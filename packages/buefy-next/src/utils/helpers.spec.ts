@@ -1,3 +1,4 @@
+import { describe, expect, it, vi } from 'vitest'
 import {
     escapeRegExpChars,
     getValueByPath,
@@ -31,6 +32,9 @@ describe('helpers', () => {
 
     describe('indexOf', () => {
         it('get index of an array element using equality function', () => {
+            type Obj = {
+                id: number
+            }
             const obj1 = {
                 id: 1
             }
@@ -52,7 +56,7 @@ describe('helpers', () => {
                 obj3,
                 obj4
             ]
-            const fnc = (obj1, obj2) => {
+            const fnc = (obj1: Obj, obj2: Obj) => {
                 return obj1.id === obj2.id
             }
 
@@ -77,19 +81,28 @@ describe('helpers', () => {
             it('extends objects', () => {
                 const a = { a: 'test' }
                 const b = { b: 'test' }
-                expect(merge(a, b)).toEqual({ a: 'test', b: 'test' })
+                expect(merge<{
+                    a?: string,
+                    b?: string
+                }>(a, b)).toEqual({ a: 'test', b: 'test' })
             })
 
-            it('extends a property with an object', () => {
+            it('extends a property with an object overriding missing', () => {
                 const a = { a: 'test' }
                 const b = { b: { c: 'test' } }
-                expect(merge(a, b)).toEqual({ a: 'test', b: { c: 'test' } })
+                expect(merge<{
+                    a?: string,
+                    b?: { c: string }
+                }>(a, b)).toEqual({ a: 'test', b: { c: 'test' } })
             })
 
-            it('replaces a property with an object', () => {
+            it('replaces a property with an object overriding string', () => {
                 const a = { b: 'whatever', a: 'test' }
                 const b = { b: { c: 'test' } }
-                expect(merge(a, b)).toEqual({ a: 'test', b: { c: 'test' } })
+                expect(merge<{
+                    a?: string,
+                    b: string | { c: string }
+                }>(a, b)).toEqual({ a: 'test', b: { c: 'test' } })
             })
         })
 
@@ -103,19 +116,59 @@ describe('helpers', () => {
             it('extends objects', () => {
                 const a = { test: { a: 'test' } }
                 const b = { test: { b: 'test' } }
-                expect(merge(a, b, true)).toEqual({ test: { a: 'test', b: 'test' } })
+                expect(merge<{
+                    test: {
+                        a?: string,
+                        b?: string
+                    }
+                }>(a, b, true)).toEqual({ test: { a: 'test', b: 'test' } })
             })
 
             it('extends a property with an object', () => {
                 const a = { test: { a: 'test' } }
                 const b = { test: { b: { c: 'test' } } }
-                expect(merge(a, b, true)).toEqual({ test: { a: 'test', b: { c: 'test' } } })
+                expect(merge<{
+                    test: {
+                        a?: string,
+                        b?: { c: string }
+                    }
+                }>(a, b, true)).toEqual({ test: { a: 'test', b: { c: 'test' } } })
             })
 
             it('replaces a property with an object', () => {
                 const a = { test: { b: 'whatever', a: 'test' } }
                 const b = { test: { b: { c: 'test' } } }
-                expect(merge(a, b, true)).toEqual({ test: { a: 'test', b: { c: 'test' } } })
+                expect(merge<{
+                    test: {
+                        a?: string,
+                        b: string | { c: string }
+                    }
+                }>(a, b, true)).toEqual({ test: { a: 'test', b: { c: 'test' } } })
+            })
+
+            it('replaces a property with an object with nested partial object', () => {
+                const a = {
+                    test: {
+                        a: 'test-1',
+                        b: 'whatever'
+                    }
+                }
+                const b = {
+                    test: {
+                        b: 'test-2'
+                    }
+                }
+                expect(merge<{
+                    test: {
+                        a: string,
+                        b: string
+                    }
+                }>(a, b, true)).toEqual({
+                    test: {
+                        a: 'test-1',
+                        b: 'test-2'
+                    }
+                })
             })
         })
     })
@@ -133,21 +186,21 @@ describe('helpers', () => {
     describe('removeElement', () => {
         it('calls remove function from the element if it exists', () => {
             const elm = {
-                remove: jest.fn()
+                remove: vi.fn()
             }
 
-            removeElement(elm)
+            removeElement((elm as unknown) as Element)
             expect(elm.remove).toHaveBeenCalled()
         })
 
         it('calls parentNode.removeChild function from the element if it exists', () => {
             const elm = {
                 parentNode: {
-                    removeChild: jest.fn()
+                    removeChild: vi.fn()
                 }
             }
 
-            removeElement(elm)
+            removeElement((elm as unknown) as Element)
             expect(elm.parentNode.removeChild).toHaveBeenCalled()
         })
     })
