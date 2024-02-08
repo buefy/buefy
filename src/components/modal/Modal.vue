@@ -151,8 +151,7 @@ export default {
                 ? this.width + 'px'
                 : this.width,
             animating: !this.active,
-            destroyed: !(this.active || this.renderOnMounted),
-            timeOutID: null
+            destroyed: !(this.active || this.renderOnMounted)
         }
     },
     computed: {
@@ -241,7 +240,7 @@ export default {
             // Timeout for the animation complete before destroying
             if (this.programmatic) {
                 this.isActive = false
-                this.timeOutID = setTimeout(() => {
+                setTimeout(() => {
                     this.$destroy()
                     removeElement(this.$el)
                 }, 150)
@@ -306,7 +305,6 @@ export default {
             document.documentElement.scrollTop = savedScrollTop
             document.body.style.top = null
         }
-        clearTimeout(this.timeOutID)
     }
 }
 </script>

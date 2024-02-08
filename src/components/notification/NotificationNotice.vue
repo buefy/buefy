@@ -20,8 +20,7 @@ export default {
     mixins: [NoticeMixin],
     data() {
         return {
-            newDuration: this.duration || config.defaultNotificationDuration,
-            timeOutID: null
+            newDuration: this.duration || config.defaultNotificationDuration
         }
     },
     methods: {
@@ -32,16 +31,12 @@ export default {
                 this.$emit('close')
 
                 // Timeout for the animation complete before destroying
-                this.timeOutID = setTimeout(() => {
+                setTimeout(() => {
                     this.$destroy()
                     removeElement(this.$el)
                 }, 150)
             }
         }
-    },
-
-    beforeDestroy() {
-        clearTimeout(this.timeOutID)
     }
 }
 </script>

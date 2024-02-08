@@ -47,8 +47,7 @@ export default {
     data() {
         return {
             isActive: this.active || false,
-            displayInFullPage: this.isFullPage,
-            timeOutID: null
+            displayInFullPage: this.isFullPage
         }
     },
     watch: {
@@ -79,7 +78,7 @@ export default {
             // Timeout for the animation complete before destroying
             if (this.programmatic) {
                 this.isActive = false
-                this.timeOutID = setTimeout(() => {
+                setTimeout(() => {
                     this.$destroy()
                     removeElement(this.$el)
                 }, 150)
@@ -117,7 +116,6 @@ export default {
         if (typeof window !== 'undefined') {
             document.removeEventListener('keyup', this.keyPress)
         }
-        clearTimeout(this.timeOutID)
     }
 }
 </script>
