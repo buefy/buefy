@@ -146,7 +146,9 @@ export default {
             isHoverable: false,
             maybeTap: false,
             isTouchEnabled: false,
-            _bodyEl: undefined // Used to append to body
+            _bodyEl: undefined, // Used to append to body
+            timeOutID: null,
+            timeOutID2: null
         }
     },
     computed: {
@@ -202,7 +204,7 @@ export default {
                 // also takes care of chattering, e.g., repeated quick taps,
                 // otherwise the flag may become inconsistent with the actual
                 // state of the dropdown menu
-                setTimeout(() => {
+                this.timeOutID = setTimeout(() => {
                     if (!this.isActive) {
                         this.isTouchEnabled = false
                     }
@@ -369,7 +371,7 @@ export default {
                 // if not active, toggle after clickOutside event
                 // this fixes toggling programmatic
                 // $nextTick may not wait for other events since Vue 3.
-                setTimeout(() => {
+                this.timeOutID2 = setTimeout(() => {
                     const value = !this.isActive
                     this.isActive = value
                 })
@@ -452,6 +454,8 @@ export default {
         if (this.appendToBody) {
             removeElement(this.$data._bodyEl)
         }
+        clearTimeout(this.timeOutID)
+        clearTimeout(this.timeOutID2)
     }
 }
 </script>

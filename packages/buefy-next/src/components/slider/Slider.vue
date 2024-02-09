@@ -164,7 +164,8 @@ export default {
             },
             dragging: false,
             isRange: false,
-            _isSlider: true // Used by Thumb and Tick
+            _isSlider: true, // Used by Thumb and Tick
+            timeOutID: null
         }
     },
     computed: {
@@ -315,7 +316,7 @@ export default {
         },
         onDragEnd() {
             this.isTrackClickDisabled = true
-            setTimeout(() => {
+            this.timeOutID = setTimeout(() => {
                 // avoid triggering onSliderClick after dragend
                 this.isTrackClickDisabled = false
             }, 0)
@@ -335,6 +336,10 @@ export default {
         this.isThumbReversed = false
         this.isTrackClickDisabled = false
         this.setValues(this.modelValue)
+    },
+
+    beforeUnmount() {
+        clearTimeout(this.timeOutID)
     }
 }
 </script>

@@ -101,7 +101,8 @@ export default {
             timer: null,
             _bodyEl: undefined, // Used to append to body
             resizeObserver: undefined,
-            resizeListener: undefined
+            resizeListener: undefined,
+            timeOutID: null
         }
     },
     computed: {
@@ -204,7 +205,7 @@ export default {
             // if not active, toggle after clickOutside event
             // this fixes toggling programmatic
             this.$nextTick(() => {
-                setTimeout(() => this.open())
+                this.timeOutID = setTimeout(() => this.open())
             })
         },
         onHover() {
@@ -289,6 +290,7 @@ export default {
         }
     },
     mounted() {
+        this.controller = new window.AbortController()
         if (this.appendToBody && typeof window !== 'undefined') {
             this.$data._bodyEl = createAbsoluteElement(this.$refs.content)
             this.updateAppendToBody()
@@ -300,7 +302,9 @@ export default {
                     this.updateAppendToBody()
                     animation.removeEventListener('transitionend', listener)
                 }
-                animation.addEventListener('transitionend', listener)
+                animation.addEventListener('transitionend', listener, {
+                    signal: this.controller.signal
+                })
             }
             // observes changes in the window size
             this.resizeListener = () => this.updateAppendToBody()
@@ -332,6 +336,9 @@ export default {
         if (this.appendToBody) {
             removeElement(this.$data._bodyEl)
         }
+        this.controller.abort()
+        clearTimeout(this.timer)
+        clearTimeout(this.timeOutID)
     }
 }
 </script>

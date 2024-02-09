@@ -212,7 +212,8 @@ export default {
             newTag: '',
             isComposing: false,
             _elementRef: 'autocomplete',
-            _isTaginput: true
+            _isTaginput: true,
+            requestID: null
         }
     },
     computed: {
@@ -320,7 +321,7 @@ export default {
                 }
 
                 // after autocomplete events
-                requestAnimationFrame(() => {
+                this.requestID = requestAnimationFrame(() => {
                     this.newTag = ''
                     this.$emit('typing', '')
                 })
@@ -391,6 +392,10 @@ export default {
         emitInfiniteScroll() {
             this.$emit('infinite-scroll')
         }
+    },
+
+    beforeUnmount() {
+        cancelAnimationFrame(this.requestID)
     }
 }
 </script>

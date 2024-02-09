@@ -440,6 +440,8 @@ export default {
         window.removeEventListener('touchmove', this.trackMouse)
         window.removeEventListener('mouseup', this.stopMouseCapture)
         window.removeEventListener('touchend', this.stopMouseCapture)
+
+        clearTimeout(this.debounce)
     }
 }
 </script>
