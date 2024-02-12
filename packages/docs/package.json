@@ -29,6 +29,10 @@
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^6.4.2",
     "@mdi/font": "^6.9.96",
+    "@types/cleave.js": "^1.4.12",
+    "@types/lodash": "^4.14.202",
+    "@types/scrollreveal": "^0.0.11",
+    "@types/sortablejs": "^1.15.8",
     "axios": "^1.5.1",
     "bulma-css-vars": "0.8.0",
     "cleave.js": "1.0.1",
