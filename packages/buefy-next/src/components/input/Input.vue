@@ -2,6 +2,7 @@
     <div
         class="control"
         :class="rootClasses"
+        v-bind="rootAttrs"
     >
         <input
             v-if="type !== 'textarea'"
@@ -12,7 +13,7 @@
             :autocomplete="newAutocomplete"
             :maxlength="maxlength"
             :value="computedValue"
-            v-bind="$attrs"
+            v-bind="inputAttrs"
             @input="onInput"
             @change="onChange"
             @blur="onBlur"
@@ -26,7 +27,7 @@
             :class="[inputClasses, customClass]"
             :maxlength="maxlength"
             :value="computedValue"
-            v-bind="$attrs"
+            v-bind="inputAttrs"
             @input="onInput"
             @change="onChange"
             @blur="onBlur"
@@ -99,7 +100,12 @@ export default {
         },
         iconRight: String,
         iconRightClickable: Boolean,
-        iconRightType: String
+        iconRightType: String,
+        // if true, `class`, `style`, and `id` are applied to the root <div>
+        compatFallthrough: {
+            type: Boolean,
+            default: () => config.defaultCompatFallthrough
+        }
     },
     emits: [
         'icon-click',
@@ -127,6 +133,23 @@ export default {
                 this.$emit('update:modelValue', value)
             }
         },
+        rootAttrs() {
+            return this.compatFallthrough
+                ? {
+                    // class is included in `rootClasses`
+                    style: this.$attrs.style,
+                    id: this.$attrs.id
+                }
+                : {}
+        },
+        inputAttrs() {
+            if (this.compatFallthrough) {
+                const { class: _1, style: _2, id: _3, ...rest } = this.$attrs
+                return rest
+            } else {
+                return this.$attrs
+            }
+        },
         rootClasses() {
             return [
                 this.iconPosition,
@@ -135,7 +158,8 @@ export default {
                     'is-expanded': this.expanded,
                     'is-loading': this.loading,
                     'is-clearfix': !this.hasMessage
-                }
+                },
+                this.compatFallthrough ? this.$attrs.class : undefined
             ]
         },
         inputClasses() {

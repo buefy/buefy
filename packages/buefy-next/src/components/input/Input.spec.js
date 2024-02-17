@@ -287,4 +287,47 @@ describe('BInput', () => {
             })
         })
     })
+
+    describe('with fallthrough attributes', () => {
+        const attrs = {
+            class: 'fallthrough-class',
+            style: 'font-size: 2rem;',
+            id: 'fallthrough-id'
+        }
+
+        it('should bind class, style, and id to the root div if compatFallthrough is true (default)', () => {
+            const wrapper = shallowMount(BInput, { attrs })
+            const root = wrapper.find('div.control')
+            expect(root.classes(attrs.class)).toBe(true)
+            expect(root.attributes('style')).toBe(attrs.style)
+            expect(root.attributes('id')).toBe(attrs.id)
+        })
+
+        it('should bind class, style, and id to the input element if compatFallthrough is false', () => {
+            const wrapper = shallowMount(BInput, {
+                attrs,
+                props: {
+                    compatFallthrough: false
+                }
+            })
+            const input = wrapper.find('input')
+            expect(input.classes(attrs.class)).toBe(true)
+            expect(input.attributes('style')).toBe(attrs.style)
+            expect(input.attributes('id')).toBe(attrs.id)
+        })
+
+        it('should bind class, style, and id to the textarea element if compatFallthrough is false', () => {
+            const wrapper = shallowMount(BInput, {
+                attrs,
+                props: {
+                    compatFallthrough: false,
+                    type: 'textarea'
+                }
+            })
+            const textarea = wrapper.find('textarea')
+            expect(textarea.classes(attrs.class)).toBe(true)
+            expect(textarea.attributes('style')).toBe(attrs.style)
+            expect(textarea.attributes('id')).toBe(attrs.id)
+        })
+    })
 })

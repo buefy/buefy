@@ -33,7 +33,7 @@ exports[`BColorpicker render correctly 1`] = `
                       <div class="field-body">
                         <div class="field">
                           <!--v-if-->
-                          <b-input-stub modelvalue="0" type="number" lazy="false" passwordreveal="false" iconclickable="false" hascounter="true" customclass="" iconrightclickable="false" modelmodifiers="[object Object]" size="is-small" aria-label="Red"></b-input-stub>
+                          <b-input-stub modelvalue="0" type="number" lazy="false" passwordreveal="false" iconclickable="false" hascounter="true" customclass="" iconrightclickable="false" compatfallthrough="true" modelmodifiers="[object Object]" size="is-small" aria-label="Red"></b-input-stub>
                           <!--v-if-->
                         </div>
                       </div>
@@ -44,7 +44,7 @@ exports[`BColorpicker render correctly 1`] = `
                       <div class="field-body">
                         <div class="field">
                           <!--v-if-->
-                          <b-input-stub modelvalue="0" type="number" lazy="false" passwordreveal="false" iconclickable="false" hascounter="true" customclass="" iconrightclickable="false" modelmodifiers="[object Object]" size="is-small" aria-label="Green"></b-input-stub>
+                          <b-input-stub modelvalue="0" type="number" lazy="false" passwordreveal="false" iconclickable="false" hascounter="true" customclass="" iconrightclickable="false" compatfallthrough="true" modelmodifiers="[object Object]" size="is-small" aria-label="Green"></b-input-stub>
                           <!--v-if-->
                         </div>
                       </div>
@@ -55,7 +55,7 @@ exports[`BColorpicker render correctly 1`] = `
                       <div class="field-body">
                         <div class="field">
                           <!--v-if-->
-                          <b-input-stub modelvalue="0" type="number" lazy="false" passwordreveal="false" iconclickable="false" hascounter="true" customclass="" iconrightclickable="false" modelmodifiers="[object Object]" size="is-small" aria-label="Blue"></b-input-stub>
+                          <b-input-stub modelvalue="0" type="number" lazy="false" passwordreveal="false" iconclickable="false" hascounter="true" customclass="" iconrightclickable="false" compatfallthrough="true" modelmodifiers="[object Object]" size="is-small" aria-label="Blue"></b-input-stub>
                           <!--v-if-->
                         </div>
                       </div>
