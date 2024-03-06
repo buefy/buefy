@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils'
+import { mount, shallowMount } from '@vue/test-utils'
 import BAutocomplete from '@components/autocomplete/Autocomplete'
 
 const findStringsStartingWith = (array, value) =>
@@ -395,5 +395,34 @@ describe('BAutocomplete', () => {
 
         expect(active).toBeTruthy()
         expect(active[0]).toEqual([true])
+    })
+
+    describe('with fallthrough attributes', () => {
+        const attrs = {
+            class: 'fallthrough-class',
+            style: 'font-size: 2rem;',
+            id: 'fallthrough-id'
+        }
+
+        it('should bind class, style, and id to the root div if compatFallthrough is true (default)', async () => {
+            const wrapper = shallowMount(BAutocomplete, { attrs })
+            const root = wrapper.find('div.autocomplete.control')
+            expect(root.classes(attrs.class)).toBe(true)
+            expect(root.attributes('style')).toBe(attrs.style)
+            expect(root.attributes('id')).toBe(attrs.id)
+        })
+
+        it('should bind class, style, and id to the input if compatFallthrough is false', async () => {
+            const wrapper = shallowMount(BAutocomplete, {
+                attrs,
+                props: {
+                    compatFallthrough: false
+                }
+            })
+            const input = wrapper.findComponent({ ref: 'input' })
+            expect(input.classes(attrs.class)).toBe(true)
+            expect(input.attributes('style')).toBe(attrs.style)
+            expect(input.attributes('id')).toBe(attrs.id)
+        })
     })
 })
