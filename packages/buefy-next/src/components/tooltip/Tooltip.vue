@@ -290,8 +290,8 @@ export default {
         }
     },
     mounted() {
-        this.controller = new window.AbortController()
         if (this.appendToBody && typeof window !== 'undefined') {
+            this.controller = new window.AbortController()
             this.$data._bodyEl = createAbsoluteElement(this.$refs.content)
             this.updateAppendToBody()
             // updates the tooltip position if the tooltip is inside
@@ -336,7 +336,9 @@ export default {
         if (this.appendToBody) {
             removeElement(this.$data._bodyEl)
         }
-        this.controller.abort()
+        if (this.controller != null) {
+            this.controller.abort()
+        }
         clearTimeout(this.timer)
         clearTimeout(this.timeOutID)
     }

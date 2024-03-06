@@ -125,6 +125,12 @@
 * A lot of ESLint errors, and warnings are fixed, as the ESLint rule version has been upgraded.
 * The type of the `cancelText` prop of `Snackbar` is fixed. It used to be `String | null`, and ended up with a type error. It is now `String`.
 
+## 0.9.29 Unreleased
+
+### Fixes
+
+* Fix [#4017](https://github.com/buefy/buefy/issues/4017) `Tooltip` - AbortController is not defined in SSR mode (Nuxt)
+
 ## 0.9.28
 
 ### New features
