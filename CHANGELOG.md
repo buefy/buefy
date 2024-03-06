@@ -1,5 +1,11 @@
 # Buefy Changelog
 
+## 0.9.29 Unreleased
+
+### Fixes
+
+* Fix [#4017](https://github.com/buefy/buefy/issues/4017) `Tooltip` - AbortController is not defined in SSR mode (Nuxt)
+
 ## 0.9.28
 
 ### New features
