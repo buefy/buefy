@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
+import { DROPDOWN_INJECTION_KEY } from '@components/dropdown/Dropdown'
 import BDropdownItem from '@components/dropdown/DropdownItem'
 
 let wrapper
@@ -15,7 +16,7 @@ describe('BDropdownItem', () => {
         wrapper = shallowMount(BDropdownItem, {
             global: {
                 provide: {
-                    bdropdown: parent
+                    [DROPDOWN_INJECTION_KEY]: parent
                 }
             }
         })

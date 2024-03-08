@@ -22,11 +22,16 @@
 </template>
 
 <script>
-import InjectedChildMixin from '../../utils/InjectedChildMixin'
+import { DROPDOWN_INJECTION_KEY } from './Dropdown.vue'
 
 export default {
     name: 'BDropdownItem',
-    mixins: [InjectedChildMixin('dropdown')],
+    inject: {
+        parent: {
+            from: DROPDOWN_INJECTION_KEY,
+            default: undefined
+        }
+    },
     props: {
         value: {
             type: [String, Number, Boolean, Object, Array, Function],

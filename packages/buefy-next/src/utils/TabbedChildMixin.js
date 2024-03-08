@@ -1,7 +1,6 @@
 import { h as createElement, Transition, vShow, withDirectives } from 'vue'
 
 import InjectedChildMixin, { Sorted } from './InjectedChildMixin'
-import { makeUniqueId } from './make-unique-id'
 
 export default (parentCmp) => ({
     mixins: [InjectedChildMixin(parentCmp, Sorted)],
@@ -12,10 +11,6 @@ export default (parentCmp) => ({
         visible: {
             type: Boolean,
             default: true
-        },
-        value: {
-            type: String,
-            default() { return makeUniqueId() }
         },
         headerClass: {
             type: [String, Array, Object],
@@ -68,9 +63,9 @@ export default (parentCmp) => ({
                     // https://github.com/buefy/buefy/issues/3272
                     class: this.elementClass,
                     role: this.elementRole,
-                    id: `${this.value}-content`,
+                    id: `${this.uniqueValue}-content`,
                     'aria-labelledby': this.elementRole
-                        ? `${this.value}-label`
+                        ? `${this.uniqueValue}-label`
                         : null,
                     tabindex: this.isActive ? 0 : -1
                 },

@@ -12,7 +12,7 @@ const WrapperComp = {
         }
     },
     template: `
-        <BTabs>
+        <BTabs ref="tabs">
             <BTabItem v-if="show1" ref="firstItem" value="tab1"/>
             <BTabItem ref="testItem" value="tab2"/>
             <BTabItem value="tab3" :visible="false"/>
@@ -72,6 +72,25 @@ describe('BTabItem', () => {
 
         wrapper.vm.deactivate(0)
         expect(wrapper.vm.transitionName).toBe('slide-next')
+    })
+
+    it('should update active state', async () => {
+        const wrapperFirstItem = wrapperParent.findComponent({ ref: 'firstItem' })
+        // we need `<a>` elements corresponding to individual tab components to
+        // activate them with 'click'
+        const firstTabLink = wrapperParent.find(`#${wrapperFirstItem.vm.uniqueValue}-label`)
+        const secondTabLink = wrapperParent.find(`#${wrapper.vm.uniqueValue}-label`)
+
+        expect(wrapperFirstItem.vm.isActive).toBe(true)
+        expect(wrapper.vm.isActive).toBe(false)
+
+        await secondTabLink.trigger('click')
+        expect(wrapperFirstItem.vm.isActive).toBe(false)
+        expect(wrapper.vm.isActive).toBe(true)
+
+        await firstTabLink.trigger('click')
+        expect(wrapperFirstItem.vm.isActive).toBe(true)
+        expect(wrapper.vm.isActive).toBe(false)
     })
 
     it('doesn\'t mount when it has no parent', () => {
@@ -148,5 +167,33 @@ describe('BTabItem', () => {
 
         expect(wrapper.findComponent(BTabs).vm.items.length).toBe(2)
         expect(wrapper.findComponent({ ref: 'item2' }).vm.isActive).toBeTruthy()
+    })
+
+    describe('with explicit order', () => {
+        it('should assign consistent index when tab is added after removal', async () => {
+            const wrapper = mount({
+                template: `
+                    <BTabs ref="tabs">
+                        <BTabItem v-if="show1" ref="firstItem" :order="1" />
+                        <BTabItem :order="2" />
+                        <BTabItem :order="3" />
+                    </BTabs>`,
+                props: {
+                    show1: {
+                        type: Boolean,
+                        default: true
+                    }
+                },
+                components: { BTabs, BTabItem }
+            })
+
+            const firstItem = wrapper.findComponent({ ref: 'firstItem' })
+            expect(firstItem.vm.index).toBe(1)
+            await wrapper.setProps({ show1: false })
+            await wrapper.setProps({ show1: true })
+
+            const firstItem2 = wrapper.findComponent({ ref: 'firstItem' })
+            expect(firstItem2.vm.index).toBe(1)
+        })
     })
 })

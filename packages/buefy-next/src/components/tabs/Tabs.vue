@@ -12,12 +12,12 @@
             >
                 <li
                     v-for="childItem in items"
-                    :key="childItem.value"
+                    :key="childItem.uniqueValue"
                     v-show="childItem.visible"
                     :class="[ childItem.headerClass, { 'is-active': childItem.isActive,
                                                        'is-disabled': childItem.disabled }]"
                     role="tab"
-                    :aria-controls="`${childItem.value}-content`"
+                    :aria-controls="`${childItem.uniqueValue}-content`"
                     :aria-selected="`${childItem.isActive}`"
                 >
                     <b-slot-component
@@ -26,7 +26,7 @@
                         :component="childItem"
                         name="header"
                         tag="a"
-                        :id="`${childItem.value}-label`"
+                        :id="`${childItem.uniqueValue}-label`"
                         :tabindex="childItem.isActive ? 0 : -1"
                         @focus="currentFocus = childItem.index"
                         @click="childClick(childItem)"
@@ -35,7 +35,7 @@
                     <a
                         :ref="`tabLink${childItem.index}`"
                         v-else
-                        :id="`${childItem.value}-label`"
+                        :id="`${childItem.uniqueValue}-label`"
                         :tabindex="childItem.isActive ? 0 : -1"
                         @focus="currentFocus = childItem.index"
                         @click="childClick(childItem)"

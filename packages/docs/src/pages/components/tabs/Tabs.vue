@@ -4,7 +4,10 @@
 
         <Example :component="ExDynamic" :code="ExDynamicCode" title="Dynamic">
             <p>Items can be created / modified / deleted and will always keep the defined order.</p>
-            <p>You can also use <code>v-if</code> to show (or not) a Tab Item.</p>
+            <p>
+              You can also use <code>v-if</code> to show (or not) a Tab Item.
+              In this case, you have to specify <code>order</code> to maintain the consistent order.
+            </p>
         </Example>
 
         <Example :component="ExPosition" :code="ExPositionCode" title="Position"/>

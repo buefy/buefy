@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BCarouselItem render correctly 1`] = `
-<transition-stub name="slide-next" appear="false" persisted="true" css="true" value="item2">
+<transition-stub name="slide-next" appear="false" persisted="true" css="true">
   <div class="carousel-item" style="display: none;"></div>
 </transition-stub>
 `;

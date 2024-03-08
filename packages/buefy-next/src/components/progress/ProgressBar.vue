@@ -18,11 +18,16 @@
 </template>
 
 <script>
-import InjectedChildMixin from '../../utils/InjectedChildMixin'
+import { PROGRESS_INJECTION_KEY } from './Progress.vue'
 
 export default {
     name: 'BProgressBar',
-    mixins: [InjectedChildMixin('progress')],
+    inject: {
+        parent: {
+            from: PROGRESS_INJECTION_KEY,
+            default: undefined
+        }
+    },
     props: {
         type: {
             type: [String, Object],

@@ -4,7 +4,7 @@
             <ul class="step-items">
                 <li
                     v-for="childItem in items"
-                    :key="childItem.value"
+                    :key="childItem.uniqueValue"
                     v-show="childItem.visible"
                     class="step-item"
                     :class="[childItem.type || type, childItem.headerClass, {
@@ -137,7 +137,8 @@ export default {
     computed: {
         // Override mixin implementation to always have a value
         activeItem() {
-            return this.childItems.filter((i) => i.value === this.activeId)[0] || this.items[0]
+            return this.childItems.filter((i) => i.uniqueValue === this.activeId)[0] ||
+                this.items[0]
         },
         wrapperClasses() {
             return [
@@ -245,7 +246,7 @@ export default {
          */
         prev() {
             if (this.hasPrev) {
-                this.activeId = this.prevItem.value
+                this.activeId = this.prevItem.uniqueValue
             }
         },
 
@@ -254,7 +255,7 @@ export default {
          */
         next() {
             if (this.hasNext) {
-                this.activeId = this.nextItem.value
+                this.activeId = this.nextItem.uniqueValue
             }
         }
     }

@@ -9,6 +9,23 @@ export const Optional = optional
 export default (parentItemName, flags = 0) => {
     const mixin = {
         inject: { parent: { from: 'b' + parentItemName, default: false } },
+        props: {
+            // if `value` is non-null, it must be unique among all the siblings.
+            // see `uniqueValue`
+            value: {
+                type: String,
+                default: null
+            }
+        },
+        computed: {
+            // `ProviderParentMixin` uses `uniqueValue` computed value to
+            // identify the child in its `childItems` collection.
+            // so the value must be unique among all the siblings.
+            // falls back to the `uid` internal field to ensure uniqueness.
+            uniqueValue() {
+                return this.value != null ? this.value : this.$.uid
+            }
+        },
         created() {
             if (!this.parent) {
                 if (!hasFlag(flags, optional)) {
@@ -33,6 +50,7 @@ export default (parentItemName, flags = 0) => {
         // incomplete dynamic indexing is still available if any child is never
         // unmounted; e.g., not switched with `v-if`
         mixin.props = {
+            ...mixin.props,
             order: {
                 type: Number,
                 required: false
@@ -44,6 +62,7 @@ export default (parentItemName, flags = 0) => {
             }
         }
         mixin.computed = {
+            ...mixin.computed,
             index() {
                 return this.order != null ? this.order : this.dynamicIndex
             }

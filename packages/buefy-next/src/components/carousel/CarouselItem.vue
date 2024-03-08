@@ -28,7 +28,7 @@ export default {
             }
         },
         isActive() {
-            return this.parent.activeChild === this.index
+            return this.parent.activeChildIndex === this.index
         }
     }
 }

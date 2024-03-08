@@ -56,16 +56,21 @@
 import trapFocus from '../../directives/trapFocus'
 import config from '../../utils/config'
 import { removeElement, createAbsoluteElement, isCustomElement, toCssWidth } from '../../utils/helpers'
-import ProviderParentMixin from '../../utils/ProviderParentMixin'
 
 const DEFAULT_CLOSE_OPTIONS = ['escape', 'outside']
+
+export const DROPDOWN_INJECTION_KEY = Symbol('bdropdown')
 
 export default {
     name: 'BDropdown',
     directives: {
         trapFocus
     },
-    mixins: [ProviderParentMixin('dropdown')],
+    provide() {
+        return {
+            [DROPDOWN_INJECTION_KEY]: this
+        }
+    },
     props: {
         modelValue: {
             type: [String, Number, Boolean, Object, Array, Function],

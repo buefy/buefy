@@ -9,7 +9,9 @@
 
         <Example :component="ExSimple" :code="ExSimpleCode" paddingless vertical />
 
-        <Example title="Custom" :component="ExFull" :code="ExFullCode" paddingless />
+        <Example title="Custom" :component="ExFull" :code="ExFullCode" paddingless>
+          This example uses <code>order</code> to maintain the consitent order while the number of items may change.
+        </Example>
 
         <Example title="Arrow" :component="ExArrow" :code="ExArrowCode" paddingless />
 

@@ -20,7 +20,7 @@ export function preformat(text) {
 }
 
 export function shallowFields(fields) {
-    for(const key in fields) {
+    for (const key in fields) {
         fields[key] = shallowRef(fields[key])
     }
 

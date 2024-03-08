@@ -240,7 +240,16 @@ export default [
         ]
     },
     {
-      title: 'Item',
+        title: 'Item',
+        props: [
+            {
+                name: '<code>order</code>',
+                description: 'Order of the item. <code>Carousel</code> sorts the items in ascending order of this value. By default, the order is determined according to when items are mounted in sequence. You have to give an explicit value if you want to keep the ordering when the number of items in <code>Carousel</code> may vary.',
+                type: 'Number',
+                values: '-',
+                default: '-'
+            }
+        ],
         events: [
             {
                 name: '<code>click</code>',

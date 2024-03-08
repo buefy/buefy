@@ -44,7 +44,7 @@ export default (cmp) => ({
         if (typeof this.modelValue === 'number') {
             // Backward compatibility: converts the index value to an id
             const value = bound(this.modelValue, 0, this.items.length - 1)
-            this.activeId = this.items[value].value
+            this.activeId = this.items[value].uniqueValue
         } else {
             this.activeId = this.modelValue
         }
@@ -55,7 +55,7 @@ export default (cmp) => ({
                 ? this.items[0]
                 : (this.activeId === null
                     ? null
-                    : this.childItems.find((i) => i.value === this.activeId))
+                    : this.childItems.find((i) => i.uniqueValue === this.activeId))
         },
         items() {
             return this.sortedItems
@@ -69,7 +69,7 @@ export default (cmp) => ({
             if (typeof value === 'number') {
                 // Backward compatibility: converts the index value to an id
                 value = bound(value, 0, this.items.length - 1)
-                this.activeId = this.items[value].value
+                this.activeId = this.items[value].uniqueValue
             } else {
                 this.activeId = value
             }
@@ -79,7 +79,7 @@ export default (cmp) => ({
          */
         activeId(val, oldValue) {
             const oldTab = oldValue !== undefined && oldValue !== null
-                ? this.childItems.find((i) => i.value === oldValue)
+                ? this.childItems.find((i) => i.uniqueValue === oldValue)
                 : null
 
             if (oldTab && this.activeItem) {
@@ -88,7 +88,7 @@ export default (cmp) => ({
             }
 
             val = this.activeItem
-                ? (typeof this.modelValue === 'number' ? this.items.indexOf(this.activeItem) : this.activeItem.value)
+                ? (typeof this.modelValue === 'number' ? this.items.indexOf(this.activeItem) : this.activeItem.uniqueValue)
                 : undefined
 
             if (val !== this.modelValue) {
@@ -101,7 +101,7 @@ export default (cmp) => ({
         * Child click listener, emit input event and change active child.
         */
         childClick(child) {
-            this.activeId = child.value
+            this.activeId = child.uniqueValue
         },
 
         getNextItemIdx(fromIdx, skipDisabled = false) {

@@ -22,11 +22,16 @@
 
 <script>
 import config from '../../utils/config'
-import ProviderParentMixin from '../../utils/ProviderParentMixin'
+
+export const PROGRESS_INJECTION_KEY = Symbol('bprogress')
 
 export default {
     name: 'BProgress',
-    mixins: [ProviderParentMixin('progress')],
+    provide() {
+        return {
+            [PROGRESS_INJECTION_KEY]: this
+        }
+    },
     props: {
         type: {
             type: [String, Object],

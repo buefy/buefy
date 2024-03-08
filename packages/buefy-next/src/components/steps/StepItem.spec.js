@@ -8,7 +8,7 @@ const WrapperComp = {
     // values must be specified to make the snapshot reproducible
     // I took the values from the legacy snapshot.
     template: `
-        <BSteps>
+        <BSteps ref="steps">
             <BStepItem value="14" />
             <BStepItem value="16" ref="testItem"/>
             <BStepItem value="18" :visible="false"/>
@@ -19,8 +19,12 @@ const WrapperComp = {
 }
 
 describe('BStepItem', () => {
+    let wrapperSteps
+
     beforeEach(() => {
-        wrapper = mount(WrapperComp).findComponent({ ref: 'testItem' })
+        const root = mount(WrapperComp)
+        wrapperSteps = root.findComponent({ ref: 'steps' })
+        wrapper = root.findComponent({ ref: 'testItem' })
     })
 
     it('is called', () => {
@@ -54,5 +58,52 @@ describe('BStepItem', () => {
 
     it('doesn\'t mount when it has no parent', () => {
         expect(() => mount(BStepItem)).toThrow(/You should wrap/)
+    })
+
+    it('should update active state', () => {
+        expect(wrapper.vm.isActive).toBe(false)
+
+        wrapperSteps.vm.next()
+        expect(wrapper.vm.isActive).toBe(true)
+
+        wrapperSteps.vm.prev()
+        expect(wrapper.vm.isActive).toBe(false)
+    })
+
+    describe('with explicit order', () => {
+        let wrapperSteps
+        let wrapperTestItem
+
+        beforeEach(() => {
+            const wrapper = mount({
+                template: `
+                    <BSteps ref="steps">
+                        <BStepItem ref="testItem" :order="2" />
+                        <BStepItem :order="1" />
+                        <BStepItem :order="3" />
+                    </BSteps>`,
+                components: {
+                    BSteps, BStepItem
+                }
+            })
+            wrapperSteps = wrapper.findComponent({ ref: 'steps' })
+            wrapperTestItem = wrapper.findComponent({ ref: 'testItem' })
+        })
+
+        it('should update active state', () => {
+            expect(wrapperTestItem.vm.isActive).toBe(false)
+
+            wrapperSteps.vm.next()
+            expect(wrapperTestItem.vm.isActive).toBe(true)
+
+            wrapperSteps.vm.next()
+            expect(wrapperTestItem.vm.isActive).toBe(false)
+
+            wrapperSteps.vm.prev()
+            expect(wrapperTestItem.vm.isActive).toBe(true)
+
+            wrapperSteps.vm.prev()
+            expect(wrapperTestItem.vm.isActive).toBe(false)
+        })
     })
 })

@@ -1,18 +1,28 @@
 import { mount } from '@vue/test-utils'
+import { PROGRESS_INJECTION_KEY } from '@components/progress/Progress'
 import BProgressBar from '@components/progress/ProgressBar'
-import ProviderParentMixin from '../../utils/ProviderParentMixin'
 
 let wrapper
 const BProgress = {
-    mixins: [ProviderParentMixin('progress')],
-    template: '<div><slot /></div>'
+    template: '<div><slot /></div>',
+    provide() {
+        return {
+            [PROGRESS_INJECTION_KEY]: this
+        }
+    },
+    data() {
+        return { max: 100 }
+    }
 }
 
 describe('BProgressBar', () => {
     beforeEach(() => {
         wrapper = mount(BProgress, {
             slots: {
-                default: BProgressBar
+                default: '<BProgressBar :value="20" />'
+            },
+            global: {
+                components: { BProgressBar }
             }
         }).findComponent(BProgressBar)
     })
@@ -24,5 +34,9 @@ describe('BProgressBar', () => {
 
     it('render correctly', () => {
         expect(wrapper.html()).toMatchSnapshot()
+    })
+
+    it('should calculate bar width', () => {
+        expect(wrapper.vm.barWidth).toBe('20%')
     })
 })

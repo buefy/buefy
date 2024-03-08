@@ -139,6 +139,13 @@ export default [
                 type: 'String, Array, Object',
                 values: '-',
                 default: '-'
+            },
+            {
+                name: '<code>order</code>',
+                description: 'Order of the tab. <code>Tabs</code> sorts the tabs in ascending order of this value. By default, the order is determined according to when tabs are mounted in sequence. You have to give an explicit value if you want to keep the ordering when the number of tabs in <code>Tabs</code> may vary.',
+                type: 'Number',
+                values: '-',
+                default: '-'
             }
         ],
         slots: [

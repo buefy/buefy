@@ -228,6 +228,11 @@ export default {
         },
         hasNext() {
             return this.repeat || this.activeChild < this.childItems.length - 1
+        },
+
+        activeChildIndex() {
+            const item = this.sortedItems[this.activeChild]
+            return item != null ? item.index : undefined
         }
     },
     watch: {

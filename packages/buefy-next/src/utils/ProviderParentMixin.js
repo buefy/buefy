@@ -35,7 +35,7 @@ export default (itemName, flags = 0) => {
                 this.childItems.push(item)
             },
             _unregisterItem(item) {
-                this.childItems = this.childItems.filter((i) => i.value !== item.value)
+                this.childItems = this.childItems.filter((i) => i.uniqueValue !== item.uniqueValue)
             }
         }
 

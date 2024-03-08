@@ -226,6 +226,13 @@ export default [
                 type: 'String, Array, Object',
                 values: '-',
                 default: '-'
+            },
+            {
+                name: '<code>order</code>',
+                description: 'The order of the step. <code>Steps</code> sorts the steps in ascending order of this value. By default, the order is determined according to when steps are mounted in sequence. You have to give an explicit value if you want to keep the ordering when the number of steps in <code>Steps</code> may vary.',
+                type: 'Number',
+                values: '-',
+                default: '-'
             }
         ],
         slots: [
