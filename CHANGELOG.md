@@ -5,6 +5,7 @@
 ### Fixes
 
 * Fix [#4017](https://github.com/buefy/buefy/issues/4017) `Tooltip` - AbortController is not defined in SSR mode (Nuxt)
+* Fix [#4018](https://github.com/buefy/buefy/issues/4018) Browser tab froze when `Field` with both `grouped` and `horizontal` props `true` got a validation error. `grouped` and `horizontal` should not be mixed, anyway.
 
 ## 0.9.28
 
