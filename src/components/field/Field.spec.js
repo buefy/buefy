@@ -247,4 +247,53 @@ describe('BField', () => {
             expect(helpWrapper.text()).toEqual(message)
         })
     })
+
+    describe('with grouped and horizontal true', () => {
+        let wrapper
+
+        beforeEach(() => {
+            wrapper = mount(BField, {
+                localVue,
+                propsData: {
+                    grouped: true,
+                    horizontal: true
+                },
+                slots: {
+                    default: [BInput, BInput]
+                }
+            })
+        })
+
+        it('should wrap each child in a field under a field-body', () => {
+            const body = wrapper.find(BFieldBody)
+            expect(body.exists()).toBe(true)
+            const childFields = body.findAll(BField)
+            expect(childFields.length).toBe(2)
+            expect(childFields.at(0).find(BInput).exists()).toBe(true)
+            expect(childFields.at(1).find(BInput).exists()).toBe(true)
+        })
+
+        describe('when validation fails', () => {
+            let childFields
+
+            beforeEach(async () => {
+                await wrapper.setData({
+                    newType: 'is-danger',
+                    newMessage: 'error message'
+                })
+                const body = wrapper.find(BFieldBody)
+                childFields = body.findAll(BField)
+            })
+
+            it('should set message only to the first child field', () => {
+                expect(childFields.at(0).props('message')).toEqual(['error message'])
+                expect(childFields.at(1).props('message')).toBeUndefined()
+            })
+
+            it('should set type to all the child fields', () => {
+                expect(childFields.at(0).props('type')).toBe('is-danger')
+                expect(childFields.at(1).props('type')).toBe('is-danger')
+            })
+        })
+    })
 })
