@@ -41,7 +41,7 @@ export default [
             },
             {
                 name: '<code>grouped</code>',
-                description: 'Direct child components/elements of Field will be grouped horizontally (see which ones at the top of the page)',
+                description: 'Direct child components/elements of Field will be grouped horizontally (see which ones at the top of the page). Do not mix with <code>horizontal</code> because there is an issue that the validation error cannot be reset once it is set if combined with <code>horizontal</code>.',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
@@ -69,7 +69,7 @@ export default [
             },
             {
                 name: '<code>horizontal</code>',
-                description: 'Group label and control on the same line for horizontal forms',
+                description: 'Group label and control on the same line for horizontal forms. Do not mix with <code>grouped</code> because there is an issue that the validation error cannot be reset once it is set if combined with <code>grouped</code>.',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'

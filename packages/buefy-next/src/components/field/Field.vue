@@ -212,7 +212,14 @@ export default {
         * Set internal message when prop change.
         */
         message(value) {
-            this.newMessage = value
+            // we deep comparison here becase an innner Field of another Field
+            // receives the message as a brand new array every time, so simple
+            // identity check won't work and will end up with infinite
+            // recursions
+            // https://github.com/buefy/buefy/issues/4018#issuecomment-1985026234
+            if (JSON.stringify(value) !== JSON.stringify(this.newMessage)) {
+                this.newMessage = value
+            }
         },
 
         /**

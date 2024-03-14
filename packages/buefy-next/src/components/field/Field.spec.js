@@ -262,4 +262,55 @@ describe('BField', () => {
             expect(helpWrapper.text()).toEqual(message)
         })
     })
+
+    describe('with grouped and horizontal true', () => {
+        let wrapper
+
+        beforeEach(() => {
+            wrapper = mount(BField, {
+                props: {
+                    grouped: true,
+                    horizontal: true
+                },
+                slots: {
+                    default: [BInput, BInput]
+                },
+                global: {
+                    components
+                }
+            })
+        })
+
+        it('should wrap each child in a field under a field-body', () => {
+            const body = wrapper.findComponent(BFieldBody)
+            expect(body.exists()).toBe(true)
+            const childFields = body.findAllComponents(BField)
+            expect(childFields.length).toBe(2)
+            expect(childFields[0].findComponent(BInput).exists()).toBe(true)
+            expect(childFields[1].findComponent(BInput).exists()).toBe(true)
+        })
+
+        describe('when validation fails', () => {
+            let childFields
+
+            beforeEach(async () => {
+                await wrapper.setData({
+                    newType: 'is-danger',
+                    newMessage: 'error message'
+                })
+                const body = wrapper.findComponent(BFieldBody)
+                childFields = body.findAllComponents(BField)
+            })
+
+            it('should set message only to the first child field', () => {
+                expect(childFields[0].props('message')).toEqual(['error message'])
+                expect(childFields[1].props('message')).toBeUndefined()
+            })
+
+            it('should set type to all the child fields', () => {
+                expect(childFields[0].props('type')).toBe('is-danger')
+                expect(childFields[1].props('type')).toBe('is-danger')
+            })
+        })
+    })
 })
