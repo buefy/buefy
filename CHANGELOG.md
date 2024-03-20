@@ -1,6 +1,6 @@
 # Buefy Changelog
 
-## 0.9.29 Unreleased
+## 0.9.29
 
 ### Fixes
 
