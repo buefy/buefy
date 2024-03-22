@@ -209,7 +209,7 @@ describe('BInput', () => {
 
         beforeEach(() => {
             spyOnCheckHtml5Validity = jest
-                .spyOn(BInput.mixins[0].methods, 'checkHtml5Validity')
+                .spyOn(BInput.mixins[1].methods, 'checkHtml5Validity')
                 .mockImplementation(function () {
                     this.isValid = false
                 })
@@ -297,10 +297,16 @@ describe('BInput', () => {
 
         it('should bind class, style, and id to the root div if compatFallthrough is true (default)', () => {
             const wrapper = shallowMount(BInput, { attrs })
+
             const root = wrapper.find('div.control')
             expect(root.classes(attrs.class)).toBe(true)
             expect(root.attributes('style')).toBe(attrs.style)
             expect(root.attributes('id')).toBe(attrs.id)
+
+            const input = wrapper.find('input')
+            expect(input.classes(attrs.class)).toBe(false)
+            expect(input.attributes('style')).toBeUndefined()
+            expect(input.attributes('id')).toBeUndefined()
         })
 
         it('should bind class, style, and id to the input element if compatFallthrough is false', () => {
@@ -310,10 +316,16 @@ describe('BInput', () => {
                     compatFallthrough: false
                 }
             })
+
             const input = wrapper.find('input')
             expect(input.classes(attrs.class)).toBe(true)
             expect(input.attributes('style')).toBe(attrs.style)
             expect(input.attributes('id')).toBe(attrs.id)
+
+            const root = wrapper.find('div.control')
+            expect(root.classes(attrs.class)).toBe(false)
+            expect(root.attributes('style')).toBeUndefined()
+            expect(root.attributes('id')).toBeUndefined()
         })
 
         it('should bind class, style, and id to the textarea element if compatFallthrough is false', () => {
@@ -324,10 +336,16 @@ describe('BInput', () => {
                     type: 'textarea'
                 }
             })
+
             const textarea = wrapper.find('textarea')
             expect(textarea.classes(attrs.class)).toBe(true)
             expect(textarea.attributes('style')).toBe(attrs.style)
             expect(textarea.attributes('id')).toBe(attrs.id)
+
+            const root = wrapper.find('div.control')
+            expect(root.classes(attrs.class)).toBe(false)
+            expect(root.attributes('style')).toBeUndefined()
+            expect(root.attributes('id')).toBeUndefined()
         })
     })
 })

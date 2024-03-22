@@ -406,10 +406,16 @@ describe('BAutocomplete', () => {
 
         it('should bind class, style, and id to the root div if compatFallthrough is true (default)', async () => {
             const wrapper = shallowMount(BAutocomplete, { attrs })
+
             const root = wrapper.find('div.autocomplete.control')
             expect(root.classes(attrs.class)).toBe(true)
             expect(root.attributes('style')).toBe(attrs.style)
             expect(root.attributes('id')).toBe(attrs.id)
+
+            const input = wrapper.findComponent({ ref: 'input' })
+            expect(input.classes(attrs.class)).toBe(false)
+            expect(input.attributes('style')).toBeUndefined()
+            expect(input.attributes('id')).toBeUndefined()
         })
 
         it('should bind class, style, and id to the input if compatFallthrough is false', async () => {
@@ -419,10 +425,16 @@ describe('BAutocomplete', () => {
                     compatFallthrough: false
                 }
             })
+
             const input = wrapper.findComponent({ ref: 'input' })
             expect(input.classes(attrs.class)).toBe(true)
             expect(input.attributes('style')).toBe(attrs.style)
             expect(input.attributes('id')).toBe(attrs.id)
+
+            const root = wrapper.find('div.autocomplete.control')
+            expect(root.classes(attrs.class)).toBe(false)
+            expect(root.attributes('style')).toBeUndefined()
+            expect(root.attributes('id')).toBeUndefined()
         })
     })
 })

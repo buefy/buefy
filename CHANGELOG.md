@@ -4,14 +4,67 @@
 
 ### New features
 
-* `Autocomplete` introduces a new prop `compat-fallthrough`, which determines whether the `class`, `style`, and `id` attributes are applied to the root `<div>` element or the underlying `<b-input>`.
-  If `true`, they are applied to the root `<div>` element, which is compatible with Buefy for Vue 2.
+* The following components introduce a new prop `compat-fallthrough`, which determines whether the `class`, `style`, and `id` attributes are applied to the root element or the underlying element.
+  If `compat-fallthrough` is `true`, they are applied to the root element, which is compatible with Buefy for Vue 2.
   The default value can be controlled by the `defaultCompatFallthrough` config option (`true` by default).
   [#16](https://github.com/ntohq/buefy-next/issues/16)
-* `Input` introduces a new prop `compat-fallthrough`, which determines whether the `class`, `style`, and `id` attributes are applied to the root `<div>`, or either of `<input>` or `<textarea>` element.
-  If `true`, they are applied to the root `<div>` element, which is compatible with Buefy for Vue 2.
-  The default value can be controlled by the `defaultCompatFallthrough` config option (`true` by default).
-  [#16](https://github.com/ntohq/buefy-next/issues/16)
+
+  * `Autocomplete`:
+
+    If `compat-fallthrough` is `true`, the attributes fall through to the root `<div>` element, otherwise to the underlying `<b-input>`.
+
+  * `BreadcrumbItem`:
+
+    TBD
+
+  * `Clockpicker`:
+
+    TBD
+
+  * `Datepicker`:
+
+    TBD
+
+  * `Input`:
+
+    If `compat-fallthrough` is `true`, the attributes fall through to the root `<div>` element, otherwise to either of `<input>` or `<textarea>` element.
+
+  * `MenuItem`:
+
+    TBD
+
+  * `NavbarDropdown`:
+
+    TBD
+
+  * `Numberinput`:
+
+    TBD
+
+  * `Select`:
+
+    TBD
+
+  * `SliderThumb`:
+
+    TBD
+
+  * `Table`:
+
+    TBD
+
+  * `Taginput`:
+
+    TBD
+
+  * `Timepicker`:
+
+    TBD
+
+  * `Upload`:
+
+    TBD
+
 * `CarouselItem`, `StepItem`, and `TabItem` introduce a new prop `order`, which determines the order of each child item.
   By default, the order of each child item is determined by the sequence in which each child item is mounted.
   If any child item is unmounted and mounted again, the order may be changed (**BREAKING CHANGE**).

@@ -19,7 +19,7 @@
             :autocomplete="newAutocomplete"
             :use-html5-validation="false"
             :aria-autocomplete="ariaAutocomplete"
-            v-bind="inputAttrs"
+            v-bind="fallthroughAttrs"
             @update:model-value="onInput"
             @focus="focused"
             @blur="onBlur"
@@ -111,7 +111,6 @@
 </template>
 
 <script>
-import config from '../../utils/config'
 import {
     getValueByPath,
     removeElement,
@@ -119,6 +118,7 @@ import {
     isCustomElement,
     toCssWidth
 } from '../../utils/helpers'
+import CompatFallthroughMixin from '../../utils/CompatFallthroughMixin'
 import FormElementMixin from '../../utils/FormElementMixin'
 import Input from '../input/Input.vue'
 
@@ -127,8 +127,7 @@ export default {
     components: {
         [Input.name]: Input
     },
-    mixins: [FormElementMixin],
-    inheritAttrs: false,
+    mixins: [CompatFallthroughMixin, FormElementMixin],
     props: {
         modelValue: [Number, String],
         data: {
@@ -166,11 +165,7 @@ export default {
             default: () => ['Tab', 'Enter']
         },
         selectableHeader: Boolean,
-        selectableFooter: Boolean,
-        compatFallthrough: {
-            type: Boolean,
-            default: () => config.defaultCompatFallthrough
-        }
+        selectableFooter: Boolean
     },
     emits: [
         'active',
@@ -322,23 +317,6 @@ export default {
             return this.iconRightClickable
         },
 
-        rootAttrs() {
-            return this.compatFallthrough
-                ? {
-                    class: this.$attrs.class,
-                    style: this.$attrs.style,
-                    id: this.$attrs.id
-                }
-                : {}
-        },
-        inputAttrs() {
-            if (this.compatFallthrough) {
-                const { style: _1, class: _2, id: _3, ...rest } = this.$attrs
-                return rest
-            } else {
-                return this.$attrs
-            }
-        },
         contentStyle() {
             return {
                 maxHeight: toCssWidth(this.maxHeight)

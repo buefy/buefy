@@ -13,7 +13,7 @@
             :autocomplete="newAutocomplete"
             :maxlength="maxlength"
             :value="computedValue"
-            v-bind="inputAttrs"
+            v-bind="fallthroughAttrs"
             @input="onInput"
             @change="onChange"
             @blur="onBlur"
@@ -27,7 +27,7 @@
             :class="[inputClasses, customClass]"
             :maxlength="maxlength"
             :value="computedValue"
-            v-bind="inputAttrs"
+            v-bind="fallthroughAttrs"
             @input="onInput"
             @change="onChange"
             @blur="onBlur"
@@ -69,6 +69,7 @@
 <script>
 import Icon from '../icon/Icon.vue'
 import config from '../../utils/config'
+import CompatFallthroughMixin from '../../utils/CompatFallthroughMixin'
 import FormElementMixin from '../../utils/FormElementMixin'
 
 export default {
@@ -76,8 +77,7 @@ export default {
     components: {
         [Icon.name]: Icon
     },
-    mixins: [FormElementMixin],
-    inheritAttrs: false,
+    mixins: [CompatFallthroughMixin, FormElementMixin],
     props: {
         modelValue: [Number, String],
         type: {
@@ -100,12 +100,7 @@ export default {
         },
         iconRight: String,
         iconRightClickable: Boolean,
-        iconRightType: String,
-        // if true, `class`, `style`, and `id` are applied to the root <div>
-        compatFallthrough: {
-            type: Boolean,
-            default: () => config.defaultCompatFallthrough
-        }
+        iconRightType: String
     },
     emits: [
         'icon-click',
@@ -133,23 +128,6 @@ export default {
                 this.$emit('update:modelValue', value)
             }
         },
-        rootAttrs() {
-            return this.compatFallthrough
-                ? {
-                    // class is included in `rootClasses`
-                    style: this.$attrs.style,
-                    id: this.$attrs.id
-                }
-                : {}
-        },
-        inputAttrs() {
-            if (this.compatFallthrough) {
-                const { class: _1, style: _2, id: _3, ...rest } = this.$attrs
-                return rest
-            } else {
-                return this.$attrs
-            }
-        },
         rootClasses() {
             return [
                 this.iconPosition,
@@ -158,8 +136,7 @@ export default {
                     'is-expanded': this.expanded,
                     'is-loading': this.loading,
                     'is-clearfix': !this.hasMessage
-                },
-                this.compatFallthrough ? this.$attrs.class : undefined
+                }
             ]
         },
         inputClasses() {
