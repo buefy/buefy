@@ -24,7 +24,7 @@
                                 <b-icon icon="github-circle" size="is-small" />
                             </a>)
                         </p>
-                        <pre class="npm"><code><span class="is-unselectable">$ </span>npm install @ntohq/buefy-next</code></pre>
+                        <pre class="npm"><code><span class="is-unselectable">$ </span>npm install buefy@npm:@ntohq/buefy-next</code></pre>
                     </div>
 
                     <div class="github-button home-hero">
