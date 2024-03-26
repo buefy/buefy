@@ -2,6 +2,7 @@
     <div
         class="datepicker control"
         :class="[size, {'is-expanded': expanded}]"
+        v-bind="rootAttrs"
     >
         <b-dropdown
             v-if="!isMobile || inline"
@@ -33,7 +34,7 @@
                         :loading="loading"
                         :disabled="disabledOrUndefined"
                         :readonly="!editable"
-                        v-bind="$attrs"
+                        v-bind="fallthroughAttrs"
                         :use-html5-validation="false"
                         @click="onInputClick"
                         @icon-right-click="$emit('icon-right-click', $event)"
@@ -217,7 +218,7 @@
             :min="formatNative(minDate)"
             :disabled="disabledOrUndefined"
             :readonly="false"
-            v-bind="$attrs"
+            v-bind="fallthroughAttrs"
             :use-html5-validation="false"
             @change="onChangeNativePicker"
             @focus="onFocus"
@@ -227,6 +228,7 @@
 </template>
 
 <script>
+import CompatFallthroughMixin from '../../utils/CompatFallthroughMixin'
 import FormElementMixin from '../../utils/FormElementMixin'
 import { isMobile, getMonthNames, getWeekdayNames, matchWithGroups } from '../../utils/helpers'
 import config from '../../utils/config'
@@ -300,8 +302,7 @@ export default {
         [Dropdown.name]: Dropdown,
         [DropdownItem.name]: DropdownItem
     },
-    mixins: [FormElementMixin],
-    inheritAttrs: false,
+    mixins: [CompatFallthroughMixin, FormElementMixin],
     provide() {
         return {
             $datepicker: this
