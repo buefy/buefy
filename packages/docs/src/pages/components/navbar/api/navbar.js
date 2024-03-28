@@ -176,6 +176,13 @@ export default [
             type: 'Boolean',
             values: '',
             default: 'false'
+        },
+        {
+            name: '<code>compat-fallthrough</code>',
+            description: 'Whether <code>class</code>, <code>style</code>, and <code>id</code> attributes are applied to the root &lt;div&gt; element or the underlying tag. If <code>true</code>, they are applied to the root &lt;div&gt; element, which is compatible with Buefy for Vue 2.',
+            type: 'Boolean',
+            values: '-',
+            default: '<code>true</code>. Can be changed via the <code>defaultCompatFallthrough</code> config option.'
         }
     ],
     slots: [

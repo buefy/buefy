@@ -32,4 +32,51 @@ describe('BNavbarDropdown', () => {
         wrapper.vm.closeMenu()
         expect(wrapper.vm.newActive).toBeFalsy()
     })
+
+    describe('with fallthrough attributes', () => {
+        const attrs = {
+            class: 'fallthrough-class',
+            style: 'font-size: 2rem;',
+            id: 'fallthrough-id'
+        }
+
+        it('should apply class, style, and id to the root <div> element if compatFallthrough is true (default)', () => {
+            const wrapper = shallowMount(BNavbarDropdown, {
+                attrs,
+                props: {
+                    tag: 'a'
+                }
+            })
+
+            const root = wrapper.find('div.navbar-item')
+            expect(root.classes(attrs.class)).toBe(true)
+            expect(root.attributes('style')).toBe(attrs.style)
+            expect(root.attributes('id')).toBe(attrs.id)
+
+            const tag = wrapper.find('a.navbar-link')
+            expect(tag.classes(attrs.class)).toBe(false)
+            expect(tag.attributes('style')).toBeUndefined()
+            expect(tag.attributes('id')).toBeUndefined()
+        })
+
+        it('should apply class, style, and id to the underlying tag if compatFallthrough is false', () => {
+            const wrapper = shallowMount(BNavbarDropdown, {
+                attrs,
+                props: {
+                    compatFallthrough: false,
+                    tag: 'a'
+                }
+            })
+
+            const root = wrapper.find('div.navbar-item')
+            expect(root.classes(attrs.class)).toBe(false)
+            expect(root.attributes('style')).toBeUndefined()
+            expect(root.attributes('id')).toBeUndefined()
+
+            const tag = wrapper.find('a.navbar-link')
+            expect(tag.classes(attrs.class)).toBe(true)
+            expect(tag.attributes('style')).toBe(attrs.style)
+            expect(tag.attributes('id')).toBe(attrs.id)
+        })
+    })
 })

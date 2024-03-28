@@ -7,6 +7,7 @@
         }"
         @mouseenter="checkHoverable"
         v-click-outside="closeMenu"
+        v-bind="rootAttrs"
     >
         <component
             :is="tag"
@@ -15,7 +16,7 @@
                 'is-arrowless': arrowless,
                 'is-active': newActive && collapsible
             }"
-            v-bind="$attrs"
+            v-bind="fallthroughAttrs"
             aria-haspopup="true"
             @click.prevent="toggleMenu"
             @keyup.enter="toggleMenu"
@@ -41,13 +42,14 @@
 
 <script>
 import clickOutside from '../../directives/clickOutside'
+import CompatFallthroughMixin from '../../utils/CompatFallthroughMixin'
 
 export default {
     name: 'BNavbarDropdown',
     directives: {
         clickOutside
     },
-    inheritAttrs: false,
+    mixins: [CompatFallthroughMixin],
     props: {
         label: String,
         hoverable: Boolean,
