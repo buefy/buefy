@@ -1,8 +1,8 @@
 <template>
-    <li :role="ariaRoleMenu">
+    <li :role="ariaRoleMenu" v-bind="rootAttrs">
         <component
             :is="tag"
-            v-bind="$attrs"
+            v-bind="fallthroughAttrs"
             :class="{
                 'is-active': newActive,
                 'is-expanded': newExpanded,
@@ -39,6 +39,7 @@
 <script>
 import Icon from '../icon/Icon.vue'
 import config from '../../utils/config'
+import CompatFallthroughMixin from '../../utils/CompatFallthroughMixin'
 import MenuItemContainerMixin from './MenuItemContainerMixin'
 
 export default {
@@ -46,14 +47,13 @@ export default {
     components: {
         [Icon.name]: Icon
     },
-    mixins: [MenuItemContainerMixin],
+    mixins: [CompatFallthroughMixin, MenuItemContainerMixin],
     inject: {
         parent: {
             from: 'BMenuItemContainer',
             default: null
         }
     },
-    inheritAttrs: false,
     // deprecated, to replace with default 'value' in the next breaking change
     model: {
         prop: 'active',
