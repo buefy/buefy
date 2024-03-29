@@ -63,7 +63,7 @@
 
   * `Upload`:
 
-    TBD
+    If `compat-fallthrough` is `true`, the attributes fall through to the root `<label>` element, otherwise to the underlying `<input>` element.
 
 * `CarouselItem`, `StepItem`, and `TabItem` introduce a new prop `order`, which determines the order of each child item.
   By default, the order of each child item is determined by the sequence in which each child item is mounted.

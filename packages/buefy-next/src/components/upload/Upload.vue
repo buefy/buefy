@@ -1,7 +1,7 @@
 <template>
     <label
         class="upload control"
-        v-bind="classAndStyle"
+        v-bind="rootAttrs"
         :class="[{'is-expanded' : expanded, 'is-rounded' : rounded}]"
     >
         <template v-if="!dragDrop">
@@ -28,7 +28,7 @@
         <input
             ref="input"
             type="file"
-            v-bind="$attrs"
+            v-bind="fallthroughAttrs"
             :multiple="multiple"
             :accept="accept"
             :disabled="disabledOrUndefined"
@@ -38,13 +38,13 @@
 </template>
 
 <script>
+import CompatFallthroughMixin from '../../utils/CompatFallthroughMixin'
 import FormElementMixin from '../../utils/FormElementMixin'
 import { File } from '../../utils/ssr'
 
 export default {
     name: 'BUpload',
-    mixins: [FormElementMixin],
-    inheritAttrs: false,
+    mixins: [CompatFallthroughMixin, FormElementMixin],
     props: {
         modelValue: {
             type: [Object, Function, File, Array]
@@ -79,12 +79,6 @@ export default {
         }
     },
     computed: {
-        classAndStyle() {
-            return {
-                class: this.$attrs.class,
-                style: this.$attrs.style
-            }
-        },
         disabledOrUndefined() {
             // On Vue 3, setting a boolean attribute `false` does not remove it,
             // `true` or `undefined` has to be given to remove it.
