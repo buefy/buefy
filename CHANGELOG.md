@@ -47,7 +47,7 @@
 
   * `SliderThumb`:
 
-    TBD
+    If `compat-fallthrough` is `true`, the attributes fall through to the root `<div>` element, otherwise to the inner `<div>` element.
 
   * `Table`:
 

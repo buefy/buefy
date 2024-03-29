@@ -3,6 +3,7 @@
         class="b-slider-thumb-wrapper"
         :class="{ 'is-dragging': dragging, 'has-indicator': indicator}"
         :style="wrapperStyle"
+        v-bind="rootAttrs"
     >
         <b-tooltip
             :label="formattedValue"
@@ -13,7 +14,7 @@
             <div
                 class="b-slider-thumb"
                 :tabindex="disabled ? false : 0"
-                v-bind="$attrs"
+                v-bind="fallthroughAttrs"
                 @mousedown="onButtonDown"
                 @touchstart="onButtonDown"
                 @focus="onFocus"
@@ -34,13 +35,14 @@
 <script>
 import Tooltip from '../tooltip/Tooltip.vue'
 import config from '../../utils/config'
+import CompatFallthroughMixin from '../../utils/CompatFallthroughMixin'
 
 export default {
     name: 'BSliderThumb',
     components: {
         [Tooltip.name]: Tooltip
     },
-    inheritAttrs: false,
+    mixins: [CompatFallthroughMixin],
     props: {
         modelValue: {
             type: Number,

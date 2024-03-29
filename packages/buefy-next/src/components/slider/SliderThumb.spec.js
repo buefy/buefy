@@ -111,4 +111,59 @@ describe('BSliderThumb', () => {
         await wrapper.setProps({ tooltipAlways: true })
         expect(wrapper.findComponent(BTooltip).props().always).toBe(true)
     })
+
+    describe('with fallthrough attributes', () => {
+        const attrs = {
+            class: 'fallthrough-class',
+            style: 'font-size: 2rem;',
+            id: 'fallthrough-id'
+        }
+
+        it('should apply class, style, and id to the root <div> element if compatFallthrough is true (default)', () => {
+            const wrapper = shallowMount(BSliderThumb, {
+                attrs,
+                global: {
+                    stubs: {
+                        // b-tooltip must be rendered to access the inner <div>
+                        'b-tooltip': false
+                    }
+                }
+            })
+
+            const root = wrapper.find('div.b-slider-thumb-wrapper')
+            expect(root.classes(attrs.class)).toBe(true)
+            expect(root.attributes('style')).toBe(attrs.style)
+            expect(root.attributes('id')).toBe(attrs.id)
+
+            const inner = wrapper.find('div.b-slider-thumb')
+            expect(inner.classes(attrs.class)).toBe(false)
+            expect(inner.attributes('style')).toBeUndefined()
+            expect(inner.attributes('id')).toBeUndefined()
+        })
+
+        it('should apply class, style, and id to the inner <div> element if compatFallthrough is false', () => {
+            const wrapper = shallowMount(BSliderThumb, {
+                attrs,
+                props: {
+                    compatFallthrough: false
+                },
+                global: {
+                    stubs: {
+                        // b-tooltip must be rendered to access the inner <div>
+                        'b-tooltip': false
+                    }
+                }
+            })
+
+            const root = wrapper.find('div.b-slider-thumb-wrapper')
+            expect(root.classes(attrs.class)).toBe(false)
+            expect(root.attributes('style')).toBeUndefined()
+            expect(root.attributes('id')).toBeUndefined()
+
+            const inner = wrapper.find('div.b-slider-thumb')
+            expect(inner.classes(attrs.class)).toBe(true)
+            expect(inner.attributes('style')).toBe(attrs.style)
+            expect(inner.attributes('id')).toBe(attrs.id)
+        })
+    })
 })
