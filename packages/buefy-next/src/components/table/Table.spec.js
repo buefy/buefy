@@ -3,6 +3,7 @@ import { toRaw } from 'vue'
 import { shallowMount } from '@vue/test-utils'
 import BInput from '@components/input/Input'
 import BTable from '@components/table/Table'
+import BTablePagination from '@components/table/TablePagination'
 
 describe('BTable', () => {
     let wrapper
@@ -539,6 +540,80 @@ describe('BTable', () => {
             expect(wrapper.vm.visibleData).toEqual([
                 data[6], data[5], data[4], data[3], data[2], data[1], data[0]
             ])
+        })
+    })
+
+    describe('with fallthrough attributes', () => {
+        const data = [
+            { id: 1, name: 'Jesse' },
+            { id: 2, name: 'John' },
+            { id: 3, name: 'Tina' },
+            { id: 4, name: 'Anne' },
+            { id: 5, name: 'Clarence' }
+        ]
+        const columns = [
+            { label: 'ID', field: 'id' },
+            { label: 'Name', field: 'name' }
+        ]
+        const attrs = {
+            class: 'fallthrough-class',
+            style: 'font-size: 2rem;',
+            id: 'fallthrough-id'
+        }
+
+        it('should apply class, style, and id to the root <div> element if compatFallthrough is true (default)', () => {
+            const wrapper = shallowMount(BTable, {
+                attrs,
+                props: {
+                    paginated: true,
+                    paginationPosition: 'both',
+                    columns,
+                    data
+                }
+            })
+
+            const root = wrapper.find('div.b-table')
+            expect(root.classes(attrs.class)).toBe(true)
+            expect(root.attributes('style')).toBe(attrs.style)
+            expect(root.attributes('id')).toBe(attrs.id)
+
+            const paginations = wrapper.findAllComponents(BTablePagination)
+            // top
+            expect(paginations[0].classes(attrs.class)).toBe(false)
+            expect(paginations[0].attributes('style')).toBeUndefined()
+            expect(paginations[0].attributes('id')).toBeUndefined()
+            // bottom
+            expect(paginations[1].classes(attrs.class)).toBe(false)
+            expect(paginations[1].attributes('style')).toBeUndefined()
+            expect(paginations[1].attributes('id')).toBeUndefined()
+        })
+
+        it('should apply class, style, and id to the underlying <b-table-pagination> components if compatFallthrough is false', () => {
+            const wrapper = shallowMount(BTable, {
+                attrs,
+                props: {
+                    compatFallthrough: false,
+                    paginated: true,
+                    paginationPosition: 'both',
+                    columns,
+                    data
+                }
+            })
+
+            const root = wrapper.find('div.b-table')
+            expect(root.classes(attrs.class)).toBe(false)
+            expect(root.attributes('style')).toBeUndefined()
+            expect(root.attributes('id')).toBeUndefined()
+
+            const paginations = wrapper.findAllComponents(BTablePagination)
+            // top
+            expect(paginations[0].classes(attrs.class)).toBe(true)
+            expect(paginations[0].attributes('style')).toBe(attrs.style)
+            expect(paginations[0].attributes('id')).toBe(attrs.id)
+            // bottom
+            expect(paginations[1].classes(attrs.class)).toBe(true)
+            expect(paginations[1].attributes('style')).toBe(attrs.style)
+            expect(paginations[1].attributes('id')).toBe(attrs.id)
         })
     })
 })

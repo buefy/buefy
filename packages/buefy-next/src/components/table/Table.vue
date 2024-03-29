@@ -1,5 +1,5 @@
 <template>
-    <div class="b-table">
+    <div class="b-table" v-bind="rootAttrs">
         <slot />
 
         <b-table-mobile-sort
@@ -22,7 +22,7 @@
         >
             <slot name="pagination">
                 <b-table-pagination
-                    v-bind="$attrs"
+                    v-bind="fallthroughAttrs"
                     :per-page="perPage"
                     :paginated="paginated"
                     :rounded="paginationRounded"
@@ -406,7 +406,7 @@
         >
             <slot name="pagination">
                 <b-table-pagination
-                    v-bind="$attrs"
+                    v-bind="fallthroughAttrs"
                     :per-page="perPage"
                     :paginated="paginated"
                     :rounded="paginationRounded"
@@ -444,6 +444,7 @@
 import { toRaw } from 'vue'
 import { getValueByPath, indexOf, multiColumnSort, escapeRegExpChars, toCssWidth, removeDiacriticsFromString, isFragment, isNil, translateTouchAsDragEvent, createAbsoluteElement, removeElement } from '../../utils/helpers'
 import debounce from '../../utils/debounce'
+import CompatFallthroughMixin from '../../utils/CompatFallthroughMixin'
 import Checkbox from '../checkbox/Checkbox.vue'
 import Icon from '../icon/Icon.vue'
 import Input from '../input/Input.vue'
@@ -466,7 +467,7 @@ export default {
         [TableColumn.name]: TableColumn,
         [TablePagination.name]: TablePagination
     },
-    inheritAttrs: false,
+    mixins: [CompatFallthroughMixin],
     provide() {
         return {
             $table: this
