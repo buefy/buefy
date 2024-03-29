@@ -1,5 +1,9 @@
 <template>
-    <div class="b-numberinput field" :class="fieldClasses">
+    <div
+        class="b-numberinput field"
+        :class="fieldClasses"
+        v-bind="rootAttrs"
+    >
         <p
             v-for="control in controlsLeft"
             :key="control"
@@ -37,7 +41,7 @@
             type="number"
             ref="input"
             v-model="computedValue"
-            v-bind="$attrs"
+            v-bind="fallthroughAttrs"
             :step="minStepNumber"
             :max="max"
             :min="min"
@@ -95,6 +99,7 @@
 <script>
 import Icon from '../icon/Icon.vue'
 import Input from '../input/Input.vue'
+import CompatFallthroughMixin from '../../utils/CompatFallthroughMixin'
 import FormElementMixin from '../../utils/FormElementMixin'
 
 export default {
@@ -103,8 +108,7 @@ export default {
         [Icon.name]: Icon,
         [Input.name]: Input
     },
-    mixins: [FormElementMixin],
-    inheritAttrs: false,
+    mixins: [CompatFallthroughMixin, FormElementMixin],
     inject: {
         field: {
             from: 'BField',

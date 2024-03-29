@@ -39,7 +39,7 @@
 
   * `Numberinput`:
 
-    TBD
+    If `compat-fallthrough` is `true`, the attributes fall through to the root `<div>` element, otherwise to the underlying `<b-input>` component.
 
   * `Select`:
 
