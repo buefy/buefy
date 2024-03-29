@@ -87,4 +87,45 @@ describe('BTaginput', () => {
         expect(firedHeader).toBeTruthy()
         expect(firedFooter).toBeTruthy()
     })
+
+    describe('with fallthrough attributes', () => {
+        const attrs = {
+            class: 'fallthrough-class',
+            style: 'font-size: 2rem;',
+            id: 'fallthrough-id'
+        }
+
+        it('should apply class, style, and id to the root <div> element if compatFallthrough is true (default)', () => {
+            const wrapper = shallowMount(BTaginput, { attrs })
+
+            const root = wrapper.find('div.taginput')
+            expect(root.classes(attrs.class)).toBe(true)
+            expect(root.attributes('style')).toBe(attrs.style)
+            expect(root.attributes('id')).toBe(attrs.id)
+
+            const autocomplete = wrapper.findComponent({ ref: 'autocomplete' })
+            expect(autocomplete.classes(attrs.class)).toBe(false)
+            expect(autocomplete.attributes('style')).toBeUndefined()
+            expect(autocomplete.attributes('id')).toBeUndefined()
+        })
+
+        it('should apply class, style, and id to the underlying <b-autocomplete> if compatFallthrough is false', () => {
+            const wrapper = shallowMount(BTaginput, {
+                attrs,
+                props: {
+                    compatFallthrough: false
+                }
+            })
+
+            const root = wrapper.find('div.taginput')
+            expect(root.classes(attrs.class)).toBe(false)
+            expect(root.attributes('style')).toBeUndefined()
+            expect(root.attributes('id')).toBeUndefined()
+
+            const autocomplete = wrapper.findComponent({ ref: 'autocomplete' })
+            expect(autocomplete.classes(attrs.class)).toBe(true)
+            expect(autocomplete.attributes('style')).toBe(attrs.style)
+            expect(autocomplete.attributes('id')).toBe(attrs.id)
+        })
+    })
 })

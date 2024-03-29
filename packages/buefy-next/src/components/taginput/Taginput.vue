@@ -1,5 +1,9 @@
 <template>
-    <div class="taginput control" :class="rootClasses">
+    <div
+        class="taginput control"
+        :class="rootClasses"
+        v-bind="rootAttrs"
+    >
         <div
             class="taginput-container"
             :class="[statusType, size, containerClasses]"
@@ -33,7 +37,7 @@
                 ref="autocomplete"
                 v-if="hasInput"
                 v-model="newTag"
-                v-bind="$attrs"
+                v-bind="fallthroughAttrs"
                 :data="data"
                 :field="field"
                 :icon="icon"
@@ -108,6 +112,7 @@ import { getValueByPath } from '../../utils/helpers'
 import Tag from '../tag/Tag.vue'
 import Autocomplete from '../autocomplete/Autocomplete.vue'
 import config from '../../utils/config'
+import CompatFallthroughMixin from '../../utils/CompatFallthroughMixin'
 import FormElementMixin from '../../utils/FormElementMixin'
 
 export default {
@@ -116,8 +121,7 @@ export default {
         [Autocomplete.name]: Autocomplete,
         [Tag.name]: Tag
     },
-    mixins: [FormElementMixin],
-    inheritAttrs: false,
+    mixins: [CompatFallthroughMixin, FormElementMixin],
     props: {
         modelValue: {
             type: Array,
