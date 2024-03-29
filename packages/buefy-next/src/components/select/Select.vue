@@ -2,6 +2,7 @@
     <div
         class="control"
         :class="{ 'is-expanded': expanded, 'has-icons-left': icon }"
+        v-bind="rootAttrs"
     >
         <span class="select" :class="spanClasses">
 
@@ -10,7 +11,7 @@
                 ref="select"
                 :multiple="multiple"
                 :size="nativeSize"
-                v-bind="$attrs"
+                v-bind="fallthroughAttrs"
                 @blur="$emit('blur', $event) && checkHtml5Validity()"
                 @focus="$emit('focus', $event)"
             >
@@ -43,6 +44,7 @@
 
 <script>
 import Icon from '../icon/Icon.vue'
+import CompatFallthroughMixin from '../../utils/CompatFallthroughMixin'
 import FormElementMixin from '../../utils/FormElementMixin'
 
 export default {
@@ -50,8 +52,7 @@ export default {
     components: {
         [Icon.name]: Icon
     },
-    mixins: [FormElementMixin],
-    inheritAttrs: false,
+    mixins: [CompatFallthroughMixin, FormElementMixin],
     props: {
         modelValue: {
             type: [String, Number, Boolean, Object, Array, Function, Date],
