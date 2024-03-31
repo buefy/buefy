@@ -50,4 +50,57 @@ describe('BTimepicker', () => {
         expect(wrapper.find('option[value="11"]').attributes().disabled).toBe('')
         expect(wrapper.find('option[value="12"]').attributes().disabled).toBeUndefined()
     })
+
+    describe('with compat fallthrough', () => {
+        const attrs = {
+            class: 'fallthrough-class',
+            style: 'font-size: 2rem;',
+            id: 'fallthrough-id'
+        }
+
+        it('should bind class, style, and id to the root div if compatFallthrough is true (default)', async () => {
+            const wrapper = shallowMount(BTimepicker, {
+                attrs,
+                global: {
+                    stubs: {
+                        'b-dropdown': false
+                    }
+                }
+            })
+
+            const root = wrapper.find('div.timepicker')
+            expect(root.classes(attrs.class)).toBe(true)
+            expect(root.attributes('style')).toBe(attrs.style)
+            expect(root.attributes('id')).toBe(attrs.id)
+
+            const input = wrapper.findComponent({ ref: 'input' })
+            expect(input.classes(attrs.class)).toBe(false)
+            expect(input.attributes('style')).toBeUndefined()
+            expect(input.attributes('id')).toBeUndefined()
+        })
+
+        it('should bind class, style, and id to the underlying input if compatFallthrough is false', async () => {
+            const wrapper = shallowMount(BTimepicker, {
+                attrs,
+                props: {
+                    compatFallthrough: false
+                },
+                global: {
+                    stubs: {
+                        'b-dropdown': false
+                    }
+                }
+            })
+
+            const root = wrapper.find('div.timepicker')
+            expect(root.classes(attrs.class)).toBe(false)
+            expect(root.attributes('style')).toBeUndefined()
+            expect(root.attributes('id')).toBeUndefined()
+
+            const input = wrapper.findComponent({ ref: 'input' })
+            expect(input.classes(attrs.class)).toBe(true)
+            expect(input.attributes('style')).toBe(attrs.style)
+            expect(input.attributes('id')).toBe(attrs.id)
+        })
+    })
 })

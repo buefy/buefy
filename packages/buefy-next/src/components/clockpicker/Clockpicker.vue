@@ -1,5 +1,9 @@
 <template>
-    <div class="b-clockpicker control" :class="[size, type, {'is-expanded': expanded}]">
+    <div
+        class="b-clockpicker control"
+        :class="[size, type, {'is-expanded': expanded}]"
+        v-bind="rootAttrs"
+    >
         <b-dropdown
             v-if="!isMobile || inline"
             ref="dropdown"
@@ -25,7 +29,7 @@
                         :disabled="disabledOrUndefined"
                         :readonly="!editable"
                         :rounded="rounded"
-                        v-bind="$attrs"
+                        v-bind="fallthroughAttrs"
                         :use-html5-validation="useHtml5Validation"
                         @click="onInputClick"
                         @keyup.enter="toggle(true)"
@@ -152,7 +156,7 @@
             :min="formatHHMMSS(minTime)"
             :disabled="disabledOrUndefined"
             :readonly="false"
-            v-bind="$attrs"
+            v-bind="fallthroughAttrs"
             :use-html5-validation="useHtml5Validation"
             @click.stop="toggle(true)"
             @keyup.enter="toggle(true)"

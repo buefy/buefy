@@ -1,5 +1,9 @@
 <template>
-    <div class="timepicker control" :class="[size, {'is-expanded': expanded}]">
+    <div
+        class="timepicker control"
+        :class="[size, {'is-expanded': expanded}]"
+        v-bind="rootAttrs"
+    >
         <b-dropdown
             v-if="!isMobile || inline"
             ref="dropdown"
@@ -25,7 +29,7 @@
                         :disabled="disabledOrUndefined"
                         :readonly="!editable || undefined"
                         :rounded="rounded"
-                        v-bind="$attrs"
+                        v-bind="fallthroughAttrs"
                         :use-html5-validation="useHtml5Validation"
                         @keyup.enter="toggle(true)"
                         @change="onChange($event.target.value)"
@@ -132,7 +136,7 @@
             :min="formatHHMMSS(minTime)"
             :disabled="disabledOrUndefined"
             :readonly="false"
-            v-bind="$attrs"
+            v-bind="fallthroughAttrs"
             :use-html5-validation="useHtml5Validation"
             @change="onChange($event.target.value)"
             @focus="handleOnFocus"
@@ -161,7 +165,6 @@ export default {
         [DropdownItem.name]: DropdownItem
     },
     mixins: [TimepickerMixin],
-    inheritAttrs: false,
     data() {
         return {
             _isTimepicker: true

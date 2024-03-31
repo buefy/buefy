@@ -1,3 +1,4 @@
+import CompatFallthroughMixin from './CompatFallthroughMixin'
 import FormElementMixin from './FormElementMixin'
 import { isMobile, matchWithGroups } from './helpers'
 import config from './config'
@@ -93,8 +94,7 @@ const defaultTimeParser = (timeString, vm) => {
 }
 
 export default {
-    mixins: [FormElementMixin],
-    inheritAttrs: false,
+    mixins: [CompatFallthroughMixin, FormElementMixin],
     props: {
         modelValue: Date,
         inline: Boolean,
