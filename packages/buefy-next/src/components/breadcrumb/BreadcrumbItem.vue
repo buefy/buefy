@@ -1,10 +1,11 @@
 <template>
     <li
         :class="{ 'is-active': active }"
+        v-bind="rootAttrs"
     >
         <component
             :is="tag"
-            v-bind="$attrs"
+            v-bind="fallthroughAttrs"
         >
             <slot />
         </component>
@@ -13,10 +14,11 @@
 
 <script>
 import config from '../../utils/config'
+import CompatFallthroughMixin from '../../utils/CompatFallthroughMixin'
 
 export default {
     name: 'BBreadcrumbItem',
-    inheritAttrs: false,
+    mixins: [CompatFallthroughMixin],
     props: {
         tag: {
             type: String,

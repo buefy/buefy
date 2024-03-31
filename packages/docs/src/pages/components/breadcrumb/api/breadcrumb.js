@@ -41,6 +41,13 @@ export default [
                 type: 'Boolean',
                 values: '<code>false</code>, <code>true</code>',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>compat-fallthrough</code>',
+                description: 'Whether <code>class</code>, <code>style</code>, and <code>id</code> attributes are applied to the root &lt;li&gt; element or the underlying <code>tag</code>. If <code>true</code>, they are applied to the root &lt;li&gt; element, which is compatible with Vue 2.',
+                type: 'Boolean',
+                values: '-',
+                default: '<code>true</code>. Can be changed via <code>defaultCompatFallthrough</code> config option.'
             }
         ]
     }

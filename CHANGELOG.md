@@ -15,7 +15,7 @@
 
   * `BreadcrumbItem`:
 
-    TBD
+    If `compat-fallthrough` is `true`, the attributes fall through to the root `<li>` element, otherwise to the underlying tag.
 
   * `Clockpicker`:
 
