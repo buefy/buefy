@@ -40,8 +40,11 @@ The biggest breaking change is obviously, **this does not work with Vue 2**.
 To install this fork, please run the following command,
 
 ```sh
-npm install @ntohq/buefy-next
+npm install buefy@npm:@ntohq/buefy-next
 ```
+
+The above command will install `@ntohq/buefy-next` under the `buefy` alias.
+This is recommended because `@ntohq/buefy-next` will replace `buefy` when it becomes stable.
 
 ## Features
 
@@ -66,7 +69,7 @@ You need [Vue.js](https://vuejs.org/) **version 3.0+**. (Vue 2 is not supported)
 ### 1 Install via npm
 
 ```bash
-npm install https://github.com/buefy/buefy#buefy-next
+npm install buefy@npm:@ntohq/buefy-next
 ```
 
 ### 2 Import and use Buefy
