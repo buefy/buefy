@@ -4,7 +4,7 @@ exports[`BDatepicker render correctly 1`] = `
 <div class="datepicker control">
   <div class="dropdown dropdown-menu-animation is-mobile-modal">
     <div tabindex="-1" class="dropdown-trigger" aria-haspopup="true">
-      <b-input-stub type="text" lazy="false" passwordreveal="false" iconclickable="false" hascounter="true" customclass="" iconrightclickable="false" compatfallthrough="true" autocomplete="off" rounded="false" loading="false" readonly="" use-html5-validation="false"></b-input-stub>
+      <b-input-stub type="text" lazy="false" passwordreveal="false" iconclickable="false" hascounter="true" customclass="" iconrightclickable="false" autocomplete="off" rounded="false" loading="false" readonly="" use-html5-validation="false"></b-input-stub>
     </div>
     <transition-stub name="fade" appear="false" persisted="false" css="true">
       <div class="background" aria-hidden="true" style="display: none;"></div>

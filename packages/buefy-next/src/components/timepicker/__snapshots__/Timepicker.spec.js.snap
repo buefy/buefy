@@ -4,7 +4,7 @@ exports[`BTimepicker render correctly 1`] = `
 <div class="timepicker control">
   <div class="dropdown dropdown-menu-animation is-mobile-modal">
     <div tabindex="0" class="dropdown-trigger" aria-haspopup="true">
-      <b-input-stub type="text" lazy="false" passwordreveal="false" iconclickable="false" hascounter="true" customclass="" iconrightclickable="false" compatfallthrough="true" autocomplete="off" loading="false" readonly="" rounded="false" use-html5-validation="true"></b-input-stub>
+      <b-input-stub type="text" lazy="false" passwordreveal="false" iconclickable="false" hascounter="true" customclass="" iconrightclickable="false" autocomplete="off" loading="false" readonly="" rounded="false" use-html5-validation="true"></b-input-stub>
     </div>
     <transition-stub name="fade" appear="false" persisted="false" css="true">
       <div class="background" aria-hidden="true" style="display: none;"></div>
