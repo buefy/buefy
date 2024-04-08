@@ -111,12 +111,14 @@ If you want to customize the icons or the theme, refer to the [customization sec
 
 ```html
 <!-- Buefy CSS -->
-<link rel="stylesheet" href="https://unpkg.com/buefy/dist/buefy.min.css">
+<link rel="stylesheet" href="https://unpkg.com/@ntohq/buefy-next/dist/buefy.min.css">
 
 <!-- Buefy JavaScript -->
-<script src="https://unpkg.com/buefy/dist/buefy.min.js"></script>
+<script src="https://unpkg.com/@ntohq/buefy-next/dist/buefy.min.js"></script>
 ```
 
+**Currently, including `buefy-next` via `<script>` is not working.**
+Please see the issue [#221](https://github.com/ntohq/buefy-next/issues/221).
 
 ### Installing Developer Release(s) from GitHub npm Registry to Access the Latest Features
 To incorporate the latest changes from the development branch of buefy-next, you can install developer releases from the GitHub npm registry. However, proceed with caution as these packages may be deleted or retracted without notice.
@@ -164,13 +166,13 @@ Steps:
    Copy the provided command from GitHub, which will resemble this:
 
     ```bash
-    npm install @ntohq/buefy-next@<package version>-<dev commit hash>
+    npm install buefy@npm:@ntohq/buefy-next@<package version>-<dev commit hash>
     ```
 
    Alternatively, to fetch the latest release from the developer snapshot registry, run:
 
     ```bash
-    npm install @ntohq/buefy-next@latest
+    npm install buefy@npm:@ntohq/buefy-next@latest
     ```
 
    **However, note it is not recommended to use the latest version of our developer snapshot, as its stability fluctuates.**
