@@ -1,6 +1,14 @@
 # Buefy Changelog
 
-## buefy-next unreleased
+## Buefy-next 0.1.3
+
+Buefy-next 0.1.3 includes all the relevant changes until Buefy 0.9.29.
+
+### Breaking changes
+
+* You can no longer install `@ntohq/buefy-next` directly from the GitHub repository.
+  You can try developer releases instead.
+  See <https://github.com/ntohq/buefy-next/pkgs/npm/buefy-next>
 
 ### New features
 
@@ -9,68 +17,104 @@
   The default value can be controlled by the `defaultCompatFallthrough` config option (`true` by default).
   [#16](https://github.com/ntohq/buefy-next/issues/16)
 
-  * `Autocomplete`:
+  * `BAutocomplete`:
 
-    If `compat-fallthrough` is `true`, the attributes fall through to the root `<div>` element, otherwise to the underlying `<b-input>`.
+    If `compat-fallthrough` is `true`, the attributes fall through to the root `<div>` element, otherwise to the underlying `BInput`.
 
-  * `BreadcrumbItem`:
+  * `BBreadcrumbItem`:
 
     If `compat-fallthrough` is `true`, the attributes fall through to the root `<li>` element, otherwise to the underlying tag.
 
-  * `Clockpicker`:
+  * `BClockpicker`:
 
-    If `compat-fallthrough` is `true`, the attributes fall through to the root `<div>` element, otherwise to the underlying `<b-input>`.
+    If `compat-fallthrough` is `true`, the attributes fall through to the root `<div>` element, otherwise to the underlying `BInput`.
 
-  * `Datepicker`:
+  * `BDatepicker`:
 
-    If `compat-fallthrough` is `true`, the attributes fall through to the root `<div>` element, otherwise to the underlying `<b-input>`.
+    If `compat-fallthrough` is `true`, the attributes fall through to the root `<div>` element, otherwise to the underlying `BInput`.
 
-  * `Input`:
+  * `BInput`:
 
     If `compat-fallthrough` is `true`, the attributes fall through to the root `<div>` element, otherwise to either of `<input>` or `<textarea>` element.
 
-  * `MenuItem`:
+  * `BMenuItem`:
 
     If `compat-fallthrough` is `true`, the attributes fall through to the root `<li>` element, otherwise to the underlying tag.
 
-  * `NavbarDropdown`:
+  * `BNavbarDropdown`:
 
     If `compat-fallthrough` is `true`, the attributes fall through to the root `<div>` element, otherwise to the underlying tag.
 
-  * `Numberinput`:
+  * `BNumberinput`:
 
     If `compat-fallthrough` is `true`, the attributes fall through to the root `<div>` element, otherwise to the underlying `<b-input>` component.
 
-  * `Select`:
+  * `BSelect`:
 
     If `compat-fallthrough` is `true`, the attributes fall through to the root `<div>` element, otherwise to the underlying `<select>` element.
 
-  * `SliderThumb`:
+  * `BSliderThumb`:
 
     If `compat-fallthrough` is `true`, the attributes fall through to the root `<div>` element, otherwise to the inner `<div>` element.
 
-  * `Table`:
+  * `BTable`:
 
     If `compat-fallthrough` is `true`, the attributes fall through to the root `<div>` element, otherwise to the underlying pagination components.
 
-  * `Taginput`:
+  * `BTaginput`:
 
-    If `compat-fallthrough` is `true`, the attributes fall through to the root `<div>` element, otherwise to the underlying `<b-autocomplete>` component.
+    If `compat-fallthrough` is `true`, the attributes fall through to the root `<div>` element, otherwise to the underlying `BAutocomplete` component.
 
-  * `Timepicker`:
+  * `BTimepicker`:
 
-    If `compat-fallthrough` is `true`, the attributes fall through to the root `<div>` element, otherwise to the underlying `<b-input>`.
+    If `compat-fallthrough` is `true`, the attributes fall through to the root `<div>` element, otherwise to the underlying `BInput`.
 
-  * `Upload`:
+  * `BUpload`:
 
     If `compat-fallthrough` is `true`, the attributes fall through to the root `<label>` element, otherwise to the underlying `<input>` element.
 
-* `CarouselItem`, `StepItem`, and `TabItem` introduce a new prop `order`, which determines the order of each child item.
+* `BCarouselItem`, `BStepItem`, and `BTabItem` introduce a new prop `order`, which determines the order of each child item.
   By default, the order of each child item is determined by the sequence in which each child item is mounted.
   If any child item is unmounted and mounted again, the order may be changed (**BREAKING CHANGE**).
   You have to give explicit `order` if you want to maintain the order of child items consistent.
 
-## buefy-next
+### Fixes
+
+* Fix [#163](https://github.com/ntohq/buefy-next/pull/163) Missing `BMenuList` in production (thanks [@dword-design](https://github.com/dword-design))
+* Fix [#124](https://github.com/ntohq/buefy-next/pull/124) Progress bar in `BNotification` component was not showing, when programmatically opened (thanks [@zhanghengxin](https://github.com/zhanghengxin))
+* Fix [#131](https://github.com/ntohq/buefy-next/issues/131) Typo in the `copyAppContext` helper function.
+  Programmatically opened components may be affected; e.g., `BModal`.
+* Fix [#153](https://github.com/ntohq/buefy-next/issues/153) `useI18n` did not work in a setup script within the context of a programmatically opened `BModal`
+* Fix [#16](https://github.com/ntohq/buefy-next/issues/16) Vue Compat: deprecation INSTANCE_ATTRS_CLASS_STYLE
+* Fix [#197](https://github.com/ntohq/buefy-next/pull/197) Migrated `BSkeleton` to Vue 3 functional component as function (thanks [@hirokiky](https://github.com/hirokiky))
+* Fix [#187](https://github.com/ntohq/buefy-next/issues/187) `BTabs` did not work in SSR due to `window` access
+* Fix [#194](https://github.com/ntohq/buefy-next/issues/194) `_unregisterItem` of `ProviderParentMixin` would not work if child items did not have value.
+  `BCarousel`, `BSteps`, `BTabs` are affected.
+
+## Buefy-next 0.1.2
+
+### Fixes
+
+* Fix [#5](https://github.com/ntohq/buefy-next/issues/5) Horizontal `BField` wrapped a simple text element with an extra `BField`
+* Fix [#8](https://github.com/ntohq/buefy-next/issues/8) `BTable` had an unexpected `tabindex` attribute containing "false"
+* Fix [#20](https://github.com/ntohq/buefy-next/issues/20) `BMenuList` crashed with "TypeError: slots.default is not a function"
+* Fix [#18](https://github.com/ntohq/buefy-next/issues/18) `BFieldBody` crashed with "TypeError: this.$slots.default is not a function".
+  `BField` may be affected.
+* Fix [#29](https://github.com/ntohq/buefy-next/issues/29) Burger menu of `BNavbar` had an unexpected `aria-expanded` attribute with false
+* Fix [#28](https://github.com/ntohq/buefy-next/issues/28) `BNavbar` crashed with "TypeError: this.$slots.brand is not a function"
+* Fix [#36](https://github.com/ntohq/buefy-next/issues/36) `BFieldBody` could not resolve `BField`.
+  `BField` may be affected.
+* Fix [#44](https://github.com/ntohq/buefy-next/issues/44) `BSlotComponent` crashed with "TypeError: Cannot read properties of undefined (reading 'default')".
+  Components using `BSlotComponent` may be affected; i.e., `BTable`, `BTabs`.
+* Fix [#33](https://github.com/ntohq/buefy-next/issues/33) Thumb of `BSlider` had an unexpected `aria-disabled` attribute with "false"
+* Fix [#45](https://github.com/ntohq/buefy-next/issues/45) `BSlotComponent` did not handle update events from underlying component.
+  `BTabItem`s with a custom header slot may be affected.
+* Fix [#42](https://github.com/ntohq/buefy-next/issues/42) `BTabs` did not respond to key interactions
+* Fix [#39](https://github.com/ntohq/buefy-next/issues/39) `BPaginationButton` had ab unexpected `aria-current` attribute with "false"
+* Fix [#26](https://github.com/ntohq/buefy-next/issues/26) `BCollapse` warned a non-function value for the default slot
+* Fix [#32](https://github.com/ntohq/buefy-next/issues/32), [#101](https://github.com/ntohq/buefy-next/issues/101) No plugins were available on programmatically opened components: `BDialog`, `BLoading`, `BModal`, `BNotification`, `BSnackbar`, and `BToast`
+
+## Buefy-next pre 0.1.2
 
 ### Breaking changes
 
