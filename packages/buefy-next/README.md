@@ -22,7 +22,7 @@ The branch departed from the latest commit [#b6233b9c335d99cf688ee2a3b9c61fd26a9
 
 The initial migration goal was to make the documentation page of every component work, and it was achieved.
 Some features not used in the documentation pages may not work.
-Please refer to [MIGRATION-NOTE.md](./MIGRATION-NOTE.md) for more details about what challenges we faced.
+Please refer to [MIGRATION-NOTE.md](/MIGRATION-NOTE.md) for more details about what challenges we faced.
 
 Due to focusing on the documentation pages:
 - **Unit tests have not been updated at all**.
@@ -32,7 +32,7 @@ Due to focusing on the documentation pages:
 ### Breaking changes
 
 Because not all of Vue 2 features could be reproduced with Vue 3, there are some breaking changes.
-Please refer to [CHANGELOG.md](./CHANGELOG.md) for more details.
+Please refer to [CHANGELOG.md](/CHANGELOG.md) for more details.
 The biggest breaking change is obviously, **this does not work with Vue 2**.
 
 ### How to install
@@ -40,8 +40,11 @@ The biggest breaking change is obviously, **this does not work with Vue 2**.
 To install this fork, please run the following command,
 
 ```sh
-npm install https://github.com/buefy/buefy#buefy-next
+npm install buefy@npm:@ntohq/buefy-next
 ```
+
+The above command will install `@ntohq/buefy-next` under the `buefy` alias.
+This is recommended because `@ntohq/buefy-next` will replace `buefy` when it becomes stable.
 
 ## Features
 
@@ -66,7 +69,7 @@ You need [Vue.js](https://vuejs.org/) **version 3.0+**. (Vue 2 is not supported)
 ### 1 Install via npm
 
 ```bash
-npm install https://github.com/buefy/buefy#buefy-next
+npm install buefy@npm:@ntohq/buefy-next
 ```
 
 ### 2 Import and use Buefy
@@ -108,11 +111,75 @@ If you want to customize the icons or the theme, refer to the [customization sec
 
 ```html
 <!-- Buefy CSS -->
-<link rel="stylesheet" href="https://unpkg.com/buefy/dist/buefy.min.css">
+<link rel="stylesheet" href="https://unpkg.com/@ntohq/buefy-next/dist/buefy.min.css">
 
 <!-- Buefy JavaScript -->
-<script src="https://unpkg.com/buefy/dist/buefy.min.js"></script>
+<script src="https://unpkg.com/@ntohq/buefy-next/dist/buefy.min.js"></script>
 ```
+
+**Currently, including `buefy-next` via `<script>` is not working.**
+Please see the issue [#221](https://github.com/ntohq/buefy-next/issues/221).
+
+### Installing Developer Release(s) from GitHub npm Registry to Access the Latest Features
+To incorporate the latest changes from the development branch of buefy-next, you can install developer releases from the GitHub npm registry. However, proceed with caution as these packages may be deleted or retracted without notice.
+
+Steps:
+1. Generate a Personal Access Token:
+
+   Create a personal access token on GitHub with read access to the GitHub Packages registry.
+
+2. Configure npm:
+
+   In your terminal, execute the following commands:
+
+    ```bash
+    npm login --auth-type=legacy --registry=https://npm.pkg.github.com
+     USERNAME: <their GitHub username>
+     PASSWORD: <personal access token issued at Step 1>
+    echo "@ntohq:registry=https://npm.pkg.github.com" > .npmrc
+    ```
+
+3. Select a Developer Release:
+
+   Visit the Buefy-next package registry: https://github.com/ntohq/buefy-next/pkgs/npm/buefy-next on GitHub.
+
+   Choose any developer release that suits your needs.
+   - Consider the features and bug fixes introduced in each release.
+   - Choose a more recent release if you need the latest features, but be aware of potential instabilities.
+   - Opt for a slightly older release if stability is a higher priority.
+
+   **Package Naming Conventions:**
+
+   Buefy-next developer releases follow a specific naming format:
+
+    ```
+    @ntohq/buefy-next@<package version>-<dev commit hash>
+    ```
+
+   `<package version>`: This represents the intended stable release version that the developer release will eventually be included in.
+
+   `<dev commit hash>`: This part indicates that it's a developer release and includes a unique commit hash that identifies the specific code changes in that release.
+
+
+4. Install the Package:
+
+   Copy the provided command from GitHub, which will resemble this:
+
+    ```bash
+    npm install buefy@npm:@ntohq/buefy-next@<package version>-<dev commit hash>
+    ```
+
+   Alternatively, to fetch the latest release from the developer snapshot registry, run:
+
+    ```bash
+    npm install buefy@npm:@ntohq/buefy-next@latest
+    ```
+
+   **However, note it is not recommended to use the latest version of our developer snapshot, as its stability fluctuates.**
+
+Congratulations! You've successfully installed a Buefy-next developer package.
+
+For further details on the GitHub npm registry refer to the [official GitHub documentation](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry#installing-a-package)
 
 ## Start On Cloud IDE
 
@@ -124,7 +191,7 @@ Recent versions of Firefox, Chrome, Edge, Opera and Safari. IE10+ is only partia
 
 ## Contributing
 
-Please see the [contributing guidelines](./.github/CONTRIBUTING.md)
+Please see the [contributing guidelines](/.github/CONTRIBUTING.md)
 
 ## Versioning
 
@@ -137,11 +204,12 @@ Version will follow **v0.Y.Z**, where:
 
 <table>
   <tr>
-    <td align="center"><a href="https://twitter.com/walter_tommasi"><img src="https://avatars0.githubusercontent.com/u/8029488?v=4" width="80px;" alt=""/><br /><sub><b>Walter Tommasi</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/kikuomax"><img src="https://avatars.githubusercontent.com/u/3257531?v=4" width="80px;" alt=""/><br /><sub><b>Kikuo Emoto</b></sub></a><br /></td>
+    <td align="center"><a href="https://twitter.com/wesdevpro"><img src="https://avatars.githubusercontent.com/u/11604664?v=4" width="80px;" alt=""/><br /><sub><b>Wesley Ford</b></sub></a><br /></td>
   </tr>
 </table>
 
-Special thanks to <a href="http://twitter.com/rafaelpimpa">Rafael Beraldo</a>, the original author.
+Special thanks to <a href="http://twitter.com/rafaelpimpa">Rafael Beraldo</a>, the original author, and <a href="https://twitter.com/walter_tommasi">Walter Tommasi</a>, a former core maintainter of Buefy.
 
 ## Contributors ✨
 
