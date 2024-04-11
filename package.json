@@ -18,7 +18,6 @@
     "eslint": "^8.52.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-vue": "^9.18.1",
-    "lerna": "^7.3.0",
     "lint-staged": "^15.0.2",
     "pre-commit": "1.2.2"
   },
