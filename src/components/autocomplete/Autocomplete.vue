@@ -282,6 +282,7 @@ export default {
          * to open upwards.
          */
         isActive(active) {
+            this.$emit('toggle-dropdown', active)
             if (this.dropdownPosition === 'auto') {
                 if (active) {
                     this.calcDropdownInViewportVertical()

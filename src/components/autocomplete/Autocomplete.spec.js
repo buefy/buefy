@@ -87,6 +87,25 @@ describe('BAutocomplete', () => {
         expect(wrapper.emitted()['blur']).toBeTruthy()
     })
 
+    it('can emit toggle-dropdown event', async () => {
+        const VALUE_TYPED = 'test'
+        wrapper.setProps({ data: DATA_LIST })
+
+        $input.trigger('focus')
+        $input.setValue(VALUE_TYPED)
+
+        await wrapper.vm.$nextTick()
+        expect(wrapper.emitted()['toggle-dropdown']).toBeTruthy()
+        let valueEmitted = wrapper.emitted()['toggle-dropdown'][0]
+        expect(valueEmitted).toContainEqual(true)
+
+        $input.trigger('keyup', {'key': 'Esc'})
+        await wrapper.vm.$nextTick()
+        expect(wrapper.emitted()['toggle-dropdown']).toBeTruthy()
+        valueEmitted = wrapper.emitted()['toggle-dropdown'][1]
+        expect(valueEmitted).toContainEqual(false)
+    })
+
     it('can autocomplete with keydown', async () => {
         const VALUE_TYPED = 'Ang'
         wrapper.setProps({ data: DATA_LIST })

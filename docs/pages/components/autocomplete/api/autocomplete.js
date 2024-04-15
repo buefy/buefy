@@ -225,7 +225,12 @@ export default [
                 name: '<code>infinite-scroll</code>',
                 description: 'Triggers when <code>.dropdown-list</code> has reached scroll end',
                 parameters: '—'
-            }
+            },
+            {
+                name: '<code>toggle-dropdown</code>',
+                description: 'Triggers when dropdown is opened/closed',
+                parameters: '<code>value: Boolean</code>'
+            },
         ],
         methods: [
             {
