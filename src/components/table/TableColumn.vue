@@ -63,6 +63,16 @@ export default {
             }
             return style
         },
+        thWrapStyle() {
+            const width = toCssWidth(this.width)
+            // interestingly, percentage width on the th element has effect
+            // so we won't apply it to .th-wrap
+            if (width != null && !width.trim().endsWith('%')) {
+                return { width }
+            } else {
+                return {}
+            }
+        },
         rootClasses() {
             return [this.cellClass, {
                 'has-text-right': this.numeric && !this.centered,
@@ -108,6 +118,9 @@ export default {
             this.$destroy()
             throw new Error('You should wrap bTableColumn on a bTable')
         }
+        this.$table.refreshSlots()
+    },
+    beforeDestroy() {
         this.$table.refreshSlots()
     },
     render(createElement) {

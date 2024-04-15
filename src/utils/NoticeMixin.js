@@ -83,6 +83,7 @@ export default {
         pause() {
             if (this.pauseOnHover && !this.indefinite) {
                 this.isPaused = true
+                clearInterval(this.$buefy.globalNoticeInterval)
             }
         },
         removePause() {
@@ -103,7 +104,9 @@ export default {
                 this.parentBottom.childElementCount > 0
             )
         },
-
+        click() {
+            this.$emit('click')
+        },
         close() {
             if (!this.isPaused) {
                 clearTimeout(this.timer)
@@ -123,11 +126,7 @@ export default {
         },
 
         showNotice() {
-            if (this.shouldQueue()) {
-                // Call recursively if should queue
-                setTimeout(() => this.showNotice(), 250)
-                return
-            }
+            if (this.shouldQueue()) this.correctParent.innerHTML = ''
             this.correctParent.insertAdjacentElement('afterbegin', this.$el)
             this.isActive = true
 

@@ -43,7 +43,7 @@
                 :loading="loading"
                 :autocomplete="nativeAutocomplete"
                 :open-on-focus="openOnFocus"
-                :keep-open="openOnFocus"
+                :keep-open="keepOpen"
                 :keep-first="keepFirst"
                 :group-field="groupField"
                 :group-options="groupOptions"
@@ -58,7 +58,8 @@
                 @compositionstart.native="isComposing = true"
                 @compositionend.native="isComposing = false"
                 @select="onSelect"
-                @infinite-scroll="emitInfiniteScroll">
+                @infinite-scroll="emitInfiniteScroll"
+                v-on="listeners">
                 <template
                     v-if="hasHeaderSlot"
                     #header>
@@ -97,8 +98,8 @@
 
 <script>
 import { getValueByPath } from '../../utils/helpers'
-import Tag from '../tag/Tag'
-import Autocomplete from '../autocomplete/Autocomplete'
+import Tag from '../tag/Tag.vue'
+import Autocomplete from '../autocomplete/Autocomplete.vue'
 import config from '../../utils/config'
 import FormElementMixin from '../../utils/FormElementMixin'
 
@@ -146,6 +147,10 @@ export default {
         groupOptions: String,
         nativeAutocomplete: String,
         openOnFocus: Boolean,
+        keepOpen: {
+            type: Boolean,
+            default: true
+        },
         keepFirst: Boolean,
         disabled: Boolean,
         ellipsis: Boolean,
@@ -191,10 +196,16 @@ export default {
             newTag: '',
             isComposing: false,
             _elementRef: 'autocomplete',
-            _isTaginput: true
+            _isTaginput: true,
+            requestID: null
         }
     },
     computed: {
+        listeners() {
+            const { input, ...listeners } = this.$listeners
+            return listeners
+        },
+
         rootClasses() {
             return {
                 'is-expanded': this.expanded
@@ -289,9 +300,13 @@ export default {
                     this.$emit('input', this.tags)
                     this.$emit('add', tagToAdd)
                 }
-            }
 
-            this.newTag = ''
+                // after autocomplete events
+                this.requestID = requestAnimationFrame(() => {
+                    this.newTag = ''
+                    this.$emit('typing', '')
+                })
+            }
         },
 
         getNormalizedTagText(tag) {
@@ -358,6 +373,10 @@ export default {
         emitInfiniteScroll() {
             this.$emit('infinite-scroll')
         }
+    },
+
+    beforeDestroy() {
+        cancelAnimationFrame(this.requestID)
     }
 }
 </script>

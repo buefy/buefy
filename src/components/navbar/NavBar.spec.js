@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import BNavbar from '@components/navbar/Navbar.vue'
+import BNavbar from '@components/navbar/Navbar'
 
 describe('BNavbar', () => {
     let wrapper

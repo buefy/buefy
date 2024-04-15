@@ -6,6 +6,8 @@
             v-show="isActive"
             class="snackbar"
             :class="[type,position]"
+            @mouseenter="pause"
+            @mouseleave="removePause"
             :role="actionText ? 'alertdialog' : 'alert'">
             <template v-if="$slots.default">
                 <slot />
@@ -32,7 +34,7 @@
 
 <script>
 import config from '../../utils/config'
-import NoticeMixin from '../../utils/NoticeMixin.js'
+import NoticeMixin from '../../utils/NoticeMixin'
 
 export default {
     name: 'BSnackbar',

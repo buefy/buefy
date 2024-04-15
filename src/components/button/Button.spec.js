@@ -90,4 +90,26 @@ describe('BButton', () => {
         })
         expect(wrapper.vm.computedTag).toBe('button')
     })
+
+    it('should set type attribute', () => {
+        wrapper.setProps({
+            nativeType: 'submit'
+        })
+        expect(wrapper.element.type).toBe('submit')
+    })
+
+    it("shouldn't set type attribute unless if the tag is button", () => {
+        wrapper.setProps({
+            tag: 'a'
+        })
+        expect(wrapper.element.type).toBeFalsy()
+    })
+
+    it('should set type attribute if the tag is input', () => {
+        wrapper.setProps({
+            tag: 'input',
+            nativeType: 'submit'
+        })
+        expect(wrapper.element.type).toBe('submit')
+    })
 })

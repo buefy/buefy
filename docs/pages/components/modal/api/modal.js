@@ -142,6 +142,20 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>close-button-aria-label</code>',
+                description: `Aria label attribute to be passed to the close button for better accessibility.`,
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>render-on-mounted</code>',
+                description: 'Create DOM for the modal content whether modal is active or not',
+                type: 'Boolean',
+                values: '-',
+                default: '<code>false</code>'
             }
         ],
         events: [

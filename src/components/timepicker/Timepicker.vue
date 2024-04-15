@@ -6,6 +6,7 @@
             :position="position"
             :disabled="disabled"
             :inline="inline"
+            :mobile-modal="mobileModal"
             :append-to-body="appendToBody"
             append-to-body-copy-parent
             @active-change="onActiveChange">
@@ -119,7 +120,6 @@
             :min="formatHHMMSS(minTime)"
             :disabled="disabled"
             :readonly="false"
-            :reset-on-meridian-change="isReset"
             v-bind="$attrs"
             :use-html5-validation="useHtml5Validation"
             @change.native="onChange($event.target.value)"
@@ -130,12 +130,12 @@
 
 <script>
 import TimepickerMixin from '../../utils/TimepickerMixin'
-import Dropdown from '../dropdown/Dropdown'
-import DropdownItem from '../dropdown/DropdownItem'
-import Input from '../input/Input'
-import Field from '../field/Field'
-import Select from '../select/Select'
-import Icon from '../icon/Icon'
+import Dropdown from '../dropdown/Dropdown.vue'
+import DropdownItem from '../dropdown/DropdownItem.vue'
+import Input from '../input/Input.vue'
+import Field from '../field/Field.vue'
+import Select from '../select/Select.vue'
+import Icon from '../icon/Icon.vue'
 
 export default {
     name: 'BTimepicker',

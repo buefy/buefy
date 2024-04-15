@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BBreadcrumbItem render correctly 1`] = `<li class=""><a></a></li>`;

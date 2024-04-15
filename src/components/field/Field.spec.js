@@ -48,13 +48,14 @@ describe('BField', () => {
     })
 
     describe('Passing a message prop', () => {
-        const generateMountOptions = ({message}) => {
+        const generateMountOptions = ({message, slot}) => {
             return {
                 propsData: {message},
                 localVue,
                 slots: {
                     default: [BInput, '<button class="button">Button</button>']
-                }
+                },
+                scopedSlots: slot ? {message: slot} : {}
             }
         }
 
@@ -114,6 +115,14 @@ describe('BField', () => {
             const wrapper = shallowMount(BField, mountOptions)
             expect(wrapper.find('p.help').html().split('<br>').length).toEqual(5)
         })
+
+        it('messages are passed down to the message slot', () => {
+            const message = 'Some string message'
+            const slot = '<template #message="{ messages }">{{ messages }}</template>'
+            const mountOptions = generateMountOptions({message, slot})
+            const wrapper = shallowMount(BField, mountOptions)
+            expect(wrapper.find('p.help').text()).toEqual(message)
+        })
     })
 
     describe('managing groups', () => {
@@ -171,6 +180,29 @@ describe('BField', () => {
             })
             expect(wrapper.find('.field').find('label').isVisible()).toBe(true)
         })
+
+        it('should reflect validation status of wrapped input unless type is specified', async () => {
+            const wrapper = mount(BField, mountOptions)
+            const input = wrapper.find(BInput)
+
+            input.vm.setInvalid()
+            await wrapper.vm.$nextTick()
+            expect(wrapper.vm.newType).toBe('is-danger')
+
+            input.vm.setValidity(null, null)
+            await wrapper.vm.$nextTick()
+            expect(wrapper.vm.newType).toBeFalsy()
+
+            await wrapper.setProps({ type: 'is-warning' })
+
+            input.vm.setInvalid()
+            await wrapper.vm.$nextTick()
+            expect(wrapper.vm.newType).toBe('is-warning')
+
+            input.vm.setValidity(null, null)
+            await wrapper.vm.$nextTick()
+            expect(wrapper.vm.newType).toBe('is-warning')
+        })
     })
 
     describe('Passing true for horizontal prop', () => {
@@ -213,6 +245,55 @@ describe('BField', () => {
             const helpWrapper = wrapper.find('.field').find('.field-body').find('.help')
             expect(helpWrapper.isVisible()).toBe(true)
             expect(helpWrapper.text()).toEqual(message)
+        })
+    })
+
+    describe('with grouped and horizontal true', () => {
+        let wrapper
+
+        beforeEach(() => {
+            wrapper = mount(BField, {
+                localVue,
+                propsData: {
+                    grouped: true,
+                    horizontal: true
+                },
+                slots: {
+                    default: [BInput, BInput]
+                }
+            })
+        })
+
+        it('should wrap each child in a field under a field-body', () => {
+            const body = wrapper.find(BFieldBody)
+            expect(body.exists()).toBe(true)
+            const childFields = body.findAll(BField)
+            expect(childFields.length).toBe(2)
+            expect(childFields.at(0).find(BInput).exists()).toBe(true)
+            expect(childFields.at(1).find(BInput).exists()).toBe(true)
+        })
+
+        describe('when validation fails', () => {
+            let childFields
+
+            beforeEach(async () => {
+                await wrapper.setData({
+                    newType: 'is-danger',
+                    newMessage: 'error message'
+                })
+                const body = wrapper.find(BFieldBody)
+                childFields = body.findAll(BField)
+            })
+
+            it('should set message only to the first child field', () => {
+                expect(childFields.at(0).props('message')).toEqual(['error message'])
+                expect(childFields.at(1).props('message')).toBeUndefined()
+            })
+
+            it('should set type to all the child fields', () => {
+                expect(childFields.at(0).props('type')).toBe('is-danger')
+                expect(childFields.at(1).props('type')).toBe('is-danger')
+            })
         })
     })
 })

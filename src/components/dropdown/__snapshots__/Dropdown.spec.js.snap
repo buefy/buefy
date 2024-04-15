@@ -2,10 +2,10 @@
 
 exports[`BDropdown render correctly 1`] = `
 <div class="dropdown dropdown-menu-animation is-mobile-modal">
-    <div role="button" tabindex="0" aria-haspopup="true" class="dropdown-trigger"><button class="trigger">trigger</button></div>
-    <div aria-hidden="true" class="background" style="display: none;" name="fade"></div>
-    <div aria-hidden="true" class="dropdown-menu" style="display: none;" name="fade">
-        <div class="dropdown-content"></div>
-    </div>
+  <div tabindex="0" aria-haspopup="true" class="dropdown-trigger"><button class="trigger">trigger</button></div>
+  <div aria-hidden="true" class="background" style="display: none;" name="fade"></div>
+  <div aria-hidden="true" class="dropdown-menu" style="display: none;" name="fade">
+    <div aria-modal="true" class="dropdown-content"></div>
+  </div>
 </div>
 `;

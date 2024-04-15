@@ -7,6 +7,10 @@
         <div class="block">
             <CodeView title="Individual components" :code="usageComponents | pre" lang="javascript" expanded/>
         </div>
+        
+         <div class="block">
+            <CodeView title="CDN bundle" :code="usageCdn | pre" lang="javascript" expanded/>
+         </div>
 
         <ApiView :data="api"/>
     </div>
@@ -22,7 +26,6 @@
                 usageBundle: `
                 Vue.use(Buefy, {
                     defaultIconPack: 'fas',
-                    defaultContainerElement: '#content',
                     // ...
                 })`,
                 usageComponents: `
@@ -32,9 +35,15 @@
                 Vue.use(Input)
                 ConfigProgrammatic.setOptions({
                     defaultIconPack: 'fas',
-                    defaultContainerElement: '#content',
                     // ...
-                })`
+                })`,
+                usageCdn: `
+                // When using CDN, Buefy automatically attaches itself on Vue
+                Vue.prototype.$buefy.config.setOptions({
+                    defaultIconPack: 'fas',
+                    // ...
+                })
+                `
             }
         }
     }

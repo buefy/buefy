@@ -8,25 +8,29 @@
         @mouseenter="checkHoverable"
         v-click-outside="closeMenu"
     >
-        <a
+        <component
+            :is="tag"
             class="navbar-link"
             :class="{
                 'is-arrowless': arrowless,
                 'is-active': newActive && collapsible
             }"
-            role="menuitem"
+            v-bind="$attrs"
+            v-on="$listeners"
             aria-haspopup="true"
-            href="#"
-            @click.prevent="newActive = !newActive">
+            @click.prevent="toggleMenu"
+            @keyup.enter="toggleMenu"
+            tabindex="0"
+        >
             <template v-if="label">{{ label }}</template>
             <slot v-else name="label" />
-        </a>
+        </component>
         <div
-            v-show="!collapsible || (collapsible && newActive)"
             class="navbar-dropdown"
             :class="{
                 'is-right': right,
                 'is-boxed': boxed,
+                'is-hidden-touch': collapsible && !newActive
             }"
         >
             <slot />
@@ -42,6 +46,7 @@ export default {
     directives: {
         clickOutside
     },
+    inheritAttrs: false,
     props: {
         label: String,
         hoverable: Boolean,
@@ -53,8 +58,11 @@ export default {
             type: Boolean,
             default: true
         },
-        collapsible: Boolean
-
+        collapsible: Boolean,
+        tag: {
+            type: String,
+            default: 'a'
+        }
     },
     data() {
         return {
@@ -66,9 +74,16 @@ export default {
     watch: {
         active(value) {
             this.newActive = value
+        },
+
+        newActive(value) {
+            this.$emit('active-change', value)
         }
     },
     methods: {
+        toggleMenu() {
+            this.newActive = !this.newActive
+        },
         showMenu() {
             this.newActive = true
         },

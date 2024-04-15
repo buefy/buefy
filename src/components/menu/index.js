@@ -1,6 +1,6 @@
-import Menu from './Menu'
-import MenuList from './MenuList'
-import MenuItem from './MenuItem'
+import Menu from './Menu.vue'
+import MenuList from './MenuList.vue'
+import MenuItem from './MenuItem.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 

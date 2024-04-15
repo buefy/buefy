@@ -12,10 +12,13 @@
         :editable="editable"
         :expanded="expanded"
         :close-on-click="false"
+        :first-day-of-week="firstDayOfWeek"
+        :rules-for-first-week="rulesForFirstWeek"
         :date-formatter="defaultDatetimeFormatter"
         :date-parser="defaultDatetimeParser"
         :min-date="minDate"
         :max-date="maxDate"
+        :nearby-month-days="nearbyMonthDays"
         :icon="icon"
         :icon-right="iconRight"
         :icon-right-clickable="iconRightClickable"
@@ -31,6 +34,7 @@
         :append-to-body="appendToBody"
         @focus="onFocus"
         @blur="onBlur"
+        @active-change="onActiveChange"
         @icon-right-click="$emit('icon-right-click')"
         @change-month="$emit('change-month', $event)"
         @change-year="$emit('change-year', $event)">
@@ -91,8 +95,8 @@ import FormElementMixin from '../../utils/FormElementMixin'
 import { isMobile, matchWithGroups } from '../../utils/helpers'
 import config from '../../utils/config'
 
-import Datepicker from '../datepicker/Datepicker'
-import Timepicker from '../timepicker/Timepicker'
+import Datepicker from '../datepicker/Datepicker.vue'
+import Timepicker from '../timepicker/Timepicker.vue'
 
 const AM = 'AM'
 const PM = 'PM'
@@ -115,6 +119,20 @@ export default {
         placeholder: String,
         horizontalTimePicker: Boolean,
         disabled: Boolean,
+        firstDayOfWeek: {
+            type: Number,
+            default: () => {
+                if (typeof config.defaultFirstDayOfWeek === 'number') {
+                    return config.defaultFirstDayOfWeek
+                } else {
+                    return 0
+                }
+            }
+        },
+        rulesForFirstWeek: {
+            type: Number,
+            default: () => 4
+        },
         icon: String,
         iconRight: String,
         iconRightClickable: Boolean,
@@ -128,6 +146,10 @@ export default {
         },
         minDatetime: Date,
         maxDatetime: Date,
+        nearbyMonthDays: {
+            type: Boolean,
+            default: config.defaultDatepickerNearbyMonthDays
+        },
         datetimeFormatter: {
             type: Function
         },
@@ -216,7 +238,7 @@ export default {
                 hour: this.localeOptions.hour || 'numeric',
                 minute: this.localeOptions.minute || 'numeric',
                 second: this.enableSeconds() ? this.localeOptions.second || 'numeric' : undefined,
-                hour12: !this.isHourFormat24()
+                hourCycle: !this.isHourFormat24() ? 'h12' : 'h23'
             })
         },
         isMobileNative() {
@@ -347,7 +369,7 @@ export default {
                         datetimeGroups.hour < 24 &&
                         datetimeGroups.minute &&
                         datetimeGroups.minute >= 0 &&
-                        datetimeGroups.minute < 59
+                        datetimeGroups.minute <= 59
                     ) {
                         const d = new Date(
                             datetimeGroups.year,
@@ -390,6 +412,12 @@ export default {
             } else {
                 this.computedValue = null
             }
+        },
+        /*
+         * Emit 'active-change' on datepicker active state change
+         */
+        onActiveChange(value) {
+            this.$emit('active-change', value)
         },
         formatNative(value) {
             const date = new Date(value)

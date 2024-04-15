@@ -32,7 +32,7 @@
         <div v-else-if="hasInnerField" class="field-body">
             <b-field
                 :addons="false"
-                :type="newType"
+                :type="type"
                 :class="innerFieldClasses">
                 <slot/>
             </b-field>
@@ -45,7 +45,11 @@
             class="help"
             :class="newType"
         >
-            <slot v-if="$slots.message" name="message"/>
+            <slot
+                v-if="$slots.message"
+                name="message"
+                :messages="formattedMessage"
+            />
             <template v-else>
                 <template v-for="(mess, i) in formattedMessage">
                     {{ mess }}
@@ -58,7 +62,7 @@
 
 <script>
 import config from '../../utils/config'
-import FieldBody from './FieldBody'
+import FieldBody from './FieldBody.vue'
 
 export default {
     name: 'BField',
@@ -218,7 +222,14 @@ export default {
         * Set internal message when prop change.
         */
         message(value) {
-            this.newMessage = value
+            // we deep comparison here becase an innner Field of another Field
+            // receives the message as a brand new array every time, so simple
+            // identity check won't work and will end up with infinite
+            // recursions
+            // https://github.com/buefy/buefy/issues/4018#issuecomment-1985026234
+            if (JSON.stringify(value) !== JSON.stringify(this.newMessage)) {
+                this.newMessage = value
+            }
         },
 
         /**
@@ -229,7 +240,9 @@ export default {
                 if (!this.parent.type) {
                     this.parent.newType = this.newType
                 }
-                this.parent.newMessage = value
+                if (!this.parent.message) {
+                    this.parent.newMessage = value
+                }
             }
         }
     },

@@ -147,6 +147,20 @@ describe('BImage', () => {
         expect(vm.figureStyles['paddingTop']).toBe(`${8 / 16 * 100}%`)
     })
 
+    it('adds custom class to image as expected', () => {
+        const src = `my-image-source.webp`
+        let customClass = 'my-custom-class'
+        const wrapper = shallowMount(BImage, {
+            propsData: {
+                src,
+                customClass
+            }
+        })
+        const vm = wrapper.vm
+
+        expect(vm.imgClasses['my-custom-class']).toBeTruthy()
+    })
+
     it('reset events before destroy', () => {
         window.removeEventListener = jest.fn()
 

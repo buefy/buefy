@@ -5,9 +5,14 @@
         ref="label"
         :disabled="disabled"
         @click="focus"
-        @keydown.prevent.enter="$refs.label.click()">
+        @keydown.prevent.enter="$refs.label.click()"
+        @keydown.prevent.space="$refs.label.click()">
+        <!-- Checkbox needs to listen for a space event instead of a just a
+             click and enter event so that that using the keyboard spacebar will also
+             trigger the checkbox change in the b-table -->
         <input
             v-model="computedValue"
+            :id="inputId"
             :indeterminate.prop="indeterminate"
             type="checkbox"
             ref="input"
@@ -26,7 +31,7 @@
 </template>
 
 <script>
-import CheckRadioMixin from '../../utils/CheckRadioMixin.js'
+import CheckRadioMixin from '../../utils/CheckRadioMixin'
 
 export default {
     name: 'BCheckbox',
@@ -45,6 +50,10 @@ export default {
         autocomplete: {
             type: String,
             default: 'on'
+        },
+        inputId: {
+            type: String,
+            default: ''
         }
     }
 }

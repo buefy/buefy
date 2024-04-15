@@ -5,7 +5,7 @@
             :class="{'is-clickable': weekNumberClickable }"
             v-if="showWeekNumber"
             @click.prevent="clickWeekNumber(getWeekNumber(week[6]))">
-            <span>{{ getWeekNumber(week[6]) }}</span>
+            <span>{{ getWeekNumber(week[6]).week }}</span>
         </a>
         <template v-for="(weekDay, index) in week">
             <a
@@ -141,12 +141,11 @@ export default {
                 resYear = mom.getFullYear()
                 resWeek = week
             }
-
-            return resWeek
+            return {week: resWeek, year: resYear}
         },
-        clickWeekNumber(week) {
+        clickWeekNumber(weekData) {
             if (this.weekNumberClickable) {
-                this.$datepicker.$emit('week-number-click', week)
+                this.$datepicker.$emit('week-number-click', weekData.week, weekData.year)
             }
         },
         /*
@@ -370,7 +369,7 @@ export default {
                 (!this.maxDate || nextDay < this.maxDate) &&
                 !this.selectableDate(nextDay)
             ) {
-                nextDay.setDate(day.getDate() + Math.sign(inc))
+                nextDay.setDate(nextDay.getDate() + Math.sign(inc))
             }
             this.setRangeHoverEndDate(nextDay)
             this.$emit('change-focus', nextDay)

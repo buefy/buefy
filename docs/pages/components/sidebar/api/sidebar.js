@@ -42,7 +42,7 @@ export default [
             },
             {
                 name: '<code>fullwidth</code>',
-                description: 'Show sidebar in fullwidth.',
+                description: 'Show sidebar in fullwidth. A close button will be present for a fullwidth sidebar.',
                 type: 'Boolean',
                 values: '-',
                 default: '<code>false</code>'

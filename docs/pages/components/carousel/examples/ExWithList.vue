@@ -21,7 +21,7 @@
         </template>
         <template #overlay>
             <div class="has-text-centered has-text-white">
-                Hello i'am overlay!
+                Hello, I'm an overlay!
             </div>
         </template>
     </b-carousel>

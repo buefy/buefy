@@ -7,11 +7,14 @@
             v-for="(collapse, index) of collapses"
             :key="index"
             :open="isOpen == index"
-            @open="isOpen = index">
+            @open="isOpen = index"
+            :aria-id="'contentIdForA11y5-' + index">
             <template #trigger="props">
                 <div
                     class="card-header"
                     role="button"
+                    :aria-controls="'contentIdForA11y5-' + index"
+                    :aria-expanded="props.open"
                 >
                     <p class="card-header-title">
                         {{ collapse.title }}

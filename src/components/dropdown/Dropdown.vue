@@ -3,17 +3,20 @@
         class="dropdown dropdown-menu-animation"
         ref="dropdown"
         :class="rootClasses"
+        @mouseleave="isHoverable = false"
     >
         <div
             v-if="!inline"
-            role="button"
-            :tabindex="disabled ? false : 0"
+            :tabindex="disabled ? false : triggerTabindex"
             ref="trigger"
             class="dropdown-trigger"
             @click="onClick"
             @contextmenu.prevent="onContextMenu"
             @mouseenter="onHover"
             @focus.capture="onFocus"
+            @touchstart="onTouchStart"
+            @touchmove="onTouchMove"
+            @touchend="onTouchEnd"
             aria-haspopup="true">
             <slot name="trigger" :active="isActive"/>
         </div>
@@ -37,6 +40,7 @@
                 <div
                     class="dropdown-content"
                     :role="ariaRole"
+                    :aria-modal="!inline"
                     :style="contentStyle">
                     <slot/>
                 </div>
@@ -124,7 +128,11 @@ export default {
         },
         expanded: Boolean,
         appendToBody: Boolean,
-        appendToBodyCopyParent: Boolean
+        appendToBodyCopyParent: Boolean,
+        triggerTabindex: {
+            type: Number,
+            default: 0
+        }
     },
     data() {
         return {
@@ -132,7 +140,11 @@ export default {
             style: {},
             isActive: false,
             isHoverable: false,
-            _bodyEl: undefined // Used to append to body
+            maybeTap: false,
+            isTouchEnabled: false,
+            _bodyEl: undefined, // Used to append to body
+            timeOutID: null,
+            timeOutID2: null
         }
     },
     computed: {
@@ -143,7 +155,8 @@ export default {
                 'is-inline': this.inline,
                 'is-active': this.isActive || this.inline,
                 'is-mobile-modal': this.isMobileModal,
-                'is-expanded': this.expanded
+                'is-expanded': this.expanded,
+                'is-touch-enabled': this.isTouchEnabled
             }]
         },
         isMobileModal() {
@@ -176,17 +189,50 @@ export default {
 
         /**
         * Emit event when isActive value is changed.
+        *
+        * Also resets `isTouchEnabled` when it turns inactive.
         */
         isActive(value) {
             this.$emit('active-change', value)
+            if (!value) {
+                // delays to reset the touch enabled flag until the dropdown
+                // menu disappears to avoid glitches
+                // also takes care of chattering, e.g., repeated quick taps,
+                // otherwise the flag may become inconsistent with the actual
+                // state of the dropdown menu
+                this.timeOutID = setTimeout(() => {
+                    if (!this.isActive) {
+                        this.isTouchEnabled = false
+                    }
+                }, 250)
+            }
+            this.handleScroll()
             if (this.appendToBody) {
                 this.$nextTick(() => {
                     this.updateAppendToBody()
                 })
             }
+        },
+
+        isHoverable(value) {
+            if (this.hoverable) {
+                this.$emit('active-change', value)
+            }
         }
     },
     methods: {
+        handleScroll() {
+            if (typeof window === 'undefined') return
+
+            if (this.isMobileModal) {
+                if (this.isActive) {
+                    document.documentElement.classList.add('is-clipped-touch')
+                } else {
+                    document.documentElement.classList.remove('is-clipped-touch')
+                }
+            }
+        },
+
         /**
          * Click listener from DropdownItem.
          *   1. Set new selected item.
@@ -271,6 +317,8 @@ export default {
         },
 
         onClick() {
+            // hover precedes
+            if (this.triggers.indexOf('hover') !== -1) return
             if (this.triggers.indexOf('click') < 0) return
             this.toggle()
         },
@@ -280,7 +328,29 @@ export default {
         },
         onHover() {
             if (this.triggers.indexOf('hover') < 0) return
+            // touch precedes
+            if (this.isTouchEnabled) return
             this.isHoverable = true
+        },
+        // takes care of touch-enabled devices
+        // - does nothing if hover trigger is disabled
+        // - suppresses hover trigger by setting isTouchEnabled
+        // - handles only a tap; i.e., touchstart on the trigger immediately
+        //   folowed by touchend
+        onTouchStart() {
+            this.maybeTap = true
+        },
+        onTouchMove() {
+            this.maybeTap = false
+        },
+        onTouchEnd(e) {
+            if (this.triggers.indexOf('hover') === -1) return
+            if (!this.maybeTap) return
+            // tap on dropdown contents may happen without preventDefault
+            e.preventDefault()
+            this.maybeTap = false
+            this.isTouchEnabled = true
+            this.toggle()
         },
         onFocus() {
             if (this.triggers.indexOf('focus') < 0) return
@@ -300,7 +370,7 @@ export default {
                     const value = !this.isActive
                     this.isActive = value
                     // Vue 2.6.x ???
-                    setTimeout(() => (this.isActive = value))
+                    this.timeOutID2 = setTimeout(() => (this.isActive = value))
                 })
             } else {
                 this.isActive = !this.isActive
@@ -379,6 +449,8 @@ export default {
         if (this.appendToBody) {
             removeElement(this.$data._bodyEl)
         }
+        clearTimeout(this.timeOutID)
+        clearTimeout(this.timeOutID2)
     }
 }
 </script>

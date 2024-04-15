@@ -63,6 +63,7 @@ const router = new Router({
                 route('documentation/upload', 'components/upload/Upload'),
                 route('documentation/table', 'components/table/Table'),
                 route('documentation/pagination', 'components/pagination/Pagination'),
+                route('documentation/breadcrumb', 'components/breadcrumb/Breadcrumb'),
                 route('documentation/button', 'components/button/Button'),
                 route('documentation/numberinput', 'components/numberinput/Numberinput'),
                 route('documentation/steps', 'components/steps/Steps'),
@@ -75,12 +76,14 @@ const router = new Router({
                 route('documentation/sidebar', 'components/sidebar/Sidebar'),
                 route('documentation/skeleton', 'components/skeleton/Skeleton'),
                 route('documentation/image', 'components/image/Image'),
+                route('documentation/colorpicker', 'components/colorpicker/Colorpicker'),
                 // Extensions
                 route('extensions', 'Extensions'),
                 route('extensions/cleavejs', 'extensions/cleavejs/Cleavejs'),
                 route('extensions/sortablejs', 'extensions/sortablejs/Sortablejs'),
                 route('extensions/veevalidate', 'extensions/veevalidate/VeeValidate'),
                 route('extensions/bulmacssvars', 'extensions/bulmacssvars/BulmaCssVars'),
+                route('extensions/vuebreakpointmixin', 'extensions/vuebreakpointmixin/VueBreakpointMixin'),
                 // Expo
                 route('expo', 'Expo')
             ]

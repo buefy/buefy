@@ -3,7 +3,7 @@
         :is="computedTag"
         class="button"
         v-bind="$attrs"
-        :type="nativeType"
+        :type="['button', 'input'].includes(computedTag) ? nativeType : undefined"
         :class="[size, type, {
             'is-rounded': rounded,
             'is-loading': loading,
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import Icon from '../icon/Icon'
+import Icon from '../icon/Icon.vue'
 import config from '../../utils/config'
 
 export default {

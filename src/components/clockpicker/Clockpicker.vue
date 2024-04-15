@@ -6,6 +6,7 @@
             :position="position"
             :disabled="disabled"
             :inline="inline"
+            :mobile-modal="mobileModal"
             :append-to-body="appendToBody"
             append-to-body-copy-parent
             @active-change="onActiveChange">
@@ -26,7 +27,7 @@
                         :rounded="rounded"
                         v-bind="$attrs"
                         :use-html5-validation="useHtml5Validation"
-                        @click.native.stop="toggle(true)"
+                        @click.native="onInputClick"
                         @keyup.native.enter="toggle(true)"
                         @change.native="onChange($event.target.value)"
                         @focus="handleOnFocus"
@@ -142,11 +143,11 @@
 import TimepickerMixin from '../../utils/TimepickerMixin'
 import config from '../../utils/config'
 
-import Dropdown from '../dropdown/Dropdown'
-import DropdownItem from '../dropdown/DropdownItem'
-import Input from '../input/Input'
-import Field from '../field/Field'
-import Icon from '../icon/Icon'
+import Dropdown from '../dropdown/Dropdown.vue'
+import DropdownItem from '../dropdown/DropdownItem.vue'
+import Input from '../input/Input.vue'
+import Field from '../field/Field.vue'
+import Icon from '../icon/Icon.vue'
 
 import ClockpickerFace from './ClockpickerFace'
 
@@ -202,7 +203,7 @@ export default {
             if (this.isHourFormat24) return this.pad(this.hoursSelected)
 
             let display = this.hoursSelected
-            if (this.meridienSelected === this.pmString || this.meridienSelected === this.PM) {
+            if (this.meridienSelected === this.pmString) {
                 display -= 12
             }
             if (display === 0) display = 12
@@ -214,13 +215,13 @@ export default {
         minFaceValue() {
             return this.isSelectingHour &&
                 !this.isHourFormat24 &&
-            (this.meridienSelected === this.pmString || this.meridienSelected === this.PM) ? 12 : 0
+                this.meridienSelected === this.pmString ? 12 : 0
         },
         maxFaceValue() {
             return this.isSelectingHour
                 ? (
                     !this.isHourFormat24 &&
-                    (this.meridienSelected === this.amString || this.meridienSelected === this.AM)
+                    this.meridienSelected === this.amString
                         ? 11
                         : 23
                 )
@@ -252,6 +253,14 @@ export default {
             if (this.meridienSelected !== value) {
                 this.meridienSelected = value
                 this.onMeridienChange(value)
+            }
+        },
+        /*
+         * Avoid dropdown toggle when is already visible
+         */
+        onInputClick(event) {
+            if (this.$refs.dropdown.isActive) {
+                event.stopPropagation()
             }
         }
     }

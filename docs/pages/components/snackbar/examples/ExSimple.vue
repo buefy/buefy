@@ -19,6 +19,11 @@
                 label="Launch snackbar (with cancel)"
                 size="is-medium"
                 @click="hasCancel" />
+            <b-button
+                label="Launch snackbar (pause on hover)"
+                type="is-link"
+                size="is-medium"
+                @click="pause" />
         </div>
     </section>
 </template>
@@ -66,7 +71,14 @@
                     message: 'Snackbar with a cancel button.',
                     cancelText: 'Cancel',
                 })
-            }
+            },
+            pause() {
+                this.$buefy.snackbar.open({
+                    message: 'I can be paused if you hover over me',
+                    pauseOnHover: true,
+                    type: 'is-link',
+                })
+            },
         }
     }
 </script>

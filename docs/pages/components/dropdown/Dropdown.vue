@@ -2,8 +2,10 @@
     <div>
         <Example :component="ExSimple" :code="ExSimpleCode">
             <p>
-                While it appear as a modal for tablet and smartphones,
-                Dropdowns with <code>hoverable</code> prop won't change it's behavior to avoid any malfunction with hover.
+                It appears as a modal for tablets and smartphones, more precisely when the screen is narrower than <code>$dropdown-mobile-breakpoint</code>.
+                However, dropdowns with <code>"hover"</code> trigger won't change its behavior to avoid any malfunction with hover.
+                <code>"hover"</code> trigger works like <code>"click"</code> trigger on touch devices where hover events do not make sense.
+                <code>"hover"</code> trigger precedes <code>"click"</code> trigger.
             </p>
         </Example>
 
@@ -31,7 +33,7 @@
                 <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.8.18</span>
             </div>
-            <p>Add the <code>scrollable</code> prop to make the list scollable.</p>
+            <p>Add the <code>scrollable</code> prop to make the list scrollable.</p>
             <p>When the <code>scrollable</code> prop is set to <code>true</code>, use the <code>max-height</code> prop to define the max height of the list.</p>
         </Example>
 

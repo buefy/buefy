@@ -48,7 +48,7 @@ export default {
             default: false
         },
         wrapperClass: {
-            type: String
+            type: [String, Array, Object]
         },
         closeOnClick: {
             type: Boolean,
@@ -176,7 +176,11 @@ export default {
                         isOpened: this.isOpened
                     },
                     on: {
-                        click: this.toggleActive
+                        click: this.toggleActive,
+                        keyup: (event) => {
+                            if (event.keyCode !== 13) return
+                            this.toggleActive()
+                        }
                     }
                 })
 

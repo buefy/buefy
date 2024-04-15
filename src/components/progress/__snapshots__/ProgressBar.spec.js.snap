@@ -1,7 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`BProgressBar render correctly 1`] = `
-<div role="progressbar" aria-valuemin="0" class="progress-bar">
-    <!---->
-</div>
-`;
+exports[`BProgressBar render correctly 1`] = `<div role="progressbar" aria-valuemin="0" class="progress-bar"><!----></div>`;

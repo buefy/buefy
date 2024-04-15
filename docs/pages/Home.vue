@@ -2,7 +2,7 @@
     <section class="home">
         <TheNavbar light/>
         <div class="hero is-fullheight is-primary">
-            <div class="hero-body">
+            <div class="hero-body is-block">
                 <div class="container has-text-centered">
                     <div class="logo-rounded home-hero">
                         <img src="../assets/buefy.png" alt="Buefy">
@@ -11,7 +11,21 @@
                         <strong>Lightweight</strong> UI components for <strong><a href="https://vuejs.org/" target="_blank">Vue.js</a></strong>
                         based on <strong><a href="http://bulma.io/" target="_blank">Bulma</a></strong>
                     </h2>
-                    <pre class="npm home-hero"><code><span class="is-unselectable">$ </span>npm install buefy</code></pre>
+                    <div class="home-hero">
+                        <p><strong>Vue 2</strong></p>
+                        <pre class="npm"><code><span class="is-unselectable">$ </span>npm install buefy</code></pre>
+                    </div>
+                    <div class="home-hero">
+                        <p>
+                            <strong>Vue 3</strong>
+                            (<a href="https://github.com/ntohq/buefy-next" target="_blank">
+                                <b-icon icon="progress-wrench" size="is-small" />
+                                official fork in development
+                                <b-icon icon="github-circle" size="is-small" />
+                            </a>)
+                        </p>
+                        <pre class="npm"><code><span class="is-unselectable">$ </span>npm install buefy@npm:@ntohq/buefy-next</code></pre>
+                    </div>
 
                     <div class="github-button home-hero">
                         <iframe
@@ -42,7 +56,6 @@
                         </a>
                     </div>
                     <small class="home-hero">v{{ version }}</small>
-                    <carbon-ads id="carbon-home" />
                 </div>
             </div>
         </div>
@@ -150,7 +163,6 @@
 
 <script>
     import ScrollReveal from 'scrollreveal'
-    import CarbonAds from '../components/CarbonAds'
     import TheNavbar from '../components/TheNavbar'
     import TheFooter from '../components/TheFooter'
     import Package from '../../package.json'
@@ -160,7 +172,6 @@
     export default {
         name: 'App',
         components: {
-            CarbonAds,
             TheNavbar,
             TheFooter
         },

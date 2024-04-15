@@ -1,5 +1,5 @@
-import Pagination from './Pagination'
-import PaginationButton from './PaginationButton'
+import Pagination from './Pagination.vue'
+import PaginationButton from './PaginationButton.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 

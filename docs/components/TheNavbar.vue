@@ -40,7 +40,7 @@
                 <a
                     class="navbar-item"
                     :class="{ 'has-text-twitter': !light }"
-                    href="https://twitter.com/walter_tommasi"
+                    href="https://twitter.com/buefycss"
                     target="_blank"
                     title="Twitter">
                     <b-icon icon="twitter"/>
@@ -133,6 +133,10 @@ export default {
     },
     mounted() {
         this.$eventHub.$on('navigate', this.closeMenu)
+    },
+
+    beforeDestroy() {
+        this.$eventHub.$off('navigate', this.closeMenu)
     }
 }
 </script>

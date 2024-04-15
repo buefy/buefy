@@ -1,4 +1,4 @@
-import Message from './Message'
+import Message from './Message.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 

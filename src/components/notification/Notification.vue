@@ -3,7 +3,9 @@
         <article
             v-show="isActive"
             class="notification"
-            :class="[type, position]">
+            :class="[type, position]"
+            @click="click"
+        >
             <button
                 v-if="closable"
                 class="delete"
@@ -16,8 +18,8 @@
                     <b-icon
                         :icon="computedIcon"
                         :pack="iconPack"
+                        :size="newIconSize"
                         both
-                        size="is-large"
                         aria-hidden/>
                 </div>
                 <div class="media-content">
@@ -29,12 +31,19 @@
                     </template>
                 </div>
             </div>
+            <b-progress
+                v-if="autoClose && progressBar"
+                class="auto-close-progress"
+                :value="remainingTime - 1"
+                :max="duration / 1000 - 1"
+                :type="type"
+                :rounded="false"/>
         </article>
     </transition>
 </template>
 
 <script>
-import MessageMixin from '../../utils/MessageMixin.js'
+import MessageMixin from '../../utils/MessageMixin'
 
 export default {
     name: 'BNotification',

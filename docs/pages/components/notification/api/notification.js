@@ -2,6 +2,13 @@ export default [
     {
         props: [
             {
+                name: '<code>v-model</code>',
+                description: 'Active state - set on `true` to reopen after close',
+                type: 'Boolean',
+                values: '—',
+                default: 'true'
+            },
+            {
                 name: '<code>type</code>',
                 description: 'Type (color) of the notification, optional',
                 type: 'String',
@@ -27,7 +34,7 @@ export default [
             },
             {
                 name: '<code>auto-close</code>',
-                description: `Hide notification after <code>duration</code> only not programmatic`,
+                description: `Hide notification after <code>duration</code>`,
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
@@ -38,6 +45,13 @@ export default [
                 type: 'Number',
                 values: '—',
                 default: '<code>2000</code>'
+            },
+            {
+                name: '<code>progress-bar</code>',
+                description: 'remaining seconds before the alert will close (in seconds)',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             },
             {
                 name: '<code>animation</code>',
@@ -68,6 +82,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>icon-size</code>',
+                description: 'Size of the icon, optional',
+                type: 'String',
+                values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
+                default: 'Depends on <code>size</code> prop'
+            },
+            {
                 name: '<code>aria-close-label</code>',
                 description: 'Label for the close button, to be read by accessibility screenreaders.',
                 type: 'String',
@@ -83,7 +104,7 @@ export default [
             },
             {
                 name: '<code>position</code>',
-                description: 'Which position the notification will appear when programmatically',
+                description: 'Which position the notification will appear when opened programmatically',
                 type: 'String',
                 values: '<code>is-top-right</code>, <code>is-top</code>, <code>is-top-left</code>, <code>is-bottom-right</code>, <code>is-bottom</code>, <code>is-bottom-left</code>',
                 default: '<code>is-top-right</code>'
@@ -97,7 +118,14 @@ export default [
             },
             {
                 name: '<code>indefinite</code>',
-                description: 'Show the Notification indefinitely until it is dismissed when programmatically',
+                description: 'Show the Notification indefinitely until it is dismissed when opened programmatically',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>pause-on-hover</code>',
+                description: 'Pause and show on hover until hover off when opened programmatically, if indefinite is false.',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
@@ -115,7 +143,12 @@ export default [
                 name: '<code>close</code>',
                 description: 'Triggers when user closes the notification',
                 parameters: '—'
-            }
+            },
+            {
+                name: '<code>click</code>',
+                description: 'Triggers when user clicks the notification',
+                parameters: '—'
+            },
         ]
     }
 ]

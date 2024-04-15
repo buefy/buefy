@@ -15,6 +15,12 @@
                 :class="rootClasses"
                 @mouseenter="onHover"
                 @mouseleave="onHoverLeave">
+                <button
+                    type="button"
+                    v-if="fullwidth"
+                    @click="clickedCloseButton"
+                    class="modal-close is-large sidebar-close"
+                    aria-label="Close" />
                 <slot />
             </div>
         </transition>
@@ -23,11 +29,10 @@
 
 <script>
 import config from '../../utils/config'
-import { removeElement, isCustomElement } from '../../utils/helpers'
+import { removeElement } from '../../utils/helpers'
 
 export default {
     name: 'BSidebar',
-    // deprecated, to replace with default 'value' in the next breaking change
     model: {
         prop: 'open',
         event: 'update:open'
@@ -143,23 +148,6 @@ export default {
     },
     methods: {
         /**
-        * White-listed items to not close when clicked.
-        * Add sidebar content and all children.
-        */
-        getWhiteList() {
-            const whiteList = []
-            whiteList.push(this.$refs.sidebarContent)
-            // Add all chidren from dropdown
-            if (this.$refs.sidebarContent !== undefined) {
-                const children = this.$refs.sidebarContent.querySelectorAll('*')
-                for (const child of children) {
-                    whiteList.push(child)
-                }
-            }
-            return whiteList
-        },
-
-        /**
         * Keypress event that is bound to the document.
         */
         keyPress({ key }) {
@@ -192,13 +180,10 @@ export default {
          * Close fixed sidebar if clicked outside.
          */
         clickedOutside(event) {
-            if (this.isFixed) {
-                if (this.isOpen && !this.animating) {
-                    const target = isCustomElement(this) ? event.composedPath()[0] : event.target
-                    if (this.getWhiteList().indexOf(target) < 0) {
-                        this.cancel('outside')
-                    }
-                }
+            if (!this.isFixed || !this.isOpen || this.animating) { return }
+
+            if (!event.composedPath().includes(this.$refs.sidebarContent)) {
+                this.cancel('outside')
             }
         },
 
@@ -264,6 +249,16 @@ export default {
             this.hasLeaved = true
             this.timer = null
             this.isDelayOver = false
+        },
+        /**
+         * Close sidebar if close button is clicked.
+         */
+        clickedCloseButton() {
+            if (this.isFixed) {
+                if (this.isOpen && this.fullwidth) {
+                    this.cancel('outside')
+                }
+            }
         }
     },
     created() {
@@ -300,6 +295,7 @@ export default {
         if (this.isFixed) {
             removeElement(this.$el)
         }
+        clearTimeout(this.timer)
     }
 }
 </script>

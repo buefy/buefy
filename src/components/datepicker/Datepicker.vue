@@ -12,12 +12,12 @@
             :mobile-modal="mobileModal"
             :trap-focus="trapFocus"
             :aria-role="ariaRole"
-            :aria-modal="!inline"
             :append-to-body="appendToBody"
             append-to-body-copy-parent
-            @active-change="onActiveChange">
-            <template #trigger v-if="!inline">
-                <slot name="trigger">
+            @active-change="onActiveChange"
+            :trigger-tabindex="-1">
+            <template #trigger="props" v-if="!inline">
+                <slot name="trigger" v-bind="props">
                     <b-input
                         ref="input"
                         autocomplete="off"
@@ -35,7 +35,7 @@
                         v-bind="$attrs"
                         :use-html5-validation="false"
                         @click.native="onInputClick"
-                        @icon-right-click="$emit('icon-right-click')"
+                        @icon-right-click="$emit('icon-right-click', $event)"
                         @keyup.native.enter="togglePicker(true)"
                         @change.native="onChange($event.target.value)"
                         @focus="handleOnFocus" />
@@ -46,7 +46,7 @@
                 :disabled="disabled"
                 :focusable="focusable"
                 custom
-                :class="{'dropdown-horizonal-timepicker': horizontalTimePicker}">
+                :class="{'dropdown-horizontal-timepicker': horizontalTimePicker}">
                 <div>
                     <header class="datepicker-header">
                         <template v-if="$slots.header !== undefined && $slots.header.length">
@@ -123,7 +123,7 @@
                     <div
                         v-if="!isTypeMonth"
                         class="datepicker-content"
-                        :class="{'content-horizonal-timepicker': horizontalTimePicker}">
+                        :class="{'content-horizontal-timepicker': horizontalTimePicker}">
                         <b-datepicker-table
                             v-model="computedValue"
                             :day-names="newDayNames"
@@ -214,15 +214,15 @@ import FormElementMixin from '../../utils/FormElementMixin'
 import { isMobile, getMonthNames, getWeekdayNames, matchWithGroups } from '../../utils/helpers'
 import config from '../../utils/config'
 
-import Dropdown from '../dropdown/Dropdown'
-import DropdownItem from '../dropdown/DropdownItem'
-import Input from '../input/Input'
-import Field from '../field/Field'
-import Select from '../select/Select'
-import Icon from '../icon/Icon'
+import Dropdown from '../dropdown/Dropdown.vue'
+import DropdownItem from '../dropdown/DropdownItem.vue'
+import Input from '../input/Input.vue'
+import Field from '../field/Field.vue'
+import Select from '../select/Select.vue'
+import Icon from '../icon/Icon.vue'
 
-import DatepickerTable from './DatepickerTable'
-import DatepickerMonth from './DatepickerMonth'
+import DatepickerTable from './DatepickerTable.vue'
+import DatepickerMonth from './DatepickerMonth.vue'
 
 const defaultDateFormatter = (date, vm) => {
     const targetDates = Array.isArray(date) ? date : [date]
@@ -492,13 +492,12 @@ export default {
             }).resolvedOptions()
         },
         dtf() {
-            return new Intl.DateTimeFormat(this.locale, { timeZone: 'UTC' })
+            return new Intl.DateTimeFormat(this.locale)
         },
         dtfMonth() {
             return new Intl.DateTimeFormat(this.locale, {
                 year: this.localeOptions.year || 'numeric',
-                month: this.localeOptions.month || '2-digit',
-                timeZone: 'UTC'
+                month: this.localeOptions.month || '2-digit'
             })
         },
         newMonthNames() {
@@ -737,11 +736,12 @@ export default {
         },
         updateInternalState(value) {
             if (this.dateSelected === value) return
-            const currentDate = Array.isArray(value)
+            const isArray = Array.isArray(value)
+            const currentDate = isArray
                 ? (!value.length ? this.dateCreator() : value[value.length - 1])
                 : (!value ? this.dateCreator() : value)
-            if (Array.isArray(value) &&
-                this.dateSelected && value.length > this.dateSelected.length) {
+            if (!isArray ||
+                (isArray && this.dateSelected && value.length > this.dateSelected.length)) {
                 this.focusedDateData = {
                     day: currentDate.getDate(),
                     month: currentDate.getMonth(),
@@ -815,6 +815,10 @@ export default {
             if (!value) {
                 this.onBlur()
             }
+            /*
+             * Emit 'active-change' when on dropdown active state change
+             */
+            this.$emit('active-change', value)
         },
 
         changeFocus(day) {

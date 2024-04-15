@@ -5,12 +5,10 @@ import config, {setOptions} from '@utils/config'
 
 let wrapper
 
+// it used to create a Date in UTC but should use the local timezone,
+// because DatepickerMonth deals with the local timezone
 const newDate = (y, m, d) => {
-    const date = new Date(Date.UTC(y, m, d))
-    date.getDate = jest.fn(() => date.getUTCDate())
-    date.getMonth = jest.fn(() => date.getUTCMonth())
-    date.getFullYear = jest.fn(() => date.getUTCFullYear())
-    return date
+    return new Date(y, m, d)
 }
 
 const thisMonth = newDate(2020, 4, 15).getUTCMonth()

@@ -15,6 +15,7 @@ let config = {
     defaultNotificationPosition: null,
     defaultTooltipType: 'is-primary',
     defaultTooltipDelay: null,
+    defaultTooltipCloseDelay: null,
     defaultSidebarDelay: null,
     defaultInputAutocomplete: 'on',
     defaultDateFormatter: null,
@@ -31,6 +32,7 @@ let config = {
     defaultModalScroll: null,
     defaultDatepickerMobileNative: true,
     defaultTimepickerMobileNative: true,
+    defaultTimepickerMobileModal: true,
     defaultNoticeQueue: true,
     defaultInputHasCounter: true,
     defaultTaginputHasCounter: true,
@@ -69,6 +71,10 @@ let config = {
     defaultImageResponsive: true,
     defaultImageRatio: null,
     defaultImageSrcsetFormatter: null,
+    defaultBreadcrumbTag: 'a',
+    defaultBreadcrumbAlign: 'is-left',
+    defaultBreadcrumbSeparator: '',
+    defaultBreadcrumbSize: 'is-medium',
     customIconPacks: null
 }
 

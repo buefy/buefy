@@ -56,16 +56,16 @@
                 </section>
 
                 <footer class="modal-card-foot">
-                    <button
+                    <b-button
                         v-if="showCancel"
-                        class="button"
                         ref="cancelButton"
-                        @click="cancel('button')">{{ cancelText }}</button>
-                    <button
-                        class="button"
-                        :class="type"
+                        :disabled="isLoading"
+                        @click="cancel('button')">{{ cancelText }}</b-button>
+                    <b-button
+                        :type="type"
                         ref="confirmButton"
-                        @click="confirm">{{ confirmText }}</button>
+                        :loading="isLoading"
+                        @click="confirm">{{ confirmText }}</b-button>
                 </footer>
             </div>
         </div>
@@ -74,15 +74,17 @@
 
 <script>
 import trapFocus from '../../directives/trapFocus'
-import Icon from '../icon/Icon'
-import Modal from '../modal/Modal'
+import Icon from '../icon/Icon.vue'
+import Modal from '../modal/Modal.vue'
+import Button from '../button/Button.vue'
 import config from '../../utils/config'
 import { removeElement } from '../../utils/helpers'
 
 export default {
     name: 'BDialog',
     components: {
-        [Icon.name]: Icon
+        [Icon.name]: Icon,
+        [Button.name]: Button
     },
     directives: {
         trapFocus
@@ -164,7 +166,8 @@ export default {
             prompt,
             isActive: false,
             validationMessage: '',
-            isCompositing: false
+            isCompositing: false,
+            isLoading: false
         }
     },
     computed: {
@@ -218,11 +221,26 @@ export default {
         */
         close() {
             this.isActive = false
+            this.isLoading = false
             // Timeout for the animation complete before destroying
             setTimeout(() => {
                 this.$destroy()
                 removeElement(this.$el)
             }, 150)
+        },
+
+        /**
+        * Start the Loading.
+        */
+        startLoading() {
+            this.isLoading = true
+        },
+
+        /**
+        * Cancel the Loading.
+        */
+        cancelLoading() {
+            this.isLoading = false
         }
     },
     beforeMount() {
@@ -246,9 +264,9 @@ export default {
             if (this.hasInput) {
                 this.$refs.input.focus()
             } else if (this.focusOn === 'cancel' && this.showCancel) {
-                this.$refs.cancelButton.focus()
+                this.$refs.cancelButton.$el.focus()
             } else {
-                this.$refs.confirmButton.focus()
+                this.$refs.confirmButton.$el.focus()
             }
         })
     }

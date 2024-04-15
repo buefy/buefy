@@ -7,6 +7,7 @@
                 type="is-primary"
                 size="is-medium"
                 @click="isOpen = !isOpen"
+                :aria-expanded="isOpen"
                 aria-controls="contentIdForA11y2" />
         </div>
 
@@ -19,7 +20,8 @@
                 <div
                     class="panel-heading"
                     role="button"
-                    aria-controls="contentIdForA11y2">
+                    aria-controls="contentIdForA11y2"
+                    :aria-expanded="isOpen">
                     <strong>Title</strong>
                 </div>
             </template>

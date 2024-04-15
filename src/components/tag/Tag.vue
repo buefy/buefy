@@ -1,9 +1,15 @@
 <template>
-    <div v-if="attached && closable" class="tags has-addons">
+    <div v-if="attached && closable" class="tags has-addons inline-tags">
         <span
             class="tag"
             :class="[type, size, { 'is-rounded': rounded }]">
-            <span :class="{ 'has-ellipsis': ellipsis }">
+            <b-icon
+                v-if="icon"
+                :icon="icon"
+                :size="size"
+                :type="iconType"
+                :pack="iconPack" />
+            <span :class="{ 'has-ellipsis': ellipsis }" @click="click">
                 <slot/>
             </span>
         </span>
@@ -33,7 +39,13 @@
         v-else
         class="tag"
         :class="[type, size, { 'is-rounded': rounded }]">
-        <span :class="{ 'has-ellipsis': ellipsis }">
+        <b-icon
+            v-if="icon"
+            :icon="icon"
+            :size="size"
+            :type="iconType"
+            :pack="iconPack" />
+        <span :class="{ 'has-ellipsis': ellipsis }" @click="click">
             <slot/>
         </span>
 
@@ -57,7 +69,7 @@ export default {
     props: {
         attached: Boolean,
         closable: Boolean,
-        type: String,
+        type: [String, Object],
         size: String,
         rounded: Boolean,
         disabled: Boolean,
@@ -67,6 +79,9 @@ export default {
             default: true
         },
         ariaCloseLabel: String,
+        icon: String,
+        iconType: String,
+        iconPack: String,
         closeType: String,
         closeIcon: String,
         closeIconPack: String,
@@ -81,6 +96,14 @@ export default {
             if (this.disabled) return
 
             this.$emit('close', event)
+        },
+        /**
+        * Emit click event when tag is clicked.
+        */
+        click(event) {
+            if (this.disabled) return
+
+            this.$emit('click', event)
         }
     }
 }

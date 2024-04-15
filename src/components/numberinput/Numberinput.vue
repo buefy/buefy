@@ -91,8 +91,8 @@
 </template>
 
 <script>
-import Icon from '../icon/Icon'
-import Input from '../input/Input'
+import Icon from '../icon/Icon.vue'
+import Input from '../input/Input.vue'
 import FormElementMixin from '../../utils/FormElementMixin'
 
 export default {
@@ -143,7 +143,11 @@ export default {
         controlsPosition: String,
         placeholder: [Number, String],
         ariaMinusLabel: String,
-        ariaPlusLabel: String
+        ariaPlusLabel: String,
+        longPress: {
+            type: Boolean,
+            default: true
+        }
     },
     data() {
         return {
@@ -160,13 +164,10 @@ export default {
                 return this.newValue
             },
             set(value) {
-                let newValue = value
+                // Parses the number, so that "0" => 0, and "invalid" => null
+                let newValue = (Number(value) === 0) ? 0 : (Number(value) || null)
                 if (value === '' || value === undefined || value === null) {
-                    if (this.minNumber !== undefined) {
-                        newValue = this.minNumber
-                    } else {
-                        newValue = null
-                    }
+                    newValue = null
                 }
                 this.newValue = newValue
                 if (newValue === null) {
@@ -175,7 +176,9 @@ export default {
                     this.$emit('input', Number(newValue))
                 }
                 this.$nextTick(() => {
-                    this.$refs.input.checkHtml5Validity()
+                    if (this.$refs.input) {
+                        this.$refs.input.checkHtml5Validity()
+                    }
                 })
             }
         },
@@ -208,9 +211,15 @@ export default {
             return typeof this.max === 'string' ? parseFloat(this.max) : this.max
         },
         stepNumber() {
+            if (this.newStep === 'any') {
+                return 1
+            }
             return typeof this.newStep === 'string' ? parseFloat(this.newStep) : this.newStep
         },
         minStepNumber() {
+            if (this.newStep === 'any' && typeof this.newMinStep === 'undefined') {
+                return 'any'
+            }
             const step = typeof this.newMinStep !== 'undefined' ? this.newMinStep : this.newStep
             return typeof step === 'string' ? parseFloat(step) : step
         },
@@ -252,27 +261,27 @@ export default {
             return this.disabled || (control === 'plus' ? this.disabledMax : this.disabledMin)
         },
         decrement() {
-            if (typeof this.minNumber === 'undefined' || this.computedValue - this.stepNumber >= this.minNumber) {
-                if (this.computedValue === null || typeof this.computedValue === 'undefined') {
-                    if (this.maxNumber) {
-                        this.computedValue = this.maxNumber
-                        return
-                    }
-                    this.computedValue = 0
+            if (this.computedValue === null || typeof this.computedValue === 'undefined') {
+                if (this.maxNumber !== null && typeof this.maxNumber !== 'undefined') {
+                    this.computedValue = this.maxNumber
+                    return
                 }
+                this.computedValue = 0
+            }
+            if (typeof this.minNumber === 'undefined' || (this.computedValue - this.stepNumber) >= this.minNumber) {
                 const value = this.computedValue - this.stepNumber
                 this.computedValue = parseFloat(value.toFixed(this.stepDecimals))
             }
         },
         increment() {
-            if (typeof this.maxNumber === 'undefined' || this.computedValue + this.stepNumber <= this.maxNumber) {
-                if (this.computedValue === null || typeof this.computedValue === 'undefined') {
-                    if (this.minNumber) {
-                        this.computedValue = this.minNumber
-                        return
-                    }
-                    this.computedValue = 0
+            if (this.computedValue === null || typeof this.computedValue === 'undefined' || this.computedValue < this.minNumber) {
+                if (this.minNumber !== null && typeof this.minNumber !== 'undefined') {
+                    this.computedValue = this.minNumber
+                    return
                 }
+                this.computedValue = 0
+            }
+            if (typeof this.maxNumber === 'undefined' || (this.computedValue + this.stepNumber) <= this.maxNumber) {
                 const value = this.computedValue + this.stepNumber
                 this.computedValue = parseFloat(value.toFixed(this.stepDecimals))
             }
@@ -287,6 +296,7 @@ export default {
             if (inc) this.increment()
             else this.decrement()
 
+            if (!this.longPress) return
             this._$intervalRef = setTimeout(() => {
                 this.longPressTick(inc)
             }, this.exponential ? (250 / (this.exponential * this.timesPressed++)) : 250)
@@ -302,6 +312,10 @@ export default {
             clearTimeout(this._$intervalRef)
             this._$intervalRef = null
         }
+    },
+
+    beforeDestroy() {
+        clearTimeout(this._$intervalRef)
     }
 }
 </script>

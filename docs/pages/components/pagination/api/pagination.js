@@ -113,6 +113,27 @@ export default [
                 type: 'String',
                 values: '—',
                 default: '—'
+            },
+            {
+                name: '<code>page-input</code>',
+                description: `Include page number input.`,
+                type: 'Boolean',
+                values: '—',
+                default: 'false'
+            },
+            {
+                name: '<code>page-input-position</code>',
+                description: `Page input position.`,
+                type: 'String',
+                values: '<code>is-input-right</code>, <code>is-input-left</code>',
+                default: '—'
+            },
+            {
+                name: '<code>debounce-page-input</code>',
+                description: `Sets the page input debounce time (in milliseconds)`,
+                type: 'Number',
+                values: '—',
+                default: '—'
             }
         ],
         slots: [

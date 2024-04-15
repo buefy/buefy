@@ -174,16 +174,30 @@ export function escapeRegExpChars(value) {
     // eslint-disable-next-line
     return value.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')
 }
+/**
+ * Remove accents/diacritics in a string in JavaScript
+ * https://stackoverflow.com/a/37511463
+ */
+export function removeDiacriticsFromString(value) {
+    if (!value) return value
+
+    return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+}
 
 export function multiColumnSort(inputArray, sortingPriority) {
+    // NOTE: this function is intended to be used by BTable
     // clone it to prevent the any watchers from triggering every sorting iteration
     let array = JSON.parse(JSON.stringify(inputArray))
     const fieldSorter = (fields) => (a, b) => fields.map((o) => {
-        let dir = 1
-        if (o[0] === '-') { dir = -1; o = o.substring(1) }
-        const aValue = getValueByPath(a, o)
-        const bValue = getValueByPath(b, o)
-        return aValue > bValue ? dir : aValue < bValue ? -(dir) : 0
+        const { field, order, customSort } = o
+        if (typeof customSort === 'function') {
+            return customSort(a, b, order !== 'desc')
+        } else {
+            const aValue = getValueByPath(a, field)
+            const bValue = getValueByPath(b, field)
+            const ord = aValue > bValue ? 1 : aValue < bValue ? -1 : 0
+            return order === 'desc' ? -ord : ord
+        }
     }).reduce((p, n) => p || n, 0)
 
     return array.sort(fieldSorter(sortingPriority))
@@ -216,8 +230,7 @@ export function getMonthNames(locale = undefined, format = 'long') {
         dates.push(new Date(2000, i, 15))
     }
     const dtf = new Intl.DateTimeFormat(locale, {
-        month: format,
-        timeZone: 'UTC'
+        month: format
     })
     return dates.map((d) => dtf.format(d))
 }
@@ -290,3 +303,52 @@ export function isCustomElement(vm) {
 }
 
 export const isDefined = (d) => d !== undefined
+
+/**
+ * Checks if a value is null or undefined.
+ * Based on
+ * https://github.com/lodash/lodash/blob/master/isNil.js
+ */
+export const isNil = (value) => value === null || value === undefined
+
+/**
+ * Translates a touch event as a drag event.
+ *
+ * `event` must be a touch event.
+ *
+ * `options` must be an object with the following properties:
+ * - `type`: new event type (required). must be one of the following:
+ *     - `"dragstart"`
+ *     - `"dragend"`
+ *     - `"drop"`
+ *     - `"dragover"`
+ *     - `"dragleave"`
+ * - `target`: new target element (optional). `clientX` and `clientY` will be
+ *   translated if `target` is different from `event.target`.
+ *
+ * This function only works with single-touch events for now.
+ */
+export const translateTouchAsDragEvent = (event, options) => {
+    const { type, target } = options
+    let translateX = 0
+    let translateY = 0
+    if (target != null && target !== event.target) {
+        const baseRect = event.target.getBoundingClientRect()
+        const targetRect = target.getBoundingClientRect()
+        translateX = targetRect.left - baseRect.left
+        translateY = targetRect.top - baseRect.top
+    }
+    const touch = event.touches[0] || event.changedTouches[0]
+    return new DragEvent(type, {
+        dataTransfer: new DataTransfer(),
+        bubbles: true,
+        screenX: touch.screenX,
+        screenY: touch.screenY,
+        clientX: touch.clientX + translateX,
+        clientY: touch.clientY + translateY,
+        ctrlKey: event.ctrlKey,
+        shiftKey: event.shiftKey,
+        altKey: event.altKey,
+        metaKey: event.metaKey
+    })
+}

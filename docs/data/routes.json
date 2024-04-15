@@ -425,6 +425,18 @@
             "documentation/pagination"
         ]
     },
+    "documentation/breadcrumb": {
+        "title": "Breadcrumb",
+        "subtitle": "Breadcrumb component for flexible navigation through the pages of your website!",
+        "path": "/documentation/breadcrumb",
+        "githubPath": "pages/components/breadcrumb/Breadcrumb.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/breadcrumb"
+        ]
+    },
     "documentation/button": {
         "title": "Button",
         "subtitle": "The classic button, in different colors, sizes, and states",
@@ -475,7 +487,7 @@
             "documentation/menu"
         ]
     },
-     "documentation/slider": {
+    "documentation/slider": {
         "title": "Slider",
         "subtitle": "A slider to select a value or range from a given range",
         "path": "/documentation/slider",
@@ -561,6 +573,19 @@
             "documentation/image"
         ]
     },
+    "documentation/colorpicker": {
+        "title": "Colorpicker",
+        "subtitle": "An Input that lets a user specify a color",
+        "path": "/documentation/colorpicker",
+        "githubPath": "pages/components/colorpicker/Colorpicker.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/colorpicker"
+        ],
+        "isNew": true
+    },
     "extensions": {
         "title": "Extensions",
         "subtitle": "See how you can improve Buefy with other packages",
@@ -618,6 +643,19 @@
             "/",
             "extensions",
             "extensions/bulmacssvars"
+        ],
+        "isNew": true
+    },
+    "extensions/vuebreakpointmixin": {
+        "title": "Vue Breakpoint Mixin",
+        "subtitle": "Use to watch the size of the screen based on Bulma breakpoints.",
+        "path": "/extensions/vuebreakpointmixin",
+        "githubPath": "pages/extensions/vuebreakpointmixin/VueBreakpointMixin.vue",
+        "menu": "extensions",
+        "breadcrumb": [
+            "/",
+            "extensions",
+            "extensions/vuebreakpointmixin"
         ],
         "isNew": true
     },

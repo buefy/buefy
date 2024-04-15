@@ -122,6 +122,16 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>checkbox-type</code>',
+                description: 'Type (color) of the checkbox when <code>checkable</code>, optional',
+                type: 'String',
+                values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
+                <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
+                <code>is-warning</code>, <code>is-danger</code>,
+                and any other colors you've set in the <code>$colors</code> list on Sass`,
+                default: 'is-primary'
+            },
+            {
                 name: '<code>mobile-cards</code>',
                 description: 'Rows appears as cards on mobile (collapse rows)',
                 type: 'Boolean',
@@ -185,6 +195,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>pagination-order</code>',
+                description: 'Buttons order, optional',
+                type: 'String',
+                values: '<code>is-centered</code>, <code>is-right</code>',
+                default: '—'
+            },
+            {
                 name: '<code>pagination-size</code>',
                 description: 'Pagination size (if <code>paginated</code>)',
                 type: 'String',
@@ -204,6 +221,27 @@ export default [
                 type: 'Number',
                 values: '—',
                 default: '<code>20</code>'
+            },
+            {
+                name: '<code>page-input</code>',
+                description: `Include page number input.`,
+                type: 'Boolean',
+                values: '—',
+                default: 'false'
+            },
+            {
+                name: '<code>page-input-position</code>',
+                description: `Page input position.`,
+                type: 'String',
+                values: '<code>is-input-right</code>, <code>is-input-left</code>',
+                default: '—'
+            },
+            {
+                name: '<code>debounce-page-input</code>',
+                description: `Sets the page input debounce time (in milliseconds)`,
+                type: 'Number',
+                values: '—',
+                default: '—'
             },
             {
                 name: '<code>sort-multiple</code>',
@@ -434,7 +472,7 @@ export default [
             {
                 name: 'default',
                 description: '<strong>Required</strong>, table body and header',
-                props: '<code>row: Object</code>, <code>column: Vue Object</code>, <code>index: Number</code>, <code>colindex: Number</code>, <code>toggleDetails: Function (row: Object)</code>'
+                props: '<code>toggleDetails: Function (row: Object)</code>'
             },
             {
                 name: '<code>header</code>',
@@ -469,6 +507,11 @@ export default [
             {
                 name: '<code>top-left</code>',
                 description: 'Custom top-left (opposite side of top pagination)',
+                props: '—'
+            },
+            {
+                name: '<code>pagination</code>',
+                description: 'Table custom pagination',
                 props: '—'
             },
         ],
@@ -737,10 +780,10 @@ export default [
             },
             {
                 name: '<code>header-selectable</code>',
-                description: 'Prevent text selection of header when setting this to <code>false</code>.',
+                description: 'Whether the header text is selectable, works when column is <code>sortable</code>.',
                 type: 'Boolean',
                 values: '—',
-                default: '<code>true</code>'
+                default: '<code>false</code>'
             },
             {
                 name: '<code>header-class</code>',
@@ -755,13 +798,6 @@ export default [
                 type: 'String',
                 values: '—',
                 default: '-'
-            },
-            {
-                name: '<code>header-selectable</code>',
-                description: 'Whether the header text is selectable, works when column is <code>sortable</code>',
-                type: 'Boolean',
-                values: '—',
-                default: '<code>false</code>'
             },
             {
                 name: '<code>th-attrs</code>',
@@ -782,7 +818,7 @@ export default [
             {
                 name: 'default',
                 description: '<strong>Required</strong>, table column body',
-                props: '-'
+                props: '<code>row: Object</code>, <code>column: Vue Object</code>, <code>index: Number</code>, <code>colindex: Number</code>, <code>toggleDetails: Function</code>, <code>isActiveDetailRow: Function</code>'
             },
             {
                 name: '<code>header</code>',

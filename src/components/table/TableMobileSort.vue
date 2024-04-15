@@ -86,8 +86,8 @@
 </template>
 
 <script>
-import Select from '../select/Select'
-import Icon from '../icon/Icon'
+import Select from '../select/Select.vue'
+import Icon from '../icon/Icon.vue'
 
 export default {
     name: 'BTableMobileSort',

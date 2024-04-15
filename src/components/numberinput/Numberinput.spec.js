@@ -3,10 +3,6 @@ import BNumberinput from '@components/numberinput/Numberinput'
 
 let wrapper
 
-const wait = (time) => {
-    return new Promise((resolve) => setTimeout(resolve, time))
-}
-
 describe('BNumberinput', () => {
     describe('Rendered', () => {
         beforeEach(() => {
@@ -35,28 +31,46 @@ describe('BNumberinput', () => {
         })
 
         it('increments/decrements on long pressing exponentially', async () => {
+            // we should not depend on a real timer
+            // otherwise the results will depend on the machine
+            jest.useFakeTimers()
+
             wrapper.setProps({exponential: true, value: 1, step: 1})
 
             wrapper.find('.control.plus button').trigger('mousedown')
+            expect(wrapper.vm.computedValue).toBe(2)
 
-            await wait(1500)
+            for (let n = 1; n <= 10; ++n) {
+                // while Jest's fake setTimeout truncates the delay to an exact
+                // ms when it schedules the callback,
+                // jest.advanceTimersByTime floors the value and
+                // accumulates the remainder.
+                // so should be floored to prevent the accumulated remainder
+                // from triggering an extra callback
+                jest.advanceTimersByTime(Math.floor(250 / n))
+                expect(wrapper.vm.computedValue).toBe(n + 2)
+            }
 
             wrapper.find('.control.plus').trigger('mouseup')
+            jest.runAllTimers()
             await wrapper.vm.$nextTick()
-
-            expect(wrapper.vm.computedValue).toBeGreaterThan(1)
-            expect(wrapper.vm.computedValue).toBeLessThan(150)
+            expect(wrapper.vm.computedValue).toBe(12)
 
             wrapper.setProps({exponential: 3, value: 0, step: 1})
 
             wrapper.find('.control.plus button').trigger('mousedown')
+            expect(wrapper.vm.computedValue).toBe(1)
 
-            await wait(1000)
+            for (let n = 1; n <= 20; ++n) {
+                // see above for `floor`ing
+                jest.advanceTimersByTime(Math.floor(250 / (n * 3)))
+                expect(wrapper.vm.computedValue).toBe(n + 1)
+            }
 
             wrapper.find('.control.plus').trigger('mouseup')
-
-            expect(wrapper.vm.computedValue).toBeGreaterThan(0)
-            expect(wrapper.vm.computedValue).toBeLessThan(600)
+            jest.runAllTimers()
+            await wrapper.vm.$nextTick()
+            expect(wrapper.vm.computedValue).toBe(21)
         })
 
         it('increments/decrements on long pressing', async () => {
@@ -91,11 +105,83 @@ describe('BNumberinput', () => {
 
             expect(wrapper.vm.computedValue).toBe(val)
         })
+
+        it('does not increment/decrement on long pressing when feature is disabled', async () => {
+            wrapper.setProps({
+                longPress: false
+            })
+            jest.useFakeTimers()
+            wrapper.vm.computedValue = 0
+
+            // Increment
+            wrapper.find('.control.plus button').trigger('mousedown')
+
+            // await wait(2000)
+            jest.runOnlyPendingTimers()
+            jest.runOnlyPendingTimers()
+            jest.runOnlyPendingTimers()
+
+            wrapper.find('.control.plus').trigger('mouseup')
+            expect(wrapper.vm.computedValue).toBe(1)
+
+            // Decrement
+            wrapper.find('.control.minus button').trigger('mousedown')
+
+            jest.runOnlyPendingTimers()
+            jest.runOnlyPendingTimers()
+
+            wrapper.find('.control.minus button').trigger('mouseup')
+            // Trigger it another time to check for unexpected browser behavior
+            wrapper.find('.control.minus button').trigger('mouseup')
+
+            expect(wrapper.vm.computedValue).toBe(0)
+        })
+
+        it('increments/decrements after manually set value on input', async () => {
+            wrapper.setProps({exponential: true, value: 1, step: 1})
+            const BASE_VALUE = Math.floor(Math.random() * 10 + 1)
+            wrapper.find('input').setValue(BASE_VALUE)
+            wrapper.find('.control.plus button').trigger('click')
+            wrapper.find('.control.minus button').trigger('click')
+
+            expect(wrapper.vm.computedValue).toEqual(BASE_VALUE)
+        })
+
+        it('is invalid when step / minStep decimals and value decimals lengths are different', () => {
+            wrapper.setProps({step: 1, value: 1.15})
+            expect(wrapper.find('input').element.checkValidity()).toEqual(false)
+            wrapper.setProps({step: 1.15, value: 1.154})
+            expect(wrapper.find('input').element.checkValidity()).toEqual(false)
+            wrapper.setProps({step: 1.15, value: 1.11541, minStep: 0.0001})
+            expect(wrapper.find('input').element.checkValidity()).toEqual(false)
+        })
+
+        it('is valid when step is "any"', () => {
+            wrapper.setProps({step: 'any', value: 1.15})
+            expect(wrapper.find('input').element.checkValidity()).toEqual(true)
+            wrapper.setProps({step: 'any', value: 1.054878})
+            expect(wrapper.find('input').element.checkValidity()).toEqual(true)
+            wrapper.setProps({step: 'any', value: 1})
+            expect(wrapper.find('input').element.checkValidity()).toEqual(true)
+            wrapper.setProps({step: 'any', value: ''})
+            expect(wrapper.find('input').element.checkValidity()).toEqual(true)
+        })
     })
 
     describe('Rendered (shallow)', () => {
         beforeEach(() => {
-            wrapper = shallowMount(BNumberinput)
+            wrapper = shallowMount(BNumberinput, {
+                stubs: {
+                    // to suppress error messages printed when BNumberinput
+                    // tries to call checkHtml5Validity of the input
+                    'b-input': {
+                        template: '<div></div>',
+                        methods: {
+                            checkHtml5Validity: () => true
+                        }
+                    }
+                }
+            })
         })
 
         it('manage prop types (number / string)', () => {
@@ -211,6 +297,26 @@ describe('BNumberinput', () => {
             expect(wrapper.vm.computedValue).toBe(start - (step * 2))
         })
 
+        it('can increment / decrement with a "any" step', () => {
+            const start = 5
+            const step = 'any'
+            const min = -5
+            wrapper.vm.computedValue = start
+            wrapper.setProps({ step, min })
+            wrapper.vm.decrement()
+            expect(wrapper.vm.computedValue).toBe(start - 1)
+            wrapper.vm.decrement()
+            expect(wrapper.vm.computedValue).toBe(start - (1 * 2))
+
+            const decimalStart = 5.15
+            wrapper.vm.computedValue = decimalStart
+            wrapper.setProps({ step, min })
+            wrapper.vm.decrement()
+            expect(wrapper.vm.computedValue).toBe(start - 1)
+            wrapper.vm.decrement()
+            expect(wrapper.vm.computedValue).toBe(start - (1 * 2))
+        })
+
         it('can increment / decrement with minStep', () => {
             const start = 5.51
             const step = 0.2
@@ -233,6 +339,28 @@ describe('BNumberinput', () => {
             expect(wrapper.vm.computedValue).toBe(5.3)
         })
 
+        it('can increment / decrement with minStep and "any" as step', () => {
+            const start = 5.51
+            const step = 'any'
+            const minStep = 0.01
+            const min = -5
+            wrapper.vm.computedValue = start
+            wrapper.setProps({ step, min, minStep })
+            wrapper.vm.decrement()
+            expect(wrapper.vm.computedValue).toBe(4.51)
+            wrapper.vm.decrement()
+            expect(wrapper.vm.computedValue).toBe(3.51)
+            wrapper.vm.increment()
+            expect(wrapper.vm.computedValue).toBe(4.51)
+            wrapper.vm.increment()
+            expect(wrapper.vm.computedValue).toBe(5.51)
+
+            const newMinStep = 0.1
+            wrapper.setProps({ minStep: newMinStep })
+            wrapper.vm.decrement()
+            expect(wrapper.vm.computedValue).toBe(4.5)
+        })
+
         it('manages empty value', () => {
             wrapper.vm.computedValue = ''
             expect(wrapper.vm.computedValue).toBeNull()
@@ -240,7 +368,7 @@ describe('BNumberinput', () => {
             const min = 5
             wrapper.setProps({ min })
             wrapper.vm.computedValue = ''
-            expect(wrapper.vm.computedValue).toBe(min)
+            expect(wrapper.vm.computedValue).toBeNull()
         })
 
         it('increments/decrements on click', async () => {

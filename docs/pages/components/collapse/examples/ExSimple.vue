@@ -2,11 +2,12 @@
     <section>
 
         <b-collapse :open="false" aria-id="contentIdForA11y1">
-            <template #trigger>
+            <template #trigger="props">
                 <b-button
                     label="Click me!"
                     type="is-primary"
-                    aria-controls="contentIdForA11y1" />
+                    aria-controls="contentIdForA11y1"
+                    :aria-expanded="props.open" />
             </template>
             <div class="notification">
                 <div class="content">

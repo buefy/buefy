@@ -1,4 +1,4 @@
-import Switch from './Switch'
+import Switch from './Switch.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 

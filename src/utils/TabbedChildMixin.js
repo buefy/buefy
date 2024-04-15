@@ -62,8 +62,8 @@ export default (parentCmp) => ({
                 name: 'show',
                 value: this.isActive && this.visible
             }],
+            staticClass: this.elementClass,
             attrs: {
-                'class': this.elementClass,
                 'role': this.elementRole,
                 'id': `${this.value}-content`,
                 'aria-labelledby': this.elementRole ? `${this.value}-label` : null,

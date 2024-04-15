@@ -3,7 +3,7 @@
         <b-input
             v-model="newValue"
             ref="input"
-            type="text"
+            :type="type"
             :size="size"
             :loading="loading"
             :rounded="rounded"
@@ -14,11 +14,11 @@
             :maxlength="maxlength"
             :autocomplete="newAutocomplete"
             :use-html5-validation="false"
+            :aria-autocomplete="ariaAutocomplete"
             v-bind="$attrs"
             @input="onInput"
             @focus="focused"
             @blur="onBlur"
-            @keyup.native.esc.prevent="isActive = false"
             @keydown.native="keydown"
             @keydown.native.up.prevent="keyArrows('up')"
             @keydown.native.down.prevent="keyArrows('down')"
@@ -31,14 +31,21 @@
                 class="dropdown-menu"
                 :class="{ 'is-opened-top': isOpenedTop && !appendToBody }"
                 :style="style"
-                v-show="isActive && (!isEmpty || hasEmptySlot || hasHeaderSlot)"
+                v-show="isActive && (!isEmpty || hasEmptySlot || hasHeaderSlot || hasFooterSlot)"
                 ref="dropdown"
             >
                 <div
                     class="dropdown-content"
                     v-show="isActive"
                     :style="contentStyle">
-                    <div v-if="hasHeaderSlot" class="dropdown-item">
+                    <div
+                        v-if="hasHeaderSlot"
+                        class="dropdown-item dropdown-header"
+                        role="button"
+                        tabindex="0"
+                        :class="{ 'is-hovered': headerHovered }"
+                        @click="selectHeaderOrFoterByClick($event, 'header')"
+                    >
                         <slot name="header" />
                     </div>
                     <template v-for="(element, groupindex) in computedData">
@@ -62,7 +69,7 @@
                             role="button"
                             tabindex="0"
                             :class="{ 'is-hovered': option === hovered }"
-                            @click="setSelected(option, undefined, $event)"
+                            @click.stop="setSelected(option, !keepOpen, $event)"
                         >
                             <slot
                                 v-if="hasDefaultSlot"
@@ -78,7 +85,14 @@
                         class="dropdown-item is-disabled">
                         <slot name="empty" />
                     </div>
-                    <div v-if="hasFooterSlot" class="dropdown-item">
+                    <div
+                        v-if="hasFooterSlot"
+                        class="dropdown-item dropdown-footer"
+                        role="button"
+                        tabindex="0"
+                        :class="{ 'is-hovered': footerHovered }"
+                        @click="selectHeaderOrFoterByClick($event, 'footer')"
+                    >
                         <slot name="footer" />
                     </div>
                 </div>
@@ -96,7 +110,7 @@ import {
     toCssWidth
 } from '../../utils/helpers'
 import FormElementMixin from '../../utils/FormElementMixin'
-import Input from '../input/Input'
+import Input from '../input/Input.vue'
 
 export default {
     name: 'BAutocomplete',
@@ -121,6 +135,7 @@ export default {
         customFormatter: Function,
         checkInfiniteScroll: Boolean,
         keepOpen: Boolean,
+        selectOnClickOutside: Boolean,
         clearable: Boolean,
         maxHeight: [String, Number],
         dropdownPosition: {
@@ -132,24 +147,34 @@ export default {
         iconRight: String,
         iconRightClickable: Boolean,
         appendToBody: Boolean,
+        type: {
+            type: String,
+            default: 'text'
+        },
         confirmKeys: {
             type: Array,
             default: () => ['Tab', 'Enter']
-        }
+        },
+        selectableHeader: Boolean,
+        selectableFooter: Boolean
     },
     data() {
         return {
             selected: null,
             hovered: null,
+            headerHovered: null,
+            footerHovered: null,
             isActive: false,
             newValue: this.value,
             newAutocomplete: this.autocomplete || 'off',
+            ariaAutocomplete: this.keepFirst ? 'both' : 'list',
             isListInViewportVertically: true,
             hasFocus: false,
             style: {},
             _isAutocomplete: true,
             _elementRef: 'input',
-            _bodyEl: undefined // Used to append to body
+            _bodyEl: undefined, // Used to append to body
+            timeOutID: null
         }
     },
     computed: {
@@ -288,11 +313,32 @@ export default {
                     this.calcDropdownInViewportVertical()
                 } else {
                     // Timeout to wait for the animation to finish before recalculating
-                    setTimeout(() => {
+                    this.timeOutID = setTimeout(() => {
                         this.calcDropdownInViewportVertical()
                     }, 100)
                 }
             }
+
+            this.$nextTick(() => {
+                this.$emit('active', active)
+            })
+        },
+
+        /**
+         * When checkInfiniteScroll property changes scroll event should be removed or added
+         */
+        checkInfiniteScroll(checkInfiniteScroll) {
+            if ((this.$refs.dropdown && this.$refs.dropdown.querySelector('.dropdown-content')) === false) return
+
+            const list = this.$refs.dropdown.querySelector('.dropdown-content')
+
+            if (checkInfiniteScroll === true) {
+                list.addEventListener('scroll', this.checkIfReachedTheEndOfScroll)
+
+                return
+            }
+
+            list.removeEventListener('scroll', this.checkIfReachedTheEndOfScroll)
         },
 
         /**
@@ -332,8 +378,20 @@ export default {
                 this.$nextTick(() => {
                     if (this.isActive) {
                         this.selectFirstOption(this.computedData)
+                    } else {
+                        this.setHovered(null)
                     }
                 })
+            } else {
+                if (this.hovered) {
+                    // reset hovered if list doesn't contain it
+                    const hoveredValue = this.getValue(this.hovered)
+                    const data = this.computedData.map((d) => d.items)
+                        .reduce((a, b) => ([...a, ...b]), [])
+                    if (!data.some((d) => this.getValue(d) === hoveredValue)) {
+                        this.setHovered(null)
+                    }
+                }
             }
         }
     },
@@ -353,11 +411,16 @@ export default {
          */
         setSelected(option, closeDropdown = true, event = undefined) {
             if (option === undefined) return
-
             this.selected = option
             this.$emit('select', this.selected, event)
             if (this.selected !== null) {
-                this.newValue = this.clearOnSelect ? '' : this.getValue(this.selected)
+                if (this.clearOnSelect) {
+                    const input = this.$refs.input
+                    input.newValue = ''
+                    input.$refs.input.value = ''
+                } else {
+                    this.newValue = this.getValue(this.selected)
+                }
                 this.setHovered(null)
             }
             closeDropdown && this.$nextTick(() => {
@@ -369,14 +432,14 @@ export default {
         /**
          * Select first option
          */
-        selectFirstOption(element) {
+        selectFirstOption(computedData) {
             this.$nextTick(() => {
-                if (element.length) {
-                    // If has visible data or open on focus, keep updating the hovered
-                    const option = element[0].items[0]
-                    if (this.openOnFocus || (this.newValue !== '' && this.hovered !== option)) {
-                        this.setHovered(option)
-                    }
+                const nonEmptyElements = computedData.filter(
+                    (element) => element.items && element.items.length
+                )
+                if (nonEmptyElements.length) {
+                    const option = nonEmptyElements[0].items[0]
+                    this.setHovered(option)
                 } else {
                     this.setHovered(null)
                 }
@@ -388,15 +451,44 @@ export default {
             // prevent emit submit event
             if (key === 'Enter') event.preventDefault()
             // Close dropdown on Tab & no hovered
-            this.isActive = key !== 'Tab'
-            if (this.hovered === null) return
+            if (key === 'Escape' || key === 'Tab') {
+                this.isActive = false
+            }
+
             if (this.confirmKeys.indexOf(key) >= 0) {
                 // If adding by comma, don't add the comma to the input
                 if (key === ',') event.preventDefault()
-
                 // Close dropdown on select by Tab
                 const closeDropdown = !this.keepOpen || key === 'Tab'
+                if (this.hovered === null) {
+                    // header and footer uses headerHovered && footerHovered. If header or footer
+                    // was selected then fire event otherwise just return so a value isn't selected
+                    this.checkIfHeaderOrFooterSelected(event, null, closeDropdown)
+                    return
+                }
                 this.setSelected(this.hovered, closeDropdown, event)
+            }
+        },
+
+        selectHeaderOrFoterByClick(event, origin) {
+            this.checkIfHeaderOrFooterSelected(event, {origin: origin})
+        },
+
+        /**
+         * Check if header or footer was selected.
+         */
+        checkIfHeaderOrFooterSelected(event, triggerClick, closeDropdown = true) {
+            if (this.selectableHeader && (this.headerHovered || (triggerClick && triggerClick.origin === 'header'))) {
+                this.$emit('select-header', event)
+                this.headerHovered = false
+                if (triggerClick) this.setHovered(null)
+                if (closeDropdown) this.isActive = false
+            }
+            if (this.selectableFooter && (this.footerHovered || (triggerClick && triggerClick.origin === 'footer'))) {
+                this.$emit('select-footer', event)
+                this.footerHovered = false
+                if (triggerClick) this.setHovered(null)
+                if (closeDropdown) this.isActive = false
             }
         },
 
@@ -406,7 +498,7 @@ export default {
         clickedOutside(event) {
             const target = isCustomElement(this) ? event.composedPath()[0] : event.target
             if (!this.hasFocus && this.whiteList.indexOf(target) < 0) {
-                if (this.keepFirst && this.hovered) {
+                if (this.keepFirst && this.hovered && this.selectOnClickOutside) {
                     this.setSelected(this.hovered, true)
                 } else {
                     this.isActive = false
@@ -431,9 +523,11 @@ export default {
          * Check if the scroll list inside the dropdown
          * reached it's end.
          */
-        checkIfReachedTheEndOfScroll(list) {
+        checkIfReachedTheEndOfScroll() {
+            const list = this.$refs.dropdown.querySelector('.dropdown-content')
+            const footerHeight = this.hasFooterSlot ? list.querySelectorAll('div.dropdown-footer')[0].clientHeight : 0
             if (list.clientHeight !== list.scrollHeight &&
-                list.scrollTop + list.clientHeight >= list.scrollHeight
+                list.scrollTop + list.parentElement.clientHeight + footerHeight >= list.scrollHeight
             ) {
                 this.$emit('infinite-scroll')
             }
@@ -470,14 +564,44 @@ export default {
             if (this.isActive) {
                 const data = this.computedData.map(
                     (d) => d.items).reduce((a, b) => ([...a, ...b]), [])
-                let index = data.indexOf(this.hovered) + sum
+                if (this.hasHeaderSlot && this.selectableHeader) {
+                    data.unshift(undefined)
+                }
+                if (this.hasFooterSlot && this.selectableFooter) {
+                    data.push(undefined)
+                }
+
+                let index
+                if (this.headerHovered) {
+                    index = 0 + sum
+                } else if (this.footerHovered) {
+                    index = (data.length - 1) + sum
+                } else {
+                    index = data.indexOf(this.hovered) + sum
+                }
+
                 index = index > data.length - 1 ? data.length - 1 : index
                 index = index < 0 ? 0 : index
 
-                this.setHovered(data[index])
+                this.footerHovered = false
+                this.headerHovered = false
+                this.setHovered(data[index] !== undefined ? data[index] : null)
+                if (this.hasFooterSlot && this.selectableFooter && index === data.length - 1) {
+                    this.footerHovered = true
+                }
+                if (this.hasHeaderSlot && this.selectableHeader && index === 0) {
+                    this.headerHovered = true
+                }
 
                 const list = this.$refs.dropdown.querySelector('.dropdown-content')
-                const element = list.querySelectorAll('a.dropdown-item:not(.is-disabled)')[index]
+                let querySelectorText = 'a.dropdown-item:not(.is-disabled)'
+                if (this.hasHeaderSlot && this.selectableHeader) {
+                    querySelectorText += ',div.dropdown-header'
+                }
+                if (this.hasFooterSlot && this.selectableFooter) {
+                    querySelectorText += ',div.dropdown-footer'
+                }
+                const element = list.querySelectorAll(querySelectorText)[index]
 
                 if (!element) return
 
@@ -505,6 +629,7 @@ export default {
             if (this.openOnFocus) {
                 this.isActive = true
                 if (this.keepFirst) {
+                    // If open on focus, update the hovered
                     this.selectFirstOption(this.computedData)
                 }
             }
@@ -519,7 +644,7 @@ export default {
             this.hasFocus = false
             this.$emit('blur', event)
         },
-        onInput(event) {
+        onInput() {
             const currentValue = this.getValue(this.selected)
             if (currentValue && currentValue === this.newValue) return
             this.$emit('typing', this.newValue)
@@ -545,7 +670,7 @@ export default {
         },
         updateAppendToBody() {
             const dropdownMenu = this.$refs.dropdown
-            const trigger = this.$refs.input.$el
+            const trigger = this.$parent.$data._isTaginput ? this.$parent.$el : this.$refs.input.$el
             if (dropdownMenu && trigger) {
                 // update wrapper dropdown
                 const root = this.$data._bodyEl
@@ -585,7 +710,7 @@ export default {
             this.$refs.dropdown && this.$refs.dropdown.querySelector('.dropdown-content')
         ) {
             const list = this.$refs.dropdown.querySelector('.dropdown-content')
-            list.addEventListener('scroll', () => this.checkIfReachedTheEndOfScroll(list))
+            list.addEventListener('scroll', this.checkIfReachedTheEndOfScroll)
         }
         if (this.appendToBody) {
             this.$data._bodyEl = createAbsoluteElement(this.$refs.dropdown)
@@ -606,6 +731,7 @@ export default {
         if (this.appendToBody) {
             removeElement(this.$data._bodyEl)
         }
+        clearTimeout(this.timeOutID)
     }
 }
 </script>

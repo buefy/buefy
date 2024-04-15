@@ -36,6 +36,7 @@
         font-size: 1.1em;
         color: lighten($primary, 20%);
         background: darken($primary, 20%);
+        max-width: 100%;
     }
     iframe {
         height: 30px;

@@ -1,5 +1,5 @@
-import Checkbox from './Checkbox'
-import CheckboxButton from './CheckboxButton'
+import Checkbox from './Checkbox.vue'
+import CheckboxButton from './CheckboxButton.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 

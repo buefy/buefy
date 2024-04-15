@@ -1,9 +1,11 @@
 import Autocomplete from './autocomplete'
+import Breadcrumb from './breadcrumb'
 import Button from './button'
 import Carousel from './carousel'
 import Checkbox from './checkbox'
 import Collapse from './collapse'
 import Clockpicker from './clockpicker'
+import Colorpicker from './colorpicker'
 import Datepicker from './datepicker'
 import Datetimepicker from './datetimepicker'
 import Dialog from './dialog'
@@ -41,11 +43,13 @@ import Upload from './upload'
 
 export {
     Autocomplete,
+    Breadcrumb,
     Button,
     Carousel,
     Checkbox,
     Clockpicker,
     Collapse,
+    Colorpicker,
     Datepicker,
     Datetimepicker,
     Dialog,

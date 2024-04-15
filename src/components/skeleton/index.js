@@ -1,4 +1,4 @@
-import Skeleton from './Skeleton'
+import Skeleton from './Skeleton.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 

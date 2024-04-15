@@ -18,7 +18,7 @@
             <div class="modal-background" @click="cancel('outside')"/>
             <div
                 class="animation-content"
-                :class="{ 'modal-content': !hasModalCard }"
+                :class="[{ 'modal-content': !hasModalCard }, customContentClass]"
                 :style="customStyle">
                 <component
                     v-if="component"
@@ -40,6 +40,7 @@
                     v-if="showX"
                     v-show="!animating"
                     class="modal-close is-large"
+                    :aria-label="closeButtonAriaLabel"
                     @click="cancel('x')"/>
             </div>
         </div>
@@ -115,6 +116,7 @@ export default {
             }
         },
         customClass: String,
+        customContentClass: [String, Array, Object],
         ariaRole: {
             type: String,
             validator: (value) => {
@@ -131,9 +133,14 @@ export default {
                 return Boolean(value)
             }
         },
+        closeButtonAriaLabel: String,
         destroyOnHide: {
             type: Boolean,
             default: true
+        },
+        renderOnMounted: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -144,7 +151,7 @@ export default {
                 ? this.width + 'px'
                 : this.width,
             animating: !this.active,
-            destroyed: !this.active
+            destroyed: !(this.active || this.renderOnMounted)
         }
     },
     computed: {

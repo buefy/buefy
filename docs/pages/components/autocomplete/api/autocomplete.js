@@ -156,6 +156,27 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>select-on-click-outside</code>',
+                description: 'Trigger the <code>@select</code> event for the first pre-selected option when clicking outside and <code>keep-first</code> is enabled',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>selectable-header</code>',
+                description: 'Allows the header in the autocomplete to be selectable',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>selectable-footer</code>',
+                description: 'Allows the footer in the autocomplete to be selectable',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',
@@ -217,6 +238,11 @@ export default [
                 parameters: '<code>value: String</code>'
             },
             {
+                name: '<code>active</code>',
+                description: 'Triggers when dropdown is active',
+                parameters: '<code>value: Boolean</code>'
+            },
+            {
                 name: '<code>[any].native</code>',
                 description: 'Listen to any native event, e.g. <code>click.native</code>',
                 parameters: '<code>event: $event</code>'
@@ -231,6 +257,15 @@ export default [
                 description: 'Triggers when dropdown is opened/closed',
                 parameters: '<code>value: Boolean</code>'
             },
+                name: '<code>select-header</code>',
+                description: 'Triggers when the header slot is selected',
+                parameters: '<code>event: $event</code>'
+            },
+            {
+                name: '<code>select-footer</code>',
+                description: 'Triggers when the footer slot is selected',
+                parameters: '<code>event: $event</code>'
+            }
         ],
         methods: [
             {

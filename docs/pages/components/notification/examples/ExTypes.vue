@@ -4,17 +4,25 @@
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
         </b-notification>
 
-        <b-notification type="is-info" aria-close-label="Close notification">
+        <b-notification 
+            type="is-info" 
+            aria-close-label="Close notification">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
         </b-notification>
-        <b-notification type="is-info is-light" aria-close-label="Close notification">
+        <b-notification 
+            type="is-info is-light" 
+            aria-close-label="Close notification">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
         </b-notification>
 
-        <b-notification type="is-success" aria-close-label="Close notification">
+        <b-notification 
+            type="is-success" 
+            aria-close-label="Close notification">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
         </b-notification>
-        <b-notification type="is-success is-light" aria-close-label="Close notification">
+        <b-notification 
+            type="is-success is-light" 
+            aria-close-label="Close notification">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
         </b-notification>
 

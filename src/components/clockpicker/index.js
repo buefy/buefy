@@ -1,4 +1,4 @@
-import Clockpicker from './Clockpicker'
+import Clockpicker from './Clockpicker.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 

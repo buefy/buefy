@@ -114,6 +114,8 @@ $table-sticky-header-height: 300px !default;
             font-weight: $weight-semibold;
             .th-wrap {
                 display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
                 align-items: center;
                 .icon {
                     margin-left: 0.5rem;
@@ -123,9 +125,12 @@ $table-sticky-header-height: 300px !default;
                 &.is-numeric {
                     flex-direction: row-reverse;
                     text-align: right;
-                    .icon {
+                    width: 95%;
+                    .sort-icon {
                         margin-left: 0;
                         margin-right: 0.5rem;
+                        left: 0;
+                        right: auto;
                     }
                 }
                 &.is-centered {
@@ -148,14 +153,18 @@ $table-sticky-header-height: 300px !default;
                     position: absolute;
                 }
             }
-            .sort-icon, .multi-sort-cancel-icon {
+            .sort-icon {
                 position: absolute;
                 bottom: 50%;
-                left: 100%;
+                right: 0;
                 transform: translateY(50%);
             }
-            .multi-sort-cancel-icon {
-                margin-left: 10px;
+            .multi-sort-icons {
+                display: flex;
+                align-items: center;
+                .multi-sort-cancel-icon {
+                    margin-left: 10px;
+                }
             }
             &.is-sticky {
                 position: -webkit-sticky;
@@ -273,6 +282,41 @@ $table-sticky-header-height: 300px !default;
         }
         &.is-card-list {
             @include table-cards
+        }
+    }
+}
+
+.touch-dragged-cell {
+    position: absolute;
+}
+.touch-dragged-cell,
+.touch-dragged-cell .table {
+    pointer-events: none;
+    background-color: color-mix(in srgb, $table-background-color 10%, transparent);
+}
+.touch-dragged-cell {
+    .table {
+        width: 100%;
+        tr, td {
+            background-color: transparent;
+        }
+    }
+}
+.touch-dragged-cell.has-mobile-cards .table {
+    @include mobile {
+        tr {
+            display: block;
+            td {
+                display: flex;
+                justify-content: space-between;
+                text-align: right;
+                &:before {
+                    content: attr(data-label);
+                    font-weight: $weight-semibold;
+                    padding-right: 0.5em;
+                    text-align: left;
+                }
+            }
         }
     }
 }

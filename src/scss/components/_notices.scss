@@ -95,6 +95,7 @@ $snackbar-box-shadow: $notices-box-shadow !default;
         }
     }
     .notification {
+        pointer-events: auto;
         max-width: 600px;
     }
 

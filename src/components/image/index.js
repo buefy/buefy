@@ -1,4 +1,4 @@
-import Image from './Image'
+import Image from './Image.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 

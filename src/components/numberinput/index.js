@@ -1,4 +1,4 @@
-import Numberinput from './Numberinput'
+import Numberinput from './Numberinput.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 

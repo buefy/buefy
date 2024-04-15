@@ -81,6 +81,13 @@ export default [
                 type: 'String',
                 values: '—',
                 default: '—'
+            },
+            {
+                name: '<code>input-id</code>',
+                description: 'String to set the inner input id',
+                type: 'String',
+                values: '—',
+                default: '—'
             }
         ],
         events: [

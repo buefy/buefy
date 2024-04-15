@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import Icon from '../icon/Icon'
+import Icon from '../icon/Icon.vue'
 import config from '../../utils/config'
 
 export default {
@@ -102,7 +102,7 @@ export default {
             if (this.disabled) return
             const menu = this.getMenu()
             this.reset(this.$parent, menu)
-            this.newExpanded = !this.newExpanded
+            this.newExpanded = this.$props.expanded || !this.newExpanded
             this.$emit('update:expanded', this.newExpanded)
             if (menu && menu.activable) {
                 this.newActive = true

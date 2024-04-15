@@ -1,5 +1,5 @@
 import _Vue from "vue";
-import {ColorModifiers, GlobalPositions, SizesModifiers} from "./helpers";
+import {ColorModifiers, DaysOfWeek, GlobalPositions, SizesModifiers} from "./helpers";
 
 // Component base definition
 export class BComponent extends _Vue {
@@ -32,7 +32,7 @@ export declare type BuefyConfig = {
     defaultDateCreator?: Function;
     defaultDayNames?: string[];
     defaultMonthNames?: string[];
-    defaultFirstDayOfWeek?: number;
+    defaultFirstDayOfWeek?: DaysOfWeek;
     defaultUnselectableDaysOfWeek?: number[];
     defaultTimeFormatter?: Function;
     defaultTimeParser?: Function;
@@ -176,11 +176,6 @@ export declare type BDialogConfig = {
     * Improve accessiblity when enabled.
     */
    ariaModal?: boolean;
-
-   /**
-    * CSS classes to be applied on modal
-    */
-   customClass?: string;
 }
 type BPromptDialogConfig = BDialogConfig & {
     /**
@@ -309,6 +304,11 @@ declare type BModalConfig = {
     ariaModal?: boolean;
 
     /**
+     * Aria label attribute to be passed to the close button for better accessibility.
+     */
+    closeButtonAriaLabel?: string;
+
+    /**
      * CSS classes to be applied on modal
     */
     customClass?: string;
@@ -347,6 +347,11 @@ export declare type BNoticeConfig = {
      * Show indefinitely until it is dismissed
      */
     indefinite?: boolean;
+
+    /**
+     * Prevent the notice from hiding while it is being hovered.
+     */
+    pauseOnHover?: boolean;
 
     /**
     * DOM element it will be created on.

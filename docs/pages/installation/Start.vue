@@ -23,6 +23,7 @@
         <b-message type="is-warning" size="is-medium">
             For any installation and usage method, you need
             <strong><a href="https://vuejs.org" target="_blank">Vue.js</a> version 2.6+</strong>.
+            <strong><a href="https://github.com/ntohq/buefy-next/" target="_blank">Vue.js version 3+ is supported here (official fork in development).</a></strong>
         </b-message>
 
         <div class="media">
@@ -166,7 +167,7 @@
                         <!-- Buefy components goes here -->
                     </div>
 
-                    <script src="https://unpkg.com/vue"></\script>
+                    <script src="https://unpkg.com/vue@2"></\script>
                     <!-- Full bundle -->
                     <script src="https://unpkg.com/buefy/dist/buefy.min.js"></\script>
 

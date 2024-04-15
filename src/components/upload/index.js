@@ -1,4 +1,4 @@
-import Upload from './Upload'
+import Upload from './Upload.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 

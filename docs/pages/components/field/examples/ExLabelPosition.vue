@@ -85,7 +85,7 @@
         </b-field>
 
         <b-field label="Number!" :label-position="labelPosition">
-            <b-numberinput laceholder="99" :min="95"></b-numberinput>
+            <b-numberinput placeholder="99" :min="95"></b-numberinput>
         </b-field>
 
         <b-field label="Add some tags" :label-position="labelPosition">

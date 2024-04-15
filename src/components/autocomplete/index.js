@@ -1,4 +1,4 @@
-import Autocomplete from './Autocomplete'
+import Autocomplete from './Autocomplete.vue'
 
 import { use, registerComponent } from '../../utils/plugins'
 
