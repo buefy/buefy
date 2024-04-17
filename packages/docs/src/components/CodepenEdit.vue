@@ -50,7 +50,7 @@ export default {
             return JSON.stringify({
                 title: `${this.$route.meta.title} ${this.title ? this.title.toLowerCase() : ''} - Buefy example`,
                 tags: ['buefy', 'vue', 'bulma'],
-                editors: this.style ? 111 : 101,
+                editors: 101,
                 layout: 'right',
                 html: this.getHtml(),
                 js: this.getScript(),
