@@ -191,7 +191,12 @@ export default {
                         role: 'button',
                         'aria-label': 'menu'
                     }
-                }, [this.$scopedSlots.burger({ isOpened: this.isOpened })]) : defaultBurgerNode
+                }, [
+                    this.$scopedSlots.burger({
+                        isOpened: this.isOpened,
+                        toggleActive: this.toggleActive
+                    })
+                ]) : defaultBurgerNode
             }
         },
         genNavbarSlotsNode(createElement) {
