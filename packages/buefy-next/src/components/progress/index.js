@@ -1,7 +1,7 @@
 import Progress from './Progress.vue'
 import ProgressBar from './ProgressBar.vue'
 
-import { use, registerComponent } from '../../utils/plugins'
+import { registerComponent } from '../../utils/plugins'
 
 const Plugin = {
     install(Vue) {
@@ -9,8 +9,6 @@ const Plugin = {
         registerComponent(Vue, ProgressBar)
     }
 }
-
-use(Plugin)
 
 export default Plugin
 

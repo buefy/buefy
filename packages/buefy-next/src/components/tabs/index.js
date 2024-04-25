@@ -1,7 +1,7 @@
 import Tabs from './Tabs.vue'
 import TabItem from './TabItem.vue'
 
-import { use, registerComponent } from '../../utils/plugins'
+import { registerComponent } from '../../utils/plugins'
 
 const Plugin = {
     install(Vue) {
@@ -9,8 +9,6 @@ const Plugin = {
         registerComponent(Vue, TabItem)
     }
 }
-
-use(Plugin)
 
 export default Plugin
 

@@ -2,7 +2,7 @@ import Navbar from './Navbar.vue'
 import NavbarItem from './NavbarItem.vue'
 import NavbarDropdown from './NavbarDropdown.vue'
 
-import { use, registerComponent } from '../../utils/plugins'
+import { registerComponent } from '../../utils/plugins'
 
 const Plugin = {
     install(Vue) {
@@ -11,8 +11,6 @@ const Plugin = {
         registerComponent(Vue, NavbarDropdown)
     }
 }
-
-use(Plugin)
 
 export default Plugin
 

@@ -4,7 +4,7 @@ import Toast from './Toast.vue'
 
 import config from '../../utils/config'
 import { merge, copyAppContext, getComponentFromVNode } from '../../utils/helpers'
-import { use, registerComponentProgrammatic } from '../../utils/plugins'
+import { registerComponentProgrammatic } from '../../utils/plugins'
 
 class ToastProgrammatic {
     constructor(app) {
@@ -87,8 +87,6 @@ const Plugin = {
         registerComponentProgrammatic(Vue, 'toast', new ToastProgrammatic(Vue))
     }
 }
-
-use(Plugin)
 
 export default Plugin
 

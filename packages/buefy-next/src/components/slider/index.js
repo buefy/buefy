@@ -1,7 +1,7 @@
 import Slider from './Slider.vue'
 import SliderTick from './SliderTick.vue'
 
-import { use, registerComponent } from '../../utils/plugins'
+import { registerComponent } from '../../utils/plugins'
 
 const Plugin = {
     install(Vue) {
@@ -9,8 +9,6 @@ const Plugin = {
         registerComponent(Vue, SliderTick)
     }
 }
-
-use(Plugin)
 
 export default Plugin
 

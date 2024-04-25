@@ -1,7 +1,7 @@
 import Tag from './Tag.vue'
 import Taglist from './Taglist.vue'
 
-import { use, registerComponent } from '../../utils/plugins'
+import { registerComponent } from '../../utils/plugins'
 
 const Plugin = {
     install(Vue) {
@@ -9,8 +9,6 @@ const Plugin = {
         registerComponent(Vue, Taglist)
     }
 }
-
-use(Plugin)
 
 export default Plugin
 

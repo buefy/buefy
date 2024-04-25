@@ -4,7 +4,7 @@ import Snackbar from './Snackbar.vue'
 
 import config from '../../utils/config'
 import { merge, copyAppContext, getComponentFromVNode } from '../../utils/helpers'
-import { use, registerComponentProgrammatic } from '../../utils/plugins'
+import { registerComponentProgrammatic } from '../../utils/plugins'
 
 class SnackbarProgrammatic {
     constructor(app) {
@@ -85,8 +85,6 @@ const Plugin = {
         registerComponentProgrammatic(Vue, 'snackbar', new SnackbarProgrammatic(Vue))
     }
 }
-
-use(Plugin)
 
 export default Plugin
 

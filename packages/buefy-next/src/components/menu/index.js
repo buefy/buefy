@@ -2,7 +2,7 @@ import Menu from './Menu.vue'
 import MenuList from './MenuList.vue'
 import MenuItem from './MenuItem.vue'
 
-import { use, registerComponent } from '../../utils/plugins'
+import { registerComponent } from '../../utils/plugins'
 
 const Plugin = {
     install(Vue) {
@@ -13,8 +13,6 @@ const Plugin = {
         registerComponent(Vue, MenuItem)
     }
 }
-
-use(Plugin)
 
 export default Plugin
 

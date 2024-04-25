@@ -1,7 +1,7 @@
 import Pagination from './Pagination.vue'
 import PaginationButton from './PaginationButton.vue'
 
-import { use, registerComponent } from '../../utils/plugins'
+import { registerComponent } from '../../utils/plugins'
 
 const Plugin = {
     install(Vue) {
@@ -9,8 +9,6 @@ const Plugin = {
         registerComponent(Vue, PaginationButton)
     }
 }
-
-use(Plugin)
 
 export default Plugin
 

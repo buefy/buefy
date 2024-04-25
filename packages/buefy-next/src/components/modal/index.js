@@ -3,7 +3,7 @@ import { createApp, h as createElement } from 'vue'
 import Modal from './Modal.vue'
 
 import { merge, copyAppContext, getComponentFromVNode } from '../../utils/helpers'
-import { use, registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
+import { registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
 
 class ModalProgrammatic {
     constructor(app) {
@@ -80,8 +80,6 @@ const Plugin = {
         registerComponentProgrammatic(Vue, 'modal', new ModalProgrammatic(Vue))
     }
 }
-
-use(Plugin)
 
 export default Plugin
 

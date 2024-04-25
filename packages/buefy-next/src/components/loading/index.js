@@ -3,7 +3,7 @@ import { createApp, h as createElement } from 'vue'
 import Loading from './Loading.vue'
 
 import { merge, copyAppContext, getComponentFromVNode } from '../../utils/helpers'
-import { use, registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
+import { registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
 
 class LoadingProgrammatic {
     constructor(app) {
@@ -64,8 +64,6 @@ const Plugin = {
         registerComponentProgrammatic(Vue, 'loading', new LoadingProgrammatic(Vue))
     }
 }
-
-use(Plugin)
 
 export default Plugin
 
