@@ -31,7 +31,7 @@
 import config from '../../utils/config'
 import { removeElement } from '../../utils/helpers'
 import NoticeMixinSubset from './NoticeMixinSubset'
-import Notification from './Notification'
+import Notification from './Notification.vue'
 
 export default {
     name: 'BNotificationNotice',

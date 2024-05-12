@@ -177,7 +177,7 @@ import Input from '../input/Input.vue'
 import Field from '../field/Field.vue'
 import Icon from '../icon/Icon.vue'
 
-import ClockpickerFace from './ClockpickerFace'
+import ClockpickerFace from './ClockpickerFace.vue'
 
 const outerPadding = 12
 
