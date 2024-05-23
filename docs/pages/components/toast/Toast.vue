@@ -33,7 +33,7 @@
                 ExSimpleCode,
                 outsideVueInstance: `
                 import { ToastProgrammatic as Toast } from 'buefy'
-                Toast.open('Toasty!')`
+                new Toast().open('Toasty!')`
             }
         }
     }
