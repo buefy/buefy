@@ -9,7 +9,6 @@ import Axios from 'axios'
 // import VueProgressBar from 'vue-progressbar'
 // TODO: use vue-gtag-next?
 // import VueAnalytics from 'vue-analytics'
-import Bluebird from 'bluebird'
 import hljs from 'highlight.js'
 
 import ApiView from './components/ApiView.vue'
@@ -35,7 +34,6 @@ vueApp.config.productionTip = false
 // Webpack inserts `global` but Vite does not
 // https://stackoverflow.com/a/73208485
 window.global ||= window
-global.Promise = Bluebird
 
 vueApp.config.globalProperties.$http = Axios
 vueApp.config.globalProperties.$eventHub = new Emitter()
