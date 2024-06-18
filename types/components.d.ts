@@ -387,8 +387,8 @@ export declare const SnackbarProgrammatic: {
 }
 
 
-export declare const ToastProgrammatic: {
-    open: (params: BNoticeConfig | string) => BNoticeComponent;
+export declare class ToastProgrammatic {
+    open: (params: BNoticeConfig | string) => BNoticeComponent
 }
 
 export declare type BNotificationConfig = BNoticeConfig & {
