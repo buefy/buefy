@@ -177,6 +177,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>keep-open</code>',
+                description: 'Keeps the list of options open after a selection',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',
