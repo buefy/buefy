@@ -19,7 +19,7 @@
                 <h3 class="subtitle">Set your variables with Sass</h3>
                 <b-message type="is-info">
                     <div class="content">
-                        <p><b>Tip:</b> You can see <a href="http://bulma.io/documentation/overview/variables/" target="_blank">all of Bulma's variables</a>.</p>
+                        <p><b>Tip:</b> You can see <a href="https://versions.bulma.io/0.9.4/documentation/customize/variables/" target="_blank">all of Bulma's variables</a>.</p>
                         <p>There are also two other variables created by Buefy:</p>
                         <ol>
                             <li><code>$speed-slow: 150ms !default</code></li>
@@ -68,7 +68,7 @@
                 // Lists and maps
                 $custom-colors: null !default;
                 $custom-shades: null !default;
-                
+
                 // Setup $colors to use as bulma classes (e.g. 'is-twitter')
                 $colors: mergeColorMaps(
                     (
