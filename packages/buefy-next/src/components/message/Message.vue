@@ -50,9 +50,13 @@
 
 <script>
 import MessageMixin from '../../utils/MessageMixin'
+import Progress from '../progress/Progress.vue'
 
 export default {
     name: 'BMessage',
+    components: {
+        [Progress.name]: Progress
+    },
     mixins: [MessageMixin],
     props: {
         ariaCloseLabel: String
