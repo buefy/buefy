@@ -98,7 +98,7 @@
 import FormElementMixin from '../../utils/FormElementMixin'
 import { isMobile, matchWithGroups } from '../../utils/helpers'
 import config from '../../utils/config'
-
+import Input from '../input/Input.vue'
 import Datepicker from '../datepicker/Datepicker.vue'
 import Timepicker from '../timepicker/Timepicker.vue'
 
@@ -108,6 +108,7 @@ export default {
     name: 'BDatetimepicker',
     components: {
         [Datepicker.name]: Datepicker,
+        [Input.name]: Input,
         [Timepicker.name]: Timepicker
     },
     mixins: [FormElementMixin],
