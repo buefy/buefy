@@ -39,6 +39,27 @@ describe('BCollapse', () => {
             expect(wrapper.find('.collapse-content div').exists()).toBe(true)
             expect(wrapper.find('.collapse-content div').html()).toContain(slotDefault)
         })
+
+        it('should render content slot contents', async () => {
+            wrapper = shallowMount(BCollapse, {
+                propsData: {
+                    open: true
+                },
+                scopedSlots: {
+                    content: `
+                        <div>
+                            <img 
+                                v-if="props.open"
+                                src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+                            />
+                        </div>
+                    `
+                }
+            })
+            await wrapper.vm.$nextTick()
+            expect(wrapper.find('.collapse-content div').exists()).toBe(true)
+            expect(wrapper.find('.collapse-content div img').exists()).toBe(true)
+        })
     })
     describe('open prop is false', () => {
         beforeEach(() => {
@@ -101,6 +122,27 @@ describe('BCollapse', () => {
             await wrapper.vm.$nextTick() // Wait for the DOM to update
             expect(wrapper.find('.collapse-content div').exists()).toBe(true)
             expect(wrapper.find('.collapse-content div').html()).toContain(slotDefault)
+        })
+
+        it('should not render content slot contents', async () => {
+            wrapper = shallowMount(BCollapse, {
+                propsData: {
+                    open: false
+                },
+                scopedSlots: {
+                    content: `
+                        <div>
+                            <img 
+                                v-if="props.open"
+                                src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+                            />
+                        </div>
+                    `
+                }
+            })
+            await wrapper.vm.$nextTick()
+            expect(wrapper.find('.collapse-content div').exists()).toBe(true)
+            expect(wrapper.find('.collapse-content div img').exists()).toBe(false)
         })
     })
 
