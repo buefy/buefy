@@ -24,6 +24,22 @@ describe('BCollapse', () => {
             expect(wrapper.html()).toMatchSnapshot()
         })
     })
+    describe('open prop is true', () => {
+        it('should render default slot contents', async () => {
+            const slotDefault = '<div>Content</div>'
+            wrapper = shallowMount(BCollapse, {
+                propsData: {
+                    open: true
+                },
+                slots: {
+                    default: slotDefault
+                }
+            })
+            await wrapper.vm.$nextTick()
+            expect(wrapper.find('.collapse-content div').exists()).toBe(true)
+            expect(wrapper.find('.collapse-content div').html()).toContain(slotDefault)
+        })
+    })
     describe('open prop is false', () => {
         beforeEach(() => {
             wrapper = shallowMount(BCollapse, {
@@ -70,6 +86,21 @@ describe('BCollapse', () => {
             wrapper.setProps({ open: true })
             expect(wrapper.vm.isOpen).toBe(true)
             expect(wrapper.find('.collapse-content').isVisible()).toBe(true)
+        })
+
+        it('should render default slot contents', async () => {
+            const slotDefault = '<div>Content</div>'
+            wrapper = shallowMount(BCollapse, {
+                propsData: {
+                    open: false
+                },
+                slots: {
+                    default: slotDefault
+                }
+            })
+            await wrapper.vm.$nextTick() // Wait for the DOM to update
+            expect(wrapper.find('.collapse-content div').exists()).toBe(true)
+            expect(wrapper.find('.collapse-content div').html()).toContain(slotDefault)
         })
     })
 
