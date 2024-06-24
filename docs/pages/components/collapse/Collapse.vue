@@ -9,6 +9,8 @@
         <Example :component="ExPosition" :code="ExPositionCode" title="Position" vertical/>
 
         <Example :component="ExAccordion" :code="ExAccordionCode" title="Accordion Effect" vertical/>
+        
+        <Example :component="ExConditionalRendering" :code="ExConditionalRenderingCode" title="Conditional Rendering" vertical/>
 
         <ApiView :data="api"/>
     </div>
@@ -19,6 +21,9 @@
 
     import ExSimple from './examples/ExSimple'
     import ExSimpleCode from '!!raw-loader!./examples/ExSimple'
+
+    import ExConditionalRendering from './examples/ExConditionalRendering'
+    import ExConditionalRenderingCode from '!!raw-loader!./examples/ExConditionalRendering'
 
     import ExPanelTemplate from './examples/ExPanelTemplate'
     import ExPanelTemplateCode from '!!raw-loader!./examples/ExPanelTemplate'
@@ -40,6 +45,8 @@
                 ExSimpleCode,
                 ExPanelTemplate,
                 ExPanelTemplateCode,
+                ExConditionalRendering,
+                ExConditionalRenderingCode,
                 ExCardTemplate,
                 ExCardTemplateCode,
                 ExPosition,
