@@ -104,6 +104,7 @@ import { isMobile } from '../../utils/helpers'
 import config from '../../utils/config'
 import Color from '../../utils/color'
 
+import Button from '../button/Button.vue'
 import Dropdown from '../dropdown/Dropdown.vue'
 import DropdownItem from '../dropdown/DropdownItem.vue'
 import Input from '../input/Input.vue'
@@ -137,6 +138,7 @@ export default {
         [Field.name]: Field,
         [Select.name]: Select,
         [Icon.name]: Icon,
+        [Button.name]: Button,
         [Dropdown.name]: Dropdown,
         [DropdownItem.name]: DropdownItem
     },
@@ -159,6 +161,10 @@ export default {
                         typeof value.blue === 'number'
                     )
             }
+        },
+        mobileNative: {
+            type: Boolean,
+            default: false
         },
         representation: {
             type: String,

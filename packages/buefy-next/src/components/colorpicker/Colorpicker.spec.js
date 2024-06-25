@@ -7,6 +7,7 @@ describe('BColorpicker', () => {
             global: {
                 stubs: {
                     // to better reproduce the legacy snapshot
+                    'b-button': false,
                     'b-dropdown': false,
                     'b-dropdown-item': false,
                     'b-field': false,
