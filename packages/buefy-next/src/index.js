@@ -2,7 +2,7 @@ import * as components from './components'
 
 import { merge } from './utils/helpers'
 import config, { setOptions, setVueInstance } from './utils/config'
-import { use, registerComponentProgrammatic } from './utils/plugins'
+import { registerComponentProgrammatic } from './utils/plugins'
 
 import ConfigComponent from './utils/ConfigComponent'
 
@@ -21,8 +21,6 @@ const Buefy = {
         Vue.config.globalProperties.$buefy.globalNoticeInterval = null
     }
 }
-
-use(Buefy)
 
 export default Buefy
 
