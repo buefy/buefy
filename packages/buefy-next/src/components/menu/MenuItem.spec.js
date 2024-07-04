@@ -17,8 +17,8 @@ describe('BMenuItem', () => {
         expect(wrapper.html()).toMatchSnapshot()
     })
 
-    it('sets newActive when active is changed', async () => {
-        await wrapper.setProps({ active: true })
+    it('sets newActive when modelValue is changed', async () => {
+        await wrapper.setProps({ modelValue: true })
         expect(wrapper.vm.newActive).toBeTruthy()
     })
 

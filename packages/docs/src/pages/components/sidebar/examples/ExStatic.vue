@@ -20,7 +20,7 @@
                     <b-menu class="is-custom-mobile">
                         <b-menu-list label="Menu">
                             <b-menu-item icon="information-outline" label="Info"></b-menu-item>
-                            <b-menu-item active expanded icon="settings" label="Administrator">
+                            <b-menu-item model-value expanded icon="settings" label="Administrator">
                                 <b-menu-item icon="account" label="Users"></b-menu-item>
                                 <b-menu-item icon="cellphone-link" label="Devices"></b-menu-item>
                                 <b-menu-item icon="cash-multiple" label="Payments" disabled></b-menu-item>

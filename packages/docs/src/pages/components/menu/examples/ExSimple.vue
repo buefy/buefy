@@ -2,7 +2,7 @@
   <b-menu>
     <b-menu-list label="Menu">
       <b-menu-item icon="information-outline" label="Info"></b-menu-item>
-      <b-menu-item icon="cog" :active="isActive" expanded>
+      <b-menu-item icon="cog" v-model="isActive" expanded>
         <template #label="props">
           Administrator
           <b-icon class="is-pulled-right" :icon="props.expanded ? 'menu-up' : 'menu-down'"></b-icon>
