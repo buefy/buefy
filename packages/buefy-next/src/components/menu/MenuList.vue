@@ -21,8 +21,13 @@
 </template>
 
 <script>
+import Icon from '../icon/Icon.vue'
+
 export default {
     name: 'BMenuList',
+    components: {
+        [Icon.name]: Icon
+    },
     props: {
         label: String,
         icon: String,
