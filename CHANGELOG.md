@@ -1,5 +1,18 @@
 # Buefy Changelog
 
+## Buefy-next 0.1.4
+
+### Fixes
+* Fix [256](https://github.com/ntohq/buefy-next/issues/256) Added missing import statement for BIcon in MenuList
+* Fix [19](https://github.com/ntohq/buefy-next/issues/19) Update MenuItem's model Prop to Work with Vue3
+* Fix [34](https://github.com/ntohq/buefy-next/issues/34), [35](https://github.com/ntohq/buefy-next/issues/35) Add Missing Prop and Import Statement to the Colorpicker
+* Fix [40](https://github.com/ntohq/buefy-next/issues/40) Added missing import statement for BIcon in BTag component
+* Fix [24](https://github.com/ntohq/buefy-next/issues/24) Added missing Progress import statements to Message component
+* Fix [241](https://github.com/ntohq/buefy-next/pull/241) Update import path for ClockpickerFace and NotificationNotice
+* Fix [182](https://github.com/ntohq/buefy-next/issues/182) Set modal's event prop's default value
+* Fix [177](https://github.com/ntohq/buefy-next/issues/177) Remove use from all components
+* Fix [178](https://github.com/ntohq/buefy-next/issues/178) Remove unnecessary prop `style` causing console warning
+
 ## Buefy-next 0.1.3
 
 Buefy-next 0.1.3 includes all the relevant changes until Buefy 0.9.29.
