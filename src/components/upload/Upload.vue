@@ -1,5 +1,14 @@
 <template>
     <label class="upload control" :class="{'is-expanded' : expanded, 'is-rounded' : rounded}">
+        <input
+            ref="input"
+            type="file"
+            v-bind="$attrs"
+            :multiple="multiple"
+            :accept="accept"
+            :disabled="disabled"
+            @change="onFileChange">
+
         <template v-if="!dragDrop">
             <slot/>
         </template>
@@ -19,15 +28,6 @@
             @drop.prevent="onFileChange">
             <slot/>
         </div>
-
-        <input
-            ref="input"
-            type="file"
-            v-bind="$attrs"
-            :multiple="multiple"
-            :accept="accept"
-            :disabled="disabled"
-            @change="onFileChange">
     </label>
 </template>
 
