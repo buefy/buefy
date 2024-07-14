@@ -2,16 +2,28 @@
 
 ## Buefy-next 0.1.4
 
+### Breaking changes
+
+* [#19](https://github.com/ntohq/buefy-next/issues/19) `MenuItem`'s `active` prop was renamed to `modelValue` so that Vue 3's `v-model` works.
+  And an `update:modelValue` event is emitted instead of an `update:active` event when the `modelValue` prop is changed.
+
 ### Fixes
-* Fix [256](https://github.com/ntohq/buefy-next/issues/256) Added missing import statement for BIcon in MenuList
-* Fix [19](https://github.com/ntohq/buefy-next/issues/19) Update MenuItem's model Prop to Work with Vue3
-* Fix [34](https://github.com/ntohq/buefy-next/issues/34), [35](https://github.com/ntohq/buefy-next/issues/35) Add Missing Prop and Import Statement to the Colorpicker
-* Fix [40](https://github.com/ntohq/buefy-next/issues/40) Added missing import statement for BIcon in BTag component
-* Fix [24](https://github.com/ntohq/buefy-next/issues/24) Added missing Progress import statements to Message component
-* Fix [241](https://github.com/ntohq/buefy-next/pull/241) Update import path for ClockpickerFace and NotificationNotice
-* Fix [182](https://github.com/ntohq/buefy-next/issues/182) Set modal's event prop's default value
-* Fix [177](https://github.com/ntohq/buefy-next/issues/177) Remove use from all components
-* Fix [178](https://github.com/ntohq/buefy-next/issues/178) Remove unnecessary prop `style` causing console warning
+
+* [#256](https://github.com/ntohq/buefy-next/issues/256) `MenuList` warned missing `<b-icon>`
+* [#257](https://github.com/ntohq/buefy-next/pull/257) The root index file had a meaningless `use(Buefy)` call
+* [#34](https://github.com/ntohq/buefy-next/issues/34) `Colorpicker` accessed the undefined `mobileNative` property causing console warning
+* [#35](https://github.com/ntohq/buefy-next/issues/35) `Colorpicker` warned missing `<b-button>`
+* [#40](https://github.com/ntohq/buefy-next/issues/40) `Tag` warned missing `<b-icon>`
+* [#23](https://github.com/ntohq/buefy-next/issues/23) `Datetimepicker` warned missing `<b-input>`
+* [#24](https://github.com/ntohq/buefy-next/issues/24) `Message` warned missing `<b-progress>`
+* [#241](https://github.com/ntohq/buefy-next/pull/241) `Clockpicker` lacked the `.vue` extension in the import path of `ClockpickerFace.vue`, and `NotificationNotice` also lacked the `.vue` extension in the import path of `Notification.vue` (thanks [@cwilby](https://github.com/cwilby))
+* [#182](https://github.com/ntohq/buefy-next/issues/182) A console warning appeared when a `Modal` was programmatically opened with a custom component
+* [#177](https://github.com/ntohq/buefy-next/issues/177) All the components had meaningless `use(...)` calls
+
+### Fixes (docs)
+
+* [#178](https://github.com/ntohq/buefy-next/issues/178) `CodepenEdit` caused console warning due to invalid `this.style` access
+* [#171](https://github.com/ntohq/buefy-next/issues/171) `bluebird` required a workarouond to work with Vite
 
 ## Buefy-next 0.1.3
 
