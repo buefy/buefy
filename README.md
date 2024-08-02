@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://buefy.org">
+    <a href="https://v3.buefy.org">
         <img src="https://raw.githubusercontent.com/buefy/buefy/master/static/img/buefy-banner.png" />
     </a>
     <a href="https://github.com/buefy/buefy/releases"><img src="https://img.shields.io/github/v/release/buefy/buefy?logo=buefy&color=7957d5&labelColor=lightgrey" /></a>
@@ -8,7 +8,7 @@
     <a href="https://circleci.com/gh/buefy/buefy"><img src="https://img.shields.io/circleci/project/github/buefy/buefy.svg?style=flat-square" /></a>
     <a href="https://codecov.io/gh/buefy/buefy"><img src="https://img.shields.io/codecov/c/github/buefy/buefy.svg?style=flat-square" /></a>
     <a href="https://discordapp.com/invite/ZkdFJMr"><img src="https://img.shields.io/badge/chat-on%20discord-7289DA.svg?logo=discord" /></a>
-    <a href="https://buefy.org"><img src="https://img.shields.io/badge/code_style-buefy-7957d5.svg?style=flat-square" /></a>
+    <a href="https://v3.buefy.org"><img src="https://img.shields.io/badge/code_style-buefy-7957d5.svg?style=flat-square" /></a>
 </p>
 
 > Buefy is a lightweight library of responsive UI components for [Vue.js](https://vuejs.org/) based on [Bulma](http://bulma.io/) framework and design.
@@ -60,7 +60,7 @@ This is recommended because `@ntohq/buefy-next` will replace `buefy` when it bec
 
 The documentation is in the docs directory, it serves as the demo as well.
 
-Browse [online documentation here](https://buefy.org/).
+Browse [online documentation here](https://v3.buefy.org/).
 
 ## Quick start
 
@@ -105,7 +105,7 @@ app.use(Input)
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.8.55/css/materialdesignicons.min.css">
 ```
 
-If you want to customize the icons or the theme, refer to the [customization section on the documentation](https://buefy.org/documentation/customization).
+If you want to customize the icons or the theme, refer to the [customization section on the documentation](https://v3.buefy.org/documentation/customization).
 
 ### Alternatively, you can use a CDN or even download
 
