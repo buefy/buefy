@@ -1,15 +1,16 @@
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import debounce from './debounce'
 
 describe('debounce', () => {
-    let func
+    let func: () => void
 
     beforeEach(() => {
-        jest.useFakeTimers()
-        func = jest.fn()
+        vi.useFakeTimers()
+        func = vi.fn()
     })
 
     afterEach(() => {
-        jest.useRealTimers()
+        vi.useRealTimers()
     })
 
     it('is not called immediately', () => {
@@ -21,7 +22,7 @@ describe('debounce', () => {
     it('is not called upon several rapid calls', () => {
         const debouncedFunc = debounce(func, 1000)
         for (let i = 0; i < 10; i++) {
-            jest.advanceTimersByTime(500)
+            vi.advanceTimersByTime(500)
             debouncedFunc()
         }
         expect(func).toHaveBeenCalledTimes(0)
@@ -30,7 +31,7 @@ describe('debounce', () => {
     it('is called after debounce time', () => {
         const debouncedFunc = debounce(func, 1000)
         debouncedFunc()
-        jest.advanceTimersByTime(1000)
+        vi.advanceTimersByTime(1000)
         expect(func).toHaveBeenCalledTimes(1)
     })
 
@@ -43,7 +44,7 @@ describe('debounce', () => {
     it('is called once upon several rapid calls if immediate is true', () => {
         const debouncedFunc = debounce(func, 1000, true)
         for (let i = 0; i < 10; i++) {
-            jest.advanceTimersByTime(500)
+            vi.advanceTimersByTime(500)
             debouncedFunc()
         }
         expect(func).toHaveBeenCalledTimes(1)
