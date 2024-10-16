@@ -1,0 +1,54 @@
+name: "Lint, type check, and unit test"
+
+on:
+  push:
+    branches:
+      - dev
+      - main
+      - migrate-to-typescript # TODO: until the migration is complete
+
+  pull_request:
+    branches:
+      - dev
+      - main
+      - migrate-to-typescript # TODO: until the migration is complete
+
+jobs:
+  verify:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node-version: [18, 20, 22]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+
+      - run: npm ci
+
+      - name: Lint
+        run: npm -w @ntohq/buefy-next run lint
+        id: lint
+        continue-on-error: true
+
+      - name: Type check
+        run: npm -w @ntohq/buefy-next run type-check
+        id: type-check
+        continue-on-error: true
+
+      - name: Unit test
+        run: npm -w @ntohq/buefy-next run unit
+        id: unit
+        continue-on-error: true
+
+      - name: Fail if any of the previous steps failed
+        if: ${{ steps.lint.outcome == 'failure' || steps.type-check.outcome == 'failure' || steps.unit.outcome == 'failure' }}
+        run: echo "Lint=${{ steps.lint.outcome }} Type-check=${{ steps.type-check.outcome }} Unit=${{ steps.unit.outcome }}" && exit 1
+
