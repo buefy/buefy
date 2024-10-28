@@ -65,7 +65,10 @@ export default {
                     name: 'show',
                     value: this.isOpen
                 }]
-            }, this.$slots.default)
+            }, this.$scopedSlots.content
+                ? [this.$scopedSlots.content({ open: this.isOpen })]
+                : [this.$slots.default]
+            )
         ])
         return createElement('div', { staticClass: 'collapse' },
             this.position === 'is-top' ? [trigger, content] : [content, trigger])
