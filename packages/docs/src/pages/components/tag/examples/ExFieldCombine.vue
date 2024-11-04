@@ -22,7 +22,6 @@
                 </b-taglist>
             </div>
         </b-field>
-        <br>
 
         <b-field grouped group-multiline>
             <div class="control">

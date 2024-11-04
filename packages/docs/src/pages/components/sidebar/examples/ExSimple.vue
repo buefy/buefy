@@ -1,18 +1,20 @@
 <template>
   <section>
-    <b-sidebar
-      type="is-light"
+    <div class="block">
+      <b-sidebar
       :fullheight="fullheight"
       :fullwidth="fullwidth"
       :overlay="overlay"
       :right="right"
       v-model="open"
-    >
-      <div class="p-1">
-        <img
+      >
+      <div class="px-4 py-6">
+        <figure class="image">
+          <img
           src="/static/img/buefy-logo.png"
           alt="Lightweight UI components for Vue.js based on Bulma"
-        />
+          />
+        </figure>
         <b-menu>
           <b-menu-list label="Menu">
             <b-menu-item icon="information-outline" label="Info"></b-menu-item>
@@ -26,12 +28,12 @@
                 <template #label>
                   Devices
                   <b-dropdown aria-role="list" class="is-pulled-right" position="is-bottom-left">
-                        <template #trigger>
-                            <b-icon icon="dots-vertical"></b-icon>
-                        </template>
-                        <b-dropdown-item aria-role="listitem">Action</b-dropdown-item>
-                        <b-dropdown-item aria-role="listitem">Another action</b-dropdown-item>
-                        <b-dropdown-item aria-role="listitem">Something else</b-dropdown-item>
+                    <template #trigger>
+                      <b-icon icon="dots-vertical"></b-icon>
+                    </template>
+                    <b-dropdown-item aria-role="listitem">Action</b-dropdown-item>
+                    <b-dropdown-item aria-role="listitem">Another action</b-dropdown-item>
+                    <b-dropdown-item aria-role="listitem">Something else</b-dropdown-item>
                   </b-dropdown>
                 </template>
               </b-menu-item>
@@ -51,24 +53,25 @@
         </b-menu>
       </div>
     </b-sidebar>
-    <div class="block">
-      <b-field grouped group-multiline>
-        <div class="control">
-          <b-switch v-model="overlay">Overlay</b-switch>
-        </div>
-        <div class="control">
-          <b-switch v-model="fullheight">Fullheight</b-switch>
-        </div>
-        <div class="control">
-          <b-switch v-model="fullwidth">Fullwidth</b-switch>
-        </div>
-        <div class="control">
-          <b-switch v-model="right">Right</b-switch>
-        </div>
-      </b-field>
-    </div>
-    <b-button @click="open = true">Show</b-button>
-  </section>
+  </div>
+  <div class="block">
+    <b-field grouped group-multiline>
+      <div class="control">
+        <b-switch v-model="overlay">Overlay</b-switch>
+      </div>
+      <div class="control">
+        <b-switch v-model="fullheight">Fullheight</b-switch>
+      </div>
+      <div class="control">
+        <b-switch v-model="fullwidth">Fullwidth</b-switch>
+      </div>
+      <div class="control">
+        <b-switch v-model="right">Right</b-switch>
+      </div>
+    </b-field>
+  </div>
+  <b-button @click="open = true">Show</b-button>
+</section>
 </template>
 
 <script>

@@ -1,3 +1,8 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/utilities/derived-variables" as dv;
+
+
 $tooltip-arrow-size: 5px !default;
 $tooltip-arrow-margin: 2px !default;
 $tooltip-multiline-sizes: (
@@ -5,19 +10,30 @@ $tooltip-multiline-sizes: (
     medium: 240px,
     large: 300px
 ) !default;
-$tooltip-colors: $colors !default;
+$tooltip-colors: dv.$colors !default;
 
-@mixin tooltip-arrow-color($direction, $color) {
-    @if ($direction == "is-top") {
-        border-top-color: $color;
-    } @else if ($direction == "is-bottom") {
-        border-bottom-color: $color;
-    } @else if ($direction == "is-right") {
-        border-right-color: $color;
-    } @else if ($direction == "is-left") {
-        border-left-color: $color;
+.#{iv.$class-prefix}b-tooltip {
+    @include cv.register-vars((
+        "tooltip-arrow-size": #{$tooltip-arrow-size},
+        "tooltip-arrow-margin": #{$tooltip-arrow-margin}
+    ));
+
+    @each $name, $pair in $tooltip-colors {
+        &.is-#{$name} {
+            @include cv.register-vars((
+                "tooltip-background-color": cv.getVar($name),
+                "tooltip-color": cv.getVar($name, "", "-invert")
+            ));
+            &.is-light {
+                @include cv.register-vars((
+                    "tooltip-background-color": cv.getVar($name, "", "-light"),
+                    "tooltip-color": cv.getVar($name, "", "-dark")
+                ));
+            }
+        }
     }
-}
+
+};
 
 @mixin tooltip($direction) {
     &.#{$direction} {
@@ -25,11 +41,11 @@ $tooltip-colors: $colors !default;
             @if ($direction == "is-top") {
                 top: auto;
                 right: auto;
-                bottom: calc(100% + #{$tooltip-arrow-size} + #{$tooltip-arrow-margin});
+                bottom: calc(100% + #{cv.getVar('tooltip-arrow-size')} + #{cv.getVar('tooltip-arrow-margin')});
                 left: 50%;
                 transform: translateX(-50%);
             } @else if ($direction == "is-bottom") {
-                top: calc(100% + #{$tooltip-arrow-size} + #{$tooltip-arrow-margin});
+                top: calc(100% + #{cv.getVar('tooltip-arrow-size')} + #{cv.getVar('tooltip-arrow-margin')});
                 right: auto;
                 bottom: auto;
                 left: 50%;
@@ -38,11 +54,11 @@ $tooltip-colors: $colors !default;
                 top: 50%;
                 right: auto;
                 bottom: auto;
-                left: calc(100% + #{$tooltip-arrow-size} + #{$tooltip-arrow-margin});
+                left: calc(100% + #{cv.getVar('tooltip-arrow-size')} + #{cv.getVar('tooltip-arrow-margin')});
                 transform: translateY(-50%);
             } @else if ($direction == "is-left") {
                 top: 50%;
-                right: calc(100% + #{$tooltip-arrow-size} + #{$tooltip-arrow-margin});
+                right: calc(100% + #{cv.getVar('tooltip-arrow-size')} + #{cv.getVar('tooltip-arrow-margin')});
                 bottom: auto;
                 left: auto;
                 transform: translateY(-50%);
@@ -55,53 +71,40 @@ $tooltip-colors: $colors !default;
                 bottom: 100%;
                 left: 50%;
                 transform: translateX(-50%);
-                border-right: $tooltip-arrow-size solid transparent;
-                border-bottom: $tooltip-arrow-size solid $primary;
-                border-left: $tooltip-arrow-size solid transparent;
+                border-right: cv.getVar('tooltip-arrow-size') solid transparent;
+                border-bottom: cv.getVar('tooltip-arrow-size') solid cv.getVar('tooltip-background-color');
+                border-left: cv.getVar('tooltip-arrow-size') solid transparent;
+                border-bottom-color: cv.getVar('tooltip-background-color');
             } @else if ($direction == "is-top") {
                 top: 100%;
                 right: auto;
                 bottom: auto;
                 left: 50%;
                 transform: translateX(-50%);
-                border-top: $tooltip-arrow-size solid $primary;
-                border-right: $tooltip-arrow-size solid transparent;
-                border-left: $tooltip-arrow-size solid transparent;
+                border-top: cv.getVar('tooltip-arrow-size') solid cv.getVar('tooltip-background-color');
+                border-right: cv.getVar('tooltip-arrow-size') solid transparent;
+                border-left: cv.getVar('tooltip-arrow-size') solid transparent;
+                border-top-color: cv.getVar('tooltip-background-color');
             } @else if ($direction == "is-left") {
                 top: 50%;
                 right: auto;
                 bottom: auto;
                 left: 100%;
                 transform: translateY(-50%);
-                border-top: $tooltip-arrow-size solid transparent;
-                border-bottom: $tooltip-arrow-size solid transparent;
-                border-left: $tooltip-arrow-size solid $primary;
+                border-top: cv.getVar('tooltip-arrow-size') solid transparent;
+                border-bottom: cv.getVar('tooltip-arrow-size') solid transparent;
+                border-left: cv.getVar('tooltip-arrow-size') solid cv.getVar('tooltip-background-color');
+                border-left-color: cv.getVar('tooltip-background-color');
             } @else if ($direction == "is-right") {
                 top: 50%;
                 right: 100%;
                 bottom: auto;
                 left: auto;
                 transform: translateY(-50%);
-                border-top: $tooltip-arrow-size solid transparent;
-                border-right: $tooltip-arrow-size solid $primary;
-                border-bottom: $tooltip-arrow-size solid transparent;
-            }
-        }
-        @each $name, $pair in $tooltip-colors {
-            $color: nth($pair, 1);
-            &.is-#{$name} {
-                .tooltip-content::before {
-                    @include tooltip-arrow-color($direction, $color)
-                }
-                // If light and dark colors are provided
-                @if length($pair) >= 4 {
-                    $color-light: nth($pair, 3);
-                    &.is-light {
-                        .tooltip-content::before {
-                            @include tooltip-arrow-color($direction, $color-light)
-                        }
-                    }
-                }
+                border-top: cv.getVar('tooltip-arrow-size') solid transparent;
+                border-right: cv.getVar('tooltip-arrow-size') solid cv.getVar('tooltip-background-color');
+                border-bottom: cv.getVar('tooltip-arrow-size') solid transparent;
+                border-right-color: cv.getVar('tooltip-background-color');
             }
         }
     }
@@ -118,13 +121,15 @@ $tooltip-colors: $colors !default;
     .tooltip-content {
         width: auto;
         padding: 0.35rem 0.75rem;
-        border-radius: $radius-large;
+        border-radius: cv.getVar('radius');
         font-size: 0.85rem;
-        font-weight: $weight-normal;
-        box-shadow: 0px 1px 2px 1px rgba(0, 1, 0, 0.2);
+        font-weight: cv.getVar('weight-normal');
+        box-shadow: cv.getVar('shadow');
         z-index: 38;
         white-space: nowrap;
         position: absolute;
+        background: cv.getVar('tooltip-background-color');
+        color: cv.getVar('tooltip-color');
     }
     .tooltip-content::before {
         position: absolute;
@@ -134,28 +139,6 @@ $tooltip-colors: $colors !default;
     }
     .tooltip-trigger {
         width: 100%;
-    }
-    // Modifiers
-    @each $name, $pair in $tooltip-colors {
-        $color: nth($pair, 1);
-        $color-invert: nth($pair, 2);
-        &.is-#{$name} {
-            .tooltip-content {
-                background: $color;
-                color: $color-invert;
-            }
-            // If light and dark colors are provided
-            @if length($pair) >= 4 {
-                $color-light: nth($pair, 3);
-                $color-dark: nth($pair, 4);
-                &.is-light {
-                    .tooltip-content {
-                        background: $color-light;
-                        color: $color-dark;
-                    }
-                }
-            }
-        }
     }
     &.is-always {
         .tooltip-content::before,
@@ -180,7 +163,7 @@ $tooltip-colors: $colors !default;
     }
     &.is-dashed {
         .tooltip-trigger {
-            border-bottom: 1px dashed $grey-light;
+            border-bottom: 1px dashed cv.getVar('grey-light');
             cursor: default;
         }
     }

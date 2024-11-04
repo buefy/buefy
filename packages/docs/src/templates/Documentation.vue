@@ -67,7 +67,7 @@ export default {
     },
 
     beforeUnmount() {
-        this.$eventHub.$off('navigate', this.setMeta)
+        this.$eventHub.off('navigate', this.setMeta)
     }
 }
 </script>

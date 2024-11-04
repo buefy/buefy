@@ -1,7 +1,9 @@
 <template>
-    <div class="menu">
-        <slot />
-    </div>
+    <section>
+        <div class="menu">
+            <slot />
+        </div>
+    </section>
 </template>
 
 <script>

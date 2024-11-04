@@ -12,7 +12,7 @@
             <div
                 v-show="isOpen"
                 ref="sidebarContent"
-                class="sidebar-content"
+                class="sidebar-content navbar"
                 :class="rootClasses"
                 @mouseenter="onHover"
                 @mouseleave="onHoverLeave"

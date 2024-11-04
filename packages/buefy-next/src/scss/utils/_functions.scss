@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 // Helper function to replace characters in a string
 @function str-replace($string, $search, $replace: '') {
     $index: str-index($string, $search);
@@ -10,11 +12,12 @@
 
 // Encode svg function by http://codepen.io/jakob-e/pen/doMoML
 @function svg-encode($svg){
+      
     // Chunk up string in order to avoid "stack level too deep" error
     $encoded:'';
     $slice: 2000;
     $index: 0;
-    $loops: ceil(divide(str-length($svg), $slice));
+    $loops: math.ceil(math.div(str-length($svg), $slice));
     @for $i from 1 through $loops {
         $chunk: str-slice($svg, $index, $index + $slice - 1);
         // Encode

@@ -39,15 +39,14 @@
                     :can-cancel="canCancel"
                     :close="close"
                 />
-                <button
-                    type="button"
-                    v-if="showX"
-                    v-show="!animating"
-                    class="modal-close is-large"
-                    :aria-label="closeButtonAriaLabel"
-                    @click="cancel('x')"
-                />
             </div>
+            <button
+                v-if="showX"
+                v-show="!animating"
+                class="modal-close is-large"
+                :aria-label="closeButtonAriaLabel"
+                @click="cancel('x')"
+            />
         </div>
     </transition>
 </template>
@@ -138,7 +137,10 @@ export default {
                 return Boolean(value)
             }
         },
-        closeButtonAriaLabel: String,
+        closeButtonAriaLabel: {
+            type: String,
+            default: 'close'
+        },
         destroyOnHide: {
             type: Boolean,
             default: true

@@ -7,15 +7,16 @@
                 :expand-on-hover="expandOnHover"
                 :reduce="reduce"
                 :delay="expandWithDelay ? 500 : null"
-                type="is-light"
                 :modelValue="true"
             >
-                <div class="p-1">
+                <div class="px-4 py-6">
                     <div class="block">
-                    <img
-                        src="/static/img/buefy-logo.png"
-                        alt="Lightweight UI components for Vue.js based on Bulma"
-                    />
+                        <figure class="image">
+                            <img
+                                src="/static/img/buefy-logo.png"
+                                alt="Lightweight UI components for Vue.js based on Bulma"
+                            />
+                        </figure>
                     </div>
                     <b-menu class="is-custom-mobile">
                         <b-menu-list label="Menu">
@@ -40,7 +41,7 @@
                 </div>
             </b-sidebar>
 
-            <div class="p-1">
+            <div class="block component-options">
                 <b-field>
                     <b-switch v-model="reduce">Reduced</b-switch>
                 </b-field>
@@ -77,20 +78,16 @@ export default {
 </script>
 
 <style lang="scss">
-.p-1 {
-  padding: 1em;
-}
 .sidebar-page {
     display: flex;
     flex-direction: column;
     width: 100%;
     min-height: 100%;
-    // min-height: 100vh;
     .sidebar-layout {
         display: flex;
         flex-direction: row;
         min-height: 100%;
-        // min-height: 100vh;
+        gap: 4rem;
     }
 }
 @media screen and (max-width: 1023px) {

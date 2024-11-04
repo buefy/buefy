@@ -1,6 +1,18 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/utilities/controls" as controls;
+
 $dropdown-content-max-height: 200px !default;
 
-.autocomplete {
+.#{iv.$class-prefix}autocomplete {
+    @include cv.register-vars(
+        (
+            "dropdown-content-max-height": #{$dropdown-content-max-height}
+        )
+    );
+}
+
+.#{iv.$class-prefix}autocomplete {
     position: relative;
     .dropdown-menu {
         display: block;
@@ -12,28 +24,24 @@ $dropdown-content-max-height: 200px !default;
     }
     .dropdown-content {
         overflow: auto;
-        max-height: $dropdown-content-max-height;
+        max-height: cv.getVar("dropdown-content-max-height");
     }
     .dropdown-item {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        &.is-hovered {
-            background: $dropdown-item-hover-background-color;
-            color: $dropdown-item-hover-color;
-        }
         &.is-disabled {
             opacity: 0.5;
             cursor: not-allowed;
         }
     }
     &.is-small {
-        @include control-small;
+        @include controls.control-small;
     }
     &.is-medium{
-        @include control-medium;
+        @include controls.control-medium;
     }
     &.is-large {
-        @include control-large;
+        @include controls.control-large;
     }
 }

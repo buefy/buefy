@@ -9,7 +9,6 @@
             :progress-bar='progressBar' 
             :duration="duration" 
             title="Error!" 
-            type="is-dark" 
             has-icon 
             v-model="isActive" 
             aria-close-label="Close notification">

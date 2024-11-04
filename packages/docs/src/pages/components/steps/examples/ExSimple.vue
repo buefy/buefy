@@ -88,7 +88,6 @@
                 v-if="customNavigation"
                 #navigation="{previous, next}">
                 <b-button
-                    outlined
                     type="is-danger"
                     icon-pack="fas"
                     icon-left="backward"
@@ -97,7 +96,6 @@
                     Previous
                 </b-button>
                 <b-button
-                    outlined
                     type="is-success"
                     icon-pack="fas"
                     icon-right="forward"

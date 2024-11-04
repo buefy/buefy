@@ -1,8 +1,19 @@
+@use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/mixins" as mixins;
+
 $icon-svg-width: 100% !default;
 $icon-svg-height: 100% !default;
 
-.icon {
-    @include unselectable;
+.#{iv.$class-prefix}icon {
+    @include cv.register-vars((
+        "icon-svg-width": #{$icon-svg-width},
+        "icon-svg-height": #{$icon-svg-height},
+    ))
+}
+
+.#{iv.$class-prefix}icon {
+    @include mixins.unselectable;
     cursor: inherit;
     svg {
         background-color: transparent;
@@ -10,7 +21,7 @@ $icon-svg-height: 100% !default;
         stroke-width: 0;
         stroke: currentColor;
         pointer-events: none;
-        width: $icon-svg-width;
-        height: $icon-svg-height;
+        width: cv.getVar('icon-svg-width');
+        height: cv.getVar('icon-svg-width');
     }
 }

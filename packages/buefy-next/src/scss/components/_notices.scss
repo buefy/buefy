@@ -1,16 +1,62 @@
-$notices-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04) !default;
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/utilities/derived-variables" as dv;
+@use "bulma/sass/utilities/mixins" as mixins;
+
+$notices-box-shadow: 0 1px 4px cv.getRgbaVar('scheme-main', 0.12), 0 0 6px cv.getRgbaVar('scheme-main', 0.04) !default;
 
 $toast-border-radius: 2em !default;
 $toast-opacity: 0.92 !default;
 $toast-box-shadow: $notices-box-shadow !default;
 
-$snackbar-background-color: $dark !default;
-$snackbar-color: $dark-invert !default;
-$snackbar-border-radius: $radius !default;
+$snackbar-background-color: cv.getVar('dark') !default;
+$snackbar-color: cv.getVar('dark-invert') !default;
+$toast-background-color: cv.getVar('dark') !default;
+$notice-color: cv.getVar('dark-invert') !default;
+$notice-button-color: cv.getVar('success') !default;
+$snackbar-border-radius: cv.getVar('radius') !default;
 $snackbar-button-text-transform: uppercase !default;
 $snackbar-box-shadow: $notices-box-shadow !default;
 
-.notices {
+.#{iv.$class-prefix}notices {
+  
+    @include cv.register-vars(
+      (
+        "notices-box-shadow": #{$notices-box-shadow},
+        "toast-border-radius": #{$toast-border-radius},
+        "toast-opacity": #{$toast-opacity},
+        "toast-box-shadow": #{$toast-box-shadow},
+        "snackbar-background-color": #{$snackbar-background-color},
+        "snackbar-color": #{$snackbar-color},
+        "toast-background-color": #{$toast-background-color},
+        "notice-color": #{$notice-color},
+        "notice-button-color": #{$notice-button-color},
+        "snackbar-border-radius": #{$snackbar-border-radius},
+        "snackbar-button-text-transform": #{$snackbar-button-text-transform},
+        "snackbar-box-shadow": #{$snackbar-box-shadow}
+      )
+    );
+
+    .snackbar,
+    .toast,
+    .snackbar,
+    .notification {
+        @each $name, $pair in dv.$colors {
+            &.is-#{$name} {
+                @include cv.register-vars(
+                    (
+                        "toast-background-color": #{cv.getVar($name)},
+                        "notice-color": #{cv.getVar($name, "", "-invert")},
+                        "notice-button-color": #{cv.getVar($name)},
+                        "notice-button-color-hover": #{cv.getVar($name, "", "-light")},
+                    )
+                );
+            }
+        }
+    }
+};
+
+.#{iv.$class-prefix}notices {
     position: fixed;
     display: flex;
     top: 0;
@@ -23,34 +69,28 @@ $snackbar-box-shadow: $notices-box-shadow !default;
     pointer-events: none;
     .toast {
         display: inline-flex;
-        animation-duration: $speed-slow;
+        animation-duration: cv.getVar("speed-slow");
         margin: 0.5em 0;
         text-align: center;
-        box-shadow: $toast-box-shadow;
-        border-radius: $toast-border-radius;
+        box-shadow: cv.getVar("toast-box-shadow");
+        border-radius: cv.getVar("toast-border-radius");
         padding: 0.75em 1.5em;
         pointer-events: auto;
-        opacity: $toast-opacity;
-        @each $name, $pair in $notification-colors {
-            $color: nth($pair, 1);
-            $color-invert: nth($pair, 2);
-            &.is-#{$name} {
-                color: $color-invert;
-                background: $color;
-            }
-        }
+        opacity: cv.getVar("toast-opacity");
+        color: cv.getVar("notice-color");
+        background: cv.getVar("toast-background-color");
     }
     .snackbar {
         display: inline-flex;
         align-items: center;
         justify-content: space-around;
-        animation-duration: $speed-slow;
+        animation-duration: cv.getVar("speed-slow");
         margin: 0.5em 0;
-        box-shadow: $snackbar-box-shadow;
-        border-radius: $snackbar-border-radius;
+        box-shadow: cv.getVar("snackbar-box-shadow");
+        border-radius: cv.getVar("snackbar-border-radius");
         pointer-events: auto;
-        background: $snackbar-background-color;
-        color: $snackbar-color;
+        background: cv.getVar("snackbar-background-color");
+        color: cv.getVar("snackbar-color");
         min-height: 3em;
         .text {
             padding: 0.5em 1em;
@@ -60,35 +100,35 @@ $snackbar-box-shadow: $notices-box-shadow !default;
             padding: 0.5em;
             padding-left: 0;
             .button {
-                font-weight: $weight-semibold;
-                text-transform: $snackbar-button-text-transform;
-                background: $snackbar-background-color;
+                // font-weight: cv.getVar("weight-semibold");
+                text-transform: cv.getVar("snackbar-button-text-transform");
+                background: cv.getVar("notice-background-color");
                 border: transparent;
+                color: cv.getVar("notice-button-color");
             }
             .button:hover {
-                background: darken($snackbar-background-color, 5%);
+                background: cv.getVar("notice-button-color-hover");
             }
             .button:active {
-                background: darken($snackbar-background-color, 5%);
-            }
-            @each $name, $pair in $notification-colors {
-                $color: nth($pair, 1);
-                &.is-#{$name} {
-                    .button {
-                        color: $color;
-                    }
-                }
+                background: cv.getVar("notice-button-color-hover");
             }
         }
         .action.is-cancel {
-            padding-right: 0;
+            .button {
+                color: cv.getVar("snackbar-color");
+                background: transparent;
+                &:hover,
+                &:active {
+                    background: cv.getRgbaVar("notice-background-color", 0.1);
+                }
+            }
         }
-        @include mobile {
+        @include mixins.mobile {
             width: 100%;
             margin: 0;
             border-radius: 0;
         }
-        @include tablet {
+        @include mixins.tablet {
             min-width: 350px;
             max-width: 600px;
             overflow: hidden;
@@ -113,7 +153,7 @@ $snackbar-box-shadow: $notices-box-shadow !default;
             align-self: flex-start;
         }
         &.is-toast {
-            opacity: $toast-opacity;
+            opacity: cv.getVar("toast-opacity");
         }
     }
 
@@ -137,7 +177,7 @@ $snackbar-box-shadow: $notices-box-shadow !default;
         position: absolute;
     }
 
-    @include mobile {
+    @include mixins.mobile {
         padding: 0;
         position: fixed !important;
     }

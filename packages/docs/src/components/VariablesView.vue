@@ -25,7 +25,7 @@ export default {
         variablesColumns() {
             const columns = []
             if (this.data.some((d) => d.name !== undefined)) {
-                columns.push({ label: 'Name', field: 'name', renderHtml: true })
+                columns.push({ label: 'Sass', field: 'name', renderHtml: true })
             }
             if (this.data.some((d) => d.description !== undefined)) {
                 columns.push({ label: 'Description', field: 'description', renderHtml: true })
