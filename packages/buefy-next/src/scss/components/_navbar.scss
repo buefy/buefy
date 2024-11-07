@@ -1,4 +1,8 @@
-.navbar {
+@use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/components/navbar" as navbar;
+
+.#{iv.$class-prefix}navbar {
     &.has-navbar-centered {
         .navbar-start {
             justify-content: center;
@@ -13,6 +17,7 @@
     .navbar-dropdown.is-boxed {
         visibility: hidden;
         transition-property: opacity, visibility, transform;
+        box-shadow: cv.getVar('shadow');
     }
 
     .navbar-item.has-dropdown.is-active .is-boxed,

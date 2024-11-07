@@ -24,12 +24,6 @@ $tooltip-colors: dv.$colors !default;
                 "tooltip-background-color": cv.getVar($name),
                 "tooltip-color": cv.getVar($name, "", "-invert")
             ));
-            &.is-light {
-                @include cv.register-vars((
-                    "tooltip-background-color": cv.getVar($name, "", "-light"),
-                    "tooltip-color": cv.getVar($name, "", "-dark")
-                ));
-            }
         }
     }
 
