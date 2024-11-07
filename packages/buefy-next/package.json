@@ -42,7 +42,7 @@
     "lint:fix": "eslint src --ext .js,.vue --fix",
     "build": "rimraf dist && npm run build:js && npm run build:scss && npm run vetur",
     "build:js": "rollup -c && rollup -c --environment MINIFY",
-    "build:scss": "node ./build/banner.js < src/scss/buefy-build.scss | sass --stdin --load-path src/scss > dist/buefy.css && cleancss -o dist/buefy.min.css dist/buefy.css",
+    "build:scss": "node ./build/banner.js < src/scss/buefy-build.scss | sass --load-path=node_modules src/scss/buefy-build.scss dist/buefy.css && cleancss -o dist/buefy.min.css dist/buefy.css",
     "vetur": "node -r esm build/vetur.js"
   },
   "peerDependencies": {
@@ -68,6 +68,7 @@
     "rollup": "^4.1.4",
     "rollup-plugin-vue": "^6.0.0",
     "sass": "^1.69.4",
-    "vue": "^3.3.7"
+    "vue": "^3.3.7",
+    "bulma": "^1.0.2"
   }
 }
