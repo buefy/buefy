@@ -45,7 +45,7 @@
         />
 
         <b-icon
-            v-if="!loading && hasIconRight"
+            v-if="!loading && hasIconRight && !$attrs.disabled"
             class="is-right"
             :class="{ 'is-clickable': passwordReveal || iconRightClickable }"
             :icon="rightIcon"
