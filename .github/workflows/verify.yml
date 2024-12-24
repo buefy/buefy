@@ -52,3 +52,35 @@ jobs:
         if: ${{ steps.lint.outcome == 'failure' || steps.type-check.outcome == 'failure' || steps.unit.outcome == 'failure' }}
         run: echo "Lint=${{ steps.lint.outcome }} Type-check=${{ steps.type-check.outcome }} Unit=${{ steps.unit.outcome }}" && exit 1
 
+  verify-docs:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node-version: [18, 20, 22]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+
+      - run: npm ci
+
+      - name: Lint docs
+        run: npm -w docs run lint
+        id: lint
+        continue-on-error: true
+
+      - name: Type check docs
+        run: npm -w docs run type-check
+        id: type-check
+        continue-on-error: true
+
+      - name: Fail if any of the previous steps failed
+        if: ${{ steps.lint.outcome == 'failure' || steps.type-check.outcome == 'failure' }}
+        run: echo "Lint=${{ steps.lint.outcome }} Type-check=${{ steps.type-check.outcome }}" && exit 1
