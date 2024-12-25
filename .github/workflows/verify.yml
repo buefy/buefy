@@ -5,13 +5,11 @@ on:
     branches:
       - dev
       - main
-      - migrate-to-typescript # TODO: until the migration is complete
 
   pull_request:
     branches:
       - dev
       - main
-      - migrate-to-typescript # TODO: until the migration is complete
 
 jobs:
   verify:
