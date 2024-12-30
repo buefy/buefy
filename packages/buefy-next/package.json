@@ -72,5 +72,8 @@
     "rollup": "^4.1.4",
     "rollup-plugin-esbuild": "^6.1.0",
     "vitest": "^0.34.6"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.6.1"
   }
 }
