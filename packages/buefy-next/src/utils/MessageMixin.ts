@@ -1,9 +1,6 @@
-import Icon from '../components/icon/Icon.vue'
+import { defineComponent } from 'vue'
 
-export default {
-    components: {
-        [Icon.name]: Icon
-    },
+export default defineComponent({
     props: {
         modelValue: {
             type: Boolean,
@@ -34,27 +31,18 @@ export default {
             default: false
         }
     },
-    emits: ['click', 'close', 'update:modelValue'],
+    emits: {
+        click: () => true,
+        close: () => true,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        'update:modelValue': (value: boolean) => true
+    },
     data() {
         return {
             isActive: this.modelValue,
             remainingTime: this.duration / 1000, // in seconds
-            newIconSize: this.iconSize || this.size || 'is-large'
-        }
-    },
-    watch: {
-        modelValue(value) {
-            this.isActive = value
-        },
-        isActive(value) {
-            if (value) {
-                this.setAutoClose()
-                this.setDurationProgress()
-            } else {
-                if (this.timer) {
-                    clearTimeout(this.timer)
-                }
-            }
+            newIconSize: this.iconSize || this.size || 'is-large',
+            timer: undefined as ReturnType<typeof setTimeout> | undefined
         }
     },
     computed: {
@@ -76,6 +64,21 @@ export default {
                     return 'alert-circle'
                 default:
                     return null
+            }
+        }
+    },
+    watch: {
+        modelValue(value) {
+            this.isActive = value
+        },
+        isActive(value) {
+            if (value) {
+                this.setAutoClose()
+                this.setDurationProgress()
+            } else {
+                if (this.timer) {
+                    clearTimeout(this.timer)
+                }
             }
         }
     },
@@ -132,4 +135,4 @@ export default {
     mounted() {
         this.setAutoClose()
     }
-}
+})
