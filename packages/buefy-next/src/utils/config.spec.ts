@@ -1,3 +1,4 @@
+import { describe, expect, test } from 'vitest'
 import config, { setOptions } from '@utils/config'
 
 describe('Config', () => {
