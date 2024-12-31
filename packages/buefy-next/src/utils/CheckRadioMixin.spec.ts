@@ -1,15 +1,19 @@
+import { defineComponent } from 'vue'
 import { shallowMount } from '@vue/test-utils'
+import type { VueWrapper } from '@vue/test-utils'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import CheckRadioMixin from '@utils/CheckRadioMixin'
 
-let wrapper
-
 describe('CheckRadioMixin', () => {
-    HTMLElement.prototype.insertAdjacentElement = jest.fn()
+    HTMLElement.prototype.insertAdjacentElement = vi.fn()
+
+    const component = defineComponent({
+        mixins: [CheckRadioMixin],
+        template: '<div class="b-component"></div>'
+    })
+    let wrapper: VueWrapper<InstanceType<typeof component>>
+
     beforeEach(() => {
-        const component = {
-            template: '<div class="b-component"></div>',
-            mixins: [CheckRadioMixin]
-        }
         wrapper = shallowMount(component, {
             attachTo: document.body
         })

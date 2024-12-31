@@ -1,4 +1,7 @@
-export default {
+import { defineComponent } from 'vue'
+
+// components that mix this in must have `input: HTMLElement` in `$refs`.
+export default defineComponent({
     props: {
         modelValue: [String, Number, Boolean, Function, Object, Array],
         nativeValue: [String, Number, Boolean, Function, Object, Array],
@@ -8,7 +11,11 @@ export default {
         name: String,
         size: String
     },
-    emits: ['update:modelValue'],
+    emits: {
+        // eslint-disable-next-line max-len
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
+        'update:modelValue': (value: any) => true
+    },
     data() {
         return {
             newValue: this.modelValue
@@ -19,7 +26,8 @@ export default {
             get() {
                 return this.newValue
             },
-            set(value) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            set(value: any) {
                 this.newValue = value
                 this.$emit('update:modelValue', value)
             }
@@ -37,7 +45,7 @@ export default {
         }
     },
     watch: {
-        /**
+        /*
         * When v-model change, set internal value.
         */
         modelValue(value) {
@@ -47,7 +55,7 @@ export default {
     methods: {
         focus() {
             // MacOS FireFox and Safari do not focus when clicked
-            this.$refs.input.focus()
+            (this.$refs.input as HTMLElement).focus()
         }
     }
-}
+})
