@@ -1,7 +1,17 @@
-import config from '../utils/config'
+import config, { type IconPack } from '../utils/config'
 import { merge } from '../utils/helpers'
 
-const mdiIcons = {
+/**
+ * Internally used {@link IconPack} type.
+ *
+ * @internal
+ */
+export type InternalIconPack = IconPack & {
+    /** Maps icon names to equivalent ones in MDI. */
+    internalIcons: Record<string, string>
+}
+
+const mdiIcons: IconPack = {
     sizes: {
         default: 'mdi-24px',
         'is-small': null,
@@ -11,7 +21,7 @@ const mdiIcons = {
     iconPrefix: 'mdi-'
 }
 
-const faIcons = () => {
+const faIcons: () => InternalIconPack = () => {
     const faIconPrefix = config && config.defaultIconComponent ? '' : 'fa-'
     return {
         sizes: {
@@ -36,8 +46,8 @@ const faIcons = () => {
     }
 }
 
-const getIcons = () => {
-    let icons = {
+const getIcons: () => Record<string, IconPack> = () => {
+    let icons: Record<string, IconPack> = {
         mdi: mdiIcons,
         fa: faIcons(),
         fas: faIcons(),
@@ -54,7 +64,7 @@ const getIcons = () => {
     }
 
     if (config && config.customIconPacks) {
-        icons = merge(icons, config.customIconPacks, true)
+        icons = merge<Record<string, IconPack>>(icons, config.customIconPacks, true)
     }
 
     return icons
