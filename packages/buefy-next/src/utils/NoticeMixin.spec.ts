@@ -1,15 +1,19 @@
+import { defineComponent } from 'vue'
 import { shallowMount } from '@vue/test-utils'
+import type { VueWrapper } from '@vue/test-utils'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import NoticeMixin from '@utils/NoticeMixin'
 
-let wrapper
-
 describe('NoticeMixin', () => {
-    HTMLElement.prototype.insertAdjacentElement = jest.fn()
+    HTMLElement.prototype.insertAdjacentElement = vi.fn()
+
+    const component = defineComponent({
+        mixins: [NoticeMixin],
+        template: '<div class="b-component"></div>'
+    })
+    let wrapper: VueWrapper<InstanceType<typeof component>>
+
     beforeEach(() => {
-        const component = {
-            template: '<div class="b-component"></div>',
-            mixins: [NoticeMixin]
-        }
         wrapper = shallowMount(component, {
             attachTo: document.body
         })
@@ -28,15 +32,15 @@ describe('NoticeMixin', () => {
             enter: 'fadeInUp',
             leave: 'fadeOut'
         }
-        const expected = {
-            'is-top': topTransition,
-            'is-top-right': topTransition,
-            'is-top-left': topTransition,
-            'is-bottom': bottomTransition,
-            'is-bottom-right': bottomTransition,
-            'is-bottom-left': bottomTransition
-        }
-        for (const [key, value] of Object.entries(expected)) {
+        const expected = [
+            ['is-top', topTransition],
+            ['is-top-right', topTransition],
+            ['is-top-left', topTransition],
+            ['is-bottom', bottomTransition],
+            ['is-bottom-right', bottomTransition],
+            ['is-bottom-left', bottomTransition]
+        ] as const
+        for (const [key, value] of expected) {
             await wrapper.setProps({ position: key })
             expect(wrapper.vm.transition).toEqual(value)
         }

@@ -1,13 +1,16 @@
-import config from './config'
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
+import config, { NOTICE_POSITIONS } from './config'
+import type { NoticePosition } from './config'
 import { removeElement } from './helpers'
 
-export default {
+export default defineComponent({
     props: {
         type: {
             type: String,
             default: 'is-dark'
         },
-        message: [String, Array],
+        message: [String, Array] as PropType<string | string[]>,
         duration: Number,
         queue: {
             type: Boolean,
@@ -22,29 +25,28 @@ export default {
             default: false
         },
         position: {
-            type: String,
+            type: String as PropType<NoticePosition>,
             default: 'is-top',
-            validator(value) {
-                return [
-                    'is-top-right',
-                    'is-top',
-                    'is-top-left',
-                    'is-bottom-right',
-                    'is-bottom',
-                    'is-bottom-left'
-                ].indexOf(value) > -1
+            validator(value: unknown): value is NoticePosition {
+                return NOTICE_POSITIONS.indexOf(value as NoticePosition) > -1
             }
         },
         container: String
     },
-    emits: ['click', 'close'],
+    emits: {
+        click: () => true,
+        close: () => true
+    },
     data() {
         return {
             isActive: false,
             isPaused: false,
-            parentTop: null,
-            parentBottom: null,
-            newContainer: this.container || config.defaultContainerElement
+            parentTop: null as Element | null,
+            parentBottom: null as Element | null,
+            newContainer: this.container || config.defaultContainerElement,
+            timer: undefined as ReturnType<typeof setTimeout> | undefined,
+            // host container should override `newDuration`
+            newDuration: this.duration || 0
         }
     },
     computed: {
@@ -53,12 +55,16 @@ export default {
                 case 'is-top-right':
                 case 'is-top':
                 case 'is-top-left':
-                    return this.parentTop
+                    return this.parentTop!
 
                 case 'is-bottom-right':
                 case 'is-bottom':
                 case 'is-bottom-left':
-                    return this.parentBottom
+                    return this.parentBottom!
+                default: {
+                    const exhaustiveCheck: never = this.position
+                    throw new RangeError(`invalid position: ${exhaustiveCheck}`)
+                }
             }
         },
         transition() {
@@ -77,6 +83,10 @@ export default {
                         enter: 'fadeInUp',
                         leave: 'fadeOut'
                     }
+                default: {
+                    const exhaustiveCheck: never = this.position
+                    throw new RangeError(`invalid position: ${exhaustiveCheck}`)
+                }
             }
         }
     },
@@ -101,8 +111,8 @@ export default {
             if (!queue) return false
 
             return (
-                this.parentTop.childElementCount > 0 ||
-                this.parentBottom.childElementCount > 0
+                this.parentTop!.childElementCount > 0 ||
+                this.parentBottom!.childElementCount > 0
             )
         },
         click() {
@@ -151,7 +161,7 @@ export default {
                 this.parentBottom.className = 'notices is-bottom'
             }
 
-            const container = document.querySelector(this.newContainer) || document.body
+            const container = document.querySelector(this.newContainer!) || document.body
 
             container.appendChild(this.parentTop)
             container.appendChild(this.parentBottom)
@@ -168,4 +178,4 @@ export default {
     mounted() {
         this.showNotice()
     }
-}
+})
