@@ -1,9 +1,14 @@
-import { h as createElement, Transition, vShow, withDirectives } from 'vue'
+import { defineComponent, h as createElement, Transition, vShow, withDirectives } from 'vue'
+import type { PropType } from 'vue'
 
+import type { VueClassAttribute } from './config'
 import InjectedChildMixin, { Sorted } from './InjectedChildMixin'
+import type { TabbedParent } from './TabbedTypes'
 
-export default (parentCmp) => ({
-    mixins: [InjectedChildMixin(parentCmp, Sorted)],
+export type TransitionName = 'slide-next' | 'slide-prev' | 'slide-up' | 'slide-down'
+
+export default <Parent extends TabbedParent = TabbedParent>(parentCmp: string) => defineComponent({
+    mixins: [InjectedChildMixin<typeof Sorted, Parent>(parentCmp, Sorted)],
     props: {
         label: String,
         icon: String,
@@ -13,36 +18,36 @@ export default (parentCmp) => ({
             default: true
         },
         headerClass: {
-            type: [String, Array, Object],
+            type: [String, Array, Object] as PropType<VueClassAttribute>,
             default: null
         }
     },
     data() {
         return {
-            transitionName: null,
-            elementClass: 'item',
-            elementRole: null
+            transitionName: null as TransitionName | null,
+            elementClass: 'item' as string,
+            elementRole: null as string | null
         }
     },
     computed: {
-        isActive() {
+        isActive(): boolean {
             return this.parent.activeItem === this
         }
     },
     methods: {
-        /**
+        /*
          * Activate element, alter animation name based on the index.
          */
-        activate(oldIndex) {
+        activate(oldIndex: number) {
             this.transitionName = this.index < oldIndex
                 ? this.parent.vertical ? 'slide-down' : 'slide-next'
                 : this.parent.vertical ? 'slide-up' : 'slide-prev'
         },
 
-        /**
+        /*
          * Deactivate element, alter animation name based on the index.
          */
-        deactivate(newIndex) {
+        deactivate(newIndex: number) {
             this.transitionName = newIndex < this.index
                 ? this.parent.vertical ? 'slide-down' : 'slide-next'
                 : this.parent.vertical ? 'slide-up' : 'slide-prev'
@@ -78,7 +83,7 @@ export default (parentCmp) => ({
             return createElement(
                 Transition,
                 {
-                    name: this.parent.animation || this.transitionName,
+                    name: (this.parent.animation || this.transitionName) ?? undefined,
                     appear: this.parent.animateInitially === true || undefined,
                     onBeforeEnter: () => { this.parent.isTransitioning = true },
                     onAfterEnter: () => { this.parent.isTransitioning = false }
