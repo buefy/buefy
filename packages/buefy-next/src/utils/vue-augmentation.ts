@@ -7,6 +7,8 @@
 // otherwise the post processing will be messed up.
 import 'vue'
 
+import ConfigComponent from './ConfigComponent'
+
 // Augments the global property with `$buefy`.
 // https://vuejs.org/guide/typescript/options-api.html#augmenting-global-properties
 declare module '@vue/runtime-core' {
@@ -14,6 +16,7 @@ declare module '@vue/runtime-core' {
     interface ComponentCustomProperties {
         /** Global Buefy API. */
         $buefy: {
+            config: typeof ConfigComponent,
             globalNoticeInterval?: ReturnType<typeof setTimeout>,
             // TODO: make key-values more specific
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
