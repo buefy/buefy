@@ -1,6 +1,9 @@
 import { h } from 'vue'
 import { shallowMount } from '@vue/test-utils'
+import { describe, expect, it, vi } from 'vitest'
 import BSlotComponent from '@utils/SlotComponent'
+
+type BSlotComponentInstance = InstanceType<typeof BSlotComponent>
 
 describe('BSlotComponent', () => {
     const MockComponent = {
@@ -76,7 +79,7 @@ describe('BSlotComponent', () => {
                 default: slot
             }
         })
-        const spyOnRefresh = jest.spyOn(BSlotComponent.methods, 'refresh').mockImplementation(() => {})
+        const spyOnRefresh = vi.spyOn(BSlotComponent.methods as BSlotComponentInstance, 'refresh').mockImplementation(() => {})
         const wrapper = shallowMount(BSlotComponent, {
             props: {
                 component: Component.vm
@@ -92,7 +95,7 @@ describe('BSlotComponent', () => {
     it('refresh on default event with existing handler', async () => {
         const MockComponent = {
             render: () => h('div', {}, 'Hello!'),
-            updated: jest.fn()
+            updated: vi.fn()
         }
         const slot = '<span>Content</span>'
         const Component = shallowMount(MockComponent, {
@@ -100,7 +103,7 @@ describe('BSlotComponent', () => {
                 default: slot
             }
         })
-        const spyOnRefresh = jest.spyOn(BSlotComponent.methods, 'refresh').mockImplementation(() => {})
+        const spyOnRefresh = vi.spyOn(BSlotComponent.methods as BSlotComponentInstance, 'refresh').mockImplementation(() => {})
         const wrapper = shallowMount(BSlotComponent, {
             props: {
                 component: Component.vm
@@ -122,7 +125,7 @@ describe('BSlotComponent', () => {
                 default: slot
             }
         })
-        const spyOnRefresh = jest.spyOn(BSlotComponent.methods, 'refresh').mockImplementation(() => {})
+        const spyOnRefresh = vi.spyOn(BSlotComponent.methods as BSlotComponentInstance, 'refresh').mockImplementation(() => {})
         const wrapper = shallowMount(BSlotComponent, {
             props: {
                 component: Component.vm,
@@ -138,7 +141,7 @@ describe('BSlotComponent', () => {
     it('refresh on custom event with existing handler (default case)', () => {
         const event = 'component-event'
         const slot = '<span>Content</span>'
-        const existingHandler = jest.fn()
+        const existingHandler = vi.fn()
         const Component = shallowMount(MockComponent, {
             props: {
                 'onComponent-event': existingHandler
@@ -147,7 +150,7 @@ describe('BSlotComponent', () => {
                 default: slot
             }
         })
-        const spyOnRefresh = jest.spyOn(BSlotComponent.methods, 'refresh').mockImplementation(() => {})
+        const spyOnRefresh = vi.spyOn(BSlotComponent.methods as BSlotComponentInstance, 'refresh').mockImplementation(() => {})
         const wrapper = shallowMount(BSlotComponent, {
             props: {
                 component: Component.vm,
@@ -164,7 +167,7 @@ describe('BSlotComponent', () => {
     it('refresh on custom event with existing handler (camelized case)', () => {
         const event = 'component-event'
         const slot = '<span>Content</span>'
-        const existingHandler = jest.fn()
+        const existingHandler = vi.fn()
         const Component = shallowMount(MockComponent, {
             props: {
                 onComponentEvent: existingHandler
@@ -173,7 +176,7 @@ describe('BSlotComponent', () => {
                 default: slot
             }
         })
-        const spyOnRefresh = jest.spyOn(BSlotComponent.methods, 'refresh').mockImplementation(() => {})
+        const spyOnRefresh = vi.spyOn(BSlotComponent.methods as BSlotComponentInstance, 'refresh').mockImplementation(() => {})
         const wrapper = shallowMount(BSlotComponent, {
             props: {
                 component: Component.vm,
@@ -194,7 +197,7 @@ describe('BSlotComponent', () => {
                 default: slot
             }
         })
-        const spyOnRefresh = jest.spyOn(BSlotComponent.methods, 'refresh').mockImplementation(() => {})
+        const spyOnRefresh = vi.spyOn(BSlotComponent.methods as BSlotComponentInstance, 'refresh').mockImplementation(() => {})
         const wrapper = shallowMount(BSlotComponent, {
             props: {
                 component: Component.vm
@@ -210,7 +213,7 @@ describe('BSlotComponent', () => {
     it('destroy with existing handler', async () => {
         const MockComponent = {
             render: () => h('div', {}, 'Hello!'),
-            updated: jest.fn()
+            updated: vi.fn()
         }
         const slot = '<span>Content</span>'
         const Component = shallowMount(MockComponent, {
@@ -218,7 +221,7 @@ describe('BSlotComponent', () => {
                 default: slot
             }
         })
-        const spyOnRefresh = jest.spyOn(BSlotComponent.methods, 'refresh').mockImplementation(() => {})
+        const spyOnRefresh = vi.spyOn(BSlotComponent.methods as BSlotComponentInstance, 'refresh').mockImplementation(() => {})
         const wrapper = shallowMount(BSlotComponent, {
             props: {
                 component: Component.vm
@@ -240,7 +243,7 @@ describe('BSlotComponent', () => {
                 default: slot
             }
         })
-        const spyOnRefresh = jest.spyOn(BSlotComponent.methods, 'refresh').mockImplementation(() => {})
+        const spyOnRefresh = vi.spyOn(BSlotComponent.methods as BSlotComponentInstance, 'refresh').mockImplementation(() => {})
         const wrapper = shallowMount(BSlotComponent, {
             props: {
                 component: Component.vm,
@@ -257,7 +260,7 @@ describe('BSlotComponent', () => {
     it('destroy with custom event and existing handler', async () => {
         const event = 'component-event'
         const slot = '<span>Content</span>'
-        const existingHandler = jest.fn()
+        const existingHandler = vi.fn()
         const Component = shallowMount(MockComponent, {
             props: {
                 'onComponent-event': existingHandler
@@ -266,7 +269,7 @@ describe('BSlotComponent', () => {
                 default: slot
             }
         })
-        const spyOnRefresh = jest.spyOn(BSlotComponent.methods, 'refresh').mockImplementation(() => {})
+        const spyOnRefresh = vi.spyOn(BSlotComponent.methods as BSlotComponentInstance, 'refresh').mockImplementation(() => {})
         const wrapper = shallowMount(BSlotComponent, {
             props: {
                 component: Component.vm,
