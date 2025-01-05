@@ -1,5 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
-import BImage from '@components/image/Image'
+import { afterAll, beforeEach, describe, expect, it, vi } from 'vitest'
+import BImage from './Image.vue'
 
 const snapshotOptions = {
     global: {
@@ -11,7 +12,7 @@ const snapshotOptions = {
 }
 
 describe('BImage', () => {
-    const originalClientWidth = Object.getOwnPropertyDescriptor(Element.prototype, 'clientWidth')
+    const originalClientWidth = Object.getOwnPropertyDescriptor(Element.prototype, 'clientWidth')!
     const clientWidth = 500
     beforeEach(() => {
         Object.defineProperty(Element.prototype, 'clientWidth', { configurable: true, value: clientWidth })
@@ -122,7 +123,7 @@ describe('BImage', () => {
 
         srcset = `${baseName}-200${webpFallback} 200w,${baseName}-500${webpFallback} 500w`
         await wrapper.setProps({
-            srcset: null,
+            srcset: undefined,
             srcsetSizes: [200, 500]
         })
         expect(vm.computedSrcset).toBe(srcset)
@@ -158,7 +159,7 @@ describe('BImage', () => {
             ratio
         })
         expect(vm.imgClasses['has-ratio']).toBeTruthy()
-        expect(vm.figureStyles.paddingTop).toBe(`${8 / 16 * 100}%`)
+        expect(vm.figureStyles?.paddingTop).toBe(`${8 / 16 * 100}%`)
     })
 
     it('adds custom class to image as expected', () => {
@@ -176,7 +177,7 @@ describe('BImage', () => {
     })
 
     it('reset events before destroy', () => {
-        window.removeEventListener = jest.fn()
+        window.removeEventListener = vi.fn()
 
         const wrapper = shallowMount(BImage)
         wrapper.unmount()

@@ -23,15 +23,23 @@
     </section>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BField, BImage, BSwitch } from '@ntohq/buefy-next'
+
     const buefyLogo = new URL('/src/assets/buefy.png', import.meta.url).href
 
-    export default {
+    export default defineComponent({
+        components: {
+            BField,
+            BImage,
+            BSwitch
+        },
         data() {
             return {
                 rounded: false,
                 buefyLogo,
             }
         }
-    }
+    })
 </script>

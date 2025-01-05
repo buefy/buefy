@@ -19,20 +19,26 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BImage } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BImage
+        },
         data() {
             return {
-                events: [],
+                events: [] as string[],
             }
         },
         methods: {
-            onLoad(event, src) {
+            onLoad(event: Event, src?: string) {
                 this.events.push(`${src} loaded`)
             },
-            onError(event, src) {
+            onError(event: Event, src?: string) {
                 this.events.push(`${src} fails to load`)
             }
         }
-    }
+    })
 </script>

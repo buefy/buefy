@@ -26,6 +26,10 @@
     </section>
 </template>
 
+<script setup lang="ts">
+import { BImage, BSkeleton } from '@ntohq/buefy-next'
+</script>
+
 <style scoped>
 /* >>> and /deep/ are deprecated on Vue 3.
  * https://github.com/vuejs/rfcs/blob/master/active-rfcs/0023-scoped-styles-changes.md

@@ -42,7 +42,6 @@ const JS_COMPONENTS = [
     'dropdown',
     'field',
     'icon',
-    'image',
     'input',
     'loading',
     'menu',
