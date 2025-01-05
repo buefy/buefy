@@ -31,6 +31,10 @@
     </section>
 </template>
 
+<script setup lang="ts">
+import { BCollapse, BIcon } from '@ntohq/buefy-next'
+</script>
+
 <style scoped>
     .content {
         margin-bottom: 0 !important;

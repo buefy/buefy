@@ -1,0 +1,10 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BCollapse > default > render correctly 1`] = `
+"<div class=\\"collapse\\">
+  <div class=\\"collapse-trigger\\"></div>
+  <transition-stub name=\\"fade\\" appear=\\"false\\" persisted=\\"false\\" css=\\"true\\">
+    <div class=\\"collapse-content\\" id=\\"\\"></div>
+  </transition-stub>
+</div>"
+`;

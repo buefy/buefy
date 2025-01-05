@@ -40,12 +40,19 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BButton, BCollapse } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BButton,
+            BCollapse
+        },
         data() {
             return {
                 isOpen: true
             }
         }
-    }
+    })
 </script>

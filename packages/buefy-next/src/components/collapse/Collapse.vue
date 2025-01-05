@@ -1,7 +1,17 @@
-<script>
-import { h as createElement, Transition, vShow, withDirectives } from 'vue'
+<script lang="ts">
+import {
+    defineComponent,
+    h as createElement,
+    Transition,
+    vShow,
+    withDirectives
+} from 'vue'
+import type { PropType } from 'vue'
 
-export default {
+export const COLLAPSE_POSITIONS = ['is-top', 'is-bottom'] as const
+export type CollapsePosition = typeof COLLAPSE_POSITIONS[number]
+
+export default defineComponent({
     name: 'BCollapse',
     props: {
         modelValue: {
@@ -17,17 +27,19 @@ export default {
             default: ''
         },
         position: {
-            type: String,
+            type: String as PropType<CollapsePosition>,
             default: 'is-top',
-            validator(value) {
-                return [
-                    'is-top',
-                    'is-bottom'
-                ].indexOf(value) > -1
+            validator(value: CollapsePosition) {
+                return COLLAPSE_POSITIONS.indexOf(value) > -1
             }
         }
     },
-    emits: ['close', 'open', 'update:modelValue'],
+    emits: {
+        close: () => true,
+        open: () => true,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        'update:modelValue': (_value: boolean) => true
+    },
     data() {
         return {
             isOpen: this.modelValue
@@ -39,13 +51,13 @@ export default {
         }
     },
     methods: {
-        /**
+        /*
         * Toggle and emit events
         */
         toggle() {
             this.isOpen = !this.isOpen
             this.$emit('update:modelValue', this.isOpen)
-            this.$emit(this.isOpen ? 'open' : 'close')
+            this.isOpen ? this.$emit('open') : this.$emit('close')
         }
     },
     render() {
@@ -82,5 +94,5 @@ export default {
             this.position === 'is-top' ? [trigger, content] : [content, trigger]
         )
     }
-}
+})
 </script>

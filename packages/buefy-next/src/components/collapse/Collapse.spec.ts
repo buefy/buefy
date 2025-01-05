@@ -1,7 +1,9 @@
+import { beforeEach, describe, expect, it } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
-import BCollapse from '@components/collapse/Collapse'
+import type { VueWrapper } from '@vue/test-utils'
+import BCollapse from '@components/collapse/Collapse.vue'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BCollapse>>
 
 describe('BCollapse', () => {
     describe('default', () => {
