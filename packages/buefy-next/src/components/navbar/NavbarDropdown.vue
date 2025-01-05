@@ -40,11 +40,13 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+
 import clickOutside from '../../directives/clickOutside'
 import CompatFallthroughMixin from '../../utils/CompatFallthroughMixin'
 
-export default {
+export default defineComponent({
     name: 'BNavbarDropdown',
     directives: {
         clickOutside
@@ -67,7 +69,10 @@ export default {
             default: 'a'
         }
     },
-    emits: ['active-change'],
+    emits: {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        'active-change': (_active: boolean) => true
+    },
     data() {
         return {
             newActive: this.active,
@@ -91,7 +96,7 @@ export default {
         showMenu() {
             this.newActive = true
         },
-        /**
+        /*
         * See naming convetion of navbaritem
         */
         closeMenu() {
@@ -106,5 +111,5 @@ export default {
             }
         }
     }
-}
+})
 </script>

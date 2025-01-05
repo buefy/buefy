@@ -1,0 +1,3 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BNavbarBurger > render correctly 1`] = `"<a role=\\"button\\" class=\\"navbar-burger burger\\" aria-label=\\"menu\\" tabindex=\\"0\\"><span aria-hidden=\\"true\\"></span><span aria-hidden=\\"true\\"></span><span aria-hidden=\\"true\\"></span></a>"`;

@@ -1,19 +1,25 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { defineComponent } from 'vue'
 import { mount, shallowMount } from '@vue/test-utils'
-import BNavbarItem from '@components/navbar/NavbarItem'
+import type { VueWrapper } from '@vue/test-utils'
+import BNavbarItem from '@components/navbar/NavbarItem.vue'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BNavbarItem>>
 
-const stubBNavBar = {
+const stubBNavBar = defineComponent({
     data() {
         return {
             _isNavBar: true
         }
     },
+    methods: {
+        closeMenu: vi.fn()
+    },
     template: `
         <div>
             <slot />
         </div>`
-}
+})
 
 describe('BNavbarItem', () => {
     const tag = 'div'
@@ -36,7 +42,7 @@ describe('BNavbarItem', () => {
     })
 
     it('emit event from tag and out', async () => {
-        const testStub = jest.fn()
+        const testStub = vi.fn()
 
         const emitWrap = shallowMount(BNavbarItem, {
             props: {
@@ -60,11 +66,12 @@ describe('BNavbarItem', () => {
                 default: BNavbarItem
             }
         }).findComponent(BNavbarItem)
-        wrapper.vm.$parent.closeMenu = jest.fn()
+        stubBNavBar.methods!.closeMenu.mockClear()
         const event = new KeyboardEvent('keyup', { key: 'Escape' })
         wrapper.vm.keyPress({})
         wrapper.vm.keyPress(event)
-        expect(wrapper.vm.$parent.closeMenu).toHaveBeenCalledTimes(1)
+        expect(stubBNavBar.methods!.closeMenu).toHaveBeenCalledTimes(1)
+        stubBNavBar.methods!.closeMenu.mockClear()
     })
 
     it('manage click as expected', () => {
@@ -73,12 +80,13 @@ describe('BNavbarItem', () => {
                 default: BNavbarItem
             }
         }).findComponent(BNavbarItem)
-        wrapper.vm.$parent.closeMenu = jest.fn()
+        stubBNavBar.methods!.closeMenu.mockClear()
         const event = new MouseEvent('click')
         wrapper.vm.handleClickEvent({
             ...event,
             target: { localName: 'a' }
         })
-        expect(wrapper.vm.$parent.closeMenu).toHaveBeenCalledTimes(1)
+        expect(stubBNavBar.methods!.closeMenu).toHaveBeenCalledTimes(1)
+        stubBNavBar.methods!.closeMenu.mockClear()
     })
 })

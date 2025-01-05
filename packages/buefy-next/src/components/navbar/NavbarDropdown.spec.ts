@@ -1,7 +1,9 @@
+import { beforeEach, describe, expect, it } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
-import BNavbarDropdown from '@components/navbar/NavbarDropdown'
+import type { VueWrapper } from '@vue/test-utils'
+import BNavbarDropdown from '@components/navbar/NavbarDropdown.vue'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BNavbarDropdown>>
 
 describe('BNavbarDropdown', () => {
     beforeEach(() => {

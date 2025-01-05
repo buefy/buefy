@@ -44,7 +44,6 @@ const JS_COMPONENTS = [
     'menu',
     'message',
     'modal',
-    'navbar',
     'notification',
     'numberinput',
     'pagination',

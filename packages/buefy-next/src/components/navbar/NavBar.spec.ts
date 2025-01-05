@@ -1,8 +1,10 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import BNavbar from '@components/navbar/Navbar'
+import type { VueWrapper } from '@vue/test-utils'
+import BNavbar from '@components/navbar/Navbar.vue'
 
 describe('BNavbar', () => {
-    let wrapper
+    let wrapper: VueWrapper<InstanceType<typeof BNavbar>>
     beforeEach(() => {
         wrapper = mount(BNavbar)
     })
@@ -46,7 +48,7 @@ describe('BNavbar', () => {
     })
 
     it('manage closing the menu as expected', async () => {
-        wrapper.vm.emitUpdateParentEvent = jest.fn()
+        wrapper.vm.emitUpdateParentEvent = vi.fn()
 
         await wrapper.setProps({
             modelValue: true,
@@ -65,7 +67,7 @@ describe('BNavbar', () => {
     })
 
     it('set body classes as expected', async () => {
-        wrapper.vm.setBodyClass = jest.fn(() => wrapper.vm.setBodyClass)
+        wrapper.vm.setBodyClass = vi.fn(() => wrapper.vm.setBodyClass)
 
         await wrapper.setProps({ fixedTop: true })
         expect(wrapper.vm.setBodyClass).toHaveBeenCalled()

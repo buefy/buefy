@@ -1,8 +1,10 @@
+import { beforeEach, describe, expect, it } from 'vitest'
 import { shallowMount, mount } from '@vue/test-utils'
-import BNavbarBurger from '@components/navbar/NavbarBurger'
+import type { VueWrapper } from '@vue/test-utils'
+import BNavbarBurger from '@components/navbar/NavbarBurger.vue'
 
 describe('BNavbarBurger', () => {
-    let wrapper
+    let wrapper: VueWrapper<InstanceType<typeof BNavbarBurger>>
     beforeEach(() => {
         wrapper = shallowMount(BNavbarBurger)
     })
