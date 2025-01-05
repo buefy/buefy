@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`BCheckbox render correctly 1`] = `
-<label class="b-checkbox checkbox">
-  <!-- Checkbox needs to listen for a space event instead of a just a
-             click and enter event so that that using the keyboard spacebar will also
-             trigger the checkbox change in the b-table --><input id="" type="checkbox" autocomplete="on" true-value="true" false-value="false" value="false"><span class="check"></span><span class="control-label"></span>
-</label>
-`;

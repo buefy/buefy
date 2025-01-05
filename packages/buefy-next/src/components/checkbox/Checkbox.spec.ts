@@ -1,7 +1,9 @@
 import { shallowMount } from '@vue/test-utils'
-import BCheckbox from '@components/checkbox/Checkbox'
+import type { VueWrapper } from '@vue/test-utils'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import BCheckbox from '@components/checkbox/Checkbox.vue'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BCheckbox>>
 
 describe('BCheckbox', () => {
     beforeEach(() => {
@@ -29,12 +31,10 @@ describe('BCheckbox', () => {
         expect(valueEmitted).toContainEqual(false)
     })
 
-    it('method focus() gives focus to the input element', (done) => {
-        wrapper.vm.$refs.input.focus = jest.fn()
+    it('method focus() gives focus to the input element', async () => {
+        (wrapper.vm.$refs.input as HTMLElement).focus = vi.fn()
         wrapper.vm.focus()
-        wrapper.vm.$nextTick(() => {
-            expect(wrapper.vm.$refs.input.focus).toHaveBeenCalled()
-            done()
-        })
+        await wrapper.vm.$nextTick()
+        expect((wrapper.vm.$refs.input as HTMLElement).focus).toHaveBeenCalled()
     })
 })

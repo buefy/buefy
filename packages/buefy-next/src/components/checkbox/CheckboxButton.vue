@@ -9,7 +9,7 @@
             }]"
             :disabled="disabledOrUndefined"
             @click="focus"
-            @keydown.prevent.enter="$refs.label.click()"
+            @keydown.prevent.enter="($refs.label as HTMLElement).click()"
         >
             <slot />
             <input
@@ -28,10 +28,11 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 import CheckRadioMixin from '../../utils/CheckRadioMixin'
 
-export default {
+export default defineComponent({
     name: 'BCheckboxButton',
     mixins: [CheckRadioMixin],
     props: {
@@ -54,5 +55,5 @@ export default {
             return this.newValue === this.nativeValue
         }
     }
-}
+})
 </script>

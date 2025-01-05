@@ -34,7 +34,6 @@ const JS_COMPONENTS = [
     'breadcrumb',
     'button',
     'carousel',
-    'checkbox',
     'clockpicker',
     'colorpicker',
     'datepicker',

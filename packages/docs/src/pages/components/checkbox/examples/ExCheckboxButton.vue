@@ -33,12 +33,19 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BCheckboxButton, BIcon } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BCheckboxButton,
+            BIcon
+        },
         data() {
             return {
                 checkboxGroup: []
             }
         }
-    }
+    })
 </script>
