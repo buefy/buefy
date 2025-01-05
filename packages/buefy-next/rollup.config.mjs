@@ -49,7 +49,6 @@ const JS_COMPONENTS = [
     'progress',
     'rate',
     'select',
-    'sidebar',
     'slider',
     'snackbar',
     'steps',

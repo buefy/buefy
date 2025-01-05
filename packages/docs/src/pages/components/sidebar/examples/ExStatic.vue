@@ -63,8 +63,28 @@
     </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import {
+  BField,
+  BMenu,
+  BMenuItem,
+  BMenuList,
+  BSelect,
+  BSidebar,
+  BSwitch
+} from '@ntohq/buefy-next'
+
+export default defineComponent({
+  components: {
+    BField,
+    BMenu,
+    BMenuItem,
+    BMenuList,
+    BSelect,
+    BSidebar,
+    BSwitch
+  },
   data() {
     return {
       expandOnHover: false,
@@ -73,7 +93,7 @@ export default {
       reduce: false
     };
   }
-};
+})
 </script>
 
 <style lang="scss">

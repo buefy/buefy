@@ -1,7 +1,9 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
-import BSidebar from '@components/sidebar/Sidebar'
+import type { VueWrapper } from '@vue/test-utils'
+import BSidebar from '@components/sidebar/Sidebar.vue'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BSidebar>>
 
 describe('BSidebar', () => {
     beforeEach(() => {
@@ -47,7 +49,7 @@ describe('BSidebar', () => {
         it('close on cancel', async () => {
             await wrapper.setProps({ canCancel: true })
             wrapper.vm.isOpen = true
-            wrapper.vm.close = jest.fn(() => wrapper.vm.close)
+            wrapper.vm.close = vi.fn(() => wrapper.vm.close)
             wrapper.vm.cancel('outside')
 
             await wrapper.setProps({ canCancel: false })
@@ -58,7 +60,7 @@ describe('BSidebar', () => {
 
         it('close on escape', async () => {
             await wrapper.setProps({ modelValue: true })
-            wrapper.vm.cancel = jest.fn(() => wrapper.vm.cancel)
+            wrapper.vm.cancel = vi.fn(() => wrapper.vm.cancel)
             const event = new KeyboardEvent('keyup', { key: 'Escape' })
             wrapper.vm.keyPress({})
             wrapper.vm.keyPress(event)
@@ -79,7 +81,7 @@ describe('BSidebar', () => {
     const component = document.createElement('div')
     describe('with a container', () => {
         beforeEach(() => {
-            component.appendChild = jest.fn()
+            component.appendChild = vi.fn()
             wrapper = shallowMount(BSidebar, {
                 props: {
                     container: component
@@ -95,7 +97,7 @@ describe('BSidebar', () => {
     })
 
     it('reset events before destroy', () => {
-        document.removeEventListener = jest.fn()
+        document.removeEventListener = vi.fn()
 
         wrapper.unmount()
 
