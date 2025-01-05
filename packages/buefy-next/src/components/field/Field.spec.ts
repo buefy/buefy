@@ -1,7 +1,12 @@
 import { shallowMount, mount } from '@vue/test-utils'
-import BField from '@components/field/Field'
-import BFieldBody from '@components/field/FieldBody'
-import BInput from '@components/input/Input'
+import type { ComponentMountingOptions, VueWrapper } from '@vue/test-utils'
+import { beforeEach, describe, expect, it } from 'vitest'
+import BField from '@components/field/Field.vue'
+import type { FieldMessageProp } from '@components/field/Field.vue'
+import BFieldBody from '@components/field/FieldBody.vue'
+import BInput from '@components/input/Input.vue'
+
+type BFieldInstance = InstanceType<typeof BField>
 
 const components = {
     'b-field': BField,
@@ -53,7 +58,10 @@ describe('BField', () => {
     })
 
     describe('Passing a message prop', () => {
-        const generateMountOptions = ({ message, slot }) => {
+        // `slot` may be a template string
+        const generateMountOptions = (
+            { message, slot }: { message: FieldMessageProp, slot?: string }
+        ) => {
             return {
                 props: { message },
                 slots: {
@@ -219,7 +227,7 @@ describe('BField', () => {
     })
 
     describe('Passing true for horizontal prop', () => {
-        const generateMountOptions = (props) => {
+        const generateMountOptions = (props?: ComponentMountingOptions<BFieldInstance>['props']) => {
             return {
                 props: {
                     horizontal: true,
@@ -264,7 +272,7 @@ describe('BField', () => {
     })
 
     describe('with grouped and horizontal true', () => {
-        let wrapper
+        let wrapper: VueWrapper<BFieldInstance>
 
         beforeEach(() => {
             wrapper = mount(BField, {
@@ -291,7 +299,7 @@ describe('BField', () => {
         })
 
         describe('when validation fails', () => {
-            let childFields
+            let childFields: VueWrapper<BFieldInstance>[]
 
             beforeEach(async () => {
                 await wrapper.setData({

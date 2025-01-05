@@ -39,7 +39,6 @@ const JS_COMPONENTS = [
     'datetimepicker',
     'dialog',
     'dropdown',
-    'field',
     'icon',
     'input',
     'menu',

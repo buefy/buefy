@@ -65,16 +65,38 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
+
 import config from '../../utils/config'
 import { isTag } from '../../utils/helpers'
-import FieldBody from './FieldBody.vue'
+import BFieldBody from './FieldBody.vue'
 
-export default {
+/**
+ * Type of the `type` prop of `BField`.
+ *
+ * @public
+ */
+export type FieldTypeProp = string | Record<string, boolean>
+
+/**
+ * Type of individual message items in the `message` prop of `BField`.
+ *
+ * @public
+ */
+export type FieldMessagePropItem = string | Record<string, string>
+
+/**
+ * Type of the `message` prop of `BField`.
+ *
+ * @public
+ */
+export type FieldMessageProp = FieldMessagePropItem | FieldMessagePropItem[]
+
+const Field = defineComponent({
     name: 'BField',
-    components: {
-        [FieldBody.name]: FieldBody
-    },
+    components: { BFieldBody },
     provide() {
         return {
             BField: this
@@ -87,10 +109,16 @@ export default {
         }
     }, // Used internally only when using Field in Field
     props: {
-        type: [String, Object],
+        type: {
+            type: [String, Object] as PropType<FieldTypeProp>,
+            default: undefined
+        },
         label: String,
         labelFor: String,
-        message: [String, Array, Object],
+        message: {
+            type: [String, Array, Object] as PropType<FieldMessageProp>,
+            default: undefined
+        },
         grouped: Boolean,
         groupMultiline: Boolean,
         position: String,
@@ -108,10 +136,10 @@ export default {
     },
     data() {
         return {
-            newType: this.type,
-            newMessage: this.message,
-            fieldLabelSize: null,
-            numberInputClasses: [],
+            newType: this.type as FieldTypeProp | null,
+            newMessage: this.message as FieldMessageProp | null,
+            fieldLabelSize: null as string | null,
+            numberInputClasses: [] as string[],
             _isField: true // Used internally by Input and Select
         }
     },
@@ -139,7 +167,7 @@ export default {
         hasInnerField() {
             return this.grouped || this.groupMultiline || this.hasAddons()
         },
-        /**
+        /*
         * Correct Bulma class for the side of the addon or group.
         *
         * This is not kept like the others (is-small, etc.),
@@ -159,12 +187,13 @@ export default {
             if (this.position) return prefix + position[1]
             return undefined
         },
-        /**
+        /*
         * Formatted message in case it's an array
         * (each element is separated by <br> tag)
         */
         formattedMessage() {
-            if (this.parent && this.parent.hasInnerField) {
+            const parentField = this.parent as InstanceType<typeof Field> | null
+            if (parentField && parentField.hasInnerField) {
                 return '' // Message will be displayed in parent field
             }
             if (typeof this.newMessage === 'string') {
@@ -196,19 +225,20 @@ export default {
             return this.label || this.$slots.label
         },
         hasMessage() {
-            return ((!this.parent || !this.parent.hasInnerField) && this.newMessage) ||
+            const parentField = this.parent as InstanceType<typeof Field> | null
+            return ((!parentField || !parentField.hasInnerField) && this.newMessage) ||
                 this.$slots.message
         }
     },
     watch: {
-        /**
+        /*
         * Set internal type when prop change.
         */
         type(value) {
             this.newType = value
         },
 
-        /**
+        /*
         * Set internal message when prop change.
         */
         message(value) {
@@ -222,22 +252,23 @@ export default {
             }
         },
 
-        /**
+        /*
         * Set parent message if we use Field in Field.
         */
         newMessage(value) {
-            if (this.parent && this.parent.hasInnerField) {
-                if (!this.parent.type) {
-                    this.parent.newType = this.newType
+            const parentField = this.parent as InstanceType<typeof Field> | null
+            if (parentField && parentField.hasInnerField) {
+                if (!parentField.type) {
+                    parentField.newType = this.newType
                 }
-                if (!this.parent.message) {
-                    this.parent.newMessage = value
+                if (!parentField.message) {
+                    parentField.newMessage = value
                 }
             }
         }
     },
     methods: {
-        /**
+        /*
         * Field has addons if there are more than one slot
         * (element / component) in the Field.
         * Or is grouped when prop is set.
@@ -259,7 +290,7 @@ export default {
             )
         },
         // called by a number input if it is a direct child.
-        wrapNumberinput({ controlsPosition, size }) {
+        wrapNumberinput({ controlsPosition, size }: { controlsPosition?: string, size?: string }) {
             const classes = ['has-numberinput']
             if (controlsPosition) {
                 classes.push(`has-numberinput-${controlsPosition}`)
@@ -279,6 +310,7 @@ export default {
             }
         }
     }
-}
+})
 
+export default Field
 </script>

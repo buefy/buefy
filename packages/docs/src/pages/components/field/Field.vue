@@ -97,48 +97,59 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
+
+    import { shallowFields } from '@/utils'
+    import ApiView from '@/components/ApiView.vue'
+    import Example from '@/components/Example.vue'
+    import VariablesView from '@/components/VariablesView.vue'
+
     import api from './api/field'
     import variables from './variables/field'
-    import { shallowFields } from '@/utils'
 
-    import ExSimple from './examples/ExSimple'
+    import ExSimple from './examples/ExSimple.vue'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
 
-    import ExObjectSyntax from './examples/ExObjectSyntax'
+    import ExObjectSyntax from './examples/ExObjectSyntax.vue'
     import ExObjectSyntaxCode from './examples/ExObjectSyntax.vue?raw'
 
-    import ExAddons from './examples/ExAddons'
+    import ExAddons from './examples/ExAddons.vue'
     import ExAddonsCode from './examples/ExAddons.vue?raw'
 
-    import ExGroups from './examples/ExGroups'
+    import ExGroups from './examples/ExGroups.vue'
     import ExGroupsCode from './examples/ExGroups.vue?raw'
 
-    import ExGroupExpanded from './examples/ExGroupExpanded'
+    import ExGroupExpanded from './examples/ExGroupExpanded.vue'
     import ExGroupExpandedCode from './examples/ExGroupExpanded.vue?raw'
 
-    import ExGroupMultiline from './examples/ExGroupMultiline'
+    import ExGroupMultiline from './examples/ExGroupMultiline.vue'
     import ExGroupMultilineCode from './examples/ExGroupMultiline.vue?raw'
 
-    import ExPositions from './examples/ExPositions'
+    import ExPositions from './examples/ExPositions.vue'
     import ExPositionsCode from './examples/ExPositions.vue?raw'
 
-    import ExCombineAddonsGroups from './examples/ExCombineAddonsGroups'
+    import ExCombineAddonsGroups from './examples/ExCombineAddonsGroups.vue'
     import ExCombineAddonsGroupsCode from './examples/ExCombineAddonsGroups.vue?raw'
 
-    import ExHorizontal from './examples/ExHorizontal'
+    import ExHorizontal from './examples/ExHorizontal.vue'
     import ExHorizontalCode from './examples/ExHorizontal.vue?raw'
 
-    import ExCustomClass from './examples/ExCustomClass'
+    import ExCustomClass from './examples/ExCustomClass.vue'
     import ExCustomClassCode from './examples/ExCustomClass.vue?raw'
 
-    import ExLabelSlot from './examples/ExLabelSlot'
+    import ExLabelSlot from './examples/ExLabelSlot.vue'
     import ExLabelSlotCode from './examples/ExLabelSlot.vue?raw'
 
-    import ExLabelPosition from './examples/ExLabelPosition'
+    import ExLabelPosition from './examples/ExLabelPosition.vue'
     import ExLabelPositionCode from './examples/ExLabelPosition.vue?raw'
 
-    export default {
+    export default defineComponent({
+        components: {
+            ApiView,
+            Example,
+            VariablesView
+        },
         data() {
             return {
                 api,
@@ -171,5 +182,5 @@
                 ExLabelPositionCode
             }
         }
-    }
+    })
 </script>

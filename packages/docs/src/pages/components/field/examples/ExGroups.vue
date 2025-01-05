@@ -15,3 +15,7 @@
         </b-field>
     </section>
 </template>
+
+<script setup lang="ts">
+import { BButton, BField, BInput } from '@ntohq/buefy-next'
+</script>

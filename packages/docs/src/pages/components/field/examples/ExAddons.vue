@@ -90,3 +90,14 @@
         </b-field>
     </section>
 </template>
+
+<script setup lang="ts">
+import {
+    BButton,
+    BDropdown,
+    BDropdownItem,
+    BField,
+    BInput,
+    BSelect
+} from '@ntohq/buefy-next'
+</script>

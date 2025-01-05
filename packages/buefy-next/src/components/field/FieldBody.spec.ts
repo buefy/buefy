@@ -1,7 +1,8 @@
 import { shallowMount, mount } from '@vue/test-utils'
-import BFieldBody from '@components/field/FieldBody'
-import BField from '@components/field/Field'
-import BInput from '@components/input/Input'
+import { describe, expect, it } from 'vitest'
+import BFieldBody from '@components/field/FieldBody.vue'
+import BField from '@components/field/Field.vue'
+import BInput from '@components/input/Input.vue'
 
 describe('BFieldBody', () => {
     it('is called', () => {

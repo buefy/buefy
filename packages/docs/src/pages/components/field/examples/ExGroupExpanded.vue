@@ -14,3 +14,7 @@
         </b-field>
     </b-field>
 </template>
+
+<script setup lang="ts">
+import { BField, BInput, BSelect } from '@ntohq/buefy-next'
+</script>
