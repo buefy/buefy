@@ -1,7 +1,23 @@
-<script>
+<script lang="ts">
 import { h as createElement } from 'vue'
+import type { DefineComponent } from 'vue'
 
-const BSkeleton = (props) => {
+const SKELETON_POSITIONS = ['', 'is-centered', 'is-right']
+type SkeletonPosition = typeof SKELETON_POSITIONS[number]
+
+export interface SkeletonProps {
+    active: boolean
+    animated: boolean
+    width?: number | string
+    height?: number | string
+    circle?: boolean
+    rounded: boolean
+    count: number
+    position: SkeletonPosition
+    size?: string
+}
+
+const BSkeleton = (props: SkeletonProps) => {
     if (!props.active) return
     const items = []
     const width = props.width
@@ -16,10 +32,10 @@ const BSkeleton = (props) => {
             style: {
                 height: height === undefined
                     ? null
-                    : (isNaN(height) ? height : height + 'px'),
+                    : (isNaN(+height) ? height : height + 'px'),
                 width: width === undefined
                     ? null
-                    : (isNaN(width) ? width : width + 'px'),
+                    : (isNaN(+width) ? width : width + 'px'),
                 borderRadius: props.circle ? '50%' : null
             }
         }))
@@ -61,16 +77,22 @@ BSkeleton.props = {
     position: {
         type: String,
         default: '',
-        validator(value) {
-            return [
-                '',
-                'is-centered',
-                'is-right'
-            ].indexOf(value) > -1
+        validator(value: SkeletonPosition) {
+            return SKELETON_POSITIONS.indexOf(value) > -1
         }
     },
     size: String
 }
 
-export default BSkeleton
+/* eslint-disable @typescript-eslint/ban-types */
+// `defineComponent(BSkeleton)` did not work.
+// forcefully casting as `DefineComponent` is the only way I came up with to
+// type a functional component
+export default BSkeleton as unknown as DefineComponent<
+    typeof BSkeleton.props, // P(rops)
+    {}, // B (raw bindings)
+    {}, // D(ata)
+    {} // C(omputed). default `ComputedOptions` did not work
+>
+/* eslint-enable @typescript-eslint/ban-types */
 </script>
