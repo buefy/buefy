@@ -1,8 +1,13 @@
 import { transformVNodeArgs } from 'vue'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import type { Mock, MockInstance } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
+import type { VueWrapper } from '@vue/test-utils'
 import { BLoading, LoadingProgrammatic } from '@components/loading'
 
-let wrapper
+type LoadingProgrammaticInstance = ReturnType<typeof LoadingProgrammatic.prototype.open>
+
+let wrapper: VueWrapper<InstanceType<typeof BLoading>>
 
 describe('BLoading', () => {
     beforeEach(() => {
@@ -37,7 +42,7 @@ describe('BLoading', () => {
         it('close on cancel', async () => {
             await wrapper.setProps({ canCancel: true })
             await wrapper.setData({ isActive: true })
-            wrapper.vm.close = jest.fn()
+            wrapper.vm.close = vi.fn()
             wrapper.vm.cancel()
             await wrapper.vm.$nextTick()
             expect(wrapper.vm.close).toHaveBeenCalled()
@@ -45,9 +50,9 @@ describe('BLoading', () => {
 
         it('close on escape', async () => {
             await wrapper.setData({ isActive: true })
-            wrapper.vm.cancel = jest.fn(() => wrapper.vm.cancel)
+            wrapper.vm.cancel = vi.fn(() => wrapper.vm.cancel)
             const event = new KeyboardEvent('keyup', { key: 'Escape' })
-            wrapper.vm.keyPress({})
+            wrapper.vm.keyPress({} as KeyboardEvent)
             wrapper.vm.keyPress(event)
             expect(wrapper.vm.cancel).toHaveBeenCalledTimes(1)
         })
@@ -60,28 +65,28 @@ describe('BLoading', () => {
     })
 
     describe('programmatic without container', () => {
-        let loading
-        let onClose
-        let spyOnAppendChild
+        let loading: LoadingProgrammaticInstance
+        let onClose: Mock
+        let spyOnAppendChild: MockInstance
 
         beforeEach(async () => {
             // resets stubs introduced by @vue/test-utils
             // otherwise, every BLoading becomes a stub
             transformVNodeArgs()
 
-            onClose = jest.fn()
-            spyOnAppendChild = jest.spyOn(window.document.body, 'appendChild')
+            onClose = vi.fn()
+            spyOnAppendChild = vi.spyOn(window.document.body, 'appendChild')
             loading = new LoadingProgrammatic().open({ onClose })
             await loading.$nextTick() // makes sure DOM is updated
         })
 
         afterEach(() => {
             spyOnAppendChild.mockRestore()
-            jest.useFakeTimers()
+            vi.useFakeTimers()
             loading.close()
             // subsequent tests will fail unless we wait for the timeout
-            jest.advanceTimersByTime(150)
-            jest.useRealTimers()
+            vi.advanceTimersByTime(150)
+            vi.useRealTimers()
         })
 
         it('Is called', () => {
@@ -94,23 +99,23 @@ describe('BLoading', () => {
         })
 
         it('manage close', async () => {
-            jest.useFakeTimers()
-            jest.spyOn(global, 'setTimeout')
+            vi.useFakeTimers()
+            vi.spyOn(global, 'setTimeout')
 
             loading.close()
             expect(onClose).toHaveBeenCalled()
             expect(window.document.querySelector('.loading-overlay')).toBeTruthy()
             expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 150)
 
-            jest.advanceTimersByTime(150)
+            vi.advanceTimersByTime(150)
             expect(window.document.querySelector('.loading-overlay')).toBeFalsy()
         })
     })
 
     describe('programmatic with a container', () => {
-        let loading
-        let container
-        let spyOnAppendChild
+        let loading: LoadingProgrammaticInstance
+        let container: HTMLElement
+        let spyOnAppendChild: MockInstance
 
         beforeEach(async () => {
             // resets stubs introduced by @vue/test-utils
@@ -118,7 +123,7 @@ describe('BLoading', () => {
             transformVNodeArgs()
 
             container = document.createElement('div')
-            spyOnAppendChild = jest.spyOn(container, 'appendChild')
+            spyOnAppendChild = vi.spyOn(container, 'appendChild')
             loading = new LoadingProgrammatic().open({
                 container
             })
@@ -127,11 +132,11 @@ describe('BLoading', () => {
 
         afterEach(() => {
             spyOnAppendChild.mockRestore()
-            jest.useFakeTimers()
+            vi.useFakeTimers()
             loading.close()
             // subsequent tests may fail unless we wait for the timeout
-            jest.advanceTimersByTime(150)
-            jest.useRealTimers()
+            vi.advanceTimersByTime(150)
+            vi.useRealTimers()
         })
 
         it('Is called', () => {

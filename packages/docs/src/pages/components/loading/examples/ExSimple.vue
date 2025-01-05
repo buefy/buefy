@@ -17,8 +17,18 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BButton, BField, BLoading, BNotification, BSwitch } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BButton,
+            BField,
+            BLoading,
+            BNotification,
+            BSwitch
+        },
         data() {
             return {
                 isLoading: false,
@@ -33,5 +43,5 @@
                 }, 10 * 1000)
             }
         }
-    }
+    })
 </script>

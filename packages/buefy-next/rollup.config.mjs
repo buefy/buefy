@@ -43,7 +43,6 @@ const JS_COMPONENTS = [
     'field',
     'icon',
     'input',
-    'loading',
     'menu',
     'message',
     'modal',

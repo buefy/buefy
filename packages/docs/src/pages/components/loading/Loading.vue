@@ -25,21 +25,32 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
+
+    import { shallowFields } from '@/utils'
+    import ApiView from '@/components/ApiView.vue'
+    import Example from '@/components/Example.vue'
+    import VariablesView from '@/components/VariablesView.vue'
+
     import api from './api/loading'
     import variables from './variables/loading'
-    import { shallowFields } from '@/utils'
 
-    import ExSimple from './examples/ExSimple'
+    import ExSimple from './examples/ExSimple.vue'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
 
-    import ExProgrammatically from './examples/ExProgrammatically'
+    import ExProgrammatically from './examples/ExProgrammatically.vue'
     import ExProgrammaticallyCode from './examples/ExProgrammatically.vue?raw'
 
-    import ExTemplated from './examples/ExTemplated'
+    import ExTemplated from './examples/ExTemplated.vue'
     import ExTemplatedCode from './examples/ExTemplated.vue?raw'
 
-    export default {
+    export default defineComponent({
+        components: {
+            ApiView,
+            Example,
+            VariablesView
+        },
         data() {
             return {
                 api,
@@ -54,5 +65,5 @@
                 ExTemplatedCode
             }
         }
-    }
+    })
 </script>
