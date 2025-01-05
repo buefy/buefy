@@ -20,14 +20,21 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BButton, BTooltip } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BButton,
+            BTooltip
+        },
         data() {
             return {
                 active: true
             }
         }
-    }
+    })
 </script>
 
 <style lang="scss" scoped>

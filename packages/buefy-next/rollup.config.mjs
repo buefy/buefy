@@ -63,7 +63,6 @@ const JS_COMPONENTS = [
     'taginput',
     'timepicker',
     'toast',
-    'tooltip',
     'upload',
 ]
 

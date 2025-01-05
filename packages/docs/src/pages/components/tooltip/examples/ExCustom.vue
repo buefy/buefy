@@ -22,6 +22,10 @@
     </section>
 </template>
 
+<script setup lang="ts">
+import { BButton, BIcon, BTooltip } from '@ntohq/buefy-next'
+</script>
+
 <style lang="scss" scoped>
 .b-tooltips {
     .b-tooltip:not(:last-child) {

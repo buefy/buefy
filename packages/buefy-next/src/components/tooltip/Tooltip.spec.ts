@@ -1,21 +1,24 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import type { MockInstance } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
-import BTooltip from '@components/tooltip/Tooltip'
+import type { VueWrapper } from '@vue/test-utils'
+import BTooltip from '@components/tooltip/Tooltip.vue'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BTooltip>>
 
 describe('BTooltip', () => {
-    let spyOnOnHover
-    let spyOnOnContextMenu
-    let spyOnOnFocus
-    let spyOnOpen
+    let spyOnOnHover: MockInstance
+    let spyOnOnContextMenu: MockInstance
+    let spyOnOnFocus: MockInstance
+    let spyOnOpen: MockInstance
 
     beforeEach(() => {
         // spies on methods before mounting the component
         // because wrapper.vm does not allow spies
-        spyOnOnHover = jest.spyOn(BTooltip.methods, 'onHover')
-        spyOnOnContextMenu = jest.spyOn(BTooltip.methods, 'onContextMenu')
-        spyOnOnFocus = jest.spyOn(BTooltip.methods, 'onFocus')
-        spyOnOpen = jest.spyOn(BTooltip.methods, 'open')
+        spyOnOnHover = vi.spyOn(BTooltip.methods!, 'onHover')
+        spyOnOnContextMenu = vi.spyOn(BTooltip.methods!, 'onContextMenu')
+        spyOnOnFocus = vi.spyOn(BTooltip.methods!, 'onFocus')
+        spyOnOpen = vi.spyOn(BTooltip.methods!, 'open')
         wrapper = shallowMount(BTooltip)
     })
 
@@ -31,7 +34,7 @@ describe('BTooltip', () => {
     it('tests isActive watch', async () => {
         await wrapper.setProps({ appendToBody: true })
         await wrapper.setData({
-            updateAppendToBody: jest.fn(),
+            updateAppendToBody: vi.fn(),
             isActive: true
         })
         expect(wrapper.vm.updateAppendToBody).toHaveBeenCalled()
@@ -47,7 +50,7 @@ describe('BTooltip', () => {
 
     it('tests onContextMenu method', async () => {
         await wrapper.setProps({ triggers: ['contextmenu'] })
-        wrapper.vm.onContextMenu({ preventDefault: jest.fn() })
+        wrapper.vm.onContextMenu({ preventDefault: vi.fn() })
         expect(spyOnOnContextMenu).toHaveBeenCalled()
         expect(spyOnOpen).toHaveBeenCalled()
     })
