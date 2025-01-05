@@ -55,7 +55,7 @@ export default {
     mixins: [CompatFallthroughMixin, FormElementMixin],
     props: {
         modelValue: {
-            type: [String, Number, Boolean, Object, Array, Function, Date],
+            type: [String, Number, Boolean, Object, Array, Function, Date, null],
             default: null
         },
         placeholder: String,

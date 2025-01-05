@@ -40,12 +40,19 @@
     </section>
 </template>
 
-<script>
-export default {
-    data() {
-        return {
-            lightMode: false
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BField, BSwitch } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BField,
+            BSwitch
+        },
+        data() {
+            return {
+                lightMode: false
+            }
         }
-    }
-}
+    })
 </script>

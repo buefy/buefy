@@ -1,0 +1,3 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BSwitch > render correctly 1`] = `"<label class=\\"switch is-rounded\\"><input type=\\"checkbox\\" true-value=\\"true\\" false-value=\\"false\\" value=\\"false\\"><span class=\\"check\\"></span><span class=\\"control-label\\">Control label</span></label>"`;

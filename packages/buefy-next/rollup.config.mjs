@@ -57,7 +57,6 @@ const JS_COMPONENTS = [
     'slider',
     'snackbar',
     'steps',
-    'switch',
     'table',
     'tabs',
     'tag',

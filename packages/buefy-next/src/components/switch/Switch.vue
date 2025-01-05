@@ -5,7 +5,7 @@
         ref="label"
         :disabled="disabledOrUndefined"
         @click="focus"
-        @keydown.prevent.enter="$refs.label.click()"
+        @keydown.prevent.enter="($refs.label as HTMLElement).click() "
         @mousedown="isMouseDown = true"
         @mouseup="isMouseDown = false"
         @mouseout="isMouseDown = false"
@@ -38,17 +38,19 @@
     </label>
 </template>
 
-<script>
+<script lang="ts">
 import config from '../../utils/config'
+import { defineComponent, type PropType } from 'vue'
+import type { ExtractComponentProps } from '../../utils/helpers'
 
-export default {
+const Switch = defineComponent({
     name: 'BSwitch',
     props: {
         modelValue: [String, Number, Boolean, Function, Object, Array, Date],
         nativeValue: [String, Number, Boolean, Function, Object, Array, Date],
         disabled: Boolean,
-        type: String,
-        passiveType: String,
+        type: String as PropType<string | null>,
+        passiveType: String as PropType<string | null>,
         name: String,
         required: Boolean,
         size: String,
@@ -88,7 +90,8 @@ export default {
             get() {
                 return this.newValue
             },
-            set(value) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            set(value: any) {
                 this.newValue = value
                 this.$emit('update:modelValue', value)
             }
@@ -132,8 +135,12 @@ export default {
     methods: {
         focus() {
             // MacOS FireFox and Safari do not focus when clicked
-            this.$refs.input.focus()
+            (this.$refs.input as HTMLElement).focus()
         }
     }
-}
+})
+
+export type SwitchProps = ExtractComponentProps<typeof Switch>
+
+export default Switch
 </script>

@@ -1,7 +1,9 @@
 import { shallowMount } from '@vue/test-utils'
-import BSwitch from '@components/switch/Switch'
+import type { VueWrapper } from '@vue/test-utils'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import BSwitch from '@components/switch/Switch.vue'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BSwitch>>
 
 describe('BSwitch', () => {
     beforeEach(() => {
@@ -43,10 +45,10 @@ describe('BSwitch', () => {
     })
 
     it('method focus() gives focus to the input element', async () => {
-        wrapper.vm.$refs.input.focus = jest.fn()
+        (wrapper.vm.$refs.input as HTMLElement).focus = vi.fn()
         wrapper.vm.focus()
         await wrapper.vm.$nextTick()
-        expect(wrapper.vm.$refs.input.focus).toHaveBeenCalled()
+        expect((wrapper.vm.$refs.input as HTMLElement).focus).toHaveBeenCalled()
     })
 
     it('applies passiveType prop properly', async () => {

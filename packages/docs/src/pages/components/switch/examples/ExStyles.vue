@@ -44,8 +44,17 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BField, BRadio, BSelect, BSwitch } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BField,
+            BRadio,
+            BSelect,
+            BSwitch
+        },
         data() {
             return {
                 size: '',
@@ -56,5 +65,5 @@
                 leftLabel: false,
             }
         }
-    }
+    })
 </script>
