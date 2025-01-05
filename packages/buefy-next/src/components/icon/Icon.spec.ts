@@ -1,5 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
-import BIcon from '@components/icon/Icon'
+import { describe, expect, it } from 'vitest'
+import BIcon from '@components/icon/Icon.vue'
 
 describe('BIcon', () => {
     it('render correctly', () => {
@@ -21,7 +22,10 @@ describe('BIcon', () => {
         })
 
         expect(wrapper.classes()).toContain('icon')
-        expect(wrapper.find('i').classes()).toContain('mdi', 'mdi-eye', 'mdi-24px')
+        const classes = wrapper.find('i').classes()
+        expect(classes).toContain('mdi')
+        expect(classes).toContain('mdi-eye')
+        expect(classes).toContain('mdi-24px')
     })
 
     it('render a colored icon when type is passed', () => {
@@ -68,7 +72,7 @@ describe('BIcon', () => {
         expect(wrapper.find('i').classes()).toContain('mdi-eye')
         await wrapper.setProps({ pack: 'fa' })
 
-        const equivalentIcons = {
+        const equivalentIcons: Record<string, string> = {
             check: 'check',
             information: 'info-circle',
             'check-circle': 'check-circle',
@@ -85,7 +89,7 @@ describe('BIcon', () => {
             other: 'other'
         }
 
-        const expectEquivalentIcon = async (icon, expected) => {
+        const expectEquivalentIcon = async (icon: string, expected: string) => {
             await wrapper.setProps({ icon })
             expect(wrapper.find('i').classes()).toContain(`fa-${expected}`)
         }
@@ -104,7 +108,8 @@ describe('BIcon', () => {
 
         expect(wrapper.find('i').classes()).toContain('mdi-24px')
         await wrapper.setProps({ size: 'is-small' })
-        expect(wrapper.find('i').classes()).toContainEqual('mdi', 'mdi-eye')
+        expect(wrapper.find('i').classes()).toContain('mdi')
+        expect(wrapper.find('i').classes()).toContain('mdi-eye')
         await wrapper.setProps({ size: 'is-medium' })
         expect(wrapper.find('i').classes()).toContain('mdi-36px')
         await wrapper.setProps({ size: 'is-large' })
@@ -120,7 +125,8 @@ describe('BIcon', () => {
             }
         })
 
-        expect(wrapper.find('i').classes()).toContainEqual('fa', 'fa-2x')
+        expect(wrapper.find('i').classes()).toContain('fa')
+        expect(wrapper.find('i').classes()).toContain('fa-2x')
     })
 
     it('render custom classes when customClass property is passed', () => {

@@ -21,7 +21,7 @@
         </b-message>
 
         <div class="example is-paddingless">
-            <CodeView :code="usage | pre" lang="javascript" expanded/>
+            <CodeView :code="preformat(usage)" lang="javascript" expanded/>
         </div>
 
         <Example :component="ExObjectSyntax" :code="ExObjectSyntaxCode" title="Object syntax" vertical>
@@ -45,24 +45,38 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
+
+    import { preformat, shallowFields } from '@/utils'
+    import ApiView from '@/components/ApiView.vue'
+    import CodeView from '@/components/CodeView.vue'
+    import Example from '@/components/Example.vue'
+    import VariablesView from '@/components/VariablesView.vue'
+
     import api from './api/icon'
     import variables from './variables/icon'
-    import { shallowFields } from '@/utils'
+    import usage from './usage.js?raw'
 
-    import ExMdi from './examples/ExMdi'
+    import ExMdi from './examples/ExMdi.vue'
     import ExMdiCode from './examples/ExMdi.vue?raw'
 
-    import ExFa from './examples/ExFa'
+    import ExFa from './examples/ExFa.vue'
     import ExFaCode from './examples/ExFa.vue?raw'
 
-    import ExObjectSyntax from './examples/ExObjectSyntax'
+    import ExObjectSyntax from './examples/ExObjectSyntax.vue'
     import ExObjectSyntaxCode from './examples/ExObjectSyntax.vue?raw'
 
-    import ExCustom from './examples/ExCustom'
+    import ExCustom from './examples/ExCustom.vue'
     import ExCustomCode from './examples/ExCustom.vue?raw'
 
-    export default {
+    export default defineComponent({
+        components: {
+            ApiView,
+            CodeView,
+            Example,
+            VariablesView
+        },
         data() {
             return {
                 api,
@@ -77,27 +91,11 @@
                 ExFaCode,
                 ExObjectSyntaxCode,
                 ExCustomCode,
-                usage: `
-                import { library } from '@fortawesome/fontawesome-svg-core';
-                // internal icons
-                import { faCheck, faCheckCircle, faInfoCircle, faExclamationTriangle, faExclamationCircle,
-                    faArrowUp, faAngleRight, faAngleLeft, faAngleDown,
-                    faEye, faEyeSlash, faCaretDown, faCaretUp, faUpload } from "@fortawesome/free-solid-svg-icons";
-                import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-
-                library.add(faCheck, faCheckCircle, faInfoCircle, faExclamationTriangle, faExclamationCircle,
-                    faArrowUp, faAngleRight, faAngleLeft, faAngleDown,
-                    faEye, faEyeSlash, faCaretDown, faCaretUp, faUpload);
-                Vue.component('vue-fontawesome', FontAwesomeIcon);
-
-                // ...
-
-                import Buefy from 'buefy'
-                Vue.use(Buefy, {
-                  defaultIconComponent: 'vue-fontawesome',
-                  defaultIconPack: 'fas',
-                });`
+                usage
             }
+        },
+        methods: {
+            preformat
         }
-    }
+    })
 </script>

@@ -15,17 +15,22 @@
     </span>
 </template>
 
-<script>
-import config from '../../utils/config'
-import getIcons from '../../utils/icons'
+<script lang="ts">
+import { defineComponent } from 'vue'
 
-export default {
+import config from '../../utils/config'
+import getIcons, { type InternalIconPack } from '../../utils/icons'
+
+export default defineComponent({
     name: 'BIcon',
     props: {
         type: [String, Object],
         component: String,
         pack: String,
-        icon: String,
+        icon: {
+            type: String,
+            required: true
+        },
         size: String,
         customSize: String,
         customClass: String,
@@ -56,7 +61,7 @@ export default {
         newType() {
             if (!this.type) return
 
-            let splitType = []
+            let splitType: string[] = []
             if (typeof this.type === 'string') {
                 splitType = this.type.split('-')
             } else {
@@ -93,19 +98,23 @@ export default {
         /**
         * Equivalent icon name of the MDI.
         */
-        getEquivalentIconOf(value) {
+        getEquivalentIconOf(value: string) {
             // Only transform the class if the both prop is set to true
             if (!this.both) {
                 return value
             }
 
-            if (this.iconConfig &&
-                this.iconConfig.internalIcons &&
-                this.iconConfig.internalIcons[value]) {
-                return this.iconConfig.internalIcons[value]
+            if (this.iconConfig == null) {
+                return value
+            }
+            const maybeInternal = this.iconConfig as Partial<InternalIconPack>
+            if (maybeInternal &&
+                maybeInternal.internalIcons &&
+                maybeInternal.internalIcons[value]) {
+                return maybeInternal.internalIcons[value]
             }
             return value
         }
     }
-}
+})
 </script>
