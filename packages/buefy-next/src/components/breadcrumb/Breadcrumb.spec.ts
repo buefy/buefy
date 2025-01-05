@@ -1,8 +1,10 @@
+import { beforeEach, describe, expect, it } from 'vitest'
 import { shallowMount, mount } from '@vue/test-utils'
-import BBreadcrumb from '@components/breadcrumb/Breadcrumb'
+import type { VueWrapper } from '@vue/test-utils'
+import BBreadcrumb from '@components/breadcrumb/Breadcrumb.vue'
 
 describe('BBreadcrumb', () => {
-    let wrapper
+    let wrapper: VueWrapper<InstanceType<typeof BBreadcrumb>>
 
     beforeEach(() => {
         wrapper = shallowMount(BBreadcrumb)

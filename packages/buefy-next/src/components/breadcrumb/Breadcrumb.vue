@@ -6,10 +6,11 @@
     </nav>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 import config from '../../utils/config'
 
-export default {
+export default defineComponent({
     name: 'BBreadcrumb',
     props: {
         align: {
@@ -37,5 +38,5 @@ export default {
             return ['breadcrumb', this.align, this.separator, this.size]
         }
     }
-}
+})
 </script>

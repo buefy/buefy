@@ -12,11 +12,13 @@
     </li>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+
 import config from '../../utils/config'
 import CompatFallthroughMixin from '../../utils/CompatFallthroughMixin'
 
-export default {
+export default defineComponent({
     name: 'BBreadcrumbItem',
     mixins: [CompatFallthroughMixin],
     props: {
@@ -28,5 +30,5 @@ export default {
         },
         active: Boolean
     }
-}
+})
 </script>

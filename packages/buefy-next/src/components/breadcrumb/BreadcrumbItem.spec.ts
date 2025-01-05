@@ -1,8 +1,10 @@
+import { beforeEach, describe, expect, it } from 'vitest'
 import { mount } from '@vue/test-utils'
-import BBreadcrumbItem from '@components/breadcrumb/BreadcrumbItem'
+import type { VueWrapper } from '@vue/test-utils'
+import BBreadcrumbItem from '@components/breadcrumb/BreadcrumbItem.vue'
 
 describe('BBreadcrumbItem', () => {
-    let wrapper
+    let wrapper: VueWrapper<InstanceType<typeof BBreadcrumbItem>>
     beforeEach(() => {
         wrapper = mount(BBreadcrumbItem, {
             props: {
