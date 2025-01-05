@@ -1,7 +1,9 @@
 import { shallowMount } from '@vue/test-utils'
-import BRadioButton from '@components/radio/RadioButton'
+import type { VueWrapper } from '@vue/test-utils'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import BRadioButton from '@components/radio/RadioButton.vue'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BRadioButton>>
 
 describe('BRadioButton', () => {
     beforeEach(() => {
@@ -30,9 +32,9 @@ describe('BRadioButton', () => {
     })
 
     it('method focus() gives focus to the input element', async () => {
-        wrapper.vm.$refs.input.focus = jest.fn()
+        (wrapper.vm.$refs.input as HTMLInputElement).focus = vi.fn()
         wrapper.vm.focus()
         await wrapper.vm.$nextTick()
-        expect(wrapper.vm.$refs.input.focus).toHaveBeenCalled()
+        expect((wrapper.vm.$refs.input as HTMLInputElement).focus).toHaveBeenCalled()
     })
 })

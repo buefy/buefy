@@ -1,10 +1,10 @@
+import type { App } from 'vue'
 import Radio from './Radio.vue'
 import RadioButton from './RadioButton.vue'
-
 import { registerComponent } from '../../utils/plugins'
 
 const Plugin = {
-    install(Vue) {
+    install(Vue: App) {
         registerComponent(Vue, Radio)
         registerComponent(Vue, RadioButton)
     }
