@@ -52,12 +52,23 @@
     </transition>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { PropType, VNode } from 'vue'
+
 import trapFocus from '../../directives/trapFocus'
 import { removeElement } from '../../utils/helpers'
+import type { ExtractComponentProps } from '../../utils/helpers'
 import config from '../../utils/config'
+import type { ModalCancellableOption } from '../../utils/config'
 
-export default {
+const MODAL_SCROLLS = ['clip', 'keep'] as const
+type ModalScroll = typeof MODAL_SCROLLS[number]
+
+const MODAL_ARIA_ROLES = ['dialog', 'alertdialog'] as const
+type ModalAriaRole = typeof MODAL_ARIA_ROLES[number]
+
+const Modal = defineComponent({
     name: 'BModal',
     directives: {
         trapFocus
@@ -65,7 +76,9 @@ export default {
     props: {
         modelValue: Boolean,
         component: [Object, Function, String],
-        content: [String, Array],
+        content: {
+            type: [String, Object, Array] as PropType<string | VNode | (string | VNode)[] >
+        },
         programmatic: Boolean,
         props: Object,
         events: {
@@ -84,27 +97,24 @@ export default {
             default: 'zoom-out'
         },
         canCancel: {
-            type: [Array, Boolean],
+            type: [Array, Boolean] as PropType<boolean | ModalCancellableOption[]>,
             default: () => {
                 return config.defaultModalCanCancel
             }
         },
         cancelCallback: {
-            type: Function,
+            type: Function as PropType<(method: ModalCancellableOption) => void>,
             default: () => {}
         },
         scroll: {
-            type: String,
+            type: String as PropType<ModalScroll>,
             default: () => {
                 return config.defaultModalScroll
                     ? config.defaultModalScroll
                     : 'clip'
             },
-            validator: (value) => {
-                return [
-                    'clip',
-                    'keep'
-                ].indexOf(value) >= 0
+            validator: (value: unknown): value is ModalScroll => {
+                return MODAL_SCROLLS.indexOf(value as ModalScroll) >= 0
             }
         },
         fullScreen: Boolean,
@@ -123,18 +133,15 @@ export default {
         customClass: String,
         customContentClass: [String, Array, Object],
         ariaRole: {
-            type: String,
-            validator: (value) => {
-                return [
-                    'dialog',
-                    'alertdialog'
-                ].indexOf(value) >= 0
+            type: String as PropType<ModalAriaRole>,
+            validator: (value: unknown): value is ModalAriaRole => {
+                return MODAL_ARIA_ROLES.indexOf(value as ModalAriaRole) >= 0
             }
         },
         ariaModal: Boolean,
         ariaLabel: {
             type: String,
-            validator: (value) => {
+            validator: (value: unknown) => {
                 return Boolean(value)
             }
         },
@@ -148,17 +155,19 @@ export default {
             default: false
         }
     },
-    emits: [
-        'after-enter',
-        'after-leave',
-        'cancel',
-        'close',
-        'update:modelValue'
-    ],
+    emits: {
+        'after-enter': () => true,
+        'after-leave': () => true,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        cancel: (method: ModalCancellableOption) => true,
+        close: () => true,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        'update:modelValue': (active: boolean) => true
+    },
     data() {
         return {
             isActive: this.modelValue || false,
-            savedScrollTop: null,
+            savedScrollTop: null as number | null,
             newWidth: typeof this.width === 'number'
                 ? this.width + 'px'
                 : this.width,
@@ -227,21 +236,21 @@ export default {
             }
 
             document.documentElement.scrollTop = this.savedScrollTop
-            document.body.style.top = null
+            document.body.style.top = ''
             this.savedScrollTop = null
         },
 
-        /**
+        /*
         * Close the Modal if canCancel and call the cancelCallback prop (function).
         */
-        cancel(method) {
+        cancel(method: ModalCancellableOption) {
             if (this.cancelOptions.indexOf(method) < 0) return
-            this.$emit('cancel', arguments)
-            this.cancelCallback.apply(null, arguments)
+            this.$emit('cancel', method)
+            this.cancelCallback.apply(null, [method])
             this.close()
         },
 
-        /**
+        /*
         * Call the cancelCallback prop (function).
         * Emit events, and destroy modal if it's programmatic.
         */
@@ -258,14 +267,14 @@ export default {
             }
         },
 
-        /**
+        /*
         * Keypress event that is bound to the document.
         */
-        keyPress({ key }) {
+        keyPress({ key }: KeyboardEvent) {
             if (this.isActive && (key === 'Escape' || key === 'Esc')) this.cancel('escape')
         },
 
-        /**
+        /*
         * Transition after-enter hook
         */
         afterEnter() {
@@ -273,14 +282,14 @@ export default {
             this.$emit('after-enter')
         },
 
-        /**
+        /*
         * Transition before-leave hook
         */
         beforeLeave() {
             this.animating = true
         },
 
-        /**
+        /*
         * Transition after-leave hook
         */
         afterLeave() {
@@ -315,8 +324,12 @@ export default {
                 : this.savedScrollTop
             document.body.classList.remove('is-noscroll')
             document.documentElement.scrollTop = savedScrollTop
-            document.body.style.top = null
+            document.body.style.top = ''
         }
     }
-}
+})
+
+export type ModalProps = ExtractComponentProps<typeof Modal>
+
+export default Modal
 </script>

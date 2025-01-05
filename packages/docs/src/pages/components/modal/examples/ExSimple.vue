@@ -52,8 +52,15 @@
     </section>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BButton, BModal } from '@ntohq/buefy-next'
+
     export default {
+        components: {
+            BButton,
+            BModal
+        },
         data() {
             return {
                 isImageModalActive: false,

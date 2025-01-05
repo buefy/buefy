@@ -30,26 +30,38 @@
     </div>
 </template>
 
-<script>
-    import { preformat as _preformat } from '@/utils'
+<script lang="ts">
+    import { defineComponent } from 'vue'
+
+    import { preformat as _preformat, shallowFields } from '@/utils'
+    import ApiView from '@/components/ApiView.vue'
+    import CodeView from '@/components/CodeView.vue'
+    import Example from '@/components/Example.vue'
+    import VariablesView from '@/components/VariablesView.vue'
 
     import api from './api/modal'
     import variables from './variables/modal'
-    import { shallowFields } from '@/utils'
+    import programmaticSyntax from './programmatic-syntax.js?raw'
 
-    import ExSimple from './examples/ExSimple'
+    import ExSimple from './examples/ExSimple.vue'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
 
-    import ExComponent from './examples/ExComponent'
+    import ExComponent from './examples/ExComponent.vue'
     import ExComponentCode from './examples/ExComponent.vue?raw'
 
-    import ExProgrammatic from './examples/ExProgrammatic'
+    import ExProgrammatic from './examples/ExProgrammatic.vue'
     import ExProgrammaticCode from './examples/ExProgrammatic.vue?raw'
 
-    import ExFullScreen from './examples/ExFullScreen'
+    import ExFullScreen from './examples/ExFullScreen.vue'
     import ExFullScreenCode from './examples/ExFullScreen.vue?raw'
 
-    export default {
+    export default defineComponent({
+        components: {
+            ApiView,
+            CodeView,
+            Example,
+            VariablesView
+        },
         data() {
             return {
                 api,
@@ -64,19 +76,13 @@
                 ExComponentCode,
                 ExProgrammaticCode,
                 ExFullScreenCode,
-                programmaticSyntax: `
-                // From inside Vue instance
-                this.$buefy.modal.open(props)
-
-                // From outside Vue instance
-                import { ModalProgrammatic as Modal } from 'buefy'
-                Modal.open(props)`
+                programmaticSyntax
             }
         },
         methods: {
-            preformat(text) {
+            preformat(text: string) {
                 return _preformat(text)
             }
         }
-    }
+    })
 </script>

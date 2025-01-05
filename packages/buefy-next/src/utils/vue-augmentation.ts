@@ -8,6 +8,7 @@
 import 'vue'
 
 import type { LoadingProgrammatic } from '../components/loading'
+import type { ModalProgrammatic } from '../components/modal'
 import ConfigComponent from './ConfigComponent'
 
 // Augments the global property with `$buefy`.
@@ -20,6 +21,7 @@ declare module '@vue/runtime-core' {
             config: typeof ConfigComponent,
             globalNoticeInterval?: ReturnType<typeof setTimeout>,
             loading: LoadingProgrammatic,
+            modal: ModalProgrammatic,
             // TODO: make key-values more specific
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             [key: string]: any

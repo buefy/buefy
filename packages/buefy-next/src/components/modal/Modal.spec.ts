@@ -1,9 +1,12 @@
 import { transformVNodeArgs } from 'vue'
 import { shallowMount } from '@vue/test-utils'
+import type { VueWrapper } from '@vue/test-utils'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { BModal, ModalProgrammatic } from '@components/modal'
 import config, { setOptions } from '@utils/config'
+import type { ModalCancellableOption } from '@utils/config'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BModal>>
 
 describe('BModal', () => {
     beforeEach(() => {
@@ -64,22 +67,26 @@ describe('BModal', () => {
         await wrapper.setProps({ canCancel: false })
         expect(wrapper.vm.cancelOptions).toEqual([])
 
-        const options = ['escape']
+        const options: ModalCancellableOption[] = ['escape']
         await wrapper.setProps({ canCancel: options })
         expect(wrapper.vm.cancelOptions).toEqual(options)
 
-        wrapper.vm.close = jest.fn(() => wrapper.vm.close)
+        wrapper.vm.close = vi.fn(() => wrapper.vm.close)
+        // @ts-expect-error leave this for backward compatibility test
         wrapper.vm.cancel()
+        expect(wrapper.vm.close).not.toHaveBeenCalled()
         wrapper.vm.cancel('escape')
         expect(wrapper.vm.close).toHaveBeenCalledTimes(1)
     })
 
     it('close on escape', async () => {
         await wrapper.setProps({ canCancel: true })
-        await wrapper.setProps({ modalValue: true })
-        wrapper.vm.cancel = jest.fn(() => wrapper.vm.cancel)
+        await wrapper.setProps({ modelValue: true })
+        wrapper.vm.cancel = vi.fn(() => wrapper.vm.cancel)
         const event = new KeyboardEvent('keyup', { key: 'Escape' })
+        // @ts-expect-error leave this for backward compatibility test
         wrapper.vm.keyPress({})
+        expect(wrapper.vm.cancel).not.toHaveBeenCalled()
         wrapper.vm.keyPress(event)
         expect(wrapper.vm.cancel).toHaveBeenCalledTimes(1)
     })
@@ -110,11 +117,11 @@ describe('BModal', () => {
             })
             await modal.$nextTick() // makes sure DOM is updated
             expect(document.querySelector('.modal')).toBeTruthy()
-            jest.useFakeTimers()
+            vi.useFakeTimers()
             modal.close()
-            jest.advanceTimersByTime(150)
+            vi.advanceTimersByTime(150)
             expect(document.querySelector('.modal')).toBeFalsy()
-            jest.useRealTimers()
+            vi.useRealTimers()
         })
     })
 

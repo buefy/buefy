@@ -15,10 +15,11 @@
     </section>
 </template>
 
-<script>
-    import { h } from 'vue'
+<script lang="ts">
+    import { defineComponent, h } from 'vue'
+    import { BButton } from '@ntohq/buefy-next'
 
-    const ModalForm = {
+    const ModalForm = defineComponent({
         props: ['email', 'password'],
         template: `
             <form action="">
@@ -63,9 +64,10 @@
                 </div>
             </form>
         `
-    }
+    })
 
-    export default {
+    export default defineComponent({
+        components: { BButton },
         methods: {
             imageModal() {
                 const vnode = h(
@@ -83,7 +85,6 @@
             },
             cardModal() {
                 this.$buefy.modal.open({
-                    parent: this,
                     component: ModalForm,
                     hasModalCard: true,
                     customClass: 'custom-class custom-class-2',
@@ -91,5 +92,5 @@
                 })
             }
         }
-    }
+    })
 </script>

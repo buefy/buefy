@@ -12,13 +12,18 @@
             has-modal-card
             full-screen
             :can-cancel="false">
-            <modal-form v-bind="formProps" @close="$refs.modal.close()"></modal-form>
+            <modal-form v-bind="formProps" @close="($refs.modal as BModalInstance).close()"></modal-form>
         </b-modal>
     </section>
 </template>
 
-<script>
-    const ModalForm = {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BButton, BModal } from '@ntohq/buefy-next'
+
+    type BModalInstance = InstanceType<typeof BModal>
+
+    const ModalForm = defineComponent({
         props: ['email', 'password'],
         emits: ['close'],
         template: `
@@ -58,10 +63,12 @@
                 </footer>
             </div>
         `
-    }
+    })
 
-    export default {
+    export default defineComponent({
         components: {
+            BButton,
+            BModal,
             ModalForm
         },
         data() {
@@ -73,5 +80,5 @@
                 }
             }
         }
-    }
+    })
 </script>
