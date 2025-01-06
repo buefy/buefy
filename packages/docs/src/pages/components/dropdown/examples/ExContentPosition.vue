@@ -90,8 +90,28 @@
     </nav>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import {
+        BButton,
+        BCheckbox,
+        BDropdown,
+        BDropdownItem,
+        BField,
+        BIcon,
+        BInput
+    } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BButton,
+            BCheckbox,
+            BDropdown,
+            BDropdownItem,
+            BField,
+            BIcon,
+            BInput
+        },
         data() {
             return {
                 searchTerm: '',
@@ -116,5 +136,5 @@
                 return this.data.filter((item) => item.toLowerCase().indexOf(this.searchTerm.toLowerCase()) >= 0);
             }
         }
-    }
+    })
 </script>

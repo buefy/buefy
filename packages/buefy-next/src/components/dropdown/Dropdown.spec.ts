@@ -1,10 +1,12 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
-import BDropdown from '@components/dropdown/Dropdown'
+import type { VueWrapper } from '@vue/test-utils'
+import BDropdown from '@components/dropdown/Dropdown.vue'
 
 describe('BDropdown', () => {
     const val1 = 'val1'
     const val2 = 'val2'
-    let wrapper
+    let wrapper: VueWrapper<InstanceType<typeof BDropdown>>
 
     beforeEach(() => {
         wrapper = shallowMount(BDropdown, {
@@ -40,7 +42,7 @@ describe('BDropdown', () => {
     })
 
     it('emit activity when it changes', async () => {
-        wrapper.vm.updateAppendToBody = jest.fn(() => wrapper.vm.updateAppendToBody)
+        wrapper.vm.updateAppendToBody = vi.fn(() => wrapper.vm.updateAppendToBody)
         await wrapper.setProps({ appendToBody: true })
 
         await wrapper.setData({ isActive: true })
@@ -68,7 +70,7 @@ describe('BDropdown', () => {
         expect(wrapper.emitted().change[0]).toEqual([val1])
 
         await wrapper.setProps({
-            hoverable: true,
+            triggers: ['hover'],
             closeOnClick: true
         })
 
@@ -123,16 +125,16 @@ describe('BDropdown', () => {
     })
 
     it('manage the whitelisted items accordingly', () => {
-        let el = wrapper.vm.$refs.dropdownMenu
+        let el = wrapper.vm.$refs.dropdownMenu as Element
         expect(wrapper.vm.isInWhiteList(el)).toBeTruthy()
 
-        el = wrapper.vm.$refs.dropdownMenu.querySelector('.dropdown-content')
+        el = (wrapper.vm.$refs.dropdownMenu as Element).querySelector('.dropdown-content')!
         expect(wrapper.vm.isInWhiteList(el)).toBeTruthy()
 
-        el = wrapper.vm.$refs.trigger
+        el = wrapper.vm.$refs.trigger as Element
         expect(wrapper.vm.isInWhiteList(el)).toBeTruthy()
 
-        el = wrapper.vm.$refs.trigger.querySelector('.trigger')
+        el = (wrapper.vm.$refs.trigger as Element).querySelector('.trigger')!
         expect(wrapper.vm.isInWhiteList(el)).toBeTruthy()
 
         el = document.createElement('div')
@@ -140,7 +142,7 @@ describe('BDropdown', () => {
     })
 
     it('manage the whitelisted items accordingly without trigger (inline)', async () => {
-        const trigger = wrapper.vm.$refs.trigger
+        const trigger = wrapper.vm.$refs.trigger as Element
         expect(trigger).toBeTruthy()
         const triggerEl = trigger.querySelector('.trigger')
         expect(triggerEl).toBeTruthy()
@@ -157,18 +159,17 @@ describe('BDropdown', () => {
 
     it('manage clicking outside accordingly', async () => {
         const el = document.createElement('div')
-        const event = {
-            target: el
-        }
+        const event = new Event('click')
+        vi.spyOn(event, 'target', 'get').mockReturnValue(el)
 
         await wrapper.setData({ isActive: true })
         wrapper.vm.clickedOutside(event)
         expect(wrapper.vm.isActive).toBeFalsy()
 
         await wrapper.setData({ isActive: true })
-        wrapper.vm.clickedOutside({
-            target: wrapper.vm.$refs.trigger
-        })
+        const event2 = new Event('click')
+        vi.spyOn(event2, 'target', 'get').mockReturnValue(wrapper.vm.$refs.trigger as Element)
+        wrapper.vm.clickedOutside(event2)
         expect(wrapper.vm.isActive).toBeTruthy()
 
         await wrapper.setData({ isActive: true })
@@ -205,20 +206,20 @@ describe('BDropdown', () => {
         wrapper.vm.toggle()
         expect(wrapper.vm.isActive).toBeFalsy()
 
-        jest.useFakeTimers()
-        jest.spyOn(global, 'setTimeout')
+        vi.useFakeTimers()
+        vi.spyOn(global, 'setTimeout')
         await wrapper.setData({ isActive: false })
         wrapper.vm.toggle()
         await wrapper.vm.$nextTick()
         expect(setTimeout).toHaveBeenCalled()
         expect(wrapper.vm.isActive).toBeFalsy()
-        jest.advanceTimersByTime(1)
+        vi.advanceTimersByTime(1)
         expect(wrapper.vm.isActive).toBeTruthy()
-        jest.useRealTimers()
+        vi.useRealTimers()
     })
 
     it('reset events before destroy', () => {
-        document.removeEventListener = jest.fn()
+        document.removeEventListener = vi.fn()
 
         wrapper.unmount()
 

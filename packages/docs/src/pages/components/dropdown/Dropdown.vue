@@ -42,30 +42,41 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
+
+    import { shallowFields } from '@/utils'
+    import ApiView from '@/components/ApiView.vue'
+    import Example from '@/components/Example.vue'
+    import VariablesView from '@/components/VariablesView.vue'
+
     import api from './api/dropdown'
     import variables from './variables/dropdown'
-    import { shallowFields } from '@/utils'
 
-    import ExSimple from './examples/ExSimple'
+    import ExSimple from './examples/ExSimple.vue'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
 
-    import ExContentPosition from './examples/ExContentPosition'
+    import ExContentPosition from './examples/ExContentPosition.vue'
     import ExContentPositionCode from './examples/ExContentPosition.vue?raw'
 
-    import ExHasLinkDisabled from './examples/ExHasLinkDisabled'
+    import ExHasLinkDisabled from './examples/ExHasLinkDisabled.vue'
     import ExHasLinkDisabledCode from './examples/ExHasLinkDisabled.vue?raw'
 
-    import ExCustomize from './examples/ExCustomize'
+    import ExCustomize from './examples/ExCustomize.vue'
     import ExCustomizeCode from './examples/ExCustomize.vue?raw'
 
-    import ExCustomizeMultiple from './examples/ExCustomizeMultiple'
+    import ExCustomizeMultiple from './examples/ExCustomizeMultiple.vue'
     import ExCustomizeMultipleCode from './examples/ExCustomizeMultiple.vue?raw'
 
-    import ExCustomizeScrollable from './examples/ExCustomizeScrollable'
+    import ExCustomizeScrollable from './examples/ExCustomizeScrollable.vue'
     import ExCustomizeScrollableCode from './examples/ExCustomizeScrollable.vue?raw'
 
-    export default {
+    export default defineComponent({
+        components: {
+            ApiView,
+            Example,
+            VariablesView
+        },
         data() {
             return {
                 api,
@@ -86,5 +97,5 @@
                 ExCustomizeScrollableCode
             }
         }
-    }
+    })
 </script>

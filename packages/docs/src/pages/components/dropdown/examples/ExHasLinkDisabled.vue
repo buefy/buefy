@@ -62,12 +62,20 @@
     </nav>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BDropdown, BDropdownItem, BIcon } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BDropdown,
+            BDropdownItem,
+            BIcon
+        },
         data() {
             return {
                 navigation: 'home'
             }
         }
-    }
+    })
 </script>

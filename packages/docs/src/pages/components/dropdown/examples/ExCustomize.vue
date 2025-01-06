@@ -40,12 +40,21 @@
     </b-dropdown>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BButton, BDropdown, BDropdownItem, BIcon } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BButton,
+            BDropdown,
+            BDropdownItem,
+            BIcon
+        },
         data() {
             return {
                 isPublic: true
             }
         }
-    }
+    })
 </script>

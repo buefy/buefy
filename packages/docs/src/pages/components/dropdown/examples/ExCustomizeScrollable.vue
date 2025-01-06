@@ -47,8 +47,30 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import {
+        BButton,
+        BDropdown,
+        BDropdownItem,
+        BField,
+        BIcon,
+        BSlider,
+        BSliderTick,
+        BSwitch
+    } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BButton,
+            BDropdown,
+            BDropdownItem,
+            BField,
+            BIcon,
+            BSlider,
+            BSliderTick,
+            BSwitch
+        },
         data() {
             return {
                 isScrollable: false,
@@ -65,5 +87,5 @@
                 ]
             }
         }
-    }
+    })
 </script>

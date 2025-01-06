@@ -1,17 +1,23 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
-import { DROPDOWN_INJECTION_KEY } from '@components/dropdown/Dropdown'
-import BDropdownItem from '@components/dropdown/DropdownItem'
+import type { VueWrapper } from '@vue/test-utils'
+import { DROPDOWN_INJECTION_KEY } from '@components/dropdown/Dropdown.vue'
+import type { ItemValueType } from '@components/dropdown/Dropdown.vue'
+import BDropdownItem from '@components/dropdown/DropdownItem.vue'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BDropdownItem>>
 const dropdownSelected = 'val'
 
 describe('BDropdownItem', () => {
-    let parent
+    let parent: {
+        selected: ItemValueType,
+        selectItem: () => void
+    }
 
     beforeEach(() => {
         parent = {
             selected: dropdownSelected,
-            selectItem: jest.fn()
+            selectItem: vi.fn()
         } // mocks injected Dropdown
         wrapper = shallowMount(BDropdownItem, {
             global: {

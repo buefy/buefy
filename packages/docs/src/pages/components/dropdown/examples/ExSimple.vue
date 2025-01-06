@@ -72,6 +72,10 @@
     </section>
 </template>
 
+<script setup lang="ts">
+import { BButton, BDropdown, BDropdownItem } from '@ntohq/buefy-next'
+</script>
+
 <style scoped>
     .tag {
         cursor: pointer;
