@@ -1,3 +1,7 @@
+<script setup lang="ts">
+    import { BProgress, BProgressBar } from '@ntohq/buefy-next'
+</script>
+
 <template>
     <section>
         <b-progress format="percent" :max="80">

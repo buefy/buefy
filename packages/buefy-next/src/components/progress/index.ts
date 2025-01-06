@@ -1,10 +1,10 @@
+import type { App } from 'vue'
 import Progress from './Progress.vue'
 import ProgressBar from './ProgressBar.vue'
-
 import { registerComponent } from '../../utils/plugins'
 
 const Plugin = {
-    install(Vue) {
+    install(Vue: App) {
         registerComponent(Vue, Progress)
         registerComponent(Vue, ProgressBar)
     }

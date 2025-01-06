@@ -24,33 +24,44 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
+
+    import { shallowFields } from '@/utils'
+    import ApiView from '@/components/ApiView.vue'
+    import Example from '@/components/Example.vue'
+    import VariablesView from '@/components/VariablesView.vue'
+
     import api from './api/progress'
     import variables from './variables/progress'
-    import { shallowFields } from '@/utils'
 
-    import ExSimple from './examples/ExSimple'
+    import ExSimple from './examples/ExSimple.vue'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
 
-    import ExTypes from './examples/ExTypes'
+    import ExTypes from './examples/ExTypes.vue'
     import ExTypesCode from './examples/ExTypes.vue?raw'
 
-    import ExSizes from './examples/ExSizes'
+    import ExSizes from './examples/ExSizes.vue'
     import ExSizesCode from './examples/ExSizes.vue?raw'
 
-    import ExNotRounded from './examples/ExNotRounded'
+    import ExNotRounded from './examples/ExNotRounded.vue'
     import ExNotRoundedCode from './examples/ExNotRounded.vue?raw'
 
-    import ExValues from './examples/ExValues'
+    import ExValues from './examples/ExValues.vue'
     import ExValuesCode from './examples/ExValues.vue?raw'
 
-    import ExSlot from './examples/ExSlot'
+    import ExSlot from './examples/ExSlot.vue'
     import ExSlotCode from './examples/ExSlot.vue?raw'
 
-    import ExBars from './examples/ExBars'
+    import ExBars from './examples/ExBars.vue'
     import ExBarsCode from './examples/ExBars.vue?raw'
 
-    export default {
+    export default defineComponent({
+        components: {
+            ApiView,
+            Example,
+            VariablesView
+        },
         data() {
             return {
                 api,
@@ -73,5 +84,5 @@
                 ExBarsCode
             }
         }
-    }
+    })
 </script>

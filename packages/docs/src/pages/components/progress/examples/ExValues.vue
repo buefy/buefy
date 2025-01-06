@@ -5,7 +5,7 @@
             <b-field label="Type and Size">
                 <b-field grouped>
                     <b-select v-model="type" placeholder="Type">
-                        <option value="null">Default</option>
+                        <option :value="undefined">Default</option>
                         <option value="is-primary">Primary</option>
                         <option value="is-success">Success</option>
                         <option value="is-warning">Warning</option>
@@ -63,12 +63,22 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BField, BNumberinput, BProgress, BSelect, BSwitch } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BField,
+            BNumberinput,
+            BProgress,
+            BSelect,
+            BSwitch
+        },
         data() {
             return {
                 indeterminate: false,
-                type: null,
+                type: undefined,
                 size: 'is-medium',
                 showValue: true,
                 format: 'raw',
@@ -77,5 +87,5 @@
                 locale: undefined // Browser locale
             }
         }
-    }
+    })
 </script>

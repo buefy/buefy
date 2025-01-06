@@ -44,7 +44,6 @@ const JS_COMPONENTS = [
     'notification',
     'numberinput',
     'pagination',
-    'progress',
     'rate',
     'select',
     'slider',

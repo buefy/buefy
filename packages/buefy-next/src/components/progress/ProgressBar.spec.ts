@@ -1,8 +1,11 @@
 import { mount } from '@vue/test-utils'
-import { PROGRESS_INJECTION_KEY } from '@components/progress/Progress'
-import BProgressBar from '@components/progress/ProgressBar'
+import type { VueWrapper } from '@vue/test-utils'
+import { PROGRESS_INJECTION_KEY } from '@components/progress/Progress.vue'
+import BProgressBar from '@components/progress/ProgressBar.vue'
+import { beforeEach, describe, expect, it } from 'vitest'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BProgressBar>>
+
 const BProgress = {
     template: '<div><slot /></div>',
     provide() {

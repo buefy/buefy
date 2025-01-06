@@ -1,5 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
-import BProgress from '@components/progress/Progress'
+import BProgress from '@components/progress/Progress.vue'
+import { describe, expect, it } from 'vitest'
 
 describe('BProgress', () => {
     it('is called', () => {
@@ -24,9 +25,8 @@ describe('BProgress', () => {
 
     describe('Passing a value prop', () => {
         it('remove value attribute to the <progress> element', async () => {
-            const value = null
             const wrapper = shallowMount(BProgress, {
-                props: { value }
+                props: { value: undefined }
             })
 
             await wrapper.vm.$nextTick()
