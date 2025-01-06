@@ -1,35 +1,58 @@
 import { createApp, h as createElement } from 'vue'
+import type { App, ComponentPublicInstance, VNode } from 'vue'
 
 import Toast from './Toast.vue'
+import type { ToastProps } from './Toast.vue'
 
 import config from '../../utils/config'
-import { merge, copyAppContext, getComponentFromVNode } from '../../utils/helpers'
+import { copyAppContext, getComponentFromVNode } from '../../utils/helpers'
 import { registerComponentProgrammatic } from '../../utils/plugins'
 
+export type ToastOpenParams = Omit<ToastProps, 'message'> & {
+    // programmatically opened toast can have VNode(s) as the message
+    message?: string | VNode | (string | VNode)[],
+    onClose?: () => void
+}
+
+// Minimal definition of a programmatically opened toast.
+//
+// ESLint does not like `{}` as a type but allowed here to make them look
+// similar to Vue's definition.
+/* eslint-disable @typescript-eslint/ban-types */
+type ToastProgrammaticInstance = ComponentPublicInstance<
+    {}, // P
+    {}, // B
+    {}, // D
+    {}, // C
+    { close: () => void } // M
+>
+/* eslint-enable @typescript-eslint/ban-types */
+
 class ToastProgrammatic {
-    constructor(app) {
+    private app: App | undefined
+
+    constructor(app?: App) {
         this.app = app // may be undefined in the testing environment
     }
 
-    open(params) {
+    open(params: string | ToastOpenParams) {
         if (typeof params === 'string') {
             params = {
                 message: params
             }
         }
 
-        const defaultParam = {
-            position: config.defaultToastPosition || 'is-top'
+        let slot: ToastOpenParams['message']
+        let { message, ...restParams } = params
+        if (typeof message !== 'string') {
+            slot = message
+            message = undefined
         }
-        if (params.parent) {
-            delete params.parent
+        const propsData: ToastProps = {
+            position: config.defaultToastPosition || 'is-top',
+            message,
+            ...restParams
         }
-        let slot
-        if (Array.isArray(params.message)) {
-            slot = params.message
-            delete params.message
-        }
-        const propsData = merge(defaultParam, params)
         const container = document.createElement('div')
         // Vue 3 requires a new app to mount another component
         const vueInstance = createApp({
@@ -42,7 +65,7 @@ class ToastProgrammatic {
                 close() {
                     const toast = getComponentFromVNode(this.toastVNode)
                     if (toast) {
-                        toast.close()
+                        (toast as InstanceType<typeof Toast>).close()
                     }
                 }
             },
@@ -76,14 +99,15 @@ class ToastProgrammatic {
         } else {
             // adds $buefy global property
             // so that $buefy.globalNoticeInterval is available on the new Vue app
-            vueInstance.config.globalProperties.$buefy = {}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            vueInstance.config.globalProperties.$buefy = {} as any
         }
-        return vueInstance.mount(container)
+        return vueInstance.mount(container) as ToastProgrammaticInstance
     }
 }
 
 const Plugin = {
-    install(Vue) {
+    install(Vue: App) {
         registerComponentProgrammatic(Vue, 'toast', new ToastProgrammatic(Vue))
     }
 }

@@ -37,11 +37,18 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BButton } from '@ntohq/buefy-next'
+    import type { ToastProgrammatic } from '@ntohq/buefy-next'
+
+    type ToastProgrammaticInstance = ReturnType<ToastProgrammatic['open']>
+
+    export default defineComponent({
+        components: { BButton },
         data() {
             return {
-                indefinteToast: null
+                indefinteToast: null as ToastProgrammaticInstance | null
             }
         },
         methods: {
@@ -85,5 +92,5 @@
                 }
             }
         }
-    }
+    })
 </script>

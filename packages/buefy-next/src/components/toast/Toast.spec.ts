@@ -1,11 +1,13 @@
 import { transformVNodeArgs } from 'vue'
 import { shallowMount } from '@vue/test-utils'
+import type { VueWrapper } from '@vue/test-utils'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { BToast, ToastProgrammatic } from '@components/toast'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BToast>>
 
 describe('BToast', () => {
-    HTMLElement.prototype.insertAdjacentElement = jest.fn()
+    HTMLElement.prototype.insertAdjacentElement = vi.fn()
     beforeEach(() => {
         wrapper = shallowMount(
             BToast,
@@ -38,32 +40,32 @@ describe('BToast', () => {
         })
 
         afterEach(() => {
-            jest.useRealTimers()
+            vi.useRealTimers()
         })
 
         it('should close after the duration', () => {
-            jest.useFakeTimers()
+            vi.useFakeTimers()
             const params = {
                 message: 'message',
                 duration: 1000,
-                onClose: jest.fn()
+                onClose: vi.fn()
             }
             new ToastProgrammatic().open(params)
-            jest.advanceTimersByTime(500)
+            vi.advanceTimersByTime(500)
             expect(params.onClose).not.toHaveBeenCalled()
-            jest.advanceTimersByTime(500)
+            vi.advanceTimersByTime(500)
             expect(params.onClose).toHaveBeenCalled()
         })
 
         it('indefinitely should be able to be manually closed', () => {
-            jest.useFakeTimers()
+            vi.useFakeTimers()
             const params = {
                 message: 'message',
                 indefinite: true,
-                onClose: jest.fn()
+                onClose: vi.fn()
             }
             const toast = new ToastProgrammatic().open(params)
-            jest.advanceTimersByTime(10000)
+            vi.advanceTimersByTime(10000)
             expect(params.onClose).not.toHaveBeenCalled()
             toast.close()
             expect(params.onClose).toHaveBeenCalled()

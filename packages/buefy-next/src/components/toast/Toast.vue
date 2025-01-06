@@ -23,11 +23,14 @@
     </transition>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+
 import config from '../../utils/config'
+import type { ExtractComponentProps } from '../../utils/helpers'
 import NoticeMixin from '../../utils/NoticeMixin'
 
-export default {
+const Toast = defineComponent({
     name: 'BToast',
     mixins: [NoticeMixin],
     data() {
@@ -35,5 +38,9 @@ export default {
             newDuration: this.duration || config.defaultToastDuration
         }
     }
-}
+})
+
+export type ToastProps = ExtractComponentProps<typeof Toast>
+
+export default Toast
 </script>
