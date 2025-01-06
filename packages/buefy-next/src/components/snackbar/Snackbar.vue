@@ -41,11 +41,14 @@
     </transition>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
 import config from '../../utils/config'
+import type { ExtractComponentProps } from '../../utils/helpers'
 import NoticeMixin from '../../utils/NoticeMixin'
 
-export default {
+const Snackbar = defineComponent({
     name: 'BSnackbar',
     mixins: [NoticeMixin],
     props: {
@@ -54,7 +57,7 @@ export default {
             default: 'OK'
         },
         onAction: {
-            type: Function,
+            type: Function as PropType<() => void>,
             default: () => {}
         },
         cancelText: {
@@ -77,5 +80,9 @@ export default {
             this.close()
         }
     }
-}
+})
+
+export type SnackbarProps = ExtractComponentProps<typeof Snackbar>
+
+export default Snackbar
 </script>

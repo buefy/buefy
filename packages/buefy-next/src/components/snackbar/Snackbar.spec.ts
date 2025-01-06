@@ -1,15 +1,17 @@
 import { shallowMount } from '@vue/test-utils'
-import BSnackbar from '@components/snackbar/Snackbar'
+import type { VueWrapper } from '@vue/test-utils'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import BSnackbar from '@components/snackbar/Snackbar.vue'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BSnackbar>>
 
 describe('BSnackbar', () => {
-    HTMLElement.prototype.insertAdjacentElement = jest.fn()
+    HTMLElement.prototype.insertAdjacentElement = vi.fn()
     beforeEach(() => {
         wrapper = shallowMount(BSnackbar, {
             attachTo: document.body,
             props: {
-                onAction: jest.fn()
+                onAction: vi.fn()
             }
         })
     })
@@ -24,7 +26,7 @@ describe('BSnackbar', () => {
     })
 
     it('calls the action listener and close on action', async () => {
-        wrapper.vm.close = jest.fn()
+        wrapper.vm.close = vi.fn()
         wrapper.vm.action()
         await wrapper.vm.$nextTick()
         expect(wrapper.vm.onAction).toHaveBeenCalled()
