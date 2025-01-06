@@ -36,8 +36,15 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BCollapse, BIcon } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BCollapse,
+            BIcon
+        },
         data() {
             return {
                 isOpen: 0,
@@ -57,5 +64,5 @@
                 ]
             }
         }
-    }
+    })
 </script>

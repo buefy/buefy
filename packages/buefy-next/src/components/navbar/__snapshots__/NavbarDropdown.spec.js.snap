@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`BNavbarDropdown render correctly 1`] = `
-<div class="navbar-item has-dropdown"><a class="navbar-link" aria-haspopup="true" tabindex="0"></a>
-  <div class="navbar-dropdown"></div>
-</div>
-`;

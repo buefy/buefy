@@ -34,12 +34,20 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BField, BIcon, BRadioButton } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BField,
+            BIcon,
+            BRadioButton
+        },
         data() {
             return {
                 radioButton: ''
             }
         }
-    }
+    })
 </script>

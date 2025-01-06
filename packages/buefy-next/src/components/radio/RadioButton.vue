@@ -6,7 +6,7 @@
             :class="labelClass"
             :disabled="disabledOrUndefined"
             @click="focus"
-            @keydown.prevent.enter="$refs.label.click()"
+            @keydown.prevent.enter="($refs.label as HTMLElement).click()"
         >
             <slot />
             <input
@@ -25,10 +25,12 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { ExtractComponentProps } from '../../utils/helpers'
 import CheckRadioMixin from '../../utils/CheckRadioMixin'
 
-export default {
+const RadioButon = defineComponent({
     name: 'BRadioButton',
     mixins: [CheckRadioMixin],
     props: {
@@ -59,5 +61,9 @@ export default {
             ]
         }
     }
-}
+})
+
+export type RadioButonProps = ExtractComponentProps<typeof RadioButon>
+
+export default RadioButon
 </script>

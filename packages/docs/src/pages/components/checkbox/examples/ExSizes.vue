@@ -14,3 +14,7 @@
         </b-field>
     </section>
 </template>
+
+<script setup lang="ts">
+import { BCheckbox, BField } from '@ntohq/buefy-next'
+</script>

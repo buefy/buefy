@@ -23,23 +23,35 @@
     </section>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+import { shallowFields } from '@/utils'
+import ApiView from '@/components/ApiView.vue'
+import Example from '@/components/Example.vue'
+import VariablesView from '@/components/VariablesView.vue'
+
 import api from './api/breadcrumb'
 import variables from './variables/breadcrumb'
-import { shallowFields } from '@/utils'
 
-import ExAlignments from './examples/ExAlignments'
+import ExAlignments from './examples/ExAlignments.vue'
 import ExAlignmentsCode from './examples/ExAlignments.vue?raw'
 
-import ExSeparators from './examples/ExSeparators'
+import ExSeparators from './examples/ExSeparators.vue'
 import ExSeparatorsCode from './examples/ExSeparators.vue?raw'
 
-import ExSizes from './examples/ExSizes'
+import ExSizes from './examples/ExSizes.vue'
 import ExSizesCode from './examples/ExSizes.vue?raw'
 
-export default {
+export default defineComponent({
 
     name: 'Breadcrumb',
+
+    components: {
+        ApiView,
+        Example,
+        VariablesView
+    },
 
     data () {
         return {
@@ -55,7 +67,7 @@ export default {
             ExSizesCode,
         }
     }
-}
+})
 </script>
 
 <style lang="css" scoped>

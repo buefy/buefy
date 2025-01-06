@@ -32,12 +32,16 @@
     </section>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BSkeleton } from '@ntohq/buefy-next'
+
+export default defineComponent({
+    components: { BSkeleton },
     data() {
         return {
             media: 3
         }
     }
-}
+})
 </script>

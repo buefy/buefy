@@ -17,17 +17,30 @@
     </div>
 </template>
 
-<script>
-    import { preformat } from '@/utils'
+<script lang="ts">
+    import { defineComponent } from 'vue'
+
+    import { preformat, shallowFields } from '@/utils'
+    import ApiView from '@/components/ApiView.vue'
+    import CodeView from '@/components/CodeView.vue'
+    import Example from '@/components/Example.vue'
+    import VariablesView from '@/components/VariablesView.vue'
 
     import api from './api/snackbar'
     import variables from './variables/snackbar'
-    import { shallowFields } from '@/utils'
 
-    import ExSimple from './examples/ExSimple'
+    import ExSimple from './examples/ExSimple.vue'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
 
-    export default {
+    import outsideVueInstance from './outside-vue-instance.js?raw'
+
+    export default defineComponent({
+        components: {
+            ApiView,
+            CodeView,
+            Example,
+            VariablesView
+        },
         data() {
             return {
                 api,
@@ -36,11 +49,9 @@
                     ExSimple
                 }),
                 ExSimpleCode,
-                outsideVueInstance: `
-                import { SnackbarProgrammatic as Snackbar } from 'buefy'
-                Snackbar.open('Look at me!')`
+                outsideVueInstance,
             }
         },
         methods: { preformat }
-    }
+    })
 </script>

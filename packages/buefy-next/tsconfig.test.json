@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": ["node_modules", "src/scss/*"],
+  "compilerOptions": {
+    "lib": [],
+    "types": ["node", "jsdom"],
+    "paths": {
+      "@components/*": ["./src/components/*"],
+      "@utils/*": ["./src/utils/*"]
+    }
+  }
+}

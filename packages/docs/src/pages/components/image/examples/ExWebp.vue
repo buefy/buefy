@@ -18,21 +18,27 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BImage } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BImage
+        },
         data() {
             return {
-                loadedSrc1: '',
-                loadedSrc2: '',
+                loadedSrc1: '' as string | undefined,
+                loadedSrc2: '' as string | undefined,
             }
         },
         methods: {
-            onLoad1(event, src) {
+            onLoad1(event: Event, src?: string) {
                 this.loadedSrc1 = src
             },
-            onLoad2(event, src) {
+            onLoad2(event: Event, src?: string) {
                 this.loadedSrc2 = src
             }
         }
-    }
+    })
 </script>

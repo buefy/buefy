@@ -12,31 +12,34 @@
         <b-image
             src="https://picsum.photos/id/1074/1600/800"
             :srcset-sizes="[400, 800, 1600]"
-            :srcset-formatter="this.formatSrcset"
+            :srcset-formatter="formatSrcset"
             ratio="16by8"
             @load="onLoad2"
         ></b-image>
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BImage } from '@ntohq/buefy-next'
+
+    export default defineComponent({
         data() {
             return {
-                loadedSrc1: '',
-                loadedSrc2: '',
+                loadedSrc1: '' as string | undefined,
+                loadedSrc2: '' as string | undefined,
             }
         },
         methods: {
-            onLoad1(event, src) {
+            onLoad1(event: Event, src?: string) {
                 this.loadedSrc1 = src
             },
-            onLoad2(event, src) {
+            onLoad2(event: Event, src?: string) {
                 this.loadedSrc2 = src
             },
-            formatSrcset(src, size) {
+            formatSrcset(src: string, size: number) {
                 return `https://picsum.photos/id/1074/${size}/${size / 2}`
             }
         }
-    }
+    })
 </script>

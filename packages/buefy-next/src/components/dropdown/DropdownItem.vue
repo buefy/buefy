@@ -6,7 +6,7 @@
         :class="anchorClasses"
         @click="selectItem"
         :role="ariaRoleItem"
-        :tabindex="isFocusable ? 0 : null"
+        :tabindex="isFocusable ? 0 : undefined"
     >
         <slot />
     </a>
@@ -15,16 +15,22 @@
         :class="itemClasses"
         @click="selectItem"
         :role="ariaRoleItem"
-        :tabindex="isFocusable ? 0 : null"
+        :tabindex="isFocusable ? 0 : undefined"
     >
         <slot />
     </div>
 </template>
 
-<script>
-import { DROPDOWN_INJECTION_KEY } from './Dropdown.vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
 
-export default {
+import Dropdown, { DROPDOWN_INJECTION_KEY } from './Dropdown.vue'
+import type { ItemValueType } from './Dropdown.vue'
+
+type DropdownInstance = InstanceType<typeof Dropdown>
+
+export default defineComponent({
     name: 'BDropdownItem',
     inject: {
         parent: {
@@ -34,7 +40,7 @@ export default {
     },
     props: {
         value: {
-            type: [String, Number, Boolean, Object, Array, Function],
+            type: [String, Number, Boolean, Object, Array, Function] as PropType<ItemValueType>,
             default: null
         },
         separator: Boolean,
@@ -51,11 +57,13 @@ export default {
             default: ''
         }
     },
-    emits: ['click'],
+    emits: {
+        click: () => true
+    },
     computed: {
         anchorClasses() {
             return {
-                'is-disabled': this.parent.disabled || this.disabled,
+                'is-disabled': (this.parent as DropdownInstance).disabled || this.disabled,
                 'is-paddingless': this.paddingless,
                 'is-active': this.isActive
             }
@@ -70,30 +78,35 @@ export default {
             }
         },
         ariaRoleItem() {
-            return this.ariaRole === 'menuitem' || this.ariaRole === 'listitem' ? this.ariaRole : null
+            return this.ariaRole === 'menuitem' || this.ariaRole === 'listitem' ? this.ariaRole : undefined
         },
         isClickable() {
-            return !this.parent.disabled && !this.separator && !this.disabled && !this.custom
+            return !(this.parent as DropdownInstance).disabled &&
+                !this.separator &&
+                !this.disabled &&
+                !this.custom
         },
         isActive() {
-            if (this.parent.selected === null) return false
-            if (this.parent.multiple) return this.parent.selected.indexOf(this.value) >= 0
-            return this.value === this.parent.selected
+            if ((this.parent as DropdownInstance).selected === null) return false
+            if ((this.parent as DropdownInstance).multiple) {
+                return (this.parent as DropdownInstance).selected.indexOf(this.value) >= 0
+            }
+            return this.value === (this.parent as DropdownInstance).selected
         },
         isFocusable() {
             return this.hasLink ? false : this.focusable
         }
     },
     methods: {
-        /**
+        /*
         * Click listener, select the item.
         */
         selectItem() {
             if (!this.isClickable) return
 
-            this.parent.selectItem(this.value)
+            (this.parent as DropdownInstance).selectItem(this.value)
             this.$emit('click')
         }
     }
-}
+})
 </script>

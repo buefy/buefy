@@ -94,3 +94,7 @@
         </div>
     </section>
 </template>
+
+<script setup lang="ts">
+import { BButton, BIcon } from '@ntohq/buefy-next'
+</script>

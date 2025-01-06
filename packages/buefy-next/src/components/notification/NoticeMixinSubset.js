@@ -1,4 +1,4 @@
-import NoticeMixin from '../../utils/NoticeMixin.js'
+import NoticeMixin from '../../utils/NoticeMixin'
 
 // drops props not used by `NoticeMixin` itself
 // - type

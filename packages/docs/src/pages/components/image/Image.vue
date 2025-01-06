@@ -46,23 +46,34 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
+
+    import { shallowFields } from '@/utils'
+    import ApiView from '@/components/ApiView.vue'
+    import Example from '@/components/Example.vue'
+    import VariablesView from '@/components/VariablesView.vue'
+
     import api from './api/image'
     import variables from './variables/image'
-    import { shallowFields } from '@/utils'
 
-    import ExSimple from './examples/ExSimple'
+    import ExSimple from './examples/ExSimple.vue'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
-    import ExWebp from './examples/ExWebp'
+    import ExWebp from './examples/ExWebp.vue'
     import ExWebpCode from './examples/ExWebp.vue?raw'
-    import ExPlaceholder from './examples/ExPlaceholder'
+    import ExPlaceholder from './examples/ExPlaceholder.vue'
     import ExPlaceholderCode from './examples/ExPlaceholder.vue?raw'
-    import ExSrcset from './examples/ExSrcset'
+    import ExSrcset from './examples/ExSrcset.vue'
     import ExSrcsetCode from './examples/ExSrcset.vue?raw'
-    import ExError from './examples/ExError'
+    import ExError from './examples/ExError.vue'
     import ExErrorCode from './examples/ExError.vue?raw'
 
-    export default {
+    export default defineComponent({
+        components: {
+            ApiView,
+            Example,
+            VariablesView
+        },
         data() {
             return {
                 api,
@@ -81,5 +92,5 @@
                 ExErrorCode
             }
         }
-    }
+    })
 </script>

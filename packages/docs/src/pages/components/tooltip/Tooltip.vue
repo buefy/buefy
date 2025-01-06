@@ -23,27 +23,38 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
+
+    import { shallowFields } from '@/utils'
+    import ApiView from '@/components/ApiView.vue'
+    import Example from '@/components/Example.vue'
+    import VariablesView from '@/components/VariablesView.vue'
+
     import api from './api/tooltip'
     import variables from './variables/tooltip'
-    import { shallowFields } from '@/utils'
 
-    import ExSimple from './examples/ExSimple'
+    import ExSimple from './examples/ExSimple.vue'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
 
-    import ExStyles from './examples/ExStyles'
+    import ExStyles from './examples/ExStyles.vue'
     import ExStylesCode from './examples/ExStyles.vue?raw'
 
-    import ExCustom from './examples/ExCustom'
+    import ExCustom from './examples/ExCustom.vue'
     import ExCustomCode from './examples/ExCustom.vue?raw'
 
-    import ExMultilined from './examples/ExMultilined'
+    import ExMultilined from './examples/ExMultilined.vue'
     import ExMultilinedCode from './examples/ExMultilined.vue?raw'
 
-    import ExToggle from './examples/ExToggle'
+    import ExToggle from './examples/ExToggle.vue'
     import ExToggleCode from './examples/ExToggle.vue?raw'
 
-    export default {
+    export default defineComponent({
+        components: {
+            ApiView,
+            Example,
+            VariablesView
+        },
         data() {
             return {
                 api,
@@ -62,5 +73,5 @@
                 ExCustomCode
             }
         }
-    }
+    })
 </script>

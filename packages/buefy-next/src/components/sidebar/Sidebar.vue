@@ -30,25 +30,37 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
+
 import config from '../../utils/config'
+import type { ModalScrollOption, VueClassAttribute } from '../../utils/config'
 import { removeElement } from '../../utils/helpers'
 
-export default {
+export const SIDEBAR_POSITIONS = ['fixed', 'absolute', 'static'] as const
+export type SidebarPosition = typeof SIDEBAR_POSITIONS[number]
+
+export const SCROLL_BEHAVIORS = ['clip', 'keep'] as const
+export type ScrollBehavior = ModalScrollOption
+
+export const CANCEL_METHODS = ['escape', 'outside']
+export type CancelMethod = typeof CANCEL_METHODS[number]
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type CancelHandler = (method: CancelMethod, ...args: any[]) => void
+
+export default defineComponent({
     name: 'BSidebar',
     props: {
         modelValue: Boolean,
-        type: [String, Object],
+        type: [String, Object] as PropType<VueClassAttribute>,
         overlay: Boolean,
         position: {
-            type: String,
+            type: String as PropType<SidebarPosition>,
             default: 'fixed',
-            validator: (value) => {
-                return [
-                    'fixed',
-                    'absolute',
-                    'static'
-                ].indexOf(value) >= 0
+            validator: (value: SidebarPosition) => {
+                return SIDEBAR_POSITIONS.indexOf(value) >= 0
             }
         },
         fullheight: Boolean,
@@ -61,41 +73,43 @@ export default {
         expandOnHover: Boolean,
         expandOnHoverFixed: Boolean,
         delay: {
-            type: Number,
+            type: [Number, null] as PropType<number | null>,
             default: () => config.defaultSidebarDelay
         },
         canCancel: {
-            type: [Array, Boolean],
-            default: () => ['escape', 'outside']
+            type: [Array<CancelMethod>, Boolean],
+            default: () => ['escape', 'outside'] as CancelMethod[]
         },
         onCancel: {
-            type: Function,
+            type: Function as PropType<CancelHandler>,
             default: () => {}
         },
         scroll: {
-            type: String,
+            type: String as PropType<ScrollBehavior>,
             default: () => {
                 return config.defaultModalScroll
                     ? config.defaultModalScroll
                     : 'clip'
             },
-            validator: (value) => {
-                return [
-                    'clip',
-                    'keep'
-                ].indexOf(value) >= 0
+            validator: (value: ScrollBehavior) => {
+                return SCROLL_BEHAVIORS.indexOf(value) >= 0
             }
         }
     },
-    emits: ['close', 'update:modelValue'],
+    emits: {
+        close: () => true,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        'update:modelValue': (_value: boolean) => true
+    },
     data() {
         return {
             isOpen: this.modelValue,
             isDelayOver: false,
-            transitionName: null,
+            transitionName: undefined as string | undefined,
             animating: true,
-            savedScrollTop: null,
-            hasLeaved: false
+            savedScrollTop: null as number | null,
+            hasLeaved: false,
+            timer: undefined as ReturnType<typeof setTimeout> | undefined
         }
     },
     computed: {
@@ -147,27 +161,28 @@ export default {
         }
     },
     methods: {
-        /**
+        /*
         * Keypress event that is bound to the document.
         */
-        keyPress({ key }) {
+        keyPress({ key }: { key?: KeyboardEvent['key'] }) {
             if (this.isFixed) {
                 if (this.isOpen && (key === 'Escape' || key === 'Esc')) this.cancel('escape')
             }
         },
 
-        /**
+        /*
         * Close the Sidebar if canCancel and call the onCancel prop (function).
         */
-        cancel(method) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        cancel(method: CancelMethod, ...args: any[]) {
             if (this.cancelOptions.indexOf(method) < 0) return
             if (this.isStatic) return
 
-            this.onCancel.apply(null, arguments)
+            this.onCancel.call(null, method, ...args)
             this.close()
         },
 
-        /**
+        /*
         * Call the onCancel prop (function) and emit events
         */
         close() {
@@ -176,25 +191,25 @@ export default {
             this.$emit('update:modelValue', false)
         },
 
-        /**
+        /*
          * Close fixed sidebar if clicked outside.
          */
-        clickedOutside(event) {
+        clickedOutside(event: MouseEvent) {
             if (!this.isFixed || !this.isOpen || this.animating) { return }
 
-            if (!event.composedPath().includes(this.$refs.sidebarContent)) {
+            if (!event.composedPath().includes(this.$refs.sidebarContent as HTMLElement)) {
                 this.cancel('outside')
             }
         },
 
-        /**
+        /*
         * Transition before-enter hook
         */
         beforeEnter() {
             this.animating = true
         },
 
-        /**
+        /*
         * Transition after-leave hook
         */
         afterEnter() {
@@ -229,7 +244,7 @@ export default {
             }
 
             document.documentElement.scrollTop = this.savedScrollTop
-            document.body.style.top = null
+            document.body.style.top = ''
             this.savedScrollTop = null
         },
         onHover() {
@@ -239,7 +254,7 @@ export default {
                     if (!this.hasLeaved) {
                         this.isDelayOver = true
                     }
-                    this.timer = null
+                    this.timer = undefined
                 }, this.delay)
             } else {
                 this.isDelayOver = false
@@ -247,10 +262,10 @@ export default {
         },
         onHoverLeave() {
             this.hasLeaved = true
-            this.timer = null
+            this.timer = undefined
             this.isDelayOver = false
         },
-        /**
+        /*
          * Close sidebar if close button is clicked.
          */
         clickedCloseButton() {
@@ -289,7 +304,7 @@ export default {
                     : this.savedScrollTop
                 document.body.classList.remove('is-noscroll')
                 document.documentElement.scrollTop = savedScrollTop
-                document.body.style.top = null
+                document.body.style.top = ''
             }
         }
         if (this.isFixed) {
@@ -297,5 +312,5 @@ export default {
         }
         clearTimeout(this.timer)
     }
-}
+})
 </script>

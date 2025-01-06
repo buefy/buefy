@@ -1,3 +1,7 @@
+<script setup lang="ts">
+    import { BField, BSwitch } from '@ntohq/buefy-next'
+</script>
+
 <template>
     <section>
         <b-field>

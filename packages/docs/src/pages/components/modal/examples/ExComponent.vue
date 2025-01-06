@@ -22,8 +22,11 @@
     </section>
 </template>
 
-<script>
-    const ModalForm = {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BButton, BModal } from '@ntohq/buefy-next'
+
+    const ModalForm = defineComponent({
         props: ['email', 'password', 'canCancel'],
         template: `
             <form action="">
@@ -68,10 +71,12 @@
                 </div>
             </form>
         `
-    }
+    })
 
     export default {
         components: {
+            BButton,
+            BModal,
             ModalForm
         },
         data() {

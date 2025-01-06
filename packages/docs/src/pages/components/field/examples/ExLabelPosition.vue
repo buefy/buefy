@@ -62,7 +62,7 @@
                 placeholder="e.g. jQuery"
                 icon="magnify"
                 clearable
-                @select="option => selected = option">
+                @select="(option: string) => selected = option">
                 <template #empty>No results found</template>
             </b-autocomplete>
         </b-field>
@@ -124,13 +124,42 @@
     </section>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import {
+    BAutocomplete,
+    BButton,
+    BDatepicker,
+    BDatetimepicker,
+    BField,
+    BInput,
+    BNumberinput,
+    BRadio,
+    BSelect,
+    BTaginput,
+    BTimepicker
+} from '@ntohq/buefy-next'
+
+export default defineComponent({
+    components: {
+        BAutocomplete,
+        BButton,
+        BDatepicker,
+        BDatetimepicker,
+        BField,
+        BInput,
+        BNumberinput,
+        BRadio,
+        BSelect,
+        BTaginput,
+        BTimepicker
+    },
     data() {
         return {
-            labelPosition: 'on-border'
+            labelPosition: 'on-border',
+            selected: undefined as string | undefined
         }
     }
-}
+})
 </script>
 

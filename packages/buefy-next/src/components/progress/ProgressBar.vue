@@ -4,7 +4,7 @@
         :class="newType"
         role="progressbar"
         :aria-valuenow="value"
-        :aria-valuemax="parent.max"
+        :aria-valuemax="parentProgress.max"
         aria-valuemin="0"
         :style="{width: barWidth}"
     >
@@ -17,10 +17,14 @@
     </div>
 </template>
 
-<script>
-import { PROGRESS_INJECTION_KEY } from './Progress.vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { ExtractComponentProps } from '../../utils/helpers'
+import Progress, { PROGRESS_INJECTION_KEY } from './Progress.vue'
 
-export default {
+type ProgressInstance = InstanceType<typeof Progress>
+
+const ProgressBar = defineComponent({
     name: 'BProgressBar',
     inject: {
         parent: {
@@ -30,7 +34,7 @@ export default {
     },
     props: {
         type: {
-            type: [String, Object],
+            type: [String],
             default: undefined
         },
         value: {
@@ -43,21 +47,28 @@ export default {
         }
     },
     computed: {
+        parentProgress() {
+            return this.parent as ProgressInstance
+        },
         newType() {
             return [
-                this.parent.size,
-                this.type || this.parent.type
+                this.parentProgress.size,
+                this.type || this.parentProgress.type
             ]
         },
         newShowValue() {
-            return this.showValue || this.parent.showValue
+            return this.showValue || this.parentProgress.showValue
         },
         newValue() {
-            return this.parent.calculateValue(this.value)
+            return this.parentProgress.calculateValue(this.value)
         },
         barWidth() {
-            return `${this.value * 100 / this.parent.max}%`
+            return `${(this.value === undefined ? 0 : this.value) * 100 / this.parentProgress.max}%`
         }
     }
-}
+})
+
+export type ProgressBarProps = ExtractComponentProps<typeof ProgressBar>
+
+export default ProgressBar
 </script>

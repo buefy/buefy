@@ -28,8 +28,12 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BButton } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: { BButton },
         methods: {
             snackbar() {
                 this.$buefy.snackbar.open(`Default, positioned bottom-right with a green 'OK' button`)
@@ -80,5 +84,5 @@
                 })
             },
         }
-    }
+    })
 </script>

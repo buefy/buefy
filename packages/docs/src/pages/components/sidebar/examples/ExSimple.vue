@@ -74,8 +74,34 @@
 </section>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import {
+  BButton,
+  BDropdown,
+  BDropdownItem,
+  BField,
+  BIcon,
+  BMenu,
+  BMenuList,
+  BMenuItem,
+  BSidebar,
+  BSwitch
+} from '@ntohq/buefy-next'
+
+export default defineComponent({
+  components: {
+    BButton,
+    BDropdown,
+    BDropdownItem,
+    BField,
+    BIcon,
+    BMenu,
+    BMenuList,
+    BMenuItem,
+    BSidebar,
+    BSwitch
+  },
   data() {
     return {
       open: false,
@@ -85,7 +111,7 @@ export default {
       right: false
     };
   }
-};
+})
 </script>
 
 <style>

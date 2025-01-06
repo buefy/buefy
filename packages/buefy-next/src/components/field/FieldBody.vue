@@ -1,7 +1,15 @@
-<script>
-import { Comment, Fragment, Text, h as createElement, resolveComponent } from 'vue'
+<script lang="ts">
+import {
+    Comment,
+    Fragment,
+    Text,
+    defineComponent,
+    h as createElement,
+    resolveComponent
+} from 'vue'
+import type { ComponentPublicInstance, VNode } from 'vue'
 
-export default {
+export default defineComponent({
     name: 'BFieldBody',
     inject: {
         parent: {
@@ -25,7 +33,8 @@ export default {
             ? this.$slots.default()
             : this.$slots.default
         if (children != null && children.length === 1 && children[0].type === Fragment) {
-            children = children[0].children
+            // is assuming VNode[] safe?
+            children = children[0].children as VNode[]
         }
         return createElement(
             'div',
@@ -42,8 +51,14 @@ export default {
                             message = this.message
                             first = false
                         }
+                        // Options API does not seem to provide a way to type injected values
+                        const parentField = this.parent as (ComponentPublicInstance | null)
                         return createElement(
-                            this.parent ? this.parent.$.type : resolveComponent('b-field'),
+                            // parentField.$.type is supposed to be BField
+                            // it falls back to `resolveComponent('b-field')`
+                            // but won't work unless `BField` is globally registered
+                            // should not be a problem as long as `BFieldBody` is properly used
+                            parentField ? parentField.$.type : resolveComponent('b-field'),
                             {
                                 type: this.type,
                                 message
@@ -55,5 +70,5 @@ export default {
             }
         )
     }
-}
+})
 </script>

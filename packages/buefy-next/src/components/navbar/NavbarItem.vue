@@ -11,10 +11,29 @@
     </component>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { ComponentPublicInstance } from 'vue'
+
 const clickableWhiteList = ['div', 'span', 'input']
 
-export default {
+/* eslint-disable @typescript-eslint/ban-types */
+type NavbarItemParent = ComponentPublicInstance<
+    {}, // P(rops)
+    {}, // B (raw bindings)
+    {
+        // to accomodate [`_is${item}`] access
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        [key: string]: any
+    }, // D(ata)
+    {}, // C(omputed)
+    {
+        closeMenu: () => void
+    } // M(ethods)
+>
+/* eslint-enable @typescript-eslint/ban-types */
+
+export default defineComponent({
     name: 'BNavbarItem',
     inheritAttrs: false,
     props: {
@@ -25,37 +44,41 @@ export default {
         active: Boolean
     },
     methods: {
-        /**
+        /*
          * Keypress event that is bound to the document
          */
-        keyPress({ key }) {
+        keyPress({ key }: { key?: KeyboardEvent['key'] }) {
             if (key === 'Escape' || key === 'Esc') {
                 this.closeMenuRecursive(this, ['NavBar'])
             }
         },
-        /**
+        /*
          * Close parent if clicked outside.
          */
-        handleClickEvent(event) {
+        handleClickEvent(event: { target: { localName: string } }) {
             const isOnWhiteList = clickableWhiteList.some((item) => item === event.target.localName)
             if (!isOnWhiteList) {
                 const parent = this.closeMenuRecursive(this, ['NavbarDropdown', 'NavBar'])
                 if (parent && parent.$data._isNavbarDropdown) this.closeMenuRecursive(parent, ['NavBar'])
             }
         },
-        /**
+        /*
          * Close parent recursively
          */
-        closeMenuRecursive(current, targetComponents) {
-            if (!current.$parent) return null
+        closeMenuRecursive(
+            current: ComponentPublicInstance,
+            targetComponents: string[]
+        ): NavbarItemParent | null {
+            const parent = current.$parent as NavbarItemParent | null
+            if (!parent) return null
             const foundItem = targetComponents.reduce((acc, item) => {
-                if (current.$parent.$data[`_is${item}`]) {
-                    current.$parent.closeMenu()
-                    return current.$parent
+                if (parent.$data[`_is${item}`]) {
+                    parent.closeMenu()
+                    return parent
                 }
                 return acc
-            }, null)
-            return foundItem || this.closeMenuRecursive(current.$parent, targetComponents)
+            }, null as NavbarItemParent | null)
+            return foundItem || this.closeMenuRecursive(parent, targetComponents)
         }
     },
     mounted() {
@@ -70,5 +93,5 @@ export default {
             document.removeEventListener('keyup', this.keyPress)
         }
     }
-}
+})
 </script>

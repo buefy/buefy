@@ -5,8 +5,8 @@
         ref="label"
         :disabled="disabledOrUndefined"
         @click="focus"
-        @keydown.prevent.enter="$refs.label.click()"
-        @keydown.prevent.space="$refs.label.click()"
+        @keydown.prevent.enter="($refs.label as HTMLElement).click()"
+        @keydown.prevent.space="($refs.label as HTMLElement).click()"
     >
         <!-- Checkbox needs to listen for a space event instead of a just a
              click and enter event so that that using the keyboard spacebar will also
@@ -32,10 +32,11 @@
     </label>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 import CheckRadioMixin from '../../utils/CheckRadioMixin'
 
-export default {
+export default defineComponent({
     name: 'BCheckbox',
     mixins: [CheckRadioMixin],
     props: {
@@ -58,5 +59,5 @@ export default {
             default: ''
         }
     }
-}
+})
 </script>

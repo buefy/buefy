@@ -37,10 +37,16 @@
     </section>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BBreadcrumb, BBreadcrumbItem } from '@ntohq/buefy-next'
 
+export default defineComponent({
+    components: {
+        BBreadcrumb,
+        BBreadcrumbItem
+    },
     name: 'ExSizes'
 
-}
+})
 </script>

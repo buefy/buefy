@@ -14,16 +14,19 @@
     </transition>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
 import { removeElement } from '../../utils/helpers'
+import type { ExtractComponentProps } from '../../utils/helpers'
 import { HTMLElement } from '../../utils/ssr'
 
-export default {
+const Loading = defineComponent({
     name: 'BLoading',
     props: {
         modelValue: Boolean,
         programmatic: Boolean,
-        container: [Object, Function, HTMLElement],
+        container: [Object, Function, HTMLElement] as PropType<HTMLElement>,
         isFullPage: {
             type: Boolean,
             default: true
@@ -37,11 +40,18 @@ export default {
             default: false
         },
         onCancel: {
-            type: Function,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            type: Function as PropType<(...args: any[]) => void>,
             default: () => {}
         }
     },
-    emits: ['close', 'update:is-full-page', 'update:modelValue'],
+    emits: {
+        /* eslint-disable @typescript-eslint/no-unused-vars */
+        close: () => true,
+        'update:is-full-page': (_flag: boolean) => true,
+        'update:modelValue': (_flag: boolean) => true
+        /* eslint-enable @typescript-eslint/no-unused-vars */
+    },
     data() {
         return {
             isActive: this.modelValue || false,
@@ -57,7 +67,7 @@ export default {
         }
     },
     methods: {
-        /**
+        /*
         * Close the Modal if canCancel.
         */
         cancel() {
@@ -65,11 +75,12 @@ export default {
 
             this.close()
         },
-        /**
+        /*
         * Emit events, and destroy modal if it's programmatic.
         */
-        close() {
-            this.onCancel.apply(null, arguments)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        close(...args: any[]) {
+            this.onCancel.apply(null, args)
             this.$emit('close')
             this.$emit('update:modelValue', false)
 
@@ -77,16 +88,16 @@ export default {
             if (this.programmatic) {
                 this.isActive = false
                 // TODO: should the following happen outside this component;
-                // i.e., in index.js?
+                // i.e., in index.ts?
                 setTimeout(() => {
                     removeElement(this.$el)
                 }, 150)
             }
         },
-        /**
+        /*
         * Keypress event that is bound to the document.
         */
-        keyPress({ key }) {
+        keyPress({ key }: KeyboardEvent) {
             if (key === 'Escape' || key === 'Esc') this.cancel()
         }
     },
@@ -116,5 +127,9 @@ export default {
             document.removeEventListener('keyup', this.keyPress)
         }
     }
-}
+})
+
+export type LoadingProps = ExtractComponentProps<typeof Loading>
+
+export default Loading
 </script>

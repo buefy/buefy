@@ -37,3 +37,7 @@
 
     </section>
 </template>
+
+<script setup lang="ts">
+import { BCollapse, BIcon } from '@ntohq/buefy-next'
+</script>

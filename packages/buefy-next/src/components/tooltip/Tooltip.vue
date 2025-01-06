@@ -30,11 +30,21 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
+
 import config from '../../utils/config'
+import type { VueClassAttribute } from '../../utils/config'
 import { createAbsoluteElement, removeElement } from '../../utils/helpers'
 
-export default {
+export const TOOLTIP_POSITIONS = ['is-top', 'is-bottom', 'is-left', 'is-right'] as const
+export type TooltipPosition = typeof TOOLTIP_POSITIONS[number]
+
+export const CLOSE_OPTIONS = ['inside', 'outside', 'escape'] as const
+export type CloseOption = typeof CLOSE_OPTIONS[number]
+
+export default defineComponent({
     name: 'BTooltip',
     props: {
         active: {
@@ -55,15 +65,10 @@ export default {
             default: () => config.defaultTooltipCloseDelay
         },
         position: {
-            type: String,
+            type: String as PropType<TooltipPosition>,
             default: 'is-top',
             validator(value) {
-                return [
-                    'is-top',
-                    'is-bottom',
-                    'is-left',
-                    'is-right'
-                ].indexOf(value) > -1
+                return TOOLTIP_POSITIONS.indexOf(value as TooltipPosition) > -1
             }
         },
         triggers: {
@@ -89,24 +94,28 @@ export default {
         },
         contentClass: String,
         autoClose: {
-            type: [Array, Boolean],
+            type: [Array<CloseOption>, Boolean],
             default: true
         }
     },
-    emits: ['close', 'open'],
+    emits: {
+        close: () => true,
+        open: () => true
+    },
     data() {
         return {
             isActive: false,
             triggerStyle: {},
-            timer: null,
-            _bodyEl: undefined, // Used to append to body
-            resizeObserver: undefined,
-            resizeListener: undefined,
-            timeOutID: null
+            timer: undefined as ReturnType<typeof setTimeout> | undefined,
+            _bodyEl: undefined as HTMLElement | undefined, // Used to append to body
+            resizeObserver: undefined as ResizeObserver | undefined,
+            resizeListener: undefined as (() => void) | undefined,
+            timeOutID: undefined as ReturnType<typeof setTimeout> | undefined,
+            controller: undefined as AbortController | undefined
         }
     },
     computed: {
-        rootClasses() {
+        rootClasses(): VueClassAttribute[] {
             return ['b-tooltip', this.type, this.position, this.size, {
                 'is-square': this.square,
                 'is-always': this.always,
@@ -120,7 +129,7 @@ export default {
     },
     watch: {
         isActive() {
-            this.$emit(this.isActive ? 'open' : 'close')
+            this.isActive ? this.$emit('open') : this.$emit('close')
             if (this.appendToBody) {
                 this.updateAppendToBody()
             }
@@ -129,27 +138,34 @@ export default {
     methods: {
         updateAppendToBody() {
             const tooltip = this.$refs.tooltip
-            const trigger = this.$refs.trigger
+            const trigger = this.$refs.trigger as Element
             if (tooltip && trigger) {
                 // update wrapper tooltip
-                const tooltipEl = this.$data._bodyEl.children[0]
+                const tooltipEl = this.$data._bodyEl!.children[0] as HTMLElement
                 tooltipEl.classList.forEach((item) => tooltipEl.classList.remove(item))
+                // the following block no longer works in Vue 3, which was
+                // introduced to address the following issue:
+                // https://github.com/buefy/buefy/issues/2780
+                // FIXME: I comment out the following block until we learn more
+                // about the issue
+                /*
                 if (
                     this.$vnode &&
                     this.$vnode.data &&
                     this.$vnode.data.staticClass
                 ) {
                     tooltipEl.classList.add(this.$vnode.data.staticClass)
-                }
+                } */
                 this.rootClasses.forEach((item) => {
                     if (typeof item === 'object') {
-                        for (const key in item) {
-                            if (item[key]) {
+                        const record = item as Record<string, boolean | undefined>
+                        for (const key in record) {
+                            if (record[key]) {
                                 tooltipEl.classList.add(key)
                             }
                         }
                     } else {
-                        tooltipEl.classList.add(item)
+                        tooltipEl.classList.add(item!)
                     }
                 })
 
@@ -189,7 +205,7 @@ export default {
                         break
                 }
 
-                const wrapper = this.$data._bodyEl
+                const wrapper = this.$data._bodyEl!
                 wrapper.style.position = 'absolute'
                 wrapper.style.top = `${top}px`
                 wrapper.style.left = `${left}px`
@@ -212,7 +228,7 @@ export default {
             if (this.triggers.indexOf('hover') < 0) return
             this.open()
         },
-        onContextMenu(e) {
+        onContextMenu(e: { preventDefault: Event['preventDefault'] }) {
             if (this.triggers.indexOf('contextmenu') < 0) return
             e.preventDefault()
             this.open()
@@ -225,7 +241,7 @@ export default {
             if (this.delay) {
                 this.timer = setTimeout(() => {
                     this.isActive = true
-                    this.timer = null
+                    this.timer = undefined
                 }, this.delay)
             } else {
                 this.isActive = true
@@ -237,17 +253,17 @@ export default {
                 if (this.closeDelay) {
                     this.timer = setTimeout(() => {
                         this.isActive = !this.autoClose
-                        this.timer = null
+                        this.timer = undefined
                     }, this.closeDelay)
                 } else {
                     this.isActive = !this.autoClose
                 }
             }
         },
-        /**
+        /*
         * Close tooltip if clicked outside.
         */
-        clickedOutside(event) {
+        clickedOutside(event: MouseEvent) {
             if (this.isActive) {
                 if (Array.isArray(this.autoClose)) {
                     if (this.autoClose.includes('outside')) {
@@ -262,24 +278,24 @@ export default {
                 }
             }
         },
-        /**
+        /*
          * Keypress event that is bound to the document
          */
-        keyPress({ key }) {
+        keyPress({ key }: { key: KeyboardEvent['key'] }) {
             if (this.isActive && (key === 'Escape' || key === 'Esc')) {
                 if (Array.isArray(this.autoClose)) {
                     if (this.autoClose.indexOf('escape') >= 0) this.isActive = false
                 }
             }
         },
-        /**
+        /*
         * White-listed items to not close when clicked.
         */
-        isInWhiteList(el) {
+        isInWhiteList(el: EventTarget | null) {
             if (el === this.$refs.content) return true
             // All chidren from content
             if (this.$refs.content != null) {
-                const children = this.$refs.content.querySelectorAll('*')
+                const children = (this.$refs.content as Element).querySelectorAll('*')
                 for (const child of children) {
                     if (el === child) {
                         return true
@@ -292,7 +308,7 @@ export default {
     mounted() {
         if (this.appendToBody && typeof window !== 'undefined') {
             this.controller = new window.AbortController()
-            this.$data._bodyEl = createAbsoluteElement(this.$refs.content)
+            this.$data._bodyEl = createAbsoluteElement(this.$refs.content as Element)
             this.updateAppendToBody()
             // updates the tooltip position if the tooltip is inside
             // `.animation-content`
@@ -334,7 +350,7 @@ export default {
             this.resizeObserver.disconnect()
         }
         if (this.appendToBody) {
-            removeElement(this.$data._bodyEl)
+            removeElement(this.$data._bodyEl!)
         }
         if (this.controller != null) {
             this.controller.abort()
@@ -342,5 +358,5 @@ export default {
         clearTimeout(this.timer)
         clearTimeout(this.timeOutID)
     }
-}
+})
 </script>

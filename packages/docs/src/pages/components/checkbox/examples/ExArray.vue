@@ -25,12 +25,16 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BCheckbox } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: { BCheckbox },
         data() {
             return {
                 checkboxGroup: ['Flint']
             }
         }
-    }
+    })
 </script>

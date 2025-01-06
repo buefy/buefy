@@ -1,8 +1,9 @@
-import vue from 'rollup-plugin-vue'
+import esbuild from 'rollup-plugin-esbuild'
 import node from '@rollup/plugin-node-resolve'
 import cjs from '@rollup/plugin-commonjs'
 import babel from '@rollup/plugin-babel'
 import terser from '@rollup/plugin-terser'
+import vue from '@vitejs/plugin-vue'
 
 import fs from 'node:fs'
 import path from 'node:path'
@@ -28,12 +29,40 @@ const components = fs
         fs.statSync(path.join(baseFolder + componentsFolder, f)).isDirectory()
     )
 
+const JS_COMPONENTS = [
+    'autocomplete',
+    'button',
+    'carousel',
+    'clockpicker',
+    'colorpicker',
+    'datepicker',
+    'datetimepicker',
+    'dialog',
+    'input',
+    'menu',
+    'message',
+    'notification',
+    'numberinput',
+    'pagination',
+    'rate',
+    'select',
+    'slider',
+    'steps',
+    'table',
+    'tabs',
+    'tag',
+    'taginput',
+    'timepicker',
+    'upload',
+]
+
 const entries = {
-    index: './src/index.js',
-    helpers: './src/utils/helpers.js',
-    config: './src/utils/ConfigComponent.js',
+    index: './src/index.ts',
+    helpers: './src/utils/helpers.ts',
+    config: './src/utils/ConfigComponent.ts',
     ...components.reduce((obj, name) => {
-        obj[name] = (baseFolder + componentsFolder + name)
+        const ext = JS_COMPONENTS.indexOf(name) !== -1 ? 'js' : 'ts'
+        obj[name] = (baseFolder + componentsFolder + name + `/index.${ext}`)
         return obj
     }, {})
 }
@@ -52,11 +81,18 @@ const vuePluginConfig = {
     }
 }
 
+const esbuildConfig = {
+    sourceMap: false,
+    minify: false,
+    target: 'es2015'
+}
+
 export default () => {
     const mapComponent = (name) => {
+        const ext = JS_COMPONENTS.indexOf(name) !== -1 ? 'js' : 'ts'
         return [
             {
-                input: baseFolder + componentsFolder + `${name}/index.js`,
+                input: baseFolder + componentsFolder + `${name}/index.${ext}`,
                 external: ['vue'],
                 output: {
                     format: 'umd',
@@ -72,8 +108,8 @@ export default () => {
                     node({
                         extensions: ['.vue', '.js']
                     }),
+                    esbuild(esbuildConfig),
                     vue(vuePluginConfig),
-                    babel(babelConfig),
                     cjs()
                 ]
             }
@@ -92,8 +128,8 @@ export default () => {
                 node({
                     extensions: ['.vue', '.js']
                 }),
+                esbuild(esbuildConfig),
                 vue(vuePluginConfig),
-                babel(babelConfig),
                 cjs()
             ]
         },
@@ -109,13 +145,13 @@ export default () => {
                 node({
                     extensions: ['.vue', '.js']
                 }),
+                esbuild(esbuildConfig),
                 vue(vuePluginConfig),
-                babel(babelConfig),
                 cjs()
             ]
         },
         {
-            input: 'src/index.js',
+            input: 'src/index.ts',
             external: ['vue'],
             output: {
                 format: 'umd',
@@ -131,13 +167,13 @@ export default () => {
                 node({
                     extensions: ['.vue', '.js']
                 }),
+                esbuild(esbuildConfig),
                 vue(vuePluginConfig),
-                babel(babelConfig),
                 cjs()
             ]
         },
         {
-            input: 'src/index.js',
+            input: 'src/index.ts',
             external: ['vue'],
             output: {
                 format: 'esm',
@@ -148,8 +184,8 @@ export default () => {
                 node({
                     extensions: ['.vue', '.js']
                 }),
+                esbuild(esbuildConfig),
                 vue(vuePluginConfig),
-                babel(babelConfig),
                 cjs()
             ]
         },

@@ -26,13 +26,20 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BCheckbox, BField } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BCheckbox,
+            BField
+        },
         data() {
             return {
                 checkbox: false,
                 checkboxCustom: 'Yes'
             }
         }
-    }
+    })
 </script>

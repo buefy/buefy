@@ -40,11 +40,49 @@
     </figure>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
 import config from '../../utils/config'
 import { isWebpSupported } from '../../utils/helpers'
 
-export default {
+// TODO: move to config
+// - BULMA_KNOWN_RATIO
+// - BulmaKnownRatio
+// - isBulmaKnownRatio
+const BULMA_KNOWN_RATIO = [
+    'square',
+    '1by1',
+    '5by4',
+    '4by3',
+    '3by2',
+    '5by3',
+    '16by9',
+    'b2y1',
+    '3by1',
+    '4by5',
+    '3by4',
+    '2by3',
+    '3by5',
+    '9by16',
+    '1by2',
+    '1by3'
+] as const
+
+type BulmaKnownRatio = typeof BULMA_KNOWN_RATIO[number]
+
+function isBulmaKnownRatio(value: unknown): value is BulmaKnownRatio {
+    return BULMA_KNOWN_RATIO.indexOf(value as BulmaKnownRatio) !== -1
+}
+
+/** Type of the `srcsetFormatter` prop. */
+export type SrcsetFormatter = (
+    src: string,
+    size: number,
+    vm: { formatSrcset: (src: string, size: number) => string }
+) => string
+
+export default defineComponent({
     name: 'BImage',
     props: {
         src: String,
@@ -76,16 +114,16 @@ export default {
         },
         placeholder: String,
         srcset: String,
-        srcsetSizes: Array,
+        srcsetSizes: Array as PropType<number[]>,
         srcsetFormatter: {
-            type: Function,
-            default: (src, size, vm) => {
+            type: Function as PropType<SrcsetFormatter>,
+            default: ((src, size, vm) => {
                 if (typeof config.defaultImageSrcsetFormatter === 'function') {
                     return config.defaultImageSrcsetFormatter(src, size)
                 } else {
                     return vm.formatSrcset(src, size)
                 }
-            }
+            }) as SrcsetFormatter
         },
         rounded: {
             type: Boolean,
@@ -97,16 +135,20 @@ export default {
         },
         customClass: String
     },
-    emits: ['load', 'error'],
+    emits: {
+        /* eslint-disable @typescript-eslint/no-unused-vars */
+        load: (event: Event, src?: string) => true,
+        error: (event: Event, src?: string) => true
+        /* eslint-enable @typescript-eslint/no-unused-vars */
+    },
     data() {
         return {
             clientWidth: 0,
             webpSupportVerified: false,
             webpSupported: false,
             useNativeLazy: false,
-            observer: null,
+            observer: null as (IntersectionObserver | null),
             inViewPort: false,
-            bulmaKnownRatio: ['square', '1by1', '5by4', '4by3', '3by2', '5by3', '16by9', 'b2y1', '3by1', '4by5', '3by4', '2by3', '3by5', '9by16', '1by2', '1by3'],
             loaded: false,
             failed: false
         }
@@ -116,32 +158,31 @@ export default {
             return /([0-9]+)by([0-9]+)/
         },
         hasRatio() {
-            return this.ratio && this.ratioPattern.test(this.ratio)
+            return this.ratio != null && this.ratioPattern.test(this.ratio)
         },
         figureClasses() {
-            const classes = { image: this.responsive }
-            if (this.hasRatio && this.bulmaKnownRatio.indexOf(this.ratio) >= 0) {
+            const classes: Record<string, boolean> = { image: this.responsive }
+            if (this.hasRatio && isBulmaKnownRatio(this.ratio)) {
                 classes[`is-${this.ratio}`] = true
             }
             return classes
         },
         figureStyles() {
-            if (
-                this.hasRatio &&
-                this.bulmaKnownRatio.indexOf(this.ratio) < 0
-            ) {
-                const ratioValues = this.ratioPattern.exec(this.ratio)
+            if (this.hasRatio && !isBulmaKnownRatio(this.ratio)) {
+                const ratioValues = this.ratioPattern.exec(this.ratio)!
                 return {
-                    paddingTop: `${(ratioValues[2] / ratioValues[1]) * 100}%`
+                    paddingTop: `${(+ratioValues[2] / +ratioValues[1]) * 100}%`
                 }
             }
             return undefined
         },
-        imgClasses() {
+        imgClasses(): Record<string, boolean> {
             return {
                 'is-rounded': this.rounded,
                 'has-ratio': this.hasRatio,
-                [this.customClass]: !!this.customClass
+                ...(
+                    this.customClass ? { [this.customClass]: !!this.customClass } : {}
+                )
             }
         },
         srcExt() {
@@ -157,7 +198,7 @@ export default {
             }
             if (!this.webpSupported && this.isWepb && this.webpFallback) {
                 if (this.webpFallback.startsWith('.')) {
-                    return src.replace(/\.webp/gi, `${this.webpFallback}`)
+                    return src!.replace(/\.webp/gi, `${this.webpFallback}`)
                 }
                 return this.webpFallback
             }
@@ -195,7 +236,7 @@ export default {
         },
         computedPlaceholder() {
             if (!this.webpSupported && this.isPlaceholderWepb && this.webpFallback && this.webpFallback.startsWith('.')) {
-                return this.placeholder.replace(/\.webp/gi, `${this.webpFallback}`)
+                return this.placeholder!.replace(/\.webp/gi, `${this.webpFallback}`)
             }
             return this.placeholder
         },
@@ -221,7 +262,7 @@ export default {
                 this.srcsetSizes && Array.isArray(this.srcsetSizes) && this.srcsetSizes.length > 0
             ) {
                 return this.srcsetSizes.map((size) => {
-                    return `${this.srcsetFormatter(this.computedSrc, size, this)} ${size}w`
+                    return `${this.srcsetFormatter(this.computedSrc!, size, this)} ${size}w`
                 }).join(',')
             }
             return undefined
@@ -240,7 +281,7 @@ export default {
         }
     },
     methods: {
-        getExt(filename, clean = true) {
+        getExt(filename?: string, clean = true) {
             if (filename) {
                 const noParam = clean ? filename.split('?')[0] : filename
                 return noParam.split('.').pop()
@@ -250,24 +291,24 @@ export default {
         setWidth() {
             this.clientWidth = this.$el.clientWidth
         },
-        formatSrcset(src, size) {
+        formatSrcset(src: string, size: number) {
             const ext = this.getExt(src, false)
             const name = src.split('.').slice(0, -1).join('.')
             return `${name}-${size}.${ext}`
         },
-        onLoad(event) {
+        onLoad(event: Event) {
             this.loaded = true
-            this.emit('load', event)
+            this.emitSrc(event, (src) => this.$emit('load', event, src))
         },
-        onError(event) {
-            this.emit('error', event)
+        onError(event: Event) {
+            this.emitSrc(event, (src) => this.$emit('error', event, src))
             if (!this.failed) {
                 this.failed = true
             }
         },
-        emit(eventName, event) {
-            const { target } = event
-            this.$emit(eventName, event, target.currentSrc || target.src || this.computedSrc)
+        emitSrc(event: Event, emit: (src?: string) => void) {
+            const target = event.target! as HTMLImageElement
+            emit(target.currentSrc || target.src || this.computedSrc)
         }
     },
     created() {
@@ -288,7 +329,7 @@ export default {
                     const { target, isIntersecting } = events[0]
                     if (isIntersecting && !this.inViewPort) {
                         this.inViewPort = true
-                        this.observer.unobserve(target)
+                        this.observer!.unobserve(target)
                     }
                 })
             } else {
@@ -313,5 +354,5 @@ export default {
             window.removeEventListener('resize', this.setWidth)
         }
     }
-}
+})
 </script>

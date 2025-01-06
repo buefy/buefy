@@ -30,12 +30,18 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BRadio } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BRadio
+        },
         data() {
             return {
                 radio: 'Jack'
             }
         }
-    }
+    })
 </script>

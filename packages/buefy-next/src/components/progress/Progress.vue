@@ -20,12 +20,14 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { ExtractComponentProps } from '../../utils/helpers'
 import config from '../../utils/config'
 
 export const PROGRESS_INJECTION_KEY = Symbol('bprogress')
 
-export default {
+const Progress = defineComponent({
     name: 'BProgress',
     provide() {
         return {
@@ -37,7 +39,9 @@ export default {
             type: [String, Object],
             default: 'is-darkgrey'
         },
-        size: String,
+        size: {
+            type: String
+        },
         rounded: {
             type: Boolean,
             default: true
@@ -57,7 +61,7 @@ export default {
         format: {
             type: String,
             default: 'raw',
-            validator: (value) => {
+            validator: (value: string) => {
                 return [
                     'raw',
                     'percent'
@@ -73,9 +77,15 @@ export default {
             default: false
         },
         locale: {
-            type: [String, Array],
+            type: [String, Array<string>],
             default: () => {
                 return config.defaultLocale
+            },
+            validator: (value) => {
+                if (Array.isArray(value)) {
+                    return value.every((item) => typeof item === 'string')
+                }
+                return typeof value === 'string'
             }
         }
     },
@@ -101,7 +111,7 @@ export default {
         wrapperClasses() {
             return {
                 'is-not-native': !this.isNative,
-                [this.size]: typeof this.size === 'string' && !this.isNative
+                [this.size === undefined ? '' : this.size]: typeof this.size === 'string' && !this.isNative
             }
         }
     },
@@ -114,16 +124,16 @@ export default {
             this.$nextTick(() => {
                 if (this.$refs.progress) {
                     if (indeterminate) {
-                        this.$refs.progress.removeAttribute('value')
+                        (this.$refs.progress as HTMLProgressElement).removeAttribute('value')
                     } else {
-                        this.$refs.progress.setAttribute('value', this.value)
+                        (this.$refs.progress as HTMLProgressElement).setAttribute('value', this.value!.toString())
                     }
                 }
             })
         }
     },
     methods: {
-        calculateValue(value) {
+        calculateValue(value: number | undefined) {
             if (value === undefined || value === null || isNaN(value)) {
                 return undefined
             }
@@ -150,5 +160,9 @@ export default {
             ).format(value)
         }
     }
-}
+})
+
+export type ProgressProps = ExtractComponentProps<typeof Progress>
+
+export default Progress
 </script>

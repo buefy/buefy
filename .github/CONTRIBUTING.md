@@ -10,6 +10,8 @@
 * The ``master`` branch is a snapshot of the latest release. **Submit your PR in the ``dev`` branch**
 * Include **screenshots** or animated GIFs in your pull request whenever needed (if visual changes)
 * It's OK to have multiple small commits as you work on the PR - we will let GitHub automatically squash it before merging
+* Make sure all the unit tests pass by running `npm test` both in the library and documentation
+* Make sure your code style is consistent by running `npm run lint:fix` both in the libary and documentation
 * **DO NOT** commit the ``lib`` and ``dist`` folder, use it only for testing on your end
 * If adding new feature:
     * Provide convincing reason to add this feature. Ideally you should open a suggestion issue first and have it greenlighted before working on it
@@ -44,7 +46,8 @@ And here is one about the FLIP technique (which ``<transition-group>`` uses inte
 
 ## Buefy Javascript styleguide
 
-Add comments if method is too complex and/or whenever you judge necessary.
+* Follow the [ESLint](https://eslint.vuejs.org) rules: `npm run lint`
+* Add comments if method is too complex and/or whenever you judge necessary.
 
 ## Buefy Sass styleguide
 
@@ -100,26 +103,104 @@ Sass example:
 
 # Development Setup
 
-You need [Node.js](http://nodejs.org/) **version >= 6 and <= 11**.
+You need [Node.js](https://nodejs.org/) **version >= 16**.
 
 After cloning the repo, run:
 
 ```bash
-$ npm install
+npm install
 ```
 
-Common used NPM scripts:
+## Buefy core library
+
+The core source files of Buefy are in the [`packages/buefy-next`](../packages/buefy-next/) folder.
 
 ```bash
-# serve docs with hot reload at localhost:8080
-$ npm run dev
+cd packages/buefy-next
+```
 
-# build lib in /dist folder
-$ npm run build:lib
+### Checking types
 
-# build docs in /dist-docs folder
-$ npm run build:docs
+```bash
+npm run type-check
+```
 
-# build docs and lib
-$ npm run build
+### Running unit tests
+
+```bash
+npm test
+```
+
+### Checking the code style and formatting
+
+```bash
+npm run lint
+```
+
+You can apply the automatic fixes by running:
+
+```bash
+npm run lint:fix
+```
+
+### Bundling the library
+
+```bash
+npm run build
+```
+
+You can find the bundled files in the `dist` folder.
+
+## Buefy documentation
+
+The source files of the Buefy documentation are in the [`packages/docs`](../packages/docs/) folder.
+
+```bash
+cd packages/docs
+```
+
+### Starting a development server
+
+```bash
+npm run dev
+```
+
+The documentation will be served at <https://localhost:5173/>.
+
+### Checking types
+
+```bash
+npm run type-check
+```
+
+### Checking the code style and formatting
+
+```bash
+npm run lint
+```
+
+You can apply the automatic fixes by running:
+
+```bash
+npm run lint:fix
+```
+
+### Bundling the documentation
+
+Prerequisite: [Bundling the library](#bundling-the-library)
+
+```bash
+npm run build
+```
+
+You can preview the production build by running:
+
+```bash
+npm run preview
+```
+
+As some type errors may be detected only in the production build, you should also perform type checking for the production build:
+
+```bash
+npm run build:type-check
 ```

@@ -1,13 +1,16 @@
-<script>
+<script lang="ts">
 import {
+    defineComponent,
     h as createElement,
     resolveComponent,
     resolveDirective,
     withDirectives
 } from 'vue'
+import type { PropType, StyleValue, VNode } from 'vue'
 
 import NavbarBurger from './NavbarBurger.vue'
 import clickOutside from '../../directives/clickOutside'
+import type { VueClassAttribute } from '../../utils/config'
 
 const FIXED_TOP_CLASS = 'is-fixed-top'
 const BODY_FIXED_TOP_CLASS = 'has-navbar-fixed-top'
@@ -17,9 +20,9 @@ const BODY_FIXED_BOTTOM_CLASS = 'has-navbar-fixed-bottom'
 const BODY_SPACED_FIXED_BOTTOM_CLASS = 'has-spaced-navbar-fixed-bottom'
 const BODY_CENTERED_CLASS = 'has-navbar-centered'
 
-const isFilled = (str) => !!str
+const isFilled = (str?: StyleValue) => !!str
 
-export default {
+export default defineComponent({
     name: 'BNavbar',
     components: {
         NavbarBurger
@@ -28,7 +31,7 @@ export default {
         clickOutside
     },
     props: {
-        type: [String, Object],
+        type: [String, Object] as PropType<VueClassAttribute>,
         transparent: {
             type: Boolean,
             default: false
@@ -50,7 +53,7 @@ export default {
             default: false
         },
         wrapperClass: {
-            type: [String, Array, Object]
+            type: [String, Array, Object] as PropType<StyleValue>
         },
         closeOnClick: {
             type: Boolean,
@@ -63,7 +66,10 @@ export default {
         spaced: Boolean,
         shadow: Boolean
     },
-    emits: ['update:modelValue'],
+    emits: {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        'update:modelValue': (_value: boolean) => true
+    },
     data() {
         return {
             internalIsActive: this.modelValue,
@@ -118,12 +124,12 @@ export default {
         emitUpdateParentEvent() {
             this.$emit('update:modelValue', this.internalIsActive)
         },
-        setBodyClass(className) {
+        setBodyClass(className: string) {
             if (typeof window !== 'undefined') {
                 document.body.classList.add(className)
             }
         },
-        removeBodyClass(className) {
+        removeBodyClass(className: string) {
             if (typeof window !== 'undefined') {
                 document.body.classList.remove(className)
             }
@@ -153,7 +159,7 @@ export default {
 
             return this.genNavbarSlots([navWrapper])
         },
-        genNavbarSlots(slots) {
+        genNavbarSlots(slots: VNode[]) {
             const vnode = createElement(
                 'nav',
                 {
@@ -184,7 +190,7 @@ export default {
                     {
                         isOpened: this.isOpened,
                         onClick: this.toggleActive,
-                        onKeyup: (event) => {
+                        onKeyup: (event: KeyboardEvent) => {
                             if (event.keyCode !== 13) return
                             this.toggleActive()
                         }
@@ -193,7 +199,7 @@ export default {
 
                 const hasBurgerSlot = !!this.$slots.burger
                 return hasBurgerSlot
-                    ? this.$slots.burger({
+                    ? this.$slots.burger!({
                         isOpened: this.isOpened,
                         toggleActive: this.toggleActive
                     })
@@ -210,16 +216,16 @@ export default {
                 ]
             )
         },
-        genMenuPosition(positionName) {
+        genMenuPosition(positionName: 'start' | 'end') {
             return createElement(
                 'div',
                 { class: `navbar-${positionName}` },
                 this.$slots[positionName] != null
-                    ? this.$slots[positionName]()
+                    ? this.$slots[positionName]!()
                     : []
             )
         },
-        setBodyFixedTopClass(isSet) {
+        setBodyFixedTopClass(isSet: boolean) {
             this.checkIfFixedPropertiesAreColliding()
             if (isSet) {
                 // TODO Apply only one of the classes once PR is merged in Bulma:
@@ -231,7 +237,7 @@ export default {
                 this.removeBodyClass(BODY_SPACED_FIXED_TOP_CLASS)
             }
         },
-        setBodyFixedBottomClass(isSet) {
+        setBodyFixedBottomClass(isSet: boolean) {
             this.checkIfFixedPropertiesAreColliding()
             if (isSet) {
                 // TODO Apply only one of the classes once PR is merged in Bulma:
@@ -264,5 +270,5 @@ export default {
     render() {
         return this.genNavbar()
     }
-}
+})
 </script>

@@ -1,6 +1,6 @@
 {
   "name": "@ntohq/buefy-next",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "Lightweight UI components for Vue.js (v3) based on Bulma",
   "keywords": [
     "vuejs",
@@ -17,9 +17,9 @@
   "homepage": "https://buefy.org",
   "license": "MIT",
   "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "module": "dist/buefy.esm.js",
   "unpkg": "dist/buefy.min.js",
-  "typings": "src/types/index.d.ts",
+  "typings": "dist/buefy.d.ts",
   "sideEffects": [
     "*.css",
     "*.scss"
@@ -36,13 +36,16 @@
     "url": "https://github.com/ntohq/buefy-next/issues"
   },
   "scripts": {
-    "test": "npm run lint && npm run unit",
-    "unit": "jest --runInBand --u",
-    "lint": "eslint src --ext .js,.vue",
-    "lint:fix": "eslint src --ext .js,.vue --fix",
-    "build": "rimraf dist && npm run build:js && npm run build:scss && npm run vetur",
+    "test": "npm run lint && npm run unit:update",
+    "unit": "vitest --run",
+    "unit:update": "vitest -u --run",
+    "lint": "eslint src --ext .js,.ts,.vue",
+    "lint:fix": "eslint src --ext .js,.ts,.vue --fix",
+    "type-check": "vue-tsc --noEmit -p tsconfig.test.json --composite false",
+    "build": "rimraf dist && npm run build:js && npm run build:scss && npm run build:dts && npm run vetur",
     "build:js": "rollup -c && rollup -c --environment MINIFY",
     "build:scss": "node ./build/banner.js < src/scss/buefy-build.scss | sass --load-path=node_modules src/scss/buefy-build.scss dist/buefy.css && cleancss -o dist/buefy.min.css dist/buefy.css",
+    "build:dts": "rimraf temp-dts && vue-tsc -p tsconfig.types.json && api-extractor run --local && node build/augment-dts.mjs",
     "vetur": "node -r esm build/vetur.js"
   },
   "peerDependencies": {
@@ -51,6 +54,7 @@
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.23.2",
     "@babel/preset-env": "^7.23.2",
+    "@microsoft/api-extractor": "^7.38.3",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
@@ -69,6 +73,11 @@
     "rollup-plugin-vue": "^6.0.0",
     "sass": "^1.83.0",
     "vue": "^3.3.7",
-    "bulma": "^1.0.3"
+    "bulma": "^1.0.3",
+    "rollup-plugin-esbuild": "^6.1.0",
+    "vitest": "^0.34.6"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.6.1"
   }
 }

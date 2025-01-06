@@ -25,3 +25,7 @@
 
     </section>
 </template>
+
+<script setup lang="ts">
+import { BButton, BCollapse } from '@ntohq/buefy-next'
+</script>

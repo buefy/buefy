@@ -215,7 +215,10 @@
     </section>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BIcon } from '@ntohq/buefy-next'
+
     const customIconConfig = {
         customIconPacks: {
             'fas': {
@@ -278,11 +281,12 @@
             }
         }
     }
-    export default {
+    export default defineComponent({
+        components: { BIcon },
         created() {
             this.$buefy.config.setOptions(customIconConfig)
         }
-    }
+    })
 </script>
 
 <style scoped>

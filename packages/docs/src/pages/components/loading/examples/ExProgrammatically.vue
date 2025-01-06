@@ -16,8 +16,18 @@
     </div>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import type { ComponentPublicInstance } from 'vue'
+    import { BButton, BField, BNotification, BSwitch } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BButton,
+            BField,
+            BNotification,
+            BSwitch
+        },
         data() {
             return {
                 isFullPage: true,
@@ -26,10 +36,10 @@
         methods: {
             open() {
                 const loadingComponent = this.$buefy.loading.open({
-                    container: this.isFullPage ? null : this.$refs.element.$el
+                    container: this.isFullPage ? null : (this.$refs.element as ComponentPublicInstance).$el
                 })
                 setTimeout(() => loadingComponent.close(), 3 * 1000)
             }
         }
-    }
+    })
 </script>

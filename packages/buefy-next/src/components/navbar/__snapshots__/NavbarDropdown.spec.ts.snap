@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BNavbarDropdown > render correctly 1`] = `
+"<div class=\\"navbar-item has-dropdown\\"><a class=\\"navbar-link\\" aria-haspopup=\\"true\\" tabindex=\\"0\\"></a>
+  <div class=\\"navbar-dropdown\\"></div>
+</div>"
+`;

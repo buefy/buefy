@@ -41,3 +41,7 @@
         </b-navbar>
     </section>
 </template>
+
+<script setup lang="ts">
+import { BNavbar, BNavbarDropdown, BNavbarItem } from '@ntohq/buefy-next'
+</script>
