@@ -1,6 +1,7 @@
 import { shallowMount, mount } from '@vue/test-utils'
-import BTaginput from '@components/taginput/Taginput'
-import BTag from '@components/tag/Tag'
+import { describe, expect, it } from 'vitest'
+import BTaginput from '@components/taginput/Taginput.vue'
+import BTag from '@components/tag/Tag.vue'
 
 describe('BTaginput', () => {
     it('is called', () => {
@@ -39,7 +40,7 @@ describe('BTaginput', () => {
         let firedFooter = false
         const wrapper = mount(BTaginput, {
             props: {
-                autocomplete: true,
+                autocomplete: '', // equivalent to attribute without value
                 iconRight: 'close-circle',
                 iconRightClickable: true,
                 selectableHeader: true,

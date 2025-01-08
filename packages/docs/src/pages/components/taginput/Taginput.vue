@@ -49,42 +49,53 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
+
+    import { shallowFields } from '@/utils'
+    import ApiView from '@/components/ApiView.vue'
+    import Example from '@/components/Example.vue'
+    import VariablesView from '@/components/VariablesView.vue'
+
     import api from './api/taginput'
     import variables from './variables/taginput'
-    import { shallowFields } from '@/utils'
 
-    import ExSimple from './examples/ExSimple'
+    import ExSimple from './examples/ExSimple.vue'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
 
-    import ExAutocomplete from './examples/ExAutocomplete'
+    import ExAutocomplete from './examples/ExAutocomplete.vue'
     import ExAutocompleteCode from './examples/ExAutocomplete.vue?raw'
 
-    import ExTemplatedAutocomplete from './examples/ExTemplatedAutocomplete'
+    import ExTemplatedAutocomplete from './examples/ExTemplatedAutocomplete.vue'
     import ExTemplatedAutocompleteCode from './examples/ExTemplatedAutocomplete.vue?raw'
 
-    import ExSelected from './examples/ExSelected'
+    import ExSelected from './examples/ExSelected.vue'
     import ExSelectedCode from './examples/ExSelected.vue?raw'
 
-    import ExLimit from './examples/ExLimit'
+    import ExLimit from './examples/ExLimit.vue'
     import ExLimitCode from './examples/ExLimit.vue?raw'
 
-    import ExState from './examples/ExState'
+    import ExState from './examples/ExState.vue'
     import ExStateCode from './examples/ExState.vue?raw'
 
-    import ExType from './examples/ExType'
+    import ExType from './examples/ExType.vue'
     import ExTypeCode from './examples/ExType.vue?raw'
 
-    import ExSize from './examples/ExSize'
+    import ExSize from './examples/ExSize.vue'
     import ExSizeCode from './examples/ExSize.vue?raw'
 
-    import ExModifier from './examples/ExModifier'
+    import ExModifier from './examples/ExModifier.vue'
     import ExModifierCode from './examples/ExModifier.vue?raw'
 
-    import ExValidation from './examples/ExValidation'
+    import ExValidation from './examples/ExValidation.vue'
     import ExValidationCode from './examples/ExValidation.vue?raw'
 
-    export default {
+    export default defineComponent({
+        components: {
+            ApiView,
+            Example,
+            VariablesView
+        },
         data() {
             return {
                 api,
@@ -113,5 +124,5 @@
                 ExValidationCode
             }
         }
-    }
+    })
 </script>

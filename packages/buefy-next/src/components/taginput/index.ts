@@ -1,9 +1,10 @@
+import type { App } from 'vue'
 import Taginput from './Taginput.vue'
 
 import { registerComponent } from '../../utils/plugins'
 
 const Plugin = {
-    install(Vue) {
+    install(Vue: App) {
         registerComponent(Vue, Taginput)
     }
 }
