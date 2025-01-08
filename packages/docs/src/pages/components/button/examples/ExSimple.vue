@@ -4,8 +4,11 @@
     </section>
 </template>
 
-<script>
+<script lang="ts">
+    import { BButton } from '@ntohq/buefy-next'
+
     export default {
+        components: { BButton },
         methods: {
             clickMe() {
                 this.$buefy.notification.open('Clicked!!')

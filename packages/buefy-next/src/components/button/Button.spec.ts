@@ -1,8 +1,10 @@
 import { shallowMount, mount } from '@vue/test-utils'
-import BButton from '@components/button/Button'
+import type { VueWrapper } from '@vue/test-utils'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import BButton from '@components/button/Button.vue'
 import config, { setOptions } from '@utils/config'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BButton>>
 
 describe('BButton', () => {
     beforeEach(() => {
@@ -19,7 +21,7 @@ describe('BButton', () => {
     })
 
     it('emit a click event', () => {
-        const click = jest.fn()
+        const click = vi.fn()
         wrapper = shallowMount(BButton, {
             props: {
                 onClick: click
@@ -95,14 +97,14 @@ describe('BButton', () => {
         await wrapper.setProps({
             nativeType: 'submit'
         })
-        expect(wrapper.element.type).toBe('submit')
+        expect((wrapper.element as HTMLButtonElement).type).toBe('submit')
     })
 
-    it("shouldn't set type attribute unless if the tag is button", async () => {
+    it("shouldn't set type attribute unless the tag is button", async () => {
         await wrapper.setProps({
             tag: 'a'
         })
-        expect(wrapper.element.type).toBeFalsy()
+        expect((wrapper.element as HTMLButtonElement).type).toBeFalsy()
     })
 
     it('should set type attribute if the tag is input', async () => {
@@ -110,6 +112,6 @@ describe('BButton', () => {
             tag: 'input',
             nativeType: 'submit'
         })
-        expect(wrapper.element.type).toBe('submit')
+        expect((wrapper.element as HTMLButtonElement).type).toBe('submit')
     })
 })
