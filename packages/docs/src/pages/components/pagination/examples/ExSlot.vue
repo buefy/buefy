@@ -37,8 +37,15 @@
     </section>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BPagination, BPaginationButton } from '@ntohq/buefy-next'
+
+export default defineComponent({
+    components: {
+        BPagination,
+        BPaginationButton
+    },
     data() {
         return {
             current: 10,
@@ -64,7 +71,7 @@ export default {
         }
     },
     methods: {
-        convertToRoman(num) {
+        convertToRoman(num: number) {
             const numArray = num.toString().split('')
             const base = numArray.length
             let count = base - 1
@@ -77,5 +84,5 @@ export default {
             return convertedRoman
         }
     }
-}
+})
 </script>

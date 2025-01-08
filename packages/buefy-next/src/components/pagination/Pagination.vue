@@ -4,7 +4,7 @@
             v-if="$slots.previous"
             name="previous"
             :page="
-                getPage(modelValue - 1, {
+                getPage(+modelValue - 1, {
                     disabled: !hasPrev,
                     class: 'pagination-previous',
                     'aria-label': ariaPreviousLabel,
@@ -22,7 +22,7 @@
             v-else
             class="pagination-previous"
             :disabled="!hasPrev"
-            :page="getPage(modelValue - 1)"
+            :page="getPage(+modelValue - 1)"
             :aria-label="ariaPreviousLabel"
         >
             <b-icon
@@ -36,7 +36,7 @@
             v-if="$slots.next"
             name="next"
             :page="
-                getPage(modelValue + 1, {
+                getPage(+modelValue + 1, {
                     disabled: !hasNext,
                     class: 'pagination-next',
                     'aria-label': ariaNextLabel,
@@ -54,7 +54,7 @@
             v-else
             class="pagination-next"
             :disabled="!hasNext"
-            :page="getPage(modelValue + 1)"
+            :page="getPage(+modelValue + 1)"
             :aria-label="ariaNextLabel"
         >
             <b-icon
@@ -80,7 +80,7 @@
         <small class="info" v-if="simple">
             <template v-if="perPage == 1"> {{ firstItem }} / {{ total }} </template>
             <template v-else>
-                {{ firstItem }}-{{ Math.min(modelValue * perPage, total) }} / {{ total }}
+                {{ firstItem }}-{{ Math.min(+modelValue * +perPage, +total!) }} / {{ total }}
             </template>
         </small>
         <ul class="pagination-list" v-else>
@@ -111,17 +111,26 @@
     </nav>
 </template>
 
-<script>
-import PaginationButton from './PaginationButton.vue'
-import Icon from '../icon/Icon.vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import BPaginationButton from './PaginationButton.vue'
+import type { PaginationPage } from './types'
+import BIcon from '../icon/Icon.vue'
 import config from '../../utils/config'
 import debounce from '../../utils/debounce'
 
-export default {
+// Options for PaginationPage.
+interface PaginationPageOptions {
+    disabled?: boolean
+    class?: string
+    'aria-label'?: string
+}
+
+export default defineComponent({
     name: 'BPagination',
     components: {
-        [Icon.name]: Icon,
-        [PaginationButton.name]: PaginationButton
+        BIcon,
+        BPaginationButton
     },
     props: {
         total: [Number, String],
@@ -171,10 +180,16 @@ export default {
     },
     data() {
         return {
-            inputValue: this.modelValue
+            inputValue: this.modelValue,
+            debounceHandlePageInput: undefined as ((event: Event) => void) | undefined
         }
     },
-    emits: ['change', 'update:modelValue'],
+    emits: {
+        /* eslint-disable @typescript-eslint/no-unused-vars */
+        change: (_num: number) => true,
+        'update:modelValue': (_num: number) => true
+        /* eslint-enable @typescript-eslint/no-unused-vars */
+    },
     computed: {
         rootClasses() {
             return [
@@ -190,82 +205,82 @@ export default {
         },
 
         beforeCurrent() {
-            return parseInt(this.rangeBefore)
+            return parseInt(this.rangeBefore + '')
         },
 
         afterCurrent() {
-            return parseInt(this.rangeAfter)
+            return parseInt(this.rangeAfter + '')
         },
 
-        /**
+        /*
         * Total page size (count).
         */
         pageCount() {
-            return Math.ceil(this.total / this.perPage)
+            return Math.ceil(+this.total! / +this.perPage)
         },
 
-        /**
+        /*
         * First item of the page (count).
         */
         firstItem() {
-            const firstItem = this.modelValue * this.perPage - this.perPage + 1
+            const firstItem = +this.modelValue * +this.perPage - +this.perPage + 1
             return firstItem >= 0 ? firstItem : 0
         },
 
-        /**
+        /*
         * Check if previous button is available.
         */
         hasPrev() {
-            return this.modelValue > 1
+            return +this.modelValue > 1
         },
 
-        /**
+        /*
          * Check if first page button should be visible.
         */
         hasFirst() {
-            return this.modelValue >= 2 + this.beforeCurrent
+            return +this.modelValue >= 2 + this.beforeCurrent
         },
 
-        /**
+        /*
         * Check if first ellipsis should be visible.
         */
         hasFirstEllipsis() {
-            return this.modelValue >= this.beforeCurrent + 4
+            return +this.modelValue >= this.beforeCurrent + 4
         },
 
-        /**
+        /*
         * Check if last page button should be visible.
         */
         hasLast() {
-            return this.modelValue <= this.pageCount - (1 + this.afterCurrent)
+            return +this.modelValue <= this.pageCount - (1 + this.afterCurrent)
         },
 
-        /**
+        /*
         * Check if last ellipsis should be visible.
         */
         hasLastEllipsis() {
-            return this.modelValue < this.pageCount - (2 + this.afterCurrent)
+            return +this.modelValue < this.pageCount - (2 + this.afterCurrent)
         },
 
-        /**
+        /*
         * Check if next button is available.
         */
         hasNext() {
-            return this.modelValue < this.pageCount
+            return +this.modelValue < this.pageCount
         },
 
-        /**
+        /*
         * Get near pages, 1 before and 1 after the current.
         * Also add the click event to the array.
         */
         pagesInRange() {
             if (this.simple) return
 
-            let left = Math.max(1, this.modelValue - this.beforeCurrent)
+            let left = Math.max(1, +this.modelValue - this.beforeCurrent)
             if (left - 1 === 2) {
                 left-- // Do not show the ellipsis if there is only one to hide
             }
-            let right = Math.min(this.modelValue + this.afterCurrent, this.pageCount)
+            let right = Math.min(+this.modelValue + this.afterCurrent, this.pageCount)
             if (this.pageCount - right === 2) {
                 right++ // Do not show the ellipsis if there is only one to hide
             }
@@ -278,7 +293,7 @@ export default {
         }
     },
     watch: {
-        /**
+        /*
         * If current page is trying to be greater than page count, set to last.
         */
         pageCount(value) {
@@ -300,32 +315,32 @@ export default {
         }
     },
     methods: {
-        /**
+        /*
         * Previous button click listener.
         */
-        prev(event) {
-            this.changePage(this.modelValue - 1, event)
+        prev(event?: Event) {
+            this.changePage(+this.modelValue - 1, event)
         },
-        /**
+        /*
          * Next button click listener.
         */
-        next(event) {
-            this.changePage(this.modelValue + 1, event)
+        next(event?: Event) {
+            this.changePage(+this.modelValue + 1, event)
         },
-        /**
+        /*
          * First button click listener.
         */
-        first(event) {
+        first(event?: Event) {
             this.changePage(1, event)
         },
-        /**
+        /*
         * Last button click listener.
         */
-        last(event) {
+        last(event?: Event) {
             this.changePage(this.pageCount, event)
         },
 
-        changePage(num, event) {
+        changePage(num: number, event?: Event) {
             if (this.modelValue === num || num < 1 || num > this.pageCount) return
 
             this.$emit('update:modelValue', num)
@@ -333,11 +348,11 @@ export default {
 
             // Set focus on element to keep tab order
             if (event && event.target) {
-                this.$nextTick(() => event.target.focus())
+                this.$nextTick(() => (event.target! as HTMLElement).focus())
             }
         },
 
-        getPage(num, options = {}) {
+        getPage(num: number, options: PaginationPageOptions = {}): PaginationPage {
             return {
                 number: num,
                 isCurrent: this.modelValue === num,
@@ -351,10 +366,10 @@ export default {
             }
         },
 
-        /**
+        /*
         * Get text for aria-label according to page number.
         */
-        getAriaPageLabel(pageNumber, isCurrent) {
+        getAriaPageLabel(pageNumber: number, isCurrent: boolean) {
             if (this.ariaPageLabel && (!isCurrent || !this.ariaCurrentLabel)) {
                 return this.ariaPageLabel + ' ' + pageNumber + '.'
             } else if (this.ariaPageLabel && isCurrent && this.ariaCurrentLabel) {
@@ -370,18 +385,18 @@ export default {
             return null
         },
 
-        handleOnInputPageChange(event) {
-            this.getPage(this.inputValue).input(event, this.inputValue)
+        handleOnInputPageChange(event: Event) {
+            this.getPage(+this.inputValue).input(event, this.inputValue)
         },
 
-        handleOnInputDebounce(event) {
+        handleOnInputDebounce(event: Event) {
             if (this.debouncePageInput) {
-                this.debounceHandlePageInput(event)
+                this.debounceHandlePageInput!(event)
             } else {
                 this.handleOnInputPageChange(event)
             }
         },
-        handleOnKeyPress(event) {
+        handleOnKeyPress(event: KeyboardEvent) {
             // --- This is required to only allow numeric inputs for the page input - --- //
             // --- size attribute does not work with input type number. --- //
             const ASCIICode = event.which || event.keyCode
@@ -392,8 +407,9 @@ export default {
                 return event.preventDefault()
             }
         },
-        handleAllowableInputPageRange(event) {
-            if (+event.target.value > 0 && +event.target.value <= this.pageCount) {
+        handleAllowableInputPageRange(event: Event) {
+            const target = event.target! as HTMLInputElement
+            if (+target.value > 0 && +target.value <= this.pageCount) {
                 this.handleOnInputValue(event)
             } else {
                 // --- It is nessacery to set inputValue to 1 and then to '' so that the DOM- --- //
@@ -403,8 +419,8 @@ export default {
                 this.inputValue = ''
             }
         },
-        handleOnInputValue(event) {
-            const inputValue = +event.target.value
+        handleOnInputValue(event: Event) {
+            const inputValue = +(event.target! as HTMLInputElement).value
             this.inputValue = inputValue
             if (Number.isInteger(this.inputValue)) {
                 this.handleOnInputDebounce(event)
@@ -414,5 +430,5 @@ export default {
             }
         }
     }
-}
+})
 </script>

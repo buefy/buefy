@@ -41,7 +41,6 @@ const JS_COMPONENTS = [
     'message',
     'notification',
     'numberinput',
-    'pagination',
     'rate',
     'select',
     'slider',

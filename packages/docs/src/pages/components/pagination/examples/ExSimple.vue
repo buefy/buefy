@@ -102,8 +102,18 @@
     </section>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BField, BInput, BPagination, BSelect, BSwitch } from '@ntohq/buefy-next'
+
+export default defineComponent({
+    components: {
+        BField,
+        BInput,
+        BPagination,
+        BSelect,
+        BSwitch
+    },
     data() {
         return {
             total: 200,
@@ -122,5 +132,5 @@ export default {
             inputDebounce: ''
         }
     }
-}
+})
 </script>

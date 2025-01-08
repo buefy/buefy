@@ -1,13 +1,16 @@
+import { beforeEach, describe, expect, it } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
-import BPaginationButton from '@components/pagination/PaginationButton'
+import type { VueWrapper } from '@vue/test-utils'
+import BPaginationButton from '@components/pagination/PaginationButton.vue'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BPaginationButton>>
 const page = 5
 const defaultProps = {
     page: {
         number: page,
         isCurrent: false,
-        click: jest.fn(),
+        click: () => {},
+        input: () => {},
         disabled: false,
         class: '',
         'aria-label': ''

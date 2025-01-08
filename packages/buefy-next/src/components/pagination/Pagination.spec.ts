@@ -1,7 +1,9 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
-import BPagination from '@components/pagination/Pagination'
+import type { VueWrapper } from '@vue/test-utils'
+import BPagination from '@components/pagination/Pagination.vue'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BPagination>>
 
 describe('BPagination', () => {
     beforeEach(() => {
@@ -34,7 +36,7 @@ describe('BPagination', () => {
         expect(wrapper.vm.firstItem).toEqual(0)
 
         await wrapper.setProps({ modelValue: 5 })
-        const expected = wrapper.vm.modelValue * wrapper.vm.perPage - wrapper.vm.perPage + 1
+        const expected = +wrapper.vm.modelValue * +wrapper.vm.perPage - +wrapper.vm.perPage + 1
         expect(wrapper.vm.firstItem).toEqual(expected)
     })
 
@@ -51,12 +53,12 @@ describe('BPagination', () => {
     it('should emit change with value of pageCount when calling last', async () => {
         const event = {
             target: {
-                focus: jest.fn()
+                focus: vi.fn()
             }
         }
 
         await wrapper.setProps({ modelValue: 5 })
-        wrapper.vm.last(event)
+        wrapper.vm.last(event as unknown as Event)
         expect(wrapper.emitted().change[0]).toContainEqual(wrapper.vm.pageCount)
         expect(wrapper.emitted()['update:modelValue'][0]).toContainEqual(wrapper.vm.pageCount)
 
@@ -79,7 +81,7 @@ describe('BPagination', () => {
     })
 
     it('set current to last if page count is smaller than current', async () => {
-        wrapper.vm.last = jest.fn()
+        wrapper.vm.last = vi.fn()
         await wrapper.setProps({ total: 100, modelValue: 3 })
         await wrapper.setProps({ total: 40 })
         expect(wrapper.vm.last).toHaveBeenCalled()
@@ -87,6 +89,6 @@ describe('BPagination', () => {
 
     it('return no pages in range when simple', async () => {
         await wrapper.setProps({ simple: true })
-        expect(wrapper.pagesInRange).toBeUndefined()
+        expect(wrapper.vm.pagesInRange).toBeUndefined()
     })
 })
