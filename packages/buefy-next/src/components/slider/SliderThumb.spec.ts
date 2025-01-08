@@ -1,10 +1,12 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { defineComponent } from 'vue'
 import { mount, shallowMount } from '@vue/test-utils'
-import BSliderThumb from '@components/slider/SliderThumb'
-import BTooltip from '@components/tooltip/Tooltip'
+import type { VueWrapper } from '@vue/test-utils'
+import BSliderThumb from '@components/slider/SliderThumb.vue'
+import BTooltip from '@components/tooltip/Tooltip.vue'
 
-let wrapper
-const BSlider = {
-    template: '<div><slot /></div>',
+let wrapper: VueWrapper<InstanceType<typeof BSliderThumb>>
+const BSlider = defineComponent({
     data() {
         return {
             _isSlider: true,
@@ -13,8 +15,15 @@ const BSlider = {
             min: 0,
             max: 100
         }
-    }
-} // Mocking only necessary
+    },
+    methods: {
+        sliderSize() {
+            return 1 // does not matter
+        },
+        emitValue: vi.fn()
+    },
+    template: '<div><slot /></div>'
+})
 
 describe('BSliderThumb', () => {
     beforeEach(() => {
@@ -35,8 +44,8 @@ describe('BSliderThumb', () => {
     })
 
     it('inherits parent properties', () => {
-        expect(wrapper.vm.step).toBe(BSlider.data().step)
-        expect(wrapper.vm.precision).toBe(BSlider.data().precision)
+        expect(wrapper.vm.step).toBe(5)
+        expect(wrapper.vm.precision).toBe(2)
     })
 
     it('manage focus', () => {
@@ -58,26 +67,24 @@ describe('BSliderThumb', () => {
                 }
             }
         }).findComponent(BSliderThumb)
-        wrapper.vm.$parent.emitValue = jest.fn()
+        BSlider.methods!.emitValue.mockReset()
         const thumb = wrapper.find('.b-slider-thumb')
 
         await thumb.trigger('keydown.left')
-        expect(wrapper.vm.$parent.emitValue).toHaveBeenCalledWith('change')
+        expect(BSlider.methods!.emitValue).toHaveBeenCalledWith('change')
         expect(wrapper.emitted()['update:modelValue']).toBeTruthy()
 
         await thumb.trigger('keydown.right')
-        expect(wrapper.vm.$parent.emitValue).toHaveBeenCalledWith('change')
+        expect(BSlider.methods!.emitValue).toHaveBeenCalledWith('change')
         expect(wrapper.emitted()['update:modelValue']).toBeTruthy()
     })
 
     it('manage dragging events', async () => {
-        document.removeEventListener = jest.fn(() => document.removeEventListener)
-        document.addEventListener = jest.fn(() => document.addEventListener)
-        wrapper.vm.$parent.sliderSize = jest.fn()
-        wrapper.vm.$parent.emitValue = jest.fn()
+        document.removeEventListener = vi.fn(() => document.removeEventListener)
+        document.addEventListener = vi.fn(() => document.addEventListener)
         const thumb = wrapper.find('.b-slider-thumb')
         let clientX = 25
-        const event = { preventDefault: jest.fn(), clientX }
+        const event = { preventDefault: vi.fn(), clientX }
 
         await thumb.trigger('mousedown', event)
         expect(event.preventDefault).toHaveBeenCalled()
@@ -92,11 +99,11 @@ describe('BSliderThumb', () => {
 
         clientX = 50
         event.clientX = clientX
-        wrapper.vm.onDragging(event)
+        wrapper.vm.onDragging(event as unknown as MouseEvent)
 
         clientX = 100
         event.clientX = clientX
-        wrapper.vm.onDragEnd(event)
+        wrapper.vm.onDragEnd()
         expect(wrapper.vm.dragging).toBeFalsy()
         expect(wrapper.emitted().dragend).toBeTruthy()
         expect(document.removeEventListener).toHaveBeenCalledWith('mousemove', expect.any(Function))

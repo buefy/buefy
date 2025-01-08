@@ -21,3 +21,7 @@
         </b-field>
     </section>
 </template>
+
+<script setup lang="ts">
+import { BField, BSlider } from '@ntohq/buefy-next'
+</script>

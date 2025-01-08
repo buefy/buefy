@@ -65,21 +65,28 @@
     </div>
 </template>
 
-<script>
-import SliderThumb from './SliderThumb.vue'
-import SliderTick from './SliderTick.vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
+
+import BSliderThumb from './SliderThumb.vue'
+import BSliderTick from './SliderTick.vue'
+import { DISPLAY_FORMATS } from './types'
+import type { CustomFormatter, DisplayFormat } from './types'
 import config from '../../utils/config'
 import { bound } from '../../utils/helpers'
 
-export default {
+type BSliderThumbInstance = InstanceType<typeof BSliderThumb>
+
+export default defineComponent({
     name: 'BSlider',
     components: {
-        [SliderThumb.name]: SliderThumb,
-        [SliderTick.name]: SliderTick
+        BSliderThumb,
+        BSliderTick
     },
     props: {
         modelValue: {
-            type: [Number, Array],
+            type: [Number, Array<number>],
             default: 0
         },
         min: {
@@ -120,8 +127,8 @@ export default {
             type: Boolean,
             default: false
         },
-        customFormatter: Function,
-        ariaLabel: [String, Array],
+        customFormatter: Function as PropType<CustomFormatter>,
+        ariaLabel: [String, Array<string>],
         biggerSliderFocus: {
             type: Boolean,
             default: false
@@ -131,17 +138,14 @@ export default {
             default: false
         },
         format: {
-            type: String,
+            type: String as PropType<DisplayFormat>,
             default: 'raw',
-            validator: (value) => {
-                return [
-                    'raw',
-                    'percent'
-                ].indexOf(value) >= 0
+            validator: (value: DisplayFormat) => {
+                return DISPLAY_FORMATS.indexOf(value) >= 0
             }
         },
         locale: {
-            type: [String, Array],
+            type: [String, Array<string>],
             default: () => {
                 return config.defaultLocale
             }
@@ -151,21 +155,31 @@ export default {
             default: false
         }
     },
-    emits: ['change', 'dragend', 'dragging', 'dragstart', 'update:modelValue'],
+    emits: {
+        /* eslint-disable @typescript-eslint/no-unused-vars */
+        change: (_value: number | [number, number]) => true,
+        dragend: () => true,
+        dragging: (_value: number | [number, number]) => true,
+        dragstart: () => true,
+        'update:modelValue': (_value: number | [number, number]) => true
+        /* eslint-enable @typescript-eslint/no-unused-vars */
+    },
     data() {
         return {
-            value1: null,
-            value2: null,
+            value1: undefined as number | undefined,
+            value2: undefined as number | undefined,
             // internal is used to update value1 and value2 with a single shot.
             // internal is also used to stop unnecessary propagation of update.
             internal: {
-                value1: null,
-                value2: null
+                value1: undefined as number | undefined,
+                value2: undefined as number | undefined
             },
             dragging: false,
             isRange: false,
+            isThumbReversed: false,
+            isTrackClickDisabled: false,
             _isSlider: true, // Used by Thumb and Tick
-            timeOutID: null
+            timeOutID: undefined as ReturnType<typeof setTimeout> | undefined
         }
     },
     computed: {
@@ -181,15 +195,15 @@ export default {
             return result
         },
         minValue() {
-            return Math.min(this.value1, this.value2)
+            return Math.min(this.value1!, this.value2!)
         },
         maxValue() {
-            return Math.max(this.value1, this.value2)
+            return Math.max(this.value1!, this.value2!)
         },
         barSize() {
             return this.isRange
                 ? `${100 * (this.maxValue - this.minValue) / (this.max - this.min)}%`
-                : `${100 * (this.value1 - this.min) / (this.max - this.min)}%`
+                : `${100 * (this.value1! - this.min) / (this.max - this.min)}%`
         },
         barStart() {
             return this.isRange
@@ -219,7 +233,7 @@ export default {
         }
     },
     watch: {
-        /**
+        /*
         * When v-model is changed set the new active step.
         */
         modelValue(value) {
@@ -247,7 +261,7 @@ export default {
         }
     },
     methods: {
-        setValues(newValue) {
+        setValues(newValue: number | number[]) {
             if (this.min > this.max) {
                 return
             }
@@ -271,13 +285,13 @@ export default {
                     value1: isNaN(newValue)
                         ? this.min
                         : bound(newValue, this.min, this.max),
-                    value2: null
+                    value2: undefined
                 }
             }
         },
         onInternalValueUpdate() {
             if (this.isRange) {
-                this.isThumbReversed = this.value1 > this.value2
+                this.isThumbReversed = this.value1! > this.value2!
             }
             if (!this.lazy || !this.dragging) {
                 this.emitValue('update:modelValue')
@@ -287,25 +301,25 @@ export default {
             }
         },
         sliderSize() {
-            return this.$refs.slider.getBoundingClientRect().width
+            return (this.$refs.slider as HTMLElement).getBoundingClientRect().width
         },
-        onSliderClick(event) {
+        onSliderClick(event: MouseEvent) {
             if (this.disabled || this.isTrackClickDisabled) return
-            const sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left
+            const sliderOffsetLeft = (this.$refs.slider as HTMLElement).getBoundingClientRect().left
             const percent = (event.clientX - sliderOffsetLeft) / this.sliderSize() * 100
             const targetValue = this.min + percent * (this.max - this.min) / 100
-            const diffFirst = Math.abs(targetValue - this.value1)
+            const diffFirst = Math.abs(targetValue - this.value1!)
             if (!this.isRange) {
                 if (diffFirst < this.step / 2) return
-                this.$refs.button1.setPosition(percent)
+                (this.$refs.button1 as BSliderThumbInstance).setPosition(percent)
             } else {
-                const diffSecond = Math.abs(targetValue - this.value2)
+                const diffSecond = Math.abs(targetValue - this.value2!)
                 if (diffFirst <= diffSecond) {
                     if (diffFirst < this.step / 2) return
-                    this.$refs.button1.setPosition(percent)
+                    (this.$refs.button1 as BSliderThumbInstance).setPosition(percent)
                 } else {
                     if (diffSecond < this.step / 2) return
-                    this.$refs.button2.setPosition(percent)
+                    (this.$refs.button2 as BSliderThumbInstance).setPosition(percent)
                 }
             }
             this.emitValue('change')
@@ -326,10 +340,25 @@ export default {
                 this.emitValue('update:modelValue')
             }
         },
-        emitValue(type) {
-            this.$emit(type, this.isRange
+        emitValue(type: 'change' | 'dragging' | 'update:modelValue') {
+            const emittedValue: number | [number, number] = this.isRange
                 ? [this.minValue, this.maxValue]
-                : this.value1)
+                : this.value1!
+            switch (type) {
+                case 'change':
+                    this.$emit(type, emittedValue)
+                    break
+                case 'dragging':
+                    this.$emit(type, emittedValue)
+                    break
+                case 'update:modelValue':
+                    this.$emit(type, emittedValue)
+                    break
+                default: {
+                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                    const _exhaustiveCheck: never = type
+                }
+            }
         }
     },
     created() {
@@ -341,5 +370,5 @@ export default {
     beforeUnmount() {
         clearTimeout(this.timeOutID)
     }
-}
+})
 </script>

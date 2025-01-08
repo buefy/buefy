@@ -1,7 +1,12 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
-import BSlider from '@components/slider/Slider'
+import type { VueWrapper } from '@vue/test-utils'
+import BSlider from '@components/slider/Slider.vue'
+import BSliderThumb from '@components/slider/SliderThumb.vue'
 
-let wrapper
+type BSliderThumbInstance = InstanceType<typeof BSliderThumb>
+
+let wrapper: VueWrapper<InstanceType<typeof BSlider>>
 
 describe('BSlider', () => {
     beforeEach(() => {
@@ -44,7 +49,7 @@ describe('BSlider', () => {
     })
 
     it('drags correctly', async () => {
-        jest.useFakeTimers()
+        vi.useFakeTimers()
 
         wrapper.vm.onDragStart()
         expect(wrapper.vm.dragging).toBeTruthy()
@@ -55,7 +60,7 @@ describe('BSlider', () => {
 
         wrapper.vm.onDragEnd()
         expect(wrapper.vm.isTrackClickDisabled).toBeTruthy()
-        jest.runOnlyPendingTimers()
+        vi.runOnlyPendingTimers()
         expect(wrapper.vm.isTrackClickDisabled).toBeFalsy()
         expect(wrapper.vm.dragging).toBeFalsy()
         expect(wrapper.emitted().dragend).toBeTruthy()
@@ -68,28 +73,28 @@ describe('BSlider', () => {
 
         wrapper.vm.onDragEnd()
         expect(wrapper.vm.isTrackClickDisabled).toBeTruthy()
-        jest.runOnlyPendingTimers()
+        vi.runOnlyPendingTimers()
         expect(wrapper.vm.isTrackClickDisabled).toBeFalsy()
         expect(wrapper.vm.dragging).toBeFalsy()
         expect(wrapper.emitted().dragend).toBeTruthy()
         expect(wrapper.emitted()['update:modelValue']).toBeTruthy()
 
-        jest.useRealTimers()
+        vi.useRealTimers()
     })
 
     it('manage click correctly', async () => {
         const bSlider = wrapper.find('.b-slider')
-        wrapper.vm.$refs.button1.setPosition = jest.fn()
+        ;(wrapper.vm.$refs.button1 as BSliderThumbInstance).setPosition = vi.fn()
 
         bSlider.trigger('click')
-        expect(wrapper.vm.$refs.button1.setPosition).toHaveBeenCalled()
+        expect((wrapper.vm.$refs.button1 as BSliderThumbInstance).setPosition).toHaveBeenCalled()
         expect(wrapper.emitted().change).toBeTruthy()
 
         await wrapper.setProps({ modelValue: [25, 50] })
-        wrapper.vm.$refs.button2.setPosition = jest.fn()
+        ;(wrapper.vm.$refs.button2 as BSliderThumbInstance).setPosition = vi.fn()
         bSlider.trigger('click')
-        expect(wrapper.vm.$refs.button1.setPosition).toHaveBeenCalled()
-        expect(wrapper.vm.$refs.button2.setPosition).toHaveBeenCalled()
+        expect((wrapper.vm.$refs.button1 as BSliderThumbInstance).setPosition).toHaveBeenCalled()
+        expect((wrapper.vm.$refs.button2 as BSliderThumbInstance).setPosition).toHaveBeenCalled()
         expect(wrapper.emitted().change).toBeTruthy()
     })
 

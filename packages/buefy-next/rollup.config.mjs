@@ -43,7 +43,6 @@ const JS_COMPONENTS = [
     'numberinput',
     'rate',
     'select',
-    'slider',
     'steps',
     'table',
     'tabs',

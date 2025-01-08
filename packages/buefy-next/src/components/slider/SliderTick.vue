@@ -10,8 +10,12 @@
     </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+import type { ISlider } from './types'
+
+export default defineComponent({
     name: 'BSliderTick',
     props: {
         value: {
@@ -20,24 +24,27 @@ export default {
         }
     },
     computed: {
+        parent() {
+            return this.$parent as unknown as ISlider
+        },
         position() {
-            const pos = (this.value - this.$parent.min) /
-                (this.$parent.max - this.$parent.min) * 100
+            const pos = (this.value - this.parent.min) /
+                (this.parent.max - this.parent.min) * 100
             return (pos >= 0 && pos <= 100) ? pos : 0
         },
         hidden() {
-            return this.value === this.$parent.min || this.value === this.$parent.max
+            return this.value === this.parent.min || this.value === this.parent.max
         }
     },
     methods: {
-        getTickStyle(position) {
+        getTickStyle(position: number) {
             return { left: position + '%' }
         }
     },
     created() {
-        if (!this.$parent.$data._isSlider) {
+        if (!this.parent.$data._isSlider) {
             throw new Error('You should wrap bSliderTick on a bSlider')
         }
     }
-}
+})
 </script>

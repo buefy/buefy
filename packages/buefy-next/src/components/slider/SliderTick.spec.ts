@@ -1,14 +1,16 @@
+import { beforeEach, describe, expect, it } from 'vitest'
 import { mount } from '@vue/test-utils'
-import BSliderTick from '@components/slider/SliderTick'
+import type { VueWrapper } from '@vue/test-utils'
+import BSliderTick from '@components/slider/SliderTick.vue'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BSliderTick>>
 const BSlider = {
-    template: '<div><slot /></div>',
     data() {
         return {
             _isSlider: true
         }
-    }
+    },
+    template: '<div><slot /></div>'
 }
 
 describe('BSliderTick', () => {
