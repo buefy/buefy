@@ -63,3 +63,16 @@
         </b-field>
     </section>
 </template>
+
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BField, BTag, BTaglist } from '@ntohq/buefy-next'
+
+export default defineComponent({
+    components: {
+        BField,
+        BTag,
+        BTaglist
+    }
+})
+</script>

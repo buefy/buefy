@@ -25,32 +25,41 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
+
+    import { shallowFields } from '@/utils'
+    import ApiView from '@/components/ApiView.vue'
+    import Example from '@/components/Example.vue'
+
     import api from './api/tag'
 
-    import ExSimple from './examples/ExSimple'
+    import ExSimple from './examples/ExSimple.vue'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
-    import { shallowFields } from '@/utils'
 
-    import ExIcon from './examples/ExIcon'
+    import ExIcon from './examples/ExIcon.vue'
     import ExIconCode from './examples/ExIcon.vue?raw'
 
-    import ExClosable from './examples/ExClosable'
+    import ExClosable from './examples/ExClosable.vue'
     import ExClosableCode from './examples/ExClosable.vue?raw'
 
-    import ExTaglist from './examples/ExTaglist'
+    import ExTaglist from './examples/ExTaglist.vue'
     import ExTaglistCode from './examples/ExTaglist.vue?raw'
 
-    import ExTaglistAttached from './examples/ExTaglistAttached'
+    import ExTaglistAttached from './examples/ExTaglistAttached.vue'
     import ExTaglistAttachedCode from './examples/ExTaglistAttached.vue?raw'
 
-    import ExFieldCombine from './examples/ExFieldCombine'
+    import ExFieldCombine from './examples/ExFieldCombine.vue'
     import ExFieldCombineCode from './examples/ExFieldCombine.vue?raw'
 
-    import ExSizes from './examples/ExSizes'
+    import ExSizes from './examples/ExSizes.vue'
     import ExSizesCode from './examples/ExSizes.vue?raw'
 
-    export default {
+    export default defineComponent({
+        components: {
+            ApiView,
+            Example
+        },
         data() {
             return {
                 api,
@@ -72,5 +81,5 @@
                 ExSizesCode
             }
         }
-    }
+    })
 </script>

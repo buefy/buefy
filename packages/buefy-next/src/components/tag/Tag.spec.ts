@@ -1,7 +1,9 @@
-import { shallowMount } from '@vue/test-utils'
-import BTag from '@components/tag/Tag'
+import { beforeEach, describe, expect, it } from 'vitest'
 
-let wrapper
+import { shallowMount, type VueWrapper } from '@vue/test-utils'
+import BTag from '@components/tag/Tag.vue'
+
+let wrapper: VueWrapper<InstanceType<typeof BTag>>
 
 describe('BTag', () => {
     beforeEach(() => {
@@ -20,10 +22,10 @@ describe('BTag', () => {
     it('emit close event when closing if not disabled', async () => {
         await wrapper.setProps({ disabled: false })
 
-        wrapper.vm.close()
+        wrapper.vm.close(new Event('test'))
 
         await wrapper.setProps({ disabled: true })
-        wrapper.vm.close()
+        wrapper.vm.close(new Event('test'))
 
         expect(wrapper.emitted().close).toHaveLength(1)
     })

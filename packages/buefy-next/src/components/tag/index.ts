@@ -1,10 +1,11 @@
+import type { App } from 'vue'
 import Tag from './Tag.vue'
 import Taglist from './Taglist.vue'
 
 import { registerComponent } from '../../utils/plugins'
 
 const Plugin = {
-    install(Vue) {
+    install(Vue: App) {
         registerComponent(Vue, Tag)
         registerComponent(Vue, Taglist)
     }

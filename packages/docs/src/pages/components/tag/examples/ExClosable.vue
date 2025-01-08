@@ -66,7 +66,14 @@
 </template>
 
 <script>
-    export default {
+    import { defineComponent } from 'vue'
+    import { BField, BTag } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BField,
+            BTag
+        },
         data() {
             return {
                 isTag1Active: true,
@@ -77,5 +84,5 @@
                 isTag6Active: true,
             }
         }
-    }
+    })
 </script>
