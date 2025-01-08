@@ -1,7 +1,9 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
-import BMenuItem from '@components/menu/MenuItem'
+import type { VueWrapper } from '@vue/test-utils'
+import BMenuItem from '@components/menu/MenuItem.vue'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BMenuItem>>
 
 describe('BMenuItem', () => {
     beforeEach(() => {
@@ -28,7 +30,7 @@ describe('BMenuItem', () => {
     })
 
     it('manage onClick', async () => {
-        wrapper.vm.reset = jest.fn()
+        wrapper.vm.reset = vi.fn()
 
         await wrapper.setProps({ disabled: true })
         wrapper.vm.onClick()

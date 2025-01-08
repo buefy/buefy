@@ -1,3 +1,5 @@
+import type { App } from 'vue'
+
 import Menu from './Menu.vue'
 import MenuList from './MenuList.vue'
 import MenuItem from './MenuItem.vue'
@@ -5,7 +7,7 @@ import MenuItem from './MenuItem.vue'
 import { registerComponent } from '../../utils/plugins'
 
 const Plugin = {
-    install(Vue) {
+    install(Vue: App) {
         registerComponent(Vue, Menu)
         // explicit `name` is needed to avoid name mangling of
         // Functional Component in production

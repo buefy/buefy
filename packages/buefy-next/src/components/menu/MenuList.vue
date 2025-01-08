@@ -20,13 +20,15 @@
     </ul>
 </template>
 
-<script>
-import Icon from '../icon/Icon.vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
 
-export default {
+import BIcon from '../icon/Icon.vue'
+
+export default defineComponent({
     name: 'BMenuList',
     components: {
-        [Icon.name]: Icon
+        BIcon
     },
     props: {
         label: String,
@@ -41,5 +43,5 @@ export default {
             default: 'is-small'
         }
     }
-}
+})
 </script>

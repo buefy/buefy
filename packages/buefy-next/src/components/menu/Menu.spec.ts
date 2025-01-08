@@ -1,7 +1,9 @@
+import { beforeEach, describe, expect, it } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
-import BMenu from '@components/menu/Menu'
+import type { VueWrapper } from '@vue/test-utils'
+import BMenu from '@components/menu/Menu.vue'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BMenu>>
 
 describe('BMenu', () => {
     beforeEach(() => {

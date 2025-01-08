@@ -1,19 +1,23 @@
+import { beforeEach, describe, expect, it } from 'vitest'
+import { defineComponent } from 'vue'
 import { mount } from '@vue/test-utils'
-import BMenuList from '@components/menu/MenuList'
+import type { VueWrapper } from '@vue/test-utils'
+import BMenuList from '@components/menu/MenuList.vue'
 
-let wrapper
+const Menu = defineComponent({
+    components: { BMenuList },
+    template: `
+    <div>
+        <b-menu-list label="Test">
+        </b-menu-list>
+    </div>
+    `
+})
+
+let wrapper: VueWrapper<InstanceType<typeof Menu>>
 
 describe('BMenuList', () => {
     beforeEach(() => {
-        const Menu = {
-            components: { BMenuList },
-            template: `
-            <div>
-                <b-menu-list label="Test">
-                </b-menu-list>
-            </div>
-            `
-        }
         wrapper = mount(Menu)
     })
 

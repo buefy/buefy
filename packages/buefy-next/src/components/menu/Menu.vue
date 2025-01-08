@@ -4,10 +4,12 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+
 import MenuItemContainerMixin from './MenuItemContainerMixin'
 
-export default {
+export default defineComponent({
     name: 'BMenu',
     mixins: [MenuItemContainerMixin],
     props: {
@@ -25,5 +27,5 @@ export default {
             _isMenu: true // Used by MenuItem
         }
     }
-}
+})
 </script>
