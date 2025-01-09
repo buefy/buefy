@@ -1,11 +1,15 @@
+import { beforeEach, describe, expect, it } from 'vitest'
+import { defineComponent } from 'vue'
 import { mount } from '@vue/test-utils'
-import BTabs from '@components/tabs/Tabs'
-import BTabItem from '@components/tabs/TabItem'
+import type { VueWrapper } from '@vue/test-utils'
+import BTabs from '@components/tabs/Tabs.vue'
+import BTabItem from '@components/tabs/TabItem.vue'
+import type { TabbedChild } from '@utils/TabbedTypes'
 
-let wrapper
-let wrapperParent
-
-const WrapperComp = {
+const WrapperComp = defineComponent({
+    components: {
+        BTabs, BTabItem
+    },
     data() {
         return {
             show1: true
@@ -16,16 +20,16 @@ const WrapperComp = {
             <BTabItem v-if="show1" ref="firstItem" value="tab1"/>
             <BTabItem ref="testItem" value="tab2"/>
             <BTabItem value="tab3" :visible="false"/>
-        </BTabs>`,
-    components: {
-        BTabs, BTabItem
-    }
-}
+        </BTabs>`
+})
+
+let wrapper: VueWrapper<InstanceType<typeof BTabItem>>
+let wrapperParent: VueWrapper<InstanceType<typeof WrapperComp>>
 
 describe('BTabItem', () => {
     beforeEach(() => {
         wrapperParent = mount(WrapperComp)
-        wrapper = wrapperParent.findComponent({ ref: 'testItem' })
+        wrapper = wrapperParent.findComponent<InstanceType<typeof BTabItem>>({ ref: 'testItem' })
     })
 
     it('is called', () => {
@@ -97,7 +101,7 @@ describe('BTabItem', () => {
         try {
             mount(BTabItem)
         } catch (error) {
-            expect(error.message).toEqual(expect.stringMatching(/You should wrap/))
+            expect((error as Error).message).toEqual(expect.stringMatching(/You should wrap/))
         }
     })
 
@@ -112,7 +116,7 @@ describe('BTabItem', () => {
                         // since we cannot override the computed value,
                         // `activeItem` needs to be identical to the item
                         // to make the item active
-                        _registerItem(item) {
+                        _registerItem(item: TabbedChild) {
                             this.activeItem = item
                         },
                         activeItem: null,

@@ -1,8 +1,10 @@
+import { beforeEach, describe, expect, it } from 'vitest'
 import { mount } from '@vue/test-utils'
-import BTabs from '@components/tabs/Tabs'
-import BTabItem from '@components/tabs/TabItem'
+import type { VueWrapper } from '@vue/test-utils'
+import BTabs from '@components/tabs/Tabs.vue'
+import BTabItem from '@components/tabs/TabItem.vue'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BTabs>>
 
 describe('BTabs', () => {
     beforeEach(() => {
@@ -45,7 +47,7 @@ describe('BTabs', () => {
         const idx = 'tab2'
         await wrapper.setData({ activeId: idx })
 
-        const valueEmitted = wrapper.emitted()['update:modelValue']
+        const valueEmitted = wrapper.emitted<(string | number | undefined)[]>()['update:modelValue']
 
         expect(valueEmitted).toBeTruthy()
         expect(valueEmitted[0][0]).toBe(idx)
@@ -59,7 +61,7 @@ describe('BTabs', () => {
 
         await wrapper.vm.$nextTick() // Wait until $emits have been handled
 
-        const valueEmitted = wrapper.emitted()['update:modelValue']
+        const valueEmitted = wrapper.emitted<(string | number | undefined)[]>()['update:modelValue']
         expect(valueEmitted[0][0]).toBe(val)
         // Will be called only once even if we clicked multiple times
         expect(valueEmitted.length).toBe(1)
@@ -105,7 +107,7 @@ describe('BTabs', () => {
         await wrapper.setProps({ modelValue: null })
 
         expect(wrapper.vm.activeId).toBeNull()
-        expect(wrapper.vm.activeTab).toBe(undefined)
+        expect(wrapper.vm.activeItem).toBe(null)
     })
 
     it('still renders if there is no item', () => {

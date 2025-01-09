@@ -5,3 +5,7 @@
         <b-tab-item label="Videos" icon="video"></b-tab-item>
     </b-tabs>
 </template>
+
+<script setup lang="ts">
+import { BTabs, BTabItem } from '@ntohq/buefy-next'
+</script>

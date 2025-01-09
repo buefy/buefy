@@ -13,3 +13,7 @@
         </b-tabs>
     </section>
 </template>
+
+<script setup lang="ts">
+import { BTabs, BTabItem } from '@ntohq/buefy-next'
+</script>

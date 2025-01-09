@@ -44,7 +44,6 @@ const JS_COMPONENTS = [
     'select',
     'steps',
     'table',
-    'tabs',
     'timepicker',
     'upload',
 ]

@@ -15,8 +15,17 @@
     </b-tabs>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BIcon, BTabs, BTabItem, BTag } from '@ntohq/buefy-next'
+
+export default defineComponent({
+    components: {
+        BIcon,
+        BTabs,
+        BTabItem,
+        BTag
+    },
     data() {
         return {
             count: 1
@@ -27,6 +36,6 @@ export default {
             this.count++;
         }, 3 * 1000)
     }
-}
+})
 </script>
 
