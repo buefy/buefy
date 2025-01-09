@@ -1,3 +1,7 @@
+<script setup lang="ts">
+    import { BMessage } from '@ntohq/buefy-next'
+</script>
+
 <template>
     <section>
         <b-message>

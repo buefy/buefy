@@ -1,9 +1,9 @@
+import type { App } from 'vue'
 import Message from './Message.vue'
-
 import { registerComponent } from '../../utils/plugins'
 
 const Plugin = {
-    install(Vue) {
+    install(Vue: App) {
         registerComponent(Vue, Message)
     }
 }

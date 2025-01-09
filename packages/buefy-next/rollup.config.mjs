@@ -38,7 +38,6 @@ const JS_COMPONENTS = [
     'datetimepicker',
     'dialog',
     'input',
-    'message',
     'notification',
     'numberinput',
     'rate',

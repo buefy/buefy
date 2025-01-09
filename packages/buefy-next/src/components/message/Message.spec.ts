@@ -1,7 +1,9 @@
 import { shallowMount } from '@vue/test-utils'
-import BMessage from '@components/message/Message'
+import type { VueWrapper } from '@vue/test-utils'
+import BMessage from '@components/message/Message.vue'
+import { beforeEach, describe, expect, it } from 'vitest'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BMessage>>
 
 describe('BMessage', () => {
     beforeEach(() => {
