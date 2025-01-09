@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BCarouselItem > render correctly 1`] = `
+"<transition-stub name=\\"slide-next\\" appear=\\"false\\" persisted=\\"true\\" css=\\"true\\">
+  <div class=\\"carousel-item\\" style=\\"display: none;\\"></div>
+</transition-stub>"
+`;

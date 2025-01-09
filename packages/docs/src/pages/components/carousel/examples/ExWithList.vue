@@ -27,8 +27,16 @@
     </b-carousel>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BCarousel, BCarouselItem, BCarouselList } from '@ntohq/buefy-next'
+
+export default defineComponent({
+    components: {
+        BCarousel,
+        BCarouselItem,
+        BCarouselList
+    },
     data() {
         return {
             gallery: false,
@@ -83,7 +91,7 @@ export default {
         }
     },
     methods: {
-        switchGallery(value) {
+        switchGallery(value: boolean) {
             this.gallery = value
             if (value) {
                 document.documentElement.classList.add('is-clipped')
@@ -92,5 +100,5 @@ export default {
             }
         }
     }
-}
+})
 </script>

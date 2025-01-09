@@ -63,14 +63,25 @@
     </section>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BCarousel, BCarouselItem, BField, BRadioButton, BSelect, BSwitch } from '@ntohq/buefy-next'
+
+export default defineComponent({
+    components: {
+        BCarousel,
+        BCarouselItem,
+        BField,
+        BRadioButton,
+        BSelect,
+        BSwitch
+    },
     data() {
         return {
             indicator: true,
             indicatorBackground: true,
             indicatorInside: true,
-            indicatorMode: 'hover',
+            indicatorMode: 'hover' as 'click' | 'hover',
             indicatorPosition: 'is-top',
             indicatorStyle: 'is-lines',
             carousels: [
@@ -81,5 +92,5 @@ export default {
             ]
         }
     }
-}
+})
 </script>

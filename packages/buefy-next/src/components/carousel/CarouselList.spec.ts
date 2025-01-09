@@ -1,7 +1,9 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
-import BCarouselList from '@components/carousel/CarouselList'
+import type { VueWrapper } from '@vue/test-utils'
+import BCarouselList from '@components/carousel/CarouselList.vue'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BCarouselList>>
 const data = [
     {
         title: 'Slide 1',
@@ -108,7 +110,7 @@ describe('BCarouselList', () => {
             itemsToShow: 4,
             itemsToList: 1,
             repeat: true,
-            modelvalue: 0
+            modelValue: 0
         })
 
         expect(wrapper.vm.scrollIndex).toBe(0)
@@ -127,8 +129,8 @@ describe('BCarouselList', () => {
     })
 
     it('removes events listener when removed', () => {
-        const map = {}
-        window.removeEventListener = jest.fn((event, cb) => {
+        const map: Record<string, EventListenerOrEventListenerObject> = {}
+        vi.spyOn(window, 'removeEventListener').mockImplementation((event, cb) => {
             map[event] = cb
         })
         wrapper.find('.carousel-list').trigger('mousedown')
@@ -137,10 +139,11 @@ describe('BCarouselList', () => {
         expect(map.resize).toBe(wrapper.vm.resized)
         expect(map.mousemove).toBe(wrapper.vm.dragMove)
         expect(map.mouseup).toBe(wrapper.vm.dragEnd)
+        vi.mocked(window.removeEventListener).mockRestore()
     })
 
     it('drags correctly', async () => {
-        wrapper.vm.$el.getBoundingClientRect = jest.fn(() => ({
+        wrapper.vm.$el.getBoundingClientRect = vi.fn(() => ({
             width: 400
         }))
         await wrapper.setData({ windowWidth: 400 })

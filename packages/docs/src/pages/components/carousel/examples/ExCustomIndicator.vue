@@ -9,14 +9,22 @@
     </b-carousel>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BCarousel, BCarouselItem, BImage } from '@ntohq/buefy-next'
+
+export default defineComponent({
+    components: {
+        BCarousel,
+        BCarouselItem,
+        BImage
+    },
     methods: {
-      getImgUrl(value) {
+      getImgUrl(value: number) {
           return `https://picsum.photos/id/43${value}/1230/500`
       }
     }
-}
+})
 </script>
 
 <style>

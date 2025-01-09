@@ -31,7 +31,6 @@ const components = fs
 
 const JS_COMPONENTS = [
     'autocomplete',
-    'carousel',
     'clockpicker',
     'colorpicker',
     'datepicker',

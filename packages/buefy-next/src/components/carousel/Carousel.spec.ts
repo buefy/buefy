@@ -1,19 +1,24 @@
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
-import BCarousel from '@components/carousel/Carousel'
+import type { VueWrapper } from '@vue/test-utils'
+import { defineComponent } from 'vue'
+import BCarousel from '@components/carousel/Carousel.vue'
 import InjectedChildMixin, { Sorted } from '../../utils/InjectedChildMixin'
 
-let wrapper
+type BCarouselInstance = InstanceType<typeof BCarousel>
 
-const mockCarouselItems = {
-    mixins: [InjectedChildMixin('carousel', Sorted)],
+let wrapper: VueWrapper<BCarouselInstance>
+
+const mockCarouselItems = defineComponent({
     name: 'BCarouselItem',
-    template: '<div></div>',
+    mixins: [InjectedChildMixin<typeof Sorted, BCarouselInstance>('carousel', Sorted)],
     computed: {
         isActive() {
             return this.parent.activeChild === this.index
         }
-    }
-}
+    },
+    template: '<div></div>'
+})
 
 describe('BCarousel', () => {
     beforeEach(() => {
@@ -35,7 +40,7 @@ describe('BCarousel', () => {
     })
 
     afterEach(() => {
-        jest.useRealTimers()
+        vi.useRealTimers()
     })
 
     it('is called', () => {
@@ -62,9 +67,9 @@ describe('BCarousel', () => {
     })
 
     it('reacts when autoplay changes', async () => {
-        wrapper.vm.startTimer = jest.fn(wrapper.vm.startTimer)
-        wrapper.vm.pauseTimer = jest.fn(wrapper.vm.pauseTimer)
-        wrapper.vm.next = jest.fn(wrapper.vm.next)
+        wrapper.vm.startTimer = vi.fn(wrapper.vm.startTimer)
+        wrapper.vm.pauseTimer = vi.fn(wrapper.vm.pauseTimer)
+        wrapper.vm.next = vi.fn(wrapper.vm.next)
 
         let autoplay = true
         await wrapper.setProps({ autoplay })
@@ -104,8 +109,8 @@ describe('BCarousel', () => {
     })
 
     it('manage next and previous accordingly', async () => {
-        wrapper.vm.startTimer = jest.fn(() => wrapper.vm.startTimer)
-        wrapper.vm.pauseTimer = jest.fn(() => wrapper.vm.pauseTimer)
+        wrapper.vm.startTimer = vi.fn(() => wrapper.vm.startTimer)
+        wrapper.vm.pauseTimer = vi.fn(() => wrapper.vm.pauseTimer)
 
         const first = 0
         const last = 1
@@ -147,44 +152,44 @@ describe('BCarousel', () => {
     })
 
     it('autoplays', async () => {
-        jest.useFakeTimers()
-        await wrapper.setProps({ autoplay: true, 'pause-hover': false, repeat: false })
+        vi.useFakeTimers()
+        await wrapper.setProps({ autoplay: true, pauseHover: false, repeat: false })
 
         expect(wrapper.vm.activeChild).toBe(0)
 
-        jest.runOnlyPendingTimers()
+        vi.runOnlyPendingTimers()
         await wrapper.vm.$nextTick()
         expect(wrapper.vm.activeChild).toBe(1)
 
-        jest.runOnlyPendingTimers()
+        vi.runOnlyPendingTimers()
         await wrapper.vm.$nextTick()
         expect(wrapper.vm.activeChild).toBe(1)
 
         await wrapper.setProps({ repeat: true })
 
         await wrapper.vm.$nextTick()
-        jest.runOnlyPendingTimers()
+        vi.runOnlyPendingTimers()
         await wrapper.vm.$nextTick()
         expect(wrapper.vm.activeChild).toBe(0)
     })
 
     it('pauses on hover', async () => {
-        jest.useFakeTimers()
-        await wrapper.setProps({ autoplay: true, 'pause-hover': true, repeat: true })
+        vi.useFakeTimers()
+        await wrapper.setProps({ autoplay: true, pauseHover: true, repeat: true })
 
-        jest.runOnlyPendingTimers()
+        vi.runOnlyPendingTimers()
         await wrapper.vm.$nextTick()
 
         expect(wrapper.vm.activeChild).toBe(1)
 
-        jest.runOnlyPendingTimers()
+        vi.runOnlyPendingTimers()
         await wrapper.vm.$nextTick()
 
         expect(wrapper.vm.activeChild).toBe(0)
 
         await wrapper.find('.carousel').trigger('mouseenter')
 
-        jest.runOnlyPendingTimers()
+        vi.runOnlyPendingTimers()
         await wrapper.vm.$nextTick()
 
         expect(wrapper.vm.activeChild).toBe(0)
@@ -192,7 +197,7 @@ describe('BCarousel', () => {
         await wrapper.find('.carousel').trigger('mouseleave')
         expect(wrapper.vm.activeChild).toBe(0)
 
-        jest.runOnlyPendingTimers()
+        vi.runOnlyPendingTimers()
         await wrapper.vm.$nextTick()
 
         expect(wrapper.vm.activeChild).toBe(1)
@@ -202,10 +207,11 @@ describe('BCarousel', () => {
         const first = 0
         const last = 1
         await wrapper.setProps({ modelValue: first })
-        wrapper.vm.startTimer = jest.fn(() => wrapper.vm.startTimer)
-        wrapper.vm.pauseTimer = jest.fn(() => wrapper.vm.pauseTimer)
+        wrapper.vm.startTimer = vi.fn(() => wrapper.vm.startTimer)
+        wrapper.vm.pauseTimer = vi.fn(() => wrapper.vm.pauseTimer)
 
-        const event = {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const event: any = {
             target: {
                 draggable: true
             },
@@ -213,7 +219,7 @@ describe('BCarousel', () => {
             changedTouches: [{
                 pageX: 50
             }]
-        }
+        } // predents to be a TouchEvent
 
         // Dragging enough to go to next slide
         await wrapper.vm.$nextTick()
@@ -240,14 +246,15 @@ describe('BCarousel', () => {
         const last = 1
         await wrapper.setProps({ modelValue: first })
 
-        const event = {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const event: any = {
             target: {
                 draggable: true,
-                click: jest.fn()
+                click: vi.fn()
             },
             pageX: 50,
-            preventDefault: jest.fn()
-        }
+            preventDefault: vi.fn()
+        } // pretends to be a MouseEvent
 
         // Dragging enough to go to next slide
         await wrapper.vm.$nextTick()
@@ -288,7 +295,7 @@ describe('BCarousel', () => {
     })
 
     it('reset timer before destroy', () => {
-        wrapper.vm.pauseTimer = jest.fn(() => wrapper.vm.pauseTimer)
+        wrapper.vm.pauseTimer = vi.fn(() => wrapper.vm.pauseTimer)
 
         wrapper.unmount()
 

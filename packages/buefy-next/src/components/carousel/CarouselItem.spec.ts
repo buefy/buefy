@@ -1,18 +1,18 @@
+import { beforeEach, describe, expect, it } from 'vitest'
 import { mount } from '@vue/test-utils'
-import BCarousel from '@components/carousel/Carousel'
-import BCarouselItem from '@components/carousel/CarouselItem'
+import type { VueWrapper } from '@vue/test-utils'
+import { defineComponent } from 'vue'
+import BCarousel from '@components/carousel/Carousel.vue'
+import BCarouselItem from '@components/carousel/CarouselItem.vue'
 
-let wrapper
-let wrapperParent
-let wrapperCarousel
+type BCarouselInstance = InstanceType<typeof BCarousel>
+type BCarouselItemInstance = InstanceType<typeof BCarouselItem>
 
-const WrapperComp = {
-    template: `
-        <BCarousel ref="carousel" :animated="animated">
-            <BCarouselItem value="item1"/>
-            <BCarouselItem ref="testItem" value="item2"/>
-            <BCarouselItem ref="testItem2" value="item3"/>
-        </BCarousel>`,
+const WrapperComp = defineComponent({
+    components: {
+        BCarousel,
+        BCarouselItem
+    },
     props: {
         // to indirectly change BCarousel's animated prop
         animated: {
@@ -20,16 +20,23 @@ const WrapperComp = {
             default: 'slide'
         }
     },
-    components: {
-        BCarousel, BCarouselItem
-    }
-}
+    template: `
+        <BCarousel ref="carousel" :animated="animated">
+            <BCarouselItem value="item1"/>
+            <BCarouselItem ref="testItem" value="item2"/>
+            <BCarouselItem ref="testItem2" value="item3"/>
+        </BCarousel>`
+})
+
+let wrapper: VueWrapper<BCarouselItemInstance>
+let wrapperParent: VueWrapper<InstanceType<typeof WrapperComp>>
+let wrapperCarousel: VueWrapper<BCarouselInstance>
 
 describe('BCarouselItem', () => {
     beforeEach(() => {
         wrapperParent = mount(WrapperComp)
-        wrapperCarousel = wrapperParent.findComponent({ ref: 'carousel' })
-        wrapper = wrapperParent.findComponent({ ref: 'testItem' })
+        wrapperCarousel = wrapperParent.findComponent<BCarouselInstance>({ ref: 'carousel' })
+        wrapper = wrapperParent.findComponent<BCarouselItemInstance>({ ref: 'testItem' })
     })
 
     it('is called', () => {
@@ -68,12 +75,11 @@ describe('BCarouselItem', () => {
     })
 
     describe('with explicit order', () => {
-        let wrapper
-        let wrapperCarousel
-        let wrapperTestItem
+        let wrapperCarousel: VueWrapper<BCarouselInstance>
+        let wrapperTestItem: VueWrapper<BCarouselItemInstance>
 
         beforeEach(() => {
-            wrapper = mount({
+            const wrapper = mount({
                 template: `
                     <BCarousel ref="carousel">
                         <BCarouselItem ref="testItem" :order="2" />
@@ -82,8 +88,8 @@ describe('BCarouselItem', () => {
                     </BCarousel>`,
                 components: { BCarousel, BCarouselItem }
             })
-            wrapperCarousel = wrapper.findComponent({ ref: 'carousel' })
-            wrapperTestItem = wrapper.findComponent({ ref: 'testItem' })
+            wrapperCarousel = wrapper.findComponent<BCarouselInstance>({ ref: 'carousel' })
+            wrapperTestItem = wrapper.findComponent<BCarouselItemInstance>({ ref: 'testItem' })
         })
 
         it('update active state', () => {
