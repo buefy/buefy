@@ -1,8 +1,10 @@
+import { beforeEach, describe, expect, it } from 'vitest'
 import { mount } from '@vue/test-utils'
-import BSteps from '@components/steps/Steps'
-import BStepItem from '@components/steps/StepItem'
+import type { VueWrapper } from '@vue/test-utils'
+import BSteps from '@components/steps/Steps.vue'
+import BStepItem from '@components/steps/StepItem.vue'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BSteps>>
 
 describe('BSteps', () => {
     beforeEach(() => {
@@ -35,9 +37,9 @@ describe('BSteps', () => {
     })
 
     it('emit input event with value when active step is modified', async () => {
-        await wrapper.setData({ activeId: wrapper.vm.items[0].value })
+        await wrapper.setData({ activeId: wrapper.vm.items[0].uniqueValue })
 
-        const valueEmitted = wrapper.emitted()['update:modelValue']
+        const valueEmitted = wrapper.emitted<[number]>()['update:modelValue']
 
         expect(valueEmitted).toBeTruthy()
         expect(valueEmitted.length).toBe(1)
@@ -59,12 +61,12 @@ describe('BSteps', () => {
         await wrapper.vm.$nextTick() // Wait until $emits have been handled
 
         // Simulate v-model
-        let emitted = wrapper.emitted()['update:modelValue']
+        let emitted = wrapper.emitted<[number]>()['update:modelValue']
         await wrapper.setProps(
             { modelValue: emitted[emitted.length - 1][0] }
         )
 
-        emitted = wrapper.emitted()['update:modelValue']
+        emitted = wrapper.emitted<[number]>()['update:modelValue']
 
         expect(emitted).toBeTruthy()
         expect(emitted.length).toBe(1)
@@ -77,12 +79,12 @@ describe('BSteps', () => {
         await wrapper.vm.$nextTick() // Wait until $emits have been handled
 
         // Simulate v-model
-        emitted = wrapper.emitted()['update:modelValue']
+        emitted = wrapper.emitted<[number]>()['update:modelValue']
         await wrapper.setProps(
             { modelValue: emitted[emitted.length - 1][0] }
         )
 
-        emitted = wrapper.emitted()['update:modelValue']
+        emitted = wrapper.emitted<[number]>()['update:modelValue']
         expect(emitted.length).toBe(1) // To still be
 
         expect(wrapper.vm.hasPrev).toBeTruthy()
@@ -91,12 +93,12 @@ describe('BSteps', () => {
         await wrapper.vm.$nextTick() // Wait until $emits have been handled
 
         // Simulate v-model
-        emitted = wrapper.emitted()['update:modelValue']
+        emitted = wrapper.emitted<[number]>()['update:modelValue']
         await wrapper.setProps(
             { modelValue: emitted[emitted.length - 1][0] }
         )
 
-        emitted = wrapper.emitted()['update:modelValue']
+        emitted = wrapper.emitted<[number]>()['update:modelValue']
         expect(emitted.length).toBe(2)
         expect(emitted[1][0]).toBe(first)
         expect(wrapper.vm.hasPrev).toBeFalsy()
@@ -104,17 +106,20 @@ describe('BSteps', () => {
         wrapper.vm.prev()
         await wrapper.vm.$nextTick() // Wait until $emits have been handled
 
-        emitted = wrapper.emitted()['update:modelValue']
+        emitted = wrapper.emitted<[number]>()['update:modelValue']
         expect(emitted.length).toBe(2) // To still be
     })
 
     it('manage wrapper classes as expected', async () => {
-        expect(wrapper.vm.wrapperClasses[1]['is-vertical']).toBeFalsy()
+        let wrapperClasses = wrapper.vm.wrapperClasses[1] as Record<string, boolean>
+        expect(wrapperClasses['is-vertical']).toBeFalsy()
 
         await wrapper.setProps({ vertical: true })
-        expect(wrapper.vm.wrapperClasses[1]['is-vertical']).toBeTruthy()
+        wrapperClasses = wrapper.vm.wrapperClasses[1] as Record<string, boolean>
+        expect(wrapperClasses['is-vertical']).toBeTruthy()
 
         await wrapper.setProps({ position: 'is-right' })
-        expect(wrapper.vm.wrapperClasses[1]['is-right']).toBeTruthy()
+        wrapperClasses = wrapper.vm.wrapperClasses[1] as Record<string, boolean>
+        expect(wrapperClasses['is-right']).toBeTruthy()
     })
 })

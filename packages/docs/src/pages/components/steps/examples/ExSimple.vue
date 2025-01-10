@@ -63,7 +63,7 @@
             :icon-prev="prevIcon"
             :icon-next="nextIcon"
             :label-position="labelPosition"
-            :mobile-mode="mobileMode">
+            :mobile-mode="mobileMode!">
             <b-step-item step="1" label="Account" :clickable="isStepsClickable">
                 <h1 class="title has-text-centered">Account</h1>
                 Lorem ipsum dolor sit amet.
@@ -110,8 +110,19 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BButton, BField, BSelect, BStepItem, BSteps, BSwitch } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BButton,
+            BField,
+            BSelect,
+            BStepItem,
+            BSteps,
+            BSwitch
+        },
         data() {
             return {
                 activeStep: 0,
@@ -127,8 +138,8 @@
 
                 prevIcon: 'chevron-left',
                 nextIcon: 'chevron-right',
-                labelPosition: 'bottom',
-                mobileMode: 'minimalist'
+                labelPosition: 'bottom' as 'bottom' | 'right' | 'left',
+                mobileMode: 'minimalist' as 'compact' | 'minimalist' | null
             }
         },
         computed: {
@@ -139,5 +150,5 @@
                 return { 'is-success': this.isProfileSuccess }
             }
         }
-    }
+    })
 </script>

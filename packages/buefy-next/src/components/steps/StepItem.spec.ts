@@ -1,8 +1,13 @@
+import { beforeEach, describe, expect, it } from 'vitest'
 import { mount } from '@vue/test-utils'
-import BSteps from '@components/steps/Steps'
-import BStepItem from '@components/steps/StepItem'
+import type { VueWrapper } from '@vue/test-utils'
+import BSteps from '@components/steps/Steps.vue'
+import BStepItem from '@components/steps/StepItem.vue'
 
-let wrapper
+type BStepsInstance = InstanceType<typeof BSteps>
+type BStepItemInstance = InstanceType<typeof BStepItem>
+
+let wrapper: VueWrapper<BStepItemInstance>
 
 const WrapperComp = {
     // values must be specified to make the snapshot reproducible
@@ -19,12 +24,12 @@ const WrapperComp = {
 }
 
 describe('BStepItem', () => {
-    let wrapperSteps
+    let wrapperSteps: VueWrapper<BStepsInstance>
 
     beforeEach(() => {
         const root = mount(WrapperComp)
-        wrapperSteps = root.findComponent({ ref: 'steps' })
-        wrapper = root.findComponent({ ref: 'testItem' })
+        wrapperSteps = root.findComponent<BStepsInstance>({ ref: 'steps' })
+        wrapper = root.findComponent<BStepItemInstance>({ ref: 'testItem' })
     })
 
     it('is called', () => {
@@ -71,8 +76,8 @@ describe('BStepItem', () => {
     })
 
     describe('with explicit order', () => {
-        let wrapperSteps
-        let wrapperTestItem
+        let wrapperSteps: VueWrapper<BStepsInstance>
+        let wrapperTestItem: VueWrapper<BStepItemInstance>
 
         beforeEach(() => {
             const wrapper = mount({
@@ -86,8 +91,8 @@ describe('BStepItem', () => {
                     BSteps, BStepItem
                 }
             })
-            wrapperSteps = wrapper.findComponent({ ref: 'steps' })
-            wrapperTestItem = wrapper.findComponent({ ref: 'testItem' })
+            wrapperSteps = wrapper.findComponent<BStepsInstance>({ ref: 'steps' })
+            wrapperTestItem = wrapper.findComponent<BStepItemInstance>({ ref: 'testItem' })
         })
 
         it('should update active state', () => {

@@ -1,12 +1,17 @@
-<script>
-import TabbedChildMixin from '../../utils/TabbedChildMixin'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
 
-export default {
+import TabbedChildMixin from '../../utils/TabbedChildMixin'
+import type { TabbedParent } from '../../utils/TabbedTypes'
+import type { VueClassAttribute } from '../../utils/config'
+
+export default defineComponent({
     name: 'BStepItem',
-    mixins: [TabbedChildMixin('step')],
+    mixins: [TabbedChildMixin<TabbedParent>('step')],
     props: {
         step: [String, Number],
-        type: [String, Object],
+        type: [String, Object] as PropType<VueClassAttribute>,
         clickable: {
             type: Boolean,
             default: undefined
@@ -17,5 +22,5 @@ export default {
             elementClass: 'step-item'
         }
     }
-}
+})
 </script>
