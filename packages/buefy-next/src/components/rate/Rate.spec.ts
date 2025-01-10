@@ -1,7 +1,9 @@
 import { shallowMount } from '@vue/test-utils'
-import BRate from '@components/rate/Rate'
+import type { VueWrapper } from '@vue/test-utils'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import BRate from '@components/rate/Rate.vue'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BRate>>
 
 describe('BRate', () => {
     beforeEach(() => {
@@ -51,7 +53,7 @@ describe('BRate', () => {
 
     it('manage methods correctly', async () => {
         const event = {
-            stopPropagation: jest.fn()
+            stopPropagation: vi.fn()
         }
         let value = 0
 
