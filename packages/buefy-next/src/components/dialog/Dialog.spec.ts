@@ -1,11 +1,13 @@
 import { shallowMount } from '@vue/test-utils'
-import BDialog from '@components/dialog/Dialog'
+import type { VueWrapper } from '@vue/test-utils'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import BDialog from '@components/dialog/Dialog.vue'
 import config, { setOptions } from '@utils/config'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BDialog>>
 
 describe('BDialog', () => {
-    HTMLElement.prototype.focus = jest.fn()
+    HTMLElement.prototype.focus = vi.fn()
     beforeEach(() => {
         wrapper = shallowMount(BDialog, {
             attachTo: document.body
@@ -19,7 +21,7 @@ describe('BDialog', () => {
 
     it('gives focus to the input element if it contains one', async () => {
         await wrapper.setProps({ hasInput: true })
-        expect(wrapper.vm.$refs.input.focus).toHaveBeenCalled()
+        expect((wrapper.vm.$refs.input as HTMLInputElement).focus).toHaveBeenCalled()
     })
 
     it('manage default config props values', () => {
@@ -60,16 +62,16 @@ describe('BDialog', () => {
     })
 
     it('close on confirm', async () => {
-        await wrapper.setProps({ confirmCallback: jest.fn() })
+        await wrapper.setProps({ confirmCallback: vi.fn() })
         wrapper.vm.confirm()
         expect(wrapper.vm.isActive).toBeFalsy()
         expect(wrapper.vm.confirmCallback).toHaveBeenCalled()
-        expect(wrapper.emitted().confirm).toEqual([['']])
+        expect(wrapper.emitted<string[]>().confirm[0][0]).toEqual('')
     })
 
     it('async confirm and keep Loading state', async () => {
         await wrapper.setProps({
-            confirmCallback: jest.fn((confirmValue, { startLoading }) => {
+            confirmCallback: vi.fn((confirmValue, { startLoading }) => {
                 startLoading()
                 expect(wrapper.vm.isLoading).toBeTruthy()
             }),
@@ -83,7 +85,7 @@ describe('BDialog', () => {
 
     it('async confirm and close Loading state', async () => {
         await wrapper.setProps({
-            confirmCallback: jest.fn((confirmValue, { startLoading, cancelLoading }) => {
+            confirmCallback: vi.fn((confirmValue, { startLoading, cancelLoading }) => {
                 startLoading()
                 expect(wrapper.vm.isLoading).toBeTruthy()
                 cancelLoading()
@@ -97,10 +99,10 @@ describe('BDialog', () => {
     })
 
     it('closeOnConfirm prop equals false', async () => {
-        await wrapper.setProps({ confirmCallback: jest.fn(), closeOnConfirm: false })
+        await wrapper.setProps({ confirmCallback: vi.fn(), closeOnConfirm: false })
         wrapper.vm.confirm()
         expect(wrapper.vm.isActive).toBeTruthy()
         expect(wrapper.vm.confirmCallback).toHaveBeenCalled()
-        expect(wrapper.emitted().confirm).toEqual([['']])
+        expect(wrapper.emitted<string[]>().confirm[0][0]).toEqual('')
     })
 })

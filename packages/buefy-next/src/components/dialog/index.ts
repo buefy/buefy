@@ -1,18 +1,47 @@
 import { createApp, h as createElement } from 'vue'
+import type { App, ComponentPublicInstance } from 'vue'
 
 import Dialog from './Dialog.vue'
+import type { DialogProps } from './Dialog.vue'
 
 import config from '../../utils/config'
-import { merge, copyAppContext, getComponentFromVNode } from '../../utils/helpers'
+import type { ModalCancellableOption } from '../../utils/config'
+import { copyAppContext, getComponentFromVNode } from '../../utils/helpers'
 import { registerComponent, registerComponentProgrammatic } from '../../utils/plugins'
 
-function open(propsData, app) {
-    let slot
+type DialogInstance = InstanceType<typeof Dialog>
+
+export type DialogOpenParams = Omit<
+    DialogProps,
+    'programmatic' | 'cancelCallback' | 'confirmCallback'
+> & {
+    onConfirm?: (value: string, dialog: DialogInstance) => void
+    onCancel?: (method: ModalCancellableOption) => void
+}
+
+// Minimal definition of a programmatically opened dialog.
+//
+// ESLint does not like `{}` as a type but allowed here to make them look
+// similar to Vue's definition.
+/* eslint-disable @typescript-eslint/ban-types */
+type DialogProgrammaticInstance = ComponentPublicInstance<
+    {}, // P
+    {}, // B
+    {}, // D
+    {}, // C
+    { close: () => void } // M
+>
+
+function open(propsData: DialogProps, app?: App) {
+    let slot: DialogProps['message']
     if (Array.isArray(propsData.message)) {
         slot = propsData.message
         delete propsData.message
     }
-    function createDialog(onConfirm, onCancel) {
+    function createDialog(
+        onConfirm?: (value: string) => void,
+        onCancel?: (method: ModalCancellableOption) => void
+    ) {
         const container = document.createElement('div')
         // Vue 3 requires a new app to mount another component
         const vueInstance = createApp({
@@ -25,19 +54,19 @@ function open(propsData, app) {
                 close() {
                     const dialog = getComponentFromVNode(this.dialogVNode)
                     if (dialog) {
-                        dialog.close()
+                        (dialog as DialogInstance).close()
                     }
                 },
                 startLoading() {
                     const dialog = getComponentFromVNode(this.dialogVNode)
                     if (dialog) {
-                        dialog.startLoading()
+                        (dialog as DialogInstance).startLoading()
                     }
                 },
                 cancelLoading() {
                     const dialog = getComponentFromVNode(this.dialogVNode)
                     if (dialog) {
-                        dialog.cancelLoading()
+                        (dialog as DialogInstance).cancelLoading()
                     }
                 }
             },
@@ -48,27 +77,27 @@ function open(propsData, app) {
                         ...propsData,
                         // intentionally overrides propsData.onConfirm
                         // to prevent propsData.onConfirm from receiving a "confirm" event
-                        onConfirm: (...args) => {
+                        onConfirm: (value: string) => {
                             if (onConfirm != null) {
-                                onConfirm(...args)
+                                onConfirm(value)
                             }
                         },
                         // intentionally override propsData.onCancel
                         // to prevent propsData.onCancel from receiving a "cancel" event
-                        onCancel: (...args) => {
+                        onCancel: (method: ModalCancellableOption) => {
                             if (onCancel != null) {
-                                onCancel(...args)
+                                onCancel(method)
                             }
                             vueInstance.unmount()
                         },
-                        confirmCallback: (...args) => {
+                        confirmCallback: (value: string, dialog: DialogInstance) => {
                             if (propsData.onConfirm != null) {
-                                propsData.onConfirm(...args)
+                                propsData.onConfirm(value, dialog)
                             }
                         },
-                        cancelCallback: (...args) => {
+                        cancelCallback: (method: ModalCancellableOption) => {
                             if (propsData.onCancel != null) {
-                                propsData.onCancel(...args)
+                                propsData.onCancel(method)
                             }
                         }
                     },
@@ -80,7 +109,7 @@ function open(propsData, app) {
         if (app) {
             copyAppContext(app, vueInstance)
         }
-        return vueInstance.mount(container)
+        return vueInstance.mount(container) as DialogProgrammaticInstance
     }
     if (!config.defaultProgrammaticPromise) {
         return createDialog()
@@ -94,40 +123,39 @@ function open(propsData, app) {
 }
 
 class DialogProgrammatic {
-    constructor(app) {
+    private app: App | undefined
+
+    constructor(app?: App) {
         this.app = app // may be undefined in the testing environment
     }
 
-    alert(params) {
+    alert(params: string | DialogOpenParams) {
+        let newParams: DialogOpenParams
         if (typeof params === 'string') {
-            params = {
+            newParams = {
                 message: params
             }
+        } else {
+            newParams = params
         }
-        const defaultParam = {
-            canCancel: false
+        newParams = {
+            canCancel: false,
+            ...newParams
         }
-        const propsData = merge(defaultParam, params)
-        return open(propsData, this.app)
+        return open(newParams, this.app)
     }
 
-    confirm(params) {
-        const defaultParam = {}
-        const propsData = merge(defaultParam, params)
-        return open(propsData, this.app)
+    confirm(params: DialogOpenParams) {
+        return open(params, this.app)
     }
 
-    prompt(params) {
-        const defaultParam = {
-            hasInput: true
-        }
-        const propsData = merge(defaultParam, params)
-        return open(propsData, this.app)
+    prompt(params: DialogOpenParams) {
+        return open({ hasInput: true, ...params }, this.app)
     }
 }
 
 const Plugin = {
-    install(Vue) {
+    install(Vue: App) {
         registerComponent(Vue, Dialog)
         registerComponentProgrammatic(Vue, 'dialog', new DialogProgrammatic(Vue))
     }

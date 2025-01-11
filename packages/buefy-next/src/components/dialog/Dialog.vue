@@ -26,7 +26,7 @@
                             v-if="hasIcon && (icon || iconByType)"
                         >
                             <b-icon
-                                :icon="icon ? icon : iconByType"
+                                :icon="icon ? icon : iconByType!"
                                 :pack="iconPack"
                                 :type="type"
                                 :both="!icon"
@@ -88,19 +88,25 @@
     </transition>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
+
 import trapFocus from '../../directives/trapFocus'
-import Icon from '../icon/Icon.vue'
+import BIcon from '../icon/Icon.vue'
 import Modal from '../modal/Modal.vue'
-import Button from '../button/Button.vue'
+import BButton from '../button/Button.vue'
 import config from '../../utils/config'
 import { removeElement } from '../../utils/helpers'
+import type { ExtractComponentProps } from '../../utils/helpers'
 
-export default {
+type BButtonInstance = InstanceType<typeof BButton>
+
+const Dialog = defineComponent({
     name: 'BDialog',
     components: {
-        [Icon.name]: Icon,
-        [Button.name]: Button
+        BIcon,
+        BButton
     },
     directives: {
         trapFocus
@@ -139,7 +145,9 @@ export default {
             default: () => ({})
         },
         confirmCallback: {
-            type: Function,
+            // I was not able to figure out how to specify the "self" type here
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            type: Function as PropType<(value: string, dialog: any) => void>,
             default: () => {}
         },
         closeOnConfirm: {
@@ -155,25 +163,15 @@ export default {
         focusOn: {
             type: String,
             default: 'confirm'
-        },
-        trapFocus: {
-            type: Boolean,
-            default: () => {
-                return config.defaultTrapFocus
-            }
-        },
-        ariaRole: {
-            type: String,
-            validator: (value) => {
-                return [
-                    'dialog',
-                    'alertdialog'
-                ].indexOf(value) >= 0
-            }
-        },
-        ariaModal: Boolean
+        }
     },
-    emits: ['confirm'],
+    emits: {
+        /* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any */
+        // second parameter is the dialog instance but typed any
+        // because I was not able to figure out how to specify the "self" type here
+        confirm: (value: string, dialog: any) => true
+        /* eslint-enable @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any */
+    },
     data() {
         const prompt = this.hasInput
             ? this.inputAttrs.value || ''
@@ -204,7 +202,7 @@ export default {
                 'has-custom-container': this.container !== null
             }]
         },
-        /**
+        /*
         * Icon name (MDI) based on the type.
         */
         iconByType() {
@@ -226,25 +224,26 @@ export default {
         }
     },
     methods: {
-        /**
+        /*
         * If it's a prompt Dialog, validate the input.
         * Call the confirmCallback prop (function) and close the Dialog.
         */
         confirm() {
-            if (this.$refs.input !== undefined) {
+            const input = this.$refs.input as HTMLInputElement
+            if (input != null) {
                 if (this.isCompositing) return
-                if (!this.$refs.input.checkValidity()) {
-                    this.validationMessage = this.$refs.input.validationMessage
-                    this.$nextTick(() => this.$refs.input.select())
+                if (!input.checkValidity()) {
+                    this.validationMessage = input.validationMessage
+                    this.$nextTick(() => input.select())
                     return
                 }
             }
-            this.$emit('confirm', this.prompt)
+            this.$emit('confirm', this.prompt, this)
             this.confirmCallback(this.prompt, this)
             if (this.closeOnConfirm) this.close()
         },
 
-        /**
+        /*
         * Close the Dialog.
         */
         close() {
@@ -285,13 +284,17 @@ export default {
         this.$nextTick(() => {
             // Handle which element receives focus
             if (this.hasInput) {
-                this.$refs.input.focus()
+                (this.$refs.input as HTMLInputElement).focus()
             } else if (this.focusOn === 'cancel' && this.showCancel) {
-                this.$refs.cancelButton.$el.focus()
+                (this.$refs.cancelButton as BButtonInstance).$el.focus()
             } else {
-                this.$refs.confirmButton.$el.focus()
+                (this.$refs.confirmButton as BButtonInstance).$el.focus()
             }
         })
     }
-}
+})
+
+export type DialogProps = ExtractComponentProps<typeof Dialog>
+
+export default Dialog
 </script>
