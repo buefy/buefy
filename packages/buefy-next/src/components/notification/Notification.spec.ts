@@ -1,7 +1,9 @@
 import { shallowMount } from '@vue/test-utils'
-import BNotification from '@components/notification/Notification'
+import type { VueWrapper } from '@vue/test-utils'
+import { beforeEach, describe, expect, it } from 'vitest'
+import BNotification from '@components/notification/Notification.vue'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BNotification>>
 
 describe('BNotification', () => {
     beforeEach(() => {

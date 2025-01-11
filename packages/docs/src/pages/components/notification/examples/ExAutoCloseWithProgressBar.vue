@@ -18,8 +18,15 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BButton, BNotification } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BButton,
+            BNotification
+        },
         data() {
             return {
                 isActive: false,
@@ -27,5 +34,5 @@
                 progressBar: true
             }
         }
-    }
+    })
 </script>

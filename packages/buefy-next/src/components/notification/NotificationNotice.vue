@@ -4,8 +4,10 @@
         ref="notification"
         :position="position"
         :model-value="isActive"
-        v-bind="$attrs"
+        :type="type"
+        :message="message"
         :duration="duration"
+        v-bind="$attrs"
         @click="click"
         @close="close"
         @mouseenter="pause"
@@ -18,8 +20,10 @@
         ref="notification"
         :position="position"
         :model-value="isActive"
-        v-bind="$attrs"
+        :type="type"
+        :message="message"
         :duration="duration"
+        v-bind="$attrs"
         @click="click"
         @close="close"
         @mouseenter="pause"
@@ -27,32 +31,34 @@
     />
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+
 import config from '../../utils/config'
 import { removeElement } from '../../utils/helpers'
-import NoticeMixinSubset from './NoticeMixinSubset'
-import Notification from './Notification.vue'
+import type { ExtractComponentProps } from '../../utils/helpers'
+import NoticeMixin from '../../utils/NoticeMixin'
+import BNotification from './Notification.vue'
 
-export default {
+type NotificationInstance = InstanceType<typeof BNotification>
+
+const NotificationNotice = defineComponent({
     name: 'BNotificationNotice',
-    components: {
-        [Notification.name]: Notification
-    },
-    mixins: [NoticeMixinSubset],
-    props: {
-        duration: Number
-    },
-    emits: ['close'],
+    components: { BNotification },
+    mixins: [NoticeMixin],
     data() {
         return {
             newDuration: this.duration || config.defaultNotificationDuration
         }
     },
+    emits: {
+        close: () => true
+    },
     methods: {
         close() {
             if (!this.isPaused) {
-                clearTimeout(this.timer)
-                this.$refs.notification.isActive = false
+                clearTimeout(this.timer);
+                (this.$refs.notification as NotificationInstance).isActive = false
                 this.$emit('close')
 
                 // Timeout for the animation complete before destroying
@@ -62,5 +68,9 @@ export default {
             }
         }
     }
-}
+})
+
+export type NotificationNoticeProps = ExtractComponentProps<typeof NotificationNotice>
+
+export default NotificationNotice
 </script>

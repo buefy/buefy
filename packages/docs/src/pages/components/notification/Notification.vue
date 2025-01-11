@@ -33,32 +33,45 @@
     </div>
 </template>
 
-<script>
-    import { preformat as _preformat } from '@/utils'
+<script lang="ts">
+    import { defineComponent } from 'vue'
+
+    import { preformat as _preformat, shallowFields } from '@/utils'
+    import ApiView from '@/components/ApiView.vue'
+    import CodeView from '@/components/CodeView.vue'
+    import Example from '@/components/Example.vue'
+    import VariablesView from '@/components/VariablesView.vue'
 
     import api from './api/notification'
     import variables from './variables/notification'
-    import { shallowFields } from '@/utils'
 
-    import ExSimple from './examples/ExSimple'
+    import ExSimple from './examples/ExSimple.vue'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
 
-    import ExTypes from './examples/ExTypes'
+    import ExTypes from './examples/ExTypes.vue'
     import ExTypesCode from './examples/ExTypes.vue?raw'
 
-    import ExIcons from './examples/ExIcons'
+    import ExIcons from './examples/ExIcons.vue'
     import ExIconsCode from './examples/ExIcons.vue?raw'
 
-    import ExAutoClose from './examples/ExAutoClose'
+    import ExAutoClose from './examples/ExAutoClose.vue'
     import ExAutoCloseCode from './examples/ExAutoClose.vue?raw'
 
-    import ExAutoCloseWithProgressBar from './examples/ExAutoCloseWithProgressBar'
+    import ExAutoCloseWithProgressBar from './examples/ExAutoCloseWithProgressBar.vue'
     import ExAutoCloseWithProgressBarCode from './examples/ExAutoCloseWithProgressBar.vue?raw'
 
-    import ExProgrammatically from './examples/ExProgrammatically'
+    import ExProgrammatically from './examples/ExProgrammatically.vue'
     import ExProgrammaticallyCode from './examples/ExProgrammatically.vue?raw'
 
-    export default {
+    import outsideVueInstance from './outside-vue-instance.js?raw'
+
+    export default defineComponent({
+        components: {
+            ApiView,
+            CodeView,
+            Example,
+            VariablesView
+        },
         data() {
             return {
                 api,
@@ -77,16 +90,13 @@
                 ExAutoCloseCode,
                 ExAutoCloseWithProgressBarCode,
                 ExProgrammaticallyCode,
-                outsideVueInstance: `
-                    import { NotificationProgrammatic as Notification } from 'buefy'
-                    Notification.open('Notify!')
-                `
+                outsideVueInstance
             }
         },
         methods: {
-            preformat(text) {
+            preformat(text: string) {
                 return _preformat(text)
             }
         }
-    }
+    })
 </script>

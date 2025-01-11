@@ -29,8 +29,12 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BButton } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: { BButton },
         methods: {
             simple() {
                 this.$buefy.notification.open('Something happened')
@@ -70,5 +74,5 @@
                 })
             },
         }
-    }
+    })
 </script>

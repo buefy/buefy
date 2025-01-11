@@ -10,6 +10,7 @@ import 'vue'
 import type { DialogProgrammatic } from '../components/dialog'
 import type { LoadingProgrammatic } from '../components/loading'
 import type { ModalProgrammatic } from '../components/modal'
+import type { NotificationProgrammatic } from '../components/notification'
 import type { SnackbarProgrammatic } from '../components/snackbar'
 import type { ToastProgrammatic } from '../components/toast'
 import ConfigComponent from './ConfigComponent'
@@ -26,6 +27,7 @@ declare module '@vue/runtime-core' {
             dialog: DialogProgrammatic,
             loading: LoadingProgrammatic,
             modal: ModalProgrammatic,
+            notification: NotificationProgrammatic,
             snackbar: SnackbarProgrammatic,
             toast: ToastProgrammatic,
             // TODO: make key-values more specific

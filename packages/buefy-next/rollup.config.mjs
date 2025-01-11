@@ -35,7 +35,6 @@ const JS_COMPONENTS = [
     'colorpicker',
     'datepicker',
     'datetimepicker',
-    'notification',
     'numberinput',
     'table',
     'timepicker',
