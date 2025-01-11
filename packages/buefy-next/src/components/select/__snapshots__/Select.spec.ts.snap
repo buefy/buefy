@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BSelect > render correctly 1`] = `
+"<div class=\\"control\\"><span class=\\"select is-empty\\"><select><!--v-if--></select></span>
+  <!--v-if-->
+</div>"
+`;

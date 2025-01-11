@@ -20,8 +20,15 @@
     </section>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BField, BSelect } from '@ntohq/buefy-next'
+
     export default {
+        components: {
+            BField,
+            BSelect
+        },
         data() {
             return {
                 selectedOptions: []

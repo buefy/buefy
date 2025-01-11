@@ -92,12 +92,18 @@
     </section>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
     import data from '@/data/sample.json'
+    import { BField, BSelect } from '@ntohq/buefy-next'
 
-    export default {
+    export default defineComponent({
+        components: {
+            BField,
+            BSelect
+        },
         data() {
             return { data }
         }
-    }
+    })
 </script>

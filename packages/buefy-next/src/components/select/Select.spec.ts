@@ -1,7 +1,9 @@
 import { shallowMount } from '@vue/test-utils'
-import BSelect from '@components/select/Select'
+import type { VueWrapper } from '@vue/test-utils'
+import { beforeEach, describe, expect, it } from 'vitest'
+import BSelect from '@components/select/Select.vue'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BSelect>>
 
 describe('BSelect', () => {
     beforeEach(() => {

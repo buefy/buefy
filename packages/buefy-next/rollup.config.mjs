@@ -38,7 +38,6 @@ const JS_COMPONENTS = [
     'dialog',
     'notification',
     'numberinput',
-    'select',
     'table',
     'timepicker',
     'upload',

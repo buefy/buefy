@@ -40,3 +40,7 @@
         </b-field>
     </section>
 </template>
+
+<script setup lang="ts">
+import { BField, BSelect } from '@ntohq/buefy-next'
+</script>
