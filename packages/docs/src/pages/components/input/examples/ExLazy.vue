@@ -16,13 +16,21 @@
     </section>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BField, BInput, BSwitch } from '@ntohq/buefy-next'
+
+export default defineComponent({
+    components: {
+        BField,
+        BInput,
+        BSwitch
+    },
     data() {
         return {
             beLazy: false,
             value: null
         }
     }
-}
+})
 </script>

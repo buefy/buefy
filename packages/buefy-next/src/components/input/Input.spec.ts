@@ -1,8 +1,19 @@
+import { defineComponent } from 'vue'
 import { shallowMount, mount } from '@vue/test-utils'
-import BInput from '@components/input/Input'
-import BIcon from '@components/icon/Icon'
+import type { VueWrapper } from '@vue/test-utils'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import type { MockInstance } from 'vitest'
+import BInput from '@components/input/Input.vue'
+import BIcon from '@components/icon/Icon.vue'
+import FormElementMixin from '@utils/FormElementMixin'
+import type { ExtractComponentData } from '@utils/helpers'
 
-let wrapper
+type BInputInstance = InstanceType<typeof BInput>
+type FormElementMixinInstance = InstanceType<typeof FormElementMixin>
+
+type BInputData = ExtractComponentData<typeof BInput>
+
+let wrapper: VueWrapper<BInputInstance>
 
 describe('BInput', () => {
     beforeEach(() => {
@@ -95,7 +106,7 @@ describe('BInput', () => {
             }
         })
 
-        await wrapper.setProps({ value: 'bar' })
+        await wrapper.setProps({ modelValue: 'bar' })
 
         expect(wrapper.find('input').exists()).toBeTruthy()
         expect(wrapper.vm.newType).toBe('password')
@@ -184,7 +195,7 @@ describe('BInput', () => {
         expect(input.vm.statusTypeIcon).toBe('alert')
     })
 
-    it('manage the click on icon', (done) => {
+    it('manage the click on icon', async () => {
         const wrapper = mount(BInput, {
             propsData: {
                 icon: 'magnify',
@@ -198,21 +209,20 @@ describe('BInput', () => {
         expect(visibilityIcon.exists()).toBeTruthy()
         visibilityIcon.trigger('click')
 
-        wrapper.vm.$nextTick(() => {
-            expect(wrapper.emitted()['icon-click']).toBeTruthy()
-            done()
-        })
+        await wrapper.vm.$nextTick()
+        expect(wrapper.emitted()['icon-click']).toBeTruthy()
     })
 
     describe('validation', () => {
-        let spyOnCheckHtml5Validity
+        let spyOnCheckHtml5Validity: MockInstance
 
         beforeEach(() => {
-            spyOnCheckHtml5Validity = jest
-                .spyOn(BInput.mixins[1].methods, 'checkHtml5Validity')
+            spyOnCheckHtml5Validity = vi
+                .spyOn(FormElementMixin.methods as FormElementMixinInstance, 'checkHtml5Validity')
                 .mockImplementation(function () {
                     this.isValid = false
-                })
+                    return false
+                } as (this: FormElementMixinInstance) => boolean)
         })
 
         afterEach(() => {
@@ -221,24 +231,26 @@ describe('BInput', () => {
 
         it('should validate value when updated by user interaction', async () => {
             const wrapper = shallowMount(BInput, {
-                data: () => ({ isValid: false })
+                data: () => ({ isValid: false } as BInputData)
             })
 
             // simulates "input" event
-            wrapper.vm.onInput({ target: { value: 'foo' } })
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            wrapper.vm.onInput({ target: { value: 'foo' } } as any)
             await wrapper.vm.$nextTick()
             expect(spyOnCheckHtml5Validity).toHaveBeenCalledTimes(1)
 
             // simulates "change" event
             await wrapper.setProps({ lazy: true })
-            wrapper.vm.onChange({ target: { value: 'bar' } })
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            wrapper.vm.onChange({ target: { value: 'bar' } } as any)
             await wrapper.vm.$nextTick()
             expect(spyOnCheckHtml5Validity).toHaveBeenCalledTimes(2)
         })
 
         it('should validate value when programmatically updated', async () => {
             const wrapper = shallowMount(BInput, {
-                data: () => ({ isValid: false })
+                data: () => ({ isValid: false } as BInputData)
             })
             await wrapper.setProps({ modelValue: 'foo' })
             await wrapper.vm.$nextTick()
@@ -246,35 +258,40 @@ describe('BInput', () => {
         })
 
         describe('via v-model', () => {
-            let root
-            let wrapper
+            const rootComponent = defineComponent({
+                components: { 'b-input': BInput },
+                data: () => ({
+                    value: '',
+                    lazy: false
+                }),
+                template: '<b-input v-model="value" :lazy="lazy" />'
+            })
+
+            let root: VueWrapper<InstanceType<typeof rootComponent>>
+            let wrapper: VueWrapper<BInputInstance>
 
             beforeEach(async () => {
-                root = mount({
-                    template: '<b-input v-model="value" :lazy="lazy" />',
-                    components: { 'b-input': BInput },
-                    data: () => ({
-                        value: '',
-                        lazy: false
-                    })
-                })
+                root = mount(rootComponent)
                 wrapper = root.findComponent(BInput)
                 // triggers validation and invalidates
-                wrapper.vm.onBlur({})
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                wrapper.vm.onBlur({} as any)
                 await wrapper.vm.$nextTick()
                 spyOnCheckHtml5Validity.mockClear()
             })
 
             it('should validate value once when updated by user interaction', async () => {
                 // simulates "input" event
-                wrapper.vm.onInput({ target: { value: 'foo' } })
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                wrapper.vm.onInput({ target: { value: 'foo' } } as any)
                 await wrapper.vm.$nextTick()
                 expect(root.vm.value).toBe('foo')
                 expect(spyOnCheckHtml5Validity).toHaveBeenCalledTimes(1)
 
                 // simulates "change" event
                 await root.setData({ lazy: true })
-                wrapper.vm.onChange({ target: { value: 'bar' } })
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                wrapper.vm.onChange({ target: { value: 'bar' } } as any)
                 await wrapper.vm.$nextTick()
                 expect(root.vm.value).toBe('bar')
                 expect(spyOnCheckHtml5Validity).toHaveBeenCalledTimes(2)

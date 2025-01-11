@@ -36,12 +36,19 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BField, BInput } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BField,
+            BInput
+        },
         data() {
             return {
                 name: 'John Silver'
             }
         }
-    }
+    })
 </script>

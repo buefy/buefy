@@ -1,9 +1,11 @@
+import type { App } from 'vue'
+
 import Input from './Input.vue'
 
 import { registerComponent } from '../../utils/plugins'
 
 const Plugin = {
-    install(Vue) {
+    install(Vue: App) {
         registerComponent(Vue, Input)
     }
 }

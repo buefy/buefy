@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BInput > render correctly 1`] = `
+"<div class=\\"control is-clearfix\\"><input class=\\"input\\" type=\\"text\\" autocomplete=\\"on\\">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;

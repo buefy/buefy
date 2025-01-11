@@ -53,8 +53,15 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BField, BInput } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BField,
+            BInput
+        },
         data() {
             return {
                 email: '',
@@ -69,5 +76,5 @@
                 alert('Email cleared!')
             }
         }
-    }
+    })
 </script>
