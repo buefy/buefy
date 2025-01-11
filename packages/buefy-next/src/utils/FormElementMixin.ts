@@ -1,6 +1,26 @@
-import config from '../utils/config'
+import { defineComponent } from 'vue'
 
-export default {
+import config from '../utils/config'
+import BField from '../components/field/Field.vue'
+import type {
+    FieldMessageProp,
+    FieldTypeProp
+} from '../components/field/Field.vue'
+
+type BFieldComponent = InstanceType<typeof BField>
+
+// HTMLElement that supports contraint validation;
+// i.e., having `validationMessage`
+// https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation#the_constraint_validation_api
+type ConstraintValidationElement =
+    | HTMLButtonElement
+    | HTMLFieldSetElement
+    | HTMLInputElement
+    | HTMLOutputElement
+    | HTMLSelectElement
+    | HTMLTextAreaElement
+
+const FormElementMixin = defineComponent({
     props: {
         size: String,
         expanded: Boolean,
@@ -17,7 +37,7 @@ export default {
         },
         validationMessage: String,
         locale: {
-            type: [String, Array],
+            type: [String, Array<string>],
             default: () => {
                 return config.defaultLocale
             }
@@ -29,29 +49,37 @@ export default {
             }
         }
     },
-    emits: ['blur', 'focus'],
+    emits: {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        blur: (event?: Event) => true,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        focus: (event?: Event) => true
+    },
     data() {
         return {
             isValid: true,
             isFocused: false,
-            newIconPack: this.iconPack || config.defaultIconPack
+            newIconPack: this.iconPack || config.defaultIconPack,
+            // host component must override this
+            _elementRef: ''
         }
     },
     computed: {
-        /**
+        /*
          * Find parent Field, max 3 levels deep.
          */
-        parentField() {
+        parentField(): BFieldComponent | undefined {
             let parent = this.$parent
             for (let i = 0; i < 3; i++) {
-                if (parent && !parent.$data._isField) {
+                if (parent && !(parent as BFieldComponent).$data._isField) {
                     parent = parent.$parent
                 }
             }
-            return parent
+            // TODO: what if parent is defined but not a Field?
+            return parent as BFieldComponent | undefined
         },
 
-        /**
+        /*
          * Get the type prop from parent if it's a Field.
          */
         statusType() {
@@ -68,9 +96,10 @@ export default {
                     }
                 }
             }
+            return undefined
         },
 
-        /**
+        /*
          * Get the message prop from parent if it's a Field.
          */
         statusMessage() {
@@ -79,7 +108,7 @@ export default {
             return this.parentField.newMessage || this.parentField.$slots.message
         },
 
-        /**
+        /*
          * Fix icon size for inputs, large was too big
          */
         iconSize() {
@@ -90,10 +119,11 @@ export default {
                     ? 'is-medium'
                     : ''
             }
+            return undefined
         }
     },
     methods: {
-        /**
+        /*
          * Focus method that work dynamically depending on the component.
          */
         focus() {
@@ -105,23 +135,25 @@ export default {
             })
         },
 
-        onBlur($event) {
+        onBlur($event?: Event) {
             this.isFocused = false
             this.$emit('blur', $event)
             this.checkHtml5Validity()
         },
 
-        onFocus($event) {
+        onFocus($event?: Event) {
             this.isFocused = true
             this.$emit('focus', $event)
         },
 
-        getElement() {
+        getElement(): ConstraintValidationElement {
             let el = this.$refs[this.$data._elementRef]
-            while (el != null && '$refs' in el) {
-                el = el.$refs[el.$data._elementRef]
+            while (el != null && typeof el === 'object' && '$refs' in el) {
+                const form = el as unknown as typeof FormElementMixin
+                el = form.$refs[form.$data._elementRef]
             }
-            return el
+            // TODO: what if el is not an HTMLElement? possibly null?
+            return el as ConstraintValidationElement
         },
 
         setInvalid() {
@@ -130,7 +162,7 @@ export default {
             this.setValidity(type, message)
         },
 
-        setValidity(type, message) {
+        setValidity(type: FieldTypeProp | null, message: FieldMessageProp | null) {
             this.$nextTick(() => {
                 if (this.parentField) {
                     // Set type only if not defined
@@ -145,7 +177,7 @@ export default {
             })
         },
 
-        /**
+        /*
          * Check HTML5 validation, set isValid property.
          * If validation fail, send 'is-danger' type,
          * and error message to parent if it's a Field.
@@ -167,4 +199,6 @@ export default {
             return this.isValid
         }
     }
-}
+})
+
+export default FormElementMixin
