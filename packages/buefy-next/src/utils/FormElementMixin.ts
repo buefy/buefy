@@ -182,11 +182,15 @@ const FormElementMixin = defineComponent({
          * If validation fail, send 'is-danger' type,
          * and error message to parent if it's a Field.
          */
-        checkHtml5Validity() {
-            if (!this.useHtml5Validation) return
+        checkHtml5Validity(): boolean {
+            if (!this.useHtml5Validation) {
+                return false
+            }
 
             const el = this.getElement()
-            if (el == null) return
+            if (el == null) {
+                return false
+            }
 
             if (!el.checkValidity()) {
                 this.setInvalid()

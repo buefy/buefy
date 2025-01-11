@@ -1,7 +1,9 @@
 import { shallowMount } from '@vue/test-utils'
-import BUpload from '@components/upload/Upload'
+import type { VueWrapper } from '@vue/test-utils'
+import { beforeEach, describe, expect, it } from 'vitest'
+import BUpload from '@components/upload/Upload.vue'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BUpload>>
 
 describe('BUpload', () => {
     beforeEach(() => {
