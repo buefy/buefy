@@ -42,8 +42,16 @@
     </section>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BClockpicker, BField, BSelect } from '@ntohq/buefy-next'
+
+export default defineComponent({
+    components: {
+        BClockpicker,
+        BField,
+        BSelect
+    },
     data() {
         return {
             hourFormat: undefined, // Browser locale
@@ -60,5 +68,5 @@ export default {
             return dtf.format(new Date(2000, 12, 12, 22, 23, 24))
         }
     }
-}
+})
 </script>

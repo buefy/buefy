@@ -30,7 +30,6 @@ const components = fs
     )
 
 const JS_COMPONENTS = [
-    'clockpicker',
     'datepicker',
     'datetimepicker',
     'table',

@@ -1,7 +1,9 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
-import BClockpickerFace from '@components/clockpicker/ClockpickerFace'
+import type { VueWrapper } from '@vue/test-utils'
+import BClockpickerFace from '@components/clockpicker/ClockpickerFace.vue'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BClockpickerFace>>
 const indicatorSize = 40
 const paddingInner = 5
 const pickerSize = 500
@@ -27,7 +29,7 @@ describe('BClockpickerFace', () => {
     })
 
     it('returns countPerRing correctly', async () => {
-        const count = wrapper.vm.max - wrapper.vm.min + 1
+        const count = wrapper.vm.max! - wrapper.vm.min! + 1
         expect(wrapper.vm.countPerRing).toEqual(count)
 
         await wrapper.setProps({ double: true })
@@ -63,17 +65,17 @@ describe('BClockpickerFace', () => {
     })
 
     it('calls disabledValues function when isDisabled is called', async () => {
-        await wrapper.setProps({ disabledValues: jest.fn() })
+        await wrapper.setProps({ disabledValues: vi.fn() })
         wrapper.vm.isDisabled(2)
         expect(wrapper.vm.disabledValues).toHaveBeenCalled()
     })
 
     it('manage onMouseDown', () => {
         const e = {
-            preventDefault: jest.fn()
+            preventDefault: vi.fn()
         }
-        wrapper.vm.onDragMove = jest.fn()
-        wrapper.vm.onMouseDown(e)
+        wrapper.vm.onDragMove = vi.fn()
+        wrapper.vm.onMouseDown(e as unknown as MouseEvent)
         expect(e.preventDefault).toHaveBeenCalled()
         expect(wrapper.vm.isDragging).toBeTruthy()
         expect(wrapper.vm.onDragMove).toHaveBeenCalled()
@@ -86,11 +88,11 @@ describe('BClockpickerFace', () => {
 
     it('manage onDragMove', async () => {
         const e = {
-            preventDefault: jest.fn()
+            preventDefault: vi.fn()
         }
         await wrapper.setData({ isDragging: true })
-        wrapper.vm.update = jest.fn()
-        wrapper.vm.onDragMove(e)
+        wrapper.vm.update = vi.fn()
+        wrapper.vm.onDragMove(e as unknown as MouseEvent)
         expect(e.preventDefault).toHaveBeenCalled()
         expect(wrapper.vm.update).toHaveBeenCalled()
     })

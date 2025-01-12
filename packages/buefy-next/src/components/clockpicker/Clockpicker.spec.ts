@@ -1,7 +1,9 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
-import BClockpicker from '@components/clockpicker/Clockpicker'
+import type { VueWrapper } from '@vue/test-utils'
+import BClockpicker from '@components/clockpicker/Clockpicker.vue'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BClockpicker>>
 
 describe('BClockpicker', () => {
     beforeEach(() => {
@@ -76,13 +78,13 @@ describe('BClockpicker', () => {
         const value = 5
 
         await wrapper.setData({ isSelectingHour: true })
-        wrapper.vm.onHoursChange = jest.fn()
+        wrapper.vm.onHoursChange = vi.fn()
         wrapper.vm.onClockInput(value)
         expect(wrapper.vm.hoursSelected).toBe(value)
         expect(wrapper.vm.onHoursChange).toHaveBeenCalledWith(value)
 
         await wrapper.setData({ isSelectingHour: false })
-        wrapper.vm.onMinutesChange = jest.fn()
+        wrapper.vm.onMinutesChange = vi.fn()
         wrapper.vm.onClockInput(value)
         expect(wrapper.vm.minutesSelected).toBe(value)
         expect(wrapper.vm.onMinutesChange).toHaveBeenCalledWith(value)
@@ -96,7 +98,7 @@ describe('BClockpicker', () => {
         expect(wrapper.vm.isSelectingHour).toBeFalsy()
     })
     it('react accordingly when changing meridien', async () => {
-        wrapper.vm.onMeridienChange = jest.fn()
+        wrapper.vm.onMeridienChange = vi.fn()
         await wrapper.setData({ meridienSelected: wrapper.vm.PM })
         wrapper.vm.onMeridienClick(wrapper.vm.PM)
         wrapper.vm.onMeridienClick(wrapper.vm.AM)

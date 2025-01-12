@@ -25,11 +25,20 @@
     </section>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BButton, BClockpicker, BField, BSwitch } from '@ntohq/buefy-next'
+
+export default defineComponent({
+    components: {
+        BButton,
+        BClockpicker,
+        BField,
+        BSwitch
+    },
     data() {
         return {
-            time: new Date(),
+            time: new Date() as Date | null,
             isAmPm: false
         }
     },
@@ -38,5 +47,5 @@ export default {
             return this.isAmPm ? '12' : '24'
         }
     }
-}
+})
 </script>
