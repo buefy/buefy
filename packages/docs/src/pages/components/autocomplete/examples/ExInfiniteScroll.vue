@@ -9,7 +9,7 @@
                 :loading="isFetching"
                 :check-infinite-scroll="true"
                 @typing="getAsyncData"
-                @select="option => selected = option"
+                @select="(option: DataItem) => selected = option"
                 @infinite-scroll="getMoreAsyncData">
 
                 <template v-slot="props">
@@ -37,14 +37,24 @@
     </section>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 import debounce from 'lodash/debounce'
+import { BAutocomplete } from '@ntohq/buefy-next'
 
-export default {
+interface DataItem {
+    title: string
+    poster_path: string
+    release_date: string
+    vote_average: number
+}
+
+const ExInfiniteScroll = defineComponent({
+    compnents: { BAutocomplete },
     data() {
         return {
-            data: [],
-            selected: null,
+            data: [] as DataItem[],
+            selected: null as DataItem | null,
             isFetching: false,
             name: '',
             page: 1,
@@ -55,42 +65,47 @@ export default {
         // You have to install and import debounce to use it,
         // it's not mandatory though.
         getAsyncData: debounce(function (name) {
+            // @ts-expect-error debounce obscures `this` type but passes it through
+            const self = this as InstanceType<typeof ExInfiniteScroll>
             // String update
-            if (this.name !== name) {
-                this.name = name
-                this.data = []
-                this.page = 1
-                this.totalPages = 1
+            if (self.name !== name) {
+                self.name = name
+                self.data = []
+                self.page = 1
+                self.totalPages = 1
             }
             // String cleared
             if (!name.length) {
-                this.data = []
-                this.page = 1
-                this.totalPages = 1
+                self.data = []
+                self.page = 1
+                self.totalPages = 1
                 return
             }
             // Reached last page
-            if (this.page > this.totalPages) {
+            if (self.page > self.totalPages) {
                 return
             }
-            this.isFetching = true
-            this.$http.get(`https://api.themoviedb.org/3/search/movie?api_key=bb6f51bef07465653c3e553d6ab161a8&query=${name}&page=${this.page}`)
+            self.isFetching = true
+            self.$http.get(`https://api.themoviedb.org/3/search/movie?api_key=bb6f51bef07465653c3e553d6ab161a8&query=${name}&page=${self.page}`)
                 .then(({ data }) => {
-                    data.results.forEach((item) => this.data.push(item))
+                    data.results.forEach((item: DataItem) => self.data.push(item))
 
-                    this.page++
-                    this.totalPages = data.total_pages
+                    self.page++
+                    self.totalPages = data.total_pages
                 })
                 .catch((error) => {
                     throw error
                 })
                 .finally(() => {
-                    this.isFetching = false
+                    self.isFetching = false
                 })
         }, 500),
         getMoreAsyncData: debounce(function () {
-            this.getAsyncData(this.name)
+            // @ts-expect-error - debounce obscures `this` type but passes it through
+            const self = this as InstanceType<typeof ExInfiniteScroll>
+            self.getAsyncData(self.name)
         }, 250)
     }
-}
+})
+export default ExInfiniteScroll
 </script>

@@ -86,36 +86,47 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+import { shallowFields } from '@/utils'
+import ApiView from '@/components/ApiView.vue'
+import Example from '@/components/Example.vue'
+import VariablesView from '@/components/VariablesView.vue'
+
 import api from './api/autocomplete'
 import variables from './variables/autocomplete'
-import { shallowFields } from '@/utils'
 
-import ExSimple from './examples/ExSimple'
+import ExSimple from './examples/ExSimple.vue'
 import ExSimpleCode from './examples/ExSimple.vue?raw'
 
-import ExObjArray from './examples/ExObjArray'
+import ExObjArray from './examples/ExObjArray.vue'
 import ExObjArrayCode from './examples/ExObjArray.vue?raw'
 
-import ExHeader from './examples/ExHeader'
+import ExHeader from './examples/ExHeader.vue'
 import ExHeaderCode from './examples/ExHeader.vue?raw'
 
-import ExFooter from './examples/ExFooter'
+import ExFooter from './examples/ExFooter.vue'
 import ExFooterCode from './examples/ExFooter.vue?raw'
 
-import ExGroups from './examples/ExGroups'
+import ExGroups from './examples/ExGroups.vue'
 import ExGroupsCode from './examples/ExGroups.vue?raw'
 
-import ExCustomAsync from './examples/ExCustomAsync'
+import ExCustomAsync from './examples/ExCustomAsync.vue'
 import ExCustomAsyncCode from './examples/ExCustomAsync.vue?raw'
 
-import ExInfiniteScroll from './examples/ExInfiniteScroll'
+import ExInfiniteScroll from './examples/ExInfiniteScroll.vue'
 import ExInfiniteScrollCode from './examples/ExInfiniteScroll.vue?raw'
 
-import ExKeepFirst from './examples/ExKeepFirst'
+import ExKeepFirst from './examples/ExKeepFirst.vue'
 import ExKeepFirstCode from './examples/ExKeepFirst.vue?raw'
 
-export default {
+export default defineComponent({
+    components: {
+        ApiView,
+        Example,
+        VariablesView
+    },
     data() {
         return {
             api,
@@ -140,5 +151,5 @@ export default {
             ExKeepFirstCode
         }
     }
-}
+})
 </script>

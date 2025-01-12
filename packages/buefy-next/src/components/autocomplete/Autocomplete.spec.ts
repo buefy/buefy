@@ -1,7 +1,9 @@
 import { mount, shallowMount } from '@vue/test-utils'
-import BAutocomplete from '@components/autocomplete/Autocomplete'
+import type { DOMWrapper, VueWrapper } from '@vue/test-utils'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import BAutocomplete from '@components/autocomplete/Autocomplete.vue'
 
-const findStringsStartingWith = (array, value) =>
+const findStringsStartingWith = (array: string[], value: string) =>
     array.filter((x) => x.startsWith(value))
 
 const DATA_LIST = [
@@ -19,11 +21,13 @@ const DATA_LIST = [
     'Vue.js'
 ]
 const dropdownMenu = '.dropdown-menu'
-let wrapper, $input, $dropdown, stubs
+let wrapper: VueWrapper<InstanceType<typeof BAutocomplete>>
+let $input: DOMWrapper<HTMLInputElement | HTMLTextAreaElement>
+let $dropdown: DOMWrapper<Element>
+const stubs = { 'b-icon': true }
 
 describe('BAutocomplete', () => {
     beforeEach(() => {
-        stubs = { 'b-icon': true }
         wrapper = mount(BAutocomplete, {
             props: {
                 checkInfiniteScroll: true
@@ -56,7 +60,7 @@ describe('BAutocomplete', () => {
     })
 
     it('can apply a maximum height for the dropdown', async () => {
-        expect(wrapper.vm.contentStyle.maxHeight).toBeNull()
+        expect(wrapper.vm.contentStyle.maxHeight).toBeUndefined()
 
         const maxHeight = 200
 
@@ -186,7 +190,7 @@ describe('BAutocomplete', () => {
     })
 
     it('close dropdown on esc', async () => {
-        jest.useFakeTimers()
+        vi.useFakeTimers()
         await wrapper.setProps({ data: DATA_LIST })
 
         await wrapper.setData({ isActive: true })
@@ -196,12 +200,12 @@ describe('BAutocomplete', () => {
 
         expect($dropdown.isVisible()).toBeFalsy()
 
-        wrapper.vm.calcDropdownInViewportVertical = jest.fn(
+        wrapper.vm.calcDropdownInViewportVertical = vi.fn(
             () => wrapper.vm.calcDropdownInViewportVertical
         )
-        jest.runAllTimers()
+        vi.runAllTimers()
         expect(wrapper.vm.calcDropdownInViewportVertical).toHaveBeenCalled()
-        jest.useRealTimers()
+        vi.useRealTimers()
     })
 
     it('close dropdown on click outside', async () => {
@@ -216,7 +220,7 @@ describe('BAutocomplete', () => {
     })
 
     it('open dropdown on down key click', async () => {
-        wrapper.vm.setHovered = jest.fn(() => wrapper.vm.setHovered)
+        wrapper.vm.setHovered = vi.fn(() => wrapper.vm.setHovered)
         await wrapper.setProps({
             data: DATA_LIST,
             dropdownPosition: 'bottom'
@@ -295,7 +299,7 @@ describe('BAutocomplete', () => {
     it('can be used with a custom data formatter', async () => {
         await wrapper.setProps({
             data: DATA_LIST,
-            customFormatter: (val) => `${val} formatted`
+            customFormatter: (val: string) => `${val} formatted`
         })
 
         await wrapper.setData({ isActive: true })
@@ -373,8 +377,8 @@ describe('BAutocomplete', () => {
     })
 
     it('reset events before destroy', () => {
-        document.removeEventListener = jest.fn()
-        window.removeEventListener = jest.fn()
+        document.removeEventListener = vi.fn()
+        window.removeEventListener = vi.fn()
 
         wrapper.unmount()
 
