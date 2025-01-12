@@ -1,21 +1,46 @@
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
+
 import CompatFallthroughMixin from './CompatFallthroughMixin'
 import FormElementMixin from './FormElementMixin'
+import { BDropdown } from '../components/dropdown'
+import { BInput } from '../components/input'
 import { isMobile, matchWithGroups } from './helpers'
 import config from './config'
+
+type BInputInstance = InstanceType<typeof BInput>
+type BDropdownInstance = InstanceType<typeof BDropdown>
 
 const AM = 'AM'
 const PM = 'PM'
 const HOUR_FORMAT_24 = '24'
 const HOUR_FORMAT_12 = '12'
 
-const defaultTimeFormatter = (date, vm) => {
+export type HourFormat = typeof HOUR_FORMAT_24 | typeof HOUR_FORMAT_12
+
+export type TimeCreator = () => Date
+
+export interface ITimepickerMixin {
+    hourFormat?: HourFormat
+    timeCreator: TimeCreator
+    enableSeconds?: boolean
+    computedValue: Date | null | undefined
+    dtf: Intl.DateTimeFormat
+    amString: string
+    pmString: string
+}
+
+export type TimeFormatter = (date: Date, vm: ITimepickerMixin) => string
+export type TimeParser = (timeString: string, vm: ITimepickerMixin) => Date | null
+
+const defaultTimeFormatter: TimeFormatter = (date, vm) => {
     return vm.dtf.format(date)
 }
 
-const defaultTimeParser = (timeString, vm) => {
+const defaultTimeParser: TimeParser = (timeString, vm) => {
     if (timeString) {
         let d = null
-        if (vm.computedValue && !isNaN(vm.computedValue)) {
+        if (vm.computedValue && !isNaN(vm.computedValue.valueOf())) {
             d = new Date(vm.computedValue)
         } else {
             d = vm.timeCreator()
@@ -32,13 +57,14 @@ const defaultTimeParser = (timeString, vm) => {
                     }
                     return `((?!=<${part.type}>)\\d+)`
                 }).join('')
-            const timeGroups = matchWithGroups(formatRegex, timeString)
+            const timeGroups: Record<string, string | number | null> =
+                matchWithGroups(formatRegex, timeString)
 
             // We do a simple validation for the group.
             // If it is not valid, it will fallback to Date.parse below
-            timeGroups.hour = timeGroups.hour ? parseInt(timeGroups.hour, 10) : null
-            timeGroups.minute = timeGroups.minute ? parseInt(timeGroups.minute, 10) : null
-            timeGroups.second = timeGroups.second ? parseInt(timeGroups.second, 10) : null
+            timeGroups.hour = timeGroups.hour ? parseInt(timeGroups.hour + '', 10) : null
+            timeGroups.minute = timeGroups.minute ? parseInt(timeGroups.minute + '', 10) : null
+            timeGroups.second = timeGroups.second ? parseInt(timeGroups.second + '', 10) : null
             if (
                 timeGroups.hour &&
                 timeGroups.hour >= 0 &&
@@ -47,12 +73,14 @@ const defaultTimeParser = (timeString, vm) => {
                 timeGroups.minute >= 0 &&
                 timeGroups.minute < 59
             ) {
-                if (timeGroups.dayPeriod &&
+                const dayPeriod = timeGroups.dayPeriod
+                if (dayPeriod &&
                     (
-                        timeGroups.dayPeriod.toLowerCase() === vm.pmString.toLowerCase() ||
-                        timeGroups.dayPeriod.toLowerCase() === PM.toLowerCase()
+                        (dayPeriod as string).toLowerCase() === vm.pmString.toLowerCase() ||
+                        (dayPeriod as string).toLowerCase() === PM.toLowerCase()
                     ) &&
-                    timeGroups.hour < 12) {
+                    timeGroups.hour < 12
+                ) {
                     timeGroups.hour += 12
                 }
                 d.setHours(timeGroups.hour)
@@ -93,18 +121,18 @@ const defaultTimeParser = (timeString, vm) => {
     return null
 }
 
-export default {
+export default defineComponent({
     mixins: [CompatFallthroughMixin, FormElementMixin],
     props: {
-        modelValue: Date,
+        modelValue: [Date, null] as PropType<Date | null>,
         inline: Boolean,
-        minTime: Date,
-        maxTime: Date,
+        minTime: [Date, null] as PropType<Date | null>,
+        maxTime: [Date, null] as PropType<Date | null>,
         placeholder: String,
         editable: Boolean,
         disabled: Boolean,
         hourFormat: {
-            type: String,
+            type: String as PropType<HourFormat>,
             validator: (value) => {
                 return value === HOUR_FORMAT_24 || value === HOUR_FORMAT_12
             }
@@ -122,8 +150,8 @@ export default {
             default: 1
         },
         timeFormatter: {
-            type: Function,
-            default: (date, vm) => {
+            type: Function as PropType<TimeFormatter>,
+            default: (date: Date, vm: ITimepickerMixin) => {
                 if (typeof config.defaultTimeFormatter === 'function') {
                     return config.defaultTimeFormatter(date)
                 } else {
@@ -132,8 +160,8 @@ export default {
             }
         },
         timeParser: {
-            type: Function,
-            default: (date, vm) => {
+            type: Function as PropType<TimeParser>,
+            default: (date: string, vm: ITimepickerMixin) => {
                 if (typeof config.defaultTimeParser === 'function') {
                     return config.defaultTimeParser(date)
                 } else {
@@ -150,7 +178,7 @@ export default {
             default: () => config.defaultTimepickerMobileModal
         },
         timeCreator: {
-            type: Function,
+            type: Function as PropType<TimeCreator>,
             default: () => {
                 if (typeof config.defaultTimeCreator === 'function') {
                     return config.defaultTimeCreator()
@@ -160,7 +188,7 @@ export default {
             }
         },
         position: String,
-        unselectableTimes: Array,
+        unselectableTimes: Array<Date>,
         openOnFocus: Boolean,
         enableSeconds: Boolean,
         defaultMinutes: Number,
@@ -179,14 +207,17 @@ export default {
             default: false
         }
     },
-    emits: ['update:modelValue'],
+    emits: {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        'update:modelValue': (_value: Date | null) => true
+    },
     data() {
         return {
             dateSelected: this.modelValue,
-            hoursSelected: null,
-            minutesSelected: null,
-            secondsSelected: null,
-            meridienSelected: null,
+            hoursSelected: null as number | null,
+            minutesSelected: null as number | null,
+            secondsSelected: null as number | null,
+            meridienSelected: null as string | null,
             _elementRef: 'input',
             AM,
             PM,
@@ -199,17 +230,20 @@ export default {
             get() {
                 return this.dateSelected
             },
-            set(value) {
+            set(value: Date | null) {
                 this.dateSelected = value
                 this.$emit('update:modelValue', this.dateSelected)
             }
         },
         localeOptions() {
+            // FIXME: resolvedOptions does not return DateTimeFormatOptions but
+            // ResolvedDateTimeFormatOptions. We have to verify if it is
+            // actually DateTimeFormatOptions.
             return new Intl.DateTimeFormat(this.locale, {
                 hour: 'numeric',
                 minute: 'numeric',
                 second: this.enableSeconds ? 'numeric' : undefined
-            }).resolvedOptions()
+            }).resolvedOptions() as Intl.DateTimeFormatOptions
         },
         dtf() {
             return new Intl.DateTimeFormat(this.locale, {
@@ -262,6 +296,7 @@ export default {
                     return literal.value
                 }
             }
+            return undefined
         },
         amString() {
             if (this.dtf.formatToParts && typeof this.dtf.formatToParts === 'function') {
@@ -361,11 +396,11 @@ export default {
         },
         locale() {
             // see updateInternalState default
-            if (!this.value) {
+            if (!this.modelValue) {
                 this.meridienSelected = this.amString
             }
         },
-        /**
+        /*
          * When v-model is changed:
          *   1. Update internal value.
          *   2. If it's invalid, validate again.
@@ -373,13 +408,13 @@ export default {
         modelValue: {
             handler(value) {
                 this.updateInternalState(value)
-                !this.isValid && this.$refs.input.checkHtml5Validity()
+                !this.isValid && (this.$refs.input as BInputInstance).checkHtml5Validity()
             },
             immediate: true
         }
     },
     methods: {
-        onMeridienChange(value) {
+        onMeridienChange(value: string) {
             if (this.hoursSelected !== null && this.resetOnMeridianChange) {
                 this.hoursSelected = null
                 this.minutesSelected = null
@@ -399,7 +434,7 @@ export default {
                 value)
         },
 
-        onHoursChange(value) {
+        onHoursChange(value: number | string) {
             if (!this.minutesSelected && typeof this.defaultMinutes !== 'undefined') {
                 this.minutesSelected = this.defaultMinutes
             }
@@ -407,39 +442,44 @@ export default {
                 this.secondsSelected = this.defaultSeconds
             }
             this.updateDateSelected(
-                parseInt(value, 10),
+                parseInt(`${value}`, 10),
                 this.minutesSelected,
                 this.enableSeconds ? this.secondsSelected : 0,
                 this.meridienSelected
             )
         },
 
-        onMinutesChange(value) {
+        onMinutesChange(value: number | string) {
             if (!this.secondsSelected && this.defaultSeconds) {
                 this.secondsSelected = this.defaultSeconds
             }
             this.updateDateSelected(
                 this.hoursSelected,
-                parseInt(value, 10),
+                parseInt(`${value}`, 10),
                 this.enableSeconds ? this.secondsSelected : 0,
                 this.meridienSelected
             )
         },
 
-        onSecondsChange(value) {
+        onSecondsChange(value: number | string) {
             this.updateDateSelected(
                 this.hoursSelected,
                 this.minutesSelected,
-                parseInt(value, 10),
+                parseInt(`${value}`, 10),
                 this.meridienSelected
             )
         },
 
-        updateDateSelected(hours, minutes, seconds, meridiens) {
+        updateDateSelected(
+            hours: number | null,
+            minutes: number | null,
+            seconds: number | null,
+            meridiens: string | null
+        ) {
             if (hours != null && minutes != null &&
                 ((!this.isHourFormat24 && meridiens !== null) || this.isHourFormat24)) {
                 let time = null
-                if (this.computedValue && !isNaN(this.computedValue)) {
+                if (this.computedValue && !isNaN(this.computedValue.valueOf())) {
                     time = new Date(this.computedValue)
                 } else {
                     time = this.timeCreator()
@@ -447,13 +487,13 @@ export default {
                 }
                 time.setHours(hours)
                 time.setMinutes(minutes)
-                time.setSeconds(seconds)
+                time.setSeconds(seconds!)
 
                 if (!isNaN(time.getTime())) this.computedValue = new Date(time.getTime())
             }
         },
 
-        updateInternalState(value) {
+        updateInternalState(value?: Date | null) {
             if (value) {
                 this.hoursSelected = value.getHours()
                 this.minutesSelected = value.getMinutes()
@@ -468,7 +508,7 @@ export default {
             this.dateSelected = value
         },
 
-        isHourDisabled(hour) {
+        isHourDisabled(hour: number) {
             let disabled = false
             if (this.minTime) {
                 const minHours = this.minTime.getHours()
@@ -500,7 +540,7 @@ export default {
                         disabled = true
                     } else {
                         disabled = this.minutes.every((minute) => {
-                            return this.unselectableTimes.filter((time) => {
+                            return this.unselectableTimes!.filter((time) => {
                                 return time.getHours() === hour &&
                                     time.getMinutes() === minute.value
                             }).length > 0
@@ -511,7 +551,7 @@ export default {
             return disabled
         },
 
-        isMinuteDisabledForHour(hour, minute) {
+        isMinuteDisabledForHour(hour: number, minute: number) {
             let disabled = false
             if (this.minTime) {
                 const minHours = this.minTime.getHours()
@@ -529,7 +569,7 @@ export default {
             return disabled
         },
 
-        isMinuteDisabled(minute) {
+        isMinuteDisabled(minute: number) {
             let disabled = false
             if (this.hoursSelected !== null) {
                 if (this.isHourDisabled(this.hoursSelected)) {
@@ -556,7 +596,7 @@ export default {
             return disabled
         },
 
-        isSecondDisabled(second) {
+        isSecondDisabled(second: number) {
             let disabled = false
             if (this.minutesSelected !== null) {
                 if (this.isMinuteDisabled(this.minutesSelected)) {
@@ -598,26 +638,26 @@ export default {
         /*
          * Parse string into date
          */
-        onChange(value) {
+        onChange(value: string) {
             const date = this.timeParser(value, this)
             this.updateInternalState(date)
-            if (date && !isNaN(date)) {
+            if (date && !isNaN(date.valueOf())) {
                 this.computedValue = date
             } else {
                 // Force refresh input value when not valid date
-                this.computedValue = null
-                this.$refs.input.newValue = this.computedValue
+                this.computedValue = null;
+                (this.$refs.input as BInputInstance).newValue = this.computedValue
             }
         },
 
         /*
          * Toggle timepicker
          */
-        toggle(active) {
+        toggle(active: boolean) {
             if (this.$refs.dropdown) {
-                this.$refs.dropdown.isActive = typeof active === 'boolean'
+                (this.$refs.dropdown as BDropdownInstance).isActive = typeof active === 'boolean'
                     ? active
-                    : !this.$refs.dropdown.isActive
+                    : !(this.$refs.dropdown as BDropdownInstance).isActive
             }
         },
 
@@ -641,9 +681,9 @@ export default {
         /*
          * Format date into string 'HH-MM-SS'
          */
-        formatHHMMSS(value) {
-            const date = new Date(value)
-            if (value && !isNaN(date)) {
+        formatHHMMSS(value: Date | null | undefined) {
+            const date = new Date(value!)
+            if (value && !isNaN(date.valueOf())) {
                 const hours = date.getHours()
                 const minutes = date.getMinutes()
                 const seconds = date.getSeconds()
@@ -657,11 +697,11 @@ export default {
         /*
          * Parse time from string
          */
-        onChangeNativePicker(event) {
-            const date = event.target.value
+        onChangeNativePicker(event: { target: EventTarget }) {
+            const date = (event.target as HTMLInputElement).value
             if (date) {
                 let time = null
-                if (this.computedValue && !isNaN(this.computedValue)) {
+                if (this.computedValue && !isNaN(this.computedValue.valueOf())) {
                     time = new Date(this.computedValue)
                 } else {
                     time = new Date()
@@ -677,38 +717,38 @@ export default {
             }
         },
 
-        formatNumber(value, prependZero) {
+        formatNumber(value: number, prependZero?: boolean) {
             return this.isHourFormat24 || prependZero
                 ? this.pad(value)
-                : value
+                : `${value}`
         },
 
-        pad(value) {
+        pad(value: number) {
             return (value < 10 ? '0' : '') + value
         },
 
         /*
          * Format date into string
          */
-        formatValue(date) {
-            if (date && !isNaN(date)) {
+        formatValue(date: Date | null | undefined) {
+            if (date && !isNaN(date.valueOf())) {
                 return this.timeFormatter(date, this)
             } else {
                 return null
             }
         },
-        /**
+        /*
          * Keypress event that is bound to the document.
          */
-        keyPress({ key }) {
-            if (this.$refs.dropdown && this.$refs.dropdown.isActive && (key === 'Escape' || key === 'Esc')) {
+        keyPress({ key }: { key: KeyboardEvent['key'] }) {
+            if (this.$refs.dropdown && (this.$refs.dropdown as BDropdownInstance).isActive && (key === 'Escape' || key === 'Esc')) {
                 this.toggle(false)
             }
         },
-        /**
+        /*
          * Emit 'blur' event on dropdown is not active (closed)
          */
-        onActiveChange(value) {
+        onActiveChange(value: boolean) {
             if (!value) {
                 this.onBlur()
             }
@@ -724,4 +764,4 @@ export default {
             document.removeEventListener('keyup', this.keyPress)
         }
     }
-}
+})

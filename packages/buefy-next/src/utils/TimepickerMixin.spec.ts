@@ -1,17 +1,22 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { defineComponent } from 'vue'
 import { shallowMount } from '@vue/test-utils'
+import type { VueWrapper } from '@vue/test-utils'
 import TimepickerMixin from '@utils/TimepickerMixin'
 
 const AM = 'AM'
 const PM = 'PM'
-let wrapper
+
+const component = defineComponent({
+    mixins: [TimepickerMixin],
+    template: '<div class="b-component"></div>'
+})
+
+let wrapper: VueWrapper<InstanceType<typeof component>>
 
 describe('TimepickerMixin', () => {
-    HTMLElement.prototype.insertAdjacentElement = jest.fn()
+    HTMLElement.prototype.insertAdjacentElement = vi.fn()
     beforeEach(() => {
-        const component = {
-            template: '<div class="b-component"></div>',
-            mixins: [TimepickerMixin]
-        }
         wrapper = shallowMount(component, {
             attachTo: document.body
         })
@@ -30,8 +35,8 @@ describe('TimepickerMixin', () => {
     })
 
     it('should call updateDateSelected on onSecondsChange', async () => {
-        wrapper.vm.updateDateSelected = jest.fn()
-        wrapper.vm.onSecondsChange()
+        wrapper.vm.updateDateSelected = vi.fn()
+        wrapper.vm.onSecondsChange('0')
         await wrapper.vm.$nextTick()
         expect(wrapper.vm.updateDateSelected).toHaveBeenCalledTimes(1)
     })
@@ -55,14 +60,14 @@ describe('TimepickerMixin', () => {
     })
 
     it('should call onFocus on handleOnFocus', async () => {
-        wrapper.vm.onFocus = jest.fn()
+        wrapper.vm.onFocus = vi.fn()
         wrapper.vm.handleOnFocus()
         await wrapper.vm.$nextTick()
         expect(wrapper.vm.onFocus).toHaveBeenCalledTimes(1)
     })
 
     it('should call toggle on close', async () => {
-        wrapper.vm.toggle = jest.fn()
+        wrapper.vm.toggle = vi.fn()
         wrapper.vm.close()
         await wrapper.vm.$nextTick()
         expect(wrapper.vm.toggle).toHaveBeenCalledTimes(1)
