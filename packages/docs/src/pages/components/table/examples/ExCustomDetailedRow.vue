@@ -22,7 +22,7 @@
             :opened-detailed="['Board Games']"
             :default-sort="['name', 'asc']"
             detail-key="name"
-            @details-open="(row, index) => $buefy.toast.open(`Expanded ${row.name}`)"
+            @details-open="(row) => $buefy.toast.open(`Expanded ${row.name}`)"
             :show-detail-icon="showDetailIcon">
 
             <b-table-column
@@ -104,8 +104,18 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BCheckbox, BField, BTable, BTableColumn } from '@ntohq/buefy-next'
+    import type { TableRow } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BCheckbox,
+            BField,
+            BTable,
+            BTableColumn
+        },
         data() {
             return {
                 data: [
@@ -211,9 +221,9 @@
             }
         },
         methods: {
-            toggle(row) {
-                this.$refs.table.toggleDetails(row)
+            toggle(row: TableRow) {
+                (this.$refs.table as InstanceType<typeof BTable>).toggleDetails(row)
             }
         }
-    }
+    })
 </script>

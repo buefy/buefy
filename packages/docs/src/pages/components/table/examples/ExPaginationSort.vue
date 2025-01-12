@@ -110,10 +110,31 @@
     </section>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import {
+        BButton,
+        BField,
+        BIcon,
+        BInput,
+        BSelect,
+        BSwitch,
+        BTable,
+        BTableColumn
+    } from '@ntohq/buefy-next'
     import data from '@/data/sample.json'
 
-    export default {
+    export default defineComponent({
+        components: {
+            BButton,
+            BField,
+            BIcon,
+            BInput,
+            BSelect,
+            BSwitch,
+            BTable,
+            BTableColumn
+        },
         data() {
             return {
                 data,
@@ -132,5 +153,5 @@
                 inputDebounce: ''
             }
         }
-    }
+    })
 </script>

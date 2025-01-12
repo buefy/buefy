@@ -22,8 +22,17 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BCheckbox, BField, BTable, BTableColumn } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BCheckbox,
+            BField,
+            BTable,
+            BTableColumn
+        },
         data() {
             const tableDataSimple = [
                 { 'id': 1, 'first_name': 'Jesse', 'last_name': 'Simmons', 'date': '2016-10-15 13:43:27', 'gender': 'Male' },
@@ -44,5 +53,5 @@
                 ]
             }
         }
-    }
+    })
 </script>

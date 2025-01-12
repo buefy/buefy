@@ -34,8 +34,16 @@
     </section>
 </template>
 
- <script>
-    export default {
+ <script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BInput, BTable, BTableColumn } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BInput,
+            BTable,
+            BTableColumn
+        },
         data() {
             return {
                 data: [
@@ -75,5 +83,5 @@
                 ]
             }
         }
-    }
+    })
 </script>

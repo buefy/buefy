@@ -139,63 +139,77 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
+
+    import { BMessage } from '@ntohq/buefy-next'
+
+    import { shallowFields } from '@/utils'
+    import ApiView from '@/components/ApiView.vue'
+    import Example from '@/components/Example.vue'
+    import VariablesView from '@/components/VariablesView.vue'
+
     import api from './api/table'
     import variables from './variables/table'
-    import { shallowFields } from '@/utils'
 
-    import ExSimple from './examples/ExSimple'
+    import ExSimple from './examples/ExSimple.vue'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
 
-    import ExSandbox from './examples/ExSandbox'
+    import ExSandbox from './examples/ExSandbox.vue'
     import ExSandboxCode from './examples/ExSandbox.vue?raw'
 
-    import ExSelection from './examples/ExSelection'
+    import ExSelection from './examples/ExSelection.vue'
     import ExSelectionCode from './examples/ExSelection.vue?raw'
 
-    import ExCheckable from './examples/ExCheckable'
+    import ExCheckable from './examples/ExCheckable.vue'
     import ExCheckableCode from './examples/ExCheckable.vue?raw'
 
-    import ExSearchable from './examples/ExSearchable'
+    import ExSearchable from './examples/ExSearchable.vue'
     import ExSearchableCode from './examples/ExSearchable.vue?raw'
 
-    import ExSortMultiple from './examples/ExSortMultiple'
+    import ExSortMultiple from './examples/ExSortMultiple.vue'
     import ExSortMultipleCode from './examples/ExSortMultiple.vue?raw'
 
-    import ExPaginationSort from './examples/ExPaginationSort'
+    import ExPaginationSort from './examples/ExPaginationSort.vue'
     import ExPaginationSortCode from './examples/ExPaginationSort.vue?raw'
 
-    import ExDetailedRow from './examples/ExDetailedRow'
+    import ExDetailedRow from './examples/ExDetailedRow.vue'
     import ExDetailedRowCode from './examples/ExDetailedRow.vue?raw'
 
-    import ExCustomDetailedRow from './examples/ExCustomDetailedRow';
+    import ExCustomDetailedRow from './examples/ExCustomDetailedRow.vue';
     import ExCustomDetailedRowCode from './examples/ExCustomDetailedRow.vue?raw';
 
-    import ExRowStatus from './examples/ExRowStatus'
+    import ExRowStatus from './examples/ExRowStatus.vue'
     import ExRowStatusCode from './examples/ExRowStatus.vue?raw'
 
-    import ExCustomHeaders from './examples/ExCustomHeaders'
+    import ExCustomHeaders from './examples/ExCustomHeaders.vue'
     import ExCustomHeadersCode from './examples/ExCustomHeaders.vue?raw'
 
-    import ExSubheadings from './examples/ExSubheadings'
+    import ExSubheadings from './examples/ExSubheadings.vue'
     import ExSubheadingsCode from './examples/ExSubheadings.vue?raw'
 
-    import ExSticky from './examples/ExSticky'
+    import ExSticky from './examples/ExSticky.vue'
     import ExStickyCode from './examples/ExSticky.vue?raw'
 
-    import ExToggleColumns from './examples/ExToggleColumns'
+    import ExToggleColumns from './examples/ExToggleColumns.vue'
     import ExToggleColumnsCode from './examples/ExToggleColumns.vue?raw'
 
-    import ExFooter from './examples/ExFooter'
+    import ExFooter from './examples/ExFooter.vue'
     import ExFooterCode from './examples/ExFooter.vue?raw'
 
-    import ExAsyncData from './examples/ExAsyncData'
+    import ExAsyncData from './examples/ExAsyncData.vue'
     import ExAsyncDataCode from './examples/ExAsyncData.vue?raw'
 
-    import ExDraggableRows from './examples/ExDraggableRows'
+    import ExDraggableRows from './examples/ExDraggableRows.vue'
     import ExDraggableRowsCode from './examples/ExDraggableRows.vue?raw'
 
-    export default {
+    export default defineComponent({
+        components: {
+            ApiView,
+            BMessage,
+            Example,
+            VariablesView
+        },
         data() {
             return {
                 api,
@@ -238,5 +252,5 @@
                 ExDraggableRowsCode
             }
         }
-    }
+    })
 </script>

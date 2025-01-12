@@ -29,13 +29,14 @@
     </div>
 </template>
 
-<script>
-import Pagination from '../pagination/Pagination.vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import BPagination from '../pagination/Pagination.vue'
 
-export default {
+export default defineComponent({
     name: 'BTablePagination',
     components: {
-        [Pagination.name]: Pagination
+        BPagination
     },
     props: {
         paginated: Boolean,
@@ -55,7 +56,12 @@ export default {
         pageInputPosition: String,
         debouncePageInput: [Number, String]
     },
-    emits: ['page-change', 'update:currentPage'],
+    emits: {
+        /* eslint-disable @typescript-eslint/no-unused-vars */
+        'page-change': (_page: string | number) => true,
+        'update:currentPage': (_page: string | number) => true
+        /* eslint-enable @typescript-eslint/no-unused-vars */
+    },
     data() {
         return {
             newCurrentPage: this.currentPage
@@ -67,14 +73,14 @@ export default {
         }
     },
     methods: {
-        /**
+        /*
         * Paginator change listener.
         */
-        pageChanged(page) {
+        pageChanged(page: number) {
             this.newCurrentPage = page > 0 ? page : 1
             this.$emit('update:currentPage', this.newCurrentPage)
             this.$emit('page-change', this.newCurrentPage)
         }
     }
-}
+})
 </script>

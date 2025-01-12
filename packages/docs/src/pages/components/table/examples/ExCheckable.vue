@@ -46,8 +46,19 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BButton, BField, BSelect, BTable, BTabs, BTabItem } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BButton,
+            BField,
+            BSelect,
+            BTable,
+            BTabs,
+            BTabItem
+        },
         data() {
             const data = [
                 { 'id': 1, 'first_name': 'Jesse', 'last_name': 'Simmons', 'date': '2016-10-15 13:43:27', 'gender': 'Male' },
@@ -89,5 +100,5 @@
                 ]
             }
         }
-    }
+    })
 </script>

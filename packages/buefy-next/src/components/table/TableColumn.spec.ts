@@ -1,20 +1,23 @@
+import { defineComponent } from 'vue'
+import { beforeEach, describe, expect, it } from 'vitest'
 import { mount } from '@vue/test-utils'
-import BTable from '@components/table/Table'
-import BTableColumn from '@components/table/TableColumn'
-import BButton from '@components/button/Button'
+import type { VueWrapper } from '@vue/test-utils'
+import BTable from '@components/table/Table.vue'
+import BTableColumn from '@components/table/TableColumn.vue'
+import BButton from '@components/button/Button.vue'
 
-let wrapper
-const WrapperComp = {
+const WrapperComp = defineComponent({
+    components: {
+        BTable, BTableColumn
+    },
     template: `
         <BTable>
             <BTableColumn/>
             <BTableColumn ref="testItem" />
             <BTableColumn />
-        </BTable>`,
-    components: {
-        BTable, BTableColumn
-    }
-}
+        </BTable>`
+})
+let wrapper: VueWrapper<InstanceType<typeof WrapperComp>>
 
 describe('BTableColumn', () => {
     beforeEach(() => {

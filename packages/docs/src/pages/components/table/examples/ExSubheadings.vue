@@ -7,8 +7,14 @@
     </section>
 </template>
 
- <script>
-    export default {
+ <script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BTable } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BTable
+        },
         data() {
             return {
                 data: [
@@ -43,5 +49,5 @@
                 ]
             }
         }
-    }
+    })
 </script>

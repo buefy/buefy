@@ -63,8 +63,17 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BField, BSwitch, BTable, BTableColumn } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BField,
+            BSwitch,
+            BTable,
+            BTableColumn
+        },
         data() {
             const tableDataSimple = [
                 { 'id': 1, 'first_name': 'Jesse', 'last_name': 'Simmons', 'date': '2016/10/15 13:43:27', 'gender': 'Male' },
@@ -79,5 +88,5 @@
                 isCustom: false
             }
         }
-    }
+    })
 </script>

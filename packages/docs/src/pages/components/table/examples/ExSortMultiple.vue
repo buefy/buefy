@@ -45,7 +45,10 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BField, BSelect, BSwitch, BTable, BTableColumn } from '@ntohq/buefy-next'
+import type { ModifierKeys, TableColumnOrder } from '@ntohq/buefy-next'
 import orderBy from 'lodash/orderBy'
 
 const dataSource = [
@@ -54,14 +57,21 @@ const dataSource = [
   { 'id': 3, 'first_name': 'Jones', 'last_name': 'Smith', 'team': 'Team C'},
   { 'id': 4, 'first_name': 'Abbie', 'last_name': 'Archer', 'team': 'Team A'}
 ]
-  export default {
+  export default defineComponent({
+      components: {
+          BField,
+          BSelect,
+          BSwitch,
+          BTable,
+          BTableColumn
+      },
       data() {
           return {
             customKey: null,
             backendSortingEnabled: false,
             multiColumnSortingEnabled: true,
-            data: [],
-            sortingPriority: []
+            data: [] as any[],
+            sortingPriority: [] as TableColumnOrder[]
           }
       },
       computed: {
@@ -73,7 +83,7 @@ const dataSource = [
       },
       methods: {
         resetPriority(){
-          this.$refs.multiSortTable.resetMultiSorting()
+          (this.$refs.multiSortTable as InstanceType<typeof BTable>).resetMultiSorting()
 
           // reset local backend sorting
           if(this.backendSortingEnabled) {
@@ -83,16 +93,20 @@ const dataSource = [
         },
 
         // Backend sorting
-        sortingPriorityRemoved(field){
+        sortingPriorityRemoved(field: string | undefined){
           this.sortingPriority = this.sortingPriority.filter(
             (priority) => priority.field !== field)
           this.loadAsyncData(this.sortingPriority)
         },
 
-        sortPressed(field, order, event) {
+        sortPressed(
+            field: string | undefined,
+            order: TableColumnOrder['order'],
+            event: ModifierKeys | null
+        ) {
           if(this.backendSortingEnabled) {
             if(this.multiColumnSortingEnabled){
-              if((this.customKey && event[this.customKey]) || !this.customKey) {
+              if((this.customKey && event![this.customKey]) || !this.customKey) {
                 let existingPriority = this.sortingPriority.filter(i => i.field === field)[0]
                 if(existingPriority) {
                   existingPriority.order = existingPriority.order === 'desc' ? 'asc' : 'desc'
@@ -111,7 +125,7 @@ const dataSource = [
         },
 
         // "API request" for data
-        async loadAsyncData(sortingPriority = []) {
+        async loadAsyncData(sortingPriority: TableColumnOrder[] = []) {
           let mockdata = JSON.parse(JSON.stringify(dataSource));
           // get data already sorted from the backend using sortingPriority
           this.data = orderBy(mockdata, sortingPriority.map(i => i.field), sortingPriority.map(i => i.order))
@@ -120,5 +134,5 @@ const dataSource = [
       created () {
         this.data = JSON.parse(JSON.stringify(dataSource));
       }
-  }
+  })
 </script>

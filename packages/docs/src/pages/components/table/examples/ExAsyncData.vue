@@ -45,14 +45,29 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BTable, BTableColumn } from '@ntohq/buefy-next'
+
+    interface Record {
+        original_title: string
+        vote_average: number
+        vote_count: number
+        release_date: string | null
+        overview: string
+    }
+
+    export default defineComponent({
+        components: {
+            BTable,
+            BTableColumn
+        },
         data() {
             return {
-                data: [],
+                data: [] as Record[],
                 total: 0,
                 loading: false,
-                sortField: 'vote_count',
+                sortField: 'vote_count' as string | undefined,
                 sortOrder: 'desc',
                 defaultSortOrder: 'desc',
                 page: 1,
@@ -83,7 +98,7 @@
                             currentTotal = this.perPage * 1000
                         }
                         this.total = currentTotal
-                        data.results.forEach((item) => {
+                        data.results.forEach((item: Record) => {
                             item.release_date = item.release_date ? item.release_date.replace(/-/g, '/') : null
                             this.data.push(item)
                         })
@@ -99,14 +114,14 @@
             /*
         * Handle page-change event
         */
-            onPageChange(page) {
-                this.page = page
+            onPageChange(page: string | number) {
+                this.page = +page
                 this.loadAsyncData()
             },
             /*
         * Handle sort event
         */
-            onSort(field, order) {
+            onSort(field: string | undefined, order: 'asc' | 'desc') {
                 this.sortField = field
                 this.sortOrder = order
                 this.loadAsyncData()
@@ -114,8 +129,8 @@
             /*
         * Type style in relation to the value
         */
-            type(value) {
-                const number = parseFloat(value)
+            type(value: number) {
+                const number = parseFloat(value + '')
                 if (number < 6) {
                     return 'is-danger'
                 } else if (number >= 6 && number < 8) {
@@ -125,7 +140,7 @@
                 }
             },
             // filter is no longer supported on Vue 3
-            truncate(value, length) {
+            truncate(value: string, length: number) {
                 return value.length > length
                     ? value.substr(0, length) + '...'
                     : value
@@ -134,5 +149,5 @@
         mounted() {
             this.loadAsyncData()
         }
-    }
+    })
 </script>

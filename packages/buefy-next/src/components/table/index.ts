@@ -1,11 +1,20 @@
+import type { App } from 'vue'
 import Table from './Table.vue'
 import TableColumn from './TableColumn.vue'
 
 import { registerComponent } from '../../utils/plugins'
 import { VueInstance, setVueInstance } from '../../utils/config'
+export type {
+    ITableColumn,
+    ModifierKeys,
+    TableColumnOrder,
+    TableColumnDragEvent,
+    TableRow,
+    TableRowDragEvent
+} from './types'
 
 const Plugin = {
-    install(Vue) {
+    install(Vue: App) {
         // individual import + extend method into Table.vue
         if (typeof VueInstance === 'undefined') {
             setVueInstance(Vue)

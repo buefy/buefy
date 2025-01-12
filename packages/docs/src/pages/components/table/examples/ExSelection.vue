@@ -26,8 +26,18 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BButton, BField, BTable, BTabs, BTabItem } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BButton,
+            BField,
+            BTable,
+            BTabs,
+            BTabItem
+        },
         data() {
             const data = [
                 { 'id': 1, 'first_name': 'Jesse', 'last_name': 'Simmons', 'date': '2016-10-15 13:43:27', 'gender': 'Male' },
@@ -39,7 +49,7 @@
 
             return {
                 data,
-                selected: data[1],
+                selected: data[1] as typeof data[number] | null,
                 columns: [
                     {
                         field: 'id',
@@ -67,5 +77,5 @@
                 ]
             }
         }
-    }
+    })
 </script>

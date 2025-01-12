@@ -2,12 +2,18 @@
     <b-table
         :data="data"
         :columns="columns"
-        :row-class="(row, index) => row.id === 1 && 'is-info'">
+        :row-class="(row, index) => row.id === 1 ? 'is-info' : undefined">
     </b-table>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BTable } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BTable
+        },
         data() {
             return {
                 data: [
@@ -44,7 +50,7 @@
                 ]
             }
         }
-    }
+    })
 </script>
 
 <style>

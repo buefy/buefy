@@ -28,8 +28,16 @@
     </section>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BField, BSwitch, BTable } from '@ntohq/buefy-next'
+
+export default defineComponent({
+    components: {
+        BField,
+        BSwitch,
+        BTable
+    },
     data() {
         return {
             data: [
@@ -268,7 +276,7 @@ export default {
             ];
         },
     }
-};
+})
 </script>
 
 <style>

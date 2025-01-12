@@ -1,0 +1,12 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BTableMobileSort > render correctly 1`] = `
+"<div class=\\"field table-mobile-sort\\">
+  <div class=\\"field has-addons\\">
+    <b-select-stub modelvalue=\\"-1\\" multiple=\\"false\\" expanded=\\"\\"></b-select-stub>
+    <div class=\\"control\\"><button class=\\"button is-primary\\">
+        <b-icon-stub icon=\\"arrow-up\\" size=\\"is-small\\" both=\\"true\\" class=\\"is-desc\\"></b-icon-stub>
+      </button></div>
+  </div>
+</div>"
+`;

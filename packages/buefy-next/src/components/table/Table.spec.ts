@@ -1,12 +1,15 @@
-import '@testing-library/jest-dom'
+import '@testing-library/jest-dom/vitest'
 import { toRaw } from 'vue'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
-import BInput from '@components/input/Input'
-import BTable from '@components/table/Table'
-import BTablePagination from '@components/table/TablePagination'
+import type { DOMWrapper, VueWrapper } from '@vue/test-utils'
+import BInput from '@components/input/Input.vue'
+import BTable from '@components/table/Table.vue'
+import BTablePagination from '@components/table/TablePagination.vue'
+import type { ITableColumn } from '@components/table/types'
 
 describe('BTable', () => {
-    let wrapper
+    let wrapper: VueWrapper<InstanceType<typeof BTable>>
     beforeEach(() => {
         wrapper = shallowMount(BTable)
     })
@@ -151,9 +154,9 @@ describe('BTable', () => {
             { id: 4, name: 'Anne' },
             { id: 5, name: 'Clarence' }
         ]
-        let headRows
-        let bodyRows
-        let searchInput
+        let headRows: DOMWrapper<Element>[]
+        let bodyRows: DOMWrapper<Element>[]
+        let searchInput: VueWrapper<InstanceType<typeof BInput>>
 
         beforeEach(() => {
             wrapper = shallowMount(BTable, {
@@ -225,27 +228,27 @@ describe('BTable', () => {
         })
 
         it('debounce search filtering when debounce-search is defined', async () => {
-            jest.useFakeTimers()
+            vi.useFakeTimers()
             await wrapper.setProps({
                 debounceSearch: 1000
             })
             for (let i = 0; i < 10; i++) {
                 searchInput.vm.$emit('update:modelValue', 'J'.repeat(10 - i))
-                jest.advanceTimersByTime(500)
+                vi.advanceTimersByTime(500)
                 await wrapper.vm.$nextTick() // makes sure the DOM is updated
                 bodyRows = wrapper.findAll('tbody tr')
                 expect(bodyRows).toHaveLength(5) // No filtering yet
             }
-            jest.advanceTimersByTime(1000)
+            vi.advanceTimersByTime(1000)
             await wrapper.vm.$nextTick() // makes sure the DOM is updated
             bodyRows = wrapper.findAll('tbody tr')
             expect(bodyRows).toHaveLength(2) // Filtering after debounce
-            jest.useRealTimers()
+            vi.useRealTimers()
         })
     })
 
     describe('Sortable', () => {
-        let wrapper
+        let wrapper: VueWrapper<InstanceType<typeof BTable>>
         const data = [
             { id: 1, name: 'Jesse' },
             { id: 2, name: 'João' },
@@ -266,7 +269,7 @@ describe('BTable', () => {
                 sortable: true
             }
         ]
-        let columns
+        let columns: ITableColumn[]
 
         beforeEach(() => {
             wrapper = shallowMount(BTable, {
@@ -307,7 +310,7 @@ describe('BTable', () => {
     })
 
     describe('Multi-sortable', () => {
-        let wrapper
+        let wrapper: VueWrapper<InstanceType<typeof BTable>>
         const data = [
             { id: 1, name: 'Jesse', age: 23 },
             { id: 2, name: 'João', age: 22 },
@@ -332,7 +335,7 @@ describe('BTable', () => {
                 sortable: true
             }
         ]
-        let columns
+        let columns: ITableColumn[]
 
         beforeEach(() => {
             wrapper = shallowMount(BTable, {
@@ -350,8 +353,8 @@ describe('BTable', () => {
             wrapper.vm.sort(columns[2])
             wrapper.vm.sort(columns[1])
             expect(wrapper.vm.sortMultipleDataLocal).toEqual([
-                { field: 'age', order: undefined },
-                { field: 'name', order: undefined }
+                { field: 'age', order: 'asc' },
+                { field: 'name', order: 'asc' }
             ])
             expect(wrapper.vm.visibleData).toEqual([
                 data[4], data[1], data[2], data[3], data[0]
@@ -360,7 +363,7 @@ describe('BTable', () => {
             wrapper.vm.sort(columns[2])
             expect(wrapper.vm.sortMultipleDataLocal).toEqual([
                 { field: 'age', order: 'desc' },
-                { field: 'name', order: undefined }
+                { field: 'name', order: 'asc' }
             ])
             expect(wrapper.vm.visibleData).toEqual([
                 data[3], data[0], data[4], data[1], data[2]
@@ -378,13 +381,13 @@ describe('BTable', () => {
     })
 
     describe('Sortable with custom sort', () => {
-        let wrapper
+        let wrapper: VueWrapper<InstanceType<typeof BTable>>
         const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
         const data = weekdays.map((day, i) => ({
             id: i + 1,
             day
         }))
-        const customSort = jest.fn((a, b, isAsc) => {
+        const customSort = vi.fn((a, b, isAsc) => {
             const ord = weekdays.indexOf(a.day) - weekdays.indexOf(b.day)
             return isAsc ? ord : -ord
         })
@@ -401,7 +404,7 @@ describe('BTable', () => {
                 customSort
             }
         ]
-        let columns
+        let columns: ITableColumn[]
 
         beforeEach(() => {
             wrapper = shallowMount(BTable, {
@@ -433,7 +436,7 @@ describe('BTable', () => {
     })
 
     describe('Multi-sortable with custom sort', () => {
-        let wrapper
+        let wrapper: VueWrapper<InstanceType<typeof BTable>>
         const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
         const data = [
             { id: 1, day: 'Sun', fee: 15 },
@@ -444,11 +447,11 @@ describe('BTable', () => {
             { id: 6, day: 'Fri', fee: 12 },
             { id: 7, day: 'Sat', fee: 15 }
         ]
-        const dayCustomSort = jest.fn((a, b, isAsc) => {
+        const dayCustomSort = vi.fn((a, b, isAsc) => {
             const ord = weekdays.indexOf(a.day) - weekdays.indexOf(b.day)
             return isAsc ? ord : -ord
         })
-        const feeCustomSort = jest.fn((a, b, isAsc) => {
+        const feeCustomSort = vi.fn((a, b, isAsc) => {
             const ord = a.fee - b.fee
             return isAsc ? -ord : ord
         })
@@ -471,7 +474,7 @@ describe('BTable', () => {
                 customSort: feeCustomSort
             }
         ]
-        let columns
+        let columns: ITableColumn[]
 
         beforeEach(() => {
             wrapper = shallowMount(BTable, {
@@ -493,8 +496,8 @@ describe('BTable', () => {
             wrapper.vm.sort(columns[2])
             wrapper.vm.sort(columns[1])
             expect(wrapper.vm.sortMultipleDataLocal).toEqual([
-                { field: 'fee', order: undefined, customSort: feeCustomSort },
-                { field: 'day', order: undefined, customSort: dayCustomSort }
+                { field: 'fee', order: 'asc', customSort: feeCustomSort },
+                { field: 'day', order: 'asc', customSort: dayCustomSort }
             ])
             expect(wrapper.vm.visibleData).toEqual([
                 data[0], data[6], data[1], data[2], data[3], data[4], data[5]
@@ -505,7 +508,7 @@ describe('BTable', () => {
             wrapper.vm.sort(columns[2])
             expect(wrapper.vm.sortMultipleDataLocal).toEqual([
                 { field: 'fee', order: 'desc', customSort: feeCustomSort },
-                { field: 'day', order: undefined, customSort: dayCustomSort }
+                { field: 'day', order: 'asc', customSort: dayCustomSort }
             ])
             expect(wrapper.vm.visibleData).toEqual([
                 data[1], data[2], data[3], data[4], data[5], data[0], data[6]
@@ -526,7 +529,7 @@ describe('BTable', () => {
             wrapper.vm.sort(columns[1])
             wrapper.vm.sort(columns[1]) // day → descending order
             expect(wrapper.vm.sortMultipleDataLocal).toEqual([
-                { field: 'fee', order: undefined, customSort: feeCustomSort },
+                { field: 'fee', order: 'asc', customSort: feeCustomSort },
                 { field: 'day', order: 'desc', customSort: dayCustomSort }
             ])
             expect(wrapper.vm.visibleData).toEqual([

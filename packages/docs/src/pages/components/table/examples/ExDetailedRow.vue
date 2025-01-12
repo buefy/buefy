@@ -87,10 +87,19 @@
     </section>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BField, BIcon, BSwitch, BTable, BTableColumn } from '@ntohq/buefy-next'
     import data from '@/data/sample.json'
 
-    export default {
+    export default defineComponent({
+        components: {
+            BField,
+            BIcon,
+            BSwitch,
+            BTable,
+            BTableColumn
+        },
         data() {
             return {
                 data,
@@ -106,5 +115,5 @@
                 }
             }
         }
-    }
+    })
 </script>
