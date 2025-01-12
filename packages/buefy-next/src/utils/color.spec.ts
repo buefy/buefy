@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest'
 import Color from '@utils/color'
 
 describe('Color', () => {

@@ -1,6 +1,7 @@
+import { describe, expect, it } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
 import Color from '@utils/color'
-import BColorpickerAlphaSlider from '@components/colorpicker/ColorpickerAlphaSlider'
+import BColorpickerAlphaSlider from '@components/colorpicker/ColorpickerAlphaSlider.vue'
 
 describe('BColorpickerAlphaSlider', () => {
     it('render correctly', () => {

@@ -98,25 +98,46 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { DefineComponent, PropType } from 'vue'
+
 import FormElementMixin from '../../utils/FormElementMixin'
 import { isMobile } from '../../utils/helpers'
 import config from '../../utils/config'
 import Color from '../../utils/color'
+import type { Rgb } from '../../utils/color'
 
-import Button from '../button/Button.vue'
-import Dropdown from '../dropdown/Dropdown.vue'
-import DropdownItem from '../dropdown/DropdownItem.vue'
-import Input from '../input/Input.vue'
-import Field from '../field/Field.vue'
-import Select from '../select/Select.vue'
-import Icon from '../icon/Icon.vue'
+import BButton from '../button/Button.vue'
+import BDropdown from '../dropdown/Dropdown.vue'
+import BDropdownItem from '../dropdown/DropdownItem.vue'
+import BInput from '../input/Input.vue'
+import BField from '../field/Field.vue'
 
-import ColorpickerHSLRepresentationTriangle from './ColorpickerHSLRepresentationTriangle.vue'
-import ColorpickerHSLRepresentationSquare from './ColorpickerHSLRepresentationSquare.vue'
-import ColorpickerAlphaSlider from './ColorpickerAlphaSlider.vue'
+import BColorpickerHSLRepresentationTriangle from './ColorpickerHSLRepresentationTriangle.vue'
+import BColorpickerHSLRepresentationSquare from './ColorpickerHSLRepresentationSquare.vue'
+import BColorpickerAlphaSlider from './ColorpickerAlphaSlider.vue'
 
-const defaultColorFormatter = (color, vm) => {
+type BDropdownInstance = InstanceType<typeof BDropdown>
+
+// Interface of the `Colorpicker` component.
+// Gives a separate definition to avoid circular dependencies.
+// TODO: we have to learn about which properties are to be exposed to the
+// implementors of custom `ColorFormatter`, and `ColorParser`.
+/* eslint-disable @typescript-eslint/ban-types */
+export type IColorpicker = Omit<DefineComponent<
+    {}, // P(rops)
+    {}, // B (raw bindings)
+    {}, // D(ata)
+    {}, // C(omputed)
+    {} // M(ethods)
+>, '$emit'> // default E(mits) type parameter would causes a `$emit` discrepancy
+/* eslint-enable @typescript-eslint/ban-types */
+
+export type ColorFormatter = (color: Color, vm?: IColorpicker) => string
+export type ColorParser = (color: string | Rgb, vm?: IColorpicker) => Color
+
+const defaultColorFormatter: ColorFormatter = (color) => {
     if (color.alpha < 1) {
         return color.toString('hexa')
     } else {
@@ -124,23 +145,21 @@ const defaultColorFormatter = (color, vm) => {
     }
 }
 
-const defaultColorParser = (color, vm) => {
+const defaultColorParser: ColorParser = (color) => {
     return Color.parse(color)
 }
 
-export default {
+export default defineComponent({
     name: 'BColorpicker',
     components: {
-        [ColorpickerHSLRepresentationTriangle.name]: ColorpickerHSLRepresentationTriangle,
-        [ColorpickerHSLRepresentationSquare.name]: ColorpickerHSLRepresentationSquare,
-        [ColorpickerAlphaSlider.name]: ColorpickerAlphaSlider,
-        [Input.name]: Input,
-        [Field.name]: Field,
-        [Select.name]: Select,
-        [Icon.name]: Icon,
-        [Button.name]: Button,
-        [Dropdown.name]: Dropdown,
-        [DropdownItem.name]: DropdownItem
+        BColorpickerHSLRepresentationTriangle,
+        BColorpickerHSLRepresentationSquare,
+        BColorpickerAlphaSlider,
+        BInput,
+        BField,
+        BButton,
+        BDropdown,
+        BDropdownItem
     },
     mixins: [FormElementMixin],
     inheritAttrs: false,
@@ -151,8 +170,8 @@ export default {
     },
     props: {
         modelValue: {
-            type: [String, Object],
-            validator(value) {
+            type: [String, Object] as PropType<string | Rgb>,
+            validator(value: string | Rgb) {
                 return typeof value === 'string' ||
                     (
                         typeof value === 'object' &&
@@ -169,7 +188,7 @@ export default {
         representation: {
             type: String,
             default: 'triangle',
-            value(value) {
+            value(value: string) {
                 return ['triangle', 'square'].some((r) => r === value)
             }
         },
@@ -180,8 +199,8 @@ export default {
             default: false
         },
         colorFormatter: {
-            type: Function,
-            default: (color, vm) => {
+            type: Function as PropType<ColorFormatter>,
+            default: (color: Color, vm?: IColorpicker) => {
                 if (typeof config.defaultColorFormatter === 'function') {
                     return config.defaultColorFormatter(color)
                 } else {
@@ -190,8 +209,8 @@ export default {
             }
         },
         colorParser: {
-            type: Function,
-            default: (color, vm) => {
+            type: Function as PropType<ColorParser>,
+            default: (color: string, vm?: IColorpicker) => {
                 if (typeof config.defaultColorParser === 'function') {
                     return config.defaultColorParser(color)
                 } else {
@@ -217,9 +236,16 @@ export default {
             type: Boolean,
             default: () => config.defaultTrapFocus
         },
+        openOnFocus: Boolean,
+        closeOnClick: Boolean,
         appendToBody: Boolean
     },
-    emits: ['active-change', 'update:modelValue'],
+    emits: {
+        /* eslint-disable @typescript-eslint/no-unused-vars */
+        'active-change': (_active: boolean) => true,
+        'update:modelValue': (_value: Color) => true
+        /* eslint-enable @typescript-eslint/no-unused-vars */
+    },
     data() {
         return {
             color: this.parseColor(this.modelValue)
@@ -227,7 +253,7 @@ export default {
     },
     computed: {
         computedValue: {
-            set(value) {
+            set(value: string | Rgb) {
                 this.color = this.parseColor(value)
             },
             get() {
@@ -286,19 +312,19 @@ export default {
         }
     },
     methods: {
-        parseColor(color) {
+        parseColor(color: string | Rgb | Color) {
             try {
                 return this.colorParser(color)
             } catch (e) {
                 return new Color()
             }
         },
-        updateColor(value) {
+        updateColor(value: Color) {
             value.alpha = this.computedValue.alpha
             this.computedValue = value
             this.$emit('update:modelValue', value)
         },
-        updateAlpha(alpha) {
+        updateAlpha(alpha: number) {
             this.computedValue.alpha = alpha
             this.$emit('update:modelValue', this.computedValue)
         },
@@ -308,22 +334,22 @@ export default {
         /*
          * Format color into string
          */
-        formatValue(value) {
+        formatValue(value: Color) { // FIXME: unused?
             return value ? this.colorFormatter(value, this) : null
         },
 
         /*
          * Toggle datepicker
          */
-        togglePicker(active) {
+        togglePicker(active: boolean) {
             if (this.$refs.dropdown) {
                 const isActive = typeof active === 'boolean'
                     ? active
-                    : !this.$refs.dropdown.isActive
+                    : !(this.$refs.dropdown as BDropdownInstance).isActive
                 if (isActive) {
-                    this.$refs.dropdown.isActive = isActive
+                    (this.$refs.dropdown as BDropdownInstance).isActive = isActive
                 } else if (this.closeOnClick) {
-                    this.$refs.dropdown.isActive = isActive
+                    (this.$refs.dropdown as BDropdownInstance).isActive = isActive
                 }
             }
         },
@@ -331,7 +357,7 @@ export default {
         /*
          * Call default onFocus method and show datepicker
          */
-        handleOnFocus(event) {
+        handleOnFocus(event: Event) {
             this.onFocus(event)
             if (this.openOnFocus) {
                 this.togglePicker(true)
@@ -341,6 +367,9 @@ export default {
         /*
          * Toggle dropdown
          */
+        // I decided to comment out the following unused method until we come
+        // back to deal with the `open-on-focus` and `close-on-click` props
+        /*
         toggle() {
             if (this.mobileNative && this.isMobile) {
                 const input = this.$refs.input.$refs.input
@@ -348,31 +377,32 @@ export default {
                 input.click()
                 return
             }
-            this.$refs.dropdown.toggle()
-        },
+            (this.$refs.dropdown as BDropdownInstance).toggle()
+        }, */
 
         /*
          * Avoid dropdown toggle when is already visible
          */
-        onInputClick(event) {
-            if (this.$refs.dropdown.isActive) {
+        onInputClick(event: Event) {
+            if ((this.$refs.dropdown as BDropdownInstance).isActive) {
                 event.stopPropagation()
             }
         },
 
-        /**
+        /*
          * Keypress event that is bound to the document.
          */
-        keyPress({ key }) {
-            if (this.$refs.dropdown && this.$refs.dropdown.isActive && (key === 'Escape' || key === 'Esc')) {
+        keyPress({ key }: KeyboardEvent) {
+            const dropdown = this.$refs.dropdown as BDropdownInstance
+            if (dropdown && dropdown.isActive && (key === 'Escape' || key === 'Esc')) {
                 this.togglePicker(false)
             }
         },
 
-        /**
+        /*
          * Emit 'blur' event on dropdown is not active (closed)
          */
-        onActiveChange(value) {
+        onActiveChange(value: boolean) {
             if (!value) {
                 this.onBlur()
             }
@@ -382,5 +412,5 @@ export default {
             this.$emit('active-change', value)
         }
     }
-}
+})
 </script>

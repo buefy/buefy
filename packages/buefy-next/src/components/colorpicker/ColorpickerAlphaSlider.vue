@@ -25,23 +25,28 @@
     </div>
 </template>
 
-<script>
-import Color from '../../utils/color'
-import Tooltip from '../tooltip/Tooltip.vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
 
-export default {
+import Color from '../../utils/color'
+import BTooltip from '../tooltip/Tooltip.vue'
+
+export default defineComponent({
     name: 'BColorpickerAlphaSlider',
     components: {
-        [Tooltip.name]: Tooltip
+        BTooltip
     },
     props: {
         value: {
             type: Number,
-            validator: (value) => value >= 0 && value < 256
+            validator: (value: number) => value >= 0 && value < 256
         },
         color: [String, Object]
     },
-    emits: ['input'],
+    emits: {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        input: (_value: number) => true
+    },
     data() {
         const color = Color.parse(this.color)
 
@@ -49,7 +54,7 @@ export default {
         return {
             startColor: color.toString('hex'),
             endColor: color.toString('hexa'),
-            percent: Math.round((1 - this.value / 255) * 100),
+            percent: Math.round((1 - this.value! / 255) * 100),
             captureMouse: false,
             clientOffset: {
                 cx: -1,
@@ -102,7 +107,7 @@ export default {
         decreaseAlpha(value = 0.01) {
             this.increaseAlpha(-value)
         },
-        alphaKeyPress(event) {
+        alphaKeyPress(event: KeyboardEvent) {
             let handled = false
             switch (event.key) {
                 case 'ArrowRight':
@@ -138,18 +143,18 @@ export default {
                 this.emitAlpha()
             }
         },
-        clickAlpha(event) {
+        clickAlpha(event: MouseEvent) {
             this.startMouseCapture(event)
             this.trackMouse(event)
-            this.stopMouseCapture(event)
-            this.$refs.alphaCursor.focus()
+            this.stopMouseCapture(event);
+            (this.$refs.alphaCursor as HTMLElement).focus()
         },
-        startMouseCapture(event) {
+        startMouseCapture(event: Event) {
             event.stopPropagation()
 
             this.captureMouse = true
         },
-        trackMouse(event) {
+        trackMouse(event: MouseEvent | TouchEvent) {
             if (this.captureMouse === false) {
                 return
             }
@@ -157,21 +162,22 @@ export default {
             event.stopPropagation()
 
             let [mouseX] = [0, 0]
-            if (typeof event.touches !== 'undefined' && event.touches.length) {
-                [mouseX] = [event.touches[0].clientX]
+            const touches = (event as TouchEvent).touches
+            if (typeof touches !== 'undefined' && touches.length) {
+                [mouseX] = [touches[0].clientX]
             } else {
-                [mouseX] = [event.clientX]
+                [mouseX] = [(event as MouseEvent).clientX]
             }
 
             const ratio = 0.5 + (this.clientOffset.cx - mouseX) / this.clientOffset.width
             this.percent = Math.round(100 - Math.max(0, Math.min(1, ratio)) * 100)
             this.emitAlpha()
         },
-        stopMouseCapture(event) {
+        stopMouseCapture(event: Event) {
             if (this.captureMouse !== false) {
                 event.preventDefault()
-                event.stopPropagation()
-                this.$refs.alphaCursor.focus()
+                event.stopPropagation();
+                (this.$refs.alphaCursor as HTMLElement).focus()
             }
             this.captureMouse = false
         },
@@ -191,5 +197,5 @@ export default {
         window.removeEventListener('mouseup', this.stopMouseCapture)
         window.removeEventListener('touchend', this.stopMouseCapture)
     }
-}
+})
 </script>

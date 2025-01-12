@@ -1,4 +1,21 @@
-export const colorChannels = ['red', 'green', 'blue', 'alpha']
+export const colorChannels = ['red', 'green', 'blue', 'alpha'] as const
+export type ColorChannel = typeof colorChannels[number]
+
+export type Rgba = {
+    [C in ColorChannel]: number
+}
+export type Rgb = Omit<Rgba, 'alpha'>
+
+export const hslChannels = ['hue', 'saturation', 'lightness'] as const
+export type HslChannel = typeof hslChannels[number]
+export type CapitalizedHslChannel = Capitalize<HslChannel>
+
+export type Hsla = {
+    [C in HslChannel]: number
+}
+export type Hsl = Omit<Hsla, 'alpha'>
+
+type ChannelTuple = [number, number, number, number]
 
 export const colorsNammed = {
     transparent: '#00000000',
@@ -150,7 +167,9 @@ export const colorsNammed = {
     whitesmoke: '#f5f5f5',
     yellowgreen: '#9acd32',
     rebeccapurple: '#663399'
-}
+} as const
+
+export type ColorName = keyof typeof colorsNammed
 
 export class ColorTypeError extends Error {
     constructor() {
@@ -159,46 +178,91 @@ export class ColorTypeError extends Error {
 }
 
 class Color {
-    constructor(...args) {
+    // @ts-expect-error - TypeScript failed to inter the initialization of this property
+    $channels: Uint8Array
+
+    // Since getters and setters for the color channels, e.g., "alpha", are
+    // dynamically defined with `Object.defineProperty` in the constructor, we
+    // cannot write property declarations inside the class body. Instead, we
+    // augment the `Color` class with an ambient module declared in `color.ts`.
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    constructor(...args: any[]) {
         if (args.length > 0) {
             return Color.parse(...args)
         }
 
         this.$channels = new Uint8Array(colorChannels.length)
-        colorChannels.forEach((channel, index) => {
-            Object.defineProperty(
-                this,
-                channel,
-                {
-                    get: () => this.$channels[index],
-                    set: (byte) => {
-                        if (!Number.isNaN(byte / 1)) {
-                            this.$channels[index] = Math.min(255, Math.max(0, byte))
-                        }
-                    },
-                    enumerable: true,
-                    configurable: true
-                }
-            )
-        })
-        // Required for observability
-        ;['hue', 'saturation', 'lightness'].forEach((name) => {
-            const capitalizedName = name.replace(/^./, (m) => m.toUpperCase())
-            Object.defineProperty(
-                this,
-                name,
-                {
-                    get: () => this[`get${capitalizedName}`](),
-                    set: (value) => {
-                        if (!Number.isNaN(value / 1)) {
-                            this[`set${capitalizedName}`](value)
-                        }
-                    },
-                    enumerable: true,
-                    configurable: true
-                }
-            )
-        })
+    }
+
+    get red(): number {
+        return this.$channels[0]
+    }
+
+    set red(byte: number) {
+        if (!Number.isNaN(byte / 1)) {
+            this.$channels[0] = Math.min(255, Math.max(0, byte))
+        }
+    }
+
+    get green(): number {
+        return this.$channels[1]
+    }
+
+    set green(byte: number) {
+        if (!Number.isNaN(byte / 1)) {
+            this.$channels[1] = Math.min(255, Math.max(0, byte))
+        }
+    }
+
+    get blue(): number {
+        return this.$channels[2]
+    }
+
+    set blue(byte: number) {
+        if (!Number.isNaN(byte / 1)) {
+            this.$channels[2] = Math.min(255, Math.max(0, byte))
+        }
+    }
+
+    get alpha(): number {
+        return this.$channels[3]
+    }
+
+    set alpha(byte: number) {
+        if (!Number.isNaN(byte / 1)) {
+            this.$channels[3] = Math.min(255, Math.max(0, byte))
+        }
+    }
+
+    get hue(): number {
+        return this.getHue()
+    }
+
+    set hue(value: number) {
+        if (!Number.isNaN(value / 1)) {
+            this.setHue(value)
+        }
+    }
+
+    get saturation(): number {
+        return this.getSaturation()
+    }
+
+    set saturation(value: number) {
+        if (!Number.isNaN(value / 1)) {
+            this.setSaturation(value)
+        }
+    }
+
+    get lightness(): number {
+        return this.getLightness()
+    }
+
+    set lightness(value: number) {
+        if (!Number.isNaN(value / 1)) {
+            this.setLightness(value)
+        }
     }
 
     getHue() {
@@ -225,7 +289,7 @@ class Color {
         return Math.round(hue % 360)
     }
 
-    setHue(value) {
+    setHue(value: number) {
         const color = Color.fromHSL(value, this.saturation, this.lightness, this.alpha / 255)
         for (let i = 0; i < this.$channels.length; i++) {
             this.$channels[i] = Number(color.$channels[i])
@@ -242,7 +306,7 @@ class Color {
             : 0
     }
 
-    setSaturation(value) {
+    setSaturation(value: number) {
         const color = Color.fromHSL(this.hue, value, this.lightness, this.alpha / 255)
         colorChannels.forEach((_, i) => (this.$channels[i] = color.$channels[i]))
     }
@@ -254,7 +318,7 @@ class Color {
         return Math.round((max + min) / 2 * 100) / 100
     }
 
-    setLightness(value) {
+    setLightness(value: number) {
         const color = Color.fromHSL(this.hue, this.lightness, value, this.alpha / 255)
         colorChannels.forEach((_, i) => (this.$channels[i] = color.$channels[i]))
     }
@@ -289,11 +353,12 @@ class Color {
         }
     }
 
-    get [Symbol.toString]() {
+    get [Symbol.toStringTag]() {
         return this.toString('hex')
     }
 
-    static parse(...args) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    static parse(...args: any[]): Color {
         if (typeof args[0] === 'object') {
             return Color.parseObject(args[0])
         } else if (args.every((arg) => !Number.isNaN(arg / 1))) {
@@ -314,8 +379,8 @@ class Color {
         } else if (typeof args[0] === 'string') {
             let match = null
 
-            if (typeof colorsNammed[args[0].toLowerCase()] === 'string') {
-                return Color.parseHex(colorsNammed[args[0].toLowerCase()])
+            if (typeof colorsNammed[args[0].toLowerCase() as ColorName] === 'string') {
+                return Color.parseHex(colorsNammed[args[0].toLowerCase() as ColorName])
             } else if ((match = args[0].match(/^(#|&h|0x)?(([a-f0-9]{3,4}){1,2})$/i)) !== null) {
                 return Color.parseHex(match[2])
             } else if ((match = args[0].match(/^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)(\s*,\s*(\d*\.?\d+))?\s*\)$/i)) !== null) {
@@ -328,7 +393,7 @@ class Color {
                         : 1
                 ]
 
-                return Color.fromRGB(...channels.map((value) => Number(value)))
+                return Color.fromRGB(...(channels.map((value) => Number(value)) as ChannelTuple))
             } else if ((args[0].match(/^(h(sl|wb)a?|lab|color|cmyk)\(/i))) {
                 throw new Error('Color expression not implemented yet')
             }
@@ -337,7 +402,7 @@ class Color {
         throw new Error('Invalid color expression')
     }
 
-    static parseObject(object) {
+    static parseObject(object: unknown) {
         const color = new Color()
 
         if (object === null || typeof object !== 'object') {
@@ -348,15 +413,15 @@ class Color {
         }
 
         colorChannels.forEach((channel) => {
-            if (!Number.isNaN(object[channel])) {
-                color[channel] = object[channel]
+            if (!Number.isNaN((object as Rgba)[channel])) {
+                color[channel] = (object as Rgba)[channel]
             }
         })
 
         return color
     }
 
-    static parseHex(hex) {
+    static parseHex(hex: string) {
         if (typeof hex !== 'string') {
             throw new Error('Hex expression must be a string')
         }
@@ -378,10 +443,10 @@ class Color {
         if (typeof chans[3] === 'number') {
             chans[3] /= 255
         }
-        return Color.fromRGB(...chans)
+        return Color.fromRGB(...(chans as ChannelTuple))
     }
 
-    static parseIndex(value, channels = 3) {
+    static parseIndex(value: number, channels: number = 3) {
         const color = new Color()
 
         for (let i = 0; i < 4; i++) {
@@ -391,7 +456,7 @@ class Color {
         return color
     }
 
-    static fromRGB(red, green, blue, alpha = 1) {
+    static fromRGB(red: number, green: number, blue: number, alpha: number = 1) {
         if ([red, green, blue, alpha].some((arg) => Number.isNaN(arg / 1))) {
             throw new Error('Invalid arguments')
         }
@@ -405,7 +470,7 @@ class Color {
         return color
     }
 
-    static fromHSL(hue, saturation, lightness, alpha = 1) {
+    static fromHSL(hue: number, saturation: number, lightness: number, alpha: number = 1) {
         if ([hue, saturation, lightness, alpha].some((arg) => Number.isNaN(arg))) {
             throw new Error('Invalid arguments')
         }
@@ -434,7 +499,7 @@ class Color {
         return Color.fromRGB((r + m) * 255, (g + m) * 255, (b + m) * 255, alpha)
     }
 
-    static isColor(arg) {
+    static isColor(arg: unknown): arg is Color {
         return arg instanceof Color
     }
 }

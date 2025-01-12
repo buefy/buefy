@@ -1,5 +1,6 @@
+import { describe, expect, it } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
-import BColorpicker from '@components/colorpicker/Colorpicker'
+import BColorpicker from '@components/colorpicker/Colorpicker.vue'
 
 describe('BColorpicker', () => {
     it('render correctly', () => {

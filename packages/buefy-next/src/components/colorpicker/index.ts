@@ -1,9 +1,10 @@
+import type { App } from 'vue'
 import Colorpicker from './Colorpicker.vue'
 
 import { registerComponent } from '../../utils/plugins'
 
 const Plugin = {
-    install(Vue) {
+    install(Vue: App) {
         registerComponent(Vue, Colorpicker)
     }
 }

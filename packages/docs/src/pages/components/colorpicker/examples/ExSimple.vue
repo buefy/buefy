@@ -5,3 +5,7 @@
         </b-field>
     </section>
 </template>
+
+<script setup lang="ts">
+import { BColorpicker, BField } from '@ntohq/buefy-next'
+</script>

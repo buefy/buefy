@@ -1,17 +1,18 @@
+import { beforeEach, describe, expect, it } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
 import Color from '@utils/color'
-import BColorpickerHSLRepresentationSquare from '@components/colorpicker/ColorpickerHSLRepresentationSquare'
+import BColorpickerHSLRepresentationTriangle from '@components/colorpicker/ColorpickerHSLRepresentationTriangle.vue'
 
-let defaultProps
+let defaultProps: () => { value: Color }
 
-describe('BColorpickerHSLRepresentationSquare', () => {
+describe('BColorpickerHSLRepresentationTriangle', () => {
     beforeEach(() => {
         defaultProps = () => ({
             value: Color.parse('#123456')
         })
     })
     it('render correctly', () => {
-        const wrapper = shallowMount(BColorpickerHSLRepresentationSquare, {
+        const wrapper = shallowMount(BColorpickerHSLRepresentationTriangle, {
             props: {
                 ...defaultProps()
             }

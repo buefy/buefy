@@ -21,10 +21,11 @@
     </section>
 </template>
 
-<script>
-import { Color } from '@ntohq/buefy-next'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BColorpicker, BField, BSelect, Color } from '@ntohq/buefy-next'
 
-export default {
+export default defineComponent({
     data() {
         return {
             format: 'rgb',
@@ -37,9 +38,9 @@ export default {
         }
     },
     methods: {
-        formatter (color) {
+        formatter (color: Color) {
             return color.toString(this.format)
         }
     }
-}
+})
 </script>

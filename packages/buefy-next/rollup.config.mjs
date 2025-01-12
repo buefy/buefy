@@ -31,7 +31,6 @@ const components = fs
 
 const JS_COMPONENTS = [
     'clockpicker',
-    'colorpicker',
     'datepicker',
     'datetimepicker',
     'numberinput',
