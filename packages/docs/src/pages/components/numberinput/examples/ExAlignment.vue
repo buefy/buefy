@@ -25,3 +25,7 @@
         </b-field>
     </section>
 </template>
+
+<script setup lang="ts">
+import { BField, BNumberinput } from '@ntohq/buefy-next'
+</script>

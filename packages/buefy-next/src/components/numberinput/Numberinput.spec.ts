@@ -1,7 +1,9 @@
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { shallowMount, mount } from '@vue/test-utils'
-import BNumberinput from '@components/numberinput/Numberinput'
+import type { VueWrapper } from '@vue/test-utils'
+import BNumberinput from '@components/numberinput/Numberinput.vue'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BNumberinput>>
 
 describe('BNumberinput', () => {
     describe('Rendered', () => {
@@ -10,7 +12,7 @@ describe('BNumberinput', () => {
         })
 
         afterEach(() => {
-            jest.useRealTimers()
+            vi.useRealTimers()
         })
 
         it('is called', () => {
@@ -37,7 +39,7 @@ describe('BNumberinput', () => {
         it('increments/decrements on long pressing exponentially', async () => {
             // we should not depend on a real timer
             // otherwise the results will depend on the machine
-            jest.useFakeTimers()
+            vi.useFakeTimers()
 
             await wrapper.setProps({ exponential: true, modelValue: 1, step: 1 })
 
@@ -47,16 +49,16 @@ describe('BNumberinput', () => {
             for (let n = 1; n <= 10; ++n) {
                 // while Jest's fake setTimeout truncates the delay to an exact
                 // ms when it schedules the callback,
-                // jest.advanceTimersByTime floors the value
+                // vi.advanceTimersByTime floors the value
                 // and accumulates the remainder.
                 // so should be floored to prevent the accumulated remainder
                 // from triggering an extra callback
-                jest.advanceTimersByTime(Math.floor(250 / n))
+                vi.advanceTimersByTime(Math.floor(250 / n))
                 expect(wrapper.vm.computedValue).toBe(n + 2)
             }
 
             wrapper.find('.control.plus').trigger('mouseup')
-            jest.runAllTimers()
+            vi.runAllTimers()
             await wrapper.vm.$nextTick()
             expect(wrapper.vm.computedValue).toBe(12)
 
@@ -68,22 +70,22 @@ describe('BNumberinput', () => {
             for (let n = 1; n <= 20; ++n) {
                 // while Jest's fake setTimeout truncates the delay to an exact
                 // ms when it schedules the callback,
-                // jest.advanceTimersByTime floors the value
+                // vi.advanceTimersByTime floors the value
                 // and accumulates the remainder.
                 // so should be floored to prevent the accumulated remainder
                 // from triggering an extra callback
-                jest.advanceTimersByTime(Math.floor(250 / (n * 3)))
+                vi.advanceTimersByTime(Math.floor(250 / (n * 3)))
                 expect(wrapper.vm.computedValue).toBe(n + 1)
             }
 
             wrapper.find('.control.plus').trigger('mouseup')
-            jest.runAllTimers()
+            vi.runAllTimers()
             await wrapper.vm.$nextTick()
             expect(wrapper.vm.computedValue).toBe(21)
         })
 
         it('increments/decrements on long pressing', async () => {
-            jest.useFakeTimers()
+            vi.useFakeTimers()
 
             let val = 0
 
@@ -92,9 +94,9 @@ describe('BNumberinput', () => {
             val++
 
             // await wait(2000)
-            jest.runOnlyPendingTimers()
-            jest.runOnlyPendingTimers()
-            jest.runOnlyPendingTimers()
+            vi.runOnlyPendingTimers()
+            vi.runOnlyPendingTimers()
+            vi.runOnlyPendingTimers()
             val += 3
 
             wrapper.find('.control.plus').trigger('mouseup')
@@ -104,8 +106,8 @@ describe('BNumberinput', () => {
             wrapper.find('.control.minus button').trigger('mousedown')
             val--
 
-            jest.runOnlyPendingTimers()
-            jest.runOnlyPendingTimers()
+            vi.runOnlyPendingTimers()
+            vi.runOnlyPendingTimers()
             val -= 2
 
             wrapper.find('.control.minus button').trigger('mouseup')
@@ -119,16 +121,16 @@ describe('BNumberinput', () => {
             await wrapper.setProps({
                 longPress: false
             })
-            jest.useFakeTimers()
+            vi.useFakeTimers()
             wrapper.vm.computedValue = 0
 
             // Increment
             wrapper.find('.control.plus button').trigger('mousedown')
 
             // await wait(2000)
-            jest.runOnlyPendingTimers()
-            jest.runOnlyPendingTimers()
-            jest.runOnlyPendingTimers()
+            vi.runOnlyPendingTimers()
+            vi.runOnlyPendingTimers()
+            vi.runOnlyPendingTimers()
 
             wrapper.find('.control.plus').trigger('mouseup')
             expect(wrapper.vm.computedValue).toBe(1)
@@ -136,8 +138,8 @@ describe('BNumberinput', () => {
             // Decrement
             wrapper.find('.control.minus button').trigger('mousedown')
 
-            jest.runOnlyPendingTimers()
-            jest.runOnlyPendingTimers()
+            vi.runOnlyPendingTimers()
+            vi.runOnlyPendingTimers()
 
             wrapper.find('.control.minus button').trigger('mouseup')
             // Trigger it another time to check for unexpected browser behavior
@@ -172,7 +174,7 @@ describe('BNumberinput', () => {
             expect(wrapper.find('input').element.checkValidity()).toEqual(true)
             await wrapper.setProps({ step: 'any', modelValue: 1 })
             expect(wrapper.find('input').element.checkValidity()).toEqual(true)
-            await wrapper.setProps({ step: 'any', modelValue: '' }) // produces a warning
+            await wrapper.setProps({ step: 'any', modelValue: null })
             expect(wrapper.find('input').element.checkValidity()).toEqual(true)
         })
     })

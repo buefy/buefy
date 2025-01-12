@@ -23,35 +23,44 @@
 
 </template>
 
-<script>
-    import api from './api/numberinput'
-    import { shallowFields } from '@/utils'
+<script lang="ts">
+    import { defineComponent } from 'vue'
 
-    import ExSimple from './examples/ExSimple'
+    import { shallowFields } from '@/utils'
+    import ApiView from '@/components/ApiView.vue'
+    import Example from '@/components/Example.vue'
+
+    import api from './api/numberinput'
+
+    import ExSimple from './examples/ExSimple.vue'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
 
-    import ExTypes from './examples/ExTypes'
+    import ExTypes from './examples/ExTypes.vue'
     import ExTypesCode from './examples/ExTypes.vue?raw'
 
-    import ExRange from './examples/ExRange'
+    import ExRange from './examples/ExRange.vue'
     import ExRangeCode from './examples/ExRange.vue?raw'
 
-    import ExStep from './examples/ExStep'
+    import ExStep from './examples/ExStep.vue'
     import ExStepCode from './examples/ExStep.vue?raw'
 
-    import ExExpon from './examples/ExExpon'
+    import ExExpon from './examples/ExExpon.vue'
     import ExExponCode from './examples/ExExpon.vue?raw'
 
-    import ExSizes from './examples/ExSizes'
+    import ExSizes from './examples/ExSizes.vue'
     import ExSizesCode from './examples/ExSizes.vue?raw'
 
-    import ExAlignment from './examples/ExAlignment'
+    import ExAlignment from './examples/ExAlignment.vue'
     import ExAlignmentCode from './examples/ExAlignment.vue?raw'
 
-    import ExCustomize from './examples/ExCustomize'
+    import ExCustomize from './examples/ExCustomize.vue'
     import ExCustomizeCode from './examples/ExCustomize.vue?raw'
 
-    export default {
+    export default defineComponent({
+        components: {
+            ApiView,
+            Example
+        },
         data() {
             return {
                 api,
@@ -75,5 +84,5 @@
                 ExSizesCode
             }
         }
-    }
+    })
 </script>

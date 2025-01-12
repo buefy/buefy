@@ -34,13 +34,20 @@
   </section>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BField, BNumberinput } from '@ntohq/buefy-next'
+
+export default defineComponent({
+  components: {
+    BField,
+    BNumberinput
+  },
   data() {
     return {
       number: 10,
       numberPlaceholder: undefined
     }
   }
-}
+})
 </script>
