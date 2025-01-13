@@ -1,14 +1,16 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
-import BDatepicker from '@components/datepicker/Datepicker'
+import type { VueWrapper } from '@vue/test-utils'
+import BDatepicker from '@components/datepicker/Datepicker.vue'
 
 import config, { setOptions } from '@utils/config'
 
-let wrapper, defaultProps
+let wrapper: VueWrapper<InstanceType<typeof BDatepicker>>
 
-const newDate = (y, m, d) => {
+const newDate = (y: number, m: number, d: number) => {
     const date = new Date(Date.UTC(y, m, d))
-    date.getDate = jest.fn(() => date.getUTCDate())
-    date.getMonth = jest.fn(() => date.getUTCMonth())
+    date.getDate = vi.fn(() => date.getUTCDate())
+    date.getMonth = vi.fn(() => date.getUTCMonth())
     return date
 }
 
@@ -19,14 +21,19 @@ const defaultMonthNames = [
 const defaultDayNames = ['Su', 'M', 'Tu', 'W', 'Th', 'F', 'S']
 const defaultFirstDayOfWeek = 0
 
+const defaultProps = () => ({
+    dayNames: config.defaultDayNames,
+    monthNames: config.defaultMonthNames,
+    focusedDate: newDate(2018, 7, 15)
+})
+
 describe('BDatepicker', () => {
     describe('with invalid value from config config', () => {
         beforeEach(() => {
             setOptions(Object.assign(config, {
                 defaultMonthNames: 'A string!',
                 defaultDayNames: 'A string!',
-                defaultFirstDayOfWeek: 'A string!',
-                focusedDate: newDate(2018, 7, 1)
+                defaultFirstDayOfWeek: 'A string!'
             }))
 
             wrapper = shallowMount(BDatepicker, {
@@ -57,19 +64,12 @@ describe('BDatepicker', () => {
         setOptions(Object.assign(config, {
             defaultMonthNames,
             defaultDayNames,
-            defaultFirstDayOfWeek,
-            focusedDate: newDate(2018, 7, 15)
+            defaultFirstDayOfWeek
         }))
-
-        defaultProps = {
-            dayNames: config.defaultDayNames,
-            monthNames: config.defaultMonthNames,
-            focusedDate: config.focusedDate
-        }
 
         wrapper = shallowMount(BDatepicker, {
             props: {
-                ...defaultProps
+                ...defaultProps()
             },
             global: {
                 stubs: {
@@ -78,8 +78,8 @@ describe('BDatepicker', () => {
             }
         })
 
-        wrapper.vm.updateInternalState = jest.fn(() => wrapper.vm.updateInternalState)
-        wrapper.vm.togglePicker = jest.fn(() => wrapper.vm.togglePicker)
+        wrapper.vm.updateInternalState = vi.fn(() => wrapper.vm.updateInternalState)
+        wrapper.vm.togglePicker = vi.fn(() => wrapper.vm.togglePicker)
     })
 
     it('is called', () => {
@@ -90,7 +90,7 @@ describe('BDatepicker', () => {
     it('render correctly', () => {
         wrapper = shallowMount(BDatepicker, {
             props: {
-                ...defaultProps
+                ...defaultProps()
             },
             global: {
                 stubs: {
@@ -104,7 +104,7 @@ describe('BDatepicker', () => {
                 }
             }
         })
-        wrapper.setProps({ dateCreator: () => {} })
+        wrapper.setProps({ dateCreator: () => newDate(2024, 8, 21) })
         expect(wrapper.html()).toMatchSnapshot()
     })
 
@@ -160,8 +160,8 @@ describe('BDatepicker', () => {
 
     it('react accordingly when calling onChange', async () => {
         const date = new Date()
-        await wrapper.setProps({ dateParser: jest.fn() })
-        wrapper.vm.onChange(date)
+        await wrapper.setProps({ dateParser: vi.fn() })
+        wrapper.vm.onChange(date + '')
         expect(wrapper.vm.dateParser).toHaveBeenCalled()
     })
 
@@ -268,8 +268,8 @@ describe('BDatepicker', () => {
         await wrapper.setProps({
             openOnFocus: false
         })
-        wrapper.vm.onFocus = jest.fn()
-        wrapper.vm.togglePicker = jest.fn()
+        wrapper.vm.onFocus = vi.fn()
+        wrapper.vm.togglePicker = vi.fn()
 
         wrapper.vm.handleOnFocus()
         expect(wrapper.vm.onFocus).toHaveBeenCalled()
@@ -321,8 +321,8 @@ describe('BDatepicker', () => {
                     inline: true,
                     multiple: true
                 })
-                wrapper.vm.updateInternalState = jest.fn(() => wrapper.vm.updateInternalState)
-                wrapper.vm.togglePicker = jest.fn(() => wrapper.vm.togglePicker)
+                wrapper.vm.updateInternalState = vi.fn(() => wrapper.vm.updateInternalState)
+                wrapper.vm.togglePicker = vi.fn(() => wrapper.vm.togglePicker)
             })
 
             it('should format multiple dates passed via array', () => {
@@ -356,7 +356,7 @@ describe('BDatepicker', () => {
 
     describe('#formatValue', () => {
         it('should call dateFormatter, passing the date', async () => {
-            const mockDateFormatter = jest.fn()
+            const mockDateFormatter = vi.fn()
             await wrapper.setProps({
                 dateFormatter: mockDateFormatter,
                 closeOnClick: false
@@ -367,24 +367,24 @@ describe('BDatepicker', () => {
         })
 
         it('should not call dateFormatter when value is undefined or NaN', async () => {
-            const mockDateFormatter = jest.fn()
+            const mockDateFormatter = vi.fn()
             await wrapper.setProps({
                 dateFormatter: mockDateFormatter
             })
             wrapper.vm.formatValue(undefined)
             expect(mockDateFormatter.mock.calls.length).toEqual(0)
-            wrapper.vm.formatValue('buefy')
+            wrapper.vm.formatValue('buefy' as unknown as Date)
             expect(mockDateFormatter.mock.calls.length).toEqual(0)
         })
 
         it('should not call dateFormatter when value is an array with undefined or NaN elements', async () => {
-            const mockDateFormatter = jest.fn()
+            const mockDateFormatter = vi.fn()
             await wrapper.setProps({
                 dateFormatter: mockDateFormatter
             })
-            wrapper.vm.formatValue([new Date(), undefined])
+            wrapper.vm.formatValue([new Date(), undefined] as unknown as Date[])
             expect(mockDateFormatter.mock.calls.length).toEqual(0)
-            wrapper.vm.formatValue([new Date(), 'buefy'])
+            wrapper.vm.formatValue([new Date(), 'buefy'] as unknown as Date[])
             expect(mockDateFormatter.mock.calls.length).toEqual(0)
         })
     })

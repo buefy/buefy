@@ -1,14 +1,22 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
-import BDatepickerMonth from '@components/datepicker/DatepickerMonth'
+import type { VueWrapper } from '@vue/test-utils'
+import BDatepickerMonth from '@components/datepicker/DatepickerMonth.vue'
 
 import config, { setOptions } from '@utils/config'
 
-let wrapper
+type BDatepickerMonthInstance = InstanceType<typeof BDatepickerMonth>
+
+let wrapper: VueWrapper<BDatepickerMonthInstance>
 
 // it used to create a date in UTC but should use the local timezone,
 // because DatepickerMonth entirely works in the local timezone
-const newDate = (y, m, d) => {
-    return new Date(y, m, d)
+const newDate = (y?: number, m?: number, d?: number) => {
+    if (y != null && m != null && d != null) {
+        return new Date(y, m, d)
+    } else {
+        return new Date()
+    }
 }
 
 const thisMonth = newDate(2020, 4, 15).getMonth()
@@ -56,22 +64,23 @@ const events = [
     }
 ]
 
+const focusedDate = newDate(2019, thisMonth, 11)
+
 describe('BDatepickerMonth', () => {
     beforeEach(() => {
         setOptions(Object.assign(config, {
             defaultMonthNames: [
                 'January', 'February', 'March', 'April', 'May', 'June', 'July',
                 'August', 'September', 'October', 'November', 'December'
-            ],
-            focusedDate: newDate(2019, thisMonth, 11)
+            ]
         }))
 
         wrapper = shallowMount(BDatepickerMonth, {
             props: {
                 monthNames: config.defaultMonthNames,
                 focused: {
-                    month: config.focusedDate.getMonth(),
-                    year: config.focusedDate.getFullYear()
+                    month: focusedDate.getMonth(),
+                    year: focusedDate.getFullYear()
                 },
                 dateCreator
             }
@@ -98,8 +107,8 @@ describe('BDatepickerMonth', () => {
     })
 
     it('emit chosen date', () => {
-        wrapper.vm.selectableDate = jest.fn(() => true)
-        wrapper.vm.emitChosenDate(5)
+        wrapper.vm.selectableDate = vi.fn(() => true)
+        wrapper.vm.emitChosenDate(new Date(5))
         expect(wrapper.vm.selectableDate).toHaveBeenCalled()
         expect(wrapper.emitted()['update:modelValue']).toBeTruthy()
     })
@@ -108,8 +117,8 @@ describe('BDatepickerMonth', () => {
         await wrapper.setProps({
             range: false
         })
-        wrapper.vm.selectableDate = jest.fn(() => true)
-        wrapper.vm.updateSelectedDate(5)
+        wrapper.vm.selectableDate = vi.fn(() => true)
+        wrapper.vm.updateSelectedDate(new Date(5))
         expect(wrapper.emitted()['update:modelValue']).toBeTruthy()
     })
 
@@ -135,8 +144,8 @@ describe('BDatepickerMonth', () => {
         expect(wrapper.vm.selectableDate(day)).toBeFalsy()
         await wrapper.setProps({
             selectableDates: [
-                newDate(config.focusedDate.getFullYear(), config.focusedDate.getMonth(), 1),
-                newDate(config.focusedDate.getFullYear(), config.focusedDate.getMonth(), 2),
+                newDate(focusedDate.getFullYear(), focusedDate.getMonth(), 1),
+                newDate(focusedDate.getFullYear(), focusedDate.getMonth(), 2),
                 day
             ]
         })
@@ -170,7 +179,7 @@ describe('BDatepickerMonth', () => {
 
         await wrapper.setProps({
             selectableDates: (d) => d.getMonth() === 7,
-            unselectableDates: (d) => true
+            unselectableDates: () => true
         })
         expect(wrapper.vm.selectableDate(day)).toBeTruthy()
 
@@ -299,35 +308,35 @@ describe('BDatepickerMonth', () => {
     })
 
     describe('focus', () => {
-        let wrapper
+        let wrapper: VueWrapper<BDatepickerMonthInstance>
         const nextMonth = thisMonth + 1
-        let cellToFocus
+        let cellToFocus: HTMLElement
 
         beforeEach(() => {
             wrapper = shallowMount(BDatepickerMonth, {
                 props: {
                     monthNames: config.defaultMonthNames,
                     focused: {
-                        month: config.focusedDate.getMonth(),
-                        year: config.focusedDate.getFullYear()
+                        month: focusedDate.getMonth(),
+                        year: focusedDate.getFullYear()
                     },
                     dateCreator
                 }
             })
             const refName = `month-${nextMonth}`
             if (Array.isArray(wrapper.vm.$refs[refName])) {
-                cellToFocus = wrapper.vm.$refs[refName][0]
+                cellToFocus = (wrapper.vm.$refs[refName] as HTMLElement[])[0]
             } else {
-                cellToFocus = wrapper.vm.$refs[refName]
+                cellToFocus = wrapper.vm.$refs[refName] as HTMLElement
             }
-            jest.spyOn(cellToFocus, 'focus')
+            vi.spyOn(cellToFocus, 'focus')
         })
 
         it('changing month should call focus on the corresponding cell', async () => {
             await wrapper.setProps({
                 focused: {
                     month: nextMonth,
-                    year: config.focusedDate.getFullYear()
+                    year: focusedDate.getFullYear()
                 }
             })
             await wrapper.vm.$nextTick()

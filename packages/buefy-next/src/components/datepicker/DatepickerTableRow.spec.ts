@@ -1,10 +1,16 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
-import BDatepickerTableRow from '@components/datepicker/DatepickerTableRow'
+import type { VueWrapper } from '@vue/test-utils'
+import BDatepickerTableRow from '@components/datepicker/DatepickerTableRow.vue'
 
-const newDate = (y, m, d) => {
+const newDate = (y?: number, m?: number, d?: number) => {
     // it used to create a date in UTC. but it is unnecessary,
     // because DatepickerTableRow entirely works in the local time zone
-    return new Date(y, m, d)
+    if (y != null && m != null && d != null) {
+        return new Date(y, m, d)
+    } else {
+        return new Date()
+    }
 }
 const props = {
     firstDayOfWeek: 0,
@@ -21,7 +27,7 @@ const props = {
     dateCreator: () => newDate()
 }
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BDatepickerTableRow>>
 
 describe('BDatepickerTableRow', () => {
     beforeEach(() => {
@@ -139,13 +145,13 @@ describe('BDatepickerTableRow', () => {
     })
 
     it('emit chosen date', () => {
-        wrapper.vm.selectableDate = jest.fn(() => false)
-        wrapper.vm.emitChosenDate(5)
+        wrapper.vm.selectableDate = vi.fn(() => false)
+        wrapper.vm.emitChosenDate(new Date(5))
         expect(wrapper.vm.selectableDate).toHaveBeenCalled()
         expect(wrapper.emitted().select).toBeFalsy()
 
-        wrapper.vm.selectableDate = jest.fn(() => true)
-        wrapper.vm.emitChosenDate(5)
+        wrapper.vm.selectableDate = vi.fn(() => true)
+        wrapper.vm.emitChosenDate(new Date(5))
         expect(wrapper.vm.selectableDate).toHaveBeenCalled()
         expect(wrapper.emitted().select).toBeTruthy()
     })
@@ -162,10 +168,11 @@ describe('BDatepickerTableRow', () => {
             global: {
                 provide: {
                     $datepicker: {
-                        $emit(event) {
+                        // TODO: it should be sufficient to test if `$emit` is called
+                        $emit(event: string, week: number, year: number) {
                             // Vue warns because BDatepickerTableRow is not
                             // supposed to emit "week-number-click"
-                            wrapper.vm.$emit(event, arguments[1], arguments[2])
+                            wrapper.vm.$emit(event, week, year)
                         }
                     }
                 }
@@ -176,7 +183,7 @@ describe('BDatepickerTableRow', () => {
         await $weekButton.trigger('click')
 
         expect(wrapper.emitted()['week-number-click']).toBeTruthy()
-        expect(wrapper.emitted()['week-number-click'][0].sort()).toEqual([weekDate.getDate(), weekDate.getFullYear()].sort())
+        expect((wrapper.emitted()['week-number-click'][0] as number[]).sort()).toEqual([weekDate.getDate(), weekDate.getFullYear()].sort())
     })
 
     it('emit focused date', async () => {
@@ -186,7 +193,7 @@ describe('BDatepickerTableRow', () => {
         const inc = 1
         wrapper.vm.changeFocus(day, inc)
         await wrapper.vm.$nextTick()
-        const valueEmitted = wrapper.emitted()['change-focus'][0]
+        const valueEmitted = wrapper.emitted<[Date]>('change-focus')![0]
         expect(valueEmitted[0].getDate()).toEqual(d + inc)
     })
 
@@ -264,8 +271,8 @@ describe('BDatepickerTableRow', () => {
     })
 
     describe('focus', () => {
-        let wrapper
-        let cellToFocus
+        let wrapper: VueWrapper<InstanceType<typeof BDatepickerTableRow>>
+        let cellToFocus: HTMLElement
 
         beforeEach(() => {
             wrapper = shallowMount(BDatepickerTableRow, {
@@ -279,9 +286,9 @@ describe('BDatepickerTableRow', () => {
             if (Array.isArray(wrapper.vm.$refs[refName])) {
                 cellToFocus = wrapper.vm.$refs[refName][0]
             } else {
-                cellToFocus = wrapper.vm.$refs[refName]
+                cellToFocus = wrapper.vm.$refs[refName] as HTMLElement
             }
-            jest.spyOn(cellToFocus, 'focus')
+            vi.spyOn(cellToFocus, 'focus')
         })
 
         it('changing day should call focus on the corresponding cell', async () => {

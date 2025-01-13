@@ -207,7 +207,7 @@
             ref="input"
             :type="!isTypeMonth ? 'date' : 'month'"
             autocomplete="off"
-            :model-value="formatNative(computedValue)"
+            :model-value="formatNative(computedValue as Date | null | undefined)"
             :placeholder="placeholder"
             :size="size"
             :icon="icon"
@@ -227,23 +227,43 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
+
 import CompatFallthroughMixin from '../../utils/CompatFallthroughMixin'
 import FormElementMixin from '../../utils/FormElementMixin'
 import { isMobile, getMonthNames, getWeekdayNames, matchWithGroups } from '../../utils/helpers'
 import config from '../../utils/config'
 
-import Dropdown from '../dropdown/Dropdown.vue'
-import DropdownItem from '../dropdown/DropdownItem.vue'
-import Input from '../input/Input.vue'
-import Field from '../field/Field.vue'
-import Select from '../select/Select.vue'
-import Icon from '../icon/Icon.vue'
+import BDropdown from '../dropdown/Dropdown.vue'
+import BDropdownItem from '../dropdown/DropdownItem.vue'
+import BInput from '../input/Input.vue'
+import BField from '../field/Field.vue'
+import BSelect from '../select/Select.vue'
+import BIcon from '../icon/Icon.vue'
 
-import DatepickerTable from './DatepickerTable.vue'
-import DatepickerMonth from './DatepickerMonth.vue'
+import BDatepickerTable from './DatepickerTable.vue'
+import BDatepickerMonth from './DatepickerMonth.vue'
+import type {
+    DateFormatter,
+    DateParser,
+    DatepickerEvent,
+    DateSelector,
+    FocusedDate,
+    IDatepicker
+} from './types'
 
-const defaultDateFormatter = (date, vm) => {
+type BDropdownInstance = InstanceType<typeof BDropdown>
+type BInputInstance = InstanceType<typeof BInput>
+
+interface MonthInfo {
+    name: string
+    index: number
+    disabled: boolean
+}
+
+const defaultDateFormatter: DateFormatter = (date, vm) => {
     const targetDates = Array.isArray(date) ? date : [date]
     const dates = targetDates.map((date) => {
         const d = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12)
@@ -252,7 +272,7 @@ const defaultDateFormatter = (date, vm) => {
     return !vm.multiple ? dates.join(' - ') : dates.join(', ')
 }
 
-const defaultDateParser = (date, vm) => {
+const defaultDateParser: DateParser = (date, vm) => {
     if (vm.dtf.formatToParts && typeof vm.dtf.formatToParts === 'function') {
         const formatRegex = (vm.isTypeMonth ? vm.dtfMonth : vm.dtf)
             .formatToParts(new Date(2000, 11, 25)).map((part) => {
@@ -269,11 +289,11 @@ const defaultDateParser = (date, vm) => {
             dateGroups.year &&
             dateGroups.year.length === 4 &&
             dateGroups.month &&
-            dateGroups.month <= 12
+            +dateGroups.month <= 12
         ) {
-            if (vm.isTypeMonth) return new Date(dateGroups.year, dateGroups.month - 1)
-            else if (dateGroups.day && dateGroups.day <= 31) {
-                return new Date(dateGroups.year, dateGroups.month - 1, dateGroups.day, 12)
+            if (vm.isTypeMonth) return new Date(+dateGroups.year, +dateGroups.month - 1)
+            else if (dateGroups.day && +dateGroups.day <= 31) {
+                return new Date(+dateGroups.year, +dateGroups.month - 1, +dateGroups.day, 12)
             }
         }
     }
@@ -284,23 +304,23 @@ const defaultDateParser = (date, vm) => {
         const year = s[0].length === 4 ? s[0] : s[1]
         const month = s[0].length === 2 ? s[0] : s[1]
         if (year && month) {
-            return new Date(parseInt(year, 10), parseInt(month - 1, 10), 1, 0, 0, 0, 0)
+            return new Date(parseInt(year, 10), parseInt(month, 10) - 1, 1, 0, 0, 0, 0)
         }
     }
     return null
 }
 
-export default {
+export default defineComponent({
     name: 'BDatepicker',
     components: {
-        [DatepickerTable.name]: DatepickerTable,
-        [DatepickerMonth.name]: DatepickerMonth,
-        [Input.name]: Input,
-        [Field.name]: Field,
-        [Select.name]: Select,
-        [Icon.name]: Icon,
-        [Dropdown.name]: Dropdown,
-        [DropdownItem.name]: DropdownItem
+        BDatepickerTable,
+        BDatepickerMonth,
+        BInput,
+        BField,
+        BSelect,
+        BIcon,
+        BDropdown,
+        BDropdownItem
     },
     mixins: [CompatFallthroughMixin, FormElementMixin],
     provide() {
@@ -310,10 +330,10 @@ export default {
     },
     props: {
         modelValue: {
-            type: [Date, Array]
+            type: [Date, Array<Date>, null] as PropType<Date | Date[] | null>
         },
         dayNames: {
-            type: Array,
+            type: [Array<string>, null] as PropType<string[] | null>,
             default: () => {
                 if (!Array.isArray(config.defaultDayNames)) {
                     return undefined
@@ -322,7 +342,7 @@ export default {
             }
         },
         monthNames: {
-            type: Array,
+            type: [Array<string>, null] as PropType<string[] | null>,
             default: () => {
                 if (!Array.isArray(config.defaultMonthNames)) {
                     return undefined
@@ -341,22 +361,22 @@ export default {
             }
         },
         inline: Boolean,
-        minDate: Date,
-        maxDate: Date,
+        minDate: [Date, null] as PropType<Date | null>,
+        maxDate: [Date, null] as PropType<Date | null>,
         focusedDate: Date,
         placeholder: String,
         editable: Boolean,
         disabled: Boolean,
         horizontalTimePicker: Boolean,
-        unselectableDates: [Array, Function],
+        unselectableDates: [Array, Function] as PropType<Date[] | DateSelector>,
         unselectableDaysOfWeek: {
-            type: Array,
+            type: [Array<number>, null] as PropType<number[] | null>,
             default: () => config.defaultUnselectableDaysOfWeek
         },
-        selectableDates: [Array, Function],
+        selectableDates: [Array, Function] as PropType<Date[] | DateSelector>,
         dateFormatter: {
-            type: Function,
-            default: (date, vm) => {
+            type: Function as PropType<DateFormatter>,
+            default: (date: Date, vm: IDatepicker) => {
                 if (typeof config.defaultDateFormatter === 'function') {
                     return config.defaultDateFormatter(date)
                 } else {
@@ -365,8 +385,8 @@ export default {
             }
         },
         dateParser: {
-            type: Function,
-            default: (date, vm) => {
+            type: Function as PropType<DateParser>,
+            default: (date: string, vm: IDatepicker) => {
                 if (typeof config.defaultDateParser === 'function') {
                     return config.defaultDateParser(date)
                 } else {
@@ -375,7 +395,7 @@ export default {
             }
         },
         dateCreator: {
-            type: Function,
+            type: Function as PropType<() => Date>,
             default: () => {
                 if (typeof config.defaultDateCreator === 'function') {
                     return config.defaultDateCreator()
@@ -391,7 +411,7 @@ export default {
         position: String,
         iconRight: String,
         iconRightClickable: Boolean,
-        events: Array,
+        events: Array<Date | DatepickerEvent>,
         indicators: {
             type: String,
             default: 'dots'
@@ -406,7 +426,7 @@ export default {
             default: () => config.defaultIconNext
         },
         yearsRange: {
-            type: Array,
+            type: Array<number>,
             default: () => config.defaultDatepickerYearsRange
         },
         type: {
@@ -414,7 +434,7 @@ export default {
             validator: (value) => {
                 return [
                     'month'
-                ].indexOf(value) >= 0
+                ].indexOf(value as string) >= 0
             }
         },
         nearbyMonthDays: {
@@ -465,16 +485,18 @@ export default {
         ariaNextLabel: String,
         ariaPreviousLabel: String
     },
-    emits: [
-        'active-change',
-        'change-month',
-        'change-year',
-        'icon-right-click',
-        'range-end',
-        'range-start',
-        'update:modelValue',
-        'week-number-click' // emitted from `DatepickerTableRow`
-    ],
+    emits: {
+        /* eslint-disable @typescript-eslint/no-unused-vars */
+        'active-change': (_active: boolean) => true,
+        'change-month': (_month: number) => true,
+        'change-year': (_year: number) => true,
+        'icon-right-click': (_event: MouseEvent) => true,
+        'range-end': (_date: Date) => true,
+        'range-start': (_date: Date) => true,
+        'update:modelValue': (_value: Date | Date[] | null | undefined) => true,
+        'week-number-click': (_week: number, _year: number) => true // emitted by `DatepickerTableRow`
+        /* eslint-enable @typescript-eslint/no-unused-vars */
+    },
     data() {
         const focusedDate = (Array.isArray(this.modelValue)
             ? this.modelValue[0]
@@ -492,7 +514,7 @@ export default {
                 day: focusedDate.getDate(),
                 month: focusedDate.getMonth(),
                 year: focusedDate.getFullYear()
-            },
+            } as FocusedDate,
             _elementRef: 'input',
             _isDatepicker: true
         }
@@ -502,7 +524,7 @@ export default {
             get() {
                 return this.dateSelected
             },
-            set(value) {
+            set(value: Date | Date[] | null | undefined) {
                 this.updateInternalState(value)
                 if (!this.multiple) this.togglePicker(false)
                 this.$emit('update:modelValue', value)
@@ -520,7 +542,7 @@ export default {
             return new Intl.DateTimeFormat(this.locale, {
                 year: 'numeric',
                 month: 'numeric'
-            }).resolvedOptions()
+            }).resolvedOptions() as Intl.DateTimeFormatOptions
         },
         dtf() {
             return new Intl.DateTimeFormat(this.locale)
@@ -543,7 +565,7 @@ export default {
             }
             return getWeekdayNames(this.locale)
         },
-        listOfMonths() {
+        listOfMonths(): MonthInfo[] {
             let minMonth = 0
             let maxMonth = 12
             if (this.minDate && this.focusedDateData.year === this.minDate.getFullYear()) {
@@ -626,7 +648,7 @@ export default {
         }
     },
     watch: {
-        /**
+        /*
          * When v-model is changed:
          *   1. Update internal value.
          *   2. If it's invalid, validate again.
@@ -660,16 +682,16 @@ export default {
         /*
          * Parse string into date
          */
-        onChange(value) {
+        onChange(value: string) {
             const date = this.dateParser(value, this)
-            if (date && (!isNaN(date) ||
+            if (date && (!isNaN(date.valueOf()) ||
                 (Array.isArray(date) && date.length === 2 && !isNaN(date[0]) && !isNaN(date[1])))) {
                 this.computedValue = date
             } else {
                 // Force refresh input value when not valid date
                 this.computedValue = null
                 if (this.$refs.input) {
-                    this.$refs.input.newValue = this.computedValue
+                    (this.$refs.input as BInputInstance).newValue = this.computedValue
                 }
             }
         },
@@ -677,12 +699,13 @@ export default {
         /*
          * Format date into string
          */
-        formatValue(value) {
+        formatValue(value: Date | Date[] | null | undefined) {
             if (Array.isArray(value)) {
-                const isArrayWithValidDates = Array.isArray(value) && value.every((v) => !isNaN(v))
+                const isArrayWithValidDates =
+                    Array.isArray(value) && value.every((v) => !isNaN(v?.valueOf() ?? NaN))
                 return isArrayWithValidDates ? this.dateFormatter([...value], this) : null
             }
-            return (value && !isNaN(value)) ? this.dateFormatter(value, this) : null
+            return (value && !isNaN(value.valueOf())) ? this.dateFormatter(value, this) : null
         },
 
         /*
@@ -723,7 +746,7 @@ export default {
             }
         },
 
-        formatNative(value) {
+        formatNative(value: Date | null | undefined) {
             return this.isTypeMonth
                 ? this.formatYYYYMM(value)
                 : this.formatYYYYMMDD(value)
@@ -732,9 +755,9 @@ export default {
         /*
          * Format date into string 'YYYY-MM-DD'
          */
-        formatYYYYMMDD(value) {
-            const date = new Date(value)
-            if (value && !isNaN(date)) {
+        formatYYYYMMDD(value: Date | null | undefined) {
+            const date = new Date(value!)
+            if (value && !isNaN(date.valueOf())) {
                 const year = date.getFullYear()
                 const month = date.getMonth() + 1
                 const day = date.getDate()
@@ -748,9 +771,9 @@ export default {
         /*
          * Format date into string 'YYYY-MM'
          */
-        formatYYYYMM(value) {
-            const date = new Date(value)
-            if (value && !isNaN(date)) {
+        formatYYYYMM(value: Date | null | undefined) {
+            const date = new Date(value!)
+            if (value && !isNaN(date.valueOf())) {
                 const year = date.getFullYear()
                 const month = date.getMonth() + 1
                 return year + '-' +
@@ -762,8 +785,8 @@ export default {
         /*
          * Parse date from string
          */
-        onChangeNativePicker(event) {
-            const date = event.target.value
+        onChangeNativePicker(event: { target?: { value: string } }) {
+            const date = event.target!.value
             const s = date ? date.split('-') : []
             if (s.length === 3) {
                 const year = parseInt(s[0], 10)
@@ -774,14 +797,16 @@ export default {
                 this.computedValue = null
             }
         },
-        updateInternalState(value) {
+        updateInternalState(value: Date | Date[] | null | undefined) {
             if (this.dateSelected === value) return
             const isArray = Array.isArray(value)
             const currentDate = isArray
                 ? (!value.length ? this.dateCreator() : value[value.length - 1])
                 : (!value ? this.dateCreator() : value)
-            if (!isArray ||
-                (isArray && this.dateSelected && value.length > this.dateSelected.length)) {
+            if (
+                !isArray ||
+                (this.dateSelected && value.length > (this.dateSelected as Date[]).length)
+            ) {
                 this.focusedDateData = {
                     day: currentDate.getDate(),
                     month: currentDate.getMonth(),
@@ -794,15 +819,15 @@ export default {
         /*
          * Toggle datepicker
          */
-        togglePicker(active) {
+        togglePicker(active: boolean) {
             if (this.$refs.dropdown) {
                 const isActive = typeof active === 'boolean'
                     ? active
-                    : !this.$refs.dropdown.isActive
+                    : !(this.$refs.dropdown as BDropdownInstance).isActive
                 if (isActive) {
-                    this.$refs.dropdown.isActive = isActive
+                    (this.$refs.dropdown as BDropdownInstance).isActive = isActive
                 } else if (this.closeOnClick) {
-                    this.$refs.dropdown.isActive = isActive
+                    (this.$refs.dropdown as BDropdownInstance).isActive = isActive
                 }
             }
         },
@@ -810,7 +835,7 @@ export default {
         /*
          * Call default onFocus method and show datepicker
          */
-        handleOnFocus(event) {
+        handleOnFocus(event?: Event) {
             this.onFocus(event)
             if (this.openOnFocus) {
                 this.togglePicker(true)
@@ -822,36 +847,36 @@ export default {
          */
         toggle() {
             if (this.mobileNative && this.isMobile) {
-                const input = this.$refs.input.$refs.input
+                const input = (this.$refs.input as BInputInstance).$refs.input as HTMLElement
                 input.focus()
                 input.click()
                 return
             }
-            this.$refs.dropdown.toggle()
+            (this.$refs.dropdown as BDropdownInstance).toggle()
         },
 
         /*
          * Avoid dropdown toggle when is already visible
          */
-        onInputClick(event) {
-            if (this.$refs.dropdown.isActive) {
+        onInputClick(event: MouseEvent) {
+            if ((this.$refs.dropdown as BDropdownInstance).isActive) {
                 event.stopPropagation()
             }
         },
 
-        /**
+        /*
          * Keypress event that is bound to the document.
          */
-        keyPress({ key }) {
-            if (this.$refs.dropdown && this.$refs.dropdown.isActive && (key === 'Escape' || key === 'Esc')) {
+        keyPress({ key }: KeyboardEvent) {
+            if (this.$refs.dropdown && (this.$refs.dropdown as BDropdownInstance).isActive && (key === 'Escape' || key === 'Esc')) {
                 this.togglePicker(false)
             }
         },
 
-        /**
+        /*
          * Emit 'blur' event on dropdown is not active (closed)
          */
-        onActiveChange(value) {
+        onActiveChange(value: boolean) {
             if (!value) {
                 this.onBlur()
             }
@@ -861,7 +886,7 @@ export default {
             this.$emit('active-change', value)
         },
 
-        changeFocus(day) {
+        changeFocus(day: Date) {
             this.focusedDateData = {
                 day: day.getDate(),
                 month: day.getMonth(),
@@ -879,5 +904,5 @@ export default {
             document.removeEventListener('keyup', this.keyPress)
         }
     }
-}
+})
 </script>

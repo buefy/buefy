@@ -29,8 +29,16 @@
     </section>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BDatepicker, BField, BSelect } from '@ntohq/buefy-next'
+
 export default {
+    components: {
+        BDatepicker,
+        BField,
+        BSelect
+    },
     data() {
         return {
             locale: undefined // Browser locale

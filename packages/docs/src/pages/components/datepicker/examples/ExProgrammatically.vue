@@ -7,14 +7,13 @@
                 placeholder="Select a date">
             </b-datepicker>
             <b-button
-                @click="$refs.datepicker.toggle()"
+                @click="($refs.datepicker as InstanceType<typeof BDatepicker>).toggle()"
                 icon-left="calendar-today"
                 type="is-primary" />
         </b-field>
     </section>
 </template>
 
-<script>
-// TODO: remove this empty script section after TypeScript migration completes
-export default {}
+<script setup lang="ts">
+import { BButton, BDatepicker, BField } from '@ntohq/buefy-next'
 </script>

@@ -1,10 +1,24 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
-import BDatepickerTable from '@components/datepicker/DatepickerTable'
+import BDatepickerTable from '@components/datepicker/DatepickerTable.vue'
 import config, { setOptions } from '@utils/config'
 
-let defaultProps
+const focusedDate = new Date(2018, 7, 10)
 
-const newDate = (y, m, d) => {
+const defaultProps = () => ({
+    modelValue: newDate(2018, 6, 21),
+    dayNames: config.defaultDayNames,
+    monthNames: config.defaultMonthNames,
+    focused: {
+        month: focusedDate.getMonth(),
+        year: focusedDate.getFullYear()
+    },
+    firstDayOfWeek: config.defaultFirstDayOfWeek,
+    unselectableDaysOfWeek: config.defaultUnselectableDaysOfWeek,
+    events: []
+})
+
+const newDate = (y: number, m: number, d: number) => {
     // it used to create a date in UTC. but it is unnecessary,
     // because DatepickerTable entirely works in the local time zone.
     return new Date(y, m, d)
@@ -19,22 +33,8 @@ describe('BDatepickerTable', () => {
                 'August', 'September', 'October', 'November', 'December'
             ],
             defaultDayNames: ['Su', 'M', 'Tu', 'W', 'Th', 'F', 'S'],
-            focusedDate: newDate(2018, 7, 10),
             defaultUnselectableDaysOfWeek: []
         }))
-
-        defaultProps = () => ({
-            modelValue: newDate(2018, 6, 21),
-            dayNames: config.defaultDayNames,
-            monthNames: config.defaultMonthNames,
-            focused: {
-                month: config.focusedDate.getMonth(),
-                year: config.focusedDate.getFullYear()
-            },
-            firstDayOfWeek: config.defaultFirstDayOfWeek,
-            unselectableDaysOfWeek: config.defaultUnselectableDaysOfWeek,
-            events: []
-        })
     })
 
     it('is called', () => {
@@ -49,14 +49,14 @@ describe('BDatepickerTable', () => {
 
     it('render correctly', () => {
         // replaces weeksInThisMonth to suppress locale dependent outputs
-        jest.spyOn(BDatepickerTable.computed, 'weeksInThisMonth').mockReturnValue([])
+        vi.spyOn(BDatepickerTable.computed!, 'weeksInThisMonth').mockReturnValue([])
         const wrapper = shallowMount(BDatepickerTable, {
             props: {
                 ...defaultProps()
             }
         })
         expect(wrapper.html()).toMatchSnapshot()
-        BDatepickerTable.computed.weeksInThisMonth.mockRestore()
+        vi.mocked(BDatepickerTable.computed!.weeksInThisMonth).mockRestore()
     })
 
     it('assign events to weeks even if the event has a time', () => {
@@ -77,7 +77,7 @@ describe('BDatepickerTable', () => {
 
     it('manage events as expected', () => {
         const monthEvent = {
-            date: newDate(config.focusedDate.getFullYear(), config.focusedDate.getMonth(), 13),
+            date: newDate(focusedDate.getFullYear(), focusedDate.getMonth(), 13),
             type: 'is-primary'
         }
         const events = [

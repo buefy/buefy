@@ -8,8 +8,15 @@
     </b-field>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BDatepicker, BField } from '@ntohq/buefy-next'
+
     export default {
+        components: {
+            BDatepicker,
+            BField
+        },
         data() {
             const today = new Date()
 
