@@ -145,24 +145,24 @@
     </div>
 </template>
 
-<script>
-import TimepickerMixin from '../../utils/TimepickerMixin'
-import Dropdown from '../dropdown/Dropdown.vue'
-import DropdownItem from '../dropdown/DropdownItem.vue'
-import Input from '../input/Input.vue'
-import Field from '../field/Field.vue'
-import Select from '../select/Select.vue'
-import Icon from '../icon/Icon.vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
 
-export default {
+import TimepickerMixin from '../../utils/TimepickerMixin'
+import BDropdown from '../dropdown/Dropdown.vue'
+import BDropdownItem from '../dropdown/DropdownItem.vue'
+import BInput from '../input/Input.vue'
+import BField from '../field/Field.vue'
+import BSelect from '../select/Select.vue'
+
+export default defineComponent({
     name: 'BTimepicker',
     components: {
-        [Input.name]: Input,
-        [Field.name]: Field,
-        [Select.name]: Select,
-        [Icon.name]: Icon,
-        [Dropdown.name]: Dropdown,
-        [DropdownItem.name]: DropdownItem
+        BInput,
+        BField,
+        BSelect,
+        BDropdown,
+        BDropdownItem
     },
     mixins: [TimepickerMixin],
     data() {
@@ -179,5 +179,5 @@ export default {
             }
         }
     }
-}
+})
 </script>

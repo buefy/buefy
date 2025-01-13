@@ -45,8 +45,17 @@
     </section>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BField, BSelect, BSwitch, BTimepicker } from '@ntohq/buefy-next'
+
+export default defineComponent({
+    components: {
+        BField,
+        BSelect,
+        BSwitch,
+        BTimepicker
+    },
     data() {
         return {
             enableSeconds: false,
@@ -66,5 +75,5 @@ export default {
             return dtf.format(new Date(2000, 12, 12, 22, 23, 24))
         }
     }
-}
+})
 </script>

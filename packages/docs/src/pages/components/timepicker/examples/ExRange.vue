@@ -8,8 +8,15 @@
     </b-field>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BField, BTimepicker } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BField,
+            BTimepicker
+        },
         data() {
             const min = new Date()
             min.setHours(9)
@@ -22,5 +29,5 @@
                 maxTime: max
             }
         }
-    }
+    })
 </script>

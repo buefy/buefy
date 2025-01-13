@@ -1,7 +1,9 @@
+import { beforeEach, describe, expect, it } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
-import BTimepicker from '@components/timepicker/Timepicker'
+import type { VueWrapper } from '@vue/test-utils'
+import BTimepicker from '@components/timepicker/Timepicker.vue'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof BTimepicker>>
 
 describe('BTimepicker', () => {
     beforeEach(() => {
