@@ -8,8 +8,15 @@
         </b-datetimepicker>
     </b-field>
 </template>
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BDatetimepicker, BField } from '@ntohq/buefy-next'
+
+export default defineComponent({
+    components: {
+        BDatetimepicker,
+        BField
+    },
     data() {
         return {
             timepicker: {
@@ -18,5 +25,5 @@ export default {
             }
         }
     },
-}
+})
 </script>

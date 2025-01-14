@@ -1,9 +1,10 @@
+import type { App } from 'vue'
 import Datetimepicker from './Datetimepicker.vue'
 
 import { registerComponent } from '../../utils/plugins'
 
 const Plugin = {
-    install(Vue) {
+    install(Vue: App) {
         registerComponent(Vue, Datetimepicker)
     }
 }

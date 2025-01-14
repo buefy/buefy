@@ -32,11 +32,20 @@
     </section>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BDatetimepicker, BField, BSelect } from '@ntohq/buefy-next'
+
+export default defineComponent({
+    components: {
+        BDatetimepicker,
+        BField,
+        BSelect
+    },
     data() {
         return {
-            locale: undefined // Browser locale
+            locale: undefined, // Browser locale
+            enableSeconds: false
         }
     },
     computed: {
@@ -52,5 +61,5 @@ export default {
             return dtf.format(new Date(2020, 11, 11, 13, 14, 15))
         }
     }
-}
+})
 </script>

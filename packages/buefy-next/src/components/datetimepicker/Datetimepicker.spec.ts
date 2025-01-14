@@ -1,7 +1,9 @@
+import { beforeEach, describe, expect, it } from 'vitest'
 import { shallowMount, mount } from '@vue/test-utils'
-import Datetimepicker from '@components/datetimepicker/Datetimepicker'
+import type { VueWrapper } from '@vue/test-utils'
+import Datetimepicker from '@components/datetimepicker/Datetimepicker.vue'
 
-let wrapper
+let wrapper: VueWrapper<InstanceType<typeof Datetimepicker>>
 
 describe('Datetimepicker', () => {
     beforeEach(() => {

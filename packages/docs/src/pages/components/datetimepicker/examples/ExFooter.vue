@@ -23,12 +23,20 @@
     </b-field>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BButton, BDatetimepicker, BField } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BButton,
+            BDatetimepicker,
+            BField
+        },
         data() {
             return {
-                datetime: new Date()
+                datetime: new Date() as Date | null
             }
         }
-    }
+    })
 </script>
