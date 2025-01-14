@@ -4,7 +4,6 @@
     "composite": true,
     "rootDir": "./src",
     "noEmit": false,
-    "allowJs": true,
     "declaration": true,
     "emitDeclarationOnly": true,
     "stripInternal": true,

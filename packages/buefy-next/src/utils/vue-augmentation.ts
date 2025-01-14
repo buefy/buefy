@@ -29,10 +29,7 @@ declare module '@vue/runtime-core' {
             modal: ModalProgrammatic,
             notification: NotificationProgrammatic,
             snackbar: SnackbarProgrammatic,
-            toast: ToastProgrammatic,
-            // TODO: make key-values more specific
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            [key: string]: any
+            toast: ToastProgrammatic
         }
     }
 }
