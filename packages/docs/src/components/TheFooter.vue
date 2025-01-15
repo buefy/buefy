@@ -73,3 +73,7 @@
         </div>
     </footer>
 </template>
+
+<script setup lang="ts">
+import { BField, BIcon } from '@ntohq/buefy-next'
+</script>
