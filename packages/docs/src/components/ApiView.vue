@@ -53,10 +53,53 @@
     </section>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BTable, BTabs, BTabItem } from '@ntohq/buefy-next'
+
+export interface PropInfo {
+    name: string
+    description: string
+    type: string
+    values: string
+    default: string
+}
+
+export interface SlotInfo {
+    name: string
+    description: string
+    props?: string
+}
+
+export interface EventInfo {
+    name: string
+    description: string
+    parameters?: string
+}
+
+export interface MethodInfo {
+    name: string
+    description: string
+    parameters?: string
+    return?: string
+}
+
+export interface ComponentInfo {
+    title?: string
+    props?: PropInfo[]
+    slots?: SlotInfo[]
+    events?: EventInfo[]
+    methods?: MethodInfo[]
+}
+
+export default defineComponent({
+    compoents: {
+        BTable,
+        BTabs,
+        BTabItem
+    },
     props: {
-        data: Array
+        data: Array<ComponentInfo>
     },
     data() {
         return {
@@ -85,5 +128,5 @@ export default {
             ]
         }
     }
-}
+})
 </script>
