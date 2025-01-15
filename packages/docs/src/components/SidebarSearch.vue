@@ -137,15 +137,45 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+
 import routes from '@/data/routes'
 import menu from '@/data/menu'
+import type { PageTree } from '@/data/menu'
 
-export default {
+import { BIcon, BInput, BModal, BTag } from '@ntohq/buefy-next'
+
+type BInputInstance = InstanceType<typeof BInput>
+
+interface SearchResult {
+    title: string
+    subtitle: string
+    path: string
+    score?: number
+}
+
+interface IndexedSearchResult extends SearchResult {
+    index: number
+}
+
+interface SearchResultsSection<R extends SearchResult = SearchResult> {
+    category: string
+    results: R[]
+    score: number
+}
+
+export default defineComponent({
+    components: {
+        BIcon,
+        BInput,
+        BModal,
+        BTag
+    },
     data() {
-        const categories = new Set()
-        const categoryByPage = {}
-        const traverseMenu = (page) => {
+        const categories = new Set<string>()
+        const categoryByPage: Record<string, string> = {}
+        const traverseMenu = (page: PageTree) => {
             categories.add(page.category)
             page.pages.forEach((subpage) => {
                 if (typeof subpage === 'string') {
@@ -162,7 +192,7 @@ export default {
             isMacOS: /\(\s*Macintosh\s*;/.test(navigator.userAgent),
             categories: [...categories],
             categoryByPage,
-            results: [],
+            results: [] as SearchResult[],
             selectedIndex: 0,
             term: ''
         }
@@ -175,8 +205,8 @@ export default {
         isTermEmpty() {
             return /^\s*$/.test(this.term)
         },
-        sortedResults() {
-            const resultsByCategory = {}
+        sortedResults(): SearchResultsSection<IndexedSearchResult>[] {
+            const resultsByCategory: Record<string, SearchResultsSection> = {}
             let index = 0
 
             this.results.forEach((result) => {
@@ -209,14 +239,15 @@ export default {
             })
 
             const sorted = Object.values(resultsByCategory)
-                .sort((a, b) => String(b.score).localeCompare(a.score))
-            sorted.forEach((category) => {
-                category.results = category.results
-                    .sort((a, b) => String(b.score).localeCompare(a.score))
-                    .map((result) => ({ ...result, index: index++ }))
+                .sort((a, b) => String(b.score).localeCompare(String(a.score)))
+            return sorted.map((category) => {
+                return {
+                    ...category,
+                    results: category.results
+                        .sort((a, b) => String(b.score).localeCompare(String(a.score)))
+                        .map((result) => ({ ...result, index: index++ }))
+                }
             })
-
-            return sorted
         }
     },
     methods: {
@@ -229,22 +260,22 @@ export default {
             this.results = []
         },
         focus() {
-            this.$refs.searchbar.focus()
+            (this.$refs.searchbar as BInputInstance).focus()
         },
-        select(index) {
+        select(index: number) {
             this.selectedIndex = Math.max(0, Math.min(index, this.results.length - 1))
         },
-        search(term) {
+        search(term: string | number | undefined) {
             this.selectedIndex = 0
-            this.term = term
+            this.term = term as string
             this.results = this.docRoutes.filter((route) => {
-                const regexp = new RegExp(term.replace(/\s+/g, '.*\\s+'), 'i')
+                const regexp = new RegExp(this.term.replace(/\s+/g, '.*\\s+'), 'i')
                 return regexp.test(route.title) || regexp.test(route.subtitle)
             })
         },
         scrollToSelection() {
             if (this.$refs[`result_${this.selectedIndex}`]) {
-                this.$refs[`result_${this.selectedIndex}`][0].scrollIntoView({
+                (this.$refs[`result_${this.selectedIndex}`] as HTMLElement[])[0].scrollIntoView({
                     behavior: 'auto',
                     block: 'center',
                     inline: 'nearest'
@@ -263,7 +294,7 @@ export default {
                 })
             )
         },
-        shortcutHandler(event) {
+        shortcutHandler(event: KeyboardEvent) {
             switch (event.key) {
                 case 'Escape':
                     return this.close()
@@ -313,14 +344,14 @@ export default {
                     break
             }
         },
-        highlightTerm(str) {
+        highlightTerm(str: string) {
             const words = this.term.split(/\s+/)
             return str.replace(
                 new RegExp(`(${words.join('|')})`, 'ig'),
                 '<em class="has-text-primary">$1</em>'
             )
         },
-        stripTags(str) {
+        stripTags(str: string) {
             return str.replace(/<[^>]*>/g, '')
         }
     },
@@ -330,7 +361,7 @@ export default {
     beforeUnmount() {
         window.removeEventListener('keydown', this.shortcutHandler)
     }
-}
+})
 </script>
 
 <style lang="scss">
