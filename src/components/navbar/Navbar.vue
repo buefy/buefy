@@ -185,12 +185,18 @@ export default {
                 })
 
                 const hasBurgerSlot = !!this.$scopedSlots.burger
-                return hasBurgerSlot
-                    ? this.$scopedSlots.burger({
+                return hasBurgerSlot ? createElement('a', {
+                    staticClass: 'ml-auto',
+                    attrs: {
+                        role: 'button',
+                        'aria-label': 'menu'
+                    }
+                }, [
+                    this.$scopedSlots.burger({
                         isOpened: this.isOpened,
                         toggleActive: this.toggleActive
                     })
-                    : defaultBurgerNode
+                ]) : defaultBurgerNode
             }
         },
         genNavbarSlotsNode(createElement) {
