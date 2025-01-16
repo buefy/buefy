@@ -52,10 +52,14 @@
     </article>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BIcon } from '@ntohq/buefy-next'
+
     import expoData from '@/data/expo'
 
-    export default {
+    export default defineComponent({
+        components: { BIcon },
         data() {
             return {
                 expo: expoData
@@ -72,9 +76,9 @@
 
                 window.open(url, '', opts)
             },
-            getImg(img) {
+            getImg(img: string) {
                 return new URL(`/src/assets/expo/${img}`, import.meta.url).href
             }
         }
-    }
+    })
 </script>
