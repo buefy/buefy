@@ -49,21 +49,27 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
+
+    import { shallowFields } from '@/utils'
+    import ApiView from '@/components/ApiView.vue'
+    import Example from '@/components/Example.vue'
+    import VariablesView from '@/components/VariablesView.vue'
+
     import api from './api/carousel'
     import variables from './variables/carousel'
-    import { shallowFields } from '@/utils'
 
-    import ExSimple from './examples/ExSimple'
-    import ExFull from './examples/ExFull'
-    import ExArrow from './examples/ExArrow'
-    import ExProgress from './examples/ExProgress'
-    import ExIndicator from './examples/ExIndicator'
-    import ExCustomIndicator from './examples/ExCustomIndicator'
-    import ExGallery from './examples/ExGallery'
-    import ExCarouselList from './examples/ExCarouselList'
-    import ExWithCard from './examples/ExWithCard'
-    import ExWithList from './examples/ExWithList'
+    import ExSimple from './examples/ExSimple.vue'
+    import ExFull from './examples/ExFull.vue'
+    import ExArrow from './examples/ExArrow.vue'
+    import ExProgress from './examples/ExProgress.vue'
+    import ExIndicator from './examples/ExIndicator.vue'
+    import ExCustomIndicator from './examples/ExCustomIndicator.vue'
+    import ExGallery from './examples/ExGallery.vue'
+    import ExCarouselList from './examples/ExCarouselList.vue'
+    import ExWithCard from './examples/ExWithCard.vue'
+    import ExWithList from './examples/ExWithList.vue'
 
     import ExSimpleCode from './examples/ExSimple.vue?raw'
     import ExFullCode from './examples/ExFull.vue?raw'
@@ -77,7 +83,12 @@
     import ExWithListCode from './examples/ExWithList.vue?raw'
 
 
-    export default {
+    export default defineComponent({
+        components: {
+            ApiView,
+            Example,
+            VariablesView
+        },
         data() {
             return {
                 api,
@@ -106,5 +117,5 @@
                 ExWithListCode
             }
         }
-    }
+    })
 </script>

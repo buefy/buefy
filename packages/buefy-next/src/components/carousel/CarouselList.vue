@@ -61,22 +61,47 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
+
 import { sign, mod, bound } from '../../utils/helpers'
 import config from '../../utils/config'
 
-import Icon from '../icon/Icon.vue'
-import Image from '../image/Image.vue'
+import BIcon from '../icon/Icon.vue'
+import BImage from '../image/Image.vue'
 
-export default {
+// Item type of the `data` prop.
+// Ideally, this should be a type parameter, but I was not able to figure out
+// how to realize it with the Options API.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type Datum = any
+
+export interface BreakpointSettings {
+    arrowHover: boolean
+    hasGrayscale?: boolean
+    hasOpacity?: boolean
+    repeat?: boolean
+    hasDrag: boolean
+    itemsToShow: number
+    itemsToList: number
+    iconPack?: string
+    iconSize?: string
+    iconPrev: string
+    iconNext: string
+}
+
+export type BreakpointOptions = Partial<BreakpointSettings>
+
+export default defineComponent({
     name: 'BCarouselList',
     components: {
-        [Icon.name]: Icon,
-        [Image.name]: Image
+        BIcon,
+        BImage
     },
     props: {
         data: {
-            type: Array,
+            type: Array<Datum>,
             default: () => []
         },
         modelValue: {
@@ -126,21 +151,27 @@ export default {
             }
         },
         breakpoints: {
-            type: Object,
+            type: Object as PropType<Record<number, BreakpointOptions>>,
             default: () => ({})
         }
     },
-    emits: ['switch', 'update:modelValue', 'updated:scroll'],
+    emits: {
+        /* eslint-disable @typescript-eslint/no-unused-vars */
+        switch: (_value: number) => true,
+        'update:modelValue': (_value: number) => true,
+        'updated:scroll': (_index: number) => true
+        /* eslint-enable @typescript-eslint/no-unused-vars */
+    },
     data() {
         return {
             activeItem: this.modelValue,
             scrollIndex: this.asIndicator ? this.scrollValue : this.modelValue,
             delta: 0,
-            dragX: false,
+            dragX: false as number | false,
             hold: 0,
             windowWidth: 0,
             touch: false,
-            observer: null,
+            observer: null as ResizeObserver | null,
             refresh_: 0
         }
     },
@@ -176,18 +207,18 @@ export default {
             return (this.settings.repeat || this.scrollIndex < this.total)
         },
         breakpointKeys() {
-            return Object.keys(this.breakpoints).sort((a, b) => b - a)
+            return Object.keys(this.breakpoints).sort((a, b) => +b - +a)
         },
-        settings() {
+        settings(): BreakpointSettings {
             const breakpoint = this.breakpointKeys.filter((breakpoint) => {
-                if (this.windowWidth >= breakpoint) {
+                if (this.windowWidth >= +breakpoint) {
                     return true
                 } else {
                     return false
                 }
             })[0]
             if (breakpoint) {
-                return { ...this.$props, ...this.breakpoints[breakpoint] }
+                return { ...this.$props, ...this.breakpoints[+breakpoint] }
             }
             return this.$props
         },
@@ -203,7 +234,7 @@ export default {
         }
     },
     watch: {
-        /**
+        /*
          * When v-model is changed set the new active item.
          */
         modelValue(value) {
@@ -220,7 +251,7 @@ export default {
         resized() {
             this.windowWidth = window.innerWidth
         },
-        switchTo(newIndex) {
+        switchTo(newIndex: number) {
             if (newIndex === this.scrollIndex || isNaN(newIndex)) { return }
 
             if (this.settings.repeat) {
@@ -240,11 +271,13 @@ export default {
         prev() {
             this.switchTo(this.scrollIndex - this.settings.itemsToList)
         },
-        checkAsIndicator(value, event) {
+        checkAsIndicator(value: number, event: MouseEvent | TouchEvent) {
             if (!this.asIndicator) return
 
-            const dragEndX = event.changedTouches ? event.changedTouches[0].clientX : event.clientX
-            if (this.hold - Date.now() > 2000 || Math.abs(this.dragX - dragEndX) > 10) return
+            const dragEndX = (event as TouchEvent).changedTouches
+                ? (event as TouchEvent).changedTouches[0].clientX
+                : (event as MouseEvent).clientX
+            if (this.hold - Date.now() > 2000 || Math.abs(+this.dragX - dragEndX) > 10) return
 
             this.dragX = false
             this.hold = 0
@@ -256,21 +289,28 @@ export default {
             this.$emit('switch', value)
         },
         // handle drag event
-        dragStart(event) {
-            if (this.dragging || !this.settings.hasDrag || (event.button !== 0 && event.type !== 'touchstart')) return
+        dragStart(event: MouseEvent | TouchEvent) {
+            if (
+                this.dragging ||
+                !this.settings.hasDrag ||
+                ((event as MouseEvent).button !== 0 && event.type !== 'touchstart')
+            ) return
             this.hold = Date.now()
-            this.touch = !!event.touches
-            this.dragX = this.touch ? event.touches[0].clientX : event.clientX
+            this.touch = !!(event as TouchEvent).touches
+            this.dragX = this.touch
+                ? (event as TouchEvent).touches[0].clientX
+                : (event as MouseEvent).clientX
             window.addEventListener(this.touch ? 'touchmove' : 'mousemove', this.dragMove)
             window.addEventListener(this.touch ? 'touchend' : 'mouseup', this.dragEnd)
         },
-        dragMove(event) {
+        dragMove(event: MouseEvent | TouchEvent) {
             if (!this.dragging) return
-            const dragEndX = event.touches
-                ? (event.changedTouches[0] || event.touches[0]).clientX
-                : event.clientX
-            this.delta = this.dragX - dragEndX
-            if (!event.touches) {
+            const dragEndX = (event as TouchEvent).touches
+                ? ((event as TouchEvent).changedTouches[0] ||
+                    (event as TouchEvent).touches[0]).clientX
+                : (event as MouseEvent).clientX
+            this.delta = +this.dragX - dragEndX
+            if (!(event as TouchEvent).touches) {
                 event.preventDefault()
             }
         },
@@ -311,7 +351,7 @@ export default {
     beforeUnmount() {
         if (typeof window !== 'undefined') {
             if (window.ResizeObserver) {
-                this.observer.disconnect()
+                this.observer!.disconnect()
             }
             window.removeEventListener('resize', this.resized)
             document.removeEventListener('animationend', this.refresh)
@@ -320,5 +360,5 @@ export default {
             this.dragEnd()
         }
     }
-}
+})
 </script>

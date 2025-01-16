@@ -161,17 +161,22 @@
     </section>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
+
+    import { BIcon } from '@ntohq/buefy-next'
+
     import ScrollReveal from 'scrollreveal'
-    import TheNavbar from '../components/TheNavbar'
-    import TheFooter from '../components/TheFooter'
+    import TheNavbar from '../components/TheNavbar.vue'
+    import TheFooter from '../components/TheFooter.vue'
     import Package from '../../../../package.json'
     import expoData from '@/data/expo'
     import sponsorsData from '@/data/sponsors'
 
-    export default {
+    export default defineComponent({
         name: 'App',
         components: {
+            BIcon,
             TheNavbar,
             TheFooter
         },
@@ -195,13 +200,13 @@
 
                 window.open(url, '', opts)
             },
-            getExpoImg(img) {
+            getExpoImg(img: string) {
                 // require won't work on Vite
                 // https://vitejs.dev/guide/assets.html#new-url-url-import-meta-url
                 // see also https://stackoverflow.com/a/71514878
                 return new URL(`/src/assets/expo/${img}`, import.meta.url).href
             },
-            getSponsorImg(img) {
+            getSponsorImg(img: string) {
                 // require won't work on Vite
                 // https://vitejs.dev/guide/assets.html#new-url-url-import-meta-url
                 // see also https://stackoverflow.com/a/71514878
@@ -216,5 +221,5 @@
             sr.reveal('.home-hero', { delay: 0, origin: 'top' }, 200)
             sr.reveal('.features', 200)
         }
-    }
+    })
 </script>

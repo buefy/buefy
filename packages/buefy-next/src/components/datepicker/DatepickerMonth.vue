@@ -18,14 +18,14 @@
                         @click.prevent="updateSelectedDate(date)"
                         @mouseenter="setRangeHoverEndDate(date)"
                         @keydown.prevent="manageKeydown($event, date)"
-                        :tabindex="focused.month === date.getMonth() ? null : -1"
+                        :tabindex="focused!.month === date.getMonth() ? undefined : -1"
                     >
-                        {{ monthNames[date.getMonth()] }}
+                        {{ monthNames![date.getMonth()] }}
                         <div class="events" v-if="eventsDateMatch(date)">
                             <div
                                 class="event"
                                 :class="event.type"
-                                v-for="(event, evIdx) in eventsDateMatch(date)"
+                                v-for="(event, evIdx) in eventsDateMatch(date) as DatepickerEvent[]"
                                 :key="evIdx"
                             />
                         </div>
@@ -35,7 +35,7 @@
                         :class="classObject(date)"
                         class="datepicker-cell"
                     >
-                        {{ monthNames[date.getMonth()] }}
+                        {{ monthNames![date.getMonth()] }}
                     </div>
                 </template>
             </div>
@@ -43,36 +43,47 @@
     </section>
 </template>
 
-<script>
-import { isDefined } from '../../utils/helpers'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
 
-export default {
+import { isDefined } from '../../utils/helpers'
+import type { DatepickerEvent, DateSelector, FocusedDate } from './types'
+
+export default defineComponent({
     name: 'BDatepickerMonth',
     props: {
         modelValue: {
-            type: [Date, Array]
+            type: [Date, Array<Date>, null] as PropType<Date | Date[] | null>
         },
-        monthNames: Array,
-        events: Array,
+        monthNames: [Array<string>, null] as PropType<string[] | null>,
+        events: Array<Date | DatepickerEvent>,
         indicators: String,
-        minDate: Date,
-        maxDate: Date,
-        focused: Object,
+        minDate: [Date, null] as PropType<Date | null>,
+        maxDate: [Date, null] as PropType<Date | null>,
+        focused: Object as PropType<FocusedDate>,
         disabled: Boolean,
-        dateCreator: Function,
-        unselectableDates: [Array, Function],
-        unselectableDaysOfWeek: Array,
-        selectableDates: [Array, Function],
+        dateCreator: Function as PropType<() => Date>,
+        unselectableDates: [Array, Function, null] as PropType<Date[] | DateSelector | null>,
+        unselectableDaysOfWeek: [Array<number>, null] as PropType<number[] | null>,
+        selectableDates: [Array, Function, null] as PropType<Date[] | DateSelector | null>,
         range: Boolean,
         multiple: Boolean
     },
-    emits: ['change-focus', 'range-end', 'range-start', 'update:modelValue'],
+    emits: {
+        /* eslint-disable @typescript-eslint/no-unused-vars */
+        'change-focus': (_date: Date) => true,
+        'range-end': (_date: Date) => true,
+        'range-start': (_date: Date) => true,
+        'update:modelValue': (_date: Date | Date[] | undefined) => true
+        /* eslint-enable @typescript-eslint/no-unused-vars */
+    },
     data() {
         return {
-            selectedBeginDate: undefined,
-            selectedEndDate: undefined,
-            hoveredEndDate: undefined,
-            multipleSelectedDates: this.multiple && this.modelValue ? this.modelValue : []
+            selectedBeginDate: undefined as Date | undefined,
+            selectedEndDate: undefined as Date | undefined,
+            hoveredEndDate: undefined as Date | undefined,
+            multipleSelectedDates: this.multiple && this.modelValue ? this.modelValue as Date[] : []
         }
     },
     computed: {
@@ -83,7 +94,7 @@ export default {
         /*
         * Return array of all events in the specified month
         */
-        eventsInThisYear() {
+        eventsInThisYear(): DatepickerEvent[] {
             if (!this.events) return []
 
             const yearEvents = []
@@ -92,22 +103,22 @@ export default {
                 let event = this.events[i]
 
                 if (!Object.prototype.hasOwnProperty.call(event, 'date')) {
-                    event = { date: event }
+                    event = { date: event as Date, type: 'is-primary' }
                 }
                 if (!Object.prototype.hasOwnProperty.call(event, 'type')) {
-                    event.type = 'is-primary'
+                    (event as DatepickerEvent).type = 'is-primary'
                 }
                 if (
-                    event.date.getFullYear() === this.focused.year
+                    (event as DatepickerEvent).date.getFullYear() === this.focused!.year
                 ) {
-                    yearEvents.push(event)
+                    yearEvents.push(event as DatepickerEvent)
                 }
             }
 
             return yearEvents
         },
         monthDates() {
-            const year = this.focused.year
+            const year = this.focused!.year
             const months = []
             for (let i = 0; i < 12; i++) {
                 const d = new Date(year, i, 1)
@@ -118,17 +129,17 @@ export default {
         },
 
         focusedMonth() {
-            return this.focused.month
+            return this.focused!.month
         },
 
         hoveredDateRange() {
             if (!this.range) {
                 return []
             }
-            if (!isNaN(this.selectedEndDate)) {
+            if (!isNaN(this.selectedEndDate?.valueOf() ?? NaN)) {
                 return []
             }
-            if (this.hoveredEndDate < this.selectedBeginDate) {
+            if (this.hoveredEndDate! < this.selectedBeginDate!) {
                 return [this.hoveredEndDate, this.selectedBeginDate].filter(isDefined)
             }
             return [this.selectedBeginDate, this.hoveredEndDate].filter(isDefined)
@@ -148,9 +159,9 @@ export default {
                 // but ≥ v3.2.25, refs in v-for are stored in an array (same as Vue 2)
                 let cell
                 if (Array.isArray(this.$refs[refName])) {
-                    cell = this.$refs[refName][0]
+                    cell = (this.$refs[refName] as HTMLElement[])[0]
                 } else {
-                    cell = this.$refs[refName]
+                    cell = this.$refs[refName] as HTMLElement
                 }
                 if (cell) {
                     cell.focus()
@@ -159,7 +170,7 @@ export default {
         }
     },
     methods: {
-        selectMultipleDates(date) {
+        selectMultipleDates(date: Date) {
             const multipleSelect = this.multipleSelectedDates.filter((selectedDate) =>
                 selectedDate.getDate() === date.getDate() &&
                 selectedDate.getFullYear() === date.getFullYear() &&
@@ -177,7 +188,7 @@ export default {
             this.$emit('update:modelValue', this.multipleSelectedDates)
         },
 
-        selectableDate(day) {
+        selectableDate(day: Date) {
             const validity = []
 
             if (this.minDate) {
@@ -188,7 +199,7 @@ export default {
                 validity.push(day <= this.maxDate)
             }
 
-            validity.push(day.getFullYear() === this.focused.year)
+            validity.push(day.getFullYear() === this.focused!.year)
 
             if (this.selectableDates) {
                 if (typeof this.selectableDates === 'function') {
@@ -233,14 +244,15 @@ export default {
 
             return validity.indexOf(false) < 0
         },
-        eventsDateMatch(day) {
+        // TODO: return undefined instead of false if no events
+        eventsDateMatch(day: Date) {
             if (!this.eventsInThisYear.length) return false
 
             const monthEvents = []
 
             for (let i = 0; i < this.eventsInThisYear.length; i++) {
                 if (this.eventsInThisYear[i].date.getMonth() === day.getMonth()) {
-                    monthEvents.push(this.events[i])
+                    monthEvents.push(this.events![i])
                 }
             }
 
@@ -253,8 +265,12 @@ export default {
         /*
         * Build classObject for cell using validations
         */
-        classObject(day) {
-            function dateMatch(dateOne, dateTwo, multiple) {
+        classObject(day: Date) {
+            function dateMatch(
+                dateOne: Date,
+                dateTwo: Date | Date[] | null | undefined,
+                multiple?: boolean
+            ) {
                 // if either date is null or undefined, return false
                 if (!dateOne || !dateTwo || multiple) {
                     return false
@@ -268,12 +284,16 @@ export default {
                 return (dateOne.getFullYear() === dateTwo.getFullYear() &&
                     dateOne.getMonth() === dateTwo.getMonth())
             }
-            function dateWithin(dateOne, dates, multiple) {
+            function dateWithin(
+                dateOne: Date,
+                dates: Date | Date[] | null | undefined,
+                multiple?: boolean
+            ) {
                 if (!Array.isArray(dates) || multiple) { return false }
 
                 return dateOne > dates[0] && dateOne < dates[1]
             }
-            function dateMultipleSelected(dateOne, dates, multiple) {
+            function dateMultipleSelected(dateOne: Date, dates: Date[], multiple: boolean) {
                 if (!Array.isArray(dates) || !multiple) { return false }
                 return dates.some((date) => (
                     dateOne.getDate() === date.getDate() &&
@@ -289,7 +309,7 @@ export default {
                 'is-first-selected':
                     dateMatch(
                         day,
-                        Array.isArray(this.modelValue) && this.modelValue[0],
+                        Array.isArray(this.modelValue) ? this.modelValue[0] : undefined,
                         this.multiple
                     ),
                 'is-within-selected':
@@ -297,7 +317,7 @@ export default {
                 'is-last-selected':
                     dateMatch(
                         day,
-                        Array.isArray(this.modelValue) && this.modelValue[1],
+                        Array.isArray(this.modelValue) ? this.modelValue[1] : undefined,
                         this.multiple
                     ),
                 'is-within-hovered-range':
@@ -306,21 +326,21 @@ export default {
                         dateWithin(day, this.hoveredDateRange)),
                 'is-first-hovered': dateMatch(
                     day,
-                    Array.isArray(this.hoveredDateRange) && this.hoveredDateRange[0]
+                    Array.isArray(this.hoveredDateRange) ? this.hoveredDateRange[0] : undefined
                 ),
                 'is-within-hovered':
                     dateWithin(day, this.hoveredDateRange),
                 'is-last-hovered': dateMatch(
                     day,
-                    Array.isArray(this.hoveredDateRange) && this.hoveredDateRange[1]
+                    Array.isArray(this.hoveredDateRange) ? this.hoveredDateRange[1] : undefined
                 ),
-                'is-today': dateMatch(day, this.dateCreator()),
+                'is-today': dateMatch(day, this.dateCreator!()),
                 'is-selectable': this.selectableDate(day) && !this.disabled,
                 'is-unselectable': !this.selectableDate(day) || this.disabled
             }
         },
 
-        manageKeydown({ key }, date) {
+        manageKeydown({ key }: KeyboardEvent, date: Date) {
             // https://developer.mozilla.org/fr/docs/Web/API/KeyboardEvent/key/Key_Values#Navigation_keys
             switch (key) {
                 case ' ':
@@ -357,7 +377,7 @@ export default {
         /*
         * Emit input event with selected date as payload for v-model in parent
         */
-        updateSelectedDate(date) {
+        updateSelectedDate(date: Date) {
             if (!this.range && !this.multiple) {
                 this.emitChosenDate(date)
             } else if (this.range) {
@@ -370,7 +390,7 @@ export default {
         /*
          * Emit select event with chosen date as payload
          */
-        emitChosenDate(day) {
+        emitChosenDate(day: Date) {
             if (this.disabled) return
 
             if (!this.multiple) {
@@ -387,7 +407,7 @@ export default {
         * If only begin date is selected, emit an array of the begin date and the new date.
         * If not set, only set the begin date.
         */
-        handleSelectRangeDate(date) {
+        handleSelectRangeDate(date: Date) {
             if (this.disabled) return
             if (this.selectedBeginDate && this.selectedEndDate) {
                 this.selectedBeginDate = date
@@ -408,17 +428,17 @@ export default {
             }
         },
 
-        setRangeHoverEndDate(day) {
+        setRangeHoverEndDate(day: Date) {
             if (this.range) {
                 this.hoveredEndDate = day
             }
         },
 
-        changeFocus(month, inc) {
+        changeFocus(month: Date, inc: number) {
             const nextMonth = month
             nextMonth.setMonth(month.getMonth() + inc)
             this.$emit('change-focus', nextMonth)
         }
     }
-}
+})
 </script>

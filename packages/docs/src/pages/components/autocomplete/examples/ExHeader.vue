@@ -39,8 +39,18 @@
     </section>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BAutocomplete, BField, BSwitch } from '@ntohq/buefy-next'
+
+type BAutocompleteInstance = InstanceType<typeof BAutocomplete>
+
+export default defineComponent({
+    components: {
+        BAutocomplete,
+        BField,
+        BSwitch
+    },
     data() {
         return {
             data: [
@@ -79,12 +89,12 @@ export default {
                     value: this.name
                 },
                 confirmText: 'Add',
-                onConfirm: (value) => {
-                    this.data.push(value)
-                    this.$refs.autocomplete.setSelected(value)
+                onConfirm: (value: string) => {
+                    this.data.push(value);
+                    (this.$refs.autocomplete as BAutocompleteInstance).setSelected(value)
                 }
             })
         }
     }
-}
+})
 </script>

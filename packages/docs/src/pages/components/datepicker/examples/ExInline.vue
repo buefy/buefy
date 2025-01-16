@@ -5,12 +5,16 @@
     </b-datepicker>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BDatepicker } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: { BDatepicker },
         data() {
             return {
                 date: new Date()
             }
         }
-    }
+    })
 </script>

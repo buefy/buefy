@@ -7,8 +7,10 @@
 // otherwise the post processing will be messed up.
 import 'vue'
 
+import type { DialogProgrammatic } from '../components/dialog'
 import type { LoadingProgrammatic } from '../components/loading'
 import type { ModalProgrammatic } from '../components/modal'
+import type { NotificationProgrammatic } from '../components/notification'
 import type { SnackbarProgrammatic } from '../components/snackbar'
 import type { ToastProgrammatic } from '../components/toast'
 import ConfigComponent from './ConfigComponent'
@@ -22,13 +24,12 @@ declare module '@vue/runtime-core' {
         $buefy: {
             config: typeof ConfigComponent,
             globalNoticeInterval?: ReturnType<typeof setTimeout>,
+            dialog: DialogProgrammatic,
             loading: LoadingProgrammatic,
             modal: ModalProgrammatic,
+            notification: NotificationProgrammatic,
             snackbar: SnackbarProgrammatic,
-            toast: ToastProgrammatic,
-            // TODO: make key-values more specific
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            [key: string]: any
+            toast: ToastProgrammatic
         }
     }
 }

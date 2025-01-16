@@ -1,0 +1,23 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BDatepickerTableRow > render correctly 1`] = `
+"<!-- eslint-disable max-len -->
+<div class=\\"datepicker-row\\">
+  <!--v-if--><a class=\\"is-selectable is-invisible datepicker-cell\\" role=\\"button\\" href=\\"#\\" tabindex=\\"-1\\"><span>31</span>
+    <!--v-if-->
+  </a><a class=\\"is-selectable is-invisible datepicker-cell\\" role=\\"button\\" href=\\"#\\" tabindex=\\"-1\\"><span>1</span>
+    <!--v-if-->
+  </a><a class=\\"is-selectable is-invisible datepicker-cell\\" role=\\"button\\" href=\\"#\\" tabindex=\\"-1\\"><span>2</span>
+    <!--v-if-->
+  </a><a class=\\"is-selectable is-invisible datepicker-cell\\" role=\\"button\\" href=\\"#\\" tabindex=\\"-1\\"><span>3</span>
+    <!--v-if-->
+  </a><a class=\\"is-selectable is-invisible datepicker-cell\\" role=\\"button\\" href=\\"#\\" tabindex=\\"-1\\"><span>4</span>
+    <!--v-if-->
+  </a><a class=\\"is-selectable is-invisible datepicker-cell\\" role=\\"button\\" href=\\"#\\" tabindex=\\"-1\\"><span>5</span>
+    <!--v-if-->
+  </a><a class=\\"is-selectable is-invisible datepicker-cell\\" role=\\"button\\" href=\\"#\\" tabindex=\\"-1\\"><span>6</span>
+    <!--v-if-->
+  </a>
+</div>
+<!-- eslint-enable max-len -->"
+`;

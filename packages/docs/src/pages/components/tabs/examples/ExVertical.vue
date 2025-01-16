@@ -25,8 +25,8 @@
         </b-field>
 
         <b-tabs :position="atRight ? 'is-right' : ''"
-                :size="size"
-                :type="type"
+                :size="size ?? undefined"
+                :type="type ?? undefined"
                 vertical
                 :expanded="expanded">
             <b-tab-item label="Pictures" icon="camera-iris">
@@ -57,14 +57,24 @@
     </section>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BField, BSelect, BSwitch, BTabs, BTabItem } from '@ntohq/buefy-next'
+
     export default {
+        components: {
+            BField,
+            BSelect,
+            BSwitch,
+            BTabs,
+            BTabItem
+        },
         data() {
             return {
                 expanded: false,
                 atRight: false,
-                size: null,
-                type: null
+                size: null as string | null,
+                type: null as string | null
             }
         }
     }

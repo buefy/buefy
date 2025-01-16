@@ -4,7 +4,7 @@
             <b-taginput
                 v-model="tags"
                 :data="filteredTags"
-                autocomplete
+                autocomplete="on"
                 field="user.first_name"
                 icon="label"
                 placeholder="Add a tag"
@@ -21,10 +21,16 @@
     </section>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
     import data from '@/data/sample.json'
+    import { BField, BTaginput } from '@ntohq/buefy-next'
 
-    export default {
+    export default defineComponent({
+        components: {
+            BField,
+            BTaginput
+        },
         data() {
             return {
                 filteredTags: data,
@@ -33,15 +39,18 @@
             }
         },
         methods: {
-            getFilteredTags(text) {
+            getFilteredTags(text: number | string | undefined) {
+                if (text == null) {
+                    return
+                }
                 this.filteredTags = data.filter((option) => {
                     return option.user.first_name
                         .toString()
                         .toLowerCase()
-                        .indexOf(text.toLowerCase()) >= 0
+                        .indexOf(text.toString().toLowerCase()) >= 0
                 })
             }
         }
-    }
+    })
 </script>
 

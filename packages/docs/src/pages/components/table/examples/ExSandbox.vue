@@ -74,8 +74,19 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BField, BIcon, BSwitch, BTable, BTableColumn } from '@ntohq/buefy-next'
+    import type { ITableColumn, TableRow } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BField,
+            BIcon,
+            BSwitch,
+            BTable,
+            BTableColumn
+        },
         data() {
             const data = [
                 { 'id': 1, 'first_name': 'Jesse', 'last_name': 'Simmons', 'date': '2016/10/15 13:43:27', 'gender': 'Male' },
@@ -99,13 +110,13 @@
             }
         },
         methods: {
-            dateThAttrs(column) {
+            dateThAttrs(column: ITableColumn) {
                 return column.label === 'Date' ? {
                     title: 'This title is sponsored by "th-attrs" prop',
                     class: 'has-text-success'
                 } : null
             },
-            columnTdAttrs(row, column) {
+            columnTdAttrs(row: TableRow, column: ITableColumn) {
                 if (row.id === 'Total') {
                     if (column.label === 'ID') {
                         return {
@@ -128,5 +139,5 @@
                 return null
             }
         }
-    }
+    })
 </script>

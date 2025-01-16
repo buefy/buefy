@@ -1,4 +1,5 @@
 <template>
+    <!-- eslint-disable max-len -->
     <div class="datepicker-row">
         <a
             class="datepicker-cell is-week-number"
@@ -20,14 +21,14 @@
                 @click.prevent="emitChosenDate(weekDay)"
                 @mouseenter="setRangeHoverEndDate(weekDay)"
                 @keydown="manageKeydown($event, weekDay)"
-                :tabindex="day === weekDay.getDate() && month === weekDay.getMonth() ? null : -1"
+                :tabindex="day === weekDay.getDate() && month === weekDay.getMonth() ? undefined : -1"
             >
                 <span>{{ weekDay.getDate() }}</span>
                 <div class="events" v-if="eventsDateMatch(weekDay)">
                     <div
                         class="event"
                         :class="event.type"
-                        v-for="(event, evIdx) in eventsDateMatch(weekDay)"
+                        v-for="(event, evIdx) in eventsDateMatch(weekDay) as DatepickerEvent[]"
                         :key="evIdx"
                     />
                 </div>
@@ -42,46 +43,57 @@
                     <div
                         class="event"
                         :class="event.type"
-                        v-for="(event, evIdx) in eventsDateMatch(weekDay)"
+                        v-for="(event, evIdx) in eventsDateMatch(weekDay) as DatepickerEvent[]"
                         :key="evIdx"
                     />
                 </div>
             </div>
         </template>
     </div>
+    <!-- eslint-enable max-len -->
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
+
+import type { DatepickerEvent, DateSelector, IDatepicker } from './types'
+
+interface WeekNumber {
+    week: number
+    year: number
+}
+
+export default defineComponent({
     name: 'BDatepickerTableRow',
     inject: {
         $datepicker: { name: '$datepicker', default: false }
     },
     props: {
         selectedDate: {
-            type: [Date, Array]
+            type: [Date, Array<Date>]
         },
-        hoveredDateRange: Array,
+        hoveredDateRange: Array<Date>,
         day: {
             type: Number
         },
         week: {
-            type: Array,
+            type: Array<Date>,
             required: true
         },
         month: {
             type: Number,
             required: true
         },
-        minDate: Date,
-        maxDate: Date,
+        minDate: [Date, null] as PropType<Date | null>,
+        maxDate: [Date, null] as PropType<Date | null>,
         disabled: Boolean,
-        unselectableDates: [Array, Function],
-        unselectableDaysOfWeek: Array,
-        selectableDates: [Array, Function],
-        events: Array,
+        unselectableDates: [Array, Function, null] as PropType<Date[] | DateSelector | null>,
+        unselectableDaysOfWeek: [Array<number>, null] as PropType<number[] | null>,
+        selectableDates: [Array, Function, null] as PropType<Date[] | DateSelector | null>,
+        events: Array<DatepickerEvent>,
         indicators: String,
-        dateCreator: Function,
+        dateCreator: Function as PropType<() => Date>,
         nearbyMonthDays: Boolean,
         nearbySelectableMonthDays: Boolean,
         showWeekNumber: Boolean,
@@ -89,9 +101,15 @@ export default {
         range: Boolean,
         multiple: Boolean,
         rulesForFirstWeek: Number,
-        firstDayOfWeek: Number
+        firstDayOfWeek: [Number, null] as PropType<number | null>
     },
-    emits: ['change-focus', 'rangeHoverEndDate', 'select'],
+    emits: {
+        /* eslint-disable @typescript-eslint/no-unused-vars */
+        'change-focus': (_day: Date) => true,
+        rangeHoverEndDate: (_day: Date) => true,
+        select: (_day: Date) => true
+        /* eslint-enable @typescript-eslint/no-unused-vars */
+    },
     watch: {
         day(day) {
             const refName = `day-${this.month}-${day}`
@@ -100,9 +118,9 @@ export default {
                 // but ≥ v3.2.25, refs in v-for are stored in an array (same as Vue 2)
                 let cell
                 if (Array.isArray(this.$refs[refName])) {
-                    cell = this.$refs[refName][0]
+                    cell = (this.$refs[refName] as HTMLElement[])[0]
                 } else {
-                    cell = this.$refs[refName]
+                    cell = this.$refs[refName] as HTMLElement
                 }
                 if (cell) {
                     cell.focus()
@@ -111,7 +129,7 @@ export default {
         }
     },
     methods: {
-        firstWeekOffset(year, dow, doy) {
+        firstWeekOffset(year: number, dow: number, doy: number) {
             // first-week day -- which january is always in the first week (4 for iso, 1 for other)
             const fwd = 7 + dow - doy
             // first-week day local weekday -- which local weekday is fwd
@@ -119,24 +137,24 @@ export default {
             const fwdlw = (7 + firstJanuary.getDay() - dow) % 7
             return -fwdlw + fwd - 1
         },
-        daysInYear(year) {
+        daysInYear(year: number) {
             return this.isLeapYear(year) ? 366 : 365
         },
-        isLeapYear(year) {
+        isLeapYear(year: number) {
             return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0
         },
-        getSetDayOfYear(input) {
-            return Math.round((input - new Date(input.getFullYear(), 0, 1)) / 864e5) + 1
+        getSetDayOfYear(input: Date) {
+            return Math.round((+input - +new Date(input.getFullYear(), 0, 1)) / 864e5) + 1
         },
-        weeksInYear(year, dow, doy) {
+        weeksInYear(year: number, dow: number, doy: number) {
             const weekOffset = this.firstWeekOffset(year, dow, doy)
             const weekOffsetNext = this.firstWeekOffset(year + 1, dow, doy)
             return (this.daysInYear(year) - weekOffset + weekOffsetNext) / 7
         },
-        getWeekNumber(mom) {
-            const dow = this.firstDayOfWeek // first day of week
+        getWeekNumber(mom: Date): WeekNumber {
+            const dow = this.firstDayOfWeek! // first day of week
             // Rules for the first week : 1 for the 1st January, 4 for the 4th January
-            const doy = this.rulesForFirstWeek
+            const doy = this.rulesForFirstWeek!
             const weekOffset = this.firstWeekOffset(mom.getFullYear(), dow, doy)
             const week = Math.floor((this.getSetDayOfYear(mom) - weekOffset - 1) / 7) + 1
             let resWeek
@@ -153,16 +171,16 @@ export default {
             }
             return { week: resWeek, year: resYear }
         },
-        clickWeekNumber(weekData) {
+        clickWeekNumber(weekData: WeekNumber) {
             if (this.weekNumberClickable) {
-                this.$datepicker.$emit('week-number-click', weekData.week, weekData.year)
+                (this.$datepicker as IDatepicker).$emit('week-number-click', weekData.week, weekData.year)
             }
         },
         /*
          * Check that selected day is within earliest/latest params and
          * is within this month
          */
-        selectableDate(day) {
+        selectableDate(day: Date) {
             const validity = []
 
             if (this.minDate) {
@@ -226,7 +244,7 @@ export default {
         /*
         * Emit select event with chosen date as payload
         */
-        emitChosenDate(day) {
+        emitChosenDate(day: Date) {
             if (this.disabled) return
 
             if (this.selectableDate(day)) {
@@ -234,10 +252,11 @@ export default {
             }
         },
 
-        eventsDateMatch(day) {
+        // TODO: return undefined instead of boolean if no events
+        eventsDateMatch(day: Date) {
             if (!this.events || !this.events.length) return false
 
-            const dayEvents = []
+            const dayEvents: DatepickerEvent[] = []
 
             for (let i = 0; i < this.events.length; i++) {
                 if (this.events[i].date.getDay() === day.getDay()) {
@@ -255,8 +274,12 @@ export default {
         /*
         * Build classObject for cell using validations
         */
-        classObject(day) {
-            function dateMatch(dateOne, dateTwo, multiple) {
+        classObject(day: Date) {
+            function dateMatch(
+                dateOne: Date,
+                dateTwo: Date | Date[] | undefined,
+                multiple?: boolean
+            ) {
                 // if either date is null or undefined, return false
                 // if using multiple flag, return false
                 if (!dateOne || !dateTwo || multiple) {
@@ -275,7 +298,11 @@ export default {
                     dateOne.getMonth() === dateTwo.getMonth())
             }
 
-            function dateWithin(dateOne, dates, multiple) {
+            function dateWithin(
+                dateOne: Date,
+                dates: Date | Date[] | undefined,
+                multiple?: boolean
+            ) {
                 if (!Array.isArray(dates) || multiple) { return false }
 
                 return dateOne > dates[0] && dateOne < dates[1]
@@ -286,7 +313,7 @@ export default {
                 'is-first-selected':
                     dateMatch(
                         day,
-                        Array.isArray(this.selectedDate) && this.selectedDate[0],
+                        Array.isArray(this.selectedDate) ? this.selectedDate[0] : undefined,
                         this.multiple
                     ),
                 'is-within-selected':
@@ -294,7 +321,7 @@ export default {
                 'is-last-selected':
                     dateMatch(
                         day,
-                        Array.isArray(this.selectedDate) && this.selectedDate[1],
+                        Array.isArray(this.selectedDate) ? this.selectedDate[1] : undefined,
                         this.multiple
                     ),
                 'is-within-hovered-range':
@@ -303,30 +330,30 @@ export default {
                         dateWithin(day, this.hoveredDateRange)),
                 'is-first-hovered': dateMatch(
                     day,
-                    Array.isArray(this.hoveredDateRange) && this.hoveredDateRange[0]
+                    Array.isArray(this.hoveredDateRange) ? this.hoveredDateRange[0] : undefined
                 ),
                 'is-within-hovered':
                     dateWithin(day, this.hoveredDateRange),
                 'is-last-hovered': dateMatch(
                     day,
-                    Array.isArray(this.hoveredDateRange) && this.hoveredDateRange[1]
+                    Array.isArray(this.hoveredDateRange) ? this.hoveredDateRange[1] : undefined
                 ),
-                'is-today': dateMatch(day, this.dateCreator()),
+                'is-today': dateMatch(day, this.dateCreator!()),
                 'is-selectable': this.selectableDate(day) && !this.disabled,
                 'is-unselectable': !this.selectableDate(day) || this.disabled,
                 'is-invisible': !this.nearbyMonthDays && day.getMonth() !== this.month,
                 'is-nearby': this.nearbySelectableMonthDays && day.getMonth() !== this.month,
                 'has-event': this.eventsDateMatch(day),
-                [this.indicators]: this.eventsDateMatch(day)
+                [this.indicators!]: this.eventsDateMatch(day)
             }
         },
-        setRangeHoverEndDate(day) {
+        setRangeHoverEndDate(day: Date) {
             if (this.range) {
                 this.$emit('rangeHoverEndDate', day)
             }
         },
 
-        manageKeydown(event, weekDay) {
+        manageKeydown(event: KeyboardEvent, weekDay: Date) {
             // https://developer.mozilla.org/fr/docs/Web/API/KeyboardEvent/key/Key_Values#Navigation_keys
             const { key } = event
             let preventDefault = true
@@ -371,7 +398,7 @@ export default {
             }
         },
 
-        changeFocus(day, inc) {
+        changeFocus(day: Date, inc: number) {
             const nextDay = new Date(day.getTime())
             nextDay.setDate(day.getDate() + inc)
             while (
@@ -385,5 +412,5 @@ export default {
             this.$emit('change-focus', nextDay)
         }
     }
-}
+})
 </script>

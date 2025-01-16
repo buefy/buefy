@@ -56,8 +56,8 @@
             :expanded="expanded"
             :placeholder="placeholder"
             :use-html5-validation="useHtml5Validation"
-            @focus="$emit('focus', $event)"
-            @blur="$emit('blur', $event)"
+            @focus="$emit('focus', $event!)"
+            @blur="$emit('blur', $event!)"
         />
 
         <p
@@ -96,17 +96,30 @@
     </div>
 </template>
 
-<script>
-import Icon from '../icon/Icon.vue'
-import Input from '../input/Input.vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
+
+import BField from '../field/Field.vue'
+import BIcon from '../icon/Icon.vue'
+import BInput from '../input/Input.vue'
 import CompatFallthroughMixin from '../../utils/CompatFallthroughMixin'
 import FormElementMixin from '../../utils/FormElementMixin'
 
-export default {
+type BFieldInstance = InstanceType<typeof BField>
+type BInputInstance = InstanceType<typeof BInput>
+
+export const CONTROLS_ALIGNMENTS = ['left', 'right', 'center'] as const
+export type ControlsAlignment = typeof CONTROLS_ALIGNMENTS[number]
+
+const CONTROL_OPERATIONS = ['plus', 'minus'] as const
+export type ControlOperation = typeof CONTROL_OPERATIONS[number]
+
+export default defineComponent({
     name: 'BNumberinput',
     components: {
-        [Icon.name]: Icon,
-        [Input.name]: Input
+        BIcon,
+        BInput
     },
     mixins: [CompatFallthroughMixin, FormElementMixin],
     inject: {
@@ -116,7 +129,7 @@ export default {
         }
     },
     props: {
-        modelValue: Number,
+        modelValue: [Number, null] as PropType<number | null>,
         min: {
             type: [Number, String]
         },
@@ -138,14 +151,10 @@ export default {
             default: true
         },
         controlsAlignment: {
-            type: String,
+            type: String as PropType<ControlsAlignment>,
             default: 'center',
-            validator: (value) => {
-                return [
-                    'left',
-                    'right',
-                    'center'
-                ].indexOf(value) >= 0
+            validator: (value: ControlsAlignment) => {
+                return CONTROLS_ALIGNMENTS.indexOf(value) >= 0
             }
         },
         controlsRounded: {
@@ -161,22 +170,31 @@ export default {
             default: true
         }
     },
-    emits: ['blur', 'focus', 'update:modelValue'],
+    emits: {
+        /* eslint-disable @typescript-eslint/no-unused-vars */
+        blur: (_event: Event) => true,
+        focus: (_event: Event) => true,
+        'update:modelValue': (_value: number | null | undefined) => true
+        /* eslint-enable @typescript-eslint/no-unused-vars */
+    },
     data() {
         return {
             newValue: this.modelValue,
             newStep: this.step || 1,
             newMinStep: this.minStep,
             timesPressed: 1,
-            _elementRef: 'input'
+            _elementRef: 'input',
+            _$intervalRef: undefined as ReturnType<typeof setTimeout> | undefined
         }
     },
     computed: {
         computedValue: {
-            get() {
+            // getter has to include `string` in the return type so that the
+            // setter can accept `string`
+            get(): number | string | null | undefined {
                 return this.newValue
             },
-            set(value) {
+            set(value: number | string | null | undefined) {
                 // Parses the number, so that "0" => 0, and "invalid" => null
                 let newValue = (Number(value) === 0) ? 0 : (Number(value) || null)
                 if (value === '' || value === undefined || value === null) {
@@ -185,23 +203,25 @@ export default {
                 this.newValue = newValue
                 if (newValue === null) {
                     this.$emit('update:modelValue', newValue)
-                } else if (!isNaN(newValue) && newValue !== '-0') {
+                // I decided to comment out `newValue !== '-0'` until we fix
+                // the regression of https://github.com/buefy/buefy/pull/3170
+                } else if (!isNaN(newValue)/* && newValue !== '-0' */) {
                     this.$emit('update:modelValue', Number(newValue))
                 }
                 this.$nextTick(() => {
                     if (this.$refs.input) {
-                        this.$refs.input.checkHtml5Validity()
+                        (this.$refs.input as BInputInstance).checkHtml5Validity()
                     }
                 })
             }
         },
-        controlsLeft() {
+        controlsLeft(): ControlOperation[] {
             if (this.controls && this.controlsAlignment !== 'right') {
                 return this.controlsAlignment === 'left' ? ['minus', 'plus'] : ['minus']
             }
             return []
         },
-        controlsRight() {
+        controlsRight(): ControlOperation[] {
             if (this.controls && this.controlsAlignment !== 'left') {
                 return this.controlsAlignment === 'right' ? ['minus', 'plus'] : ['plus']
             }
@@ -237,10 +257,10 @@ export default {
             return typeof step === 'string' ? parseFloat(step) : step
         },
         disabledMin() {
-            return this.computedValue - this.stepNumber < this.minNumber
+            return +this.computedValue! - this.stepNumber < this.minNumber!
         },
         disabledMax() {
-            return this.computedValue + this.stepNumber > this.maxNumber
+            return +this.computedValue! + this.stepNumber > this.maxNumber!
         },
         stepDecimals() {
             const step = this.minStepNumber.toString()
@@ -258,7 +278,7 @@ export default {
         }
     },
     watch: {
-    /**
+    /*
      * When v-model is changed:
      *   1. Set internal value.
      */
@@ -276,7 +296,7 @@ export default {
         }
     },
     methods: {
-        isDisabled(control) {
+        isDisabled(control: ControlOperation) {
             return this.disabled || (control === 'plus' ? this.disabledMax : this.disabledMin)
         },
         decrement() {
@@ -287,41 +307,41 @@ export default {
                 }
                 this.computedValue = 0
             }
-            if (typeof this.minNumber === 'undefined' || (this.computedValue - this.stepNumber) >= this.minNumber) {
-                const value = this.computedValue - this.stepNumber
+            if (typeof this.minNumber === 'undefined' || (+this.computedValue - this.stepNumber) >= this.minNumber) {
+                const value = +this.computedValue - this.stepNumber
                 this.computedValue = parseFloat(value.toFixed(this.stepDecimals))
             }
         },
         increment() {
-            if (this.computedValue === null || typeof this.computedValue === 'undefined' || this.computedValue < this.minNumber) {
+            if (this.computedValue === null || typeof this.computedValue === 'undefined' || +this.computedValue < this.minNumber!) {
                 if (this.minNumber !== null && typeof this.minNumber !== 'undefined') {
                     this.computedValue = this.minNumber
                     return
                 }
                 this.computedValue = 0
             }
-            if (typeof this.maxNumber === 'undefined' || (this.computedValue + this.stepNumber) <= this.maxNumber) {
-                const value = this.computedValue + this.stepNumber
+            if (typeof this.maxNumber === 'undefined' || (+this.computedValue + this.stepNumber) <= this.maxNumber) {
+                const value = +this.computedValue + this.stepNumber
                 this.computedValue = parseFloat(value.toFixed(this.stepDecimals))
             }
         },
-        onControlClick(event, inc) {
+        onControlClick(event: MouseEvent, inc: boolean) {
             // IE 11 -> filter click event
             if (event.detail !== 0 || event.type !== 'click') return
             if (inc) this.increment()
             else this.decrement()
         },
-        longPressTick(inc) {
+        longPressTick(inc: boolean) {
             if (inc) this.increment()
             else this.decrement()
 
             if (!this.longPress) return
             this._$intervalRef = setTimeout(() => {
                 this.longPressTick(inc)
-            }, this.exponential ? (250 / (this.exponential * this.timesPressed++)) : 250)
+            }, this.exponential ? (250 / (+this.exponential * this.timesPressed++)) : 250)
         },
-        onStartLongPress(event, inc) {
-            if (event.button !== 0 && event.type !== 'touchstart') return
+        onStartLongPress(event: MouseEvent | TouchEvent, inc: boolean) {
+            if ((event as MouseEvent).button !== 0 && (event as TouchEvent).type !== 'touchstart') return
             clearTimeout(this._$intervalRef)
             this.longPressTick(inc)
         },
@@ -329,14 +349,14 @@ export default {
             if (!this._$intervalRef) return
             this.timesPressed = 1
             clearTimeout(this._$intervalRef)
-            this._$intervalRef = null
+            this._$intervalRef = undefined
         }
     },
     mounted() {
         // tells the field that it is wrapping a number input
         // if the field is the direct parent.
         if (this.field === this.$parent) {
-            this.$parent.wrapNumberinput({
+            (this.$parent as BFieldInstance).wrapNumberinput({
                 controlsPosition: this.controlsPosition,
                 size: this.size
             })
@@ -346,5 +366,5 @@ export default {
     beforeUnmount() {
         clearTimeout(this._$intervalRef)
     }
-}
+})
 </script>

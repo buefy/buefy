@@ -19,7 +19,7 @@
             class="tag"
             role="button"
             :aria-label="ariaCloseLabel"
-            :tabindex="tabstop ? 0 : false"
+            :tabindex="tabstop ? 0 : undefined"
             :disabled="disabledOrUndefined"
             :class="[size,
                      closeType,
@@ -61,21 +61,20 @@
             class="delete is-small"
             :class="closeType"
             :disabled="disabledOrUndefined"
-            :tabindex="tabstop ? 0 : false"
+            :tabindex="tabstop ? 0 : undefined"
             @click="close"
             @keyup.delete.prevent="close"
         />
     </span>
 </template>
 
-<script>
-import Icon from '../icon/Icon.vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import BIcon from '../icon/Icon.vue'
 
-export default {
+export default defineComponent({
     name: 'BTag',
-    components: {
-        [Icon.name]: Icon
-    },
+    components: { BIcon },
     props: {
         attached: Boolean,
         closable: Boolean,
@@ -97,7 +96,12 @@ export default {
         closeIconPack: String,
         closeIconType: String
     },
-    emits: ['click', 'close'],
+    emits: {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        click: (_: Event) => true,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        close: (_: Event) => true
+    },
     computed: {
         // setting a boolean attribute `false` does not remove it on Vue 3.
         // `null` or `undefined` has to be given to remove it.
@@ -110,7 +114,7 @@ export default {
         * Emit close event when delete button is clicked
         * or delete key is pressed.
         */
-        close(event) {
+        close(event: Event) {
             if (this.disabled) return
 
             this.$emit('close', event)
@@ -118,11 +122,11 @@ export default {
         /**
         * Emit click event when tag is clicked.
         */
-        click(event) {
+        click(event: Event) {
             if (this.disabled) return
 
             this.$emit('click', event)
         }
     }
-}
+})
 </script>

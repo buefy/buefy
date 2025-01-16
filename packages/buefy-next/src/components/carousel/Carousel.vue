@@ -76,7 +76,7 @@
                 :class="{'is-active': item.isActive}"
                 @mouseover="modeChange('hover', index)"
                 @click="modeChange('click', index)"
-                :key="item._uid"
+                :key="item.uniqueValue"
             >
                 <slot
                     :i="index"
@@ -92,19 +92,27 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
+
 import config from '../../utils/config'
 
-import Icon from '../icon/Icon.vue'
+import BIcon from '../icon/Icon.vue'
 import ProviderParentMixin, { Sorted } from '../../utils/ProviderParentMixin'
 import { mod, bound } from '../../utils/helpers'
 
-export default {
+import type { ICarouselItem } from './types'
+
+export const INDICATOR_MODES = ['hover', 'click'] as const
+export type IndicatorMode = typeof INDICATOR_MODES[number]
+
+export default defineComponent({
     name: 'BCarousel',
     components: {
-        [Icon.name]: Icon
+        BIcon
     },
-    mixins: [ProviderParentMixin('carousel', Sorted)],
+    mixins: [ProviderParentMixin<typeof Sorted, ICarouselItem>('carousel', Sorted)],
     props: {
         modelValue: {
             type: Number,
@@ -180,7 +188,7 @@ export default {
             default: true
         },
         indicatorMode: {
-            type: String,
+            type: String as PropType<IndicatorMode>,
             default: 'click'
         },
         indicatorPosition: {
@@ -199,14 +207,20 @@ export default {
         },
         withCarouselList: Boolean
     },
-    emits: ['change', 'click', 'update:modelValue'],
+    emits: {
+        /* eslint-disable @typescript-eslint/no-unused-vars */
+        change: (_index: number) => true,
+        click: () => true,
+        'update:modelValue': (_value: number) => true
+        /* eslint-enable @typescript-eslint/no-unused-vars */
+    },
     data() {
         return {
             transition: 'next',
             activeChild: this.modelValue || 0,
             isPause: false,
-            dragX: false,
-            timer: null
+            dragX: false as number | false,
+            timer: undefined as ReturnType<typeof setInterval> | undefined
         }
     },
     computed: {
@@ -236,13 +250,13 @@ export default {
         }
     },
     watch: {
-        /**
+        /*
          * When v-model is changed set the new active item.
          */
         modelValue(value) {
             this.changeActive(value)
         },
-        /**
+        /*
          * When carousel-items are updated, set active one.
          */
         sortedItems(items) {
@@ -250,13 +264,13 @@ export default {
                 this.changeActive(this.activeChild - 1)
             }
         },
-        /**
+        /*
          *  When autoplay is changed, start or pause timer accordingly
          */
         autoplay(status) {
             status ? this.startTimer() : this.pauseTimer()
         },
-        /**
+        /*
          *  Since the timer can get paused at the end, if repeat is changed we need to restart it
          */
         repeat(status) {
@@ -280,7 +294,7 @@ export default {
             this.isPause = true
             if (this.timer) {
                 clearInterval(this.timer)
-                this.timer = null
+                this.timer = undefined
             }
         },
         restartTimer() {
@@ -292,11 +306,11 @@ export default {
                 this.pauseTimer()
             }
         },
-        /**
+        /*
          * Change the active item and emit change event.
          * action only for animated slide, there true = next, false = prev
          */
-        changeActive(newIndex, direction = 0) {
+        changeActive(newIndex: number, direction: number = 0) {
             if (this.activeChild === newIndex || isNaN(newIndex)) return
 
             direction = direction || (newIndex - this.activeChild)
@@ -316,7 +330,7 @@ export default {
             this.$emit('change', newIndex) // BC
         },
         // Indicator trigger when change active item.
-        modeChange(trigger, value) {
+        modeChange(trigger: IndicatorMode, value: number) {
             if (this.indicatorMode === trigger) {
                 return this.changeActive(value)
             }
@@ -328,19 +342,25 @@ export default {
             this.changeActive(this.activeChild + 1, 1)
         },
         // handle drag event
-        dragStart(event) {
+        dragStart(event: MouseEvent | TouchEvent) {
             if (!this.hasDrag ||
-                !event.target.draggable) return
-            this.dragX = event.touches ? event.changedTouches[0].pageX : event.pageX
-            if (event.touches) {
+                !(event.target as HTMLElement).draggable) return
+            const touches = (event as TouchEvent).touches
+            this.dragX = touches
+                ? (event as TouchEvent).changedTouches[0].pageX
+                : (event as MouseEvent).pageX
+            if (touches) {
                 this.pauseTimer()
             } else {
                 event.preventDefault()
             }
         },
-        dragEnd(event) {
+        dragEnd(event: MouseEvent | TouchEvent) {
             if (this.dragX === false) return
-            const detected = event.touches ? event.changedTouches[0].pageX : event.pageX
+            const touches = (event as TouchEvent).touches
+            const detected = touches
+                ? (event as TouchEvent).changedTouches[0].pageX
+                : (event as MouseEvent).pageX
             const diffX = detected - this.dragX
             if (Math.abs(diffX) > 30) {
                 if (diffX < 0) {
@@ -349,11 +369,11 @@ export default {
                     this.prev()
                 }
             } else {
-                event.target.click()
+                (event.target as HTMLElement).click()
                 this.sortedItems[this.activeChild].$emit('click')
                 this.$emit('click')
             }
-            if (event.touches) {
+            if (touches) {
                 this.startTimer()
             }
             this.dragX = false
@@ -365,5 +385,5 @@ export default {
     beforeUnmount() {
         this.pauseTimer()
     }
-}
+})
 </script>

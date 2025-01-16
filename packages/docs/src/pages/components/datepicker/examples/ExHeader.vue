@@ -24,12 +24,20 @@
     </b-field>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BAutocomplete, BDatepicker, BField } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BAutocomplete,
+            BDatepicker,
+            BField
+        },
         data() {
             return {
                 date: new Date(),
-                month: null,
+                month: null as string | null,
                 months: [
                     { name: 'January', value: 0 },
                     { name:'February', value: 1 },
@@ -47,7 +55,7 @@
             }
         },
         methods: {
-            selectMonth(option) {
+            selectMonth(option: { value: number } | undefined) {
                 if (option) {
                     this.date = new Date(this.date)
                     this.date.setMonth(option.value)
@@ -59,5 +67,5 @@
                 item.value == this.date.getMonth()
             )[0].name
         }
-    }
+    })
 </script>

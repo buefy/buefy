@@ -127,7 +127,9 @@
                             :face-numbers="isSelectingHour ? hours : minutes"
                             :disabled-values="faceDisabledValues"
                             :double="isSelectingHour && isHourFormat24"
-                            :value="isSelectingHour ? hoursSelected : minutesSelected"
+                            :value="isSelectingHour
+                                ? hoursSelected ?? undefined
+                                : minutesSelected ?? undefined"
                             @input="onClockInput"
                             @change="onClockChange"
                         />
@@ -167,29 +169,27 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+
 import TimepickerMixin from '../../utils/TimepickerMixin'
 import config from '../../utils/config'
 
-import Dropdown from '../dropdown/Dropdown.vue'
-import DropdownItem from '../dropdown/DropdownItem.vue'
-import Input from '../input/Input.vue'
-import Field from '../field/Field.vue'
-import Icon from '../icon/Icon.vue'
+import BDropdown from '../dropdown/Dropdown.vue'
+import BInput from '../input/Input.vue'
 
-import ClockpickerFace from './ClockpickerFace.vue'
+import BClockpickerFace from './ClockpickerFace.vue'
+
+type BDropdownInstance = InstanceType<typeof BDropdown>
 
 const outerPadding = 12
 
-export default {
+export default defineComponent({
     name: 'BClockpicker',
     components: {
-        [ClockpickerFace.name]: ClockpickerFace,
-        [Input.name]: Input,
-        [Field.name]: Field,
-        [Icon.name]: Icon,
-        [Dropdown.name]: Dropdown,
-        [DropdownItem.name]: DropdownItem
+        BClockpickerFace,
+        BInput,
+        BDropdown
     },
     mixins: [TimepickerMixin],
     props: {
@@ -265,7 +265,7 @@ export default {
         }
     },
     methods: {
-        onClockInput(value) {
+        onClockInput(value: number) {
             if (this.isSelectingHour) {
                 this.hoursSelected = value
                 this.onHoursChange(value)
@@ -274,12 +274,12 @@ export default {
                 this.onMinutesChange(value)
             }
         },
-        onClockChange(value) {
+        onClockChange() {
             if (this.autoSwitch && this.isSelectingHour) {
                 this.isSelectingHour = !this.isSelectingHour
             }
         },
-        onMeridienClick(value) {
+        onMeridienClick(value: string) {
             if (this.meridienSelected !== value) {
                 this.meridienSelected = value
                 this.onMeridienChange(value)
@@ -288,11 +288,11 @@ export default {
         /*
          * Avoid dropdown toggle when is already visible
          */
-        onInputClick(event) {
-            if (this.$refs.dropdown.isActive) {
+        onInputClick(event: MouseEvent) {
+            if ((this.$refs.dropdown as BDropdownInstance).isActive) {
                 event.stopPropagation()
             }
         }
     }
-}
+})
 </script>

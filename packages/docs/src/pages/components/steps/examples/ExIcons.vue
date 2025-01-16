@@ -5,3 +5,7 @@
         <b-step-item label="Social" icon="account-plus"></b-step-item>
     </b-steps>
 </template>
+
+<script setup lang="ts">
+import { BSteps, BStepItem } from '@ntohq/buefy-next'
+</script>

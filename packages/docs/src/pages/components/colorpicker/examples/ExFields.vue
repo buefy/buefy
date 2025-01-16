@@ -90,10 +90,17 @@
     </section>
 </template>
 
-<script>
-import { Color } from '@ntohq/buefy-next'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BButton, BColorpicker, BField, BInput, Color } from '@ntohq/buefy-next'
 
-export default {
+export default defineComponent({
+    components: {
+        BButton,
+        BColorpicker,
+        BField,
+        BInput
+    },
     data() {
         return {
             selected: Color.parse('cyan')
@@ -104,5 +111,5 @@ export default {
             this.selected = Color.parse('cyan')
         }
     }
-}
+})
 </script>

@@ -14,10 +14,18 @@
     </span>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BDatepicker, BField, BSwitch } from '@ntohq/buefy-next'
+
     const thisMonth = new Date().getMonth()
 
-    export default {
+    export default defineComponent({
+        components: {
+            BDatepicker,
+            BField,
+            BSwitch
+        },
         computed: {
             indicators() {
                 return this.bars ? 'bars' : 'dots'
@@ -74,5 +82,5 @@
                 bars: false
             }
         }
-    }
+    })
 </script>

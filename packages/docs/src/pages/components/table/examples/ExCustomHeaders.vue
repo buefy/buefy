@@ -52,8 +52,17 @@
     </b-table>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BIcon, BTable, BTableColumn, BTooltip } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BIcon,
+            BTable,
+            BTableColumn,
+            BTooltip
+        },
         data() {
             return {
                 data: [
@@ -65,5 +74,5 @@
                 ]
             }
         }
-    }
+    })
 </script>

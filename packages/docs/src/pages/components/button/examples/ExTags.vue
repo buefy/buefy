@@ -15,3 +15,7 @@
         </div>
     </section>
 </template>
+
+<script setup lang="ts">
+import { BButton } from '@ntohq/buefy-next'
+</script>

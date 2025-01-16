@@ -37,17 +37,20 @@
     </label>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
+import type { ExtractComponentProps } from '../../utils/helpers'
 import CompatFallthroughMixin from '../../utils/CompatFallthroughMixin'
 import FormElementMixin from '../../utils/FormElementMixin'
 import { File } from '../../utils/ssr'
 
-export default {
+const Upload = defineComponent({
     name: 'BUpload',
     mixins: [CompatFallthroughMixin, FormElementMixin],
     props: {
         modelValue: {
-            type: [Object, Function, File, Array]
+            type: [Object, Function, File, Array] as PropType<File | Array<File> | null>
         },
         multiple: Boolean,
         disabled: Boolean,
@@ -70,7 +73,12 @@ export default {
             default: false
         }
     },
-    emits: ['invalid', 'update:modelValue'],
+    emits: {
+        /* eslint-disable @typescript-eslint/no-unused-vars */
+        invalid: () => true,
+        'update:modelValue': (newValue: File | Array<File> | null) => true
+        /* eslint-enable @typescript-eslint/no-unused-vars */
+    },
     data() {
         return {
             newValue: this.modelValue,
@@ -80,35 +88,26 @@ export default {
     },
     computed: {
         disabledOrUndefined() {
-            // On Vue 3, setting a boolean attribute `false` does not remove it,
-            // `true` or `undefined` has to be given to remove it.
             return this.disabled || undefined
         }
     },
     watch: {
-        /**
-         *   When v-model is changed:
-         *   1. Set internal value.
-         *   2. Reset internal input file value
-         *   3. If it's invalid, validate again.
-         */
         modelValue(value) {
             this.newValue = value
             if (!value || (Array.isArray(value) && value.length === 0)) {
-                this.$refs.input.value = null
+                (this.$refs.input as HTMLInputElement).value = ''
             }
             !this.isValid && !this.dragDrop && this.checkHtml5Validity()
         }
     },
     methods: {
-        /**
-        * Listen change event on input type 'file',
-        * emit 'input' event and validate
-        */
-        onFileChange(event) {
+        onFileChange(event: Event) {
             if (this.disabled || this.loading) return
             if (this.dragDrop) this.updateDragDropFocus(false)
-            const value = event.target.files || event.dataTransfer.files
+            const value = (event.target as HTMLInputElement)!.files ??
+                            (event as DragEvent).dataTransfer!.files ??
+                            []
+
             if (value.length === 0) {
                 if (!this.newValue) return
                 if (this.native) this.newValue = null
@@ -137,7 +136,7 @@ export default {
                 }
                 for (let i = 0; i < value.length; i++) {
                     const file = value[i]
-                    if (this.checkType(file)) {
+                    if (this.checkType(file) && Array.isArray(this.newValue)) {
                         this.newValue.push(file)
                         newValues = true
                     }
@@ -147,27 +146,15 @@ export default {
             this.$emit('update:modelValue', this.newValue)
             !this.dragDrop && this.checkHtml5Validity()
         },
-
-        /*
-        * Reset file input value
-        */
         clearInput() {
-            this.$refs.input.value = null
+            (this.$refs.input as HTMLInputElement).value = ''
         },
-
-        /**
-        * Listen drag-drop to update internal variable
-        */
-        updateDragDropFocus(focus) {
+        updateDragDropFocus(focus: boolean) {
             if (!this.disabled && !this.loading) {
                 this.dragDropFocus = focus
             }
         },
-
-        /**
-        * Check mime type of file
-        */
-        checkType(file) {
+        checkType(file: File) {
             if (!this.accept) return true
             const types = this.accept.split(',')
             if (types.length === 0) return true
@@ -193,5 +180,9 @@ export default {
             return valid
         }
     }
-}
+})
+
+export type UploadProps = ExtractComponentProps<typeof Upload>
+
+export default Upload
 </script>

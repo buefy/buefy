@@ -1,7 +1,17 @@
-<script>
-import { toCssWidth } from '../../utils/helpers'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
 
-export default {
+import { toCssWidth } from '../../utils/helpers'
+import type {
+    CustomSearchFunction,
+    CustomSortFunction,
+    ITableColumn,
+    TableColumnHost,
+    TableRow
+} from './types'
+
+export default defineComponent({
     name: 'BTableColumn',
     inject: {
         $table: { name: '$table', default: false }
@@ -21,18 +31,18 @@ export default {
             default: true
         },
         subheading: [String, Number],
-        customSort: Function,
-        customSearch: Function,
+        customSort: Function as PropType<CustomSortFunction>,
+        customSearch: Function as PropType<CustomSearchFunction>,
         sticky: Boolean,
         headerSelectable: Boolean,
         headerClass: String,
         cellClass: String,
         thAttrs: {
-            type: Function,
+            type: Function as PropType<ITableColumn['thAttrs']>,
             default: () => ({})
         },
         tdAttrs: {
-            type: Function,
+            type: Function as PropType<ITableColumn['tdAttrs']>,
             default: () => ({})
         }
     },
@@ -82,7 +92,7 @@ export default {
         },
         style() {
             return {
-                width: toCssWidth(this.width)
+                width: toCssWidth(this.width) ?? undefined // null → undefined to satisfy StyleValue
             }
         },
         hasDefaultSlot() {
@@ -96,7 +106,7 @@ export default {
         }
     },
     methods: {
-        getRootClasses(row) {
+        getRootClasses(row: TableRow) {
             const attrs = this.tdAttrs(row, this)
             const classes = [this.rootClasses]
             if (attrs && attrs.class) {
@@ -104,7 +114,7 @@ export default {
             }
             return classes
         },
-        getRootStyle(row) {
+        getRootStyle(row: TableRow) {
             const attrs = this.tdAttrs(row, this)
             const style = []
             if (attrs && attrs.style) {
@@ -117,14 +127,14 @@ export default {
         if (!this.$table) {
             throw new Error('You should wrap bTableColumn on a bTable')
         }
-        this.$table._registerTableColumn(this)
+        (this.$table as TableColumnHost)._registerTableColumn(this)
     },
     beforeUnmount() {
-        this.$table._unregisterTableColumn(this)
+        (this.$table as TableColumnHost)._unregisterTableColumn(this)
     },
-    render(createElement) {
+    render() {
         // renderless
         return null
     }
-}
+})
 </script>

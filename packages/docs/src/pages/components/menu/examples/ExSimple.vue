@@ -37,12 +37,30 @@
   </b-menu>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import {
+    BDropdown,
+    BDropdownItem,
+    BIcon,
+    BMenu,
+    BMenuList,
+    BMenuItem
+} from '@ntohq/buefy-next'
+
+export default defineComponent({
+  components: {
+    BDropdown,
+    BDropdownItem,
+    BIcon,
+    BMenu,
+    BMenuList,
+    BMenuItem
+  },
   data() {
     return {
       isActive: true
     }
   }
-}
+})
 </script>

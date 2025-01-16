@@ -6,14 +6,15 @@
     </section>
 </template>
 
-<script>
-import { Color } from '@ntohq/buefy-next'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BColorpicker, BField, Color } from '@ntohq/buefy-next'
 
-export default {
+export default defineComponent({
     data() {
         return {
             selected: Color.parse('red')
         }
     }
-}
+})
 </script>

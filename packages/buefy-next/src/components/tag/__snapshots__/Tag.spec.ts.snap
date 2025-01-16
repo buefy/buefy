@@ -1,0 +1,6 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BTag > render correctly 1`] = `
+"<span class=\\"tag\\"><!--v-if--><span class=\\"\\"></span>
+<!--v-if--></span>"
+`;

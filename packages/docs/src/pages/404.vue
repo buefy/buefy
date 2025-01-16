@@ -23,15 +23,19 @@
     </section>
 </template>
 
-<script>
-import TheNavbar from '../components/TheNavbar'
-import TheFooter from '../components/TheFooter'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BButton, BIcon } from '@ntohq/buefy-next'
+import TheNavbar from '../components/TheNavbar.vue'
+import TheFooter from '../components/TheFooter.vue'
 
-export default {
+export default defineComponent({
     name: 'App',
     components: {
+        BButton,
+        BIcon,
         TheNavbar,
         TheFooter
     }
-}
+})
 </script>

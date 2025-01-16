@@ -47,3 +47,7 @@
         </b-field>
     </section>
 </template>
+
+<script setup lang="ts">
+import { BField, BTaginput } from '@ntohq/buefy-next'
+</script>

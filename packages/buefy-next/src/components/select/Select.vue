@@ -12,7 +12,7 @@
                 :multiple="multiple"
                 :size="nativeSize"
                 v-bind="fallthroughAttrs"
-                @blur="$emit('blur', $event) && checkHtml5Validity()"
+                @blur="onBlur"
                 @focus="$emit('focus', $event)"
             >
 
@@ -42,27 +42,40 @@
     </div>
 </template>
 
-<script>
-import Icon from '../icon/Icon.vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
+import BIcon from '../icon/Icon.vue'
 import CompatFallthroughMixin from '../../utils/CompatFallthroughMixin'
 import FormElementMixin from '../../utils/FormElementMixin'
 
-export default {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type ModelValue = any
+
+export default defineComponent({
     name: 'BSelect',
     components: {
-        [Icon.name]: Icon
+        BIcon
     },
     mixins: [CompatFallthroughMixin, FormElementMixin],
     props: {
         modelValue: {
-            type: [String, Number, Boolean, Object, Array, Function, Date, null],
+            type: [
+                String, Number, Boolean, Object, Array, Function, Date, null
+            ] as PropType<ModelValue>,
             default: null
         },
         placeholder: String,
         multiple: Boolean,
         nativeSize: [String, Number]
     },
-    emits: ['blur', 'focus', 'update:modelValue'],
+    emits: {
+        /* eslint-disable @typescript-eslint/no-unused-vars */
+        blur: (_event: FocusEvent) => true,
+        focus: (_event: FocusEvent) => true,
+        'update:modelValue': (_value: ModelValue) => true
+        /* eslint-enable @typescript-eslint/no-unused-vars */
+    },
     data() {
         return {
             selected: this.modelValue,
@@ -74,7 +87,7 @@ export default {
             get() {
                 return this.selected
             },
-            set(value) {
+            set(value: ModelValue) {
                 this.selected = value
                 this.$emit('update:modelValue', value)
                 !this.isValid && this.checkHtml5Validity()
@@ -91,7 +104,7 @@ export default {
         }
     },
     watch: {
-        /**
+        /*
         * When v-model is changed:
         *   1. Set the selected option.
         *   2. If it's invalid, validate again.
@@ -101,5 +114,5 @@ export default {
             !this.isValid && this.checkHtml5Validity()
         }
     }
-}
+})
 </script>

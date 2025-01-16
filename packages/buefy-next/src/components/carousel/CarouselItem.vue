@@ -6,12 +6,15 @@
     </transition>
 </template>
 
-<script>
-import InjectedChildMixin, { Sorted } from '../../utils/InjectedChildMixin'
+<script lang="ts">
+import { defineComponent } from 'vue'
 
-export default {
+import InjectedChildMixin, { Sorted } from '../../utils/InjectedChildMixin'
+import type { ICarousel } from './types'
+
+export default defineComponent({
     name: 'BCarouselItem',
-    mixins: [InjectedChildMixin('carousel', Sorted)],
+    mixins: [InjectedChildMixin<typeof Sorted, ICarousel>('carousel', Sorted)],
     data() {
         return {
             transitionName: null
@@ -31,5 +34,5 @@ export default {
             return this.parent.activeChildIndex === this.index
         }
     }
-}
+})
 </script>

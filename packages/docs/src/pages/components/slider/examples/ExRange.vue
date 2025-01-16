@@ -13,13 +13,20 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BField, BSlider } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BField,
+            BSlider
+        },
         data() {
             return {
                 numbers: [2, 5],
                 numbers2: [2, 6]
             }
         }
-    }
+    })
 </script>

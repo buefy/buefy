@@ -45,16 +45,20 @@
     </transition>
 </template>
 
-<script>
-import Progress from '../progress/Progress.vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import BIcon from '../icon/Icon.vue'
+import BProgress from '../progress/Progress.vue'
+import type { ExtractComponentProps } from '../../utils/helpers'
 import MessageMixin from '../../utils/MessageMixin'
 
-export default {
+const Notification = defineComponent({
     name: 'BNotification',
     components: {
+        BIcon,
         // directly registers Progress
         // in case Notification is programmatically opened
-        [Progress.name]: Progress
+        BProgress
     },
     mixins: [MessageMixin],
     props: {
@@ -65,5 +69,9 @@ export default {
             default: 'fade'
         }
     }
-}
+})
+
+export type NotificationProps = ExtractComponentProps<typeof Notification>
+
+export default Notification
 </script>

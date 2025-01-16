@@ -59,13 +59,23 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { ComponentPublicInstance } from 'vue'
+
+import BIcon from '../icon/Icon.vue'
 import config from '../../utils/config'
 import TabbedMixin from '../../utils/TabbedMixin'
+import BSlotComponent from '../../utils/SlotComponent'
+import type { TabbedChild } from '../../utils/TabbedTypes'
 
-export default {
+export default defineComponent({
     name: 'BTabs',
-    mixins: [TabbedMixin('tab')],
+    components: {
+        BIcon,
+        BSlotComponent
+    },
+    mixins: [TabbedMixin<TabbedChild>('tab')],
     props: {
         expanded: {
             type: Boolean,
@@ -89,7 +99,7 @@ export default {
     },
     data() {
         return {
-            currentFocus: null
+            currentFocus: null as number | null
         }
     },
     computed: {
@@ -98,7 +108,7 @@ export default {
                 'is-fullwidth': this.expanded,
                 'is-vertical': this.vertical,
                 'is-multiline': this.multiline,
-                [this.position]: this.position && this.vertical
+                [this.position!]: this.position && this.vertical
             }
         },
         navClasses() {
@@ -106,7 +116,7 @@ export default {
                 this.type,
                 this.size,
                 {
-                    [this.position]: this.position && !this.vertical,
+                    [this.position!]: this.position && !this.vertical,
                     'is-fullwidth': this.expanded,
                     'is-toggle': this.type === 'is-toggle-rounded'
                 }
@@ -114,7 +124,7 @@ export default {
         }
     },
     methods: {
-        giveFocusToTab(tab) {
+        giveFocusToTab(tab: HTMLElement | ComponentPublicInstance | ComponentPublicInstance[]) {
             if (Array.isArray(tab)) {
                 // Vue ≥ v3.0 < v3.2.25, refs in v-for are stored as a single object,
                 // but ≥ v3.2.25, refs in v-for are stored in an array (same as Vue 2)
@@ -123,19 +133,22 @@ export default {
                     return
                 }
             }
-            if (tab.$el && tab.$el.focus) {
-                tab.$el.focus()
-            } else if (tab.focus) {
-                tab.focus()
+            if (
+                (tab as ComponentPublicInstance).$el &&
+                (tab as ComponentPublicInstance).$el.focus
+            ) {
+                (tab as ComponentPublicInstance).$el.focus()
+            } else if ((tab as HTMLElement).focus) {
+                (tab as HTMLElement).focus()
             }
         },
-        manageTablistKeydown(event) {
+        manageTablistKeydown(event: KeyboardEvent) {
             // https://developer.mozilla.org/fr/docs/Web/API/KeyboardEvent/key/Key_Values#Navigation_keys
             const { key } = event
             switch (key) {
                 case this.vertical ? 'ArrowUp' : 'ArrowLeft':
                 case this.vertical ? 'Up' : 'Left': {
-                    let prevIdx = this.getPrevItemIdx(this.currentFocus, true)
+                    let prevIdx = this.getPrevItemIdx(this.currentFocus!, true)
                     if (prevIdx === null) {
                         // We try to give focus back to the last visible element
                         prevIdx = this.getPrevItemIdx(Infinity, true)
@@ -146,14 +159,14 @@ export default {
                         this.$refs[`tabLink${prevIdx}`] &&
                         !prevItem.disabled
                     ) {
-                        this.giveFocusToTab(this.$refs[`tabLink${prevIdx}`])
+                        this.giveFocusToTab(this.$refs[`tabLink${prevIdx}`] as HTMLElement | ComponentPublicInstance | ComponentPublicInstance[])
                     }
                     event.preventDefault()
                     break
                 }
                 case this.vertical ? 'ArrowDown' : 'ArrowRight':
                 case this.vertical ? 'Down' : 'Right': {
-                    let nextIdx = this.getNextItemIdx(this.currentFocus, true)
+                    let nextIdx = this.getNextItemIdx(this.currentFocus!, true)
                     if (nextIdx === null) {
                         // We try to give focus back to the first visible element
                         nextIdx = this.getNextItemIdx(-1, true)
@@ -164,7 +177,7 @@ export default {
                         this.$refs[`tabLink${nextIdx}`] &&
                         !nextItem.disabled
                     ) {
-                        this.giveFocusToTab(this.$refs[`tabLink${nextIdx}`])
+                        this.giveFocusToTab(this.$refs[`tabLink${nextIdx}`] as HTMLElement | ComponentPublicInstance | ComponentPublicInstance[])
                     }
                     event.preventDefault()
                     break
@@ -172,7 +185,7 @@ export default {
             }
         },
 
-        manageTabKeydown(event, childItem) {
+        manageTabKeydown(event: KeyboardEvent, childItem: TabbedChild) {
             // https://developer.mozilla.org/fr/docs/Web/API/KeyboardEvent/key/Key_Values#Navigation_keys
             const { key } = event
             switch (key) {
@@ -187,5 +200,5 @@ export default {
             }
         }
     }
-}
+})
 </script>

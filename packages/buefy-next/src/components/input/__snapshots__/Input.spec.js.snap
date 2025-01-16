@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`BInput render correctly 1`] = `
-<div class="control is-clearfix"><input class="input" type="text" autocomplete="on">
-  <!--v-if-->
-  <!--v-if-->
-  <!--v-if-->
-</div>
-`;

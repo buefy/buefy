@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BMessage > render correctly 1`] = `
+"<transition-stub name=\\"fade\\" appear=\\"false\\" persisted=\\"true\\" css=\\"true\\">
+  <article class=\\"message\\">
+    <!--v-if-->
+    <!--v-if-->
+    <!--v-if-->
+  </article>
+</transition-stub>"
+`;

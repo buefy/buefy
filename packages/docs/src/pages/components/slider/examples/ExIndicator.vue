@@ -38,16 +38,24 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BField, BSelect, BSlider } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BField,
+            BSelect,
+            BSlider,
+        },
         data() {
             return {
-                format: "raw",
+                format: "raw" as 'raw' | 'percent',
                 locale: undefined, // Browser locale
 
                 value1: 6000,
                 value2: 40,
             }
         }
-    }
+    })
 </script>

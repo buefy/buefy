@@ -6,7 +6,7 @@
                     <li
                         v-if="routes[item]"
                         :key="item"
-                        :class="{ 'is-active': index === breadcrumb.length - 1 }"
+                        :class="{ 'is-active': index === breadcrumb!.length - 1 }"
                     >
                         <router-link :to="routes[item].path">
                             {{ routes[item].breadTitle || routes[item].title }}
@@ -27,12 +27,14 @@
     </header>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+
 import routes from '@/data/routes'
 
-export default {
+export default defineComponent({
     props: {
-        breadcrumb: Array,
+        breadcrumb: Array<string>,
         title: String,
         subtitle: String
     },
@@ -41,5 +43,5 @@ export default {
             routes
         }
     }
-}
+})
 </script>

@@ -1,0 +1,12 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BSlider > render correctly 1`] = `
+"<div class=\\"b-slider is-primary\\">
+  <div class=\\"b-slider-track\\">
+    <div class=\\"b-slider-fill\\" style=\\"left: 0%; width: 0%;\\"></div>
+    <!--v-if-->
+    <b-slider-thumb-stub modelvalue=\\"0\\" type=\\"is-primary\\" tooltip=\\"true\\" indicator=\\"false\\" format=\\"raw\\" tooltipalways=\\"false\\" role=\\"slider\\" aria-valuemin=\\"0\\" aria-valuemax=\\"100\\" aria-orientation=\\"horizontal\\" aria-valuenow=\\"0\\"></b-slider-thumb-stub>
+    <!--v-if-->
+  </div>
+</div>"
+`;

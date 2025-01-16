@@ -29,8 +29,15 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BField, BTaginput } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BField,
+            BTaginput
+        },
         data() {
             return {
                 tags: [
@@ -40,5 +47,5 @@
                 ]
             }
         }
-    }
+    })
 </script>

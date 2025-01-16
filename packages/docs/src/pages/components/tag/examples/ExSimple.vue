@@ -8,3 +8,7 @@
         </b-field>
     </section>
 </template>
+
+<script setup lang="ts">
+import { BField, BTag } from '@ntohq/buefy-next'
+</script>

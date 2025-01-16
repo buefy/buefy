@@ -12,23 +12,32 @@
     </div>
 </template>
 
-<script>
-    import api from './api/select'
-    import { shallowFields } from '@/utils'
+<script lang="ts">
+    import { defineComponent } from 'vue'
 
-    import ExSimple from './examples/ExSimple'
+    import { shallowFields } from '@/utils'
+    import ApiView from '@/components/ApiView.vue'
+    import Example from '@/components/Example.vue'
+
+    import api from './api/select'
+
+    import ExSimple from './examples/ExSimple.vue'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
 
-    import ExMultiple from './examples/ExMultiple'
+    import ExMultiple from './examples/ExMultiple.vue'
     import ExMultipleCode from './examples/ExMultiple.vue?raw'
 
-    import ExIcons from './examples/ExIcons'
+    import ExIcons from './examples/ExIcons.vue'
     import ExIconsCode from './examples/ExIcons.vue?raw'
 
-    import ExSizes from './examples/ExSizes'
+    import ExSizes from './examples/ExSizes.vue'
     import ExSizesCode from './examples/ExSizes.vue?raw'
 
-    export default {
+    export default defineComponent({
+        components: {
+            ApiView,
+            Example
+        },
         data() {
             return {
                 api,
@@ -44,5 +53,5 @@
                 ExSizesCode
             }
         }
-    }
+    })
 </script>

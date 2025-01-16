@@ -15,21 +15,24 @@
     </component>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
 import config from '../../utils/config'
+import type { PaginationPage } from './types'
 
-export default {
+export default defineComponent({
     name: 'BPaginationButton',
     props: {
         page: {
-            type: Object,
+            type: Object as PropType<PaginationPage>,
             required: true
         },
         tag: {
             type: String,
             default: 'a',
             validator: (value) => {
-                return config.defaultLinkTags.indexOf(value) >= 0
+                return config.defaultLinkTags.indexOf(value as string) >= 0
             }
         },
         disabled: {
@@ -52,5 +55,5 @@ export default {
             return this.isDisabled || undefined
         }
     }
-}
+})
 </script>

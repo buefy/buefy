@@ -92,8 +92,20 @@
         </b-rate>
     </section>
 </template>
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BField, BInput, BNumberinput, BRate, BSelect, BSwitch, BTaginput } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BField,
+            BInput,
+            BNumberinput,
+            BRate,
+            BSelect,
+            BSwitch,
+            BTaginput
+        },
         data() {
             return {
                 rate: 4.6,
@@ -111,5 +123,5 @@
                 locale: undefined // Browser locale
             }
         }
-    }
+    })
 </script>

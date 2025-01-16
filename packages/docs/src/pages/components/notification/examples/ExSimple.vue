@@ -12,8 +12,15 @@
     </section>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BButton, BNotification } from '@ntohq/buefy-next'
+
     export default {
+        components: {
+            BButton,
+            BNotification
+        },
         data() {
             return {
                 isActive: true

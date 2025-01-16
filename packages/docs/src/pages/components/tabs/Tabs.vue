@@ -38,39 +38,50 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
+
+    import { shallowFields } from '@/utils'
+    import ApiView from '@/components/ApiView.vue'
+    import Example from '@/components/Example.vue'
+    import VariablesView from '@/components/VariablesView.vue'
+
     import api from './api/tabs'
     import variables from './variables/tabs'
-    import { shallowFields } from '@/utils'
 
-    import ExSimple from './examples/ExSimple'
+    import ExSimple from './examples/ExSimple.vue'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
 
-    import ExDynamic from './examples/ExDynamic'
+    import ExDynamic from './examples/ExDynamic.vue'
     import ExDynamicCode from './examples/ExDynamic.vue?raw'
 
-    import ExPosition from './examples/ExPosition'
+    import ExPosition from './examples/ExPosition.vue'
     import ExPositionCode from './examples/ExPosition.vue?raw'
 
-    import ExIcons from './examples/ExIcons'
+    import ExIcons from './examples/ExIcons.vue'
     import ExIconsCode from './examples/ExIcons.vue?raw'
 
-    import ExSizes from './examples/ExSizes'
+    import ExSizes from './examples/ExSizes.vue'
     import ExSizesCode from './examples/ExSizes.vue?raw'
 
-    import ExTypes from './examples/ExTypes'
+    import ExTypes from './examples/ExTypes.vue'
     import ExTypesCode from './examples/ExTypes.vue?raw'
 
-    import ExExpanded from './examples/ExExpanded'
+    import ExExpanded from './examples/ExExpanded.vue'
     import ExExpandedCode from './examples/ExExpanded.vue?raw'
 
-    import ExCustomHeaders from './examples/ExCustomHeaders'
+    import ExCustomHeaders from './examples/ExCustomHeaders.vue'
     import ExCustomHeadersCode from './examples/ExCustomHeaders.vue?raw'
 
-    import ExVertical from './examples/ExVertical'
+    import ExVertical from './examples/ExVertical.vue'
     import ExVerticalCode from './examples/ExVertical.vue?raw'
 
-    export default {
+    export default defineComponent({
+        components: {
+            ApiView,
+            Example,
+            VariablesView
+        },
         data() {
             return {
                 api,
@@ -97,5 +108,5 @@
                 ExVerticalCode
             }
         }
-    }
+    })
 </script>

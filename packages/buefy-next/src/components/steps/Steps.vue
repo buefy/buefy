@@ -75,20 +75,37 @@
     </div>
 </template>
 
-<script>
-import Icon from '../icon/Icon.vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
+
+import BIcon from '../icon/Icon.vue'
 
 import TabbedMixin from '../../utils/TabbedMixin'
+import type { TabbedChild } from '../../utils/TabbedTypes'
 import config from '../../utils/config'
+import type { VueClassAttribute } from '../../utils/config'
 
-export default {
+export interface IStepItem extends TabbedChild {
+    type?: VueClassAttribute
+    step?: number | string
+    clickable?: boolean
+}
+
+export const LABEL_POSITIONS = ['bottom', 'right', 'left'] as const
+export type LabelPosition = typeof LABEL_POSITIONS[number]
+
+export const MOBILE_MODES = ['minimalist', 'compact'] as const
+export type MobileMode = typeof MOBILE_MODES[number]
+
+export default defineComponent({
     name: 'BSteps',
     components: {
-        [Icon.name]: Icon
+        BIcon
     },
-    mixins: [TabbedMixin('step')],
+    mixins: [TabbedMixin<IStepItem>('step')],
     props: {
-        type: [String, Object],
+        type: [String, Object] as PropType<VueClassAttribute>,
         iconPack: String,
         iconPrev: {
             type: String,
@@ -107,13 +124,9 @@ export default {
             default: true
         },
         labelPosition: {
-            type: String,
-            validator(value) {
-                return [
-                    'bottom',
-                    'right',
-                    'left'
-                ].indexOf(value) > -1
+            type: String as PropType<LabelPosition>,
+            validator(value: LabelPosition) {
+                return LABEL_POSITIONS.indexOf(value) > -1
             },
             default: 'bottom'
         },
@@ -122,12 +135,9 @@ export default {
             default: true
         },
         mobileMode: {
-            type: String,
-            validator(value) {
-                return [
-                    'minimalist',
-                    'compact'
-                ].indexOf(value) > -1
+            type: String as PropType<MobileMode>,
+            validator(value: MobileMode) {
+                return MOBILE_MODES.indexOf(value) > -1
             },
             default: 'minimalist'
         },
@@ -145,7 +155,7 @@ export default {
                 this.size,
                 {
                     'is-vertical': this.vertical,
-                    [this.position]: this.position && this.vertical
+                    [this.position!]: this.position && this.vertical
                 }
             ]
         },
@@ -234,7 +244,7 @@ export default {
         /**
          * Return if the step should be clickable or not.
          */
-        isItemClickable(stepItem) {
+        isItemClickable(stepItem: IStepItem) {
             if (stepItem.clickable === undefined) {
                 return stepItem.index < this.activeItem.index
             }
@@ -246,7 +256,7 @@ export default {
          */
         prev() {
             if (this.hasPrev) {
-                this.activeId = this.prevItem.uniqueValue
+                this.activeId = this.prevItem!.uniqueValue
             }
         },
 
@@ -255,9 +265,9 @@ export default {
          */
         next() {
             if (this.hasNext) {
-                this.activeId = this.nextItem.uniqueValue
+                this.activeId = this.nextItem!.uniqueValue
             }
         }
     }
-}
+})
 </script>

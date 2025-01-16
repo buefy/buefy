@@ -37,14 +37,16 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { ExtractComponentProps } from '../../utils/helpers'
 import config from '../../utils/config'
-import Icon from '../icon/Icon.vue'
+import BIcon from '../icon/Icon.vue'
 
-export default {
+const Rate = defineComponent({
     name: 'BRate',
     components: {
-        [Icon.name]: Icon
+        BIcon
     },
     props: {
         modelValue: {
@@ -67,15 +69,20 @@ export default {
         showScore: Boolean,
         showText: Boolean,
         customText: String,
-        texts: Array,
+        texts: Array<string>,
         locale: {
-            type: [String, Array],
+            type: [String, Array<string>],
             default: () => {
                 return config.defaultLocale
             }
         }
     },
-    emits: ['change', 'update:modelValue'],
+    emits: {
+        /* eslint-disable @typescript-eslint/no-unused-vars */
+        change: (newValue: number) => true,
+        'update:modelValue': (newValue: number) => true
+        /* eslint-enable @typescript-eslint/no-unused-vars */
+    },
     data() {
         return {
             newValue: this.modelValue,
@@ -89,13 +96,14 @@ export default {
         showMe() {
             let result = ''
             if (this.showScore) {
-                result = this.disabled ? this.modelValue : this.newValue
-                if (result === 0) {
+                result = this.disabled ? this.modelValue.toString() : this.newValue.toString()
+                if (Number(result) === 0) {
                     result = ''
                 } else {
-                    result = new Intl.NumberFormat(this.locale).format(this.modelValue)
+                    result = new Intl.NumberFormat(this!.locale)
+                        .format(this.modelValue)
                 }
-            } else if (this.showText) {
+            } else if (this.showText && this.texts) {
                 result = this.texts[Math.ceil(this.newValue) - 1]
             }
             return result
@@ -106,7 +114,7 @@ export default {
     },
     watch: {
         // When v-model is changed set the new value.
-        modelValue(value) {
+        modelValue(value: number) {
             this.newValue = value
         }
     },
@@ -115,23 +123,23 @@ export default {
             if (this.disabled) return
             this.hoverValue = 0
         },
-        previewRate(index, event) {
+        previewRate(index: number, event: { stopPropagation: () => void }) {
             if (this.disabled) return
             this.hoverValue = index
             event.stopPropagation()
         },
-        confirmValue(index) {
+        confirmValue(index: number) {
             if (this.disabled) return
             this.newValue = index
             this.$emit('change', this.newValue)
             this.$emit('update:modelValue', this.newValue)
         },
-        checkHalf(index) {
+        checkHalf(index: number) {
             const showWhenDisabled = this.disabled && this.valueDecimal > 0 &&
             index - 1 < this.modelValue && index > this.modelValue
             return showWhenDisabled
         },
-        rateClass(index) {
+        rateClass(index: number) {
             let output = ''
             const currentValue = this.hoverValue !== 0 ? this.hoverValue : this.newValue
             if (index <= currentValue) {
@@ -142,5 +150,9 @@ export default {
             return output
         }
     }
-}
+})
+
+export type RateProps = ExtractComponentProps<typeof Rate>
+
+export default Rate
 </script>

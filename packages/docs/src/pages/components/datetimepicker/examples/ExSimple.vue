@@ -64,11 +64,20 @@
     </section>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BDatetimepicker, BField, BSelect, BSwitch } from '@ntohq/buefy-next'
+
+export default defineComponent({
+    components: {
+        BDatetimepicker,
+        BField,
+        BSelect,
+        BSwitch
+    },
     data() {
         return {
-            selected: new Date(),
+            selected: new Date() as Date | null,
             showWeekNumber: false,
             enableSeconds: false,
             hourFormat: undefined, // Browser locale
@@ -81,5 +90,5 @@ export default {
             this.selected = null
         }
     }
-}
+})
 </script>

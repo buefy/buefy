@@ -22,8 +22,15 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BField, BSlider } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BField,
+            BSlider
+        },
         data() {
             return {
                 sliderValue: 0
@@ -39,5 +46,5 @@
                 return "is-danger";
             }
         }
-    }
+    })
 </script>

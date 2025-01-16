@@ -11,10 +11,16 @@
     </section>
 </template>
 
-<script>
-import { Color } from '@ntohq/buefy-next'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BColorpicker, BField, BSwitch, Color } from '@ntohq/buefy-next'
 
-export default {
+export default defineComponent({
+    components: {
+        BColorpicker,
+        BField,
+        BSwitch
+    },
     data() {
         return {
             alpha: true,
@@ -22,9 +28,9 @@ export default {
         }
     },
     methods: {
-        formatter (color) {
+        formatter (color: Color) {
             return color.toString(this.alpha ? 'rgba' : 'rgb')
         }
     }
-}
+})
 </script>

@@ -139,11 +139,16 @@
     </nav>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+import { BIcon } from '@ntohq/buefy-next'
+
 import buefyPackage from '../../../../package.json'
 import bulmaPackage from 'bulma/package.json'
 
-export default {
+export default defineComponent({
+    components: { BIcon },
     props: {
         light: {
             type: Boolean,
@@ -180,5 +185,5 @@ export default {
     beforeUnmount() {
         this.$eventHub.off('navigate', this.closeMenu)
     }
-}
+})
 </script>

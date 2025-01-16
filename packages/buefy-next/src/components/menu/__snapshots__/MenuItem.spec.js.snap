@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`BMenuItem render correctly 1`] = `
-<li><a class="">
-    <!--v-if-->
-  </a><!-- sub menu items -->
-  <!--v-if-->
-</li>
-`;

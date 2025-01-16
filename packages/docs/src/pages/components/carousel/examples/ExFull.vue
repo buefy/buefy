@@ -84,8 +84,30 @@
     </section>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import {
+    BCarousel,
+    BCarouselItem,
+    BField,
+    BInput,
+    BNumberinput,
+    BRadioButton,
+    BSelect,
+    BSwitch
+} from '@ntohq/buefy-next'
+
+export default defineComponent({
+    components: {
+        BCarousel,
+        BCarouselItem,
+        BField,
+        BInput,
+        BNumberinput,
+        BRadioButton,
+        BSelect,
+        BSwitch
+    },
     data() {
         return {
             carousel: 0,
@@ -98,12 +120,12 @@ export default {
             pauseType: 'is-primary',
             interval: 3000,
             carousels: [
-                { title: 'Slide 1', color: 'dark' },
-                { title: 'Slide 2', color: 'primary' },
-                { title: 'Slide 3', color: 'info' },
-                { title: 'Slide 4', color: 'success', isHidden: false },
-                { title: 'Slide 5', color: 'warning' },
-                { title: 'Slide 6', color: 'danger' }
+                { title: 'Slide 1', color: 'dark', order: 0 },
+                { title: 'Slide 2', color: 'primary', order: 1 },
+                { title: 'Slide 3', color: 'info', order: 2 },
+                { title: 'Slide 4', color: 'success', isHidden: false, order: 3 },
+                { title: 'Slide 5', color: 'warning', order: 4 },
+                { title: 'Slide 6', color: 'danger', order: 5 }
             ]
         }
     },
@@ -113,7 +135,7 @@ export default {
         }
     },
     methods: {
-        info(value) {
+        info(value: number) {
             this.carousel = value
             this.$buefy.toast.open({
                 message: `This Slide ${value} !`,
@@ -121,5 +143,5 @@ export default {
             })
         }
     }
-}
+})
 </script>

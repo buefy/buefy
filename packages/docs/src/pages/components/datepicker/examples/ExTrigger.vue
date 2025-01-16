@@ -13,11 +13,20 @@
     </section>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BButton, BDatepicker, BField, BInput } from '@ntohq/buefy-next'
+
+export default defineComponent({
+    components: {
+        BButton,
+        BDatepicker,
+        BField,
+        BInput
+    },
     data() {
         return {
-            selected: null
+            selected: null as Date | null
         }
     },
     computed: {
@@ -25,5 +34,5 @@ export default {
             return this.selected ? this.selected.toDateString() : ''
         }
     }
-}
+})
 </script>

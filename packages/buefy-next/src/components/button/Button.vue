@@ -35,15 +35,23 @@
     </component>
 </template>
 
-<script>
-import Icon from '../icon/Icon.vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
+import BIcon from '../icon/Icon.vue'
 import config from '../../utils/config'
 
-export default {
+// Allowed native types.
+const NATIVE_TYPES = [
+    'button',
+    'submit',
+    'reset'
+] as const
+export type ButtonNativeType = typeof NATIVE_TYPES[number]
+
+export default defineComponent({
     name: 'BButton',
-    components: {
-        [Icon.name]: Icon
-    },
+    components: { BIcon },
     inheritAttrs: false,
     props: {
         type: [String, Object],
@@ -67,21 +75,17 @@ export default {
         hovered: Boolean,
         selected: Boolean,
         nativeType: {
-            type: String,
+            type: String as PropType<ButtonNativeType>,
             default: 'button',
-            validator: (value) => {
-                return [
-                    'button',
-                    'submit',
-                    'reset'
-                ].indexOf(value) >= 0
+            validator: (value: unknown) => {
+                return NATIVE_TYPES.indexOf(value as ButtonNativeType) >= 0
             }
         },
         tag: {
             type: String,
             default: 'button',
-            validator: (value) => {
-                return config.defaultLinkTags.indexOf(value) >= 0
+            validator: (value: unknown) => {
+                return config.defaultLinkTags.indexOf(value as string) >= 0
             }
         }
     },
@@ -101,5 +105,5 @@ export default {
             return this.size
         }
     }
-}
+})
 </script>

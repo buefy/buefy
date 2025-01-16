@@ -15,27 +15,38 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
+
+    import { shallowFields } from '@/utils'
+    import ApiView from '@/components/ApiView.vue'
+    import Example from '@/components/Example.vue'
+    import VariablesView from '@/components/VariablesView.vue'
+
     import api from './api/colorpicker'
     import variables from './variables/colorpicker'
-    import { shallowFields } from '@/utils'
 
-    import ExSimple from './examples/ExSimple'
+    import ExSimple from './examples/ExSimple.vue'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
 
-    import ExAlpha from './examples/ExAlpha'
+    import ExAlpha from './examples/ExAlpha.vue'
     import ExAlphaCode from './examples/ExAlpha.vue?raw'
 
-    import ExRepresentation from './examples/ExRepresentation'
+    import ExRepresentation from './examples/ExRepresentation.vue'
     import ExRepresentationCode from './examples/ExRepresentation.vue?raw'
 
-    import ExFormatter from './examples/ExFormatter'
+    import ExFormatter from './examples/ExFormatter.vue'
     import ExFormatterCode from './examples/ExFormatter.vue?raw'
 
-    import ExFields from './examples/ExFields'
+    import ExFields from './examples/ExFields.vue'
     import ExFieldsCode from './examples/ExFields.vue?raw'
 
-    export default {
+    export default defineComponent({
+        components: {
+            ApiView,
+            Example,
+            VariablesView
+        },
         data() {
             return {
                 api,
@@ -54,5 +65,5 @@
                 ExFieldsCode
             }
         }
-    }
+    })
 </script>

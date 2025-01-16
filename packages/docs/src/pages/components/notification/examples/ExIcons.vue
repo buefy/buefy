@@ -40,3 +40,7 @@
         </b-notification>
     </section>
 </template>
+
+<script setup lang="ts">
+import { BNotification } from '@ntohq/buefy-next'
+</script>

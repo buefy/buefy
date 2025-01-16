@@ -23,8 +23,16 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BSwitch, BTabs, BTabItem } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BSwitch,
+            BTabs,
+            BTabItem
+        },
         data() {
             return {
                 activeTab: 'pictures',
@@ -90,5 +98,5 @@
                 }
             }
         }
-    }
+    })
 </script>

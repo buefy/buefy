@@ -19,3 +19,7 @@
         </b-steps>
     </section>
 </template>
+
+<script setup lang="ts">
+import { BSteps, BStepItem } from '@ntohq/buefy-next'
+</script>

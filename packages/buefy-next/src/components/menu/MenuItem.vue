@@ -9,7 +9,7 @@
                 'is-disabled': disabled,
                 'icon-text': icon,
             }"
-            @click="onClick($event)"
+            @click="onClick()"
         >
             <b-icon
                 v-if="icon"
@@ -36,16 +36,22 @@
     </li>
 </template>
 
-<script>
-import Icon from '../icon/Icon.vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+import BIcon from '../icon/Icon.vue'
 import config from '../../utils/config'
 import CompatFallthroughMixin from '../../utils/CompatFallthroughMixin'
+import BMenu from './Menu.vue'
 import MenuItemContainerMixin from './MenuItemContainerMixin'
+import type { MenuItemContainer } from './MenuItemContainerMixin'
 
-export default {
+type MenuInstance = InstanceType<typeof BMenu>
+
+export default defineComponent({
     name: 'BMenuItem',
     components: {
-        [Icon.name]: Icon
+        BIcon
     },
     mixins: [CompatFallthroughMixin, MenuItemContainerMixin],
     inject: {
@@ -70,7 +76,7 @@ export default {
             type: String,
             default: 'a',
             validator: (value) => {
-                return config.defaultLinkTags.indexOf(value) >= 0
+                return config.defaultLinkTags.indexOf(value as string) >= 0
             }
         },
         ariaRole: {
@@ -82,7 +88,12 @@ export default {
             default: 'is-small'
         }
     },
-    emits: ['update:modelValue', 'update:expanded'],
+    emits: {
+        /* eslint-disable @typescript-eslint/no-unused-vars */
+        'update:modelValue': (_isActive: boolean) => true,
+        'update:expanded': (_isExpanded: boolean) => true
+        /* eslint-enable @typescript-eslint/no-unused-vars */
+    },
     data() {
         return {
             newActive: this.modelValue,
@@ -91,7 +102,7 @@ export default {
     },
     computed: {
         ariaRoleMenu() {
-            return this.ariaRole === 'menuitem' ? this.ariaRole : null
+            return this.ariaRole === 'menuitem' ? this.ariaRole : undefined
         }
     },
     watch: {
@@ -103,10 +114,10 @@ export default {
         }
     },
     methods: {
-        onClick(event) {
+        onClick() {
             if (this.disabled) return
             const menu = this.getMenu()
-            this.reset(this.parent, menu)
+            this.reset(this.parent as MenuItemContainer, menu)
             this.newExpanded = this.$props.expanded || !this.newExpanded
             this.$emit('update:expanded', this.newExpanded)
             if (menu && menu.activable) {
@@ -114,16 +125,19 @@ export default {
                 this.$emit('update:modelValue', this.newActive)
             }
         },
-        reset(parent, menu) {
+        reset(parent: MenuItemContainer | null, menu: MenuInstance | null) {
             if (parent == null) {
                 return
             }
             parent.menuItems.forEach((item) => {
                 if (item !== this) {
                     this.reset(item, menu)
-                    if (!parent.$data._isMenu || (parent.$data._isMenu && parent.accordion)) {
+                    if (
+                        !parent.$data._isMenu ||
+                        (parent.$data._isMenu && (parent as MenuInstance).accordion)
+                    ) {
                         item.newExpanded = false
-                        item.$emit('update:expanded', item.newActive)
+                        item.$emit('update:expanded', item.newExpanded)
                     }
                     if (menu && menu.activable) {
                         item.newActive = false
@@ -133,22 +147,22 @@ export default {
             })
         },
         getMenu() {
-            let parent = this.$parent
+            let parent = this.parent as MenuItemContainer
             while (parent && !parent.$data._isMenu) {
-                parent = parent.$parent
+                parent = parent.parent as MenuItemContainer
             }
-            return parent
+            return parent as MenuInstance | null
         }
     },
     mounted() {
         if (this.parent) {
-            this.parent.appendMenuItem(this)
+            (this.parent as MenuItemContainer).appendMenuItem(this)
         }
     },
     beforeUnmount() {
         if (this.parent) {
-            this.parent.removeMenuItem(this)
+            (this.parent as MenuItemContainer).removeMenuItem(this)
         }
     }
-}
+})
 </script>

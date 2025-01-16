@@ -27,7 +27,7 @@
             @keydown.up.prevent="keyArrows('up')"
             @keydown.down.prevent="keyArrows('down')"
             @icon-right-click="rightIconClick"
-            @icon-click="(event) => $emit('icon-click', event)"
+            @icon-click="(event: MouseEvent) => $emit('icon-click', event)"
         />
 
         <transition name="fade">
@@ -84,7 +84,7 @@
                                 :index="index"
                             />
                             <span v-else>
-                                {{ getValue(option, true) }}
+                                {{ getValue(option) }}
                             </span>
                         </a>
                     </template>
@@ -110,7 +110,10 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
+
 import {
     getValueByPath,
     removeElement,
@@ -120,16 +123,27 @@ import {
 } from '../../utils/helpers'
 import CompatFallthroughMixin from '../../utils/CompatFallthroughMixin'
 import FormElementMixin from '../../utils/FormElementMixin'
-import Input from '../input/Input.vue'
+import BInput from '../input/Input.vue'
 
-export default {
+type BInputComponent = InstanceType<typeof BInput>
+// `$data` interface of `Taginput` component.
+// we cannot directly import `Taginput` because it depends on `Autocomplete`.
+interface TaginputData {
+    _isTaginput: boolean
+}
+
+interface DataItem {
+    group?: string
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    items: any[]
+}
+
+export default defineComponent({
     name: 'BAutocomplete',
-    components: {
-        [Input.name]: Input
-    },
+    components: { BInput },
     mixins: [CompatFallthroughMixin, FormElementMixin],
     props: {
-        modelValue: [Number, String],
+        modelValue: [Number, String, null] as PropType<number | string | null>,
         data: {
             type: Array,
             default: () => []
@@ -141,7 +155,10 @@ export default {
         keepFirst: Boolean,
         clearOnSelect: Boolean,
         openOnFocus: Boolean,
-        customFormatter: Function,
+        customFormatter: {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            type: Function as PropType<(option: any) => string>
+        },
         checkInfiniteScroll: Boolean,
         keepOpen: Boolean,
         selectOnClickOutside: Boolean,
@@ -167,25 +184,29 @@ export default {
         selectableHeader: Boolean,
         selectableFooter: Boolean
     },
-    emits: [
-        'active',
-        'blur',
-        'focus',
-        'icon-click',
-        'icon-right-click',
-        'infinite-scroll',
-        'select',
-        'select-footer',
-        'select-header',
-        'typing',
-        'update:modelValue'
-    ],
+    emits: {
+        /* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any */
+        active: (active: boolean) => true,
+        blur: (event: Event) => true,
+        focus: (event?: Event) => true,
+        'icon-click': (event: MouseEvent) => true,
+        'icon-right-click': (event: MouseEvent) => true,
+        'infinite-scroll': () => true,
+        select: (selected: any, event?: Event) => true,
+        'select-footer': (event: Event) => true,
+        'select-header': (event: Event) => true,
+        typing: (value: number | string | null | undefined) => true,
+        'update:modelValue': (value: number | string) => true
+        /* eslint-enable @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any */
+    },
     data() {
         return {
-            selected: null,
-            hovered: null,
-            headerHovered: null,
-            footerHovered: null,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            selected: null as any,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            hovered: null as any,
+            headerHovered: null as boolean | null,
+            footerHovered: null as boolean | null,
             isActive: false,
             newValue: this.modelValue,
             newAutocomplete: this.autocomplete || 'off',
@@ -195,29 +216,31 @@ export default {
             style: {},
             _isAutocomplete: true,
             _elementRef: 'input',
-            _bodyEl: undefined, // Used to append to body
-            timeOutID: null
+            _bodyEl: undefined as Element | undefined, // Used to append to body
+            timeOutID: undefined as ReturnType<typeof setTimeout> | undefined
         }
     },
     computed: {
-        computedData() {
-            if (this.groupField) {
-                if (this.groupOptions) {
-                    const newData = []
+        computedData(): DataItem[] {
+            const { groupField, groupOptions } = this
+            if (groupField) {
+                if (groupOptions) {
+                    const newData: DataItem[] = []
                     this.data.forEach((option) => {
-                        const group = getValueByPath(option, this.groupField)
-                        const items = getValueByPath(option, this.groupOptions)
+                        const group = getValueByPath(option, groupField)
+                        const items = getValueByPath(option, groupOptions)
                         newData.push({ group, items })
                     })
                     return newData
                 } else {
-                    const tmp = {}
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    const tmp: Record<string, any[]> = {}
                     this.data.forEach((option) => {
-                        const group = getValueByPath(option, this.groupField)
+                        const group = getValueByPath(option, groupField)
                         if (!tmp[group]) tmp[group] = []
                         tmp[group].push(option)
                     })
-                    const newData = []
+                    const newData: DataItem[] = []
                     Object.keys(tmp).forEach((group) => {
                         newData.push({ group, items: tmp[group] })
                     })
@@ -230,26 +253,26 @@ export default {
             if (!this.computedData) return true
             return !this.computedData.some((element) => element.items && element.items.length)
         },
-        /**
+        /*
          * White-listed items to not close when clicked.
          * Add input, dropdown and all children.
          */
         whiteList() {
             const whiteList = []
-            whiteList.push(this.$refs.input.$el.querySelector('input'))
+            whiteList.push((this.$refs.input as BInputComponent).$el.querySelector('input'))
             whiteList.push(this.$refs.dropdown)
             // Add all children from dropdown
             if (this.$refs.dropdown != null) {
-                const children = this.$refs.dropdown.querySelectorAll('*')
+                const children = (this.$refs.dropdown as Element).querySelectorAll('*')
                 for (const child of children) {
                     whiteList.push(child)
                 }
             }
-            if (this.$parent.$data._isTaginput) {
+            if ((this.$parent?.$data as TaginputData)._isTaginput) {
                 // Add taginput container
-                whiteList.push(this.$parent.$el)
+                whiteList.push(this.$parent!.$el)
                 // Add .tag and .delete
-                const tagInputChildren = this.$parent.$el.querySelectorAll('*')
+                const tagInputChildren = this.$parent!.$el.querySelectorAll('*')
                 for (const tagInputChild of tagInputChildren) {
                     whiteList.push(tagInputChild)
                 }
@@ -258,42 +281,42 @@ export default {
             return whiteList
         },
 
-        /**
+        /*
          * Check if exists default slot
          */
         hasDefaultSlot() {
             return !!this.$slots.default
         },
 
-        /**
+        /*
          * Check if exists group slot
          */
         hasGroupSlot() {
             return !!this.$slots.group
         },
 
-        /**
+        /*
          * Check if exists "empty" slot
          */
         hasEmptySlot() {
             return !!this.$slots.empty
         },
 
-        /**
+        /*
          * Check if exists "header" slot
          */
         hasHeaderSlot() {
             return !!this.$slots.header
         },
 
-        /**
+        /*
          * Check if exists "footer" slot
          */
         hasFooterSlot() {
             return !!this.$slots.footer
         },
 
-        /**
+        /*
          * Apply dropdownPosition property
          */
         isOpenedTop() {
@@ -319,12 +342,12 @@ export default {
 
         contentStyle() {
             return {
-                maxHeight: toCssWidth(this.maxHeight)
+                maxHeight: toCssWidth(this.maxHeight) || undefined
             }
         }
     },
     watch: {
-        /**
+        /*
          * When dropdown is toggled, check the visibility to know when
          * to open upwards.
          */
@@ -345,13 +368,13 @@ export default {
             })
         },
 
-        /**
+        /*
          * When checkInfiniteScroll property changes scroll event should be removed or added
          */
         checkInfiniteScroll(checkInfiniteScroll) {
-            if ((this.$refs.dropdown && this.$refs.dropdown.querySelector('.dropdown-content')) === false) return
+            if ((this.$refs.dropdown && (this.$refs.dropdown as Element).querySelector('.dropdown-content')) === false) return
 
-            const list = this.$refs.dropdown.querySelector('.dropdown-content')
+            const list = (this.$refs.dropdown as Element).querySelector('.dropdown-content')!
 
             if (checkInfiniteScroll === true) {
                 list.addEventListener('scroll', this.checkIfReachedTheEndOfScroll)
@@ -362,7 +385,7 @@ export default {
             list.removeEventListener('scroll', this.checkIfReachedTheEndOfScroll)
         },
 
-        /**
+        /*
          * When updating input's value
          *   1. Emit changes
          *   2. If value isn't the same as selected, set null
@@ -381,7 +404,7 @@ export default {
             }
         },
 
-        /**
+        /*
          * When v-model is changed:
          *   1. Update internal value.
          *   2. If it's invalid, validate again.
@@ -390,7 +413,7 @@ export default {
             this.newValue = value
         },
 
-        /**
+        /*
          * Select first option if "keep-first
          */
         data() {
@@ -417,28 +440,31 @@ export default {
         }
     },
     methods: {
-        /**
+        /*
          * Set which option is currently hovered.
          */
-        setHovered(option) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        setHovered(option: any) {
             if (option === undefined) return
 
             this.hovered = option
         },
 
-        /**
+        /*
          * Set which option is currently selected, update v-model,
          * update input value and close dropdown.
          */
-        setSelected(option, closeDropdown = true, event = undefined) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        setSelected(option: any, closeDropdown = true, event?: Event) {
             if (option === undefined) return
             this.selected = option
             this.$emit('select', this.selected, event)
             if (this.selected !== null) {
                 if (this.clearOnSelect) {
-                    const input = this.$refs.input
+                    const input = this.$refs.input as BInputComponent
                     input.newValue = ''
-                    input.$refs.input.value = ''
+                    const innerInput = input.$refs.input as HTMLInputElement | HTMLTextAreaElement
+                    innerInput.value = ''
                 } else {
                     this.newValue = this.getValue(this.selected)
                 }
@@ -450,10 +476,10 @@ export default {
             this.checkValidity()
         },
 
-        /**
+        /*
          * Select first option
          */
-        selectFirstOption(computedData) {
+        selectFirstOption(computedData: DataItem[]) {
             this.$nextTick(() => {
                 const nonEmptyElements = computedData.filter(
                     (element) => element.items && element.items.length
@@ -467,7 +493,7 @@ export default {
             })
         },
 
-        keydown(event) {
+        keydown(event: KeyboardEvent) {
             const { key } = event // cannot destructure preventDefault (https://stackoverflow.com/a/49616808/2774496)
             // prevent emit submit event
             if (key === 'Enter') event.preventDefault()
@@ -491,14 +517,18 @@ export default {
             }
         },
 
-        selectHeaderOrFoterByClick(event, origin) {
+        selectHeaderOrFoterByClick(event: MouseEvent, origin: 'header' | 'footer') {
             this.checkIfHeaderOrFooterSelected(event, { origin })
         },
 
-        /**
+        /*
          * Check if header or footer was selected.
          */
-        checkIfHeaderOrFooterSelected(event, triggerClick, closeDropdown = true) {
+        checkIfHeaderOrFooterSelected(
+            event: Event,
+            triggerClick: { origin: 'header' | 'footer' } | null,
+            closeDropdown = true
+        ) {
             if (this.selectableHeader && (this.headerHovered || (triggerClick && triggerClick.origin === 'header'))) {
                 this.$emit('select-header', event)
                 this.headerHovered = false
@@ -513,10 +543,10 @@ export default {
             }
         },
 
-        /**
+        /*
          * Close dropdown if clicked outside.
          */
-        clickedOutside(event) {
+        clickedOutside(event: MouseEvent) {
             const target = isCustomElement(this) ? event.composedPath()[0] : event.target
             if (!this.hasFocus && this.whiteList.indexOf(target) < 0) {
                 if (this.keepFirst && this.hovered && this.selectOnClickOutside) {
@@ -527,11 +557,12 @@ export default {
             }
         },
 
-        /**
+        /*
          * Return display text for the input.
          * If object, get value from path, or else just the value.
          */
-        getValue(option) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        getValue(option: any) {
             if (option === null) return
 
             if (typeof this.customFormatter !== 'undefined') {
@@ -540,33 +571,37 @@ export default {
             return typeof option === 'object' ? getValueByPath(option, this.field) : option
         },
 
-        /**
+        /*
          * Check if the scroll list inside the dropdown
          * reached it's end.
          */
         checkIfReachedTheEndOfScroll() {
-            const list = this.$refs.dropdown.querySelector('.dropdown-content')
-            const footerHeight = this.hasFooterSlot ? list.querySelectorAll('div.dropdown-footer')[0].clientHeight : 0
+            const list = (this.$refs.dropdown as Element).querySelector('.dropdown-content')!
+            const footerHeight = this.hasFooterSlot
+                ? list.querySelectorAll('div.dropdown-footer')[0].clientHeight
+                : 0
             if (list.clientHeight !== list.scrollHeight &&
-                list.scrollTop + list.parentElement.clientHeight + footerHeight >= list.scrollHeight
+                (list.scrollTop +
+                 list.parentElement!.clientHeight +
+                 footerHeight) >= list.scrollHeight
             ) {
                 this.$emit('infinite-scroll')
             }
         },
 
-        /**
+        /*
          * Calculate if the dropdown is vertically visible when activated,
          * otherwise it is openened upwards.
          */
         calcDropdownInViewportVertical() {
             this.$nextTick(() => {
-                /**
+                /*
                  * this.$refs.dropdown may be undefined
                  * when Autocomplete is conditional rendered
                  */
                 if (this.$refs.dropdown == null) return
 
-                const rect = this.$refs.dropdown.getBoundingClientRect()
+                const rect = (this.$refs.dropdown as Element).getBoundingClientRect()
 
                 this.isListInViewportVertically = rect.top >= 0 &&
                     rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
@@ -576,11 +611,11 @@ export default {
             })
         },
 
-        /**
+        /*
          * Arrows keys listener.
          * If dropdown is active, set hovered option, or else just open.
          */
-        keyArrows(direction) {
+        keyArrows(direction: 'down' | 'up') {
             const sum = direction === 'down' ? 1 : -1
             if (this.isActive) {
                 const data = this.computedData.map(
@@ -614,7 +649,7 @@ export default {
                     this.headerHovered = true
                 }
 
-                const list = this.$refs.dropdown.querySelector('.dropdown-content')
+                const list = (this.$refs.dropdown as Element).querySelector('.dropdown-content')!
                 let querySelectorText = 'a.dropdown-item:not(.is-disabled)'
                 if (this.hasHeaderSlot && this.selectableHeader) {
                     querySelectorText += ',div.dropdown-header'
@@ -622,7 +657,8 @@ export default {
                 if (this.hasFooterSlot && this.selectableFooter) {
                     querySelectorText += ',div.dropdown-footer'
                 }
-                const element = list.querySelectorAll(querySelectorText)[index]
+                const element =
+                    list.querySelectorAll(querySelectorText)[index] as HTMLElement | null
 
                 if (!element) return
 
@@ -639,11 +675,11 @@ export default {
             }
         },
 
-        /**
+        /*
          * Focus listener.
          * If value is the same as selected, select all text.
          */
-        focused(event) {
+        focused(event?: Event) {
             if (this.getValue(this.selected) === this.newValue) {
                 this.$el.querySelector('input').select()
             }
@@ -658,10 +694,10 @@ export default {
             this.$emit('focus', event)
         },
 
-        /**
+        /*
          * Blur listener.
          */
-        onBlur(event) {
+        onBlur(event: Event) {
             this.hasFocus = false
             this.$emit('blur', event)
         },
@@ -671,12 +707,12 @@ export default {
             this.$emit('typing', this.newValue)
             this.checkValidity()
         },
-        rightIconClick(event) {
+        rightIconClick(event: MouseEvent) {
             if (this.clearable) {
                 this.newValue = ''
                 this.setSelected(null, false)
                 if (this.openOnFocus) {
-                    this.$refs.input.$el.focus()
+                    (this.$refs.input as BInputComponent).$el.focus()
                 }
             } else {
                 this.$emit('icon-right-click', event)
@@ -690,16 +726,18 @@ export default {
             }
         },
         updateAppendToBody() {
-            const dropdownMenu = this.$refs.dropdown
-            const trigger = this.$parent.$data._isTaginput ? this.$parent.$el : this.$refs.input.$el
+            const dropdownMenu = this.$refs.dropdown as Element
+            const trigger = (this.$parent!.$data as TaginputData)._isTaginput
+                ? this.$parent!.$el
+                : (this.$refs.input as BInputComponent).$el
             if (dropdownMenu && trigger) {
                 // update wrapper dropdown
-                const root = this.$data._bodyEl
+                const root = this.$data._bodyEl!
                 root.classList.forEach((item) => root.classList.remove(item))
                 root.classList.add('autocomplete')
                 root.classList.add('control')
-                if (this.expandend) {
-                    root.classList.add('is-expandend')
+                if (this.expanded) {
+                    root.classList.add('is-expanded')
                 }
                 const rect = trigger.getBoundingClientRect()
                 let top = rect.top + window.scrollY
@@ -728,13 +766,13 @@ export default {
     },
     mounted() {
         if (this.checkInfiniteScroll &&
-            this.$refs.dropdown && this.$refs.dropdown.querySelector('.dropdown-content')
+            this.$refs.dropdown && (this.$refs.dropdown as Element).querySelector('.dropdown-content')
         ) {
-            const list = this.$refs.dropdown.querySelector('.dropdown-content')
+            const list = (this.$refs.dropdown as Element).querySelector('.dropdown-content')!
             list.addEventListener('scroll', this.checkIfReachedTheEndOfScroll)
         }
         if (this.appendToBody) {
-            this.$data._bodyEl = createAbsoluteElement(this.$refs.dropdown)
+            this.$data._bodyEl = createAbsoluteElement(this.$refs.dropdown as Element)
             this.updateAppendToBody()
         }
     },
@@ -744,15 +782,15 @@ export default {
             if (this.dropdownPosition === 'auto') { window.removeEventListener('resize', this.calcDropdownInViewportVertical) }
         }
         if (this.checkInfiniteScroll &&
-            this.$refs.dropdown && this.$refs.dropdown.querySelector('.dropdown-content')
+            this.$refs.dropdown && (this.$refs.dropdown as Element).querySelector('.dropdown-content')
         ) {
-            const list = this.$refs.dropdown.querySelector('.dropdown-content')
+            const list = (this.$refs.dropdown as Element).querySelector('.dropdown-content')!
             list.removeEventListener('scroll', this.checkIfReachedTheEndOfScroll)
         }
         if (this.appendToBody) {
-            removeElement(this.$data._bodyEl)
+            removeElement(this.$data._bodyEl!)
         }
         clearTimeout(this.timeOutID)
     }
-}
+})
 </script>

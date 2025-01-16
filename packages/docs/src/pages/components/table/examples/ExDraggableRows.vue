@@ -17,8 +17,20 @@
   </div>
 </template>
 
-<script>
-  export default {
+<script lang="ts">
+  import { defineComponent } from 'vue'
+  import { BTable } from '@ntohq/buefy-next'
+  import type {
+    ITableColumn,
+    TableColumnDragEvent,
+    TableRow,
+    TableRowDragEvent
+} from '@ntohq/buefy-next'
+
+  export default defineComponent({
+      components: {
+          BTable
+      },
       data() {
           return {
               data: [
@@ -53,52 +65,52 @@
                       label: 'Gender',
                   }
               ],
-              draggingRow: null,
-              draggingRowIndex: null,
-              draggingColumn: null,
-              draggingColumnIndex: null
+              draggingRow: null as TableRow | null,
+              draggingRowIndex: null as number | null,
+              draggingColumn: null as ITableColumn | null,
+              draggingColumnIndex: null as number | null
           }
       },
       methods: {
-        dragstart(payload) {
+        dragstart(payload: TableRowDragEvent) {
           this.draggingRow = payload.row
           this.draggingRowIndex = payload.index
-          payload.event.dataTransfer.effectAllowed = 'copy'
+          payload.event.dataTransfer!.effectAllowed = 'copy'
         },
-        dragover(payload) {
-          payload.event.dataTransfer.dropEffect = 'copy'
-          payload.event.target.closest('tr').classList.add('is-selected')
+        dragover(payload: TableRowDragEvent) {
+          payload.event.dataTransfer!.dropEffect = 'copy';
+          (payload.event.target as Element).closest('tr')!.classList.add('is-selected')
           payload.event.preventDefault()
         },
-        dragleave(payload) {
-          payload.event.target.closest('tr').classList.remove('is-selected')
+        dragleave(payload: TableRowDragEvent) {
+          (payload.event.target as Element).closest('tr')!.classList.remove('is-selected')
           payload.event.preventDefault()
         },
-        drop(payload) {
-          payload.event.target.closest('tr').classList.remove('is-selected')
+        drop(payload: TableRowDragEvent) {
+          (payload.event.target as Element).closest('tr')!.classList.remove('is-selected')
           const droppedOnRowIndex = payload.index
-          this.$buefy.toast.open(`Moved ${this.draggingRow.first_name} from row ${this.draggingRowIndex + 1} to ${droppedOnRowIndex + 1}`)
+          this.$buefy.toast.open(`Moved ${this.draggingRow.first_name} from row ${this.draggingRowIndex! + 1} to ${droppedOnRowIndex! + 1}`)
         },
 
-        columndragstart(payload) {
+        columndragstart(payload: TableColumnDragEvent) {
           this.draggingColumn = payload.column
           this.draggingColumnIndex = payload.index
-          payload.event.dataTransfer.effectAllowed = 'copy'
+          payload.event.dataTransfer!.effectAllowed = 'copy'
         },
-        columndragover(payload) {
-          payload.event.dataTransfer.dropEffect = 'copy'
-          payload.event.target.closest('th').classList.add('is-selected')
+        columndragover(payload: TableColumnDragEvent) {
+          payload.event.dataTransfer!.dropEffect = 'copy';
+          (payload.event.target as Element).closest('th')!.classList.add('is-selected')
           payload.event.preventDefault()
         },
-        columndragleave(payload) {
-          payload.event.target.closest('th').classList.remove('is-selected')
+        columndragleave(payload: TableColumnDragEvent) {
+          (payload.event.target as Element).closest('th')!.classList.remove('is-selected')
           payload.event.preventDefault()
         },
-        columndrop(payload) {
-          payload.event.target.closest('th').classList.remove('is-selected')
+        columndrop(payload: TableColumnDragEvent) {
+          (payload.event.target as Element).closest('th')!.classList.remove('is-selected')
           const droppedOnColumnIndex = payload.index
-          this.$buefy.toast.open(`Moved ${this.draggingColumn.field} from column ${this.draggingColumnIndex + 1} to ${droppedOnColumnIndex + 1}`)
+          this.$buefy.toast.open(`Moved ${this.draggingColumn!.field} from column ${this.draggingColumnIndex! + 1} to ${droppedOnColumnIndex! + 1}`)
         }
       }
-  }
+  })
 </script>

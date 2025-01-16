@@ -4,7 +4,7 @@
             <b-taginput
                 v-model="tags"
                 :data="filteredTags"
-                autocomplete
+                autocomplete="on"
                 ref="taginput"
                 icon="label"
                 placeholder="Add a tag"
@@ -24,7 +24,7 @@
                         :tabstop="false"
                         ellipsis
                         closable
-                        @close="$refs.taginput.removeTag(index, $event)">
+                        @close="($refs.taginput as BTaginputInstance).removeTag(index, $event)">
                         {{tag.user.first_name}}
                     </b-tag>
                 </template>
@@ -34,10 +34,19 @@
     </section>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
     import data from '@/data/sample.json'
+    import { BField, BTag, BTaginput } from '@ntohq/buefy-next'
 
-    export default {
+    type BTaginputInstance = InstanceType<typeof BTaginput>
+
+    export default defineComponent({
+        components: {
+            BField,
+            BTag,
+            BTaginput
+        },
         data() {
             return {
                 filteredTags: data,
@@ -46,15 +55,18 @@
             }
         },
         methods: {
-            getFilteredTags(text) {
+            getFilteredTags(text: number | string | undefined) {
+                if (text == null) {
+                    return
+                }
                 this.filteredTags = data.filter((option) => {
                     return option.user.first_name
                         .toString()
                         .toLowerCase()
-                        .indexOf(text.toLowerCase()) >= 0
+                        .indexOf(text.toString().toLowerCase()) >= 0
                 })
             },
-            getType(tag) {
+            getType(tag: typeof data[number]) {
                 if (tag.id >= 1 && tag.id < 10) {
                     return 'is-primary'
                 } else if (tag.id >= 10 && tag.id < 20) {
@@ -68,6 +80,6 @@
                 }
             }
         }
-    }
+    })
 </script>
 

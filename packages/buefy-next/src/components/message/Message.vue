@@ -48,18 +48,26 @@
     </transition>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { ExtractComponentProps } from '../../utils/helpers'
 import MessageMixin from '../../utils/MessageMixin'
-import Progress from '../progress/Progress.vue'
+import BIcon from '../icon/Icon.vue'
+import BProgress from '../progress/Progress.vue'
 
-export default {
+const Message = defineComponent({
     name: 'BMessage',
     components: {
-        [Progress.name]: Progress
+        BIcon,
+        BProgress
     },
     mixins: [MessageMixin],
     props: {
         ariaCloseLabel: String
     }
-}
+})
+
+export type MessageProps = ExtractComponentProps<typeof Message>
+
+export default Message
 </script>

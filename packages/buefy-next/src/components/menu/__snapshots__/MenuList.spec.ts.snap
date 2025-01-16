@@ -1,0 +1,8 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BMenuList > render correctly 1`] = `
+"<div>
+  <p class=\\"menu-label\\">Test</p>
+  <ul class=\\"menu-list\\"></ul>
+</div>"
+`;

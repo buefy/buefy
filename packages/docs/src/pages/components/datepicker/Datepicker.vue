@@ -85,51 +85,62 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
+
+    import { shallowFields } from '@/utils'
+    import ApiView from '@/components/ApiView.vue'
+    import Example from '@/components/Example.vue'
+    import VariablesView from '@/components/VariablesView.vue'
+
     import api from './api/datepicker'
     import variables from './variables/datepicker'
-    import { shallowFields } from '@/utils'
 
-    import ExSimple from './examples/ExSimple'
+    import ExSimple from './examples/ExSimple.vue'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
 
-    import ExEditable from './examples/ExEditable'
+    import ExEditable from './examples/ExEditable.vue'
     import ExEditableCode from './examples/ExEditable.vue?raw'
 
-    import ExRange from './examples/ExRange'
+    import ExRange from './examples/ExRange.vue'
     import ExRangeCode from './examples/ExRange.vue?raw'
 
-    import ExFooter from './examples/ExFooter'
+    import ExFooter from './examples/ExFooter.vue'
     import ExFooterCode from './examples/ExFooter.vue?raw'
 
-    import ExHeader from './examples/ExHeader'
+    import ExHeader from './examples/ExHeader.vue'
     import ExHeaderCode from './examples/ExHeader.vue?raw'
 
-    import ExProgrammatically from './examples/ExProgrammatically'
+    import ExProgrammatically from './examples/ExProgrammatically.vue'
     import ExProgrammaticallyCode from './examples/ExProgrammatically.vue?raw'
 
-    import ExTrigger from './examples/ExTrigger'
+    import ExTrigger from './examples/ExTrigger.vue'
     import ExTriggerCode from './examples/ExTrigger.vue?raw'
 
-    import ExMonth from './examples/ExMonth'
+    import ExMonth from './examples/ExMonth.vue'
     import ExMonthCode from './examples/ExMonth.vue?raw'
 
-    import ExInline from './examples/ExInline'
+    import ExInline from './examples/ExInline.vue'
     import ExInlineCode from './examples/ExInline.vue?raw'
 
-    import ExUnselectable from './examples/ExUnselectable'
+    import ExUnselectable from './examples/ExUnselectable.vue'
     import ExUnselectableCode from './examples/ExUnselectable.vue?raw'
 
-    import ExEvents from './examples/ExEvents'
+    import ExEvents from './examples/ExEvents.vue'
     import ExEventsCode from './examples/ExEvents.vue?raw'
 
-    import ExRangeInput from './examples/ExRangeInput'
+    import ExRangeInput from './examples/ExRangeInput.vue'
     import ExRangeInputCode from './examples/ExRangeInput.vue?raw'
 
-    import ExMultipleInput from './examples/ExMultipleInput'
+    import ExMultipleInput from './examples/ExMultipleInput.vue'
     import ExMultipleInputCode from './examples/ExMultipleInput.vue?raw'
 
-    export default {
+    export default defineComponent({
+        components: {
+            ApiView,
+            Example,
+            VariablesView
+        },
         data() {
             return {
                 api,
@@ -164,5 +175,5 @@
                 ExMultipleInputCode
             }
         }
-    }
+    })
 </script>

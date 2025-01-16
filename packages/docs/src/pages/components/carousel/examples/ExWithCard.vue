@@ -27,8 +27,18 @@
     </b-carousel-list>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BButton, BCarouselList, BField, BRate, BTag } from '@ntohq/buefy-next'
+
+export default defineComponent({
+    components: {
+        BButton,
+        BCarouselList,
+        BField,
+        BRate,
+        BTag
+    },
     data() {
         return {
             test: 0,
@@ -76,9 +86,9 @@ export default {
         }
     },
     methods: {
-        info(value) {
+        info(value: number) {
             this.test = value
         }
     }
-}
+})
 </script>

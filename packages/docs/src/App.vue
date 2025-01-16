@@ -8,15 +8,16 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 import Clipboard from 'clipboard'
 
-export default {
+export default defineComponent({
     // eslint-disable-next-line vue/multi-word-component-names
     name: 'Buefy',
     data() {
         return {
-            clipboard: null
+            clipboard: null as Clipboard | null
         }
     },
     methods: {
@@ -25,14 +26,14 @@ export default {
             this.clipboard && this.clipboard.destroy()
 
             this.clipboard = new Clipboard('.copy-code', {
-                target: (trigger) => trigger.parentElement.parentElement.querySelector('code')
+                target: (trigger) => trigger.parentElement!.parentElement!.querySelector('code')!
             })
 
-            this.clipboard.on('success', (e) => {
+            this.clipboard.on('success', () => {
                 this.$buefy.toast.open('Copied to clipboard!')
             })
 
-            this.clipboard.on('error', (e) => {
+            this.clipboard.on('error', () => {
                 this.$buefy.toast.open({
                     message: 'Error while copying to clipboard :(',
                     type: 'is-danger'
@@ -63,10 +64,10 @@ export default {
         // Destroy clipboard instance if there's any
         this.clipboard && this.clipboard.destroy()
     },
-    beforeRouteUpdate(to, from) {
+    beforeRouteUpdate() {
         this.setupClipboardControls()
     }
-}
+})
 </script>
 
 <style lang="scss">

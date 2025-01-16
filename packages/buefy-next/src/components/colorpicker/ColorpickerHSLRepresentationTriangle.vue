@@ -115,20 +115,25 @@
     </svg>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
+
 import Color from '../../utils/color'
+import type { Hsl } from '../../utils/color'
+
 const cos30 = 0.86602540378
 const sin30 = 0.5
 
 let id = 0
 
-export default {
+export default defineComponent({
     name: 'BColorpickerHSLRepresentationTriangle',
     props: {
         value: {
-            type: Object,
+            type: Object as PropType<Hsl>,
             required: true,
-            validator(value) {
+            validator(value: Hsl) {
                 return typeof value.hue === 'number' &&
                     typeof value.saturation === 'number' &&
                     typeof value.lightness === 'number'
@@ -143,7 +148,10 @@ export default {
             default: 20
         }
     },
-    emits: ['input'],
+    emits: {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        input: (_value: Color) => true
+    },
     data() {
         return {
             id: id++,
@@ -266,7 +274,7 @@ export default {
                 )
             )
         },
-        hueKeyPress(event) {
+        hueKeyPress(event: KeyboardEvent) {
             let handled = false
             switch (event.key) {
                 case 'ArrowRight':
@@ -302,7 +310,7 @@ export default {
                 this.emitColor()
             }
         },
-        slKeyPress(event) {
+        slKeyPress(event: KeyboardEvent) {
             let handled = false
             switch (event.key) {
                 case 'ArrowRight':
@@ -344,30 +352,31 @@ export default {
                 this.emitColor()
             }
         },
-        clickHue(event) {
+        clickHue(event: MouseEvent) {
             this.startMouseCapture(event)
             this.trackMouse(event)
-            this.stopMouseCapture(event)
-            this.$refs.hueCursor.focus()
+            this.stopMouseCapture(event);
+            (this.$refs.hueCursor as HTMLElement).focus()
         },
-        clickSL(event) {
+        clickSL(event: MouseEvent) {
             this.startMouseCapture(event)
             this.trackMouse(event)
-            this.stopMouseCapture(event)
-            this.$refs.slCursor.focus()
+            this.stopMouseCapture(event);
+            (this.$refs.slCursor as HTMLElement).focus()
         },
-        trackMouse(event) {
+        trackMouse(event: MouseEvent | TouchEvent) {
             if (this.captureMouse === false) {
                 return
             }
             event.preventDefault()
             event.stopPropagation()
 
+            const touches = (event as TouchEvent).touches
             let [mouseX, mouseY] = [0, 0]
-            if (typeof event.touches !== 'undefined' && event.touches.length) {
-                [mouseX, mouseY] = [event.touches[0].clientX, event.touches[0].clientY]
+            if (typeof touches !== 'undefined' && touches.length) {
+                [mouseX, mouseY] = [touches[0].clientX, touches[0].clientY]
             } else {
-                [mouseX, mouseY] = [event.clientX, event.clientY]
+                [mouseX, mouseY] = [(event as MouseEvent).clientX, (event as MouseEvent).clientY]
             }
             const angle = Math.atan2(
                 mouseY - this.clientOffset.cy,
@@ -405,21 +414,21 @@ export default {
             }
             this.emitColor()
         },
-        startMouseCapture(event) {
+        startMouseCapture(event: Event) {
             event.stopPropagation()
 
             this.captureMouse = true
-            if (event.target.closest('.colorpicker-triangle-slider-sl') !== null) {
+            if ((event.target as HTMLElement).closest('.colorpicker-triangle-slider-sl') !== null) {
                 this.captureType = 'sl'
             } else {
                 this.captureType = 'hue'
             }
         },
-        stopMouseCapture(event) {
+        stopMouseCapture(event: Event) {
             if (this.captureMouse !== false) {
                 event.preventDefault()
-                event.stopPropagation()
-                this.$refs[this.captureType === 'sl' ? 'slCursor' : 'hueCursor'].focus()
+                event.stopPropagation();
+                (this.$refs[this.captureType === 'sl' ? 'slCursor' : 'hueCursor'] as HTMLElement).focus()
             }
             this.captureMouse = false
         },
@@ -443,5 +452,5 @@ export default {
 
         clearTimeout(this.debounce)
     }
-}
+})
 </script>

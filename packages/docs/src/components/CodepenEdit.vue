@@ -22,14 +22,21 @@
     </form>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BButton } from '@ntohq/buefy-next'
+
 // https://vitejs.dev/guide/assets.html#importing-asset-as-string
 import dataTest from '@/data/sample.json?raw'
 import { preformat } from '@/utils'
 
-export default {
+export default defineComponent({
+    components: { BButton },
     props: {
-        code: String,
+        code: {
+            type: String,
+            required: true
+        },
         title: String
     },
     data() {
@@ -152,9 +159,9 @@ export default {
             const end = this.code.lastIndexOf('</style>')
             if (start < 0 || end < 0) return
 
-            return this.code.substring(start + match[0].length, end)
+            return this.code.substring(start + match![0].length, end)
         },
-        hasContent(startTag, endTag) {
+        hasContent(startTag: string, endTag: string) {
             const start = this.code.indexOf(startTag)
             const end = this.code.lastIndexOf(endTag)
             return !(start < 0 || end < 0)
@@ -163,5 +170,5 @@ export default {
     mounted() {
         this.hasHtml = this.hasContent('<template>', '</template>')
     }
-}
+})
 </script>

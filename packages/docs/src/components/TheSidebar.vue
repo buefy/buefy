@@ -8,7 +8,7 @@
                 </p>
                 <ul>
                     <li v-for="item in normalizedData(items.pages)" :key="item.title">
-                        <router-link v-if="item.title" :to="item.path">
+                        <router-link v-if="item.title" :to="item.path!">
                             <span class="sidebar-menu-text">{{ item.title }}</span>
                             <b-tag v-if="item.isNew" type="is-success">
                                 New!
@@ -23,10 +23,10 @@
                             <p>{{ item.category }}</p>
                             <ul>
                                 <li
-                                    v-for="subItem in normalizedData(item.pages)"
+                                    v-for="subItem in normalizedData(item.pages!)"
                                     :key="subItem.title"
                                 >
-                                    <router-link :to="subItem.path">
+                                    <router-link :to="subItem.path!">
                                         <span class="sidebar-menu-text">{{ subItem.title }}</span>
                                         <b-tag v-if="subItem.isNew" type="is-success">
                                             New!
@@ -54,19 +54,29 @@
     </aside>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+import { BIcon, BTag } from '@ntohq/buefy-next'
+
+import type { PageTree } from '@/data/menu'
 import routes from '@/data/routes'
+import type { Route } from '@/data/routes'
 import SidebarSearch from './SidebarSearch.vue'
 
-export default {
+type PageRoute = Partial<PageTree & Route>
+
+export default defineComponent({
     components: {
+        BIcon,
+        BTag,
         SidebarSearch
     },
     props: {
-        data: Array
+        data: Array<PageTree>
     },
     methods: {
-        normalizedData(items) {
+        normalizedData(items: PageTree['pages']): PageRoute[] {
             return items.map((item) => {
                 return typeof item === 'string'
                     ? routes[item]
@@ -80,5 +90,5 @@ export default {
             })
         }
     }
-}
+})
 </script>

@@ -20,8 +20,17 @@
     </section>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import { BDatepicker, BField, BInput, BSwitch } from '@ntohq/buefy-next'
+
+    export default defineComponent({
+        components: {
+            BDatepicker,
+            BField,
+            BInput,
+            BSwitch
+        },
         data() {
             return {
                 date: new Date(),
@@ -30,9 +39,9 @@
             }
         },
         methods: {
-            unselectableDates(day) {
+            unselectableDates(day: Date) {
                 return this.unselectableAfterDate < day.getDate()
             }
         }
-    }
+    })
 </script>

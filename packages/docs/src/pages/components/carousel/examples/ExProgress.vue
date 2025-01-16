@@ -34,8 +34,18 @@
     </section>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { BCarousel, BCarouselItem, BField, BSelect, BSwitch } from '@ntohq/buefy-next'
+
+export default defineComponent({
+    components: {
+        BCarousel,
+        BCarouselItem,
+        BField,
+        BSelect,
+        BSwitch
+    },
     data() {
         return {
             progress: true,
@@ -48,5 +58,5 @@ export default {
             ]
         }
     }
-}
+})
 </script>

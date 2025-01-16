@@ -26,29 +26,38 @@
     </div>
 </template>
 
-<script>
-    import api from './api/timepicker'
-    import { shallowFields } from '@/utils'
+<script lang="ts">
+    import { defineComponent } from 'vue'
 
-    import ExSimple from './examples/ExSimple'
+    import { shallowFields } from '@/utils'
+    import ApiView from '@/components/ApiView.vue'
+    import Example from '@/components/Example.vue'
+
+    import api from './api/timepicker'
+
+    import ExSimple from './examples/ExSimple.vue'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
 
-    import ExEditable from './examples/ExEditable'
+    import ExEditable from './examples/ExEditable.vue'
     import ExEditableCode from './examples/ExEditable.vue?raw'
 
-    import ExRange from './examples/ExRange'
+    import ExRange from './examples/ExRange.vue'
     import ExRangeCode from './examples/ExRange.vue?raw'
 
-    import ExFooter from './examples/ExFooter'
+    import ExFooter from './examples/ExFooter.vue'
     import ExFooterCode from './examples/ExFooter.vue?raw'
 
-    import ExInline from './examples/ExInline'
+    import ExInline from './examples/ExInline.vue'
     import ExInlineCode from './examples/ExInline.vue?raw'
 
-    import ExGranularity from './examples/ExGranularity'
+    import ExGranularity from './examples/ExGranularity.vue'
     import ExGranularityCode from './examples/ExGranularity.vue?raw'
 
-    export default {
+    export default defineComponent({
+        components: {
+            ApiView,
+            Example
+        },
         data() {
             return {
                 api,
@@ -68,5 +77,5 @@
                 ExInlineCode
             }
         }
-    }
+    })
 </script>
