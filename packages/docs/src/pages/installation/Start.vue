@@ -119,93 +119,53 @@
     </div>
 </template>
 
-<script>
-import { preformat } from '@/utils'
+<script lang="ts">
+    import { defineComponent } from 'vue'
 
-export default {
-    data() {
-        return {
-            importingBundle: `
-                import Vue from 'vue'
-                import Buefy from 'buefy'
-                import 'buefy/dist/buefy.css'
+    import { BMessage } from '@ntohq/buefy-next'
 
-                Vue.use(Buefy)
-                `,
-            importingComponentsAsVuePlugins: `
-                import Vue from 'vue'
-                import { Table, Input } from 'buefy'
-                import 'buefy/dist/buefy.css'
+    import CodeView from '@/components/CodeView.vue'
+    import { preformat } from '@/utils'
 
-                Vue.use(Table)
-                Vue.use(Input)
-                `,
-            importingSSR: `
-                import Vue from 'vue'
-                import Buefy from 'buefy'
-                import 'buefy/dist/buefy.css'
+    import {
+        fontAwesome5,
+        importingBundle,
+        importingCDNHtml,
+        importingComponentsAsVuePlugins,
+        importingNuxtBuefy,
+        importingSSR,
+        installNuxtBuefy,
+        materialIcons
+    } from './usage/start'
 
-                Vue.use(Buefy) `,
-            installNuxtBuefy: `
-								// with npm
-								npm install buefy@npm:@ntohq/buefy-next
-
-								// with pnpm
-								pnpm add buefy@npm:@ntohq/buefy-next
-
-								// with yarn
-								yarn add buefy@npm:@ntohq/buefy-next`,
-            importingNuxtBuefy: `
-								import Buefy from 'buefy'
-								import 'buefy/dist/buefy.css'
-
-								export default defineNuxtPlugin(nuxtApp => {
-									nuxtApp.vueApp.use(Buefy)
-								})`,
-            importingCDNHtml: `
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <meta charset="utf-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1">
-                    <link rel="stylesheet" href="https://unpkg.com/buefy/dist/buefy.min.css">
-                </head>
-
-                <body>
-                    <div id="app">
-                        <!-- Buefy components goes here -->
-                    </div>
-
-                    <script src="https://unpkg.com/vue@2"></\script>
-                    <!-- Full bundle -->
-                    <script src="https://unpkg.com/buefy/dist/buefy.min.js"></\script>
-
-                    <!-- Individual components -->
-                    <script src="https://unpkg.com/buefy/dist/components/table"></\script>
-                    <script src="https://unpkg.com/buefy/dist/components/input"></\script>
-
-                    <script>
-                        new Vue({
-                            el: '#app'
-                        })
-                    </\script>
-                </body>
-                </html>`,
-            materialIcons: '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.8.55/css/materialdesignicons.min.css">',
-            fontAwesome5: '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">'
+    export default defineComponent({
+        components: {
+            BMessage,
+            CodeView
+        },
+        data() {
+            return {
+                importingBundle,
+                importingComponentsAsVuePlugins,
+                importingSSR,
+                installNuxtBuefy,
+                importingNuxtBuefy,
+                importingCDNHtml,
+                materialIcons,
+                fontAwesome5
+            }
+        },
+        methods: {
+            preformat,
+            slugifyTitle(title: string) {
+                if (!title) return ''
+                return title.toLowerCase()
+                    .replace(/\s+/g, '-') // Replace spaces with -
+                    .replace(/[^\w-]+/g, '') // Remove all non-word chars
+                    .replace(/--+/g, '-') // Replace multiple - with single -
+                    .replace(/^-+/, '') // Trim - from start of text
+                    .replace(/-+$/, '') // Trim - from end of text
+            }
         }
-    },
-    methods: {
-        preformat,
-        slugifyTitle(title) {
-            if (!title) return ''
-            return title.toLowerCase()
-                .replace(/\s+/g, '-') // Replace spaces with -
-                .replace(/[^\w-]+/g, '') // Remove all non-word chars
-                .replace(/--+/g, '-') // Replace multiple - with single -
-                .replace(/^-+/, '') // Trim - from start of text
-                .replace(/-+$/, '') // Trim - from end of text
-        }
-    }
-}
+    })
 </script>
