@@ -49,103 +49,30 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
+
+    import { BMessage } from '@ntohq/buefy-next'
+
+    import CodeView from '@/components/CodeView.vue'
     import { preformat } from '@/utils'
 
-    export default {
+    import {
+        importing,
+        sass
+    } from './usage/customization'
+
+    export default defineComponent({
+        components: {
+            BMessage,
+            CodeView
+        },
         data() {
             return {
-                sass: `
-                // Import Bulma's core
-                @import "~bulma/sass/utilities/_all";
-
-                // Set your colors
-                $primary: #8c67ef;
-                $primary-light: findLightColor($primary);
-                $primary-dark: findDarkColor($primary);
-                $primary-invert: findColorInvert($primary);
-                $twitter: #4099FF;
-                $twitter-invert: findColorInvert($twitter);
-
-                // Lists and maps
-                $custom-colors: null !default;
-                $custom-shades: null !default;
-                
-                // Setup $colors to use as bulma classes (e.g. 'is-twitter')
-                $colors: mergeColorMaps(
-                    (
-                        "white": (
-                            $white,
-                            $black,
-                        ),
-                        "black": (
-                            $black,
-                            $white,
-                        ),
-                        "light": (
-                            $light,
-                            $light-invert,
-                        ),
-                        "dark": (
-                            $dark,
-                            $dark-invert,
-                        ),
-                        "primary": (
-                            $primary,
-                            $primary-invert,
-                            $primary-light,
-                            $primary-dark,
-                        ),
-                        "link": (
-                            $link,
-                            $link-invert,
-                            $link-light,
-                            $link-dark,
-                        ),
-                        "info": (
-                            $info,
-                            $info-invert,
-                            $info-light,
-                            $info-dark,
-                        ),
-                        "success": (
-                            $success,
-                            $success-invert,
-                            $success-light,
-                            $success-dark,
-                        ),
-                        "warning": (
-                            $warning,
-                            $warning-invert,
-                            $warning-light,
-                            $warning-dark,
-                        ),
-                        "danger": (
-                            $danger,
-                            $danger-invert,
-                            $danger-light,
-                            $danger-dark,
-                        ),
-                    ),
-                    $custom-colors
-                );
-
-                // Links
-                $link: $primary;
-                $link-invert: $primary-invert;
-                $link-focus-border: $primary;
-
-                // Import Bulma and Buefy styles
-                @import "~bulma";
-                @import "~buefy/src/scss/buefy";
-                `,
-                importing: `
-                import Vue from 'vue'
-                import Buefy from 'buefy'
-
-                Vue.use(Buefy)`
+                sass,
+                importing
             }
         },
         methods: { preformat }
-    }
+    })
 </script>
