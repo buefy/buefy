@@ -19,7 +19,7 @@
                 placeholder="Custom"
                 :value="value"
                 v-cleave="masks.custom"
-                @input.native="onInput">
+                @input="onInput">
             </b-input>
             <p><b>Formatted value (v-model)</b>: {{ value }}</p>
             <p><b>Raw value</b>: {{ rawValue }}</p>
@@ -27,28 +27,41 @@
     </section>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent } from 'vue'
+    import type { Directive } from 'vue'
     // You have to install cleave.js to use it:
     // 'npm install cleave.js'
+    // 'npm install --save-dev @types/cleave.js'
     import Cleave from 'cleave.js'
+    import type { CleaveOptions } from 'cleave.js/options'
+
+    import { BField, BInput } from '@ntohq/buefy-next'
+
+    interface CleaveContainer extends HTMLInputElement {
+        _vCleave: Cleave
+    }
 
     /**
      * We add a new instance of Cleave when the element
      * is bound and destroy it when it's unbound.
      */
-    const cleave = {
-        name: 'cleave',
-        bind(el, binding) {
-            const input = el.querySelector('input')
+    const cleave: Directive<HTMLElement, CleaveOptions> = {
+        beforeMount(el, binding) {
+            const input = el.querySelector('input') as CleaveContainer
             input._vCleave = new Cleave(input, binding.value)
         },
-        unbind(el) {
-            const input = el.querySelector('input')
+        unmounted(el) {
+            const input = el.querySelector('input') as CleaveContainer
             input._vCleave.destroy()
         }
     }
 
-    export default {
+    export default defineComponent({
+        components: {
+            BField,
+            BInput
+        },
         directives: { cleave },
         data() {
             return {
@@ -70,10 +83,10 @@
             }
         },
         methods: {
-            onInput(event) {
-                this.rawValue = event.target._vCleave.getRawValue()
-                this.value = event.target._vCleave.getFormattedValue()
+            onInput(event: InputEvent) {
+                this.rawValue = (event.target as unknown as CleaveContainer)._vCleave.getRawValue()
+                this.value = (event.target as unknown as CleaveContainer)._vCleave.getFormattedValue()
             }
         }
-    }
+    })
 </script>

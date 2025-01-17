@@ -24,16 +24,28 @@
     </div>
 </template>
 
-<script>
-    import ExFormat from './examples/ExFormat'
+<script lang="ts">
+    import { defineComponent, shallowRef } from 'vue'
+
+    import { BMessage } from '@ntohq/buefy-next'
+
+    import CodeView from '@/components/CodeView.vue'
+    import Example from '@/components/Example.vue'
+
+    import ExFormat from './examples/ExFormat.vue'
     import ExFormatCode from './examples/ExFormat.vue?raw'
 
-    export default {
+    export default defineComponent({
+        components: {
+            BMessage,
+            CodeView,
+            Example
+        },
         data() {
             return {
-                ExFormat,
+                ExFormat: shallowRef(ExFormat),
                 ExFormatCode
             }
         }
-    }
+    })
 </script>
