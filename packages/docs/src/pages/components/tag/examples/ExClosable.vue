@@ -65,7 +65,7 @@
     </section>
 </template>
 
-<script>
+<script lang="ts">
     import { defineComponent } from 'vue'
     import { BField, BTag } from '@ntohq/buefy-next'
 
