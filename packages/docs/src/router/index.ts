@@ -1,13 +1,20 @@
+import type { App } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
-import { afterEachGlobal } from './guards.js'
+import type { RouteComponent, RouteMeta } from 'vue-router'
+import { afterEachGlobal } from './guards'
 import routes from '@/data/routes'
+import type { Route } from '@/data/routes'
 
-export function createDocsRouter(vueApp) {
-    function route(path, component) {
+declare module 'vue-router' {
+    interface RouteMeta extends Route {}
+}
+
+export function createDocsRouter(vueApp: App) {
+    function route(path: string, component: () => Promise<RouteComponent>) {
         return {
             path,
             name: path,
-            meta: routes[path],
+            meta: routes[path] as RouteMeta,
             // `component` is now a function to import the component; e.g.,
             // () => import('@/pages/Home.vue')
             //
@@ -95,11 +102,11 @@ export function createDocsRouter(vueApp) {
             {
                 path: '/:pathMatch(.*)*',
                 name: 'notfound',
-                meta: routes.notfound,
+                meta: routes.notfound as RouteMeta,
                 component: NotFound
             }
         ],
-        scrollBehavior(to, from, savedPosition) {
+        scrollBehavior(to) {
             if (to.hash) {
                 return {
                     el: to.hash
