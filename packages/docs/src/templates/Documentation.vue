@@ -25,15 +25,19 @@
     </main>
 </template>
 
-<script>
-import TheHeader from '@/components/TheHeader'
-import TheNavbar from '@/components/TheNavbar'
-import TheFooter from '@/components/TheFooter'
-import TheSidebar from '@/components/TheSidebar'
-import ImproveThis from '@/components/ImproveThis'
-import menuData from '@/data/menu'
+<script lang="ts">
+import { defineComponent } from 'vue'
 
-export default {
+import TheHeader from '@/components/TheHeader.vue'
+import TheNavbar from '@/components/TheNavbar.vue'
+import TheFooter from '@/components/TheFooter.vue'
+import TheSidebar from '@/components/TheSidebar.vue'
+import ImproveThis from '@/components/ImproveThis.vue'
+import menuData from '@/data/menu'
+import type { PageTree } from '@/data/menu'
+import type { Route } from '@/data/routes'
+
+export default defineComponent({
     // eslint-disable-next-line vue/multi-word-component-names
     name: 'Documentation',
     components: {
@@ -45,16 +49,16 @@ export default {
     },
     data() {
         return {
-            menu: [],
-            meta: {}
+            menu: [] as PageTree[],
+            meta: {} as Partial<Route>
         }
     },
     methods: {
-        setMeta(meta) {
+        setMeta(meta: Route) {
             this.meta = meta
-            this.menu = menuData[this.meta.menu]
+            this.menu = menuData[this.meta.menu!]
         },
-        scrollTo(hash) {
+        scrollTo(hash: string) {
             location.href = hash
         }
     },
@@ -67,7 +71,7 @@ export default {
     },
 
     beforeUnmount() {
-        this.$eventHub.$off('navigate', this.setMeta)
+        this.$eventHub.off('navigate', this.setMeta)
     }
-}
+})
 </script>
