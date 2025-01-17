@@ -23,34 +23,43 @@
     </section>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 // You have to install bulma-css-vars to use it:
 // 'npm install bulma-css-vars'
+// @ts-expect-error - bulma-css-vars is not well configured for ESM
 import { ColorUpdater } from "bulma-css-vars";
+
+import { BButton, BNotification } from "@ntohq/buefy-next";
+
 import { default as bulmaColors } from "./bulma-generated/bulma-colors";
 
 const updater = new ColorUpdater(bulmaColors.bulmaCssVariablesDefs);
 
-export default {
+export default defineComponent({
+    components: {
+        BButton,
+        BNotification
+    },
     data() {
         return {
-            cssVars: []
+            cssVars: [] as string[]
         };
     },
     mounted() {
         this.setColor('#7957d5')
     },
     methods: {
-        setColor(newColor) {
+        setColor(newColor: unknown) {
             const updatedVars = updater.getUpdatedVars("primary", newColor);
-            const container = this.$refs.bcvContainer;
-            this.cssVars = updatedVars.map(({ name, value }) => {
+            const container = this.$refs.bcvContainer as HTMLElement;
+            this.cssVars = updatedVars.map(({ name, value }: { name: string, value: string }) => {
                 container.style.setProperty(name, value);
                 return `${name}: ${value};`;
             });
         }
     }
-};
+});
 </script>
 
 <style scoped>
