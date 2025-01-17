@@ -24,16 +24,27 @@
     </div>
 </template>
 
-<script>
-    import ExSimple from './examples/ExSimple'
+<script lang="ts">
+    import { defineComponent, shallowRef } from 'vue'
+
+    import { BMessage } from '@ntohq/buefy-next'
+
+    import CodeView from '@/components/CodeView.vue'
+    import Example from '@/components/Example.vue'
+    import ExSimple from './examples/ExSimple.vue'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
 
-    export default {
+    export default defineComponent({
+        components: {
+            BMessage,
+            CodeView,
+            Example
+        },
         data() {
             return {
-                ExSimple,
+                ExSimple: shallowRef(ExSimple),
                 ExSimpleCode
             }
         }
-    }
+    })
 </script>
