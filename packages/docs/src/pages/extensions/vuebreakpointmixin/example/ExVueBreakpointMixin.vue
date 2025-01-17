@@ -8,13 +8,32 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
+import type { DefineComponent } from 'vue';
+// @ts-expect-error - vue-breakpoint-mixin does not provide types so far
 import VueBreakpointMixin from 'vue-breakpoint-mixin';
 
-export default {
+// TODO: ask vue-breakpoint-mixin to support Vue 3
+VueBreakpointMixin.onMounted = VueBreakpointMixin.mounted;
+VueBreakpointMixin.onBeforeUnmount = VueBreakpointMixin.beforeDestroy;
+
+// TODO: ask vue-breakpoint-mixin to provide types
+type VueBreakpointMixinType = DefineComponent<
+  {}, // P(rops)
+  {}, // B (raw bindings)
+  {}, // D(ata)
+  {
+    isMobile: () => boolean,
+    isTablet: () => boolean,
+    isDesktop: () => boolean
+  } // C(omputed)
+>
+
+export default defineComponent({
   name: 'ExVueBreakpointMixin',
-  mixins: [VueBreakpointMixin],
-}
+  mixins: [VueBreakpointMixin as VueBreakpointMixinType],
+})
 </script>
 
 <style>

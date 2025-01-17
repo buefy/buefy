@@ -19,15 +19,26 @@
   </div>
 </template>
 
-<script>
-import ExVueBreakpointMixin from './example/ExVueBreakpointMixin'
+<script lang="ts">
+import { defineComponent, shallowRef } from 'vue'
+
+import { BMessage } from '@ntohq/buefy-next'
+
+import CodeView from '@/components/CodeView.vue'
+import Example from '@/components/Example.vue'
+import ExVueBreakpointMixin from './example/ExVueBreakpointMixin.vue'
 import ExVueBreakpointMixinCode from './example/ExVueBreakpointMixin.vue?raw'
 
-export default {
+export default defineComponent({
+  components: {
+    BMessage,
+    CodeView,
+    Example
+  },
   name: 'VueBreakpointMixin',
   data: () => ({
-    ExVueBreakpointMixin,
+    ExVueBreakpointMixin: shallowRef(ExVueBreakpointMixin),
     ExVueBreakpointMixinCode,
   }),
-}
+})
 </script>
