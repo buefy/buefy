@@ -12,7 +12,7 @@
             <b-taginput
                 v-model="tags"
                 :data="filteredTags"
-                autocomplete="on"
+                autocomplete
                 :allow-new="allowNew"
                 :open-on-focus="openOnFocus"
                 field="user.first_name"

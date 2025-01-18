@@ -182,7 +182,9 @@ export default defineComponent({
             default: () => ['Tab', 'Enter']
         },
         selectableHeader: Boolean,
-        selectableFooter: Boolean
+        selectableFooter: Boolean,
+        // Native options to use in HTML5 validation
+        autocomplete: String
     },
     emits: {
         /* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any */

@@ -40,7 +40,7 @@ describe('BTaginput', () => {
         let firedFooter = false
         const wrapper = mount(BTaginput, {
             props: {
-                autocomplete: '', // equivalent to attribute without value
+                autocomplete: true,
                 iconRight: 'close-circle',
                 iconRightClickable: true,
                 selectableHeader: true,
