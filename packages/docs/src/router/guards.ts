@@ -1,4 +1,7 @@
-export const afterEachGlobal = (vueApp, to, from) => {
+import type { App } from 'vue'
+import type { NavigationHookAfter } from 'vue-router'
+
+export const afterEachGlobal = (vueApp: App, to: Parameters<NavigationHookAfter>[0]) => {
     const title = to.meta.path === '/' ? to.meta.title : `${to.meta.title} | Buefy`
     const url = `https://buefy.org${to.meta.path}`
     const description = to.meta.subtitle.replace(/<(.|\n)*?>/g, '')
@@ -17,7 +20,7 @@ export const afterEachGlobal = (vueApp, to, from) => {
 
     updates.forEach((item) => {
         if (!item.value) return
-        document.querySelector(item.tag)
+        document.querySelector(item.tag)!
             .setAttribute(item.attr || 'content', item.value)
     })
 

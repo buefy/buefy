@@ -4,7 +4,7 @@
             <b-taginput
                 v-model="tags"
                 :data="filteredTags"
-                autocomplete="on"
+                autocomplete
                 ref="taginput"
                 icon="label"
                 placeholder="Add a tag"

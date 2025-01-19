@@ -103,7 +103,9 @@ export default defineComponent({
         },
         iconRight: String,
         iconRightClickable: Boolean,
-        iconRightType: String
+        iconRightType: String,
+        // Native options to use in HTML5 validation
+        autocomplete: String
     },
     emits: {
         /* eslint-disable @typescript-eslint/no-unused-vars */

@@ -160,6 +160,7 @@ export default defineComponent({
             type: String,
             default: 'value'
         },
+        autocomplete: Boolean,
         groupField: String,
         groupOptions: String,
         nativeAutocomplete: String,
@@ -310,7 +311,7 @@ export default defineComponent({
             const tagToAdd: U = tag || this.newTag.trim()
 
             if (tagToAdd) {
-                if (!(this.autocomplete || this.autocomplete === '')) {
+                if (!this.autocomplete) {
                     const reg = this.separatorsAsRegExp
                     // TODO: won't work if `tagToAdd` is not a string
                     if (reg && tagToAdd.match(reg)) {
@@ -351,7 +352,7 @@ export default defineComponent({
 
         customOnBlur(event: Event) {
             // Add tag on-blur if not select only
-            if (!(this.autocomplete || this.autocomplete === '')) this.addTag()
+            if (!this.autocomplete) this.addTag()
 
             this.onBlur(event)
         },
@@ -388,7 +389,7 @@ export default defineComponent({
                 this.removeLastTag()
             }
             // Stop if is to accept select only
-            if ((this.autocomplete || this.autocomplete === '') && !this.allowNew) return
+            if (this.autocomplete && !this.allowNew) return
 
             if (this.confirmKeys.indexOf(key) >= 0) {
                 // Allow Tab to advance to next field regardless

@@ -28,8 +28,6 @@ const FormElementMixin = defineComponent({
         rounded: Boolean,
         icon: String,
         iconPack: String,
-        // Native options to use in HTML5 validation
-        autocomplete: String,
         maxlength: [Number, String],
         useHtml5Validation: {
             type: Boolean,

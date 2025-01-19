@@ -25,12 +25,23 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+    import { defineComponent, shallowRef } from 'vue'
+
+    import { BMessage } from '@ntohq/buefy-next'
+
+    import CodeView from '@/components/CodeView.vue'
+    import Example from '@/components/Example.vue'
     import { preformat } from '@/utils'
-    import ExFormat from './examples/ExFormat'
+    import ExFormat from './examples/ExFormat.vue'
     import ExFormatCode from './examples/ExFormat.vue?raw'
 
-    export default {
+    export default defineComponent({
+        components: {
+            BMessage,
+            CodeView,
+            Example
+        },
         data() {
             return {
                 npmInstallSnippet: `npm install -S bulma-css-vars
@@ -40,12 +51,12 @@ node ./node_modules/.bin/bulma-css-vars --init`,
                 scriptSnippet: `"scripts": {
   "bulma-css-vars": "bulma-css-vars"
 }`,
-                ExFormat,
+                ExFormat: shallowRef(ExFormat),
                 ExFormatCode
             }
         },
         methods: {
             preformat
         }
-    }
+    })
 </script>

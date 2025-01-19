@@ -10,7 +10,7 @@
     </section>
 </template>
 
-<script>
+<script lang="ts">
     import { defineComponent } from 'vue'
     import { BCheckbox, BIcon } from '@ntohq/buefy-next'
 

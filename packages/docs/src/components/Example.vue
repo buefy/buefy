@@ -31,13 +31,17 @@
     </section>
 </template>
 
-<script>
-import CodepenEdit from './CodepenEdit.vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
 
-export default {
+import CodepenEdit from './CodepenEdit.vue'
+import CodeView from './CodeView.vue'
+
+export default defineComponent({
     // eslint-disable-next-line vue/multi-word-component-names
     name: 'Example',
     components: {
+        CodeView,
         CodepenEdit
     },
     props: {
@@ -58,5 +62,5 @@ export default {
                 .replace(/-+$/, '') // Trim - from end of text
         }
     }
-}
+})
 </script>
