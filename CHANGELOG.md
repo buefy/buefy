@@ -1,5 +1,25 @@
 # Buefy Changelog
 
+## Buefy-next 0.2.0
+
+### New features
+
+* [#151](https://github.com/ntohq/buefy-next/issues/151) Buefy-next was completely rewritten in TypeScript.
+  The migration to TypeScript itself is not a breaking change as you can continue to use it in plain JavaScript projects.
+  It just enhances the type checking capability which was partially provided in the past versions.
+
+### Fixes
+
+* [#17](https://github.com/ntohq/buefy-next/issues/17) `Dropdown` and `DropdownItem` got an unnecessary `tabindex` attribute.
+* [#271](https://github.com/ntohq/buefy-next/issues/271) `Select` did not run HTML5 validation after emitting a "blur" event.
+* [#357](https://github.com/ntohq/buefy-next/pull/357) `MenuItem` emitted "update:expanded" events with a wrong value.
+* [#372](https://github.com/ntohq/buefy-next/pull/372) `TimepickerMixin` was using the obsolete `value` prop instead of `modelValue`.
+
+### Others
+
+* [#266](https://github.com/ntohq/buefy-next/pull/266) Update buefy.org links in README.md (thanks @uturnr)
+* [#279](https://github.com/ntohq/buefy-next/pull/279) update installation for nuxt 3 (thanks @zhaolinlau)
+
 ## Buefy-next 0.1.4
 
 ### Breaking changes
