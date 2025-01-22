@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@ntohq/buefy-next": "*",
-    "bulma": "^0.9.4",
+    "bulma": "^1.0.3",
     "vue": "*"
   },
   "devDependencies": {

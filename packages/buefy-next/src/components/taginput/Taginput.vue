@@ -5,7 +5,7 @@
         v-bind="rootAttrs"
     >
         <div
-            class="taginput-container"
+            class="taginput-container input"
             :class="[statusType, size, containerClasses]"
             :disabled="disabledOrUndefined"
             @click="hasInput && focus()"

@@ -1,4 +1,5 @@
 // Some of the animations are from animate.css (https://daneden.github.io/animate.css)
+@use "bulma/sass/utilities/css-variables" as cv;
 
 // Fade out
 @keyframes fadeOut {
@@ -87,7 +88,7 @@
 // Fade
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity $speed-slow $easing;
+    transition: opacity cv.getVar("speed-slow") cv.getVar("easing");
 }
 .fade-enter-from,
 .fade-leave-to {
@@ -97,10 +98,10 @@
 // Zoom In
 .zoom-in-enter-active,
 .zoom-in-leave-active {
-    transition: opacity $speed-slow $easing;
+    transition: opacity cv.getVar("speed-slow") cv.getVar("easing");
     .animation-content,
     .animation-content {
-        transition: transform $speed-slow $easing;
+        transition: transform cv.getVar("speed-slow") cv.getVar("easing");
     }
 }
 .zoom-in-enter-from,
@@ -116,10 +117,10 @@
 // Zoom Out
 .zoom-out-enter-active,
 .zoom-out-leave-active {
-    transition: opacity $speed-slow $easing;
+    transition: opacity cv.getVar("speed-slow") cv.getVar("easing");
     .animation-content,
     .animation-content {
-        transition: transform $speed-slow $easing;
+        transition: transform cv.getVar("speed-slow") cv.getVar("easing");
     }
 }
 .zoom-out-enter-from,
@@ -136,7 +137,7 @@
 .slide-next-leave-active,
 .slide-prev-enter-active,
 .slide-prev-leave-active {
-    transition: transform $speed-slower cubic-bezier(0.785, 0.135, 0.150, 0.860);
+    transition: transform cv.getVar("speed-slower") cubic-bezier(0.785, 0.135, 0.150, 0.860);
 }
 .slide-prev-leave-to, .slide-next-enter-from {
     transform: translate3d(-100%, 0, 0);
@@ -153,7 +154,7 @@
 .slide-down-leave-active,
 .slide-up-enter-active,
 .slide-up-leave-active {
-    transition: transform $speed-slower cubic-bezier(0.785, 0.135, 0.150, 0.860);
+    transition: transform cv.getVar("speed-slower") cubic-bezier(0.785, 0.135, 0.150, 0.860);
 }
 .slide-up-leave-to, .slide-down-enter-from {
     transform: translate3d(0, -100%, 0);
@@ -167,10 +168,10 @@
 }
 
 .slide-enter-active {
-    transition: $speed-slow $easing;
+    transition: cv.getVar("speed-slow") cv.getVar("easing");
 }
 .slide-leave-active {
-    transition: $speed-slow $easing;
+    transition: cv.getVar("speed-slow") cv.getVar("easing");
     transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 }
 .slide-enter-to, .slide-leave-from {

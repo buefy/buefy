@@ -1,6 +1,8 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+
 .expo {
     .image-has-shadow {
-        box-shadow: 0 4px 10px 0 rgba($dark, 0.25);
+        box-shadow: 0 4px 10px 0 cv.getRgbaVar('dark', 0.25);
     }
     .expo-head {
         display: flex;
@@ -8,7 +10,7 @@
         align-items: center;
         padding-bottom: 1.5rem;
         .expo-head-text {
-            font-weight: $weight-semibold;
+            font-weight: cv.getVar('weight-semibold');
             padding-right: 1rem;
         }
     }

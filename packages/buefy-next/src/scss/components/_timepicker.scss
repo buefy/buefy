@@ -1,20 +1,15 @@
-.timepicker {
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/utilities/derived-variables" as dv;
+@use "bulma/sass/utilities/controls" as controls;
+
+.#{iv.$class-prefix}timepicker {
     .dropdown-menu {
         min-width: 0;
     }
     .dropdown,
     .dropdown-trigger {
         width: 100%;
-        .input[readonly] {
-            cursor: pointer;
-            box-shadow: $input-shadow;
-            &:focus,
-            &.is-focused,
-            &:active,
-            &.is-active {
-                box-shadow: $input-focus-box-shadow-size $input-focus-box-shadow-color;
-            }
-        }
     }
     // unset opacity when dropdow is disabled
     .dropdown {
@@ -37,12 +32,12 @@
                 margin: 0 0.125em;
 
                 select {
-                    font-weight: $weight-semibold;
-                    padding-right: $control-padding-horizontal;
+                    font-weight: cv.getVar("weight-semibold");
+                    padding-right: cv.getVar("control-padding-horizontal");
                     border: 0;
                     option {
                         &:disabled {
-                            color: rgba($grey, 0.7);
+                            color: cv.getRgbaVar("grey", 0.7);
                         }
                     }
                 }
@@ -55,19 +50,19 @@
                 line-height: 1.7em;
 
                 &:last-child {
-                    padding-right: $control-padding-horizontal;
+                    padding-right: cv.getVar("control-padding-horizontal");
                 }
             }
         }
     }
     // Sizes
     &.is-small {
-        @include control-small;
+        @include controls.control-small;
     }
     &.is-medium {
-        @include control-medium;
+        @include controls.control-medium;
     }
     &.is-large {
-        @include control-large;
+        @include controls.control-large;
     }
 }

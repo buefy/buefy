@@ -11,4 +11,5 @@ debug.log*
 cypress/videos/
 cypress/screenshots/
 .vscode/
+yarn.lock
 *.tsbuildinfo

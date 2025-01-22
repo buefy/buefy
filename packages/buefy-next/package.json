@@ -44,8 +44,8 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.test.json --composite false",
     "build": "rimraf dist && npm run build:js && npm run build:scss && npm run build:dts && npm run vetur",
     "build:js": "rollup -c && rollup -c --environment MINIFY",
+    "build:scss": "node ./build/banner.js < src/scss/buefy-build.scss | sass --load-path=node_modules src/scss/buefy-build.scss dist/buefy.css && cleancss -o dist/buefy.min.css dist/buefy.css",
     "build:dts": "rimraf temp-dts && vue-tsc -p tsconfig.types.json && api-extractor run --local && node build/augment-dts.mjs",
-    "build:scss": "node ./build/banner.js < src/scss/buefy-build.scss | sass --stdin --load-path src/scss > dist/buefy.css && cleancss -o dist/buefy.min.css dist/buefy.css",
     "vetur": "node -r esm build/vetur.js"
   },
   "peerDependencies": {
@@ -70,6 +70,10 @@
     "jest-serializer-vue": "^3.1.0",
     "rimraf": "^5.0.5",
     "rollup": "^4.1.4",
+    "rollup-plugin-vue": "^6.0.0",
+    "sass": "^1.83.0",
+    "vue": "^3.3.7",
+    "bulma": "^1.0.3",
     "rollup-plugin-esbuild": "^6.1.0",
     "vitest": "^0.34.6"
   },

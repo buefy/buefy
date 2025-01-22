@@ -1,2 +1,11 @@
+@use "bulma/sass/utilities/css-variables" as cv;
 
-$input-arrow: $primary !default;
+$input-arrow: cv.getVar('primary') !default;
+
+:root {
+  @include cv.register-vars(
+    (
+      "input-arrow": #{$input-arrow}
+    )
+  );
+}

@@ -1,24 +1,36 @@
-$sidebar-background: $modal-background-background-color !default;
-$sidebar-box-shadow: 5px 0px 13px 3px rgba($black, 0.1) !default;
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/utilities/mixins" as mixins;
+@use "bulma/sass/components/navbar" as navbar;
+@use "bulma/sass/components/modal" as modal;
+
+$sidebar-overlay-background: modal.$modal-background-background-color !default;
+$sidebar-box-shadow: 5px 0 13px 3px cv.getVar('background') !default;
 $sidebar-width: 260px !default;
 $sidebar-mobile-width: 80px !default;
-$sidebar-mobile-breakpoint: $tablet !default;
-$sidebar-colors: $navbar-colors !default;
+$sidebar-mobile-breakpoint: iv.$tablet !default;
+$sidebar-colors: navbar.$navbar-colors !default;
 $sidebar-close-button-background: rgba(10,10,10,.3) !default;
 $sidebar-close-button-dark-background: rgba(10,10,10,.86) !default;
 
-.b-sidebar {
+.#{iv.$class-prefix}b-sidebar {
+    @include cv.register-vars((
+        "sidebar-overlay-background": #{$sidebar-overlay-background},
+        "sidebar-box-shadow": #{$sidebar-box-shadow},
+        "sidebar-width": #{$sidebar-width},
+        "sidebar-mobile-width": #{$sidebar-mobile-width},
+        "sidebar-mobile-breakpoint": #{$sidebar-mobile-breakpoint},
+        "sidebar-close-button-background": #{$sidebar-close-button-background},
+        "sidebar-close-button-dark-background": #{$sidebar-close-button-dark-background}
+    ));
+
+}
+
+.#{iv.$class-prefix}b-sidebar {
     .sidebar-content {
-        background-color: $background;
-        box-shadow: $sidebar-box-shadow;
-        width: $sidebar-width;
+        box-shadow: cv.getVar("sidebar-box-shadow");
+        width: cv.getVar("sidebar-width");
         z-index: 39;
-        @each $name, $pair in $sidebar-colors {
-            $color: nth($pair, 1);
-            &.is-#{$name} {
-                background-color: $color;
-            }
-        }
         &.is-fixed {
             position: fixed;
             left: 0;
@@ -38,11 +50,11 @@ $sidebar-close-button-dark-background: rgba(10,10,10,.86) !default;
             }
         }
         &.is-mini {
-            width: $sidebar-mobile-width;
+            width: cv.getVar("sidebar-mobile-width");
             &.is-mini-expand:hover:not(.is-mini-delayed) {
-                transition: width $speed-slow $easing;
+                transition: width cv.getVar("speed-slow") cv.getVar("easing");
                 &:not(.is-fullwidth) {
-                    width: $sidebar-width;
+                    width: cv.getVar("sidebar-width");
                     &.is-mini-expand-fixed {
                         position: fixed;
                     }
@@ -53,7 +65,7 @@ $sidebar-close-button-dark-background: rgba(10,10,10,.86) !default;
             position: static;
         }
         &.is-absolute, &.is-static {
-            transition: width $speed-slow $easing;
+            transition: width cv.getVar("speed-slow") cv.getVar("easing");
         }
         &.is-fullwidth {
             width: 100%;
@@ -68,12 +80,12 @@ $sidebar-close-button-dark-background: rgba(10,10,10,.86) !default;
             flex-direction: column;
             align-content: stretch;
         }
-        @media screen and (max-width: $sidebar-mobile-breakpoint - 1px) {
+        @media screen and (max-width: calc(cv.getVar("sidebar-mobile-breakpoint") - 1px)) {
             &.is-mini-mobile {
-                width: $sidebar-mobile-width;
+                width: cv.getVar("sidebar-mobile-width");
                 &.is-mini-expand:hover {
                     &:not(.is-fullwidth-mobile) {
-                        width: $sidebar-width;
+                        width: cv.getVar("sidebar-width");
                         &.is-mini-expand-fixed {
                             position: fixed;
                         }
@@ -91,16 +103,16 @@ $sidebar-close-button-dark-background: rgba(10,10,10,.86) !default;
             }
         }
         .sidebar-close {
-            background: $sidebar-close-button-background;
+            background: cv.getVar("sidebar-close-button-background");
 
             &:hover {
-                background: $sidebar-close-button-dark-background;
+                background: cv.getVar("sidebar-close-button-dark-background");
             }
         }
     }
     .sidebar-background {
-        @include overlay;
-        background: $sidebar-background;
+        @extend %overlay;
+        background: cv.getVar("sidebar-overlay-background");
         position: fixed;
         z-index: 38;
     }

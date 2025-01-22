@@ -1,44 +1,56 @@
-$loading-background-legacy: #7f7f7f !default;
-$loading-background: rgba(255,255,255,0.5) !default;
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/utilities/derived-variables" as dv;
+@use "bulma/sass/utilities/mixins" as mixins;
+@use "bulma/sass/utilities/functions" as fn;
+
+$loading-background: fn.bulmaRgba(dv.$scheme-main, 50%) !default;
 $loading-icon-size: 3em !default;
 $loading-full-page-icon-size: 5em !default;
 
-.loading-overlay {
-    @include overlay;
+.#{iv.$class-prefix}loading-overlay {
+    @include cv.register-vars((
+        "loading-background": #{$loading-background},
+        "loading-icon-size": #{$loading-icon-size},
+        "loading-full-page-icon-size": #{$loading-full-page-icon-size}
+    ));
+
+    &.is-full-page {
+        @include cv.register-vars((
+            "loading-icon-size": #{cv.getVar('loading-full-page-icon-size')}
+        ));
+    }
+};
+
+
+.#{iv.$class-prefix}loading-overlay {
+    @include mixins.overlay;
     align-items: center;
     display: none;
     justify-content: center;
     overflow: hidden;
     z-index: 29;
+
     &.is-active {
         display: flex
     }
     &.is-full-page {
         position: fixed;
         z-index: 999;
-        .loading-icon {
-            &:after {
-                top: calc(50% - #{$loading-full-page-icon-size * 0.5});
-                left: calc(50% - #{$loading-full-page-icon-size * 0.5});
-                width: $loading-full-page-icon-size;
-                height: $loading-full-page-icon-size;
-            }
-        }
     }
     .loading-background {
-        @include overlay;
-        background:$loading-background-legacy;
-        background:$loading-background;
+        @include mixins.overlay;
+        background: cv.getVar('loading-background');
     }
     .loading-icon {
         position: relative;
         &:after {
-            @include loader;
+            @include mixins.loader;
             position: absolute;
-            top: calc(50% - #{$loading-icon-size * 0.5});
-            left: calc(50% - #{$loading-icon-size * 0.5});
-            width: $loading-icon-size;
-            height: $loading-icon-size;
+            top: calc(50% - #{cv.getVar('loading-icon-size')} * 0.5);
+            left: calc(50% - #{cv.getVar('loading-icon-size')} * 0.5);
+            width: cv.getVar('loading-icon-size');
+            height: cv.getVar('loading-icon-size');
             border-width: 0.25em;
         }
     }

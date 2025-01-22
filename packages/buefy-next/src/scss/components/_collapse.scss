@@ -1,4 +1,6 @@
-.collapse {
+@use "bulma/sass/utilities/initial-variables" as iv;
+
+.#{iv.$class-prefix}collapse {
     .collapse-trigger {
         display: inline;
         cursor: pointer;
