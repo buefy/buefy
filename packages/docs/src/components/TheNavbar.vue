@@ -111,6 +111,28 @@
                             </a>
                         </div>
                     </div>
+
+                    <div class="navbar-item">
+                        <b-icon
+                            icon="white-balance-sunny"
+                            size="is-small"
+                            :class="{'is-warning': theme === 'light' }"
+                        />
+                        <b-switch
+                            v-model="theme"
+                            type="is-warning"
+                            true-value="light"
+                            false-value="dark"
+                            size="is-small"
+                            label="Theme"
+                            @input="toggleTheme"
+                        />
+                        <b-icon
+                            icon="moon-waning-crescent"
+                            size="is-small"
+                            :class="{'is-primary': theme === 'dark' }"
+                        />
+                    </div>
                 </div>
             </div>
         </div>
@@ -128,13 +150,17 @@ import bulmaPackage from 'bulma/package.json'
 export default defineComponent({
     components: { BIcon },
     props: {
-        light: Boolean
+        light: {
+            type: Boolean,
+            default: true
+        }
     },
     data() {
         return {
             isMenuActive: false,
             version: buefyPackage.version,
-            bulmaVersion: bulmaPackage.version
+            bulmaVersion: bulmaPackage.version,
+            theme: localStorage.getItem('theme') || 'light'
         }
     },
     methods: {
@@ -146,6 +172,10 @@ export default defineComponent({
                 .documentElement
                 .classList
                 .toggle('is-clipped-touch', this.isMenuActive)
+        },
+        toggleTheme() {
+            document.documentElement.setAttribute('data-theme', this.theme)
+            localStorage.setItem('theme', this.theme)
         }
     },
     mounted() {

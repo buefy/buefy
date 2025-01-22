@@ -1,17 +1,20 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/mixins" as mixins;
+
 .example {
     position: relative;
     display: flex;
     flex-direction: column;
-    border: 1px solid $warning;
-    border-top-right-radius: $radius;
-    border-bottom-right-radius: $radius;
-    border-bottom-left-radius: $radius;
-    color: rgba(0, 0, 0, 0.7);
+    border: 1px solid  cv.getVar('warning');
+    border-top-right-radius:  cv.getVar('radius');
+    border-bottom-right-radius:  cv.getVar('radius');
+    border-bottom-left-radius:  cv.getVar('radius');
+    // color: rgba(0, 0, 0, 0.7);
     .button-container {
         position: absolute;
         display: inline-flex;
-        background: $warning;
-        border-radius: $radius $radius 0 0;
+        background:  cv.getVar('warning');
+        border-radius:  cv.getVar('radius')  cv.getVar('radius') 0 0;
         bottom: 100%;
         right: -1px;
         padding: 0 0 0 8px;
@@ -22,6 +25,7 @@
             font-size: 11px;
             padding: 0;
             text-decoration: none;
+            color: cv.getVar('warning-invert');
             &:not(:last-child) {
                 margin-right: 0.5rem;
             }
@@ -30,7 +34,7 @@
             }
             &:hover,
             &:focus {
-                color: $link;
+                color: cv.getVar('link');
                 background: transparent;
             }
         }
@@ -42,13 +46,14 @@
         margin-bottom: 1.5rem
     }
     &:before {
-        background: $warning;
-        border-radius: $radius $radius 0 0;
+        background: cv.getVar('warning');
+        color: cv.getVar('warning-invert');
+        border-radius: cv.getVar('radius') cv.getVar('radius') 0 0;
         bottom: 100%;
         content: "Example";
         display: inline-block;
         font-size: 8px;
-        font-weight: $weight-bold;
+        font-weight: cv.getVar('weight-bold');
         left: -1px;
         padding: 4px 8px;
         position: absolute;
@@ -57,12 +62,17 @@
     }
     .example-component {
         padding: 1.5rem;
+        > :first-child {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
     }
     .codeview {
-        border-top: 1px solid $warning;
+        border-top: 1px solid  cv.getVar('warning');
     }
     &.is-vertical {
-        @include desktop {
+        @include mixins.desktop {
             flex-direction: row;
             .example-component,
             .codeview {
@@ -72,7 +82,7 @@
                 display: flex;
                 flex-direction: column;
                 border-top: 0;
-                border-left: 1px solid $warning;
+                border-left: 1px solid  cv.getVar('warning');
             }
             .codeview,
             .highlight,

@@ -68,6 +68,11 @@
             </b-select>
         </b-field>
 
+        <b-field label="Empty">
+            <b-select placeholder="Select a character">
+            </b-select>
+        </b-field>
+
         <b-field label="Disabled">
             <b-select placeholder="Select a character" disabled>
                 <option value="flint">Flint</option>

@@ -32,7 +32,7 @@
 
         <transition name="fade">
             <div
-                class="dropdown-menu"
+                class="dropdown dropdown-menu"
                 :class="{ 'is-opened-top': isOpenedTop && !appendToBody }"
                 :style="style"
                 v-show="isActive && (!isEmpty || hasEmptySlot || hasHeaderSlot || hasFooterSlot)"

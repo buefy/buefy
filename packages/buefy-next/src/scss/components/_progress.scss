@@ -1,25 +1,101 @@
-@mixin progress-size() {
-    &.is-small {
-        + .progress-value, .progress-value {
-            font-size: calc(#{$size-small} / 1.5);
-            line-height: $size-small;
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/utilities/functions" as functions;
+@use "bulma/sass/elements/progress" as progress;
+
+$progress-value-color: progress.$progress-value-background-color;
+$progress-value-color-invert: functions.bulmaFindColorInvert($progress-value-color);
+
+.#{iv.$class-prefix}progress-wrapper {
+
+    @include cv.register-vars(
+        (
+            "progress-value-color": #{$progress-value-color},
+            "progress-value-color-invert": #{$progress-value-color-invert}
+        )
+    );
+
+    .progress, .progress-bar {
+    
+        @each $name, $pair in progress.$progress-colors {
+            &.is-#{$name} {
+                @include cv.register-vars(
+                (
+                    "progress-value-color": #{cv.getVar($name)},
+                    "progress-value-background-color": #{cv.getVar($name)}
+                )
+                );
+                &.is-more-than-half {
+                    +.progress-value {
+                        @include cv.register-vars(
+                        (
+                            "progress-value-color": #{cv.getVar($name, "", "-invert")}
+                        )
+                        );
+                    }
+                }
+            }
+        }
+
+        &.is-more-than-half {
+            +.progress-value {
+                @include cv.register-vars(
+                    (
+                        "progress-value-color": #{cv.getVar("progress-value-color-invert")}
+                    )
+                );
+            }
+
         }
     }
-    &.is-medium {
-        + .progress-value, .progress-value {
-            font-size: calc(#{$size-medium} / 1.5);
-            line-height: $size-medium;
+
+    &.is-not-native {
+        @each $name, $pair in progress.$progress-colors {
+            .progress-bar.is-#{$name} {
+                @include cv.register-vars(
+                    (
+                        "progress-value-color": #{cv.getVar($name, "", "-invert")}
+                    )
+                );
+            }
         }
     }
-    &.is-large {
-        + .progress-value, .progress-value {
-            font-size: calc(#{$size-large} / 1.5);
-            line-height: $size-large;
+
+    &.is-squared {
+        @include cv.register-vars((
+            "progress-border-radius": 0
+        ));
+        
+        .progress, .progress-bar {
+            @include cv.register-vars((
+                "progress-border-radius": 0
+            ));
         }
     }
 }
 
-.progress-wrapper {
+@mixin progress-size() {
+    &.is-small {
+        + .progress-value, .progress-value {
+            font-size: calc(#{cv.getVar("size-small")} / 1.5);
+            line-height: cv.getVar("size-small");
+        }
+    }
+    &.is-medium {
+        + .progress-value, .progress-value {
+            font-size: calc(#{cv.getVar("size-medium")} / 1.5);
+            line-height: cv.getVar("size-medium");
+        }
+    }
+    &.is-large {
+        + .progress-value, .progress-value {
+            font-size: calc(#{cv.getVar("size-large")} / 1.5);
+            line-height: cv.getVar("size-large");
+        }
+    }
+}
+
+.#{iv.$class-prefix}progress-wrapper {
     position: relative;
     overflow: hidden;
 
@@ -32,10 +108,10 @@
         top: 0;
         left: 50%;
         transform: translateX(-50%);
-        font-size: calc(#{$size-normal} / 1.5);
-        line-height: $size-normal;
-        font-weight: $weight-bold;
-        color: findColorInvert($progress-bar-background-color);
+        font-size: calc(#{cv.getVar("size-normal")} / 1.5);
+        line-height: cv.getVar("size-normal");
+        font-weight: cv.getVar("weight-bold");
+        color: cv.getVar('progress-value-color');
         white-space: nowrap;
     }
 
@@ -50,56 +126,28 @@
 
         &.is-more-than-half {
             +.progress-value {
-                color: findColorInvert($progress-value-background-color);
+                color: cv.getVar('progress-value-color');
             }
-
-            @each $name, $pair in $progress-colors {
-                $color: nth($pair, 1);
-                $color-invert: nth($pair, 2);
-                &.is-#{$name} {
-                    + .progress-value {
-                        color: $color-invert;
-                    }
-                }
-            }
-        }
-
-        &.is-squared {
-            border-radius: 0;
         }
     }
 
     &.is-not-native {
         @extend .progress;
         white-space: nowrap;
-        background-color: $progress-bar-background-color;
-        border-radius: $progress-border-radius;
+        background-color: cv.getVar('progress-bar-background-color');
+        border-radius: cv.getVar('progress-border-radius');
 
         .progress-bar {
+            
             position: relative;
             display: inline-block;
             vertical-align: top;
             height: 100%;
-            background-color: $progress-value-background-color;
+            background-color: cv.getVar('progress-value-background-color');
 
             .progress-value {
-                color: findColorInvert($progress-value-background-color);
-            }
-
-            @each $name, $pair in $progress-colors {
-                $color: nth($pair, 1);
-                $color-invert: nth($pair, 2);
-                &.is-#{$name} {
-                    background-color: $color;
-                    .progress-value {
-                        color: $color-invert;
-                    }
-                }
+                color: cv.getVar('progress-value-color');
             }
         }
-    }
-    
-    &.is-squared {
-        border-radius: 0;
     }
 }

@@ -1,4 +1,5 @@
 <template>
+    <section>
     <b-dropdown v-model="isPublic" aria-role="list">
 
         <template v-if="isPublic" #trigger>
@@ -38,6 +39,7 @@
             </div>
         </b-dropdown-item>
     </b-dropdown>
+</section>
 </template>
 
 <script lang="ts">

@@ -1,29 +1,30 @@
 <template>
-    <section class="b-tooltips">
+    <section>
+        <div class="b-tooltips">
+            <b-tooltip label="Tooltip right"
+                position="is-right">
+                <b-button label="Right" type="is-dark" />
+            </b-tooltip>
 
-        <b-tooltip label="Tooltip right"
-            position="is-right">
-            <b-button label="Right" type="is-dark" />
-        </b-tooltip>
+            <b-tooltip label="Tooltip top">
+                <b-button label="Top (default)" type="is-dark" />
+            </b-tooltip>
 
-        <b-tooltip label="Tooltip top">
-            <b-button label="Top (default)" type="is-dark" />
-        </b-tooltip>
+            <b-tooltip label="Tooltip bottom"
+                position="is-bottom">
+                <b-button label="Bottom" type="is-dark" />
+            </b-tooltip>
 
-        <b-tooltip label="Tooltip bottom"
-            position="is-bottom">
-            <b-button label="Bottom" type="is-dark" />
-        </b-tooltip>
+            <b-tooltip label="Tooltip left"
+                position="is-left">
+                <b-button label="Left" type="is-dark" />
+            </b-tooltip>
 
-        <b-tooltip label="Tooltip left"
-            position="is-left">
-            <b-button label="Left" type="is-dark" />
-        </b-tooltip>
-
-        <b-tooltip label="delayed by 1000ms"
-            :delay="1000">
-            <b-button label="Delayed" type="is-dark" />
-        </b-tooltip>
+            <b-tooltip label="delayed by 1000ms"
+                :delay="1000">
+                <b-button label="Delayed" type="is-dark" />
+            </b-tooltip>
+        </div>
     </section>
 </template>
 

@@ -19,6 +19,7 @@
     "@typescript-eslint/parser": "^7.18.0",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/tsconfig": "^0.7.0",
+    "bulma": "^1.0.3",
     "eslint": "^8.57.1",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-vue": "^9.32.0",

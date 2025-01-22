@@ -1,38 +1,55 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/base/skeleton" as skeleton;
+@use "bulma/sass/utilities/functions" as functions;
 
-$skeleton-color: $grey-lighter !default;
-$skeleton-background: linear-gradient(90deg, $skeleton-color 25%, rgba($skeleton-color, 0.5) 50%, $skeleton-color 75%) !default;
-$skeleton-border-radius: $radius !default;
+
+$skeleton-gradient: linear-gradient(90deg, cv.getVar('border') 25%, cv.getVar('border-active') 50%, cv.getVar('border') 75%) !default;
 $skeleton-duration: 1.5s !default;
 $skeleton-margin-top: .5rem !default;
 
+.#{iv.$class-prefix}b-skeleton {
+
+    @include cv.register-vars(
+        (
+            "skeleton-gradient": #{$skeleton-gradient},
+            "skeleton-duration": #{$skeleton-duration},
+            "skeleton-margin-top": #{$skeleton-margin-top}
+        )
+    );
+}
+
 @mixin steps-size($size) {
     > .b-skeleton-item {
-        line-height: $size;
+        line-height: cv.getVar($size);
     }
 }
 
-.b-skeleton {
+.#{iv.$class-prefix}b-skeleton {
+
+    // @include skeleton;
+
     display: inline-flex;
     flex-direction: column;
     vertical-align: middle;
     width: 100%;
     > .b-skeleton-item {
-        background: $skeleton-background;
+        background: cv.getVar("skeleton-gradient");
         background-size: 400% 100%;
         width: 100%;
         &.is-rounded {
-            border-radius: $skeleton-border-radius;
+            border-radius: cv.getVar("skeleton-radius");
         }
         &::after {
             content: "\00a0";
         }
         + .b-skeleton-item {
-            margin-top: $skeleton-margin-top;
+            margin-top: cv.getVar("skeleton-margin-top");
         }
     }
     &.is-animated {
         > .b-skeleton-item {
-            animation: skeleton-loading $skeleton-duration infinite;
+            animation: skeleton-loading cv.getVar("skeleton-duration") infinite;
         }
     }
     &.is-centered {
@@ -42,17 +59,17 @@ $skeleton-margin-top: .5rem !default;
         align-items: flex-end;
     }
     + .b-skeleton {
-        margin-top: $skeleton-margin-top;
+        margin-top: cv.getVar("skeleton-margin-top");
     }
-    @include steps-size($size-normal);
+    @include steps-size("size-normal");
     &.is-small {
-        @include steps-size($size-small);
+        @include steps-size("size-small");
     }
     &.is-medium {
-        @include steps-size($size-medium);
+        @include steps-size("size-medium");
     }
     &.is-large {
-        @include steps-size($size-large);
+        @include steps-size("size-large");
     }
 }
 
