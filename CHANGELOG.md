@@ -1,5 +1,7 @@
 # Buefy Changelog
 
+## Buefy-next 0.2.1 unreleased
+
 ## Buefy-next 0.2.0
 
 ### New features
