@@ -2,6 +2,11 @@
 
 ## Buefy-next 0.2.1 unreleased
 
+### Fixes
+
+* [#274](https://github.com/ntohq/buefy-next/issues/274) `Table`, and `Tabs` caused memory leaks on Vue 3.5.
+  `SlotComponent` which is internally used by `Table`, and `Tabs` ceased adding the update hook to the component specified to the `component` prop, and dropped the `event` prop.
+
 ## Buefy-next 0.2.0
 
 ### New features
