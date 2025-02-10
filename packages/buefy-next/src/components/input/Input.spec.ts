@@ -229,23 +229,39 @@ describe('BInput', () => {
             spyOnCheckHtml5Validity.mockReset()
         })
 
-        it('should validate value when updated by user interaction', async () => {
+        it('should validate value at input event', async () => {
             const wrapper = shallowMount(BInput, {
                 data: () => ({ isValid: false } as BInputData)
             })
 
-            // simulates "input" event
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            wrapper.vm.onInput({ target: { value: 'foo' } } as any)
-            await wrapper.vm.$nextTick()
+            const inputElement = wrapper.get('input')
+
+            await inputElement.element.focus()
+            expect(spyOnCheckHtml5Validity).toHaveBeenCalledTimes(0)
+
+            await inputElement.trigger('input')
             expect(spyOnCheckHtml5Validity).toHaveBeenCalledTimes(1)
 
-            // simulates "change" event
-            await wrapper.setProps({ lazy: true })
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            wrapper.vm.onChange({ target: { value: 'bar' } } as any)
-            await wrapper.vm.$nextTick()
-            expect(spyOnCheckHtml5Validity).toHaveBeenCalledTimes(2)
+            await inputElement.trigger('change')
+            expect(spyOnCheckHtml5Validity).toHaveBeenCalledTimes(1)
+        })
+
+        it('should validate value at change event if lazy', async () => {
+            const wrapper = shallowMount(BInput, {
+                props: { lazy: true },
+                data: () => ({ isValid: false } as BInputData)
+            })
+
+            const inputElement = wrapper.get('input')
+
+            await inputElement.element.focus()
+            expect(spyOnCheckHtml5Validity).toHaveBeenCalledTimes(0)
+
+            await inputElement.trigger('input')
+            expect(spyOnCheckHtml5Validity).toHaveBeenCalledTimes(0)
+
+            await inputElement.trigger('change')
+            expect(spyOnCheckHtml5Validity).toHaveBeenCalledTimes(1)
         })
 
         it('should validate value when programmatically updated', async () => {
@@ -280,21 +296,33 @@ describe('BInput', () => {
                 spyOnCheckHtml5Validity.mockClear()
             })
 
-            it('should validate value once when updated by user interaction', async () => {
-                // simulates "input" event
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                wrapper.vm.onInput({ target: { value: 'foo' } } as any)
-                await wrapper.vm.$nextTick()
+            it('should update and validate value at input event', async () => {
+                const inputElement = wrapper.get('input')
+
+                inputElement.element.value = 'foo'
+
+                await inputElement.trigger('input')
                 expect(root.vm.value).toBe('foo')
                 expect(spyOnCheckHtml5Validity).toHaveBeenCalledTimes(1)
 
-                // simulates "change" event
+                await inputElement.trigger('change')
+                expect(spyOnCheckHtml5Validity).toHaveBeenCalledTimes(1)
+            })
+
+            it('should update and validate value at change event if lazy', async () => {
                 await root.setData({ lazy: true })
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                wrapper.vm.onChange({ target: { value: 'bar' } } as any)
-                await wrapper.vm.$nextTick()
-                expect(root.vm.value).toBe('bar')
-                expect(spyOnCheckHtml5Validity).toHaveBeenCalledTimes(2)
+                // input element must be queried after changing `lazy`
+                const inputElement = root.get('input')
+
+                inputElement.element.value = 'foo'
+
+                await inputElement.trigger('input')
+                expect(root.vm.value).toBe('')
+                expect(spyOnCheckHtml5Validity).toHaveBeenCalledTimes(0)
+
+                await inputElement.trigger('change')
+                expect(root.vm.value).toBe('foo')
+                expect(spyOnCheckHtml5Validity).toHaveBeenCalledTimes(1)
             })
 
             it('should validate value once when programmatically updated', async () => {
