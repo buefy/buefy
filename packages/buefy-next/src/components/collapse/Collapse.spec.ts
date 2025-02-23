@@ -29,6 +29,7 @@ describe('BCollapse', () => {
     describe('open prop is false', () => {
         beforeEach(() => {
             wrapper = shallowMount(BCollapse, {
+                attachTo: document.body, // isVisible tests require attachTo
                 props: {
                     modelValue: false,
                     position: 'is-bottom'

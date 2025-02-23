@@ -16,7 +16,7 @@
 
             backend-sorting
             :default-sort-direction="defaultSortOrder"
-            :default-sort="[sortField, sortOrder]"
+            :default-sort="[...(sortField ? [sortField] : []), sortOrder]"
             @sort="onSort">
 
             <b-table-column field="original_title" label="Title" sortable v-slot="props">
@@ -49,7 +49,7 @@
     import { defineComponent } from 'vue'
     import { BTable, BTableColumn } from '@ntohq/buefy-next'
 
-    interface Record {
+    export interface Record {
         original_title: string
         vote_average: number
         vote_count: number

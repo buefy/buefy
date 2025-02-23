@@ -136,7 +136,7 @@
                     </div>
                 </div>
                 <footer
-                    v-if="$slots.default !== undefined && $slots.default().length"
+                    v-if="$slots.default !== undefined && $slots.default([]).length"
                     class="b-clockpicker-footer card-footer"
                 >
                     <slot />

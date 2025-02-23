@@ -58,9 +58,9 @@
                 :append-to-body="appendToBody"
                 :confirm-keys="confirmKeys"
                 @typing="onTyping"
-                @focus="onFocus($event as Event)"
-                @blur="customOnBlur($event as Event)"
-                @keydown="keydown($event as KeyboardEvent)"
+                @focus="onFocus"
+                @blur="customOnBlur"
+                @keydown="keydown"
                 @compositionstart="isComposing = true"
                 @compositionend="isComposing = false"
                 @select="onSelect"
@@ -350,7 +350,7 @@ export default defineComponent({
             return `${tag}`
         },
 
-        customOnBlur(event: Event) {
+        customOnBlur(event?: Event) {
             // Add tag on-blur if not select only
             if (!this.autocomplete) this.addTag()
 

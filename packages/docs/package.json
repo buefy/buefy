@@ -28,25 +28,26 @@
     "vue": "*"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^6.4.2",
+    "@fortawesome/fontawesome-free": "^6.7.2",
     "@mdi/font": "^6.9.96",
     "@types/cleave.js": "^1.4.12",
-    "@types/lodash": "^4.14.202",
+    "@types/lodash": "^4.17.15",
     "@types/scrollreveal": "^0.0.11",
     "@types/sortablejs": "^1.15.8",
     "axios": "^1.5.1",
     "bulma-css-vars": "0.8.0",
-    "cleave.js": "1.0.1",
+    "cleave.js": "1.6.0",
     "clipboard": "^2.0.11",
     "copyfiles": "^2.4.1",
     "highlight.js": "^11.9.0",
     "lodash": "^4.17.21",
-    "npm-run-all2": "^6.1.1",
+    "npm-run-all2": "^7.0.2",
     "scrollreveal": "3.3.6",
-    "sortablejs": "1.7.0",
+    "sortablejs": "1.15.6",
     "tiny-emitter": "^2.1.0",
-    "vite-plugin-commonjs": "^0.10.0",
-    "vue-breakpoint-mixin": "1.2.2",
-    "vue-router": "^4.2.5"
+    "vite": "^6.1.1",
+    "vite-plugin-commonjs": "^0.10.4",
+    "vue-breakpoint-mixin": "1.5.0",
+    "vue-router": "^4.5.0"
   }
 }

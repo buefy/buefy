@@ -42,7 +42,7 @@ import { defineComponent } from 'vue'
 import debounce from 'lodash/debounce'
 import { BAutocomplete } from '@ntohq/buefy-next'
 
-interface DataItem {
+export interface DataItem {
     title: string
     poster_path: string
     release_date: string

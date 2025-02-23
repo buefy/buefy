@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["src/**/*", "src/**/*.vue", "../buefy-next/src/**/*", "../buefy-next/src/**/*.vue"],
-  "exclude": ["node_modules", "src/assets/*", "../buefy-next/src/**/*.spec.*"],
+  "include": ["src/**/*", "src/**/*.vue"],
+  "exclude": ["node_modules", "src/assets/*"],
   "compilerOptions": {
     "composite": true,
     "declaration": true,
@@ -10,5 +10,8 @@
       "@ntohq/buefy-next": ["../buefy-next/src"],
       "@/*": ["./src/*"]
     }
-  }
+  },
+  "references": [
+    { "path": "../buefy-next/tsconfig.types.json" }
+  ]
 }

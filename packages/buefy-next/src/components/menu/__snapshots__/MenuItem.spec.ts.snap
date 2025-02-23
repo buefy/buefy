@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`BMenuItem > render correctly 1`] = `
-"<li><a class=\\"\\">
+"<li><a class="">
     <!--v-if-->
   </a><!-- sub menu items -->
   <!--v-if-->
