@@ -12,7 +12,8 @@ Buefy-next 0.2.1 is now compiled with Vue 3.4.13, so the recommended Vue version
 
 ### Others
 
-* Fixes the issue that an example of `Cleave.js` in the documentation for extensions did not work.
+* [#191](https://github.com/ntohq/buefy-next/issues/191) A warning message was added to the `Table` documentation to inform that specifying an inline arrow function to the `td-attrs` prop will cause infinite updates.
+* [#435](https://github.com/ntohq/buefy-next/pull/435) The issue that an example of `Cleave.js` in the documentation for extensions did not work was fixed.
 
 ## Buefy-next 0.2.0
 

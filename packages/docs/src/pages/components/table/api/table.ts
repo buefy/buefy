@@ -815,8 +815,8 @@ export default [
             },
             {
                 name: '<code>td-attrs</code>',
-                description: 'Adds native attributes to td <code>:td-attrs="(row, column)" => ({})"</code>',
-                type: 'Function',
+                description: 'Adds native attributes to td. <div class="notification is-warning">Do not specify an inline arrow function to this prop. Otherwise, you will face infinite updates.</div>',
+                type: 'Function: <code>(row, column) => Record&lt;string, any&gt;</code>',
                 values: '—',
                 default: '-'
             }
