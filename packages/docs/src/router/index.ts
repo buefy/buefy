@@ -105,7 +105,6 @@ export function createDocsRouter(vueApp: App) {
                     route('extensions/cleavejs', () => import('@/pages/extensions/cleavejs/Cleavejs.vue')),
                     route('extensions/sortablejs', () => import('@/pages/extensions/sortablejs/Sortablejs.vue')),
                     route('extensions/veevalidate', () => import('@/pages/extensions/veevalidate/VeeValidate.vue')),
-                    route('extensions/bulmacssvars', () => import('@/pages/extensions/bulmacssvars/BulmaCssVars.vue')),
                     route('extensions/vuebreakpointmixin', () => import('@/pages/extensions/vuebreakpointmixin/VueBreakpointMixin.vue')),
                     // Expo
                     route('expo', () => import('@/pages/Expo.vue'))
