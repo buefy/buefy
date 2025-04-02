@@ -156,7 +156,8 @@ export default {
                 'is-active': this.isActive || this.inline,
                 'is-mobile-modal': this.isMobileModal,
                 'is-expanded': this.expanded,
-                'is-touch-enabled': this.isTouchEnabled
+                'is-touch-enabled': this.isTouchEnabled,
+                'is-up': this.position.startsWith('is-top')
             }]
         },
         isMobileModal() {
