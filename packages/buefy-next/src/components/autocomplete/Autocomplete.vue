@@ -606,7 +606,7 @@ export default defineComponent({
                 const rect = (this.$refs.dropdown as Element).getBoundingClientRect()
 
                 this.isListInViewportVertically = rect.top >= 0 &&
-                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+                    rect.bottom <= (window?.innerHeight || document?.documentElement?.clientHeight)
                 if (this.appendToBody) {
                     this.updateAppendToBody()
                 }
