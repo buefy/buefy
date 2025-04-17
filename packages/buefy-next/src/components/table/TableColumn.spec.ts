@@ -33,14 +33,19 @@ describe('BTableColumn', () => {
         const DetailedTable = {
             template: `
                 <BTable :data="tableData" detail-key="id" detailed>
-                    <BTableColumn :td-attrs="(td) => ({ id: \`td-\${td.id}\` })" v-slot="props">
+                    <BTableColumn :td-attrs="tdAttrs" v-slot="props">
                         <div>
                             {{ props.row.name }} - {{ props.isActiveDetailRow(props.row) ? 'Opened' : 'Closed' }}
                         </div>
                         <BButton @click="props.toggleDetails(props.row)">Toggle details</BButton>
                     </BTableColumn>
                 </BTable>`,
-            components: { BTable, BTableColumn, BButton }
+            components: { BTable, BTableColumn, BButton },
+            methods: {
+                tdAttrs(td: { id: string }) {
+                    return { id: `td-${td.id}` }
+                }
+            }
         }
 
         const tableData = [

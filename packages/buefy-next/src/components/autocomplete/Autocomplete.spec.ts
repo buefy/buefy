@@ -29,6 +29,7 @@ const stubs = { 'b-icon': true }
 describe('BAutocomplete', () => {
     beforeEach(() => {
         wrapper = mount(BAutocomplete, {
+            attachTo: document.body, // isVisible tests require attachTo
             props: {
                 checkInfiniteScroll: true
             },

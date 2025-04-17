@@ -1,5 +1,21 @@
 # Buefy Changelog
 
+## Buefy-next 0.2.1 unreleased
+
+Buefy-next 0.2.1 is now compiled with Vue 3.4.13, so the recommended Vue version is 3.4.13 or higher.
+
+### Fixes
+
+* [#274](https://github.com/ntohq/buefy-next/issues/274) `Table`, and `Tabs` caused memory leaks on Vue 3.5.
+  `SlotComponent` which is internally used by `Table`, and `Tabs` ceased adding the update hook to the component specified to the `component` prop, and dropped the `event` prop.
+* [#429](https://github.com/ntohq/buefy-next/issues/429) `Numberinput` may have accepted an invalid number as valid with Vue 3.4.28 or higher.
+* [#434](https://github.com/ntohq/buefy-next/issues/434) The multi column sorting feature of `Table` did not work since Buefy-next v0.2.0.
+
+### Others
+
+* [#191](https://github.com/ntohq/buefy-next/issues/191) A warning message was added to the `Table` documentation to inform that specifying an inline arrow function to the `td-attrs` prop will cause infinite updates.
+* [#435](https://github.com/ntohq/buefy-next/pull/435) The issue that an example of `Cleave.js` in the documentation for extensions did not work was fixed.
+
 ## Buefy-next 0.2.0
 
 ### New features

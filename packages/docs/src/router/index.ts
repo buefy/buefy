@@ -1,12 +1,27 @@
 import type { App } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
-import type { RouteComponent, RouteMeta } from 'vue-router'
+import type {
+    RouteComponent,
+    RouteLocationNormalizedLoaded,
+    RouteMeta,
+    Router
+} from 'vue-router'
 import { afterEachGlobal } from './guards'
 import routes from '@/data/routes'
 import type { Route } from '@/data/routes'
 
 declare module 'vue-router' {
     interface RouteMeta extends Route {}
+}
+
+// global $route and $router cannot be resolved if vue-router@4.5.0 is used.
+// here is a workaround to fix it.
+// reference: https://github.com/vuejs/router/blob/2d0a79def756db3284fc848098d6fec81ac893a4/packages/router/src/globalExtensions.ts#L61-L72
+declare module '@vue/runtime-core' {
+    interface ComponentCustomProperties {
+        $route: RouteLocationNormalizedLoaded
+        $router: Router
+    }
 }
 
 export function createDocsRouter(vueApp: App) {
@@ -90,7 +105,6 @@ export function createDocsRouter(vueApp: App) {
                     route('extensions/cleavejs', () => import('@/pages/extensions/cleavejs/Cleavejs.vue')),
                     route('extensions/sortablejs', () => import('@/pages/extensions/sortablejs/Sortablejs.vue')),
                     route('extensions/veevalidate', () => import('@/pages/extensions/veevalidate/VeeValidate.vue')),
-                    route('extensions/bulmacssvars', () => import('@/pages/extensions/bulmacssvars/BulmaCssVars.vue')),
                     route('extensions/vuebreakpointmixin', () => import('@/pages/extensions/vuebreakpointmixin/VueBreakpointMixin.vue')),
                     // Expo
                     route('expo', () => import('@/pages/Expo.vue'))

@@ -18,7 +18,7 @@
 import { defineComponent } from 'vue'
 import { BAutocomplete, BField } from '@ntohq/buefy-next'
 
-interface DataItem {
+export interface DataItem {
     type: string
     items: string[]
 }

@@ -1,15 +1,15 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`BPagination > render correctly 1`] = `
-"<nav class=\\"pagination\\"><a role=\\"button\\" href=\\"#\\" disabled=\\"true\\" class=\\"pagination-link pagination-previous pagination-previous\\">
-    <b-icon-stub icon=\\"chevron-left\\" both=\\"true\\" aria-hidden=\\"true\\"></b-icon-stub>
-  </a><a role=\\"button\\" href=\\"#\\" disabled=\\"true\\" class=\\"pagination-link pagination-next pagination-next\\">
-    <b-icon-stub icon=\\"chevron-right\\" both=\\"true\\" aria-hidden=\\"true\\"></b-icon-stub>
+"<nav class="pagination"><a role="button" href="#" disabled="true" class="pagination-link pagination-previous pagination-previous">
+    <b-icon-stub icon="chevron-left" both="true" aria-hidden="true"></b-icon-stub>
+  </a><a role="button" href="#" disabled="true" class="pagination-link pagination-next pagination-next">
+    <b-icon-stub icon="chevron-right" both="true" aria-hidden="true"></b-icon-stub>
   </a>
-  <div class=\\"control pagination-input\\">
+  <div class="control pagination-input">
     <!--v-if-->
   </div>
-  <ul class=\\"pagination-list\\">
+  <ul class="pagination-list">
     <!--First-->
     <!--v-if-->
     <!--v-if-->

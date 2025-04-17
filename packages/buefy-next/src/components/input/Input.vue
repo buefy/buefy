@@ -4,35 +4,68 @@
         :class="rootClasses"
         v-bind="rootAttrs"
     >
-        <input
-            v-if="type !== 'textarea'"
-            ref="input"
-            class="input"
-            :class="[inputClasses, customClass]"
-            :type="newType"
-            :autocomplete="newAutocomplete"
-            :maxlength="maxlength"
-            :value="computedValue"
-            v-bind="fallthroughAttrs"
-            @input="onInput"
-            @change="onChange"
-            @blur="onBlur"
-            @focus="onFocus"
-        >
+        <template v-if="lazy">
+            <input
+                v-if="type !== 'textarea'"
+                ref="input"
+                class="input"
+                :class="[inputClasses, customClass]"
+                :type="newType"
+                :autocomplete="newAutocomplete"
+                :maxlength="maxlength"
+                v-model.lazy="computedValue"
+                v-bind="fallthroughAttrs"
+                @input="onInput"
+                @change="onChange"
+                @blur="onBlur"
+                @focus="onFocus"
+            >
 
-        <textarea
-            v-else
-            ref="textarea"
-            class="textarea"
-            :class="[inputClasses, customClass]"
-            :maxlength="maxlength"
-            :value="computedValue === null ? undefined : computedValue"
-            v-bind="fallthroughAttrs"
-            @input="onInput"
-            @change="onChange"
-            @blur="onBlur"
-            @focus="onFocus"
-        />
+            <textarea
+                v-else
+                ref="textarea"
+                class="textarea"
+                :class="[inputClasses, customClass]"
+                :maxlength="maxlength"
+                v-model.lazy="computedValue"
+                v-bind="fallthroughAttrs"
+                @input="onInput"
+                @change="onChange"
+                @blur="onBlur"
+                @focus="onFocus"
+            />
+        </template>
+        <template v-else>
+            <input
+                v-if="type !== 'textarea'"
+                ref="input"
+                class="input"
+                :class="[inputClasses, customClass]"
+                :type="newType"
+                :autocomplete="newAutocomplete"
+                :maxlength="maxlength"
+                v-model="computedValue"
+                v-bind="fallthroughAttrs"
+                @input="onInput"
+                @change="onChange"
+                @blur="onBlur"
+                @focus="onFocus"
+            >
+
+            <textarea
+                v-else
+                ref="textarea"
+                class="textarea"
+                :class="[inputClasses, customClass]"
+                :maxlength="maxlength"
+                v-model="computedValue"
+                v-bind="fallthroughAttrs"
+                @input="onInput"
+                @change="onChange"
+                @blur="onBlur"
+                @focus="onFocus"
+            />
+        </template>
 
         <b-icon
             v-if="icon"
@@ -282,22 +315,19 @@ export default defineComponent({
             }
         },
 
-        onInput(event: Event) {
+        onInput() {
             if (!this.lazy) {
-                const value = (event.target as HTMLInputElement | HTMLTextAreaElement).value
-                this.updateValue(value)
+                this.revalidate()
             }
         },
 
-        onChange(event: Event) {
+        onChange() {
             if (this.lazy) {
-                const value = (event.target as HTMLInputElement | HTMLTextAreaElement).value
-                this.updateValue(value)
+                this.revalidate()
             }
         },
 
-        updateValue(value: string | number | undefined) {
-            this.computedValue = value
+        revalidate() {
             !this.isValid && this.checkHtml5Validity()
         }
     }

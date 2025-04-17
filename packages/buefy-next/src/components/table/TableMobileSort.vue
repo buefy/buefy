@@ -55,7 +55,7 @@
                         @click="sort"
                     >
                         <b-icon
-                            :class="{ 'is-desc': columnIsDesc(sortMultipleSelect!) }"
+                            :class="{ 'is-desc': columnIsDesc(sortMultipleSelect) }"
                             :icon="sortIcon"
                             :pack="iconPack"
                             :size="sortIconSize"
@@ -214,8 +214,8 @@ export default defineComponent({
             return this.sortMultipleData!.filter((i) =>
                 i.field === column.field)[0]
         },
-        columnIsDesc(column: ITableColumn) {
-            const sortingObject = this.getSortingObjectOfColumn(column)
+        columnIsDesc(column: ITableColumn | null) {
+            const sortingObject = column && this.getSortingObjectOfColumn(column)
             if (sortingObject) {
                 return !!(sortingObject.order && sortingObject.order === 'desc')
             }

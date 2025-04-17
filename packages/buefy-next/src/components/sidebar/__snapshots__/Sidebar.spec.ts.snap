@@ -1,24 +1,24 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`BSidebar > open > render correctly 1`] = `
-"<div class=\\"b-sidebar\\">
+"<div class="b-sidebar">
   <!--v-if-->
-  <transition-stub name=\\"slide-next\\" appear=\\"false\\" persisted=\\"true\\" css=\\"true\\">
-    <div class=\\"sidebar-content is-fixed\\" style=\\"\\">
+  <transition-stub name="slide-next" appear="false" persisted="true" css="true">
+    <div class="sidebar-content is-fixed" style="">
       <!--v-if-->
-      <div class=\\"content\\"></div>
+      <div class="content"></div>
     </div>
   </transition-stub>
 </div>"
 `;
 
 exports[`BSidebar > render correctly 1`] = `
-"<div class=\\"b-sidebar\\">
+"<div class="b-sidebar">
   <!--v-if-->
-  <transition-stub name=\\"slide-prev\\" appear=\\"false\\" persisted=\\"true\\" css=\\"true\\">
-    <div class=\\"sidebar-content is-fixed\\" style=\\"display: none;\\">
+  <transition-stub name="slide-prev" appear="false" persisted="true" css="true">
+    <div class="sidebar-content is-fixed" style="display: none;">
       <!--v-if-->
-      <div class=\\"content\\"></div>
+      <div class="content"></div>
     </div>
   </transition-stub>
 </div>"

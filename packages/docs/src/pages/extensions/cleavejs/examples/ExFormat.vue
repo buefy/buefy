@@ -17,7 +17,7 @@
         <b-field :addons="false">
             <b-input
                 placeholder="Custom"
-                :value="value"
+                :model-value="value"
                 v-cleave="masks.custom"
                 @input="onInput">
             </b-input>
