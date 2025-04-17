@@ -5,6 +5,7 @@
 @use "bulma/sass/utilities/controls" as controls;
 @use "bulma/sass/form/shared";
 @use "../utils/functions" as fn;
+@use "sass:list";
 
 $checkbox-active-background-color: cv.getVar('primary') !default;
 $checkbox-border-color: cv.getVar('primary') !default;
@@ -39,7 +40,7 @@ $checkbox-colors: shared.$form-colors !default;
   &.checkbox input[type=checkbox] + .check {
 
     @each $name, $pair in $checkbox-colors {
-      $color: nth($pair, 1);
+      $color: list.nth($pair, 1);
 
       &.#{iv.$class-prefix}is-#{$name} {
         @include cv.register-vars(
