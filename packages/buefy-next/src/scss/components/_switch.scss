@@ -1,3 +1,4 @@
+@use "sass:list";
 @use "bulma/sass/utilities/initial-variables" as iv;
 @use "bulma/sass/utilities/css-variables" as cv;
 @use "bulma/sass/utilities/extends" as extends;
@@ -39,7 +40,7 @@ $input-border-l-delta: 0% !default;
   
   .#{iv.$class-prefix}check {
     @each $name, $pair in $switch-colors {
-      $color: nth($pair, 1);
+      $color: list.nth($pair, 1);
       
       &.#{iv.$class-prefix}is-#{$name}-passive {
         @include cv.register-vars((
@@ -52,7 +53,7 @@ $input-border-l-delta: 0% !default;
   
   input[type=checkbox]:checked + .check {
     @each $name, $pair in $switch-colors {
-      $color: nth($pair, 1);
+      $color: list.nth($pair, 1);
       &.#{iv.$class-prefix}is-#{$name} {
         @include cv.register-vars((
         "switch-active-background-color": #{cv.getVar($name)},

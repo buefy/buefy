@@ -1,9 +1,10 @@
+@use "sass:list";
 @use "bulma/sass/utilities/css-variables" as cv;
 @use "bulma/sass/utilities/mixins" as mixins;
 
 @mixin paginationPositions($classes...) {
-    @for $i from 0 to length($classes) {
-       #{nth($classes, $i + 1)} {
+    @for $i from 0 to list.length($classes) {
+       #{list.nth($classes, $i + 1)} {
             order: $i + 1;
         }
     }
