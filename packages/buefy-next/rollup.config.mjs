@@ -8,7 +8,7 @@ import vue from '@vitejs/plugin-vue'
 import fs from 'node:fs'
 import path from 'node:path'
 
-import pack from '../../package.json' assert { type: 'json' }
+import pack from '../../package.json' with { type: 'json' }
 
 const babelConfig = {
     exclude: 'node_modules/**',
