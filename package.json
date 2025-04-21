@@ -30,7 +30,8 @@
     "vue-tsc": "^2.2.2"
   },
   "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "^4.34.8"
+    "@rollup/rollup-linux-x64-gnu": "^4.34.8",
+    "@rollup/rollup-win32-x64-msvc": "^4.40.0"
   },
   "repository": {
     "type": "git",
