@@ -281,6 +281,7 @@
                                 :class="['checkbox-cell', { 'is-sticky': stickyCheckbox } ]"
                                 v-if="checkable && checkboxPosition === 'left'">
                                 <b-checkbox
+                                    v-if="isRowCheckboxVisible(row)"
                                     autocomplete="off"
                                     :value="isRowChecked(row)"
                                     :type="checkboxType"
@@ -495,6 +496,10 @@ export default {
         focusable: Boolean,
         customIsChecked: Function,
         isRowCheckable: {
+            type: Function,
+            default: () => true
+        },
+        isRowCheckboxVisible: {
             type: Function,
             default: () => true
         },

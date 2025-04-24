@@ -342,6 +342,13 @@ export default [
                 default: 'true'
             },
             {
+                name: '<code>is-row-checkbox-visible</code>',
+                description: 'Custom method to verify if a row\'s checkbox is visible, works when is <code>checkable</code>. ',
+                type: 'Function (row: Object)',
+                values: '—',
+                default: 'true'
+            },
+            {
                 name: '<code>is-row-selectable</code>',
                 description: 'Custom method to verify if a row is selectable, works when is <code>selected</code>. ',
                 type: 'Function (row: Object)',

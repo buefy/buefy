@@ -29,6 +29,7 @@
                     :columns="columns"
                     :checked-rows.sync="checkedRows"
                     :is-row-checkable="(row) => row.id !== 3 && row.id !== 4"
+                    :is-row-checkbox-visible="(row) => row.id < 5"
                     checkable
                     :checkbox-position="checkboxPosition"
                     :checkbox-type="checkboxType">
