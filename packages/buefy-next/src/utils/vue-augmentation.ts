@@ -18,9 +18,9 @@ import ConfigComponent from './ConfigComponent'
 // Augments the global property with `$buefy`.
 // https://vuejs.org/guide/typescript/options-api.html#augmenting-global-properties
 declare module '@vue/runtime-core' {
-    /** @public */
+    /* @public */
     interface ComponentCustomProperties {
-        /** Global Buefy API. */
+        /* Global Buefy API. */
         $buefy: {
             config: typeof ConfigComponent,
             globalNoticeInterval?: ReturnType<typeof setTimeout>,

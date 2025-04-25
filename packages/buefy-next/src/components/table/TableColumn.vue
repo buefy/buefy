@@ -98,7 +98,7 @@ export default defineComponent({
         hasDefaultSlot() {
             return !!this.$slots.default
         },
-        /**
+        /*
          * Return if column header is un-selectable
          */
         isHeaderUnSelectable() {

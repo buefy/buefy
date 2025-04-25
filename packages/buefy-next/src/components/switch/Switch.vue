@@ -125,7 +125,7 @@ const Switch = defineComponent({
         }
     },
     watch: {
-        /**
+        /*
         * When v-model change, set internal value.
         */
         modelValue(value) {

@@ -46,7 +46,7 @@ export default defineComponent({
         }
     },
     computed: {
-        /**
+        /*
          * Icon name (MDI) based on type.
          */
         computedIcon() {
@@ -83,7 +83,7 @@ export default defineComponent({
         }
     },
     methods: {
-        /**
+        /*
          * Close the Message and emit events.
          */
         close() {
@@ -95,7 +95,7 @@ export default defineComponent({
         click() {
             this.$emit('click')
         },
-        /**
+        /*
          * Set timer to auto close message
          */
         setAutoClose() {
@@ -109,7 +109,7 @@ export default defineComponent({
         },
         setDurationProgress() {
             if (this.progressBar || this.autoClose) {
-                /**
+                /*
                  * Runs every one second to set the duration passed before
                  * the alert will auto close to show it in the progress bar (Remaining Time)
                  */
@@ -123,7 +123,7 @@ export default defineComponent({
             }
         },
         resetDurationProgress() {
-            /**
+            /*
              * Wait until the component get closed and then reset
              **/
             setTimeout(() => {

@@ -31,7 +31,7 @@ export type ExtractComponentData<T> = T extends { new (...args: any[]): infer U 
         : Record<string, never>
     : Record<string, never>
 
-/**
+/*
  * +/- function to native math sign
  *
  * @internal
@@ -42,7 +42,7 @@ function signPoly(value: number): number {
 }
 export const sign = Math.sign || signPoly
 
-/**
+/*
  * Checks if the flag is set
  * @param val
  * @param flag
@@ -54,7 +54,7 @@ export function hasFlag(val: number, flag: number): boolean {
     return (val & flag) === flag
 }
 
-/**
+/*
  * Native modulo bug with negative numbers
  * @param n
  * @param mod
@@ -66,7 +66,7 @@ export function mod(n: number, mod: number): number {
     return ((n % mod) + mod) % mod
 }
 
-/**
+/*
  * Asserts a value is beetween min and max
  * @param val
  * @param min
@@ -79,7 +79,7 @@ export function bound(val: number, min: number, max: number): number {
     return Math.max(min, Math.min(max, val))
 }
 
-/**
+/*
  * Get value of an object property/path even if it's nested
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -87,7 +87,7 @@ export function getValueByPath(obj: any, path: string): any {
     return path.split('.').reduce((o, i) => o ? o[i] : null, obj)
 }
 
-/**
+/*
  * Extension of indexOf method by equality function if specified
  *
  * @internal
@@ -117,7 +117,7 @@ export function indexOf<T>(
 // https://stackoverflow.com/questions/61132262/typescript-deep-partial
 type DeepPartial<T> = { [K in keyof T]?: DeepPartial<T[K]> }
 
-/**
+/*
  * Merge function to replace Object.assign with deep merging possibility
  *
  * @internal
@@ -156,7 +156,7 @@ const mergeFn = <T>(
 }
 export const merge = mergeFn
 
-/**
+/*
  * Mobile detection
  * https://www.abeautifulsite.net/detecting-mobile-devices-with-javascript
  *
@@ -233,7 +233,7 @@ export function isVueComponent(c: unknown): c is ComponentPublicInstance {
         (c as ComponentPublicInstance).$.vnode != null
 }
 
-/**
+/*
  * Escape regex characters
  * http://stackoverflow.com/a/6969486
  *
@@ -245,7 +245,7 @@ export function escapeRegExpChars(value: string | null | undefined): string | nu
     // eslint-disable-next-line
     return value.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')
 }
-/**
+/*
  * Remove accents/diacritics in a string in JavaScript
  * https://stackoverflow.com/a/37511463
  *
@@ -303,7 +303,7 @@ export function toCssWidth(width: number | string | undefined): string | null {
     return width === undefined ? null : (isNaN(+width) ? `${width}` : width + 'px')
 }
 
-/**
+/*
  * Return month names according to a specified locale
  * @param  {String} locale A bcp47 localerouter. undefined will use the user browser locale
  * @param  {String} format long (ex. March), short (ex. Mar) or narrow (M)
@@ -322,7 +322,7 @@ export function getMonthNames(locale?: string | string[], format: Intl.DateTimeF
     return dates.map((d) => dtf.format(d))
 }
 
-/**
+/*
  * Return weekday names according to a specified locale
  * @param  {String} locale A bcp47 localerouter. undefined will use the user browser locale
  * @param  {String} format long (ex. Thursday), short (ex. Thu) or narrow (T)
@@ -340,7 +340,7 @@ export function getWeekdayNames(locale?: string | string[], format: Intl.DateTim
     return dates.map((d) => dtf.format(d))
 }
 
-/**
+/*
  * Accept a regex with group names and return an object
  * ex. matchWithGroups(/((?!=<year>)\d+)\/((?!=<month>)\d+)\/((?!=<day>)\d+)/, '2000/12/25')
  * will return { year: 2000, month: 12, day: 25 }
@@ -375,7 +375,7 @@ export function matchWithGroups(pattern: string, str: string): Record<string, st
         }, {} as Record<string, string | null>)
 }
 
-/**
+/*
  * Based on
  * https://github.com/fregante/supports-webp
  *
@@ -398,7 +398,7 @@ export function isCustomElement(vm: Pick<ComponentPublicInstance, '$root'>) {
 
 export const isDefined = <T>(d: T | undefined): d is T => d !== undefined
 
-/**
+/*
  * Checks if a value is null or undefined.
  * Based on
  * https://github.com/lodash/lodash/blob/master/isNil.js
@@ -475,13 +475,13 @@ export function copyAppContext(src: App, dest: App) {
     }
 }
 
-/** Options for `translateTouchAsDragEvent`. */
+/* Options for `translateTouchAsDragEvent`. */
 export interface TranslateTouchAsDragEventOptions {
     type: 'dragstart' | 'dragend' | 'drop' | 'dragover' | 'dragleave'
     target?: Element
 }
 
-/**
+/*
  * Translates a touch event as a drag event.
  *
  * `event` must be a touch event.

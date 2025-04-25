@@ -71,7 +71,7 @@ const Snackbar = defineComponent({
         }
     },
     methods: {
-        /**
+        /*
         * Click listener.
         * Call action prop before closing (from Mixin).
         */

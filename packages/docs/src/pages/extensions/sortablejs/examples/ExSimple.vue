@@ -56,7 +56,7 @@
         })
     }
 
-    /**
+    /*
      * We add a new instance of Sortable when the element
      * is bound or updated, and destroy it when it's unbound.
      */

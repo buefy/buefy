@@ -90,7 +90,7 @@ export default <
 
         if (hasFlag(flags, sorted)) {
             mixin.computed = {
-                /**
+                /*
                  * When items are added/removed sort them according to their position
                  */
                 sortedItems() {

@@ -47,7 +47,7 @@ export default defineComponent({
             }
             return ''
         },
-        /**
+        /*
         * Internal icon name based on the pack.
         * If pack is 'fa', gets the equivalent FA icon name of the MDI,
         * internal icons are always MDI.
@@ -95,7 +95,7 @@ export default defineComponent({
         }
     },
     methods: {
-        /**
+        /*
         * Equivalent icon name of the MDI.
         */
         getEquivalentIconOf(value: string) {

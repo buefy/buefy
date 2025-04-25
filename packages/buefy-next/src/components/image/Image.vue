@@ -75,7 +75,7 @@ function isBulmaKnownRatio(value: unknown): value is BulmaKnownRatio {
     return BULMA_KNOWN_RATIO.indexOf(value as BulmaKnownRatio) !== -1
 }
 
-/** Type of the `srcsetFormatter` prop. */
+/* Type of the `srcsetFormatter` prop. */
 export type SrcsetFormatter = (
     src: string,
     size: number,

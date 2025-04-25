@@ -73,21 +73,21 @@ import config from '../../utils/config'
 import { isTag } from '../../utils/helpers'
 import BFieldBody from './FieldBody.vue'
 
-/**
+/*
  * Type of the `type` prop of `BField`.
  *
  * @public
  */
 export type FieldTypeProp = string | Record<string, boolean>
 
-/**
+/*
  * Type of individual message items in the `message` prop of `BField`.
  *
  * @public
  */
 export type FieldMessagePropItem = string | Record<string, string>
 
-/**
+/*
  * Type of the `message` prop of `BField`.
  *
  * @public

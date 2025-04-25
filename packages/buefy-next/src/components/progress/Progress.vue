@@ -116,7 +116,7 @@ const Progress = defineComponent({
         }
     },
     watch: {
-        /**
+        /*
          * When value is changed back to undefined, value of native progress get reset to 0.
          * Need to add and remove the value attribute to have the indeterminate or not.
          */

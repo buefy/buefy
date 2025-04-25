@@ -172,14 +172,14 @@ export default defineComponent({
             ]
         },
 
-        /**
+        /*
          * Check if previous button is available.
          */
         hasPrev() {
             return this.prevItemIdx !== null
         },
 
-        /**
+        /*
          * Retrieves the next visible item index
          */
         nextItemIdx() {
@@ -187,7 +187,7 @@ export default defineComponent({
             return this.getNextItemIdx(idx)
         },
 
-        /**
+        /*
          * Retrieves the next visible item
          */
         nextItem() {
@@ -198,7 +198,7 @@ export default defineComponent({
             return nextItem
         },
 
-        /**
+        /*
         * Retrieves the next visible item index
         */
         prevItemIdx() {
@@ -207,7 +207,7 @@ export default defineComponent({
             return this.getPrevItemIdx(idx)
         },
 
-        /**
+        /*
          * Retrieves the previous visible item
          */
         prevItem() {
@@ -220,7 +220,7 @@ export default defineComponent({
             return prevItem
         },
 
-        /**
+        /*
          * Check if next button is available.
          */
         hasNext() {
@@ -241,7 +241,7 @@ export default defineComponent({
         }
     },
     methods: {
-        /**
+        /*
          * Return if the step should be clickable or not.
          */
         isItemClickable(stepItem: IStepItem) {
@@ -251,7 +251,7 @@ export default defineComponent({
             return stepItem.clickable
         },
 
-        /**
+        /*
          * Previous button click listener.
          */
         prev() {
@@ -260,7 +260,7 @@ export default defineComponent({
             }
         },
 
-        /**
+        /*
          * Previous button click listener.
          */
         next() {

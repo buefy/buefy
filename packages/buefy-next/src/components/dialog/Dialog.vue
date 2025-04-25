@@ -255,14 +255,14 @@ const Dialog = defineComponent({
             }, 150)
         },
 
-        /**
+        /*
         * Start the Loading.
         */
         startLoading() {
             this.isLoading = true
         },
 
-        /**
+        /*
         * Cancel the Loading.
         */
         cancelLoading() {

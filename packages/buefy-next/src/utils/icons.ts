@@ -1,13 +1,13 @@
 import config, { type IconPack } from '../utils/config'
 import { merge } from '../utils/helpers'
 
-/**
+/*
  * Internally used {@link IconPack} type.
  *
  * @internal
  */
 export type InternalIconPack = IconPack & {
-    /** Maps icon names to equivalent ones in MDI. */
+    /* Maps icon names to equivalent ones in MDI. */
     internalIcons: Record<string, string>
 }
 

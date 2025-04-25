@@ -42,7 +42,7 @@
         _vCleave: Cleave
     }
 
-    /**
+    /*
      * We add a new instance of Cleave when the element
      * is bound and destroy it when it's unbound.
      */

@@ -207,7 +207,7 @@ export default defineComponent({
             return this.statusType
         },
 
-        /**
+        /*
         * Position of the icon or if it's both sides.
         */
         iconPosition() {

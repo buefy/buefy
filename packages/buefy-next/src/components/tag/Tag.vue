@@ -110,7 +110,7 @@ export default defineComponent({
         }
     },
     methods: {
-        /**
+        /*
         * Emit close event when delete button is clicked
         * or delete key is pressed.
         */
@@ -119,7 +119,7 @@ export default defineComponent({
 
             this.$emit('close', event)
         },
-        /**
+        /*
         * Emit click event when tag is clicked.
         */
         click(event: Event) {
