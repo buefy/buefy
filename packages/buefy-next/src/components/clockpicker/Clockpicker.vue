@@ -20,7 +20,7 @@
                     <b-input
                         ref="input"
                         autocomplete="off"
-                        :value="formatValue(computedValue)"
+                        :model-value="formatValue(computedValue)"
                         :placeholder="placeholder"
                         :size="size"
                         :icon="icon"
@@ -148,7 +148,7 @@
             ref="input"
             type="time"
             autocomplete="off"
-            :value="formatHHMMSS(computedValue)"
+            :model-value="formatHHMMSS(computedValue)"
             :placeholder="placeholder"
             :size="size"
             :icon="icon"
