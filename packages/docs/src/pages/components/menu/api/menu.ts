@@ -125,7 +125,7 @@ export default [
             {
                 name: '<code>tag</code>',
                 description: 'Button tag name',
-                type: 'String',
+                type: 'String, Object',
                 values: '<code>a</code>, <code>router-link</code>, <code>nuxt-link</code> or other nuxt alias',
                 default: '<code>a</code>'
             },

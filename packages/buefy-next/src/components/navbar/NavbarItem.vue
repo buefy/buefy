@@ -38,7 +38,7 @@ export default defineComponent({
     inheritAttrs: false,
     props: {
         tag: {
-            type: String,
+            type: [String, Object],
             default: 'a'
         },
         active: Boolean

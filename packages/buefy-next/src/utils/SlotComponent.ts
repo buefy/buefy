@@ -18,7 +18,7 @@ export default defineComponent({
             type: Object
         },
         tag: {
-            type: String,
+            type: [String, Object],
             default: 'div'
         }
     },

@@ -3,7 +3,10 @@
         :is="computedTag"
         class="button"
         v-bind="$attrs"
-        :type="['button', 'input'].includes(computedTag) ? nativeType : undefined"
+        :type="typeof computedTag === 'string' && ['button', 'input'].includes(computedTag)
+            ? nativeType
+            : undefined
+        "
         :class="[size, type, {
             'is-rounded': rounded,
             'is-loading': loading,
@@ -82,10 +85,10 @@ export default defineComponent({
             }
         },
         tag: {
-            type: String,
+            type: [String, Object],
             default: 'button',
             validator: (value: unknown) => {
-                return config.defaultLinkTags.indexOf(value as string) >= 0
+                return typeof value === 'object' || config.defaultLinkTags.indexOf(value as string) >= 0
             }
         }
     },

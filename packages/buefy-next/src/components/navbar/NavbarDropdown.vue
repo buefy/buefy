@@ -65,7 +65,7 @@ export default defineComponent({
         },
         collapsible: Boolean,
         tag: {
-            type: String,
+            type: [String, Object],
             default: 'a'
         }
     },

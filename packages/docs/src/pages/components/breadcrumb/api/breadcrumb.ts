@@ -31,7 +31,7 @@ export default [
             {
                 name: '<code>tag</code>',
                 description: "a, router-link and it's html attributes like href, to, etc...",
-                type: 'String',
+                type: 'String, Object',
                 values: '<code>router-link</code>, <code>a</code>',
                 default: '<code>a</code>'
             },
