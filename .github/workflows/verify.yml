@@ -32,17 +32,17 @@ jobs:
       - run: npm ci --prefer-offline
 
       - name: Lint
-        run: npm -w @ntohq/buefy-next run lint
+        run: npm -w buefy run lint
         id: lint
         continue-on-error: true
 
       - name: Type check
-        run: npm -w @ntohq/buefy-next run type-check
+        run: npm -w buefy run type-check
         id: type-check
         continue-on-error: true
 
       - name: Unit test
-        run: npm -w @ntohq/buefy-next run unit
+        run: npm -w buefy run unit
         id: unit
         continue-on-error: true
 

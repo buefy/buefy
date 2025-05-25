@@ -1,25 +1,16 @@
 <template>
     <section>
         <div class="block">
-            <b-radio v-model="radio"
-                name="name"
-                native-value="Flint">
+            <b-radio v-model="radio" name="name" native-value="Flint">
                 Flint
             </b-radio>
-            <b-radio v-model="radio"
-                name="name"
-                native-value="Silver">
+            <b-radio v-model="radio" name="name" native-value="Silver">
                 Silver
             </b-radio>
-            <b-radio v-model="radio"
-                name="name"
-                native-value="Jack">
+            <b-radio v-model="radio" name="name" native-value="Jack">
                 Jack
             </b-radio>
-            <b-radio v-model="radio"
-                name="name"
-                native-value="Vane"
-                disabled>
+            <b-radio v-model="radio" name="name" native-value="Vane" disabled>
                 Vane
             </b-radio>
         </div>
@@ -31,17 +22,17 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue'
-    import { BRadio } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BRadio } from "buefy";
 
-    export default defineComponent({
-        components: {
-            BRadio
-        },
-        data() {
-            return {
-                radio: 'Jack'
-            }
-        }
-    })
+export default defineComponent({
+    components: {
+        BRadio,
+    },
+    data() {
+        return {
+            radio: "Jack",
+        };
+    },
+});
 </script>

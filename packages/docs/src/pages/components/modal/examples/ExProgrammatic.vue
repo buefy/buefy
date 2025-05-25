@@ -5,23 +5,25 @@
                 label="Launch image modal (HTML)"
                 type="is-primary"
                 size="is-medium"
-                @click="imageModal" />
+                @click="imageModal"
+            />
             <b-button
                 label="Launch card modal (Component)"
                 type="is-primary"
                 size="is-medium"
-                @click="cardModal" />
+                @click="cardModal"
+            />
         </div>
     </section>
 </template>
 
 <script lang="ts">
-    import { defineComponent, h } from 'vue'
-    import { BButton } from '@ntohq/buefy-next'
+import { defineComponent, h } from "vue";
+import { BButton } from "buefy";
 
-    const ModalForm = defineComponent({
-        props: ['email', 'password'],
-        template: `
+const ModalForm = defineComponent({
+    props: ["email", "password"],
+    template: `
             <form action="">
                 <div class="modal-card" style="width: auto">
                     <header class="modal-card-head">
@@ -63,34 +65,30 @@
                     </footer>
                 </div>
             </form>
-        `
-    })
+        `,
+});
 
-    export default defineComponent({
-        components: { BButton },
-        methods: {
-            imageModal() {
-                const vnode = h(
-                  'p',
-                  { class: "image is-4by3" },
-                  [
-                    h('img', {
-                      src: 'https://buefy.org/static/img/placeholder-1280x960.png'
-                    })
-                  ]
-                )
-                this.$buefy.modal.open({
-                    content: [ vnode ]
-                })
-            },
-            cardModal() {
-                this.$buefy.modal.open({
-                    component: ModalForm,
-                    hasModalCard: true,
-                    customClass: 'custom-class custom-class-2',
-                    trapFocus: true
-                })
-            }
-        }
-    })
+export default defineComponent({
+    components: { BButton },
+    methods: {
+        imageModal() {
+            const vnode = h("p", { class: "image is-4by3" }, [
+                h("img", {
+                    src: "https://buefy.org/static/img/placeholder-1280x960.png",
+                }),
+            ]);
+            this.$buefy.modal.open({
+                content: [vnode],
+            });
+        },
+        cardModal() {
+            this.$buefy.modal.open({
+                component: ModalForm,
+                hasModalCard: true,
+                customClass: "custom-class custom-class-2",
+                trapFocus: true,
+            });
+        },
+    },
+});
 </script>

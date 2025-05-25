@@ -21,5 +21,5 @@
 </template>
 
 <script setup lang="ts">
-import { BSteps, BStepItem } from '@ntohq/buefy-next'
+import { BSteps, BStepItem } from "buefy";
 </script>

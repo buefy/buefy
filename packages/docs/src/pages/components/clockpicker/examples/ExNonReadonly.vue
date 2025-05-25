@@ -36,37 +36,38 @@
                 icon="clock"
                 :hour-format="hourFormat"
                 :locale="locale"
-                editable>
+                editable
+            >
             </b-clockpicker>
         </b-field>
     </section>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { BClockpicker, BField, BSelect } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BClockpicker, BField, BSelect } from "buefy";
 
 export default defineComponent({
     components: {
         BClockpicker,
         BField,
-        BSelect
+        BSelect,
     },
     data() {
         return {
             hourFormat: undefined, // Browser locale
-            locale: undefined // Browser locale
-        }
+            locale: undefined, // Browser locale
+        };
     },
     computed: {
         sampleFormat() {
             const dtf = new Intl.DateTimeFormat(this.locale, {
-                hour: 'numeric',
-                minute: 'numeric',
-                hour12: this.hourFormat ? this.hourFormat === '12' : undefined
-            })
-            return dtf.format(new Date(2000, 12, 12, 22, 23, 24))
-        }
-    }
-})
+                hour: "numeric",
+                minute: "numeric",
+                hour12: this.hourFormat ? this.hourFormat === "12" : undefined,
+            });
+            return dtf.format(new Date(2000, 12, 12, 22, 23, 24));
+        },
+    },
+});
 </script>

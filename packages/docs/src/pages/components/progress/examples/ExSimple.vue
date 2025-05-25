@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { BProgress } from '@ntohq/buefy-next'
+import { BProgress } from "buefy";
 </script>
 
 <template>

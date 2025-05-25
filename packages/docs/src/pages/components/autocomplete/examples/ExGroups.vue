@@ -8,54 +8,56 @@
                 group-options="items"
                 open-on-focus
                 :data="filteredDataObj"
-                @select="option => (selected = option)"
+                @select="(option) => (selected = option)"
             />
         </b-field>
     </section>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { BAutocomplete, BField } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BAutocomplete, BField } from "buefy";
 
 export interface DataItem {
-    type: string
-    items: string[]
+    type: string;
+    items: string[];
 }
 
 export default defineComponent({
     components: {
         BAutocomplete,
-        BField
+        BField,
     },
     data() {
         return {
             data: [
                 {
-                    type: 'Fruit',
-                    items: ['Apple', 'Banana', 'Watermelon']
+                    type: "Fruit",
+                    items: ["Apple", "Banana", "Watermelon"],
                 },
                 {
-                    type: 'Vegetables',
-                    items: ['Carrot', 'Broccoli', 'Cucumber', 'Onion']
-                }
+                    type: "Vegetables",
+                    items: ["Carrot", "Broccoli", "Cucumber", "Onion"],
+                },
             ],
-            name: '',
-            selected: null
-        }
+            name: "",
+            selected: null,
+        };
     },
     computed: {
         filteredDataObj() {
-            const newData: DataItem[] = []
+            const newData: DataItem[] = [];
             this.data.forEach((element) => {
-                const items = element.items.filter((item) =>
-                    item.toLowerCase().indexOf(this.name.toLowerCase()) >= 0)
+                const items = element.items.filter(
+                    (item) =>
+                        item.toLowerCase().indexOf(this.name.toLowerCase()) >= 0
+                );
                 if (items.length) {
-                    newData.push({ type: element.type, items })
+                    newData.push({ type: element.type, items });
                 }
-            })
-            return newData
-        }
-    }
-})
+            });
+            return newData;
+        },
+    },
+});
 </script>

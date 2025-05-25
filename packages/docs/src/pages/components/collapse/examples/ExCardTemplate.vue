@@ -1,22 +1,16 @@
 <template>
     <section>
-
-        <b-collapse 
-            class="card" 
-            animation="slide" 
-            aria-id="contentIdForA11y3">
+        <b-collapse class="card" animation="slide" aria-id="contentIdForA11y3">
             <template #trigger="props">
                 <div
                     class="card-header"
                     role="button"
                     aria-controls="contentIdForA11y3"
-                    :aria-expanded="props.open">
-                    <p class="card-header-title">
-                        Component
-                    </p>
+                    :aria-expanded="props.open"
+                >
+                    <p class="card-header-title">Component</p>
                     <a class="card-header-icon">
-                        <b-icon
-                            :icon="props.open ? 'menu-down' : 'menu-up'">
+                        <b-icon :icon="props.open ? 'menu-down' : 'menu-up'">
                         </b-icon>
                     </a>
                 </div>
@@ -24,7 +18,8 @@
 
             <div class="card-content">
                 <div class="content">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Phasellus nec iaculis mauris.
                     <a>#buefy</a>.
                 </div>
             </div>
@@ -34,10 +29,9 @@
                 <a class="card-footer-item">Delete</a>
             </footer>
         </b-collapse>
-
     </section>
 </template>
 
 <script setup lang="ts">
-import { BCollapse, BIcon } from '@ntohq/buefy-next'
+import { BCollapse, BIcon } from "buefy";
 </script>

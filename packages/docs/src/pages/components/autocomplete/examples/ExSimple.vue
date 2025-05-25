@@ -9,7 +9,8 @@
                 placeholder="e.g. jQuery"
                 icon="magnify"
                 clearable
-                @select="option => selected = option">
+                @select="(option) => (selected = option)"
+            >
                 <template #empty>No results found</template>
             </b-autocomplete>
         </b-field>
@@ -17,43 +18,45 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { BAutocomplete, BField } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BAutocomplete, BField } from "buefy";
 
 export default defineComponent({
     components: {
         BAutocomplete,
-        BField
+        BField,
     },
     data() {
         return {
             data: [
-                'Angular',
-                'Angular 2',
-                'Aurelia',
-                'Backbone',
-                'Ember',
-                'jQuery',
-                'Meteor',
-                'Node.js',
-                'Polymer',
-                'React',
-                'RxJS',
-                'Vue.js'
+                "Angular",
+                "Angular 2",
+                "Aurelia",
+                "Backbone",
+                "Ember",
+                "jQuery",
+                "Meteor",
+                "Node.js",
+                "Polymer",
+                "React",
+                "RxJS",
+                "Vue.js",
             ],
-            name: '',
-            selected: null
-        }
+            name: "",
+            selected: null,
+        };
     },
     computed: {
         filteredDataArray() {
             return this.data.filter((option) => {
-                return option
-                    .toString()
-                    .toLowerCase()
-                    .indexOf(this.name.toLowerCase()) >= 0
-            })
-        }
-    }
-})
+                return (
+                    option
+                        .toString()
+                        .toLowerCase()
+                        .indexOf(this.name.toLowerCase()) >= 0
+                );
+            });
+        },
+    },
+});
 </script>

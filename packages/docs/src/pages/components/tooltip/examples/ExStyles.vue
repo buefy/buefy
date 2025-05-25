@@ -1,24 +1,20 @@
 <template>
     <section class="b-tooltips">
-        <b-tooltip label="Text is dashed" dashed>
-            Simple text
-        </b-tooltip>
+        <b-tooltip label="Text is dashed" dashed> Simple text </b-tooltip>
 
-        <b-tooltip label="Maybe you like a little animation"
+        <b-tooltip
+            label="Maybe you like a little animation"
             position="is-bottom"
-            :animated="false">
+            :animated="false"
+        >
             <b-button label="No animation" />
         </b-tooltip>
 
-        <b-tooltip label="You prefer dark?"
-            type="is-dark"
-            position="is-bottom">
+        <b-tooltip label="You prefer dark?" type="is-dark" position="is-bottom">
             <b-button label="Dark" />
         </b-tooltip>
 
-        <b-tooltip label="Or light?"
-            type="is-light"
-            position="is-bottom">
+        <b-tooltip label="Or light?" type="is-light" position="is-bottom">
             <b-button label="Light" />
         </b-tooltip>
 
@@ -26,31 +22,31 @@
             <b-button label="Always" />
         </b-tooltip>
 
-        <b-tooltip label="I'm square"
-            position="is-bottom"
-            square>
+        <b-tooltip label="I'm square" position="is-bottom" square>
             <b-button label="Square" />
         </b-tooltip>
 
-        <b-tooltip label="You love the light variant, dont you?"
+        <b-tooltip
+            label="You love the light variant, dont you?"
             type="is-primary is-light"
-            position="is-bottom">
+            position="is-bottom"
+        >
             <b-button label="Primary light variant" />
         </b-tooltip>
     </section>
 </template>
 
 <script setup lang="ts">
-import { BButton, BTooltip } from '@ntohq/buefy-next'
+import { BButton, BTooltip } from "buefy";
 </script>
 
 <style lang="scss" scoped>
 .b-tooltips {
     .b-tooltip:not(:last-child) {
-        margin-right: .5em
+        margin-right: 0.5em;
     }
     .b-tooltip {
-        margin-bottom: .5em
+        margin-bottom: 0.5em;
     }
 }
 </style>

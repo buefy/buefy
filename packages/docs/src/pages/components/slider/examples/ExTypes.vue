@@ -23,5 +23,5 @@
 </template>
 
 <script setup lang="ts">
-import { BField, BSlider } from '@ntohq/buefy-next'
+import { BField, BSlider } from "buefy";
 </script>

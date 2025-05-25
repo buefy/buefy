@@ -5,7 +5,8 @@
                 <option
                     v-for="option in data"
                     :value="option.id"
-                    :key="option.id">
+                    :key="option.id"
+                >
                     {{ option.user.first_name }}
                 </option>
             </b-select>
@@ -31,7 +32,9 @@
                 <optgroup label="Game of Thrones">
                     <option value="tyrion-lannister">Tyrion Lannister</option>
                     <option value="jamie-lannister">Jamie Lannister</option>
-                    <option value="daenerys-targaryen">Daenerys Targaryen</option>
+                    <option value="daenerys-targaryen">
+                        Daenerys Targaryen
+                    </option>
                     <option value="jon-snow">Jon Snow</option>
                 </optgroup>
             </b-select>
@@ -40,7 +43,8 @@
         <b-field
             label="Error"
             type="is-danger"
-            message="Something went wrong with this field">
+            message="Something went wrong with this field"
+        >
             <b-select placeholder="Select a character">
                 <option value="flint">Flint</option>
                 <option value="silver">Silver</option>
@@ -82,8 +86,7 @@
             </b-select>
         </b-field>
 
-        <b-field
-            label="Expanded">
+        <b-field label="Expanded">
             <b-select placeholder="Select a character" expanded>
                 <option value="flint">Flint</option>
                 <option value="silver">Silver</option>
@@ -93,17 +96,17 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue'
-    import data from '@/data/sample.json'
-    import { BField, BSelect } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import data from "@/data/sample.json";
+import { BField, BSelect } from "buefy";
 
-    export default defineComponent({
-        components: {
-            BField,
-            BSelect
-        },
-        data() {
-            return { data }
-        }
-    })
+export default defineComponent({
+    components: {
+        BField,
+        BSelect,
+    },
+    data() {
+        return { data };
+    },
+});
 </script>

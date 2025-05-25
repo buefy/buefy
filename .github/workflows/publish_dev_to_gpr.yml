@@ -36,8 +36,8 @@ jobs:
 
       - run: npm ci
 
-      - run: npm -w @ntohq/buefy-next run build
+      - run: npm -w buefy run build
 
-      - run: npm -w @ntohq/buefy-next publish
+      - run: npm -w buefy publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -23,32 +23,33 @@
                 placeholder="Type or select a date..."
                 icon="calendar-today"
                 :locale="locale"
-                editable>
+                editable
+            >
             </b-datepicker>
         </b-field>
     </section>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { BDatepicker, BField, BSelect } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BDatepicker, BField, BSelect } from "buefy";
 
 export default {
     components: {
         BDatepicker,
         BField,
-        BSelect
+        BSelect,
     },
     data() {
         return {
-            locale: undefined // Browser locale
-        }
+            locale: undefined, // Browser locale
+        };
     },
     computed: {
         sampleFormat() {
-            const dtf = new Intl.DateTimeFormat(this.locale)
-            return dtf.format(new Date(2000, 11, 25, 12))
-        }
-    }
-}
+            const dtf = new Intl.DateTimeFormat(this.locale);
+            return dtf.format(new Date(2000, 11, 25, 12));
+        },
+    },
+};
 </script>

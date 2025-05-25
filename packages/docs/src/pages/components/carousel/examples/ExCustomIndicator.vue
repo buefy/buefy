@@ -4,27 +4,31 @@
             <b-image class="image" :src="getImgUrl(i)"></b-image>
         </b-carousel-item>
         <template #indicators="props">
-            <b-image class="al image" :src="getImgUrl(props.i)" :title="props.i"></b-image>
+            <b-image
+                class="al image"
+                :src="getImgUrl(props.i)"
+                :title="props.i"
+            ></b-image>
         </template>
     </b-carousel>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { BCarousel, BCarouselItem, BImage } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BCarousel, BCarouselItem, BImage } from "buefy";
 
 export default defineComponent({
     components: {
         BCarousel,
         BCarouselItem,
-        BImage
+        BImage,
     },
     methods: {
-      getImgUrl(value: number) {
-          return `https://picsum.photos/id/43${value}/1230/500`
-      }
-    }
-})
+        getImgUrl(value: number) {
+            return `https://picsum.photos/id/43${value}/1230/500`;
+        },
+    },
+});
 </script>
 
 <style>

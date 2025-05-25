@@ -1,18 +1,13 @@
 <template>
     <section id="api-view" class="api-view">
         <h2 class="title is-4">
-            <router-link to="#api-view">
-                #
-            </router-link>
+            <router-link to="#api-view"> # </router-link>
             API
         </h2>
 
         <template v-for="component in data" :key="component.title">
             <div>
-                <h3
-                    v-if="component.title"
-                    class="subtitle"
-                >
+                <h3 v-if="component.title" class="subtitle">
                     {{ component.title }}
                 </h3>
                 <b-tabs>
@@ -54,79 +49,99 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { BTable, BTabs, BTabItem } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BTable, BTabs, BTabItem } from "buefy";
 
 export interface PropInfo {
-    name: string
-    description: string
-    type: string
-    values: string
-    default: string
+    name: string;
+    description: string;
+    type: string;
+    values: string;
+    default: string;
 }
 
 export interface SlotInfo {
-    name: string
-    description: string
-    props?: string
+    name: string;
+    description: string;
+    props?: string;
 }
 
 export interface EventInfo {
-    name: string
-    description: string
-    parameters?: string
+    name: string;
+    description: string;
+    parameters?: string;
 }
 
 export interface MethodInfo {
-    name: string
-    description: string
-    parameters?: string
-    return?: string
+    name: string;
+    description: string;
+    parameters?: string;
+    return?: string;
 }
 
 export interface ComponentInfo {
-    title?: string
-    props?: PropInfo[]
-    slots?: SlotInfo[]
-    events?: EventInfo[]
-    methods?: MethodInfo[]
+    title?: string;
+    props?: PropInfo[];
+    slots?: SlotInfo[];
+    events?: EventInfo[];
+    methods?: MethodInfo[];
 }
 
 export default defineComponent({
-    compoents: {
+    components: {
         BTable,
         BTabs,
-        BTabItem
+        BTabItem,
     },
     props: {
-        data: Array<ComponentInfo>
+        data: Array<ComponentInfo>,
     },
     data() {
         return {
             propsColumns: [
-                { label: 'Name', field: 'name', renderHtml: true },
-                { label: 'Description', field: 'description', renderHtml: true },
-                { label: 'Type', field: 'type' },
-                { label: 'Values', field: 'values', renderHtml: true },
-                { label: 'Default', field: 'default', renderHtml: true }
+                { label: "Name", field: "name", renderHtml: true },
+                {
+                    label: "Description",
+                    field: "description",
+                    renderHtml: true,
+                },
+                { label: "Type", field: "type" },
+                { label: "Values", field: "values", renderHtml: true },
+                { label: "Default", field: "default", renderHtml: true },
             ],
             slotsColumns: [
-                { label: 'Slot name', field: 'name', renderHtml: true },
-                { label: 'Description', field: 'description', renderHtml: true },
-                { label: 'Props (if scoped)', field: 'props', renderHtml: true }
+                { label: "Slot name", field: "name", renderHtml: true },
+                {
+                    label: "Description",
+                    field: "description",
+                    renderHtml: true,
+                },
+                {
+                    label: "Props (if scoped)",
+                    field: "props",
+                    renderHtml: true,
+                },
             ],
             eventsColumns: [
-                { label: 'Name', field: 'name', renderHtml: true },
-                { label: 'Description', field: 'description', renderHtml: true },
-                { label: 'Parameters', field: 'parameters', renderHtml: true }
+                { label: "Name", field: "name", renderHtml: true },
+                {
+                    label: "Description",
+                    field: "description",
+                    renderHtml: true,
+                },
+                { label: "Parameters", field: "parameters", renderHtml: true },
             ],
             methodsColumns: [
-                { label: 'Name', field: 'name', renderHtml: true },
-                { label: 'Description', field: 'description', renderHtml: true },
-                { label: 'Parameters', field: 'parameters', renderHtml: true },
-                { label: 'Return', field: 'return', renderHtml: true }
-            ]
-        }
-    }
-})
+                { label: "Name", field: "name", renderHtml: true },
+                {
+                    label: "Description",
+                    field: "description",
+                    renderHtml: true,
+                },
+                { label: "Parameters", field: "parameters", renderHtml: true },
+                { label: "Return", field: "return", renderHtml: true },
+            ],
+        };
+    },
+});
 </script>

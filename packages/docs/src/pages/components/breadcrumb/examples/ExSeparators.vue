@@ -3,7 +3,9 @@
         <!-- Default -->
         <b-breadcrumb>
             <b-breadcrumb-item tag="router-link" to="/">Home</b-breadcrumb-item>
-            <b-breadcrumb-item tag="router-link" to="/documentation">Docs</b-breadcrumb-item>
+            <b-breadcrumb-item tag="router-link" to="/documentation"
+                >Docs</b-breadcrumb-item
+            >
             <b-breadcrumb-item
                 tag="router-link"
                 to="/documentation/breadcrumb"
@@ -13,9 +15,7 @@
             </b-breadcrumb-item>
         </b-breadcrumb>
         <!-- Arrow -->
-        <b-breadcrumb
-            separator="has-arrow-separator"
-        >
+        <b-breadcrumb separator="has-arrow-separator">
             <b-breadcrumb-item href="/">Home</b-breadcrumb-item>
             <b-breadcrumb-item href="/documentation">Docs</b-breadcrumb-item>
             <b-breadcrumb-item href="/documentation/breadcrumb" active>
@@ -23,9 +23,7 @@
             </b-breadcrumb-item>
         </b-breadcrumb>
         <!-- Bullet -->
-        <b-breadcrumb
-            separator="has-bullet-separator"
-        >
+        <b-breadcrumb separator="has-bullet-separator">
             <b-breadcrumb-item href="/">Home</b-breadcrumb-item>
             <b-breadcrumb-item href="/documentation">Docs</b-breadcrumb-item>
             <b-breadcrumb-item href="/documentation/breadcrumb" active>
@@ -33,9 +31,7 @@
             </b-breadcrumb-item>
         </b-breadcrumb>
         <!-- Dot -->
-        <b-breadcrumb
-            separator="has-dot-separator"
-        >
+        <b-breadcrumb separator="has-dot-separator">
             <b-breadcrumb-item href="/">Home</b-breadcrumb-item>
             <b-breadcrumb-item href="/documentation">Docs</b-breadcrumb-item>
             <b-breadcrumb-item href="/documentation/breadcrumb" active>
@@ -43,9 +39,7 @@
             </b-breadcrumb-item>
         </b-breadcrumb>
         <!-- Succeeds -->
-        <b-breadcrumb
-            separator="has-succeeds-separator"
-        >
+        <b-breadcrumb separator="has-succeeds-separator">
             <b-breadcrumb-item href="/">Home</b-breadcrumb-item>
             <b-breadcrumb-item href="/documentation">Docs</b-breadcrumb-item>
             <b-breadcrumb-item href="/documentation/breadcrumb" active>
@@ -56,15 +50,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { BBreadcrumb, BBreadcrumbItem } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BBreadcrumb, BBreadcrumbItem } from "buefy";
 
 export default defineComponent({
     components: {
         BBreadcrumb,
-        BBreadcrumbItem
+        BBreadcrumbItem,
     },
-    name: 'ExSeparators'
-
-})
+    name: "ExSeparators",
+});
 </script>

@@ -17,5 +17,5 @@
 </template>
 
 <script setup lang="ts">
-import { BButton, BField, BInput } from '@ntohq/buefy-next'
+import { BButton, BField, BInput } from "buefy";
 </script>

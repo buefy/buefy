@@ -8,13 +8,13 @@
                 field="user.first_name"
                 icon="label"
                 placeholder="Add a tag"
-                @typing="getFilteredTags">
+                @typing="getFilteredTags"
+            >
                 <template v-slot="props">
-                    <strong>{{props.option.id}}</strong>: {{props.option.user.first_name}}
+                    <strong>{{ props.option.id }}</strong
+                    >: {{ props.option.user.first_name }}
                 </template>
-                <template #empty>
-                    There are no items
-                </template>
+                <template #empty> There are no items </template>
             </b-taginput>
         </b-field>
         <pre style="max-height: 400px"><b>Tags:</b>{{ tags }}</pre>
@@ -22,35 +22,36 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue'
-    import data from '@/data/sample.json'
-    import { BField, BTaginput } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import data from "@/data/sample.json";
+import { BField, BTaginput } from "buefy";
 
-    export default defineComponent({
-        components: {
-            BField,
-            BTaginput
-        },
-        data() {
-            return {
-                filteredTags: data,
-                isSelectOnly: false,
-                tags: []
+export default defineComponent({
+    components: {
+        BField,
+        BTaginput,
+    },
+    data() {
+        return {
+            filteredTags: data,
+            isSelectOnly: false,
+            tags: [],
+        };
+    },
+    methods: {
+        getFilteredTags(text: number | string | undefined) {
+            if (text == null) {
+                return;
             }
-        },
-        methods: {
-            getFilteredTags(text: number | string | undefined) {
-                if (text == null) {
-                    return
-                }
-                this.filteredTags = data.filter((option) => {
-                    return option.user.first_name
+            this.filteredTags = data.filter((option) => {
+                return (
+                    option.user.first_name
                         .toString()
                         .toLowerCase()
                         .indexOf(text.toString().toLowerCase()) >= 0
-                })
-            }
-        }
-    })
+                );
+            });
+        },
+    },
+});
 </script>
-

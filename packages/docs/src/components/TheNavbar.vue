@@ -15,12 +15,8 @@
                         v-if="light"
                         src="../assets/buefy-light.png"
                         alt="Buefy"
-                    >
-                    <img
-                        v-else
-                        src="../assets/buefy.png"
-                        alt="Buefy"
-                    >
+                    />
+                    <img v-else src="../assets/buefy.png" alt="Buefy" />
                 </router-link>
 
                 <a
@@ -66,11 +62,7 @@
 
             <div class="navbar-menu" :class="{ 'is-active': isMenuActive }">
                 <div class="navbar-end">
-                    <router-link
-                        to="/"
-                        exact
-                        class="navbar-item"
-                    >
+                    <router-link to="/" exact class="navbar-item">
                         Home
                     </router-link>
 
@@ -87,21 +79,25 @@
                     </router-link>
 
                     <div class="navbar-item has-dropdown is-hoverable">
-                        <div class="navbar-link">
-                            Info
-                        </div>
+                        <div class="navbar-link">Info</div>
 
                         <div class="navbar-dropdown is-boxed">
                             <strong class="navbar-item is-version">
-                                <span class="has-text-primary">Buefy version</span>
+                                <span class="has-text-primary"
+                                    >Buefy version</span
+                                >
                                 <span class="has-text-grey">{{ version }}</span>
                             </strong>
                             <strong class="navbar-item is-version">
-                                <span class="has-text-bulma">Bulma version</span>
-                                <span class="has-text-grey">{{ bulmaVersion }}</span>
+                                <span class="has-text-bulma"
+                                    >Bulma version</span
+                                >
+                                <span class="has-text-grey">{{
+                                    bulmaVersion
+                                }}</span>
                             </strong>
 
-                            <hr class="navbar-divider">
+                            <hr class="navbar-divider" />
                             <a
                                 class="navbar-item"
                                 href="https://github.com/buefy/buefy/releases"
@@ -118,42 +114,42 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
 
-import { BIcon } from '@ntohq/buefy-next'
+import { BIcon } from "buefy";
 
-import buefyPackage from '../../../../package.json'
-import bulmaPackage from 'bulma/package.json'
+import buefyPackage from "../../../../package.json";
+import bulmaPackage from "bulma/package.json";
 
 export default defineComponent({
     components: { BIcon },
     props: {
-        light: Boolean
+        light: Boolean,
     },
     data() {
         return {
             isMenuActive: false,
             version: buefyPackage.version,
-            bulmaVersion: bulmaPackage.version
-        }
+            bulmaVersion: bulmaPackage.version,
+        };
     },
     methods: {
         closeMenu() {
-            this.isMenuActive = false
+            this.isMenuActive = false;
         },
         toggleHtmlClip() {
-            document
-                .documentElement
-                .classList
-                .toggle('is-clipped-touch', this.isMenuActive)
-        }
+            document.documentElement.classList.toggle(
+                "is-clipped-touch",
+                this.isMenuActive
+            );
+        },
     },
     mounted() {
-        this.$eventHub.on('navigate', this.closeMenu)
+        this.$eventHub.on("navigate", this.closeMenu);
     },
 
     beforeUnmount() {
-        this.$eventHub.off('navigate', this.closeMenu)
-    }
-})
+        this.$eventHub.off("navigate", this.closeMenu);
+    },
+});
 </script>

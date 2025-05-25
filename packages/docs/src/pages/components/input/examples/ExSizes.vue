@@ -1,34 +1,26 @@
 <template>
     <section>
         <b-field>
-            <b-input placeholder="Small"
-                size="is-small"
-                icon="account">
+            <b-input placeholder="Small" size="is-small" icon="account">
             </b-input>
         </b-field>
 
         <b-field>
-            <b-input placeholder="Default"
-                icon="account">
+            <b-input placeholder="Default" icon="account"> </b-input>
+        </b-field>
+
+        <b-field>
+            <b-input placeholder="Medium" size="is-medium" icon="account">
             </b-input>
         </b-field>
 
         <b-field>
-            <b-input placeholder="Medium"
-                size="is-medium"
-                icon="account">
-            </b-input>
-        </b-field>
-
-        <b-field>
-            <b-input placeholder="Large"
-                size="is-large"
-                icon="account">
+            <b-input placeholder="Large" size="is-large" icon="account">
             </b-input>
         </b-field>
     </section>
 </template>
 
 <script setup lang="ts">
-import { BField, BInput } from '@ntohq/buefy-next'
+import { BField, BInput } from "buefy";
 </script>

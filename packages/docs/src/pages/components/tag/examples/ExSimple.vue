@@ -10,5 +10,5 @@
 </template>
 
 <script setup lang="ts">
-import { BField, BTag } from '@ntohq/buefy-next'
+import { BField, BTag } from "buefy";
 </script>

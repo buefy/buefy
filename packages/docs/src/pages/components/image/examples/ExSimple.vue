@@ -24,22 +24,22 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue'
-    import { BField, BImage, BSwitch } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BField, BImage, BSwitch } from "buefy";
 
-    const buefyLogo = new URL('/src/assets/buefy.png', import.meta.url).href
+const buefyLogo = new URL("/src/assets/buefy.png", import.meta.url).href;
 
-    export default defineComponent({
-        components: {
-            BField,
-            BImage,
-            BSwitch
-        },
-        data() {
-            return {
-                rounded: false,
-                buefyLogo,
-            }
-        }
-    })
+export default defineComponent({
+    components: {
+        BField,
+        BImage,
+        BSwitch,
+    },
+    data() {
+        return {
+            rounded: false,
+            buefyLogo,
+        };
+    },
+});
 </script>

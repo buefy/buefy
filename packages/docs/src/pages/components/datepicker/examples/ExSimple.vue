@@ -3,7 +3,9 @@
         <b-field grouped group-multiline>
             <b-field>
                 <div class="control">
-                    <b-switch v-model="showWeekNumber">Show week number</b-switch>
+                    <b-switch v-model="showWeekNumber"
+                        >Show week number</b-switch
+                    >
                 </div>
             </b-field>
             <b-field label="Locale">
@@ -34,35 +36,35 @@
                 :icon-right="selected ? 'close-circle' : ''"
                 icon-right-clickable
                 @icon-right-click="clearDate"
-                trap-focus>
+                trap-focus
+            >
             </b-datepicker>
         </b-field>
     </section>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { BDatepicker, BField, BSelect, BSwitch } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BDatepicker, BField, BSelect, BSwitch } from "buefy";
 
 export default defineComponent({
     components: {
         BDatepicker,
         BField,
         BSelect,
-        BSwitch
+        BSwitch,
     },
     data() {
         return {
             selected: new Date() as Date | null,
             showWeekNumber: false,
-            locale: undefined // Browser locale
-        }
+            locale: undefined, // Browser locale
+        };
     },
     methods: {
-        clearDate () {
-            this.selected = null
-        }
-    }
-})
+        clearDate() {
+            this.selected = null;
+        },
+    },
+});
 </script>
-

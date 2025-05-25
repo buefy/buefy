@@ -6,27 +6,32 @@
         </b-field>
 
         <b-field>
-            <b-slider v-model="numbers2" type="is-danger" :min="-2" :max="8" :step="2">
+            <b-slider
+                v-model="numbers2"
+                type="is-danger"
+                :min="-2"
+                :max="8"
+                :step="2"
+            >
             </b-slider>
         </b-field>
-
     </section>
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue'
-    import { BField, BSlider } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BField, BSlider } from "buefy";
 
-    export default defineComponent({
-        components: {
-            BField,
-            BSlider
-        },
-        data() {
-            return {
-                numbers: [2, 5],
-                numbers2: [2, 6]
-            }
-        }
-    })
+export default defineComponent({
+    components: {
+        BField,
+        BSlider,
+    },
+    data() {
+        return {
+            numbers: [2, 5],
+            numbers2: [2, 6],
+        };
+    },
+});
 </script>

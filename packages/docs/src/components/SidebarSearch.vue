@@ -11,20 +11,19 @@
                 <b-icon
                     icon="magnify"
                     aria-hidden="true"
-                    style="vertical-align: middle;"
+                    style="vertical-align: middle"
                 />
                 Search
             </span>
-            <b-tag type="is-primary is-light is-hidden-touch" aria-hidden="true">
-                {{ isMacOS ? '⌘' : 'Ctrl' }} K
+            <b-tag
+                type="is-primary is-light is-hidden-touch"
+                aria-hidden="true"
+            >
+                {{ isMacOS ? "⌘" : "Ctrl" }} K
             </b-tag>
         </div>
 
-        <b-modal
-            v-model="isActive"
-            @after-enter="focus"
-            :width="560"
-        >
+        <b-modal v-model="isActive" @after-enter="focus" :width="560">
             <article class="panel is-primary">
                 <div class="panel-block">
                     <p class="control has-icons-left">
@@ -34,10 +33,15 @@
                             placeholder="Search docs"
                             aria-label="Search in the documentation"
                             aria-controls="sidebarSearchResults"
-                            :aria-invalid="isTermEmpty || sortedResults.length > 0 ? null : 'true'"
-                            :aria-errormessage="isTermEmpty || sortedResults.length > 0
-                                ? null
-                                :'sidebarSearchNoresult'
+                            :aria-invalid="
+                                isTermEmpty || sortedResults.length > 0
+                                    ? null
+                                    : 'true'
+                            "
+                            :aria-errormessage="
+                                isTermEmpty || sortedResults.length > 0
+                                    ? null
+                                    : 'sidebarSearchNoresult'
                             "
                             @update:model-value="search"
                             maxlength="32"
@@ -57,9 +61,7 @@
                     aria-labelledby="Search results"
                     aria-live="polite"
                 >
-                    <template
-                        v-if="sortedResults.length > 0"
-                    >
+                    <template v-if="sortedResults.length > 0">
                         <template
                             v-for="section in sortedResults"
                             :key="section.category"
@@ -78,18 +80,24 @@
                                     :key="result.path"
                                     class="notification"
                                     :class="{
-                                        'is-active': result.index === selectedIndex
+                                        'is-active':
+                                            result.index === selectedIndex,
                                     }"
                                     @mouseenter="select(result.index)"
                                     @click="navigateTo"
                                     role="option"
-                                    :aria-selected="result.index === selectedIndex"
+                                    :aria-selected="
+                                        result.index === selectedIndex
+                                    "
                                     :aria-setsize="results.length"
                                     :aria-posinset="result.index + 1"
                                     tabindex="-1"
                                 >
                                     <!-- eslint-disable-next-line vue/no-v-html -->
-                                    <p v-html="highlightTerm(result.title)" class="is-size-6" />
+                                    <p
+                                        v-html="highlightTerm(result.title)"
+                                        class="is-size-6"
+                                    />
                                     <p class="is-size-7">
                                         {{ stripTags(result.subtitle) }}
                                     </p>
@@ -103,33 +111,29 @@
                         id="sidebarSearchNoresult"
                         class="is-size-4 has-text-dark sidebar-search-noresult"
                     >
-                        No results for “<strong class="has-text-primary">{{ term }}</strong>„
+                        No results for “<strong class="has-text-primary">{{
+                            term
+                        }}</strong
+                        >„
                     </p>
                 </div>
 
-                <ul class="panel-block sidebar-search-shortcuts is-hidden-touch">
+                <ul
+                    class="panel-block sidebar-search-shortcuts is-hidden-touch"
+                >
                     <li aria-keyshortcuts="Enter">
-                        <b-tag type="is-primary is-light">
-                            Enter
-                        </b-tag>
+                        <b-tag type="is-primary is-light"> Enter </b-tag>
                         &nbsp;to select
                     </li>
                     <li aria-keyshortcuts="ArrowUp ArrowDown">
-                        <b-tag type="is-primary is-light">
-                            ↓
-                        </b-tag>
+                        <b-tag type="is-primary is-light"> ↓ </b-tag>
                         &nbsp;
-                        <b-tag type="is-primary is-light">
-                            ↑
-                        </b-tag>
+                        <b-tag type="is-primary is-light"> ↑ </b-tag>
                         &nbsp;to navigate
                     </li>
                     <li aria-keyshortcuts="Escape">
-                        <b-tag type="is-primary is-light">
-                            Esc
-                        </b-tag>
-                        &nbsp;
-                        to close
+                        <b-tag type="is-primary is-light"> Esc </b-tag>
+                        &nbsp; to close
                     </li>
                 </ul>
             </article>
@@ -138,31 +142,31 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
 
-import routes from '@/data/routes'
-import menu from '@/data/menu'
-import type { PageTree } from '@/data/menu'
+import routes from "@/data/routes";
+import menu from "@/data/menu";
+import type { PageTree } from "@/data/menu";
 
-import { BIcon, BInput, BModal, BTag } from '@ntohq/buefy-next'
+import { BIcon, BInput, BModal, BTag } from "buefy";
 
-type BInputInstance = InstanceType<typeof BInput>
+type BInputInstance = InstanceType<typeof BInput>;
 
 interface SearchResult {
-    title: string
-    subtitle: string
-    path: string
-    score?: number
+    title: string;
+    subtitle: string;
+    path: string;
+    score?: number;
 }
 
 interface IndexedSearchResult extends SearchResult {
-    index: number
+    index: number;
 }
 
 interface SearchResultsSection<R extends SearchResult = SearchResult> {
-    category: string
-    results: R[]
-    score: number
+    category: string;
+    results: R[];
+    score: number;
 }
 
 export default defineComponent({
@@ -170,22 +174,22 @@ export default defineComponent({
         BIcon,
         BInput,
         BModal,
-        BTag
+        BTag,
     },
     data() {
-        const categories = new Set<string>()
-        const categoryByPage: Record<string, string> = {}
+        const categories = new Set<string>();
+        const categoryByPage: Record<string, string> = {};
         const traverseMenu = (page: PageTree) => {
-            categories.add(page.category)
+            categories.add(page.category);
             page.pages.forEach((subpage) => {
-                if (typeof subpage === 'string') {
-                    categoryByPage[subpage] = page.category
+                if (typeof subpage === "string") {
+                    categoryByPage[subpage] = page.category;
                 } else {
-                    traverseMenu(subpage)
+                    traverseMenu(subpage);
                 }
-            })
-        }
-        traverseMenu({ category: 'Documentation', pages: menu.documentation })
+            });
+        };
+        traverseMenu({ category: "Documentation", pages: menu.documentation });
 
         return {
             isActive: false,
@@ -194,174 +198,199 @@ export default defineComponent({
             categoryByPage,
             results: [] as SearchResult[],
             selectedIndex: 0,
-            term: ''
-        }
+            term: "",
+        };
     },
     computed: {
         docRoutes() {
-            return Object.values(routes)
-                .filter((route) => route.menu === 'documentation')
+            return Object.values(routes).filter(
+                (route) => route.menu === "documentation"
+            );
         },
         isTermEmpty() {
-            return /^\s*$/.test(this.term)
+            return /^\s*$/.test(this.term);
         },
         sortedResults(): SearchResultsSection<IndexedSearchResult>[] {
-            const resultsByCategory: Record<string, SearchResultsSection> = {}
-            let index = 0
+            const resultsByCategory: Record<string, SearchResultsSection> = {};
+            let index = 0;
 
             this.results.forEach((result) => {
-                const category = this.categoryByPage[result.path.replace(/^\//, '')] || 'Others'
-                const score = this.term.trim().toLowerCase() !== result.title.trim().toLowerCase()
-                    ? new RegExp('^' + this.term.trim(), 'i').test(result.title) === false
-                        ? RegExp('\\s+' + this.term.trim(), 'i').test(result.title) === false
-                            ? RegExp(this.term.trim(), 'i').test(result.title) === false
-                                ? 0
-                                : 2
-                            : 3
-                        : 4
-                    : 5
+                const category =
+                    this.categoryByPage[result.path.replace(/^\//, "")] ||
+                    "Others";
+                const score =
+                    this.term.trim().toLowerCase() !==
+                    result.title.trim().toLowerCase()
+                        ? new RegExp("^" + this.term.trim(), "i").test(
+                              result.title
+                          ) === false
+                            ? RegExp("\\s+" + this.term.trim(), "i").test(
+                                  result.title
+                              ) === false
+                                ? RegExp(this.term.trim(), "i").test(
+                                      result.title
+                                  ) === false
+                                    ? 0
+                                    : 2
+                                : 3
+                            : 4
+                        : 5;
 
-                if (typeof resultsByCategory[category] === 'undefined') {
+                if (typeof resultsByCategory[category] === "undefined") {
                     resultsByCategory[category] = {
                         category,
                         results: [],
-                        score
-                    }
+                        score,
+                    };
                 } else {
                     if (score > resultsByCategory[category].score) {
-                        resultsByCategory[category].score = score
+                        resultsByCategory[category].score = score;
                     }
                 }
                 resultsByCategory[category].results.push({
                     ...result,
-                    score
-                })
-            })
+                    score,
+                });
+            });
 
-            const sorted = Object.values(resultsByCategory)
-                .sort((a, b) => String(b.score).localeCompare(String(a.score)))
+            const sorted = Object.values(resultsByCategory).sort((a, b) =>
+                String(b.score).localeCompare(String(a.score))
+            );
             return sorted.map((category) => {
                 return {
                     ...category,
                     results: category.results
-                        .sort((a, b) => String(b.score).localeCompare(String(a.score)))
-                        .map((result) => ({ ...result, index: index++ }))
-                }
-            })
-        }
+                        .sort((a, b) =>
+                            String(b.score).localeCompare(String(a.score))
+                        )
+                        .map((result) => ({ ...result, index: index++ })),
+                };
+            });
+        },
     },
     methods: {
         open() {
-            this.isActive = true
+            this.isActive = true;
         },
         close() {
-            this.isActive = false
-            this.term = ''
-            this.results = []
+            this.isActive = false;
+            this.term = "";
+            this.results = [];
         },
         focus() {
-            (this.$refs.searchbar as BInputInstance).focus()
+            (this.$refs.searchbar as BInputInstance).focus();
         },
         select(index: number) {
-            this.selectedIndex = Math.max(0, Math.min(index, this.results.length - 1))
+            this.selectedIndex = Math.max(
+                0,
+                Math.min(index, this.results.length - 1)
+            );
         },
         search(term: string | number | undefined) {
-            this.selectedIndex = 0
-            this.term = term as string
+            this.selectedIndex = 0;
+            this.term = term as string;
             this.results = this.docRoutes.filter((route) => {
-                const regexp = new RegExp(this.term.replace(/\s+/g, '.*\\s+'), 'i')
-                return regexp.test(route.title) || regexp.test(route.subtitle)
-            })
+                const regexp = new RegExp(
+                    this.term.replace(/\s+/g, ".*\\s+"),
+                    "i"
+                );
+                return regexp.test(route.title) || regexp.test(route.subtitle);
+            });
         },
         scrollToSelection() {
             if (this.$refs[`result_${this.selectedIndex}`]) {
-                (this.$refs[`result_${this.selectedIndex}`] as HTMLElement[])[0].scrollIntoView({
-                    behavior: 'auto',
-                    block: 'center',
-                    inline: 'nearest'
-                })
+                (
+                    this.$refs[`result_${this.selectedIndex}`] as HTMLElement[]
+                )[0].scrollIntoView({
+                    behavior: "auto",
+                    block: "center",
+                    inline: "nearest",
+                });
             }
         },
         navigateTo() {
             this.sortedResults.some((category) =>
                 category.results.some((result) => {
                     if (result.index === this.selectedIndex) {
-                        this.$router.push(result.path)
-                        this.close()
-                        return true
+                        this.$router.push(result.path);
+                        this.close();
+                        return true;
                     }
-                    return false
+                    return false;
                 })
-            )
+            );
         },
         shortcutHandler(event: KeyboardEvent) {
             switch (event.key) {
-                case 'Escape':
-                    return this.close()
-                case 'k':
-                case 'K':
+                case "Escape":
+                    return this.close();
+                case "k":
+                case "K":
                     // NOTE: MetaKey is the command key on 🍏' devices
                     if (event.ctrlKey || event.metaKey) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                        this.open()
+                        event.preventDefault();
+                        event.stopPropagation();
+                        this.open();
                     }
-                    break
-                case 'ArrowUp':
+                    break;
+                case "ArrowUp":
                     if (this.isActive) {
                         this.selectedIndex = Math.max(
                             0,
                             this.selectedIndex - 1
-                        )
-                        this.scrollToSelection()
+                        );
+                        this.scrollToSelection();
                     }
-                    break
-                case 'ArrowDown':
+                    break;
+                case "ArrowDown":
                     if (this.isActive) {
                         this.selectedIndex = Math.min(
                             this.results.length - 1,
                             this.selectedIndex + 1
-                        )
-                        this.scrollToSelection()
+                        );
+                        this.scrollToSelection();
                     }
-                    break
-                case 'PageUp':
+                    break;
+                case "PageUp":
                     if (this.isActive) {
-                        this.selectedIndex = 0
-                        this.scrollToSelection()
+                        this.selectedIndex = 0;
+                        this.scrollToSelection();
                     }
-                    break
-                case 'PageDown':
+                    break;
+                case "PageDown":
                     if (this.isActive) {
-                        this.selectedIndex = Math.max(0, this.results.length - 1)
-                        this.scrollToSelection()
+                        this.selectedIndex = Math.max(
+                            0,
+                            this.results.length - 1
+                        );
+                        this.scrollToSelection();
                     }
-                    break
-                case 'Enter':
+                    break;
+                case "Enter":
                     if (this.isActive && this.results.length > 0) {
-                        this.navigateTo()
+                        this.navigateTo();
                     }
-                    break
+                    break;
             }
         },
         highlightTerm(str: string) {
-            const words = this.term.split(/\s+/)
+            const words = this.term.split(/\s+/);
             return str.replace(
-                new RegExp(`(${words.join('|')})`, 'ig'),
+                new RegExp(`(${words.join("|")})`, "ig"),
                 '<em class="has-text-primary">$1</em>'
-            )
+            );
         },
         stripTags(str: string) {
-            return str.replace(/<[^>]*>/g, '')
-        }
+            return str.replace(/<[^>]*>/g, "");
+        },
     },
     mounted() {
-        window.addEventListener('keydown', this.shortcutHandler)
+        window.addEventListener("keydown", this.shortcutHandler);
     },
     beforeUnmount() {
-        window.removeEventListener('keydown', this.shortcutHandler)
-    }
-})
+        window.removeEventListener("keydown", this.shortcutHandler);
+    },
+});
 </script>
 
 <style lang="scss">
@@ -374,7 +403,7 @@ export default defineComponent({
         flex-grow: 1;
     }
 }
-.sidebar-search  {
+.sidebar-search {
     .modal {
         justify-content: flex-start;
         .modal-content {
@@ -394,14 +423,14 @@ export default defineComponent({
 
         .notification {
             cursor: pointer;
-            margin-bottom: .5rem;
+            margin-bottom: 0.5rem;
 
             &.is-active {
                 background: #7957d5;
                 color: #fff;
 
                 em {
-                    color: inherit!important;
+                    color: inherit !important;
                     text-decoration: underline;
                 }
             }
