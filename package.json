@@ -73,7 +73,7 @@
     "@mdi/font": "4.9.95",
     "@vue/test-utils": "1.0.0-beta.29",
     "all-contributors-cli": "6.26.1",
-    "axios": "1.6.0",
+    "axios": "1.8.2",
     "babel-core": "6.26.3",
     "babel-jest": "23.6.0",
     "babel-loader": "7.1.5",
