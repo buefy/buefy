@@ -1,8 +1,12 @@
 {
   "name": "docs",
-  "version": "0.2.1",
+  "version": "1.0.0",
   "private": true,
   "author": "Rafael Beraldo <rafael.pimpa@gmail.com>",
+  "maintainers": [
+    "Kikuo Emoto <kemoto@codemonger.io>",
+    "Wesley Ford <wes@wesdevpro.com>"
+  ],
   "homepage": "htps://buefy.org",
   "license": "MIT",
   "repository": {

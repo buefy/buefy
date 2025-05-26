@@ -1,6 +1,6 @@
 {
   "name": "buefy",
-  "version": "0.2.1",
+  "version": "1.0.0",
   "description": "Lightweight UI components for Vue.js (v3) based on Bulma",
   "keywords": [
     "vuejs",
@@ -13,7 +13,11 @@
     "scss",
     "typescript"
   ],
-  "author": "Wesley Ford <wes@wesdev.pro>",
+  "author": "Rafael Beraldo <rafael.pimpa@gmail.com>",
+  "maintainers": [
+    "Kikuo Emoto <kemoto@codemonger.io>",
+    "Wesley Ford <wes@wesdevpro.com>"
+  ],
   "homepage": "https://buefy.org",
   "license": "MIT",
   "main": "dist/cjs/index.js",

@@ -1,13 +1,12 @@
 {
   "name": "root",
   "private": true,
-  "version": "0.2.1",
+  "version": "1.0.0",
   "homepage": "https://buefy.org",
   "description": "Lightweight UI components for Vue.js (v3) based on Bulma",
   "license": "MIT",
   "author": "Rafael Beraldo <rafael.pimpa@gmail.com>",
   "maintainers": [
-    "Walter Tommasi <tommsi20@gmail.com>",
     "Kikuo Emoto <kemoto@codemonger.io>",
     "Wesley Ford <wes@wesdevpro.com>"
   ],
