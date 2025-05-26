@@ -34,10 +34,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ntohq/buefy-next.git"
+    "url": "git+https://github.com/ntohq/buefy.git"
   },
   "bugs": {
-    "url": "https://github.com/ntohq/buefy-next/issues"
+    "url": "https://github.com/ntohq/buefy/issues"
   },
   "scripts": {
     "test": "npm run lint && npm run unit:update",

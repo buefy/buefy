@@ -94,7 +94,7 @@ export default defineConfig({
         {
             // replaces `buefy` with the path to the source code
             // // in development to ease debugging
-            name: "link-buefy-next-src",
+            name: "link-buefy-src",
             apply: "serve", // development only
             resolveId: {
                 order: "pre", // otherwise, IDs become "plugin-vue:export-helper"
@@ -102,7 +102,7 @@ export default defineConfig({
                     if (id === "buefy") {
                         return path.resolve(
                             __dirname,
-                            "../buefy-next/src/index.ts"
+                            "../buefy/src/index.ts"
                         );
                     }
                 },

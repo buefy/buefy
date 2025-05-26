@@ -38,7 +38,7 @@
                 2.6+</strong
             >.
             <strong
-                ><a href="https://github.com/ntohq/buefy-next/" target="_blank"
+                ><a href="https://github.com/ntohq/buefy/" target="_blank"
                     >Vue.js version 3+ is supported here (official fork in
                     development).</a
                 ></strong

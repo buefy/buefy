@@ -34,10 +34,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ntohq/buefy-next"
+    "url": "https://github.com/ntohq/buefy"
   },
   "bugs": {
-    "url": "https://github.com/ntohq/buefy-next/issues"
+    "url": "https://github.com/ntohq/buefy/issues"
   },
   "scripts": {
     "lint:staged": "lint-staged"

@@ -31,7 +31,7 @@
                         <p>
                             <strong>Vue 3</strong>
                             (<a
-                                href="https://github.com/ntohq/buefy-next"
+                                href="https://github.com/ntohq/buefy"
                                 target="_blank"
                             >
                                 <b-icon

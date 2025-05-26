@@ -3,23 +3,23 @@
   "include": [
     "src/**/*",
     "src/**/*.vue",
-    "../buefy-next/src/**/*",
-    "../buefy-next/src/**/*.vue"
+    "../buefy/src/**/*",
+    "../buefy/src/**/*.vue"
   ],
   "exclude": [
     "node_modules",
     "src/assets/*",
-    "../buefy-next/src/**/*.spec.*",
-    "../buefy-next/node_modules"
+    "../buefy/src/**/*.spec.*",
+    "../buefy/node_modules"
   ],
   "compilerOptions": {
     "rootDirs": [
       "./src",
-      "../buefy-next/src"
+      "../buefy/src"
     ],
     "paths": {
       "buefy": [
-        "../buefy-next/src"
+        "../buefy/src"
       ],
       "@/*": [
         "./src/*"
