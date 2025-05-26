@@ -56,7 +56,11 @@
             </template>
         </div>
 
-        <a class="sidebar-btt" role="button" @click="backToTop">
+        <a
+            class="sidebar-btt"
+            role="button"
+            @click="backToTop"
+        >
             <b-icon icon="arrow-expand-up" size="is-small" />
             <span>Back to top</span>
         </a>
@@ -64,14 +68,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent } from 'vue'
 
-import { BIcon, BTag } from "buefy";
+import { BIcon, BTag } from 'buefy'
 
-import type { PageTree } from "@/data/menu";
-import routes from "@/data/routes";
-import type { Route } from "@/data/routes";
-import SidebarSearch from "./SidebarSearch.vue";
+import type { PageTree } from '@/data/menu'
+import routes from '@/data/routes'
+import type { Route } from '@/data/routes'
+import SidebarSearch from './SidebarSearch.vue'
 
 type PageRoute = Partial<PageTree & Route>;
 
@@ -79,23 +83,23 @@ export default defineComponent({
     components: {
         BIcon,
         BTag,
-        SidebarSearch,
+        SidebarSearch
     },
     props: {
-        data: Array<PageTree>,
+        data: Array<PageTree>
     },
     methods: {
-        normalizedData(items: PageTree["pages"]): PageRoute[] {
+        normalizedData(items: PageTree['pages']): PageRoute[] {
             return items.map((item) => {
-                return typeof item === "string" ? routes[item] : item;
-            });
+                return typeof item === 'string' ? routes[item] : item
+            })
         },
         backToTop() {
             window.scroll({
                 top: 0,
-                behavior: "smooth",
-            });
-        },
-    },
-});
+                behavior: 'smooth'
+            })
+        }
+    }
+})
 </script>

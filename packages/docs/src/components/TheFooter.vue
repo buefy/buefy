@@ -10,8 +10,7 @@
                                 <a
                                     href="http://opensource.org/licenses/mit-license.php"
                                     target="_blank"
-                                    >MIT</a
-                                >.
+                                >MIT</a>.
                             </small>
                         </p>
 
@@ -80,5 +79,5 @@
 </template>
 
 <script setup lang="ts">
-import { BField, BIcon } from "buefy";
+import { BField, BIcon } from 'buefy'
 </script>

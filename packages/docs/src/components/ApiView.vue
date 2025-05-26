@@ -1,7 +1,9 @@
 <template>
     <section id="api-view" class="api-view">
         <h2 class="title is-4">
-            <router-link to="#api-view"> # </router-link>
+            <router-link to="#api-view">
+                #
+            </router-link>
             API
         </h2>
 
@@ -49,8 +51,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { BTable, BTabs, BTabItem } from "buefy";
+import { defineComponent } from 'vue'
+import { BTable, BTabs, BTabItem } from 'buefy'
 
 export interface PropInfo {
     name: string;
@@ -91,57 +93,57 @@ export default defineComponent({
     components: {
         BTable,
         BTabs,
-        BTabItem,
+        BTabItem
     },
     props: {
-        data: Array<ComponentInfo>,
+        data: Array<ComponentInfo>
     },
     data() {
         return {
             propsColumns: [
-                { label: "Name", field: "name", renderHtml: true },
+                { label: 'Name', field: 'name', renderHtml: true },
                 {
-                    label: "Description",
-                    field: "description",
-                    renderHtml: true,
+                    label: 'Description',
+                    field: 'description',
+                    renderHtml: true
                 },
-                { label: "Type", field: "type" },
-                { label: "Values", field: "values", renderHtml: true },
-                { label: "Default", field: "default", renderHtml: true },
+                { label: 'Type', field: 'type' },
+                { label: 'Values', field: 'values', renderHtml: true },
+                { label: 'Default', field: 'default', renderHtml: true }
             ],
             slotsColumns: [
-                { label: "Slot name", field: "name", renderHtml: true },
+                { label: 'Slot name', field: 'name', renderHtml: true },
                 {
-                    label: "Description",
-                    field: "description",
-                    renderHtml: true,
+                    label: 'Description',
+                    field: 'description',
+                    renderHtml: true
                 },
                 {
-                    label: "Props (if scoped)",
-                    field: "props",
-                    renderHtml: true,
-                },
+                    label: 'Props (if scoped)',
+                    field: 'props',
+                    renderHtml: true
+                }
             ],
             eventsColumns: [
-                { label: "Name", field: "name", renderHtml: true },
+                { label: 'Name', field: 'name', renderHtml: true },
                 {
-                    label: "Description",
-                    field: "description",
-                    renderHtml: true,
+                    label: 'Description',
+                    field: 'description',
+                    renderHtml: true
                 },
-                { label: "Parameters", field: "parameters", renderHtml: true },
+                { label: 'Parameters', field: 'parameters', renderHtml: true }
             ],
             methodsColumns: [
-                { label: "Name", field: "name", renderHtml: true },
+                { label: 'Name', field: 'name', renderHtml: true },
                 {
-                    label: "Description",
-                    field: "description",
-                    renderHtml: true,
+                    label: 'Description',
+                    field: 'description',
+                    renderHtml: true
                 },
-                { label: "Parameters", field: "parameters", renderHtml: true },
-                { label: "Return", field: "return", renderHtml: true },
-            ],
-        };
-    },
-});
+                { label: 'Parameters', field: 'parameters', renderHtml: true },
+                { label: 'Return', field: 'return', renderHtml: true }
+            ]
+        }
+    }
+})
 </script>

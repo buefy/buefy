@@ -23,7 +23,11 @@
             </b-tag>
         </div>
 
-        <b-modal v-model="isActive" @after-enter="focus" :width="560">
+        <b-modal
+            v-model="isActive"
+            @after-enter="focus"
+            :width="560"
+        >
             <article class="panel is-primary">
                 <div class="panel-block">
                     <p class="control has-icons-left">
@@ -113,8 +117,7 @@
                     >
                         No results for “<strong class="has-text-primary">{{
                             term
-                        }}</strong
-                        >„
+                        }}</strong>„
                     </p>
                 </div>
 
@@ -122,17 +125,25 @@
                     class="panel-block sidebar-search-shortcuts is-hidden-touch"
                 >
                     <li aria-keyshortcuts="Enter">
-                        <b-tag type="is-primary is-light"> Enter </b-tag>
+                        <b-tag type="is-primary is-light">
+                            Enter
+                        </b-tag>
                         &nbsp;to select
                     </li>
                     <li aria-keyshortcuts="ArrowUp ArrowDown">
-                        <b-tag type="is-primary is-light"> ↓ </b-tag>
+                        <b-tag type="is-primary is-light">
+                            ↓
+                        </b-tag>
                         &nbsp;
-                        <b-tag type="is-primary is-light"> ↑ </b-tag>
+                        <b-tag type="is-primary is-light">
+                            ↑
+                        </b-tag>
                         &nbsp;to navigate
                     </li>
                     <li aria-keyshortcuts="Escape">
-                        <b-tag type="is-primary is-light"> Esc </b-tag>
+                        <b-tag type="is-primary is-light">
+                            Esc
+                        </b-tag>
                         &nbsp; to close
                     </li>
                 </ul>
@@ -142,13 +153,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent } from 'vue'
 
-import routes from "@/data/routes";
-import menu from "@/data/menu";
-import type { PageTree } from "@/data/menu";
+import routes from '@/data/routes'
+import menu from '@/data/menu'
+import type { PageTree } from '@/data/menu'
 
-import { BIcon, BInput, BModal, BTag } from "buefy";
+import { BIcon, BInput, BModal, BTag } from 'buefy'
 
 type BInputInstance = InstanceType<typeof BInput>;
 
@@ -174,22 +185,22 @@ export default defineComponent({
         BIcon,
         BInput,
         BModal,
-        BTag,
+        BTag
     },
     data() {
-        const categories = new Set<string>();
-        const categoryByPage: Record<string, string> = {};
+        const categories = new Set<string>()
+        const categoryByPage: Record<string, string> = {}
         const traverseMenu = (page: PageTree) => {
-            categories.add(page.category);
+            categories.add(page.category)
             page.pages.forEach((subpage) => {
-                if (typeof subpage === "string") {
-                    categoryByPage[subpage] = page.category;
+                if (typeof subpage === 'string') {
+                    categoryByPage[subpage] = page.category
                 } else {
-                    traverseMenu(subpage);
+                    traverseMenu(subpage)
                 }
-            });
-        };
-        traverseMenu({ category: "Documentation", pages: menu.documentation });
+            })
+        }
+        traverseMenu({ category: 'Documentation', pages: menu.documentation })
 
         return {
             isActive: false,
@@ -198,64 +209,64 @@ export default defineComponent({
             categoryByPage,
             results: [] as SearchResult[],
             selectedIndex: 0,
-            term: "",
-        };
+            term: ''
+        }
     },
     computed: {
         docRoutes() {
             return Object.values(routes).filter(
-                (route) => route.menu === "documentation"
-            );
+                (route) => route.menu === 'documentation'
+            )
         },
         isTermEmpty() {
-            return /^\s*$/.test(this.term);
+            return /^\s*$/.test(this.term)
         },
         sortedResults(): SearchResultsSection<IndexedSearchResult>[] {
-            const resultsByCategory: Record<string, SearchResultsSection> = {};
-            let index = 0;
+            const resultsByCategory: Record<string, SearchResultsSection> = {}
+            let index = 0
 
             this.results.forEach((result) => {
                 const category =
-                    this.categoryByPage[result.path.replace(/^\//, "")] ||
-                    "Others";
+                    this.categoryByPage[result.path.replace(/^\//, '')] ||
+                    'Others'
                 const score =
                     this.term.trim().toLowerCase() !==
                     result.title.trim().toLowerCase()
-                        ? new RegExp("^" + this.term.trim(), "i").test(
-                              result.title
-                          ) === false
-                            ? RegExp("\\s+" + this.term.trim(), "i").test(
-                                  result.title
-                              ) === false
-                                ? RegExp(this.term.trim(), "i").test(
-                                      result.title
-                                  ) === false
+                        ? new RegExp('^' + this.term.trim(), 'i').test(
+                            result.title
+                        ) === false
+                            ? RegExp('\\s+' + this.term.trim(), 'i').test(
+                                result.title
+                            ) === false
+                                ? RegExp(this.term.trim(), 'i').test(
+                                    result.title
+                                ) === false
                                     ? 0
                                     : 2
                                 : 3
                             : 4
-                        : 5;
+                        : 5
 
-                if (typeof resultsByCategory[category] === "undefined") {
+                if (typeof resultsByCategory[category] === 'undefined') {
                     resultsByCategory[category] = {
                         category,
                         results: [],
-                        score,
-                    };
+                        score
+                    }
                 } else {
                     if (score > resultsByCategory[category].score) {
-                        resultsByCategory[category].score = score;
+                        resultsByCategory[category].score = score
                     }
                 }
                 resultsByCategory[category].results.push({
                     ...result,
-                    score,
-                });
-            });
+                    score
+                })
+            })
 
             const sorted = Object.values(resultsByCategory).sort((a, b) =>
                 String(b.score).localeCompare(String(a.score))
-            );
+            )
             return sorted.map((category) => {
                 return {
                     ...category,
@@ -263,134 +274,134 @@ export default defineComponent({
                         .sort((a, b) =>
                             String(b.score).localeCompare(String(a.score))
                         )
-                        .map((result) => ({ ...result, index: index++ })),
-                };
-            });
-        },
+                        .map((result) => ({ ...result, index: index++ }))
+                }
+            })
+        }
     },
     methods: {
         open() {
-            this.isActive = true;
+            this.isActive = true
         },
         close() {
-            this.isActive = false;
-            this.term = "";
-            this.results = [];
+            this.isActive = false
+            this.term = ''
+            this.results = []
         },
         focus() {
-            (this.$refs.searchbar as BInputInstance).focus();
+            (this.$refs.searchbar as BInputInstance).focus()
         },
         select(index: number) {
             this.selectedIndex = Math.max(
                 0,
                 Math.min(index, this.results.length - 1)
-            );
+            )
         },
         search(term: string | number | undefined) {
-            this.selectedIndex = 0;
-            this.term = term as string;
+            this.selectedIndex = 0
+            this.term = term as string
             this.results = this.docRoutes.filter((route) => {
                 const regexp = new RegExp(
-                    this.term.replace(/\s+/g, ".*\\s+"),
-                    "i"
-                );
-                return regexp.test(route.title) || regexp.test(route.subtitle);
-            });
+                    this.term.replace(/\s+/g, '.*\\s+'),
+                    'i'
+                )
+                return regexp.test(route.title) || regexp.test(route.subtitle)
+            })
         },
         scrollToSelection() {
             if (this.$refs[`result_${this.selectedIndex}`]) {
                 (
                     this.$refs[`result_${this.selectedIndex}`] as HTMLElement[]
                 )[0].scrollIntoView({
-                    behavior: "auto",
-                    block: "center",
-                    inline: "nearest",
-                });
+                    behavior: 'auto',
+                    block: 'center',
+                    inline: 'nearest'
+                })
             }
         },
         navigateTo() {
             this.sortedResults.some((category) =>
                 category.results.some((result) => {
                     if (result.index === this.selectedIndex) {
-                        this.$router.push(result.path);
-                        this.close();
-                        return true;
+                        this.$router.push(result.path)
+                        this.close()
+                        return true
                     }
-                    return false;
+                    return false
                 })
-            );
+            )
         },
         shortcutHandler(event: KeyboardEvent) {
             switch (event.key) {
-                case "Escape":
-                    return this.close();
-                case "k":
-                case "K":
+                case 'Escape':
+                    return this.close()
+                case 'k':
+                case 'K':
                     // NOTE: MetaKey is the command key on 🍏' devices
                     if (event.ctrlKey || event.metaKey) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                        this.open();
+                        event.preventDefault()
+                        event.stopPropagation()
+                        this.open()
                     }
-                    break;
-                case "ArrowUp":
+                    break
+                case 'ArrowUp':
                     if (this.isActive) {
                         this.selectedIndex = Math.max(
                             0,
                             this.selectedIndex - 1
-                        );
-                        this.scrollToSelection();
+                        )
+                        this.scrollToSelection()
                     }
-                    break;
-                case "ArrowDown":
+                    break
+                case 'ArrowDown':
                     if (this.isActive) {
                         this.selectedIndex = Math.min(
                             this.results.length - 1,
                             this.selectedIndex + 1
-                        );
-                        this.scrollToSelection();
+                        )
+                        this.scrollToSelection()
                     }
-                    break;
-                case "PageUp":
+                    break
+                case 'PageUp':
                     if (this.isActive) {
-                        this.selectedIndex = 0;
-                        this.scrollToSelection();
+                        this.selectedIndex = 0
+                        this.scrollToSelection()
                     }
-                    break;
-                case "PageDown":
+                    break
+                case 'PageDown':
                     if (this.isActive) {
                         this.selectedIndex = Math.max(
                             0,
                             this.results.length - 1
-                        );
-                        this.scrollToSelection();
+                        )
+                        this.scrollToSelection()
                     }
-                    break;
-                case "Enter":
+                    break
+                case 'Enter':
                     if (this.isActive && this.results.length > 0) {
-                        this.navigateTo();
+                        this.navigateTo()
                     }
-                    break;
+                    break
             }
         },
         highlightTerm(str: string) {
-            const words = this.term.split(/\s+/);
+            const words = this.term.split(/\s+/)
             return str.replace(
-                new RegExp(`(${words.join("|")})`, "ig"),
+                new RegExp(`(${words.join('|')})`, 'ig'),
                 '<em class="has-text-primary">$1</em>'
-            );
+            )
         },
         stripTags(str: string) {
-            return str.replace(/<[^>]*>/g, "");
-        },
+            return str.replace(/<[^>]*>/g, '')
+        }
     },
     mounted() {
-        window.addEventListener("keydown", this.shortcutHandler);
+        window.addEventListener('keydown', this.shortcutHandler)
     },
     beforeUnmount() {
-        window.removeEventListener("keydown", this.shortcutHandler);
-    },
-});
+        window.removeEventListener('keydown', this.shortcutHandler)
+    }
+})
 </script>
 
 <style lang="scss">

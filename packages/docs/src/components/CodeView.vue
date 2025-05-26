@@ -49,36 +49,36 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { BButton, BIcon } from "buefy";
+import { defineComponent } from 'vue'
+import { BButton, BIcon } from 'buefy'
 
 export default defineComponent({
     components: {
         BButton,
-        BIcon,
+        BIcon
     },
     props: {
         lang: {
             type: String,
-            default: "html",
+            default: 'html'
         },
         bordered: Boolean,
         code: String,
         expanded: Boolean,
-        title: String,
+        title: String
     },
     data() {
         return {
-            isExpanded: false,
-        };
+            isExpanded: false
+        }
     },
     computed: {
         figureClasses() {
             return {
-                "is-collapsed": !this.bordered && !this.expanded,
-                "is-expanded": this.isExpanded || this.expanded,
-            };
-        },
-    },
-});
+                'is-collapsed': !this.bordered && !this.expanded,
+                'is-expanded': this.isExpanded || this.expanded
+            }
+        }
+    }
+})
 </script>
