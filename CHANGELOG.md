@@ -1,5 +1,23 @@
 # Buefy Changelog
 
+## [1.0.0](https://github.com/buefy/buefy/pull/4077)
+### Fixes
+* Updated workflows and scripts to reference the package as "buefy" instead of "@ntohq/buefy-next".
+* Updated main repo references:
+* package.json now points to the new repository and issues URLs.
+* Linting, type check, and unit test scripts reference "buefy" workspace.
+* All configuration and ignore files renamed/moved from buefy-next to buefy.
+
+### Fixes (docs)
+* README installation and usage instructions updated to use buefy as the npm package.
+* Documentation now references buefy instead of @ntohq/buefy-next everywhere.
+* Clarified developer release installation instructions and naming conventions in the README.
+
+### Others
+* Version bump: package.json version set to 1.0.0.
+* jsconfig updated to reference new source directory.
+* Large updates to package-lock.json and workflow YAML files to match new structure.
+
 ## Buefy-next 0.2.1 unreleased
 
 Buefy-next 0.2.1 is now compiled with Vue 3.4.13, so the recommended Vue version is 3.4.13 or higher.
