@@ -13,28 +13,11 @@
 
 > Buefy is a lightweight library of responsive UI components for [Vue.js](https://vuejs.org/) based on [Bulma](http://bulma.io/) framework and design.
 
-## About this branch
-
-This branch `buefy-next` aims at being Buefy for [Vue 3](https://vuejs.org).
-The branch departed from the latest commit [#b6233b9c335d99cf688ee2a3b9c61fd26a92a182](https://github.com/buefy/buefy/commit/b6233b9c335d99cf688ee2a3b9c61fd26a92a182) on the [`dev`](https://github.com/buefy/buefy/tree/dev) branch as of July 4, 2023.
-
-### Initial migration goal
-
-The initial migration goal was to make the documentation page of every component work, and it was achieved.
-Some features not used in the documentation pages may not work.
-Please refer to [MIGRATION-NOTE.md](/MIGRATION-NOTE.md) for more details about what challenges we faced.
-
-Due to focusing on the documentation pages:
-
--   **Unit tests have not been updated at all**.
--   **Extensions have not migrated**.
--   **Server-side-rendering has neither been tested**.
-
 ### Breaking changes
 
 Because not all of Vue 2 features could be reproduced with Vue 3, there are some breaking changes.
 Please refer to [CHANGELOG.md](/CHANGELOG.md) for more details.
-The biggest breaking change is obviously, **this does not work with Vue 2**.
+The biggest breaking change is obviously, **buefy does not work with Vue 2**.
 
 ### How to install
 
@@ -43,9 +26,6 @@ To install this fork, please run the following command,
 ```sh
 npm install buefy
 ```
-
-The above command will install `buefy` under the `buefy` alias.
-This is recommended because `buefy` will replace `buefy` when it becomes stable.
 
 ## Features
 
@@ -109,7 +89,7 @@ app.use(Input);
 />
 ```
 
-If you want to customize the icons or the theme, refer to the [customization section on the documentation](https://v3.buefy.org/documentation/customization).
+If you want to customize the icons or the theme, refer to the [customization section on the documentation](https://buefy.org/documentation/customization).
 
 ### Alternatively, you can use a CDN or even download
 
@@ -142,12 +122,12 @@ Steps:
     npm login --auth-type=legacy --registry=https://npm.pkg.github.com
      USERNAME: <their GitHub username>
      PASSWORD: <personal access token issued at Step 1>
-    echo "@ntohq:registry=https://npm.pkg.github.com" > .npmrc
+    echo "@buefy:registry=https://npm.pkg.github.com" > .npmrc
     ```
 
 3. Select a Developer Release:
 
-    Visit the Buefy-next package registry: https://github.com/ntohq/buefy-next/pkgs/npm/buefy-next on GitHub.
+    Visit the Buefy package registry: https://github.com/buefy/buefy/pkgs/npm/buefy on GitHub.
 
     Choose any developer release that suits your needs.
 
@@ -157,7 +137,7 @@ Steps:
 
     **Package Naming Conventions:**
 
-    Buefy-next developer releases follow a specific naming format:
+    Buefy developer releases follow a specific naming format:
 
     ```
     buefy@<package version>-<dev commit hash>
