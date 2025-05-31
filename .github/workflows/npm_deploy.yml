@@ -14,8 +14,8 @@ jobs:
             # Setup .npmrc file to publish to GitHub Packages
             - uses: actions/setup-node@v4
               with:
-                  node-version: "18.x"
-                  registry-url: "https://registry.npmjs.org/"
+                node-version: "18.x"
+                registry-url: "https://registry.npmjs.org/"
             - run: npm ci
             - run: npm -w buefy run build
             - run: npm -w buefy publish --access public
