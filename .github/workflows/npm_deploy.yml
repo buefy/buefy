@@ -16,7 +16,6 @@ jobs:
               with:
                   node-version: "18.x"
                   registry-url: "https://registry.npmjs.org/"
-                  scope: "@ntohq"
             - run: npm ci
             - run: npm -w buefy run build
             - run: npm -w buefy publish --access public
