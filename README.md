@@ -140,30 +140,32 @@ Steps:
     Buefy developer releases follow a specific naming format:
 
     ```
-    buefy@<package version>-<dev commit hash>
+    @buefy/buefy@<package version>-<dev commit hash>
     ```
 
     `<package version>`: This represents the intended stable release version that the developer release will eventually be included in.
 
     `<dev commit hash>`: This part indicates that it's a developer release and includes a unique commit hash that identifies the specific code changes in that release.
 
+    **Due to the GitHub npm registry's requirements, the package name must be scoped; i.e., prefixed with `@buefy/`.**
+
 4. Install the Package:
 
     Copy the provided command from GitHub, which will resemble this:
 
     ```bash
-    npm install buefy@<package version>-<dev commit hash>
+    npm install buefy@npm:@buefy/buefy@<package version>-<dev commit hash>
     ```
 
-    Alternatively, to fetch the latest release from the developer snapshot registry, run:
+    Alternatively, to fetch the latest release from the developer release registry, run:
 
     ```bash
-    npm install buefy@latest
+    npm install buefy@npm:@buefy/buefy@latest
     ```
 
-    **However, note it is not recommended to use the latest version of our developer snapshot, as its stability fluctuates.**
+    **However, note it is not recommended to use the latest version of our developer release, as its stability fluctuates.**
 
-Congratulations! You've successfully installed a Buefy-next developer package.
+Congratulations! You've successfully installed a Buefy developer release.
 
 For further details on the GitHub npm registry refer to the [official GitHub documentation](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry#installing-a-package)
 
