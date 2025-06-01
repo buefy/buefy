@@ -3,15 +3,15 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue'
-    import { BTimepicker } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BTimepicker } from "buefy";
 
-    export default {
-        components: { BTimepicker },
-        data() {
-            return {
-                time: new Date()
-            }
-        }
-    }
+export default {
+    components: { BTimepicker },
+    data() {
+        return {
+            time: new Date(),
+        };
+    },
+};
 </script>

@@ -15,29 +15,31 @@ jobs:
       - name: Get commit SHA
         run: echo "GITHUB_SHA=${GITHUB_SHA}" >> $GITHUB_ENV
 
-      - name: Extract information from buefy-next/package.json
+      - name: Extract information from buefy/package.json
         id: package_info
         # uses the exact commit to prevent harmful updates
         uses: jaywcjlove/github-action-package@4c0fcaf1440887bf51b501d7ccadd0a15caa7c81
         with:
-          path: packages/buefy-next/package.json
+          path: packages/buefy/package.json
 
-      - name: Append GITHUB_SHA to the version in buefy-next/package.json
+      - name: Add scope to package name and append GITHUB_SHA to the version in buefy/package.json
         # uses the exact commit to prevent harmful updates
         uses: jaywcjlove/github-action-package@4c0fcaf1440887bf51b501d7ccadd0a15caa7c81
         with:
-          path: packages/buefy-next/package.json
+          path: packages/buefy/package.json
+          rename: "@buefy/buefy"
           version: "${{ steps.package_info.outputs.version }}-${{ env.GITHUB_SHA }}"
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '18.x'
-          registry-url: 'https://npm.pkg.github.com'
+          node-version: "18.x"
+          registry-url: "https://npm.pkg.github.com"
 
-      - run: npm ci
+      # npm ci won't work due to the package name change
+      - run: npm install
 
-      - run: npm -w @ntohq/buefy-next run build
+      - run: npm -w @buefy/buefy run build
 
-      - run: npm -w @ntohq/buefy-next publish
+      - run: npm -w @buefy/buefy publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

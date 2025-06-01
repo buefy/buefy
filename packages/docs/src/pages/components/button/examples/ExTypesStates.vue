@@ -1,6 +1,5 @@
 <template>
     <section>
-
         <div class="buttons">
             <b-button type="is-primary">Primary</b-button>
             <b-button type="is-primary is-light">Primary Light</b-button>
@@ -51,13 +50,14 @@
         <div class="notification is-primary">
             <div class="buttons">
                 <b-button type="is-primary" inverted>Inverted</b-button>
-                <b-button type="is-primary" inverted outlined>Invert Outlined</b-button>
+                <b-button type="is-primary" inverted outlined
+                    >Invert Outlined</b-button
+                >
             </div>
         </div>
-
     </section>
 </template>
 
 <script setup lang="ts">
-import { BButton } from '@ntohq/buefy-next'
+import { BButton } from "buefy";
 </script>

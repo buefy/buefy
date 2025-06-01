@@ -6,8 +6,13 @@
             </div>
             <div class="media-content">
                 <h3 class="subtitle">Install Buefy via npm</h3>
-                <CodeView code="npm install buefy" lang="bash" expanded/>
-                <p class="content">Or clone the repository: <a href="https://github.com/buefy/buefy" target="_blank">https://github.com/buefy/buefy</a></p>
+                <CodeView code="npm install buefy" lang="bash" expanded />
+                <p class="content">
+                    Or clone the repository:
+                    <a href="https://github.com/buefy/buefy" target="_blank"
+                        >https://github.com/buefy/buefy</a
+                    >
+                </p>
             </div>
         </div>
 
@@ -19,8 +24,17 @@
                 <h3 class="subtitle">Set your variables with Sass</h3>
                 <b-message type="is-info">
                     <div class="content">
-                        <p><b>Tip:</b> You can see <a href="http://bulma.io/documentation/overview/variables/" target="_blank">all of Bulma's variables</a>.</p>
-                        <p>There are also two other variables created by Buefy:</p>
+                        <p>
+                            <b>Tip:</b> You can see
+                            <a
+                                href="http://bulma.io/documentation/overview/variables/"
+                                target="_blank"
+                                >all of Bulma's variables</a
+                            >.
+                        </p>
+                        <p>
+                            There are also two other variables created by Buefy:
+                        </p>
                         <ol>
                             <li><code>$speed-slow: 150ms !default</code></li>
                             <li><code>$speed-slower: 250ms !default</code></li>
@@ -28,9 +42,8 @@
                     </div>
                 </b-message>
                 <div class="example is-paddingless">
-                    <CodeView :code="preformat(sass)" lang="sass" expanded/>
+                    <CodeView :code="preformat(sass)" lang="sass" expanded />
                 </div>
-
             </div>
         </div>
 
@@ -41,38 +54,47 @@
             <div class="media-content">
                 <h3 class="subtitle">Import and use Buefy</h3>
                 <b-message type="is-warning">
-                    Please note that <code class="javascript">import 'buefy/dist/buefy.css'</code> from the <router-link to="/documentation/start">start section</router-link> has been omitted because it is not required when using scss.
+                    Please note that
+                    <code class="javascript"
+                        >import 'buefy/dist/buefy.css'</code
+                    >
+                    from the
+                    <router-link to="/documentation/start"
+                        >start section</router-link
+                    >
+                    has been omitted because it is not required when using scss.
                 </b-message>
-                <CodeView :code="preformat(importing)" lang="javascript" expanded/>
+                <CodeView
+                    :code="preformat(importing)"
+                    lang="javascript"
+                    expanded
+                />
             </div>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
 
-    import { BMessage } from '@ntohq/buefy-next'
+import { BMessage } from "buefy";
 
-    import CodeView from '@/components/CodeView.vue'
-    import { preformat } from '@/utils'
+import CodeView from "@/components/CodeView.vue";
+import { preformat } from "@/utils";
 
-    import {
-        importing,
-        sass
-    } from './usage/customization'
+import { importing, sass } from "./usage/customization";
 
-    export default defineComponent({
-        components: {
-            BMessage,
-            CodeView
-        },
-        data() {
-            return {
-                sass,
-                importing
-            }
-        },
-        methods: { preformat }
-    })
+export default defineComponent({
+    components: {
+        BMessage,
+        CodeView,
+    },
+    data() {
+        return {
+            sass,
+            importing,
+        };
+    },
+    methods: { preformat },
+});
 </script>

@@ -26,40 +26,41 @@
                 placeholder="Type or select a date..."
                 icon="calendar-today"
                 :locale="locale"
-                editable>
+                editable
+            >
             </b-datetimepicker>
         </b-field>
     </section>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { BDatetimepicker, BField, BSelect } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BDatetimepicker, BField, BSelect } from "buefy";
 
 export default defineComponent({
     components: {
         BDatetimepicker,
         BField,
-        BSelect
+        BSelect,
     },
     data() {
         return {
             locale: undefined, // Browser locale
-            enableSeconds: false
-        }
+            enableSeconds: false,
+        };
     },
     computed: {
         sampleFormat() {
             const dtf = new Intl.DateTimeFormat(this.locale, {
-                year: 'numeric',
-                month: 'numeric',
-                day: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-                second: this.enableSeconds ? 'numeric' : undefined
-            })
-            return dtf.format(new Date(2020, 11, 11, 13, 14, 15))
-        }
-    }
-})
+                year: "numeric",
+                month: "numeric",
+                day: "numeric",
+                hour: "numeric",
+                minute: "numeric",
+                second: this.enableSeconds ? "numeric" : undefined,
+            });
+            return dtf.format(new Date(2020, 11, 11, 13, 14, 15));
+        },
+    },
+});
 </script>

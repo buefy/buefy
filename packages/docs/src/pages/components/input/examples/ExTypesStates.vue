@@ -12,9 +12,11 @@
             <b-input placeholder="Success"></b-input>
         </b-field>
 
-        <b-field label="Error"
+        <b-field
+            label="Error"
             type="is-danger"
-            message="You can have a message too">
+            message="You can have a message too"
+        >
             <b-input placeholder="Error"></b-input>
         </b-field>
 
@@ -37,5 +39,5 @@
 </template>
 
 <script setup lang="ts">
-import { BField, BInput } from '@ntohq/buefy-next'
+import { BField, BInput } from "buefy";
 </script>

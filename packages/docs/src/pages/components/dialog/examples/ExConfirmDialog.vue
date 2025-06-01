@@ -5,40 +5,43 @@
                 label="Launch confirm (default)"
                 type="is-info"
                 size="is-medium"
-                @click="confirm" />
+                @click="confirm"
+            />
 
             <b-button
                 label="Launch confirm (custom)"
                 type="is-info"
                 size="is-medium"
-                @click="confirmCustom" />
+                @click="confirmCustom"
+            />
 
             <b-button
                 label="Launch confirm (custom)"
                 type="is-danger"
                 size="is-medium"
-                @click="confirmCustomDelete" />
+                @click="confirmCustomDelete"
+            />
         </div>
     </section>
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue'
-    import { BButton } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BButton } from "buefy";
 
-    export default defineComponent({
-        components: { BButton },
-        methods: {
-            confirm() {
-                this.$buefy.dialog.confirm({
-                    message: 'Continue on this task?',
-                    onConfirm: () => this.$buefy.toast.open('User confirmed')
-                })
-            },
-            confirmCustom() {
-                this.$buefy.dialog.confirm({
-                    title: 'Privacy Politics',
-                    message: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+export default defineComponent({
+    components: { BButton },
+    methods: {
+        confirm() {
+            this.$buefy.dialog.confirm({
+                message: "Continue on this task?",
+                onConfirm: () => this.$buefy.toast.open("User confirmed"),
+            });
+        },
+        confirmCustom() {
+            this.$buefy.dialog.confirm({
+                title: "Privacy Politics",
+                message: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         Fusce id fermentum quam. Proin sagittis,
                         nibh id hendrerit imperdiet, elit sapien laoreet elit,
                         ac scelerisque diam velit in nisl. Nunc maximus ex non
@@ -58,22 +61,23 @@
                         In hac habitasse platea dictumst.
                         Pellentesque habitant morbi tristique senectus
                         et netus et malesuada fames ac turpis egestas.`,
-                    cancelText: 'Disagree',
-                    confirmText: 'Agree',
-                    type: 'is-success',
-                    onConfirm: () => this.$buefy.toast.open('User agreed')
-                })
-            },
-            confirmCustomDelete() {
-                this.$buefy.dialog.confirm({
-                    title: 'Deleting account',
-                    message: 'Are you sure you want to <b>delete</b> your account? This action cannot be undone.',
-                    confirmText: 'Delete Account',
-                    type: 'is-danger',
-                    hasIcon: true,
-                    onConfirm: () => this.$buefy.toast.open('Account deleted!')
-                })
-            }
-        }
-    })
+                cancelText: "Disagree",
+                confirmText: "Agree",
+                type: "is-success",
+                onConfirm: () => this.$buefy.toast.open("User agreed"),
+            });
+        },
+        confirmCustomDelete() {
+            this.$buefy.dialog.confirm({
+                title: "Deleting account",
+                message:
+                    "Are you sure you want to <b>delete</b> your account? This action cannot be undone.",
+                confirmText: "Delete Account",
+                type: "is-danger",
+                hasIcon: true,
+                onConfirm: () => this.$buefy.toast.open("Account deleted!"),
+            });
+        },
+    },
+});
 </script>

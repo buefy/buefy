@@ -7,5 +7,5 @@
 </template>
 
 <script setup lang="ts">
-import { BColorpicker, BField } from '@ntohq/buefy-next'
+import { BColorpicker, BField } from "buefy";
 </script>

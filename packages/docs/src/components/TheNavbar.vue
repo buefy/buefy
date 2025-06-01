@@ -98,7 +98,9 @@
                             </strong>
                             <strong class="navbar-item is-version">
                                 <span class="has-text-bulma">Bulma version</span>
-                                <span class="has-text-grey">{{ bulmaVersion }}</span>
+                                <span class="has-text-grey">{{
+                                    bulmaVersion
+                                }}</span>
                             </strong>
 
                             <hr class="navbar-divider">
@@ -120,7 +122,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import { BIcon } from '@ntohq/buefy-next'
+import { BIcon } from 'buefy'
 
 import buefyPackage from '../../../../package.json'
 import bulmaPackage from 'bulma/package.json'
@@ -142,10 +144,10 @@ export default defineComponent({
             this.isMenuActive = false
         },
         toggleHtmlClip() {
-            document
-                .documentElement
-                .classList
-                .toggle('is-clipped-touch', this.isMenuActive)
+            document.documentElement.classList.toggle(
+                'is-clipped-touch',
+                this.isMenuActive
+            )
         }
     },
     mounted() {

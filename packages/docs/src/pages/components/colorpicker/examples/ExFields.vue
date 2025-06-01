@@ -1,7 +1,11 @@
 <template>
     <section>
         <b-field label="Select a color">
-            <b-colorpicker :model-value="selected" inline horizontal-color-picker>
+            <b-colorpicker
+                :model-value="selected"
+                inline
+                horizontal-color-picker
+            >
                 <template #footer="{ color }">
                     <div class="colorpicker-fields">
                         <b-field grouped>
@@ -91,25 +95,25 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { BButton, BColorpicker, BField, BInput, Color } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BButton, BColorpicker, BField, BInput, Color } from "buefy";
 
 export default defineComponent({
     components: {
         BButton,
         BColorpicker,
         BField,
-        BInput
+        BInput,
     },
     data() {
         return {
-            selected: Color.parse('cyan')
-        }
+            selected: Color.parse("cyan"),
+        };
     },
     methods: {
-        clearColor () {
-            this.selected = Color.parse('cyan')
-        }
-    }
-})
+        clearColor() {
+            this.selected = Color.parse("cyan");
+        },
+    },
+});
 </script>

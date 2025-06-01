@@ -2,10 +2,17 @@
     <section>
         <b-field grouped group-multiline>
             <b-field label="Max">
-                <b-numberinput v-model="maxs" min="1" controls-position="compact"></b-numberinput>
+                <b-numberinput
+                    v-model="maxs"
+                    min="1"
+                    controls-position="compact"
+                ></b-numberinput>
             </b-field>
             <b-field label="Icon Pack">
-                <b-input v-model="packs" placeholder="e.g. mdi, fa or other"></b-input>
+                <b-input
+                    v-model="packs"
+                    placeholder="e.g. mdi, fa or other"
+                ></b-input>
             </b-field>
             <b-field label="Icon">
                 <b-input v-model="icons"></b-input>
@@ -14,12 +21,21 @@
         <div class="block">
             <b-field grouped group-multiline>
                 <b-field label="Value">
-                    <b-numberinput v-model="rate" min="0" :max="maxs"
-                        :step="isDisabled ? '.1' : '1'" controls-position="compact">
+                    <b-numberinput
+                        v-model="rate"
+                        min="0"
+                        :max="maxs"
+                        :step="isDisabled ? '.1' : '1'"
+                        controls-position="compact"
+                    >
                     </b-numberinput>
                 </b-field>
                 <b-field label="Custom Text">
-                    <b-input v-model="custom" placeholder="e.g. Points or Total reviews" :disabled="text">
+                    <b-input
+                        v-model="custom"
+                        placeholder="e.g. Points or Total reviews"
+                        :disabled="text"
+                    >
                     </b-input>
                 </b-field>
                 <b-field label="Size">
@@ -61,20 +77,19 @@
                 <b-switch v-model="text" :disabled="score">Show Text</b-switch>
             </div>
             <div class="control">
-                <b-switch v-model="isDisabled">Read Only (Support Decimal)</b-switch>
+                <b-switch v-model="isDisabled"
+                    >Read Only (Support Decimal)</b-switch
+                >
             </div>
             <div class="control">
                 <b-switch v-model="isSpaced">Spaced</b-switch>
             </div>
         </b-field>
         <b-field label="Texts Template">
-            <b-taginput
-                v-model="texts"
-                :maxtags="maxs"
-                :disabled="score">
+            <b-taginput v-model="texts" :maxtags="maxs" :disabled="score">
             </b-taginput>
         </b-field>
-        <hr>
+        <hr />
         <b-rate
             v-model="rate"
             :icon-pack="packs"
@@ -88,40 +103,49 @@
             :texts="texts"
             :rtl="isRtl"
             :spaced="isSpaced"
-            :disabled="isDisabled">
+            :disabled="isDisabled"
+        >
         </b-rate>
     </section>
 </template>
 <script lang="ts">
-    import { defineComponent } from 'vue'
-    import { BField, BInput, BNumberinput, BRate, BSelect, BSwitch, BTaginput } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import {
+    BField,
+    BInput,
+    BNumberinput,
+    BRate,
+    BSelect,
+    BSwitch,
+    BTaginput,
+} from "buefy";
 
-    export default defineComponent({
-        components: {
-            BField,
-            BInput,
-            BNumberinput,
-            BRate,
-            BSelect,
-            BSwitch,
-            BTaginput
-        },
-        data() {
-            return {
-                rate: 4.6,
-                maxs: 5,
-                sizes: '',
-                packs: 'mdi',
-                icons: 'star',
-                score: false,
-                custom: '',
-                text: false,
-                texts: ['Very bad', 'Bad', 'Good', 'Very good', 'Awesome'],
-                isRtl:false,
-                isSpaced: false,
-                isDisabled: true,
-                locale: undefined // Browser locale
-            }
-        }
-    })
+export default defineComponent({
+    components: {
+        BField,
+        BInput,
+        BNumberinput,
+        BRate,
+        BSelect,
+        BSwitch,
+        BTaginput,
+    },
+    data() {
+        return {
+            rate: 4.6,
+            maxs: 5,
+            sizes: "",
+            packs: "mdi",
+            icons: "star",
+            score: false,
+            custom: "",
+            text: false,
+            texts: ["Very bad", "Bad", "Good", "Very good", "Awesome"],
+            isRtl: false,
+            isSpaced: false,
+            isDisabled: true,
+            locale: undefined, // Browser locale
+        };
+    },
+});
 </script>

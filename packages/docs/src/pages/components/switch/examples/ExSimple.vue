@@ -9,9 +9,11 @@
             </b-switch>
         </b-field>
         <b-field>
-            <b-switch v-model="isSwitchedCustom"
+            <b-switch
+                v-model="isSwitchedCustom"
                 true-value="Yes"
-                false-value="No">
+                false-value="No"
+            >
                 {{ isSwitchedCustom }}
             </b-switch>
         </b-field>
@@ -22,19 +24,19 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue'
-    import { BField, BSwitch } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BField, BSwitch } from "buefy";
 
-    export default defineComponent({
-        components: {
-            BField,
-            BSwitch
-        },
-        data() {
-            return {
-                isSwitched: false,
-                isSwitchedCustom: 'Yes'
-            }
-        }
-    })
+export default defineComponent({
+    components: {
+        BField,
+        BSwitch,
+    },
+    data() {
+        return {
+            isSwitched: false,
+            isSwitchedCustom: "Yes",
+        };
+    },
+});
 </script>

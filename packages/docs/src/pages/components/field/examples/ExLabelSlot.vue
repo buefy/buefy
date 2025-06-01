@@ -1,11 +1,12 @@
 <template>
     <section>
-        <b-field
-            custom-class="is-medium"
-            horizontal>
+        <b-field custom-class="is-medium" horizontal>
             <template #label>
-               With tooltip
-                <b-tooltip type="is-dark" label="Help text here for explanation">
+                With tooltip
+                <b-tooltip
+                    type="is-dark"
+                    label="Help text here for explanation"
+                >
                     <b-icon size="is-small" icon="help-circle-outline"></b-icon>
                 </b-tooltip>
             </template>
@@ -14,7 +15,8 @@
 
         <b-field>
             <template #label>
-                Label with custom <span class="has-text-primary is-italic">style</span>
+                Label with custom
+                <span class="has-text-primary is-italic">style</span>
             </template>
             <b-input></b-input>
         </b-field>
@@ -22,5 +24,5 @@
 </template>
 
 <script setup lang="ts">
-import { BField, BIcon, BInput, BTooltip } from '@ntohq/buefy-next'
+import { BField, BIcon, BInput, BTooltip } from "buefy";
 </script>

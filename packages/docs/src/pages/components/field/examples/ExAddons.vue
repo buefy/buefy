@@ -1,9 +1,7 @@
 <template>
     <section>
         <b-field message="What do you want to search?">
-            <b-input placeholder="Search..."
-                type="search"
-                icon="magnify">
+            <b-input placeholder="Search..." type="search" icon="magnify">
             </b-input>
             <p class="control">
                 <b-button type="is-primary" label="Search" />
@@ -17,7 +15,7 @@
             </p>
         </b-field>
 
-        <hr>
+        <hr />
 
         <b-field>
             <b-select placeholder="Currency">
@@ -50,10 +48,11 @@
             <p class="control">
                 <b-button icon-left="format-align-right" />
             </p>
-            <b-input 
-                placeholder="Search..." 
-                type="search" 
-                icon="magnify"></b-input>
+            <b-input
+                placeholder="Search..."
+                type="search"
+                icon="magnify"
+            ></b-input>
         </b-field>
 
         <b-field>
@@ -80,13 +79,25 @@
                         <b-button label="Filters" icon-right="menu-down" />
                     </template>
 
-                    <b-dropdown-item value="open_issues">Open Issues and Pull Requests</b-dropdown-item>
-                    <b-dropdown-item value="your_issues">Your Issues</b-dropdown-item>
-                    <b-dropdown-item value="pull_requests">Your Pull Requests</b-dropdown-item>
-                    <b-dropdown-item value="everything">Everything</b-dropdown-item>
+                    <b-dropdown-item value="open_issues"
+                        >Open Issues and Pull Requests</b-dropdown-item
+                    >
+                    <b-dropdown-item value="your_issues"
+                        >Your Issues</b-dropdown-item
+                    >
+                    <b-dropdown-item value="pull_requests"
+                        >Your Pull Requests</b-dropdown-item
+                    >
+                    <b-dropdown-item value="everything"
+                        >Everything</b-dropdown-item
+                    >
                 </b-dropdown>
             </p>
-            <b-input icon="magnify" type="search" placeholder="Search..."></b-input>
+            <b-input
+                icon="magnify"
+                type="search"
+                placeholder="Search..."
+            ></b-input>
         </b-field>
     </section>
 </template>
@@ -98,6 +109,6 @@ import {
     BDropdownItem,
     BField,
     BInput,
-    BSelect
-} from '@ntohq/buefy-next'
+    BSelect,
+} from "buefy";
 </script>

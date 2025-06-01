@@ -3,14 +3,16 @@
         <b-tooltip position="is-bottom" multilined>
             <b-button label="Html Content" type="is-primary" />
             <template v-slot:content>
-                <b>Lorem ipsum dolor sit amet</b>, consectetur warning elit. <i>Fusce id fermentum quam</i>.
+                <b>Lorem ipsum dolor sit amet</b>, consectetur warning elit.
+                <i>Fusce id fermentum quam</i>.
             </template>
         </b-tooltip>
 
-        <b-tooltip 
+        <b-tooltip
             type="is-light"
             :triggers="['click']"
-            :auto-close="['outside', 'escape']">
+            :auto-close="['outside', 'escape']"
+        >
             <template v-slot:content>
                 <b-icon icon="heart" type="is-danger"></b-icon>
                 <b-icon icon="thumb-up" type="is-info"></b-icon>
@@ -23,16 +25,16 @@
 </template>
 
 <script setup lang="ts">
-import { BButton, BIcon, BTooltip } from '@ntohq/buefy-next'
+import { BButton, BIcon, BTooltip } from "buefy";
 </script>
 
 <style lang="scss" scoped>
 .b-tooltips {
     .b-tooltip:not(:last-child) {
-        margin-right: .5em
+        margin-right: 0.5em;
     }
     .b-tooltip {
-        margin-bottom: .5em
+        margin-bottom: 0.5em;
     }
 }
 </style>

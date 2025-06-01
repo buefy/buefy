@@ -2,26 +2,18 @@
     <section>
         <b-field grouped group-multiline>
             <b-field label="Total">
-                <b-input type="number" v-model="total"/>
+                <b-input type="number" v-model="total" />
             </b-field>
             <b-field label="Items per page">
-                <b-input type="number" v-model="perPage"/>
+                <b-input type="number" v-model="perPage" />
             </b-field>
         </b-field>
         <b-field grouped group-multiline>
             <b-field label="Show buttons before current">
-                <b-input
-                    type="number"
-                    v-model="rangeBefore"
-                    min="0"
-                />
+                <b-input type="number" v-model="rangeBefore" min="0" />
             </b-field>
             <b-field label="Show buttons after current">
-                <b-input
-                    type="number"
-                    v-model="rangeAfter"
-                    min="0"
-                />
+                <b-input type="number" v-model="rangeAfter" min="0" />
             </b-field>
         </b-field>
         <b-field grouped group-multiline>
@@ -78,7 +70,7 @@
             </b-field>
         </b-field>
 
-        <hr>
+        <hr />
         <b-pagination
             :total="total"
             v-model="current"
@@ -103,8 +95,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { BField, BInput, BPagination, BSelect, BSwitch } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BField, BInput, BPagination, BSelect, BSwitch } from "buefy";
 
 export default defineComponent({
     components: {
@@ -112,7 +104,7 @@ export default defineComponent({
         BInput,
         BPagination,
         BSelect,
-        BSwitch
+        BSwitch,
     },
     data() {
         return {
@@ -121,16 +113,16 @@ export default defineComponent({
             perPage: 10,
             rangeBefore: 3,
             rangeAfter: 1,
-            order: '',
-            size: '',
+            order: "",
+            size: "",
             isSimple: false,
             isRounded: false,
             hasInput: false,
-            prevIcon: 'chevron-left',
-            nextIcon: 'chevron-right',
-            inputPosition: '',
-            inputDebounce: ''
-        }
-    }
-})
+            prevIcon: "chevron-left",
+            nextIcon: "chevron-right",
+            inputPosition: "",
+            inputDebounce: "",
+        };
+    },
+});
 </script>

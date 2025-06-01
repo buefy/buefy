@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { BField, BSwitch } from '@ntohq/buefy-next'
+import { BField, BSwitch } from "buefy";
 </script>
 
 <template>

@@ -1,18 +1,12 @@
 <template>
     <section>
         <p class="content"><b>selected</b>: {{ selectedOptions }}</p>
-        <b-dropdown
-            v-model="selectedOptions"
-            multiple
-            aria-role="list">
+        <b-dropdown v-model="selectedOptions" multiple aria-role="list">
             <template #trigger>
-                <b-button
-                    type="is-primary"
-                    icon-right="menu-down">
+                <b-button type="is-primary" icon-right="menu-down">
                     Selected ({{ selectedOptions.length }})
                 </b-button>
             </template>
-
 
             <b-dropdown-item value="option1" aria-role="listitem">
                 <span>Option 1</span>
@@ -30,19 +24,19 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue'
-    import { BButton, BDropdown, BDropdownItem } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BButton, BDropdown, BDropdownItem } from "buefy";
 
-    export default defineComponent({
-        components: {
-            BButton,
-            BDropdown,
-            BDropdownItem
-        },
-        data() {
-            return {
-                selectedOptions: []
-            }
-        }
-    })
+export default defineComponent({
+    components: {
+        BButton,
+        BDropdown,
+        BDropdownItem,
+    },
+    data() {
+        return {
+            selectedOptions: [],
+        };
+    },
+});
 </script>

@@ -3,7 +3,9 @@
         <div class="example-component">
             <b-field grouped group-multiline>
                 <div class="control">
-                    <b-switch v-model="progress"><strong>Progress</strong></b-switch>
+                    <b-switch v-model="progress"
+                        ><strong>Progress</strong></b-switch
+                    >
                 </div>
                 <b-field label="Type" label-position="on-border">
                     <b-select v-model="progressType" :disabled="!progress">
@@ -20,13 +22,11 @@
             </b-field>
         </div>
 
-        <b-carousel
-            :progress="progress"
-            :progress-type="progressType">
+        <b-carousel :progress="progress" :progress-type="progressType">
             <b-carousel-item v-for="(carousel, i) in carousels" :key="i">
                 <section :class="`hero is-medium is-${carousel.color}`">
                     <div class="hero-body has-text-centered">
-                        <h1 class="title">{{carousel.title}}</h1>
+                        <h1 class="title">{{ carousel.title }}</h1>
                     </div>
                 </section>
             </b-carousel-item>
@@ -35,8 +35,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { BCarousel, BCarouselItem, BField, BSelect, BSwitch } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BCarousel, BCarouselItem, BField, BSelect, BSwitch } from "buefy";
 
 export default defineComponent({
     components: {
@@ -44,19 +44,19 @@ export default defineComponent({
         BCarouselItem,
         BField,
         BSelect,
-        BSwitch
+        BSwitch,
     },
     data() {
         return {
             progress: true,
-            progressType: 'is-primary',
+            progressType: "is-primary",
             carousels: [
-                { title: 'Slide 1', color: 'grey' },
-                { title: 'Slide 2', color: 'dark' },
-                { title: 'Slide 3', color: 'primary' },
-                { title: 'Slide 4', color: 'info' }
-            ]
-        }
-    }
-})
+                { title: "Slide 1", color: "grey" },
+                { title: "Slide 2", color: "dark" },
+                { title: "Slide 3", color: "primary" },
+                { title: "Slide 4", color: "info" },
+            ],
+        };
+    },
+});
 </script>

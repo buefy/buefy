@@ -24,58 +24,60 @@
             </b-field>
         </b-field>
 
-        <b-tabs :position="atRight ? 'is-right' : ''"
-                :size="size ?? undefined"
-                :type="type ?? undefined"
-                vertical
-                :expanded="expanded">
+        <b-tabs
+            :position="atRight ? 'is-right' : ''"
+            :size="size ?? undefined"
+            :type="type ?? undefined"
+            vertical
+            :expanded="expanded"
+        >
             <b-tab-item label="Pictures" icon="camera-iris">
-                Lorem ipsum dolor sit amet. <br>
-                Lorem ipsum dolor sit amet. <br>
-                Lorem ipsum dolor sit amet. <br>
-                Lorem ipsum dolor sit amet. <br>
-                Lorem ipsum dolor sit amet. <br>
+                Lorem ipsum dolor sit amet. <br />
+                Lorem ipsum dolor sit amet. <br />
+                Lorem ipsum dolor sit amet. <br />
+                Lorem ipsum dolor sit amet. <br />
+                Lorem ipsum dolor sit amet. <br />
                 Lorem ipsum dolor sit amet.
             </b-tab-item>
 
             <b-tab-item label="Music" icon="music-box-multiple">
-                What light is light, if Silvia be not seen? <br>
-                What joy is joy, if Silvia be not by— <br>
-                Unless it be to think that she is by <br>
-                And feed upon the shadow of perfection? <br>
-                Except I be by Silvia in the night, <br>
+                What light is light, if Silvia be not seen? <br />
+                What joy is joy, if Silvia be not by— <br />
+                Unless it be to think that she is by <br />
+                And feed upon the shadow of perfection? <br />
+                Except I be by Silvia in the night, <br />
                 There is no music in the nightingale.
             </b-tab-item>
 
             <b-tab-item label="Videos" icon="video" disabled>
-                Nunc nec velit nec libero vestibulum eleifend.
-                Curabitur pulvinar congue luctus.
-                Nullam hendrerit iaculis augue vitae ornare.
-                Maecenas vehicula pulvinar tellus, id sodales felis lobortis eget.
+                Nunc nec velit nec libero vestibulum eleifend. Curabitur
+                pulvinar congue luctus. Nullam hendrerit iaculis augue vitae
+                ornare. Maecenas vehicula pulvinar tellus, id sodales felis
+                lobortis eget.
             </b-tab-item>
         </b-tabs>
     </section>
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue'
-    import { BField, BSelect, BSwitch, BTabs, BTabItem } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BField, BSelect, BSwitch, BTabs, BTabItem } from "buefy";
 
-    export default {
-        components: {
-            BField,
-            BSelect,
-            BSwitch,
-            BTabs,
-            BTabItem
-        },
-        data() {
-            return {
-                expanded: false,
-                atRight: false,
-                size: null as string | null,
-                type: null as string | null
-            }
-        }
-    }
+export default {
+    components: {
+        BField,
+        BSelect,
+        BSwitch,
+        BTabs,
+        BTabItem,
+    },
+    data() {
+        return {
+            expanded: false,
+            atRight: false,
+            size: null as string | null,
+            type: null as string | null,
+        };
+    },
+};
 </script>

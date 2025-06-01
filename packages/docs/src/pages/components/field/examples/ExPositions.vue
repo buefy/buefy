@@ -8,7 +8,7 @@
             </p>
         </b-field>
 
-        <hr>
+        <hr />
 
         <b-field grouped position="is-right">
             <b-input placeholder="Search..." type="search" icon="magnify">
@@ -21,5 +21,5 @@
 </template>
 
 <script setup lang="ts">
-import { BButton, BField, BInput } from '@ntohq/buefy-next'
+import { BButton, BField, BInput } from "buefy";
 </script>

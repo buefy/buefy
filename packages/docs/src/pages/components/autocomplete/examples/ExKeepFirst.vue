@@ -16,7 +16,8 @@
                 :select-on-click-outside="selectOutside"
                 placeholder="e.g. Orange"
                 keep-first
-                @select="option => selected = option">
+                @select="(option) => (selected = option)"
+            >
                 <template #empty>No results for {{ name }}</template>
             </b-autocomplete>
         </b-field>
@@ -24,40 +25,42 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { BAutocomplete, BField, BSwitch } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BAutocomplete, BField, BSwitch } from "buefy";
 
 export default defineComponent({
     components: {
         BAutocomplete,
         BField,
-        BSwitch
+        BSwitch,
     },
     data() {
         return {
             data: [
-                'Orange',
-                'Apple',
-                'Banana',
-                'Pear',
-                'Lemon',
-                'Strawberry',
-                'Kiwi'
+                "Orange",
+                "Apple",
+                "Banana",
+                "Pear",
+                "Lemon",
+                "Strawberry",
+                "Kiwi",
             ],
-            name: '',
+            name: "",
             selected: null,
-            selectOutside: false
-        }
+            selectOutside: false,
+        };
     },
     computed: {
         filteredDataArray() {
             return this.data.filter((option) => {
-                return option
-                    .toString()
-                    .toLowerCase()
-                    .indexOf(this.name.toLowerCase()) >= 0
-            })
-        }
-    }
-})
+                return (
+                    option
+                        .toString()
+                        .toLowerCase()
+                        .indexOf(this.name.toLowerCase()) >= 0
+                );
+            });
+        },
+    },
+});
 </script>

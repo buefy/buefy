@@ -1,12 +1,12 @@
 <template>
     <b-dropdown v-model="isPublic" aria-role="list">
-
         <template v-if="isPublic" #trigger>
             <b-button
                 label="Public"
                 type="is-primary"
                 icon-left="earth"
-                icon-right="menu-down" />
+                icon-right="menu-down"
+            />
         </template>
 
         <template v-else #trigger>
@@ -14,9 +14,9 @@
                 label="Friends"
                 type="is-primary"
                 icon-left="account-multiple"
-                icon-right="menu-down" />
+                icon-right="menu-down"
+            />
         </template>
-
 
         <b-dropdown-item :value="true" aria-role="listitem">
             <div class="media">
@@ -41,20 +41,20 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue'
-    import { BButton, BDropdown, BDropdownItem, BIcon } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BButton, BDropdown, BDropdownItem, BIcon } from "buefy";
 
-    export default defineComponent({
-        components: {
-            BButton,
-            BDropdown,
-            BDropdownItem,
-            BIcon
-        },
-        data() {
-            return {
-                isPublic: true
-            }
-        }
-    })
+export default defineComponent({
+    components: {
+        BButton,
+        BDropdown,
+        BDropdownItem,
+        BIcon,
+    },
+    data() {
+        return {
+            isPublic: true,
+        };
+    },
+});
 </script>

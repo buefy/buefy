@@ -8,9 +8,17 @@
             </b-field>
             <b-field label="Max Height">
                 <div class="control">
-                    <b-slider v-model="maxHeight" :min="50" :max="250" rounded :disabled="!isScrollable">
+                    <b-slider
+                        v-model="maxHeight"
+                        :min="50"
+                        :max="250"
+                        rounded
+                        :disabled="!isScrollable"
+                    >
                         <template v-for="val in [100, 150, 200]" :key="val">
-                            <b-slider-tick :value="val">{{ val }}</b-slider-tick>
+                            <b-slider-tick :value="val">{{
+                                val
+                            }}</b-slider-tick>
                         </template>
                     </b-slider>
                 </div>
@@ -28,18 +36,20 @@
                     :label="currentMenu.text"
                     type="is-primary"
                     :icon-left="currentMenu.icon"
-                    icon-right="menu-down" />
+                    icon-right="menu-down"
+                />
             </template>
-
 
             <b-dropdown-item
                 v-for="(menu, index) in menus"
                 :key="index"
-                :value="menu" aria-role="listitem">
+                :value="menu"
+                aria-role="listitem"
+            >
                 <div class="media">
                     <b-icon class="media-left" :icon="menu.icon"></b-icon>
                     <div class="media-content">
-                        <h3>{{menu.text}}</h3>
+                        <h3>{{ menu.text }}</h3>
                     </div>
                 </div>
             </b-dropdown-item>
@@ -48,8 +58,20 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue'
-    import {
+import { defineComponent } from "vue";
+import {
+    BButton,
+    BDropdown,
+    BDropdownItem,
+    BField,
+    BIcon,
+    BSlider,
+    BSliderTick,
+    BSwitch,
+} from "buefy";
+
+export default defineComponent({
+    components: {
         BButton,
         BDropdown,
         BDropdownItem,
@@ -57,35 +79,23 @@
         BIcon,
         BSlider,
         BSliderTick,
-        BSwitch
-    } from '@ntohq/buefy-next'
-
-    export default defineComponent({
-        components: {
-            BButton,
-            BDropdown,
-            BDropdownItem,
-            BField,
-            BIcon,
-            BSlider,
-            BSliderTick,
-            BSwitch
-        },
-        data() {
-            return {
-                isScrollable: false,
-                maxHeight: 200,
-                currentMenu: { icon: 'account-group', text: 'People' },
-                menus: [
-                    { icon: 'account-group', text: 'People' },
-                    { icon: 'shopping-search', text: 'Orders' },
-                    { icon: 'credit-card-multiple', text: 'Payments' },
-                    { icon: 'dolly', text: 'Logistics' },
-                    { icon: 'clock-check', text: 'Jobs' },
-                    { icon: 'cart-arrow-right', text: 'Cart' },
-                    { icon: 'settings', text: 'Configuration' }
-                ]
-            }
-        }
-    })
+        BSwitch,
+    },
+    data() {
+        return {
+            isScrollable: false,
+            maxHeight: 200,
+            currentMenu: { icon: "account-group", text: "People" },
+            menus: [
+                { icon: "account-group", text: "People" },
+                { icon: "shopping-search", text: "Orders" },
+                { icon: "credit-card-multiple", text: "Payments" },
+                { icon: "dolly", text: "Logistics" },
+                { icon: "clock-check", text: "Jobs" },
+                { icon: "cart-arrow-right", text: "Cart" },
+                { icon: "settings", text: "Configuration" },
+            ],
+        };
+    },
+});
 </script>

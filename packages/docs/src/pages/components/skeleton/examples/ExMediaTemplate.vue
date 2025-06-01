@@ -33,15 +33,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { BSkeleton } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BSkeleton } from "buefy";
 
 export default defineComponent({
     components: { BSkeleton },
     data() {
         return {
-            media: 3
-        }
-    }
-})
+            media: 3,
+        };
+    },
+});
 </script>

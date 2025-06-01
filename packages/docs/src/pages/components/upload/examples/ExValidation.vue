@@ -1,6 +1,12 @@
 <template>
-    <b-field class="file is-primary" :class="{'has-name': !!file}">
-        <b-upload v-model="file" class="file-label" accept=".tar.gz" required validationMessage="Please select a file">
+    <b-field class="file is-primary" :class="{ 'has-name': !!file }">
+        <b-upload
+            v-model="file"
+            class="file-label"
+            accept=".tar.gz"
+            required
+            validationMessage="Please select a file"
+        >
             <span class="file-cta">
                 <b-icon class="file-icon" icon="upload"></b-icon>
                 <span class="file-label">Click to upload (Only .tar.gz)</span>
@@ -13,19 +19,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { BField, BIcon, BUpload } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BField, BIcon, BUpload } from "buefy";
 
 export default defineComponent({
     components: {
         BField,
         BIcon,
-        BUpload
+        BUpload,
     },
     data() {
         return {
             file: null as File | null,
-        }
-    }
+        };
+    },
 });
 </script>

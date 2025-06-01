@@ -4,7 +4,8 @@
             <div
                 class="card-header"
                 role="button"
-                aria-controls="contentIdForA11y3">
+                aria-controls="contentIdForA11y3"
+            >
                 <p class="card-header-title">
                     <template v-if="!loading">Component</template>
                     <b-skeleton size="is-large" :active="loading"></b-skeleton>
@@ -13,10 +14,15 @@
             <div class="card-content">
                 <div class="content">
                     <template v-if="!loading">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Phasellus nec iaculis mauris.
                         <a>#buefy</a>.
                     </template>
-                    <b-skeleton size="is-large" :active="loading" :count="2"></b-skeleton>
+                    <b-skeleton
+                        size="is-large"
+                        :active="loading"
+                        :count="2"
+                    ></b-skeleton>
                 </div>
             </div>
             <footer class="card-footer">
@@ -34,25 +40,24 @@
                 </a>
             </footer>
         </div>
-
     </section>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { BSkeleton } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BSkeleton } from "buefy";
 
 export default defineComponent({
     components: { BSkeleton },
     data() {
         return {
-            loading: true
-        }
+            loading: true,
+        };
     },
     mounted() {
         setInterval(() => {
-            this.loading = !this.loading
-        }, 3 * 1000)
-    }
-})
+            this.loading = !this.loading;
+        }, 3 * 1000);
+    },
+});
 </script>

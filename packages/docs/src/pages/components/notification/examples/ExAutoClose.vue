@@ -1,32 +1,32 @@
 <template>
     <section>
-        <b-button
-            label="Show"
-            :disabled="isActive"
-            @click="isActive = true" />
+        <b-button label="Show" :disabled="isActive" @click="isActive = true" />
         <b-notification
-            auto-close 
+            auto-close
             type="is-danger"
             v-model="isActive"
-            aria-close-label="Close notification">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
+            aria-close-label="Close notification"
+        >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id
+            fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit
+            sapien laoreet elit
         </b-notification>
     </section>
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue'
-    import { BButton, BNotification } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BButton, BNotification } from "buefy";
 
-    export default defineComponent({
-        components: {
-            BButton,
-            BNotification
-        },
-        data() {
-            return {
-                isActive: false
-            }
-        }
-    })
+export default defineComponent({
+    components: {
+        BButton,
+        BNotification,
+    },
+    data() {
+        return {
+            isActive: false,
+        };
+    },
+});
 </script>

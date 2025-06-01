@@ -1,12 +1,10 @@
 <template>
     <section>
         <div class="block">
-            <b-radio v-model="labelPosition"
-                native-value="on-border">
+            <b-radio v-model="labelPosition" native-value="on-border">
                 On Border
             </b-radio>
-            <b-radio v-model="labelPosition"
-                native-value="inside">
+            <b-radio v-model="labelPosition" native-value="inside">
                 Inside
             </b-radio>
         </div>
@@ -15,26 +13,29 @@
             <b-input model-value="Kevin Garvey"></b-input>
         </b-field>
 
-        <b-field label="Email"
+        <b-field
+            label="Email"
             :label-position="labelPosition"
             type="is-danger"
-            message="This email is invalid">
-            <b-input type="email"
-                model-value="john@"
-                maxlength="30">
-            </b-input>
+            message="This email is invalid"
+        >
+            <b-input type="email" model-value="john@" maxlength="30"> </b-input>
         </b-field>
 
-        <b-field label="Username"
+        <b-field
+            label="Username"
             :label-position="labelPosition"
             type="is-success"
-            message="This username is available">
+            message="This username is available"
+        >
             <b-input model-value="johnsilver" maxlength="30"></b-input>
         </b-field>
 
-        <b-field label="Password"
+        <b-field
+            label="Password"
             :label-position="labelPosition"
-            type="is-warning">
+            type="is-warning"
+        >
             <b-input model-value="123" type="password" maxlength="30"></b-input>
             <template #message>
                 <div>Password is too short</div>
@@ -42,16 +43,14 @@
             </template>
         </b-field>
 
-        <b-field label="Subject"
-            :label-position="labelPosition">
+        <b-field label="Subject" :label-position="labelPosition">
             <b-select placeholder="Select a subject">
                 <option value="1">Option 1</option>
                 <option value="2">Option 2</option>
             </b-select>
         </b-field>
 
-        <b-field label="Message"
-            :label-position="labelPosition">
+        <b-field label="Message" :label-position="labelPosition">
             <b-input maxlength="200" type="textarea"></b-input>
         </b-field>
 
@@ -62,7 +61,8 @@
                 placeholder="e.g. jQuery"
                 icon="magnify"
                 clearable
-                @select="(option: string) => selected = option">
+                @select="(option: string) => selected = option"
+            >
                 <template #empty>No results found</template>
             </b-autocomplete>
         </b-field>
@@ -71,7 +71,8 @@
             <b-datepicker
                 placeholder="Click to select..."
                 icon="calendar-today"
-                trap-focus>
+                trap-focus
+            >
             </b-datepicker>
         </b-field>
 
@@ -80,7 +81,8 @@
                 rounded
                 placeholder="Click to select..."
                 icon="calendar-today"
-                horizontal-time-picker>
+                horizontal-time-picker
+            >
             </b-datetimepicker>
         </b-field>
 
@@ -93,19 +95,17 @@
                 :model-value="['My first tag', 'My second tag']"
                 ellipsis
                 icon="label"
-                placeholder="Add a tag">
+                placeholder="Add a tag"
+            >
             </b-taginput>
         </b-field>
 
         <b-field label="Select time" :label-position="labelPosition">
-            <b-timepicker
-                rounded
-                placeholder="Click to select..."
-                icon="clock">
+            <b-timepicker rounded placeholder="Click to select..." icon="clock">
             </b-timepicker>
         </b-field>
 
-        <hr>
+        <hr />
         <p class="title is-6">Also works for grouped field and with addons.</p>
 
         <b-field label="Search..." :label-position="labelPosition" grouped>
@@ -125,7 +125,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
 import {
     BAutocomplete,
     BButton,
@@ -137,8 +137,8 @@ import {
     BRadio,
     BSelect,
     BTaginput,
-    BTimepicker
-} from '@ntohq/buefy-next'
+    BTimepicker,
+} from "buefy";
 
 export default defineComponent({
     components: {
@@ -152,14 +152,13 @@ export default defineComponent({
         BRadio,
         BSelect,
         BTaginput,
-        BTimepicker
+        BTimepicker,
     },
     data() {
         return {
-            labelPosition: 'on-border',
-            selected: undefined as string | undefined
-        }
-    }
-})
+            labelPosition: "on-border",
+            selected: undefined as string | undefined,
+        };
+    },
+});
 </script>
-

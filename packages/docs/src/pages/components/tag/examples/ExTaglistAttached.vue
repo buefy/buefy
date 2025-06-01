@@ -6,5 +6,5 @@
 </template>
 
 <script setup lang="ts">
-import { BTag, BTaglist } from '@ntohq/buefy-next'
+import { BTag, BTaglist } from "buefy";
 </script>

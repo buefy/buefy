@@ -7,5 +7,5 @@
 </template>
 
 <script setup lang="ts">
-import { BTabs, BTabItem } from '@ntohq/buefy-next'
+import { BTabs, BTabItem } from "buefy";
 </script>

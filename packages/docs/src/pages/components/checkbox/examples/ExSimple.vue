@@ -9,16 +9,16 @@
             </b-checkbox>
         </b-field>
         <b-field>
-            <b-checkbox v-model="checkboxCustom"
+            <b-checkbox
+                v-model="checkboxCustom"
                 true-value="Yes"
-                false-value="No">
+                false-value="No"
+            >
                 {{ checkboxCustom }}
             </b-checkbox>
         </b-field>
         <b-field>
-            <b-checkbox :indeterminate="true">
-                Indeterminate
-            </b-checkbox>
+            <b-checkbox :indeterminate="true"> Indeterminate </b-checkbox>
         </b-field>
         <b-field>
             <b-checkbox disabled>Disabled</b-checkbox>
@@ -27,19 +27,19 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue'
-    import { BCheckbox, BField } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BCheckbox, BField } from "buefy";
 
-    export default defineComponent({
-        components: {
-            BCheckbox,
-            BField
-        },
-        data() {
-            return {
-                checkbox: false,
-                checkboxCustom: 'Yes'
-            }
-        }
-    })
+export default defineComponent({
+    components: {
+        BCheckbox,
+        BField,
+    },
+    data() {
+        return {
+            checkbox: false,
+            checkboxCustom: "Yes",
+        };
+    },
+});
 </script>

@@ -31,39 +31,41 @@
             </b-select>
         </b-field>
         <b-field label="Left Label">
-            <b-radio v-model='leftLabel' :native-value='false'>False</b-radio>
-            <b-radio v-model='leftLabel' :native-value='true'>True</b-radio>
+            <b-radio v-model="leftLabel" :native-value="false">False</b-radio>
+            <b-radio v-model="leftLabel" :native-value="true">True</b-radio>
         </b-field>
         <b-switch
             :rounded="isRounded"
             :outlined="isOutlined"
             :size="size"
             :type="type"
-            :left-label='leftLabel'
-            :passive-type='passiveType'>Sample</b-switch>
+            :left-label="leftLabel"
+            :passive-type="passiveType"
+            >Sample</b-switch
+        >
     </section>
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue'
-    import { BField, BRadio, BSelect, BSwitch } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BField, BRadio, BSelect, BSwitch } from "buefy";
 
-    export default defineComponent({
-        components: {
-            BField,
-            BRadio,
-            BSelect,
-            BSwitch
-        },
-        data() {
-            return {
-                size: '',
-                type: null,
-                passiveType: null,
-                isRounded: false,
-                isOutlined: false,
-                leftLabel: false,
-            }
-        }
-    })
+export default defineComponent({
+    components: {
+        BField,
+        BRadio,
+        BSelect,
+        BSwitch,
+    },
+    data() {
+        return {
+            size: "",
+            type: null,
+            passiveType: null,
+            isRounded: false,
+            isOutlined: false,
+            leftLabel: false,
+        };
+    },
+});
 </script>

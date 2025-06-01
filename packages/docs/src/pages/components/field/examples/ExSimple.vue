@@ -4,24 +4,26 @@
             <b-input model-value="Kevin Garvey"></b-input>
         </b-field>
 
-        <b-field label="Email"
-            type="is-danger"
-            message="This email is invalid">
-            <b-input type="email"
-                model-value="john@"
-                maxlength="30">
-            </b-input>
+        <b-field label="Email" type="is-danger" message="This email is invalid">
+            <b-input type="email" model-value="john@" maxlength="30"> </b-input>
         </b-field>
 
-        <b-field label="Username"
+        <b-field
+            label="Username"
             type="is-success"
-            message="This username is available">
+            message="This username is available"
+        >
             <b-input model-value="johnsilver" maxlength="30"></b-input>
         </b-field>
 
-        <b-field label="Password"
+        <b-field
+            label="Password"
             type="is-warning"
-            :message="['Password is too short', 'Password must have at least 8 characters']">
+            :message="[
+                'Password is too short',
+                'Password must have at least 8 characters',
+            ]"
+        >
             <b-input model-value="123" type="password" maxlength="30"></b-input>
         </b-field>
 
@@ -35,5 +37,5 @@
 </template>
 
 <script setup lang="ts">
-import { BField, BInput, BSelect } from '@ntohq/buefy-next'
+import { BField, BInput, BSelect } from "buefy";
 </script>

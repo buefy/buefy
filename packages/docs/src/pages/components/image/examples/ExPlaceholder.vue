@@ -5,17 +5,14 @@
             placeholder="/static/img/icons/favicon-32x32.png"
             ratio="2by1"
         ></b-image>
-        <br>
+        <br />
         <b-image
             src="https://picsum.photos/id/237/800/400"
             placeholder="https://picsum.photos/id/237/200/100?blur=10"
             ratio="2by1"
         ></b-image>
-        <br>
-        <b-image
-            src="https://picsum.photos/id/1062/800/400"
-            ratio="2by1"
-        >
+        <br />
+        <b-image src="https://picsum.photos/id/1062/800/400" ratio="2by1">
             <template #placeholder>
                 <b-skeleton
                     class="skeleton-placeholder"
@@ -27,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { BImage, BSkeleton } from '@ntohq/buefy-next'
+import { BImage, BSkeleton } from "buefy";
 </script>
 
 <style scoped>

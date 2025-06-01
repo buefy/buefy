@@ -58,22 +58,23 @@
                 :first-day-of-week="firstDayOfWeek"
                 :datepicker="{ showWeekNumber }"
                 :timepicker="{ enableSeconds, hourFormat }"
-                horizontal-time-picker>
+                horizontal-time-picker
+            >
             </b-datetimepicker>
         </b-field>
     </section>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { BDatetimepicker, BField, BSelect, BSwitch } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BDatetimepicker, BField, BSelect, BSwitch } from "buefy";
 
 export default defineComponent({
     components: {
         BDatetimepicker,
         BField,
         BSelect,
-        BSwitch
+        BSwitch,
     },
     data() {
         return {
@@ -82,13 +83,13 @@ export default defineComponent({
             enableSeconds: false,
             hourFormat: undefined, // Browser locale
             locale: undefined, // Browser locale
-            firstDayOfWeek: undefined // 0 - Sunday
-        }
+            firstDayOfWeek: undefined, // 0 - Sunday
+        };
     },
     methods: {
-        clearDateTime () {
-            this.selected = null
-        }
-    }
-})
+        clearDateTime() {
+            this.selected = null;
+        },
+    },
+});
 </script>

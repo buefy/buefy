@@ -8,12 +8,18 @@
             </div>
             <div class="column">
                 <b-field label="Min Time">
-                    <b-clockpicker v-model="minTime" :hour-format="format"></b-clockpicker>
+                    <b-clockpicker
+                        v-model="minTime"
+                        :hour-format="format"
+                    ></b-clockpicker>
                 </b-field>
             </div>
             <div class="column">
                 <b-field label="Max Time">
-                    <b-clockpicker v-model="maxTime" :hour-format="format"></b-clockpicker>
+                    <b-clockpicker
+                        v-model="maxTime"
+                        :hour-format="format"
+                    ></b-clockpicker>
                 </b-field>
             </div>
         </div>
@@ -22,40 +28,40 @@
                 placeholder="Click to select..."
                 :hour-format="format"
                 :min-time="minTime"
-                :max-time="maxTime">
+                :max-time="maxTime"
+            >
             </b-clockpicker>
         </b-field>
-
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { BClockpicker, BField, BSwitch } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BClockpicker, BField, BSwitch } from "buefy";
 
 export default defineComponent({
     components: {
         BClockpicker,
         BField,
-        BSwitch
+        BSwitch,
     },
     data() {
-        const min = new Date()
-        min.setHours(9)
-        min.setMinutes(0)
-        const max = new Date()
-        max.setHours(18)
-        max.setMinutes(0)
+        const min = new Date();
+        min.setHours(9);
+        min.setMinutes(0);
+        const max = new Date();
+        max.setHours(18);
+        max.setMinutes(0);
         return {
             minTime: min,
             maxTime: max,
-            isAmPm: false
-        }
+            isAmPm: false,
+        };
     },
     computed: {
         format() {
-            return this.isAmPm ? '12' : '24'
-        }
-    }
-})
+            return this.isAmPm ? "12" : "24";
+        },
+    },
+});
 </script>
