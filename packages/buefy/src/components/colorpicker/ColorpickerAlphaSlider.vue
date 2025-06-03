@@ -18,7 +18,11 @@
             aria-valuemax="100"
             :style="{ left: `${percent}%` }"
         >
-            <b-tooltip :label="`${percent}%`" :always="captureMouse">
+            <b-tooltip
+                :label="`${percent}%`"
+                :always="captureMouse"
+                position="is-top"
+            >
                 &nbsp;
             </b-tooltip>
         </div>
