@@ -1,11 +1,15 @@
 <template>
     <section class="b-tooltips">
+        <b-tooltip label="Tooltip auto">
+            <b-button label="Auto positioning (default)" type="is-dark" />
+        </b-tooltip>
+
         <b-tooltip label="Tooltip right" position="is-right">
             <b-button label="Right" type="is-dark" />
         </b-tooltip>
 
-        <b-tooltip label="Tooltip top">
-            <b-button label="Top (default)" type="is-dark" />
+        <b-tooltip label="Tooltip top" position="is-top">
+            <b-button label="Top" type="is-dark" />
         </b-tooltip>
 
         <b-tooltip label="Tooltip bottom" position="is-bottom">

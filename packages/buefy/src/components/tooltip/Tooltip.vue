@@ -38,7 +38,7 @@ import config from '../../utils/config'
 import type { VueClassAttribute } from '../../utils/config'
 import { createAbsoluteElement, removeElement } from '../../utils/helpers'
 
-export const TOOLTIP_POSITIONS = ['is-top', 'is-bottom', 'is-left', 'is-right'] as const
+export const TOOLTIP_POSITIONS = ['is-auto', 'is-top', 'is-bottom', 'is-left', 'is-right'] as const
 export type TooltipPosition = typeof TOOLTIP_POSITIONS[number]
 
 export const CLOSE_OPTIONS = ['inside', 'outside', 'escape'] as const
@@ -66,7 +66,7 @@ export default defineComponent({
         },
         position: {
             type: String as PropType<TooltipPosition>,
-            default: 'is-top',
+            default: 'is-auto',
             validator(value) {
                 return TOOLTIP_POSITIONS.indexOf(value as TooltipPosition) > -1
             }
@@ -111,12 +111,13 @@ export default defineComponent({
             resizeObserver: undefined as ResizeObserver | undefined,
             resizeListener: undefined as (() => void) | undefined,
             timeOutID: undefined as ReturnType<typeof setTimeout> | undefined,
-            controller: undefined as AbortController | undefined
+            controller: undefined as AbortController | undefined,
+            dynamicPosition: 'is-top' as TooltipPosition // Used to store the computed position
         }
     },
     computed: {
         rootClasses(): VueClassAttribute[] {
-            return ['b-tooltip', this.type, this.position, this.size, {
+            return ['b-tooltip', this.type, this.dynamicPosition, this.size, {
                 'is-square': this.square,
                 'is-always': this.always,
                 'is-multiline': this.multilined,
@@ -136,6 +137,29 @@ export default defineComponent({
         }
     },
     methods: {
+        computePosition() : TooltipPosition {
+            if (this.position !== 'is-auto') return this.position
+
+            const trigger = this.$refs.trigger as Element
+            const bounds = trigger.getBoundingClientRect()
+
+            // place the tooltip on the opposite of the side with the least space
+            const dt = bounds.top
+            const db = window.innerHeight - bounds.bottom
+            const dl = bounds.left
+            const dr = window.innerWidth - bounds.right
+            const min = Math.min(dt, db, dl, dr)
+            if (min === dt) {
+                return 'is-bottom'
+            } else if (min === db) {
+                return 'is-top'
+            } else if (min === dl) {
+                return 'is-right'
+            } else {
+                // if (min === dr) {
+                return 'is-left'
+            }
+        },
         updateAppendToBody() {
             const tooltip = this.$refs.tooltip
             const trigger = this.$refs.trigger as Element
@@ -178,7 +202,9 @@ export default defineComponent({
                 // because `wrapper` should create a stacking context
                 // as its z-index is non-auto
                 tooltipEl.style.position = 'absolute'
-                switch (this.position) {
+
+                this.dynamicPosition = this.computePosition()
+                switch (this.dynamicPosition) {
                     case 'is-top':
                         tooltipEl.style.width = `${trigger.clientWidth}px`
                         tooltipEl.style.height = '0px'
@@ -238,6 +264,7 @@ export default defineComponent({
             this.open()
         },
         open() {
+            this.dynamicPosition = this.computePosition()
             if (this.delay) {
                 this.timer = setTimeout(() => {
                     this.isActive = true
