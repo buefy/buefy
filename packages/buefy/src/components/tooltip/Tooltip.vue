@@ -112,7 +112,7 @@ export default defineComponent({
             resizeListener: undefined as (() => void) | undefined,
             timeOutID: undefined as ReturnType<typeof setTimeout> | undefined,
             controller: undefined as AbortController | undefined,
-            dynamicPosition: 'is-top' as TooltipPosition // Used to store the computed position
+            dynamicPosition: undefined as TooltipPosition | undefined
         }
     },
     computed: {
@@ -141,8 +141,6 @@ export default defineComponent({
             if (this.position !== 'is-auto') return this.position
 
             const trigger = this.$refs.trigger as Element
-            if (!trigger) return 'is-top' // Fallback position if trigger is not found because the tooltip is not part of the DOM for whatever reason
-
             const bounds = trigger.getBoundingClientRect()
 
             // place the tooltip on the opposite of the side with the least space
