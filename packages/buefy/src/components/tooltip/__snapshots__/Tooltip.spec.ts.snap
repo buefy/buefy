@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`BTooltip > render correctly 1`] = `
-"<div class="b-tooltip is-primary is-top is-medium">
+"<div class="b-tooltip is-primary is-medium">
   <transition-stub name="fade" appear="false" persisted="true" css="true">
     <div class="tooltip-content" style="display: none;">
       <!--v-if-->
