@@ -112,7 +112,7 @@ export default defineComponent({
             resizeListener: undefined as (() => void) | undefined,
             timeOutID: undefined as ReturnType<typeof setTimeout> | undefined,
             controller: undefined as AbortController | undefined,
-            dynamicPosition: undefined as TooltipPosition | undefined
+            dynamicPosition: undefined as TooltipPosition | undefined // Computed once opened
         }
     },
     computed: {
