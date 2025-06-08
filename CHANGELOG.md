@@ -1,6 +1,11 @@
 # Buefy Changelog
 
-## [1.0.0](https://github.com/buefy/buefy/pull/4077)
+## [1.0.0](https://github.com/buefy/buefy/pull/4077) unreleased
+
+### Breaking changes
+
+* [#4135](https://github.com/buefy/buefy/pull/4135) `Tooltip` introduced a new variant `is-auto` for the `position` prop and made it the new default.
+
 ### Fixes
 * Updated workflows and scripts to reference the package as "buefy" instead of "@ntohq/buefy-next".
 * Updated main repo references:
