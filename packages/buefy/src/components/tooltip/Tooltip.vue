@@ -358,6 +358,10 @@ export default defineComponent({
                 this.resizeObserver.observe(this.$el.parentNode)
             }
         }
+        // dynamicPosition has to be computed if it is always shown
+        if (this.always) {
+            this.dynamicPosition = this.computePosition()
+        }
     },
     created() {
         if (typeof window !== 'undefined') {
