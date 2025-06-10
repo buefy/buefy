@@ -46,7 +46,7 @@
 
                     <div class="home-hero mb-6">
                         <p>
-                            The Vue 2 version of Buefy is deprecated but will remain available as Version "0".
+                            The Vue 2 version of Buefy is deprecated but will remain available as Version "0.x".
                         </p>
                     </div>
 
