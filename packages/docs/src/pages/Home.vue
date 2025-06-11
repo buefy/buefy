@@ -11,7 +11,7 @@
                         <strong>Lightweight</strong> UI components for
                         <strong
                             ><a href="https://vuejs.org/" target="_blank"
-                                >Vue.js</a
+                                >Vue 3</a
                             ></strong
                         >
                         based on
@@ -22,33 +22,35 @@
                         >
                     </h2>
                     <div class="home-hero">
-                        <p><strong>Vue 2</strong></p>
                         <pre
                             class="npm"
                         ><code><span class="is-unselectable">$ </span>npm install buefy</code></pre>
                     </div>
-                    <div class="home-hero">
+
+
+                    <div class="buttons">
+                        <router-link
+                            class="button is-medium home-hero"
+                            to="/documentation/start"
+                        >
+                            Get started
+                        </router-link>
+                        <a
+                            class="button is-medium is-primary home-hero"
+                            href="https://github.com/buefy/buefy/releases"
+                            target="_blank"
+                        >
+                            Changelog
+                        </a>
+                    </div>
+
+                    <div class="home-hero mb-6">
                         <p>
-                            <strong>Vue 3</strong>
-                            (<a
-                                href="https://github.com/ntohq/buefy"
-                                target="_blank"
-                            >
-                                <b-icon
-                                    icon="progress-wrench"
-                                    size="is-small"
-                                />
-                                official fork in development
-                                <b-icon
-                                    icon="github-circle"
-                                    size="is-small"
-                                /> </a
-                            >)
+                            The Vue 2 version of Buefy is deprecated but will remain available as Version "0.x".
                         </p>
-                        <pre
-                            class="npm"
-                        ><code><span class="is-unselectable">$ </span>npm install buefy</code></pre>
                     </div>
+
+
 
                     <div class="github-button home-hero">
                         <iframe
@@ -68,21 +70,6 @@
                         />
                     </div>
 
-                    <div class="buttons">
-                        <router-link
-                            class="button is-medium home-hero"
-                            to="/documentation/start"
-                        >
-                            Get started
-                        </router-link>
-                        <a
-                            class="button is-medium is-primary home-hero"
-                            href="https://github.com/buefy/buefy/releases"
-                            target="_blank"
-                        >
-                            Changelog
-                        </a>
-                    </div>
                     <small class="home-hero">v{{ version }}</small>
                 </div>
             </div>
