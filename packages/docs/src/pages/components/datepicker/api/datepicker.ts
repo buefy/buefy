@@ -121,6 +121,55 @@ export default [
                 default: '<code>mdi</code>'
             },
             {
+                name: '<code>placeholder</code>',
+                description: 'Input placeholder',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>disabled</code>',
+                description: 'Same as native disabled',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>horizontal-time-picker</code>',
+                description: 'Show time picker horizontal',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>maxlength</code>',
+                description: 'Same as native maxlength, plus character counter',
+                type: 'Number, String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>use-html5-validation</code>',
+                description: 'Enable HTML5 native validation',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>validation-message</code>',
+                description: 'The message which is shown when a validation error occurs',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>status-icon</code>',
+                description: 'Show status icon using field and variant prop',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>icon-prev</code>',
                 description: 'Icon to use for previous month',
                 type: 'String',
@@ -351,9 +400,24 @@ export default [
         ],
         events: [
             {
-                name: '<code>input</code>',
+                name: '<code>update:modelValue</code>',
                 description: 'Triggers when the value of datepicker is changed',
-                parameters: '<code>value: Date</code>'
+                parameters: '<code>value: Date | Date[] | null</code>'
+            },
+            {
+                name: '<code>active-change</code>',
+                description: 'Triggers when the datepicker visibility (active state) changes',
+                parameters: '<code>active: Boolean</code>'
+            },
+            {
+                name: '<code>focus</code>',
+                description: 'Triggers when input receives focus',
+                parameters: '<code>event: Event</code>'
+            },
+            {
+                name: '<code>blur</code>',
+                description: 'Triggers when input loses focus',
+                parameters: '<code>event: Event</code>'
             },
             {
                 name: '<code>icon-right-click</code>',
@@ -390,6 +454,19 @@ export default [
             {
                 name: '<code>toggle</code>',
                 description: 'Toggle activation (picker visibility)'
+            },
+            {
+                name: '<code>focus</code>',
+                description: 'Set focus on the input element'
+            },
+            {
+                name: '<code>checkHtml5Validity</code>',
+                description: 'Check HTML5 validation, set isValid property. If validation fails, send \'is-danger\' type, and error message to parent if it\'s a Field'
+            },
+            {
+                name: '<code>togglePicker</code>',
+                description: 'Toggle datepicker visibility with explicit active state',
+                parameters: '<code>active: Boolean</code>'
             }
         ]
     }

@@ -86,6 +86,50 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>icon-right-type</code>',
+                description: 'Type (color) for the right icon',
+                type: 'String',
+                values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
+                    <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
+                    <code>is-warning</code>, <code>is-danger</code>`,
+                default: '—'
+            },
+            {
+                name: '<code>rounded</code>',
+                description: 'Makes the input rounded',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>autocomplete</code>',
+                description: 'Native HTML5 autocomplete attribute',
+                type: 'String',
+                values: 'Any valid HTML5 autocomplete value',
+                default: 'Uses global config <code>defaultInputAutocomplete</code>'
+            },
+            {
+                name: '<code>use-html5-validation</code>',
+                description: 'Enable HTML5 native validation',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>. Can be changed via <code>defaultUseHtml5Validation</code> config option.'
+            },
+            {
+                name: '<code>locale</code>',
+                description: 'Accept a locale string to display date in certain language (month and days names). See Moment.js documentation for valid locales. This overrides the default locale assigned globally.',
+                type: 'String, Array',
+                values: '—',
+                default: 'Uses global config <code>defaultLocale</code>'
+            },
+            {
+                name: '<code>status-icon</code>',
+                description: 'Show status icon using field and variant prop',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>. Can be changed via <code>defaultStatusIcon</code> config option.'
+            },
+            {
                 name: '<code>maxlength</code>',
                 description: 'Same as native <code>maxlength</code>, plus character counter',
                 type: 'String, Number',
@@ -130,8 +174,8 @@ export default [
         ],
         events: [
             {
-                name: '<code>input</code>',
-                description: 'Triggers when value is changed',
+                name: '<code>update:modelValue</code>',
+                description: 'Triggers when the value is changed (Vue 3 v-model event)',
                 parameters: '<code>value: String|Number</code>'
             },
             {

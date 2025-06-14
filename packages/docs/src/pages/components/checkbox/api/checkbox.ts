@@ -88,6 +88,20 @@ export default [
                 type: 'String',
                 values: '—',
                 default: '—'
+            },
+            {
+                name: '<code>autocomplete</code>',
+                description: 'Native HTML5 autocomplete attribute',
+                type: 'String',
+                values: '—',
+                default: '<code>on</code>'
+            }
+        ],
+        slots: [
+            {
+                name: 'default',
+                description: 'Label content for the checkbox',
+                props: '—'
             }
         ],
         events: [
@@ -100,6 +114,13 @@ export default [
                 name: '<code>[any].native</code>',
                 description: 'Listen to any event using this syntax, e.g <code>@click.native</code>',
                 parameters: '<code>event: $event</code>'
+            }
+        ],
+        methods: [
+            {
+                name: '<code>focus()</code>',
+                description: 'Set focus on the checkbox input',
+                return: '—'
             }
         ]
     },
@@ -138,6 +159,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>required</code>',
+                description: 'Same as native <code>required</code>',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>name</code>',
                 description: 'Same as native <code>name</code>',
                 type: 'String',
@@ -157,6 +185,32 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            }
+        ],
+        slots: [
+            {
+                name: 'default',
+                description: 'Button content for the checkbox button',
+                props: '—'
+            }
+        ],
+        events: [
+            {
+                name: '<code>input</code>',
+                description: 'Triggers when the value of checkbox button is changed',
+                parameters: '<code>value: Any</code>'
+            },
+            {
+                name: '<code>[any].native</code>',
+                description: 'Listen to any event using this syntax, e.g <code>@click.native</code>',
+                parameters: '<code>event: $event</code>'
+            }
+        ],
+        methods: [
+            {
+                name: '<code>focus()</code>',
+                description: 'Set focus on the checkbox button input',
+                return: '—'
             }
         ]
     }

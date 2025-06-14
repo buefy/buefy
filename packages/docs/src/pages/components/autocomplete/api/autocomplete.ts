@@ -86,6 +86,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>rounded</code>',
+                description: 'Makes the input rounded',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>icon</code>',
                 description: 'Icon name to be added',
                 type: 'String',
@@ -121,6 +128,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>icon-right-clickable</code>',
+                description: 'Makes the right icon clickable',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>maxlength</code>',
                 description: 'Same as native <code>maxlength</code>, plus character counter',
                 type: 'String, Number',
@@ -130,6 +144,13 @@ export default [
             {
                 name: '<code>check-infinite-scroll</code>',
                 description: 'Makes the component check if list reached scroll end and emit <code>infinite-scroll</code> event.',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>keep-open</code>',
+                description: 'Keeps the dropdown open after selection',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
@@ -182,6 +203,20 @@ export default [
                 type: 'Boolean',
                 values: '-',
                 default: '<code>true</code>. Can be changed via <code>defaultCompatFallthrough</code> config option.'
+            },
+            {
+                name: '<code>type</code>',
+                description: 'Input type',
+                type: 'String',
+                values: '—',
+                default: '<code>text</code>'
+            },
+            {
+                name: '<code>autocomplete</code>',
+                description: 'Native HTML5 autocomplete attribute',
+                type: 'String',
+                values: '—',
+                default: '<code>off</code>'
             },
             {
                 name: 'Any native attribute',

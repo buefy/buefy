@@ -121,15 +121,15 @@ export default [
                 default: '<code>minimalist</code>'
             },
             {
-                name: '<code>aria-page-label</code>',
-                description: 'Accessibility label for the page link. If passed, this text will be prepended to the number of the page.',
+                name: '<code>aria-next-label</code>',
+                description: 'Accessibility label for the next navigation button',
                 type: 'String',
                 values: '—',
                 default: '—'
             },
             {
-                name: '<code>aria-current-label</code>',
-                description: 'Accessibility label for the current page link. If passed, this text will be prepended to the current page.',
+                name: '<code>aria-previous-label</code>',
+                description: 'Accessibility label for the previous navigation button',
                 type: 'String',
                 values: '—',
                 default: '—'
@@ -149,11 +149,23 @@ export default [
         ],
         events: [
             {
-                name: '<code>input</code>',
+                name: '<code>update:modelValue</code>',
                 description: 'Triggers when active step is changed',
                 parameters: '<code>value: String|Number</code>'
             }
         ],
+        methods: [
+            {
+                name: '<code>prev</code>',
+                description: 'Go to previous step',
+                return: 'void'
+            },
+            {
+                name: '<code>next</code>',
+                description: 'Go to next step',
+                return: 'void'
+            }
+        ]
     },
     {
         title: 'Item',
@@ -241,6 +253,8 @@ export default [
                 description: 'Step item body',
                 props: '—'
             }
+        ],
+        methods: [
         ]
     }
 ]

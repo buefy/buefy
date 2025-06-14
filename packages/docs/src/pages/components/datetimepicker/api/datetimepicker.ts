@@ -23,6 +23,83 @@ export default [
                 default: 'Tries to parse the time using the locale specific format. Fallback to <code>HH:mm</code> or <code>HH:mm AM/PM</code>'
             },
             {
+                name: '<code>datetime-creator</code>',
+                description: 'Function used internally to create a new Date instance from a given date',
+                type: 'Function',
+                values: '—',
+                default: '<code>(date) => date</code>'
+            },
+            {
+                name: '<code>placeholder</code>',
+                description: 'Input placeholder',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>disabled</code>',
+                description: 'Same as native disabled',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>rules-for-first-week</code>',
+                description: 'Choose the rule to determine the first week of year, 4 for ISO or 1 for other',
+                type: 'Number',
+                values: '—',
+                default: '<code>4</code>'
+            },
+            {
+                name: '<code>tz-offset</code>',
+                description: 'Timezone offset in minutes',
+                type: 'Number',
+                values: '—',
+                default: '<code>0</code>'
+            },
+            {
+                name: '<code>expanded</code>',
+                description: 'Makes input full width when inside a grouped or addon field',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>rounded</code>',
+                description: 'Makes the input rounded',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>maxlength</code>',
+                description: 'Same as native maxlength, plus character counter',
+                type: 'Number, String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>use-html5-validation</code>',
+                description: 'Enable HTML5 native validation',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>validation-message</code>',
+                description: 'The message which is shown when a validation error occurs',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>status-icon</code>',
+                description: 'Show status icon using field and variant prop',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
                 name: '<code>min-datetime</code>',
                 description: 'Earliest datetime available for selection',
                 type: 'Date',
@@ -192,6 +269,26 @@ export default [
         ],
         events: [
             {
+                name: '<code>update:modelValue</code>',
+                description: 'Triggers when the datetime value changes',
+                parameters: '<code>value: Date | null</code>'
+            },
+            {
+                name: '<code>active-change</code>',
+                description: 'Triggers when the datetimepicker visibility (active state) changes',
+                parameters: '<code>active: Boolean</code>'
+            },
+            {
+                name: '<code>focus</code>',
+                description: 'Triggers when input receives focus',
+                parameters: '<code>event: Event</code>'
+            },
+            {
+                name: '<code>blur</code>',
+                description: 'Triggers when input loses focus',
+                parameters: '<code>event: Event</code>'
+            },
+            {
                 name: '<code>icon-right-click</code>',
                 description: 'Triggers when the right icon is clickable and has been clicked',
                 parameters: '<code>event: $event</code>'
@@ -211,6 +308,14 @@ export default [
             {
                 name: '<code>toggle</code>',
                 description: 'Toggle activation (picker visibility)'
+            },
+            {
+                name: '<code>focus</code>',
+                description: 'Set focus on the input element'
+            },
+            {
+                name: '<code>checkHtml5Validity</code>',
+                description: 'Check HTML5 validation, set isValid property. If validation fails, send \'is-danger\' type, and error message to parent if it\'s a Field'
             }
         ]
     }

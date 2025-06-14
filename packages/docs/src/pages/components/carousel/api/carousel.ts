@@ -237,6 +237,23 @@ export default [
                 name: '<code>click</code>',
                 description: 'Non-native click event, will trigger only when clicking an element that should normally not be clickable/focusable',
             }
+        ],
+        methods: [
+            {
+                name: '<code>next()</code>',
+                description: 'Move to next slide',
+                return: '—'
+            },
+            {
+                name: '<code>prev()</code>',
+                description: 'Move to previous slide',
+                return: '—'
+            },
+            {
+                name: '<code>changeActive(index: Number)</code>',
+                description: 'Change to specific slide by index',
+                return: '—'
+            }
         ]
     },
     {
@@ -263,6 +280,13 @@ export default [
             {
                 name: '<code>v-model</code>',
                 description: 'Binding value',
+                type: 'Number',
+                values: '—',
+                default: '<code>0</code>'
+            },
+            {
+                name: '<code>scroll-value</code>',
+                description: 'Initial scroll position value',
                 type: 'Number',
                 values: '—',
                 default: '<code>0</code>'
@@ -324,11 +348,11 @@ export default [
                 default: '<code>false</code>'
             },
             {
-                name: '<code>refresh</code>',
-                description: 'Refresh for carousel overlay',
-                type: 'Boolean',
+                name: '<code>breakpoints</code>',
+                description: 'Responsive breakpoint settings for different screen sizes',
+                type: 'Object',
                 values: '—',
-                default: '<code>false</code>'
+                default: '<code>{}</code>'
             },
             {
                 name: '<code>arrow</code>',
@@ -385,6 +409,33 @@ export default [
                 name: '<code>switch</code>',
                 description: 'Triggers when value is changed',
                 parameters: '<code>value: Boolean</code>, <code>value: Number</code>, <code>value: String</code>'
+            },
+            {
+                name: '<code>updated:scroll</code>',
+                description: 'Triggers when scroll position changes',
+                parameters: '<code>index: Number</code>'
+            }
+        ],
+        methods: [
+            {
+                name: '<code>next()</code>',
+                description: 'Move to next items',
+                return: '—'
+            },
+            {
+                name: '<code>prev()</code>',
+                description: 'Move to previous items',
+                return: '—'
+            },
+            {
+                name: '<code>switchTo(index: Number)</code>',
+                description: 'Switch to specific index',
+                return: '—'
+            },
+            {
+                name: '<code>refresh()</code>',
+                description: 'Refresh the carousel layout',
+                return: '—'
             }
         ]
     }

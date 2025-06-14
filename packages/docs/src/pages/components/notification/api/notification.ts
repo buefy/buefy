@@ -19,11 +19,18 @@ export default [
                 default: '—'
             },
             {
-                name: '<code>active</code>',
-                description: 'Whether notification is active or not, use the <code>.sync</code> modifier to make it two-way binding',
-                type: 'Boolean',
+                name: '<code>title</code>',
+                description: 'Notification title',
+                type: 'String',
                 values: '—',
-                default: '<code>true</code>'
+                default: '—'
+            },
+            {
+                name: '<code>size</code>',
+                description: 'Size of the notification, optional',
+                type: 'String',
+                values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
+                default: '—'
             },
             {
                 name: '<code>closable</code>',
@@ -140,6 +147,11 @@ export default [
         ],
         events: [
             {
+                name: '<code>update:modelValue</code>',
+                description: 'Triggers when the notification visibility changes',
+                parameters: '<code>value: Boolean</code>'
+            },
+            {
                 name: '<code>close</code>',
                 description: 'Triggers when user closes the notification',
                 parameters: '—'
@@ -149,6 +161,20 @@ export default [
                 description: 'Triggers when user clicks the notification',
                 parameters: '—'
             },
+        ],
+        slots: [
+            {
+                name: 'default',
+                description: 'Main notification content',
+                props: '—'
+            }
+        ],
+        methods: [
+            {
+                name: '<code>close</code>',
+                description: 'Programmatically close the notification',
+                return: '—'
+            }
         ]
     }
 ]
