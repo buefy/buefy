@@ -260,10 +260,12 @@ export default defineComponent({
          * Add input, dropdown and all children.
          */
         whiteList() {
+            // access computedData to make this property reactive when data changes
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const _ = this.computedData
             const whiteList = []
             whiteList.push((this.$refs.input as BInputComponent).$el.querySelector('input'))
             whiteList.push(this.$refs.dropdown)
-            // Add all children from dropdown
             if (this.$refs.dropdown != null) {
                 const children = (this.$refs.dropdown as Element).querySelectorAll('*')
                 for (const child of children) {
@@ -271,9 +273,7 @@ export default defineComponent({
                 }
             }
             if ((this.$parent?.$data as TaginputData)._isTaginput) {
-                // Add taginput container
                 whiteList.push(this.$parent!.$el)
-                // Add .tag and .delete
                 const tagInputChildren = this.$parent!.$el.querySelectorAll('*')
                 for (const tagInputChild of tagInputChildren) {
                     whiteList.push(tagInputChild)
@@ -374,13 +374,12 @@ export default defineComponent({
          * When checkInfiniteScroll property changes scroll event should be removed or added
          */
         checkInfiniteScroll(checkInfiniteScroll) {
-            if ((this.$refs.dropdown && (this.$refs.dropdown as Element).querySelector('.dropdown-content')) === false) return
-
-            const list = (this.$refs.dropdown as Element).querySelector('.dropdown-content')!
+            if (!this.$refs.dropdown) return
+            const list = (this.$refs.dropdown as Element).querySelector('.dropdown-content')
+            if (!list) return
 
             if (checkInfiniteScroll === true) {
                 list.addEventListener('scroll', this.checkIfReachedTheEndOfScroll)
-
                 return
             }
 
@@ -397,12 +396,12 @@ export default defineComponent({
             this.$emit('update:modelValue', value)
             // Check if selected is invalid
             const currentValue = this.getValue(this.selected)
-            if (currentValue && currentValue !== value) {
+            if (currentValue !== undefined && currentValue !== null && currentValue !== value) {
                 this.setSelected(null, false)
             }
             // Close dropdown if input is clear or else open it
-            if (this.hasFocus && (!this.openOnFocus || value)) {
-                this.isActive = !!value
+            if (this.hasFocus && (!this.openOnFocus || value !== '')) {
+                this.isActive = value !== '' && value !== undefined && value !== null
             }
         },
 
@@ -413,6 +412,10 @@ export default defineComponent({
          */
         modelValue(value) {
             this.newValue = value
+        },
+
+        keepFirst(value) {
+            this.ariaAutocomplete = value ? 'both' : 'list'
         },
 
         /*
@@ -463,10 +466,7 @@ export default defineComponent({
             this.$emit('select', this.selected, event)
             if (this.selected !== null) {
                 if (this.clearOnSelect) {
-                    const input = this.$refs.input as BInputComponent
-                    input.newValue = ''
-                    const innerInput = input.$refs.input as HTMLInputElement | HTMLTextAreaElement
-                    innerInput.value = ''
+                    this.newValue = ''
                 } else {
                     this.newValue = this.getValue(this.selected)
                 }
@@ -705,7 +705,8 @@ export default defineComponent({
         },
         onInput() {
             const currentValue = this.getValue(this.selected)
-            if (currentValue && currentValue === this.newValue) return
+            if ((currentValue !== undefined && currentValue !== null) &&
+                currentValue === this.newValue) return
             this.$emit('typing', this.newValue)
             this.checkValidity()
         },
@@ -764,6 +765,7 @@ export default defineComponent({
         if (typeof window !== 'undefined') {
             document.addEventListener('click', this.clickedOutside)
             if (this.dropdownPosition === 'auto') { window.addEventListener('resize', this.calcDropdownInViewportVertical) }
+            if (this.appendToBody) { window.addEventListener('scroll', this.calcDropdownInViewportVertical) }
         }
     },
     mounted() {
@@ -782,6 +784,7 @@ export default defineComponent({
         if (typeof window !== 'undefined') {
             document.removeEventListener('click', this.clickedOutside)
             if (this.dropdownPosition === 'auto') { window.removeEventListener('resize', this.calcDropdownInViewportVertical) }
+            if (this.appendToBody) { window.removeEventListener('scroll', this.calcDropdownInViewportVertical) }
         }
         if (this.checkInfiniteScroll &&
             this.$refs.dropdown && (this.$refs.dropdown as Element).querySelector('.dropdown-content')

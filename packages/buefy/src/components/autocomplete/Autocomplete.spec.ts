@@ -402,6 +402,45 @@ describe('BAutocomplete', () => {
         expect(active[0]).toEqual([true])
     })
 
+    it('updates ariaAutocomplete when keepFirst changes', async () => {
+        await wrapper.setProps({ keepFirst: true })
+        expect(wrapper.vm.ariaAutocomplete).toBe('both')
+        await wrapper.setProps({ keepFirst: false })
+        expect(wrapper.vm.ariaAutocomplete).toBe('list')
+    })
+
+    it('clears selection when value changes from 0', async () => {
+        await wrapper.setProps({ data: [0, 1] })
+        wrapper.vm.setSelected(0)
+        await wrapper.vm.$nextTick()
+        await wrapper.setData({ newValue: '1' })
+        expect(wrapper.vm.selected).toBeNull()
+    })
+
+    it('opens dropdown when value is 0', async () => {
+        await wrapper.setProps({ data: ['0', '1'] })
+        await wrapper.setData({ hasFocus: true })
+        await $input.setValue('0')
+        expect(wrapper.vm.isActive).toBe(true)
+    })
+
+    it('updates model when clearOnSelect is used', async () => {
+        await wrapper.setProps({ data: DATA_LIST, clearOnSelect: true })
+        await wrapper.setData({ isActive: true })
+        await $input.trigger('keydown', { key: 'Down' })
+        await $input.trigger('keydown', { key: 'Enter' })
+        const emitted = wrapper.emitted()['update:modelValue']
+        expect(emitted[emitted.length - 1]).toEqual([''])
+    })
+
+    it('updates white list when data changes', async () => {
+        await wrapper.setProps({ data: ['a'] })
+        const len = wrapper.vm.whiteList.length
+        await wrapper.setProps({ data: ['a', 'b'] })
+        await wrapper.vm.$nextTick()
+        expect(wrapper.vm.whiteList.length).toBeGreaterThan(len)
+    })
+
     describe('with fallthrough attributes', () => {
         const attrs = {
             class: 'fallthrough-class',
