@@ -566,4 +566,82 @@ describe('BAutocomplete', () => {
         await $input.trigger('keydown', { key: 'Enter' })
         expect($input.element.value).toBe('Vue.js')
     })
+
+    it('should handle dynamic appendToBody prop changes without crashing', async () => {
+        const data = ['Angular', 'Vue.js', 'React']
+        const wrapper = mount(BAutocomplete, {
+            props: {
+                data,
+                appendToBody: false // Start with false
+            },
+            attachTo: document.body
+        })
+
+        // Initially appendToBody is false
+        expect(wrapper.vm.appendToBody).toBe(false)
+
+        // Change appendToBody to true dynamically
+        await wrapper.setProps({ appendToBody: true })
+        expect(wrapper.vm.appendToBody).toBe(true)
+
+        // Focus the input to trigger dropdown and potential appendToBody logic
+        const input = wrapper.find('input')
+        await input.trigger('focus')
+        await wrapper.vm.$nextTick()
+
+        // Type something to open dropdown and trigger updateAppendToBody
+        wrapper.vm.newValue = 'Vue'
+        await wrapper.vm.$nextTick()
+
+        // This should not crash - if it crashes, the test will fail
+        expect(wrapper.vm.isActive).toBe(true)
+
+        wrapper.unmount()
+    })
+
+    it('should properly handle appendToBody switching from false to true and back', async () => {
+        const data = ['Angular', 'Vue.js', 'React']
+        const wrapper = mount(BAutocomplete, {
+            props: {
+                data,
+                appendToBody: false,
+                openOnFocus: true
+            },
+            attachTo: document.body
+        })
+
+        const input = wrapper.find('input')
+
+        // Start with appendToBody false
+        expect(wrapper.vm.appendToBody).toBe(false)
+        expect(wrapper.vm.$data._bodyEl).toBeUndefined()
+
+        // Focus to open dropdown
+        await input.trigger('focus')
+        await wrapper.vm.$nextTick()
+        expect(wrapper.vm.isActive).toBe(true)
+
+        // Change to appendToBody true
+        await wrapper.setProps({ appendToBody: true })
+        expect(wrapper.vm.appendToBody).toBe(true)
+
+        // Type something to trigger updateAppendToBody
+        wrapper.vm.newValue = 'Vue'
+        await wrapper.vm.$nextTick()
+
+        // Should have created _bodyEl
+        expect(wrapper.vm.$data._bodyEl).toBeDefined()
+
+        // Change back to appendToBody false
+        await wrapper.setProps({ appendToBody: false })
+        expect(wrapper.vm.appendToBody).toBe(false)
+
+        // _bodyEl should be cleaned up
+        expect(wrapper.vm.$data._bodyEl).toBeUndefined()
+
+        // Should still work normally
+        expect(wrapper.vm.isActive).toBe(true)
+
+        wrapper.unmount()
+    })
 })

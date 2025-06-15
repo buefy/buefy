@@ -442,6 +442,25 @@ export default defineComponent({
                     }
                 }
             }
+        },
+
+        /*
+         * When appendToBody property changes, handle the transition properly
+         */
+        appendToBody(newValue, oldValue) {
+            if (newValue && !oldValue) {
+                // Changing from false to true - need to create _bodyEl if dropdown is active
+                if (this.isActive && this.$refs.dropdown && !this.$data._bodyEl) {
+                    this.$data._bodyEl = createAbsoluteElement(this.$refs.dropdown as Element)
+                    this.updateAppendToBody()
+                }
+            } else if (!newValue && oldValue) {
+                // Changing from true to false - need to clean up _bodyEl
+                if (this.$data._bodyEl) {
+                    removeElement(this.$data._bodyEl)
+                    this.$data._bodyEl = undefined
+                }
+            }
         }
     },
     methods: {
@@ -758,6 +777,10 @@ export default defineComponent({
                 ? this.$parent!.$el
                 : (this.$refs.input as BInputComponent).$el
             if (dropdownMenu && trigger) {
+                // Ensure _bodyEl exists before trying to update it
+                if (!this.$data._bodyEl) {
+                    this.$data._bodyEl = createAbsoluteElement(dropdownMenu)
+                }
                 // update wrapper dropdown
                 const root = this.$data._bodyEl!
                 root.classList.forEach((item) => root.classList.remove(item))
@@ -816,8 +839,8 @@ export default defineComponent({
             const list = (this.$refs.dropdown as Element).querySelector('.dropdown-content')!
             list.removeEventListener('scroll', this.checkIfReachedTheEndOfScroll)
         }
-        if (this.appendToBody) {
-            removeElement(this.$data._bodyEl!)
+        if (this.appendToBody && this.$data._bodyEl) {
+            removeElement(this.$data._bodyEl)
         }
         clearTimeout(this.timeOutID)
     }
