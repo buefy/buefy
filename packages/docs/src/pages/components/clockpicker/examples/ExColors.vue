@@ -26,11 +26,12 @@
                     <option value="24">24</option>
                 </b-select>
             </b-field>
-            <b-field label="Bulma color class"></b-field>
-            <b-field v-for="color in colors" :key="color">
-                <b-radio v-model="selectedColor" :native-value="color"
-                    >is-{{ color }}</b-radio
-                >
+            <b-field label="Bulma color class">
+                <b-select v-model="selectedColor">
+                    <option v-for="color in colors" :key="color" :value="color">
+                        is-{{ color }}
+                    </option>
+                </b-select>
             </b-field>
         </div>
         <div class="column">

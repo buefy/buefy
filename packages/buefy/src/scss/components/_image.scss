@@ -1,7 +1,18 @@
+@use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/extends" as extends;
+
 $image-placeholder-blur-enabled: true !default;
 $image-placeholder-blur: 10px !default;
 
-.b-image-wrapper {
+.#{iv.$class-prefix}b-image-wrapper {
+    @include cv.register-vars((
+        "image-placeholder-blur-enabled": #{$image-placeholder-blur-enabled},
+        "image-placeholder-blur": #{$image-placeholder-blur},
+    ))
+}
+
+.#{iv.$class-prefix}b-image-wrapper {
     > img {
         object-fit: cover;
 
@@ -13,7 +24,7 @@ $image-placeholder-blur: 10px !default;
         }
         @if $image-placeholder-blur-enabled {
             &.placeholder {
-                filter: blur($image-placeholder-blur);
+                filter: blur(cv.getVar('image-placeholder-blur'));
             }
         }
     }

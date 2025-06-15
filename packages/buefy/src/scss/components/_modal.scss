@@ -1,4 +1,10 @@
-.modal {
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/utilities/mixins" as mixins;
+// @use "bulma/sass/components/modal" as modal;
+@use "bulma/sass/utilities/extends";
+
+.#{iv.$class-prefix}modal {
     &.is-full-screen {
         > .animation-content,
         > .animation-content > .modal-card {
@@ -6,7 +12,7 @@
             height: 100%;
             max-height: 100vh;
             margin: 0;
-            background-color: $background;
+            background-color: cv.getVar('background');
         }
     }
     .animation-content {
@@ -14,24 +20,25 @@
         .modal-card {
             margin: 0;
         }
-        @include mobile {
+        @include mixins.mobile {
             width: 100%;
         }
     }
     .modal-content {
         width: 100%;
     }
-    .modal-close {
-        @include until($modal-breakpoint) {
-            /* keep modal-close visible when the contents fill the screen */
-            background-color: color-mix(in hsl, $modal-background-background-color 10%, transparent);
-            &:hover,
-            :focus {
-                background-color: color-mix(in hsl, $modal-background-background-color 20%, transparent);
-            }
-            &:active {
-                background-color: color-mix(in hsl, $modal-background-background-color 30%, transparent);
-            }
-        }
+}
+
+// temporary fix for modal close button
+// as ::before and ::after pseudo elements from bulma
+// are not working properly
+.#{iv.$class-prefix}modal-close {
+    &::before {
+        content: "×";
+        display: block;
+        font-size: 1.5rem;
+        line-height: 1;
+        text-align: center;
+        width: 1.5rem;
     }
 }

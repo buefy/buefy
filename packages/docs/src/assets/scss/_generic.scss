@@ -1,10 +1,13 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/mixins" as mixins;
+
 ::selection {
-    background: lighten($primary, 5%);
-    color: $primary-invert;
+    background: cv.getVar('primary-soft');
+    color: cv.getVar('primary-invert');
 }
 
 html.is-clipped-touch {
-    @include touch {
+    @include mixins.touch {
         overflow: hidden !important;
     }
 }

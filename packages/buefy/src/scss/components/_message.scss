@@ -1,5 +1,7 @@
-.message,
-.notification {
+@use "bulma/sass/utilities/initial-variables" as iv;
+
+.#{iv.$class-prefix}message,
+.#{iv.$class-prefix}notification {
     .media {
         padding-top: 0;
         border: 0;

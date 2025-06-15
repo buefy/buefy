@@ -1,4 +1,7 @@
-.select {
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/initial-variables" as iv;
+
+.#{iv.$class-prefix}select {
     select {
         // TODO Remove below when the following problem will be fixed from Bulma or Safari:
         // https://github.com/jgthms/bulma/issues/2626
@@ -7,18 +10,7 @@
 
         padding-right: 2.5em;
         option {
-            color: $grey-dark;
-            padding: $control-padding-vertical $control-padding-horizontal;
-        }
-        option:disabled {
-            cursor: not-allowed;
-            opacity: 0.5;
-        }
-        optgroup {
-            color: $grey-light;
-            font-weight: $weight-normal;
-            font-style: normal;
-            padding: 0.25em 0;
+            padding: cv.getVar("control-padding-vertical") cv.getVar("control-padding-horizontal");
         }
 
         &[disabled] {
@@ -28,7 +20,7 @@
         }
     }
     &.is-empty select {
-        color: rgba($grey, 0.7);
+        color: cv.getRgbaVar("grey", 0.7);
     }
     // fix Bulma 0.8.2
     &.is-loading::after {

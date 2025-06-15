@@ -1,0 +1,22 @@
+@use "bulma/sass/utilities/mixins" as mixins;
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/form/shared";
+
+
+$form-colors: shared.$form-colors !default;
+
+
+%disabled {
+  cursor: not-allowed !important;
+  pointer-events: none;
+
+  background-color: cv.getVar("input-disabled-background-color");
+  border-color: cv.getVar("input-disabled-border-color");
+  box-shadow: none;
+  color: cv.getVar("input-disabled-color");
+  opacity: .5;
+
+  @include mixins.placeholder {
+    color: cv.getVar("input-disabled-placeholder-color");
+  }
+}

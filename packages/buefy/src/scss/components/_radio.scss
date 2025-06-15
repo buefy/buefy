@@ -1,10 +1,43 @@
-$radio-active-background-color: $primary !default;
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/utilities/mixins" as mixins;
+@use "bulma/sass/utilities/controls" as controls;
+@use "../utils/shared";
+
+$radio-active-background-color: cv.getVar('primary') !default;
 $radio-size: 1.25em !default;
-$radio-colors: $form-colors !default;
+$radio-colors: shared.$form-colors !default;
+$radio-border-color: cv.getVar('border') !default;
+$radio-shadow: cv.getVar('shadow') !default;
+
+.#{iv.$class-prefix}b-radio {
+    @include cv.register-vars((
+        "radio-active-background-color": #{$radio-active-background-color},
+        "radio-shadow": #{$radio-shadow},
+        "radio-size": #{$radio-size},
+        "radio-border-color": #{$radio-border-color}
+    ));
+
+    &.radio input[type=radio] + .check {
+        @each $name, $pair in $radio-colors {  
+          &.#{iv.$class-prefix}is-#{$name} {
+            @include cv.register-vars(
+              (
+                "radio-active-background-color": #{cv.getVar($name)},
+                "radio-shadow": 0 0 0.5em #{cv.getRgbaVar($name, 0.8)}
+              )
+            )
+          }
+        }
+    }
+}
 
 .b-radio {
+
+    line-height: cv.getVar('control-line-height');
+
     &.radio {
-        @extend %unselectable;
+        @include mixins.unselectable;
         outline: none;
         display: inline-flex;
         align-items: center;
@@ -29,57 +62,39 @@ $radio-colors: $form-colors !default;
                 flex-shrink: 0;
                 position: relative;
                 cursor: pointer;
-                width: $radio-size;
-                height: $radio-size;
-                transition: background $speed-slow $easing;
+                width: cv.getVar('radio-size');
+                height: cv.getVar('radio-size');
+                transition: background cv.getVar('speed-slow')  cv.getVar('easing');
                 border-radius: 50%;
-                border: 2px solid $grey;
+                border: 2px solid cv.getVar('radio-border-color');
                 &:before {
                     content: "";
                     display: flex;
                     position: absolute;
                     left: 50%;
-                    margin-left: calc(-#{$radio-size} * 0.5);
+                    margin-left: calc(#{cv.getVar('radio-size')} * -0.5);
                     bottom: 50%;
-                    margin-bottom: calc(-#{$radio-size} * 0.5);
-                    width: $radio-size;
-                    height: $radio-size;
-                    transition: transform $speed-slow $easing;
+                    margin-bottom: calc(#{ cv.getVar('radio-size')} * -0.5);
+                    width:  cv.getVar('radio-size');
+                    height:  cv.getVar('radio-size');
+                    transition: transform  cv.getVar('speed-slow')  cv.getVar('easing');
                     border-radius: 50%;
                     transform: scale(0);
-                    background-color: $radio-active-background-color;
-                }
-                @each $name, $pair in $radio-colors {
-                    $color: nth($pair, 1);
-                    &.is-#{$name}:before {
-                        background: $color;
-                    }
+                    background-color:  cv.getVar('radio-active-background-color');
                 }
             }
             &:checked + .check {
-                border-color: $radio-active-background-color;
-                @each $name, $pair in $radio-colors {
-                    $color: nth($pair, 1);
-                    &.is-#{$name} {
-                        border-color: $color;
-                    }
-                }
+                border-color:  cv.getVar('radio-active-background-color');
                 &:before {
                     transform: scale(.5);
                 }
             }
             &:focus {
                 + .check {
-                    box-shadow: 0 0 0.5em rgba($grey, 0.8);
+                    box-shadow: cv.getVar('radio-shadow');
                 }
                 &:checked + .check {
-                    box-shadow: 0 0 0.5em rgba($radio-active-background-color, 0.8);
-                    @each $name, $pair in $radio-colors {
-                        $color: nth($pair, 1);
-                        &.is-#{$name} {
-                            box-shadow: 0 0 0.5em rgba($color, 0.8);
-                        }
-                    }
+                    box-shadow: cv.getVar('radio-shadow');
                 }
             }
             &[disabled] + .check {
@@ -87,7 +102,7 @@ $radio-colors: $form-colors !default;
             }
         }
         .control-label {
-            padding-left: $control-padding-horizontal;
+            padding-left:  cv.getVar('control-padding-horizontal');
         }
         &.button {
             display: flex;
@@ -101,23 +116,17 @@ $radio-colors: $form-colors !default;
         }
         &:hover {
             input[type=radio]:not(:disabled) + .check {
-                border-color: $radio-active-background-color;
-                @each $name, $pair in $radio-colors {
-                    $color: nth($pair, 1);
-                    &.is-#{$name} {
-                        border-color: $color;
-                    }
-                }
+                border-color:  cv.getVar('radio-active-background-color');
             }
         }
         &.is-small {
-            @include control-small;
+            @include controls.control-small;
         }
         &.is-medium{
-            @include control-medium;
+            @include controls.control-medium;
         }
         &.is-large {
-            @include control-large;
+            @include controls.control-large;
         }
     }
 }

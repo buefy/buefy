@@ -1,21 +1,13 @@
-.tag {
+@use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/utilities/mixins" as mixins;
+
+
+.#{iv.$class-prefix}tag {
     .has-ellipsis {
         max-width: 10em;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-    }
-    .delete, &.is-delete, &.has-delete-icon {
-        @each $name, $pair in $tag-colors {
-            $color: nth($pair, 1);
-            &.is-#{$name} {
-                background: $color;
-                &:hover {
-                    background-color: darken($color, 10%);
-                    text-decoration: none;
-                }
-            }
-        }
     }
     &.has-delete-icon {
         padding: 0px;
@@ -30,7 +22,7 @@
     &.inline-tags {
         margin-bottom: 0px;
         &:not(:last-child) {
-            @include ltr-property("margin", 0.5rem);
+            @include mixins.ltr-property("margin", 0.5rem);
         }
     }
 }

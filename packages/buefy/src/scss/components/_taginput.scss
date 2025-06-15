@@ -1,10 +1,34 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/utilities/derived-variables" as dv;
+@use "bulma/sass/utilities/controls" as controls;
+@use "bulma/sass/utilities/mixins" as mixins;
+@use "bulma/sass/form/input-textarea";
+@use "../utils/shared";
+
 $taginput-height: calc(2em - 1px) !default;
 
-.taginput {
+
+.#{iv.$class-prefix}taginput {
+    @include cv.register-vars((
+        "taginput-height": #{$taginput-height}
+    ))
+}
+
+.#{iv.$class-prefix}taginput {
     .taginput-container {
+
+        @extend %input-textarea;
         display: flex;
+        box-shadow: cv.getVar('input-shadow');
+
+        input {
+            border: none;
+            outline: none;
+        }
+
         &.is-focusable {
-            @extend %input-textarea;
+            @extend %input;
             padding-bottom: 0;
             padding-top: calc(0.275em - 1px);
             padding-left: 0;
@@ -14,6 +38,10 @@ $taginput-height: calc(2em - 1px) !default;
             justify-content: flex-start;
             height: auto;
             cursor: text;
+            &.is-focused {
+                // border-color: cv.getVar("taginput-active-border-color");
+                // box-shadow: cv.getVar("input-focus-shadow-size") cv.getRgbaVar("taginput-border-color", cv.getVar("input-focus-shadow-alpha"));
+            }
         }
         &:not(.is-focusable) {
             align-items: center;
@@ -21,13 +49,13 @@ $taginput-height: calc(2em - 1px) !default;
             justify-content: flex-start;
             height: auto;
             &.is-small {
-                @include control-small;
+                @include controls.control-small;
             }
             &.is-medium{
-                @include control-medium;
+                @include controls.control-medium;
             }
             &.is-large {
-                @include control-large;
+                @include controls.control-large;
             }
         }
 
@@ -36,13 +64,13 @@ $taginput-height: calc(2em - 1px) !default;
             margin-left: 0.275rem;
             margin-bottom: calc(0.275em - 1px);
             font-size: 0.9em;
-            height: $taginput-height;
+            height: cv.getVar("taginput-height");
             .tag {
                 margin-bottom: 0;
                 font-size: 0.9em;
-                height: $taginput-height;
+                height: cv.getVar("taginput-height");
                 &.is-delete {
-                    width: $taginput-height;
+                    width: cv.getVar("taginput-height");
                 }
             }
         }
@@ -51,7 +79,7 @@ $taginput-height: calc(2em - 1px) !default;
             position: static;
             flex: 1;
             input {
-                height: $taginput-height;
+                height: cv.getVar("taginput-height");
                 margin-bottom: calc(0.275em - 1px);
                 padding-top: 0;
                 padding-bottom: 0;
@@ -63,11 +91,17 @@ $taginput-height: calc(2em - 1px) !default;
                 }
             }
             .icon {
-                height: $taginput-height;
+                height: cv.getVar("taginput-height");
             }
             > .control.is-loading::after {
                 top: 0.375em;
             }
+        }
+
+        &[disabled],
+        &[disabled] input {
+            cursor: not-allowed;
+            opacity: 0.5;
         }
     }
 }

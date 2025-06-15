@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "buefy": "*",
-    "bulma": "^0.9.4",
+    "bulma": "*",
     "vue": "*"
   },
   "devDependencies": {
@@ -39,7 +39,6 @@
     "@types/scrollreveal": "^0.0.11",
     "@types/sortablejs": "^1.15.8",
     "axios": "^1.5.1",
-    "bulma-css-vars": "0.8.0",
     "cleave.js": "1.6.0",
     "clipboard": "^2.0.11",
     "copyfiles": "^2.4.1",

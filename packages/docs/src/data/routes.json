@@ -633,19 +633,6 @@
             "extensions/veevalidate"
         ]
     },
-    "extensions/bulmacssvars": {
-        "title": "BulmaCssVars",
-        "subtitle": "Use CSS Variables for Bulma",
-        "path": "/extensions/bulmacssvars",
-        "githubPath": "pages/extensions/bulmacssvars/BulmaCssVars.vue",
-        "menu": "extensions",
-        "breadcrumb": [
-            "/",
-            "extensions",
-            "extensions/bulmacssvars"
-        ],
-        "isNew": true
-    },
     "extensions/vuebreakpointmixin": {
         "title": "Vue Breakpoint Mixin",
         "subtitle": "Use to watch the size of the screen based on Bulma breakpoints.",

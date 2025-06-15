@@ -1,16 +1,17 @@
 <template>
-    <nav class="navbar">
-        <div class="navbar-brand">
-            <a class="navbar-item">
-                <img src="/static/img/buefy-logo.png" alt="Buefy" />
-            </a>
-            <a class="navbar-item"
+    <section>
+        <nav class="navbar">
+            <div class="navbar-brand">
+                <a class="navbar-item">
+                    <img src="/static/img/buefy-logo.png" alt="Buefy" />
+                </a>
+                <a class="navbar-item"
                 ><b-icon pack="fab" icon="github"></b-icon
             ></a>
-            <a class="navbar-item"
+                <a class="navbar-item"
                 ><b-icon pack="fab" icon="twitter"></b-icon
             ></a>
-        </div>
+            </div>
 
         <div class="navbar-menu">
             <div class="navbar-end">

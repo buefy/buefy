@@ -87,12 +87,6 @@
             ]
         },
         {
-            "category": "CSS Variables",
-            "pages": [
-                "extensions/bulmacssvars"
-            ]
-        },
-        {
             "category": "Mixins",
             "pages": [
                 "extensions/vuebreakpointmixin"
