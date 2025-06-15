@@ -481,4 +481,89 @@ describe('BAutocomplete', () => {
             expect(root.attributes('id')).toBeUndefined()
         })
     })
+
+    // Test for bug #4098: Arrow key selection doesn't work with computed data
+    it('should handle arrow key navigation with computed data containing objects', async () => {
+        // This test reproduces the bug where arrow key navigation fails with computed data
+        // that contains objects, due to proxy comparison issues
+
+        const DATA_OBJECTS = [
+            { id: 1, name: 'Angular' },
+            { id: 2, name: 'React' },
+            { id: 3, name: 'Vue.js' }
+        ]
+
+        // Simulate computed data by creating a new array reference each time
+        // This mimics how Vue's reactivity system creates new proxy objects
+        const createComputedData = () => {
+            return DATA_OBJECTS.map((item) => ({ ...item }))
+        }
+
+        // Set initial data
+        await wrapper.setProps({
+            data: createComputedData(),
+            field: 'name',
+            openOnFocus: true
+        })
+
+        // Focus and open dropdown
+        await $input.trigger('focus')
+        expect($dropdown.isVisible()).toBeTruthy()
+
+        // Update data to simulate computed property changes (creates new object references)
+        // This is where the bug manifests - the hovered item reference becomes stale
+        await wrapper.setProps({ data: createComputedData() })
+
+        // Try to navigate with arrow keys
+        await $input.trigger('keydown', { key: 'Down' })
+
+        // The first item should be hovered after pressing Down
+        expect(wrapper.vm.hovered).not.toBeNull()
+        expect(wrapper.vm.hovered?.name).toBe('Angular')
+
+        // Navigate to second item
+        await $input.trigger('keydown', { key: 'Down' })
+
+        // This should move to the second item, but due to the bug it might not work
+        expect(wrapper.vm.hovered?.name).toBe('React')
+
+        // Select the hovered item
+        await $input.trigger('keydown', { key: 'Enter' })
+        expect($input.element.value).toBe('React')
+    })
+
+    it('should handle arrow key navigation consistently after data updates', async () => {
+        // Additional test to verify the fix works with multiple data updates
+        const DATA_OBJECTS = [
+            { id: 1, name: 'Angular', category: 'framework' },
+            { id: 2, name: 'React', category: 'library' },
+            { id: 3, name: 'Vue.js', category: 'framework' }
+        ]
+
+        await wrapper.setProps({
+            data: DATA_OBJECTS,
+            field: 'name',
+            openOnFocus: true
+        })
+
+        await $input.trigger('focus')
+        expect($dropdown.isVisible()).toBeTruthy()
+
+        // Navigate to second item
+        await $input.trigger('keydown', { key: 'Down' })
+        await $input.trigger('keydown', { key: 'Down' })
+
+        expect(wrapper.vm.hovered?.name).toBe('React')
+
+        // Update data (simulating computed property change)
+        const updatedData = DATA_OBJECTS.map((item) => ({ ...item, updated: true }))
+        await wrapper.setProps({ data: updatedData })
+
+        // Navigation should still work after data update
+        await $input.trigger('keydown', { key: 'Down' })
+        expect(wrapper.vm.hovered?.name).toBe('Vue.js')
+
+        await $input.trigger('keydown', { key: 'Enter' })
+        expect($input.element.value).toBe('Vue.js')
+    })
 })

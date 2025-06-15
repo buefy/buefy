@@ -495,6 +495,30 @@ export default defineComponent({
             })
         },
 
+        /*
+         * Find index of hovered item in data array by comparing display values
+         * instead of object references. This fixes the bug with computed data
+         * where proxy objects cause indexOf to fail.
+         */
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        findHoveredIndex(data: any[]) {
+            if (this.hovered === null || this.hovered === undefined) {
+                return -1
+            }
+
+            const hoveredValue = this.getValue(this.hovered)
+            if (hoveredValue === null || hoveredValue === undefined) {
+                return -1
+            }
+
+            return data.findIndex((item) => {
+                if (item === null || item === undefined) {
+                    return hoveredValue === null || hoveredValue === undefined
+                }
+                return this.getValue(item) === hoveredValue
+            })
+        },
+
         keydown(event: KeyboardEvent) {
             const { key } = event // cannot destructure preventDefault (https://stackoverflow.com/a/49616808/2774496)
             // prevent emit submit event
@@ -635,7 +659,7 @@ export default defineComponent({
                 } else if (this.footerHovered) {
                     index = (data.length - 1) + sum
                 } else {
-                    index = data.indexOf(this.hovered) + sum
+                    index = this.findHoveredIndex(data) + sum
                 }
 
                 index = index > data.length - 1 ? data.length - 1 : index
