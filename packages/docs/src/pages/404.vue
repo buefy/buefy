@@ -1,6 +1,9 @@
 <template>
     <section>
-        <TheNavbar />
+        <TheNavbar 
+            :light="isLightTheme" 
+            @theme-changed="handleThemeChange"
+        />
 
         <section class="hero is-medium is-light">
             <div class="hero-body">
@@ -41,5 +44,23 @@ export default defineComponent({
         TheNavbar,
         TheFooter,
     },
+    data() {
+        return {
+            isLightTheme: localStorage.getItem('theme') === 'light' || localStorage.getItem('theme') === null
+        }
+    },
+    methods: {
+        handleThemeChange(isLight: boolean) {
+            this.isLightTheme = isLight
+            const theme = isLight ? 'light' : 'dark'
+            localStorage.setItem('theme', theme)
+            document.documentElement.classList.toggle('theme-dark', !isLight)
+            document.documentElement.classList.toggle('theme-light', isLight)
+        }
+    },
+    mounted() {
+        // Apply initial theme
+        this.handleThemeChange(this.isLightTheme)
+    }
 });
 </script>

@@ -1,6 +1,9 @@
 <template>
     <section class="home">
-        <TheNavbar light />
+        <TheNavbar 
+            :light="isLightTheme" 
+            @theme-changed="handleThemeChange"
+        />
         <div class="hero is-fullheight is-primary">
             <div class="hero-body is-block">
                 <div class="container has-text-centered">
@@ -254,6 +257,7 @@ export default defineComponent({
                 return item.featured;
             }),
             sponsors: sponsorsData,
+            isLightTheme: localStorage.getItem('theme') === 'light' || localStorage.getItem('theme') === null
         };
     },
     methods: {
@@ -281,6 +285,13 @@ export default defineComponent({
             // see also https://stackoverflow.com/a/71514878
             return new URL(`/src/assets/sponsors/${img}`, import.meta.url).href;
         },
+        handleThemeChange(isLight: boolean) {
+            this.isLightTheme = isLight
+            const theme = isLight ? 'light' : 'dark'
+            localStorage.setItem('theme', theme)
+            document.documentElement.classList.toggle('theme-dark', !isLight)
+            document.documentElement.classList.toggle('theme-light', isLight)
+        }
     },
     mounted() {
         const sr = ScrollReveal({
@@ -289,6 +300,9 @@ export default defineComponent({
         });
         sr.reveal(".home-hero", { delay: 0, origin: "top" }, 200);
         sr.reveal(".features", 200);
+        
+        // Apply initial theme
+        this.handleThemeChange(this.isLightTheme)
     },
 });
 </script>

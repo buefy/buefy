@@ -113,6 +113,27 @@
                             </a>
                         </div>
                     </div>
+
+                    <div class="navbar-item">
+                        <b-icon
+                            icon="white-balance-sunny"
+                            size="is-small"
+                            :class="{'is-warning': theme === 'light' }"
+                        />
+                        <b-switch
+                            v-model="theme"
+                            type="is-warning"
+                            true-value="dark"
+                            false-value="light"
+                            size="is-small"
+                            label="Theme"
+                        />
+                        <b-icon
+                            icon="moon-waning-crescent"
+                            size="is-small"
+                            :class="{'is-primary': theme === 'dark' }"
+                        />
+                    </div>
                 </div>
             </div>
         </div>
@@ -129,14 +150,33 @@ import bulmaPackage from 'bulma/package.json'
 
 export default defineComponent({
     components: { BIcon },
+    emits: ['theme-changed'],
     props: {
-        light: Boolean
+        light: {
+            type: Boolean,
+            default: true
+        }
     },
     data() {
         return {
             isMenuActive: false,
             version: buefyPackage.version,
             bulmaVersion: bulmaPackage.version
+        }
+    },
+    computed: {
+        theme: {
+            get() {
+                return this.light ? 'light' : 'dark'
+            },
+            set(newTheme) {
+                this.$emit('theme-changed', newTheme === 'light')
+            }
+        }
+    },
+    watch: {
+        isMenuActive() {
+            this.toggleHtmlClip()
         }
     },
     methods: {
