@@ -219,7 +219,8 @@ export default defineComponent({
             _isAutocomplete: true,
             _elementRef: 'input',
             _bodyEl: undefined as Element | undefined, // Used to append to body
-            timeOutID: undefined as ReturnType<typeof setTimeout> | undefined
+            timeOutID: undefined as ReturnType<typeof setTimeout> | undefined,
+            _scrollThrottled: false // Performance optimization for scroll events
         }
     },
     computed: {
@@ -354,6 +355,12 @@ export default defineComponent({
          * to open upwards.
          */
         isActive(active) {
+            // Clear any existing timeout to prevent race conditions
+            if (this.timeOutID) {
+                clearTimeout(this.timeOutID)
+                this.timeOutID = undefined
+            }
+
             if (this.dropdownPosition === 'auto') {
                 if (active) {
                     this.calcDropdownInViewportVertical()
@@ -361,6 +368,7 @@ export default defineComponent({
                     // Timeout to wait for the animation to finish before recalculating
                     this.timeOutID = setTimeout(() => {
                         this.calcDropdownInViewportVertical()
+                        this.timeOutID = undefined // Clear reference after execution
                     }, 100)
                 }
             }
@@ -593,7 +601,7 @@ export default defineComponent({
          */
         clickedOutside(event: MouseEvent) {
             const target = isCustomElement(this) ? event.composedPath()[0] : event.target
-            if (!this.hasFocus && this.whiteList.indexOf(target) < 0) {
+            if (!this.hasFocus && target && this.whiteList.indexOf(target as Element) < 0) {
                 if (this.keepFirst && this.hovered && this.selectOnClickOutside) {
                     this.setSelected(this.hovered, true)
                 } else {
@@ -621,17 +629,33 @@ export default defineComponent({
          * reached it's end.
          */
         checkIfReachedTheEndOfScroll() {
-            const list = (this.$refs.dropdown as Element).querySelector('.dropdown-content')!
-            const footerHeight = this.hasFooterSlot
-                ? list.querySelectorAll('div.dropdown-footer')[0].clientHeight
-                : 0
-            if (list.clientHeight !== list.scrollHeight &&
-                (list.scrollTop +
-                 list.parentElement!.clientHeight +
-                 footerHeight) >= list.scrollHeight
-            ) {
-                this.$emit('infinite-scroll')
-            }
+            // Simple throttling to improve performance
+            if (this._scrollThrottled) return
+            this._scrollThrottled = true
+
+            requestAnimationFrame(() => {
+                try {
+                    const list = (this.$refs.dropdown as Element)?.querySelector('.dropdown-content')
+                    if (!list) return
+
+                    const footerHeight = this.hasFooterSlot
+                        ? (list.querySelector('div.dropdown-footer') as HTMLElement)?.clientHeight || 0
+                        : 0
+
+                    if (list.clientHeight !== list.scrollHeight &&
+                        (list.scrollTop +
+                         list.parentElement!.clientHeight +
+                         footerHeight) >= list.scrollHeight
+                    ) {
+                        this.$emit('infinite-scroll')
+                    }
+                } catch (error) {
+                    // eslint-disable-next-line no-console
+                    console.warn('Autocomplete: Error in scroll handler', error)
+                } finally {
+                    this._scrollThrottled = false
+                }
+            })
         },
 
         /*
@@ -646,12 +670,21 @@ export default defineComponent({
                  */
                 if (this.$refs.dropdown == null) return
 
-                const rect = (this.$refs.dropdown as Element).getBoundingClientRect()
+                try {
+                    const rect = (this.$refs.dropdown as Element).getBoundingClientRect()
 
-                this.isListInViewportVertically = rect.top >= 0 &&
-                    rect.bottom <= (window?.innerHeight || document?.documentElement?.clientHeight)
-                if (this.appendToBody) {
-                    this.updateAppendToBody()
+                    this.isListInViewportVertically = rect.top >= 0 &&
+                        rect.bottom <= (
+                            window?.innerHeight || document?.documentElement?.clientHeight
+                        )
+                    if (this.appendToBody) {
+                        this.updateAppendToBody()
+                    }
+                } catch (error) {
+                    // eslint-disable-next-line no-console
+                    console.warn('Autocomplete: Error calculating dropdown position', error)
+                    // Fallback to default positioning
+                    this.isListInViewportVertically = true
                 }
             })
         },
@@ -834,7 +867,7 @@ export default defineComponent({
             if (this.appendToBody) { window.removeEventListener('scroll', this.calcDropdownInViewportVertical) }
         }
         if (this.checkInfiniteScroll &&
-            this.$refs.dropdown && (this.$refs.dropdown as Element).querySelector('.dropdown-content')
+                this.$refs.dropdown && (this.$refs.dropdown as Element).querySelector('.dropdown-content')
         ) {
             const list = (this.$refs.dropdown as Element).querySelector('.dropdown-content')!
             list.removeEventListener('scroll', this.checkIfReachedTheEndOfScroll)
@@ -842,7 +875,11 @@ export default defineComponent({
         if (this.appendToBody && this.$data._bodyEl) {
             removeElement(this.$data._bodyEl)
         }
-        clearTimeout(this.timeOutID)
+        // Clean up any pending timeouts to prevent memory leaks
+        if (this.timeOutID) {
+            clearTimeout(this.timeOutID)
+            this.timeOutID = undefined
+        }
     }
 })
 </script>
