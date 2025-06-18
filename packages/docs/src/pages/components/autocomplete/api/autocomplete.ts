@@ -255,9 +255,14 @@ export default [
         ],
         events: [
             {
-                name: '<code>input</code>',
-                description: 'Triggers when value is changed',
+                name: '<code>update:modelValue</code>',
+                description: 'Triggers when the value is changed (Vue 3 v-model event)',
                 parameters: '<code>value: String|Number</code>'
+            },
+            {
+                name: '<code>input</code>',
+                description: 'Native input event that bubbles up from the underlying input element',
+                parameters: '<code>event: Event</code>'
             },
             {
                 name: '<code>select</code>',

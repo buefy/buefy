@@ -113,6 +113,11 @@ export default [
                 parameters: '<code>value: Boolean</code>'
             },
             {
+                name: '<code>change</code>',
+                description: 'Native change event that bubbles up from the underlying input element',
+                parameters: '<code>event: Event</code>'
+            },
+            {
                 name: '<code>[any].native</code>',
                 description: 'Listen to any event using this syntax, e.g <code>click.native</code>',
                 parameters: '<code>event: $event</code>'

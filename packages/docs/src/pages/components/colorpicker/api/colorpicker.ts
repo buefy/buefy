@@ -217,8 +217,8 @@ export default [
         ],
         events: [
             {
-                name: '<code>input</code>',
-                description: 'Triggers when the value of colorpicker is changed',
+                name: '<code>update:modelValue</code>',
+                description: 'Triggers when the value of colorpicker is changed (Vue 3 v-model event)',
                 parameters: '<code>value: Color</code>'
             },
             {
