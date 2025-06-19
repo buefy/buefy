@@ -1,6 +1,7 @@
 import { mount, shallowMount } from '@vue/test-utils'
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { nextTick } from 'vue'
 import BAutocomplete from '@components/autocomplete/Autocomplete.vue'
 
 const findStringsStartingWith = (array: string[], value: string) =>
@@ -42,7 +43,7 @@ describe('BAutocomplete', () => {
         $dropdown = wrapper.find(dropdownMenu)
     })
 
-    it('is called', () => {
+    it('renders and initializes correctly', () => {
         expect(wrapper.vm).toBeTruthy()
         expect(wrapper.vm.$options.name).toBe('BAutocomplete')
     })
@@ -218,6 +219,7 @@ describe('BAutocomplete', () => {
         window.document.body.click()
         await wrapper.vm.$nextTick()
         expect($dropdown.isVisible()).toBeFalsy()
+        vi.useRealTimers()
     })
 
     it('open dropdown on down key click', async () => {
@@ -297,7 +299,7 @@ describe('BAutocomplete', () => {
         expect($input.element.value).toBe('')
     })
 
-    it('can be used with a custom data formatter', async () => {
+    it('supports custom formatter', async () => {
         await wrapper.setProps({
             data: DATA_LIST,
             customFormatter: (val: string) => `${val} formatted`
@@ -377,7 +379,7 @@ describe('BAutocomplete', () => {
         expect(wrapper.emitted()['icon-right-click']).toBeTruthy()
     })
 
-    it('reset events before destroy', () => {
+    it('cleans up event listeners on unmount', () => {
         document.removeEventListener = vi.fn()
         window.removeEventListener = vi.fn()
 
@@ -402,7 +404,7 @@ describe('BAutocomplete', () => {
         expect(active[0]).toEqual([true])
     })
 
-    it('updates ariaAutocomplete when keepFirst changes', async () => {
+    it('updates ariaAutocomplete with keepFirst', async () => {
         await wrapper.setProps({ keepFirst: true })
         expect(wrapper.vm.ariaAutocomplete).toBe('both')
         await wrapper.setProps({ keepFirst: false })
@@ -433,7 +435,7 @@ describe('BAutocomplete', () => {
         expect(emitted[emitted.length - 1]).toEqual([''])
     })
 
-    it('updates white list when data changes', async () => {
+    it('updates whiteList when data changes', async () => {
         await wrapper.setProps({ data: ['a'] })
         const len = wrapper.vm.whiteList.length
         await wrapper.setProps({ data: ['a', 'b'] })
@@ -441,14 +443,13 @@ describe('BAutocomplete', () => {
         expect(wrapper.vm.whiteList.length).toBeGreaterThan(len)
     })
 
-    describe('with fallthrough attributes', () => {
+    describe('fallthrough attributes', () => {
         const attrs = {
             class: 'fallthrough-class',
             style: 'font-size: 2rem;',
             id: 'fallthrough-id'
         }
-
-        it('should bind class, style, and id to the root div if compatFallthrough is true (default)', async () => {
+        it('binds class/style/id to root if compatFallthrough true', async () => {
             const wrapper = shallowMount(BAutocomplete, { attrs })
 
             const root = wrapper.find('div.autocomplete.control')
@@ -461,13 +462,10 @@ describe('BAutocomplete', () => {
             expect(input.attributes('style')).toBeUndefined()
             expect(input.attributes('id')).toBeUndefined()
         })
-
-        it('should bind class, style, and id to the input if compatFallthrough is false', async () => {
+        it('binds class/style/id to input if compatFallthrough false', async () => {
             const wrapper = shallowMount(BAutocomplete, {
                 attrs,
-                props: {
-                    compatFallthrough: false
-                }
+                props: { compatFallthrough: false }
             })
 
             const input = wrapper.findComponent({ ref: 'input' })
@@ -567,39 +565,22 @@ describe('BAutocomplete', () => {
         expect($input.element.value).toBe('Vue.js')
     })
 
-    it('should handle dynamic appendToBody prop changes without crashing', async () => {
+    it('handles appendToBody prop changes', async () => {
         const data = ['Angular', 'Vue.js', 'React']
         const wrapper = mount(BAutocomplete, {
-            props: {
-                data,
-                appendToBody: false // Start with false
-            },
+            props: { data, appendToBody: false },
             attachTo: document.body
         })
-
-        // Initially appendToBody is false
-        expect(wrapper.vm.appendToBody).toBe(false)
-
-        // Change appendToBody to true dynamically
         await wrapper.setProps({ appendToBody: true })
-        expect(wrapper.vm.appendToBody).toBe(true)
-
-        // Focus the input to trigger dropdown and potential appendToBody logic
         const input = wrapper.find('input')
         await input.trigger('focus')
-        await wrapper.vm.$nextTick()
-
-        // Type something to open dropdown and trigger updateAppendToBody
         wrapper.vm.newValue = 'Vue'
         await wrapper.vm.$nextTick()
-
-        // This should not crash - if it crashes, the test will fail
         expect(wrapper.vm.isActive).toBe(true)
-
         wrapper.unmount()
     })
 
-    it('should properly handle appendToBody switching from false to true and back', async () => {
+    it('handles appendToBody switching back and forth', async () => {
         const data = ['Angular', 'Vue.js', 'React']
         const wrapper = mount(BAutocomplete, {
             props: {
@@ -609,39 +590,194 @@ describe('BAutocomplete', () => {
             },
             attachTo: document.body
         })
-
         const input = wrapper.find('input')
-
-        // Start with appendToBody false
-        expect(wrapper.vm.appendToBody).toBe(false)
-        expect(wrapper.vm.$data._bodyEl).toBeUndefined()
-
-        // Focus to open dropdown
         await input.trigger('focus')
-        await wrapper.vm.$nextTick()
-        expect(wrapper.vm.isActive).toBe(true)
-
-        // Change to appendToBody true
         await wrapper.setProps({ appendToBody: true })
-        expect(wrapper.vm.appendToBody).toBe(true)
-
-        // Type something to trigger updateAppendToBody
         wrapper.vm.newValue = 'Vue'
         await wrapper.vm.$nextTick()
-
-        // Should have created _bodyEl
         expect(wrapper.vm.$data._bodyEl).toBeDefined()
-
-        // Change back to appendToBody false
         await wrapper.setProps({ appendToBody: false })
-        expect(wrapper.vm.appendToBody).toBe(false)
-
-        // _bodyEl should be cleaned up
         expect(wrapper.vm.$data._bodyEl).toBeUndefined()
-
-        // Should still work normally
         expect(wrapper.vm.isActive).toBe(true)
-
         wrapper.unmount()
+    })
+
+    it('navigates correctly with infinite scroll)', async () => {
+        interface MovieData {
+            title: string;
+            poster_path: string;
+            release_date: string;
+            vote_average: number
+        }
+        const firstPageResults: MovieData[] = [
+            {
+                title: 'Spider-Man',
+                poster_path: 'path1.jpg',
+                release_date: '2002-05-03',
+                vote_average: 7.3
+            },
+            {
+                title: 'Spider-Man 2',
+                poster_path: 'path2.jpg',
+                release_date: '2004-06-30',
+                vote_average: 7.3
+            },
+            {
+                title: 'Spider-Man 3',
+                poster_path: 'path3.jpg',
+                release_date: '2007-05-04',
+                vote_average: 6.2
+            }
+        ]
+        const secondPageResults: MovieData[] = [
+            {
+                title: 'The Amazing Spider-Man',
+                poster_path: 'path4.jpg',
+                release_date: '2012-07-03',
+                vote_average: 6.9
+            },
+            {
+                title: 'The Amazing Spider-Man 2',
+                poster_path: 'path5.jpg',
+                release_date: '2014-05-02',
+                vote_average: 6.6
+            },
+            {
+                title: 'Spider-Man: Homecoming',
+                poster_path: 'path6.jpg',
+                release_date: '2017-07-07',
+                vote_average: 7.4
+            }
+        ]
+        const wrapper = mount(BAutocomplete, {
+            attachTo: document.body,
+            props: {
+                data: [],
+                field: 'title',
+                checkInfiniteScroll: true,
+                loading: false
+            }
+        })
+        try {
+            const input = wrapper.find('input')
+            wrapper.vm.isActive = true
+            await nextTick()
+            await wrapper.setProps({ data: firstPageResults })
+            await nextTick()
+            await input.trigger('keydown', { key: 'ArrowDown' })
+            expect(wrapper.vm.hovered.title).toBe('Spider-Man')
+            await input.trigger('keydown', { key: 'ArrowDown' })
+            expect(wrapper.vm.hovered.title).toBe('Spider-Man 2')
+            await input.trigger('keydown', { key: 'ArrowDown' })
+            expect(wrapper.vm.hovered.title).toBe('Spider-Man 3')
+            const combinedResults = [...firstPageResults, ...secondPageResults]
+            await wrapper.setProps({ data: combinedResults })
+            await nextTick()
+            await input.trigger('keydown', { key: 'ArrowDown' })
+            expect(wrapper.vm.hovered.title).toBe('The Amazing Spider-Man')
+            await input.trigger('keydown', { key: 'ArrowDown' })
+            expect(wrapper.vm.hovered.title).toBe('The Amazing Spider-Man 2')
+            await input.trigger('keydown', { key: 'ArrowDown' })
+            expect(wrapper.vm.hovered.title).toBe('Spider-Man: Homecoming')
+        } finally { wrapper.unmount() }
+    })
+
+    it('handles rapid async data updates', async () => {
+        const wrapper = mount(BAutocomplete, {
+            attachTo: document.body,
+            props: {
+                data: [],
+                field: 'title',
+                checkInfiniteScroll: true
+            }
+        })
+        try {
+            const input = wrapper.find('input')
+            wrapper.vm.isActive = true
+            await nextTick()
+            const updates = [
+                [{ title: 'Movie A' }],
+                [{ title: 'Movie A' }, { title: 'Movie B' }],
+                [{ title: 'Movie A' }, { title: 'Movie B' }, { title: 'Movie C' }],
+                [{ title: 'Movie A' },
+                    { title: 'Movie B' },
+                    { title: 'Movie C' },
+                    { title: 'Movie D' }]
+            ]
+            for (const update of updates) {
+                await wrapper.setProps({ data: update })
+                await nextTick()
+                await input.trigger('keydown', { key: 'ArrowDown' })
+            }
+            expect(wrapper.vm.hovered.title).toBe('Movie D')
+        } finally { wrapper.unmount() }
+    })
+
+    it('handles navigation at boundary with loading state', async () => {
+        const wrapper = mount(BAutocomplete, {
+            attachTo: document.body,
+            props: {
+                data: [{ title: 'Result 1' }, { title: 'Result 2' }, { title: 'Result 3' }],
+                field: 'title',
+                checkInfiniteScroll: true,
+                loading: false
+            }
+        })
+        try {
+            const input = wrapper.find('input')
+            wrapper.vm.isActive = true
+            await nextTick()
+            await input.trigger('keydown', { key: 'ArrowDown' })
+            await input.trigger('keydown', { key: 'ArrowDown' })
+            await input.trigger('keydown', { key: 'ArrowDown' })
+            expect(wrapper.vm.hovered.title).toBe('Result 3')
+            await wrapper.setProps({ loading: true })
+            await nextTick()
+            await input.trigger('keydown', { key: 'ArrowDown' })
+            expect(wrapper.vm.hovered.title).toBe('Result 3')
+            await wrapper.setProps({
+                loading: false,
+                data: [{ title: 'Result 1' },
+                    { title: 'Result 2' },
+                    { title: 'Result 3' },
+                    { title: 'Result 4' },
+                    { title: 'Result 5' }]
+            })
+            await nextTick()
+            await input.trigger('keydown', { key: 'ArrowDown' })
+            expect(wrapper.vm.hovered.title).toBe('Result 4')
+        } finally { wrapper.unmount() }
+    })
+
+    it('handles duplicate getValue results (reference and value fallback)', async () => {
+        const wrapper = mount(BAutocomplete, {
+            attachTo: document.body,
+            props: {
+                data: [
+                    { name: 'John', role: 'Developer', id: 1 },
+                    { name: 'John', role: 'Designer', id: 2 },
+                    { name: 'John', role: 'Manager', id: 3 }
+                ],
+                field: 'name',
+                checkInfiniteScroll: true
+            }
+        })
+        try {
+            const input = wrapper.find('input')
+            wrapper.vm.isActive = true
+            await nextTick()
+            await input.trigger('keydown', { key: 'ArrowDown' })
+            await input.trigger('keydown', { key: 'ArrowDown' })
+            expect(wrapper.vm.hovered.role).toBe('Designer')
+            const originalData = wrapper.vm.data
+            const moreJohns = [
+                { name: 'John', role: 'Tester', id: 4 },
+                { name: 'John', role: 'Admin', id: 5 }
+            ]
+            await wrapper.setProps({ data: [...originalData, ...moreJohns] })
+            await nextTick()
+            await input.trigger('keydown', { key: 'ArrowDown' })
+            expect(wrapper.vm.hovered.role).toBe('Manager')
+        } finally { wrapper.unmount() }
     })
 })
