@@ -35,10 +35,7 @@
                 class="dropdown-menu"
                 :class="{ 'is-opened-top': isOpenedTop && !appendToBody }"
                 :style="style"
-                v-show="
-                    isActive &&
-                        (!isEmpty || hasEmptySlot || hasHeaderSlot || hasFooterSlot)
-                "
+                v-show="isActive && (!isEmpty || hasEmptySlot || hasHeaderSlot || hasFooterSlot)"
                 ref="dropdown"
             >
                 <div
@@ -128,17 +125,17 @@ import CompatFallthroughMixin from '../../utils/CompatFallthroughMixin'
 import FormElementMixin from '../../utils/FormElementMixin'
 import BInput from '../input/Input.vue'
 
-type BInputComponent = InstanceType<typeof BInput>;
+type BInputComponent = InstanceType<typeof BInput>
 // `$data` interface of `Taginput` component.
 // we cannot directly import `Taginput` because it depends on `Autocomplete`.
 interface TaginputData {
-    _isTaginput: boolean;
+    _isTaginput: boolean
 }
 
 interface DataItem {
-    group?: string;
+    group?: string
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    items: any[];
+    items: any[]
 }
 
 export default defineComponent({
@@ -269,9 +266,7 @@ export default defineComponent({
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const _ = this.computedData
             const whiteList = []
-            whiteList.push(
-                (this.$refs.input as BInputComponent).$el.querySelector('input')
-            )
+            whiteList.push((this.$refs.input as BInputComponent).$el.querySelector('input'))
             whiteList.push(this.$refs.dropdown)
             if (this.$refs.dropdown != null) {
                 const children = (
