@@ -1,5 +1,6 @@
 
-@use "bulma/sass" with (
+// Forward Bulma with configuration - this makes it available with the custom primary color
+@forward "bulma/sass" with (
     $primary: #7957d5,
 );
 

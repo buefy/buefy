@@ -10,19 +10,19 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue'
-    import { BField, BInput, BSlider } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BField, BInput, BSlider } from "buefy";
 
-    export default defineComponent({
-        components: {
-            BField,
-            BInput,
-            BSlider
-        },
-        data() {
-            return {
-                value: 20
-            }
-        }
-    })
+export default defineComponent({
+    components: {
+        BField,
+        BInput,
+        BSlider,
+    },
+    data() {
+        return {
+            value: 20,
+        };
+    },
+});
 </script>

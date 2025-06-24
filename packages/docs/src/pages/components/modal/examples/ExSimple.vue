@@ -5,17 +5,19 @@
                 label="Launch image modal"
                 type="is-primary"
                 size="is-medium"
-                @click="isImageModalActive = true" />
+                @click="isImageModalActive = true"
+            />
             <b-button
                 label="Launch card modal (keep scroll)"
                 type="is-primary"
                 size="is-medium"
-                @click="isCardModalActive = true" />
+                @click="isCardModalActive = true"
+            />
         </div>
 
         <b-modal v-model="isImageModalActive">
             <p class="image is-4by3">
-                <img src="/static/img/placeholder-1280x960.png">
+                <img src="/static/img/placeholder-1280x960.png" />
             </p>
         </b-modal>
 
@@ -23,14 +25,20 @@
             <div class="card">
                 <div class="card-image">
                     <figure class="image is-4by3">
-                        <img src="/static/img/placeholder-1280x960.png" alt="Image">
+                        <img
+                            src="/static/img/placeholder-1280x960.png"
+                            alt="Image"
+                        />
                     </figure>
                 </div>
                 <div class="card-content">
                     <div class="media">
                         <div class="media-left">
                             <figure class="image is-48x48">
-                                <img src="/static/img/placeholder-1280x960.png" alt="Image">
+                                <img
+                                    src="/static/img/placeholder-1280x960.png"
+                                    alt="Image"
+                                />
                             </figure>
                         </div>
                         <div class="media-content">
@@ -43,7 +51,7 @@
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         Phasellus nec iaculis mauris. <a>@bulmaio</a>.
                         <a>#css</a> <a>#responsive</a>
-                        <br>
+                        <br />
                         <small>11:09 PM - 1 Jan 2016</small>
                     </div>
                 </div>
@@ -53,19 +61,19 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue'
-    import { BButton, BModal } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BButton, BModal } from "buefy";
 
-    export default {
-        components: {
-            BButton,
-            BModal
-        },
-        data() {
-            return {
-                isImageModalActive: false,
-                isCardModalActive: false
-            }
-        }
-    }
+export default {
+    components: {
+        BButton,
+        BModal,
+    },
+    data() {
+        return {
+            isImageModalActive: false,
+            isCardModalActive: false,
+        };
+    },
+};
 </script>

@@ -16,5 +16,5 @@
 </template>
 
 <script setup lang="ts">
-import { BCheckbox, BField } from '@ntohq/buefy-next'
+import { BCheckbox, BField } from "buefy";
 </script>

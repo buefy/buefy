@@ -8,31 +8,32 @@
                 rounded
                 placeholder="Click to select..."
                 icon="clock"
-                :hour-format="format">
+                :hour-format="format"
+            >
             </b-clockpicker>
         </b-field>
     </section>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { BClockpicker, BField, BSwitch } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BClockpicker, BField, BSwitch } from "buefy";
 
 export default defineComponent({
     components: {
         BClockpicker,
         BField,
-        BSwitch
+        BSwitch,
     },
     data() {
         return {
-            isAmPm: false
-        }
+            isAmPm: false,
+        };
     },
     computed: {
         format() {
-            return this.isAmPm ? '12' : '24'
-        }
-    }
-})
+            return this.isAmPm ? "12" : "24";
+        },
+    },
+});
 </script>

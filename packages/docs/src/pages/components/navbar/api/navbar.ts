@@ -24,8 +24,8 @@ export default [
               default: '<code>false</code>'
           },
           {
-              name: '<code>active</code>',
-              description: 'To control the behaviour of the mobile menu programmatically, use the <code>.sync</code> modifier to make it two-way binding',
+              name: '<code>v-model</code>',
+              description: 'To control the behaviour of the mobile menu programmatically',
               type: 'Boolean',
               values: '—',
               default: '<code>false</code>'
@@ -104,7 +104,26 @@ export default [
             description: 'Items that  will appear on the right',
             props: '—'
           },
-      ]
+      ],
+      events: [
+          {
+              name: '<code>update:modelValue</code>',
+              description: 'Triggers when the mobile menu visibility changes (Vue 3 v-model event)',
+              parameters: '<code>value: Boolean</code>'
+          }
+      ],
+      methods: [
+          {
+              name: '<code>toggleActive</code>',
+              description: 'Toggle the mobile menu visibility',
+              return: '—'
+          },
+          {
+              name: '<code>closeMenu</code>',
+              description: 'Close the mobile menu',
+              return: '—'
+          }
+      ],
   },
   {
     title: 'Item',
@@ -112,7 +131,7 @@ export default [
         {
             name: '<code>tag</code>',
             description: 'Sets the type of the component that have to render as navbar-item',
-            type: 'String',
+            type: 'String, Object',
             values: '<code>a</code>, <code>router-link</code>, <code>div</code> and it\'s html attributes like href, to, etc...',
             default: 'a'
         },
@@ -129,9 +148,16 @@ export default [
     title: 'Dropdown',
     props: [
         {
+            name: '<code>label</code>',
+            description: 'Dropdown label text',
+            type: 'String',
+            values: '—',
+            default: '—'
+        },
+        {
             name: '<code>tag</code>',
             description: 'Sets the type of the component that have to render as navbar-item',
-            type: 'String',
+            type: 'String, Object',
             values: '<code>a</code>, <code>router-link</code>, <code>div</code> and it\'s html attributes like href, to, etc...',
             default: 'a'
         },
@@ -178,6 +204,13 @@ export default [
             default: 'false'
         },
         {
+            name: '<code>close-on-click</code>',
+            description: 'Close dropdown when clicking inside',
+            type: 'Boolean',
+            values: '—',
+            default: '<code>true</code>'
+        },
+        {
             name: '<code>compat-fallthrough</code>',
             description: 'Whether <code>class</code>, <code>style</code>, and <code>id</code> attributes are applied to the root &lt;div&gt; element or the underlying tag. If <code>true</code>, they are applied to the root &lt;div&gt; element, which is compatible with Buefy for Vue 2.',
             type: 'Boolean',
@@ -202,6 +235,23 @@ export default [
             name: '<code>active-change</code>',
             description: 'Triggers when dropdown is activated or deactivated (visibility of list)',
             parameters: '<code>active: Boolean</code>'
+        }
+    ],
+    methods: [
+        {
+            name: '<code>toggleMenu</code>',
+            description: 'Toggle the dropdown menu visibility',
+            return: '—'
+        },
+        {
+            name: '<code>showMenu</code>',
+            description: 'Show the dropdown menu',
+            return: '—'
+        },
+        {
+            name: '<code>closeMenu</code>',
+            description: 'Close the dropdown menu',
+            return: '—'
         }
     ]
   }

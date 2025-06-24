@@ -1,39 +1,28 @@
 <template>
     <section>
         <b-field>
-            <b-select
-                placeholder="Small"
-                size="is-small"
-                expanded>
+            <b-select placeholder="Small" size="is-small" expanded>
                 <option value="flint">Flint</option>
                 <option value="silver">Silver</option>
             </b-select>
         </b-field>
 
         <b-field>
-            <b-select
-                placeholder="Default"
-                expanded>
+            <b-select placeholder="Default" expanded>
                 <option value="flint">Flint</option>
                 <option value="silver">Silver</option>
             </b-select>
         </b-field>
 
         <b-field>
-            <b-select
-                placeholder="Medium"
-                size="is-medium"
-                expanded>
+            <b-select placeholder="Medium" size="is-medium" expanded>
                 <option value="flint">Flint</option>
                 <option value="silver">Silver</option>
             </b-select>
         </b-field>
 
         <b-field>
-            <b-select
-                placeholder="Large"
-                size="is-large"
-                expanded>
+            <b-select placeholder="Large" size="is-large" expanded>
                 <option value="flint">Flint</option>
                 <option value="silver">Silver</option>
             </b-select>
@@ -42,5 +31,5 @@
 </template>
 
 <script setup lang="ts">
-import { BField, BSelect } from '@ntohq/buefy-next'
+import { BField, BSelect } from "buefy";
 </script>

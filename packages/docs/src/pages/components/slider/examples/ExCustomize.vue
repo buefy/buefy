@@ -1,19 +1,22 @@
 <template>
     <section>
         <b-field label="Tooltip type">
-            <b-slider v-model="sliderValue" :tooltip-type="sliderType"></b-slider>
+            <b-slider
+                v-model="sliderValue"
+                :tooltip-type="sliderType"
+            ></b-slider>
         </b-field>
 
         <b-field label="Tooltip Always">
             <b-slider tooltip-always></b-slider>
         </b-field>
-        
+
         <b-field label="Hide tooltip">
             <b-slider :tooltip="false"></b-slider>
         </b-field>
 
         <b-field label="Custom tooltip label">
-            <b-slider :custom-formatter="val => val + '%'"></b-slider>
+            <b-slider :custom-formatter="(val) => val + '%'"></b-slider>
         </b-field>
 
         <b-field label="Rounded thumb">
@@ -23,28 +26,28 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue'
-    import { BField, BSlider } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BField, BSlider } from "buefy";
 
-    export default defineComponent({
-        components: {
-            BField,
-            BSlider
-        },
-        data() {
-            return {
-                sliderValue: 0
+export default defineComponent({
+    components: {
+        BField,
+        BSlider,
+    },
+    data() {
+        return {
+            sliderValue: 0,
+        };
+    },
+    computed: {
+        sliderType() {
+            if (this.sliderValue > 25 && this.sliderValue < 75) {
+                return "is-warning";
+            } else if (this.sliderValue >= 75) {
+                return "is-success";
             }
+            return "is-danger";
         },
-        computed:{
-            sliderType(){
-                if (this.sliderValue > 25 && this.sliderValue < 75){
-                    return "is-warning";
-                } else if (this.sliderValue >= 75){
-                    return "is-success";
-                }
-                return "is-danger";
-            }
-        }
-    })
+    },
+});
 </script>

@@ -39,41 +39,42 @@
                 editable
                 :enable-seconds="enableSeconds"
                 :hour-format="hourFormat"
-                :locale="locale">
+                :locale="locale"
+            >
             </b-timepicker>
         </b-field>
     </section>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { BField, BSelect, BSwitch, BTimepicker } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BField, BSelect, BSwitch, BTimepicker } from "buefy";
 
 export default defineComponent({
     components: {
         BField,
         BSelect,
         BSwitch,
-        BTimepicker
+        BTimepicker,
     },
     data() {
         return {
             enableSeconds: false,
             hourFormat: undefined, // Browser locale
-            locale: undefined // Browser locale
-        }
+            locale: undefined, // Browser locale
+        };
     },
     computed: {
         sampleFormat() {
             const dtf = new Intl.DateTimeFormat(this.locale, {
-                hour: 'numeric',
-                minute: 'numeric',
-                second: this.enableSeconds ? 'numeric' : undefined,
+                hour: "numeric",
+                minute: "numeric",
+                second: this.enableSeconds ? "numeric" : undefined,
                 // Fixes 12 hour display github.com/buefy/buefy/issues/3418
-                hourCycle: this.hourFormat === '12' ? 'h12' : 'h23'
-            })
-            return dtf.format(new Date(2000, 12, 12, 22, 23, 24))
-        }
-    }
-})
+                hourCycle: this.hourFormat === "12" ? "h12" : "h23",
+            });
+            return dtf.format(new Date(2000, 12, 12, 22, 23, 24));
+        },
+    },
+});
 </script>

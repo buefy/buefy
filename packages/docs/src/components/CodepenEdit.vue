@@ -24,7 +24,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { BButton } from '@ntohq/buefy-next'
+import { BButton } from 'buefy'
 
 // https://vitejs.dev/guide/assets.html#importing-asset-as-string
 import dataTest from '@/data/sample.json?raw'
@@ -55,7 +55,9 @@ export default defineComponent({
     computed: {
         data() {
             return JSON.stringify({
-                title: `${this.$route.meta.title} ${this.title ? this.title.toLowerCase() : ''} - Buefy example`,
+                title: `${this.$route.meta.title} ${
+                    this.title ? this.title.toLowerCase() : ''
+                } - Buefy example`,
                 tags: ['buefy', 'vue', 'bulma'],
                 editors: 101,
                 layout: 'right',
@@ -80,7 +82,10 @@ export default defineComponent({
             if (start < 0 || end < 0) return
 
             let html = this.code.substring(start + 10, end)
-            html = html.replace(/src="\/static/g, 'src="https://buefy.org/static')
+            html = html.replace(
+                /src="\/static/g,
+                'src="https://buefy.org/static'
+            )
 
             // FontAwesome
             if (
@@ -89,7 +94,9 @@ export default defineComponent({
                 this.code.indexOf('pack="far"') ||
                 this.code.indexOf('pack="fad"')
             ) {
-                this.externalStyles.push('https://use.fontawesome.com/releases/v5.0.6/css/all.css')
+                this.externalStyles.push(
+                    'https://use.fontawesome.com/releases/v5.0.6/css/all.css'
+                )
             }
 
             return preformat(`
@@ -100,49 +107,65 @@ export default defineComponent({
         },
         getScript() {
             const start = this.code.indexOf('<script>')
-                const end = this.code.lastIndexOf('<\/script>') // eslint-disable-line
+            const end = this.code.lastIndexOf("<\/script>"); // eslint-disable-line
             let js
 
             if (start >= 0 && end >= 0) {
                 js = this.code.substring(start + 8, end)
                 js = js.replace('export default ', 'const example = ')
 
-                js = js.replace('require(\'@/data/sample.json\')', dataTest)
+                js = js.replace("require('@/data/sample.json')", dataTest)
 
                 // Vue
                 if (this.code.indexOf('vue')) {
-                    js = js.replace('import Vue from \'vue\'', '')
+                    js = js.replace("import Vue from 'vue'", '')
                 }
 
                 // Axios
                 if (this.code.indexOf('this.$http')) {
                     js = js.replace(/this\.\$http/g, 'axios')
-                    this.externalScripts.push('https://unpkg.com/axios/dist/axios.min.js')
+                    this.externalScripts.push(
+                        'https://unpkg.com/axios/dist/axios.min.js'
+                    )
                 }
 
                 // Debounce
                 if (this.code.indexOf('debounce')) {
-                    js = js.replace('import debounce from \'lodash/debounce\'', '')
+                    js = js.replace(
+                        "import debounce from 'lodash/debounce'",
+                        ''
+                    )
                     js = js.replace(/debounce/g, '_.debounce')
-                    this.externalScripts.push('https://cdn.jsdelivr.net/npm/lodash@4.17.4/lodash.min.js')
+                    this.externalScripts.push(
+                        'https://cdn.jsdelivr.net/npm/lodash@4.17.4/lodash.min.js'
+                    )
                 }
 
                 // Cleave
                 if (this.code.indexOf('cleave.js')) {
-                    js = js.replace('import Cleave from \'cleave.js\'', '')
-                    this.externalScripts.push('https://unpkg.com/cleave.js/dist/cleave.min.js')
+                    js = js.replace("import Cleave from 'cleave.js'", '')
+                    this.externalScripts.push(
+                        'https://unpkg.com/cleave.js/dist/cleave.min.js'
+                    )
                 }
 
                 // Sortable
                 if (this.code.indexOf('sortablejs')) {
-                    js = js.replace('import Sortable from \'sortablejs\'', '')
-                    this.externalScripts.push('https://cdn.jsdelivr.net/npm/sortablejs@1.6.1/Sortable.min.js')
+                    js = js.replace("import Sortable from 'sortablejs'", '')
+                    this.externalScripts.push(
+                        'https://cdn.jsdelivr.net/npm/sortablejs@1.6.1/Sortable.min.js'
+                    )
                 }
 
                 // VeeValidate
                 if (this.code.indexOf('vee-validate')) {
-                    js = js.replace('import VeeValidate from \'vee-validate\'', '')
-                    this.externalScripts.push('https://cdn.jsdelivr.net/npm/vee-validate@2.1.0-beta.9/dist/vee-validate.min.js')
+                    js = js.replace(
+                        "import VeeValidate from 'vee-validate'",
+                        ''
+                    )
+                    this.externalScripts.push(
+                        'https://cdn.jsdelivr.net/npm/vee-validate@2.1.0-beta.9/dist/vee-validate.min.js'
+                    )
                 }
             }
 

@@ -23,29 +23,29 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue'
-    import { BButton, BTooltip } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BButton, BTooltip } from "buefy";
 
-    export default defineComponent({
-        components: {
-            BButton,
-            BTooltip
-        },
-        data() {
-            return {
-                active: true
-            }
-        }
-    })
+export default defineComponent({
+    components: {
+        BButton,
+        BTooltip,
+    },
+    data() {
+        return {
+            active: true,
+        };
+    },
+});
 </script>
 
 <style lang="scss" scoped>
 .b-tooltips {
     .b-tooltip:not(:last-child) {
-        margin-right: .5em
+        margin-right: 0.5em;
     }
     .b-tooltip {
-        margin-bottom: .5em
+        margin-bottom: 0.5em;
     }
 }
 </style>

@@ -4,29 +4,34 @@
             label="Launch component modal"
             type="is-primary"
             size="is-medium"
-            @click="isComponentModalActive = true" />
+            @click="isComponentModalActive = true"
+        />
 
         <b-modal
             ref="modal"
             v-model="isComponentModalActive"
             has-modal-card
             full-screen
-            :can-cancel="false">
-            <modal-form v-bind="formProps" @close="($refs.modal as BModalInstance).close()"></modal-form>
+            :can-cancel="false"
+        >
+            <modal-form
+                v-bind="formProps"
+                @close="($refs.modal as BModalInstance).close()"
+            ></modal-form>
         </b-modal>
     </section>
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue'
-    import { BButton, BModal } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BButton, BModal } from "buefy";
 
-    type BModalInstance = InstanceType<typeof BModal>
+type BModalInstance = InstanceType<typeof BModal>;
 
-    const ModalForm = defineComponent({
-        props: ['email', 'password'],
-        emits: ['close'],
-        template: `
+const ModalForm = defineComponent({
+    props: ["email", "password"],
+    emits: ["close"],
+    template: `
             <div class="modal-card" style="width: auto">
                 <header class="modal-card-head">
                     <p class="modal-card-title">Login</p>
@@ -62,23 +67,23 @@
                         type="is-primary" />
                 </footer>
             </div>
-        `
-    })
+        `,
+});
 
-    export default defineComponent({
-        components: {
-            BButton,
-            BModal,
-            ModalForm
-        },
-        data() {
-            return {
-                isComponentModalActive: false,
-                formProps: {
-                    email: 'evan@you.com',
-                    password: 'testing'
-                }
-            }
-        }
-    })
+export default defineComponent({
+    components: {
+        BButton,
+        BModal,
+        ModalForm,
+    },
+    data() {
+        return {
+            isComponentModalActive: false,
+            formProps: {
+                email: "evan@you.com",
+                password: "testing",
+            },
+        };
+    },
+});
 </script>

@@ -13,9 +13,7 @@
                 </b-switch>
             </div>
             <div class="control">
-                <b-switch v-model="clearable">
-                    Clearable
-                </b-switch>
+                <b-switch v-model="clearable"> Clearable </b-switch>
             </div>
         </b-field>
         <p class="content"><b>Selected:</b> {{ selected }}</p>
@@ -27,7 +25,7 @@
                 :open-on-focus="openOnFocus"
                 :data="filteredDataObj"
                 field="user.first_name"
-                @select="option => (selected = option)"
+                @select="(option) => (selected = option)"
                 :clearable="clearable"
             />
         </b-field>
@@ -35,26 +33,26 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { BAutocomplete, BField, BSwitch } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BAutocomplete, BField, BSwitch } from "buefy";
 
-import data from '@/data/sample.json'
+import data from "@/data/sample.json";
 
 export default defineComponent({
     components: {
         BAutocomplete,
         BField,
-        BSwitch
+        BSwitch,
     },
     data() {
         return {
             data,
             keepFirst: false,
             openOnFocus: false,
-            name: '',
+            name: "",
             selected: null,
-            clearable: false
-        }
+            clearable: false,
+        };
     },
     computed: {
         filteredDataObj() {
@@ -64,9 +62,9 @@ export default defineComponent({
                         .toString()
                         .toLowerCase()
                         .indexOf(this.name.toLowerCase()) >= 0
-                )
-            })
-        }
-    }
-})
+                );
+            });
+        },
+    },
+});
 </script>

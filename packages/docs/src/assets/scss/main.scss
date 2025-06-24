@@ -1,13 +1,13 @@
 // Bulma vars
 // @use "bulma/sass/utilities";
 
-// Buefy vars
-// @use "@ntohq/buefy-next/src/scss/utils";
-
-// Docs variables
+// Docs variables - MUST come before Buefy to configure Bulma
 @forward "_variables";
 
-@use "@ntohq/buefy-next/src/scss/utils/all";
+// Buefy vars
+@use "buefy/src/scss/utils/_all";
+
+// @use "@ntohq/buefy-next/src/scss/utils/all";
 
 // Docs elements / components
 @use "_apiview";
@@ -22,27 +22,25 @@
 @use "_sidebar";
 @use "_templates";
 
-// Bulma
-// Vite confuses it as an ordinary JavaScript module if we do @use "bulma"
-@use "bulma/bulma";
+// Bulma is already loaded in _variables.scss with configuration
+// @use "bulma/bulma"; // Removed to avoid duplicate loading
 
 // Buefy
-@use "@ntohq/buefy-next/src/scss/buefy";
+@use "buefy/src/scss/buefy";
+
 
 // Highlight.js
-@import "highlight.js/styles/base16/atelier-cave-light.css";
+@use "highlight.js/styles/base16/atelier-cave-light.css" as *;
 
 // MDI
-$mdi-font-path: "@mdi/font/fonts";
-@import "@mdi/font/scss/materialdesignicons";
-
-// FontAwesome
-// $fa-font-path: "~font-awesome/fonts";
-// @use "~font-awesome/scss/font-awesome";
+@use "@mdi/font/scss/materialdesignicons" as * with (
+  $mdi-font-path: "@mdi/font/fonts"
+);
 
 // FontAwesome 5
-$fa-font-path: "@fortawesome/fontawesome-free/webfonts";
-@import "@fortawesome/fontawesome-free/scss/fontawesome";
-@import "@fortawesome/fontawesome-free/scss/regular";
-@import "@fortawesome/fontawesome-free/scss/solid";
-@import "@fortawesome/fontawesome-free/scss/brands";
+@use "@fortawesome/fontawesome-free/scss/fontawesome" as * with (
+  $fa-font-path: "/webfonts"
+);
+@use "@fortawesome/fontawesome-free/scss/regular" as *;
+@use "@fortawesome/fontawesome-free/scss/solid" as *;
+@use "@fortawesome/fontawesome-free/scss/brands" as *;

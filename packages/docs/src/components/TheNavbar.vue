@@ -98,7 +98,9 @@
                             </strong>
                             <strong class="navbar-item is-version">
                                 <span class="has-text-bulma">Bulma version</span>
-                                <span class="has-text-grey">{{ bulmaVersion }}</span>
+                                <span class="has-text-grey">{{
+                                    bulmaVersion
+                                }}</span>
                             </strong>
 
                             <hr class="navbar-divider">
@@ -121,11 +123,10 @@
                         <b-switch
                             v-model="theme"
                             type="is-warning"
-                            true-value="light"
-                            false-value="dark"
+                            true-value="dark"
+                            false-value="light"
                             size="is-small"
                             label="Theme"
-                            @input="toggleTheme"
                         />
                         <b-icon
                             icon="moon-waning-crescent"
@@ -142,13 +143,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import { BIcon } from '@ntohq/buefy-next'
+import { BIcon } from 'buefy'
 
 import buefyPackage from '../../../../package.json'
 import bulmaPackage from 'bulma/package.json'
 
 export default defineComponent({
     components: { BIcon },
+    emits: ['theme-changed'],
     props: {
         light: {
             type: Boolean,
@@ -159,8 +161,22 @@ export default defineComponent({
         return {
             isMenuActive: false,
             version: buefyPackage.version,
-            bulmaVersion: bulmaPackage.version,
-            theme: localStorage.getItem('theme') || 'light'
+            bulmaVersion: bulmaPackage.version
+        }
+    },
+    computed: {
+        theme: {
+            get() {
+                return this.light ? 'light' : 'dark'
+            },
+            set(newTheme) {
+                this.$emit('theme-changed', newTheme === 'light')
+            }
+        }
+    },
+    watch: {
+        isMenuActive() {
+            this.toggleHtmlClip()
         }
     },
     methods: {
@@ -168,14 +184,10 @@ export default defineComponent({
             this.isMenuActive = false
         },
         toggleHtmlClip() {
-            document
-                .documentElement
-                .classList
-                .toggle('is-clipped-touch', this.isMenuActive)
-        },
-        toggleTheme() {
-            document.documentElement.setAttribute('data-theme', this.theme)
-            localStorage.setItem('theme', this.theme)
+            document.documentElement.classList.toggle(
+                'is-clipped-touch',
+                this.isMenuActive
+            )
         }
     },
     mounted() {

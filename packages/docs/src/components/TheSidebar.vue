@@ -7,9 +7,14 @@
                     {{ items.category }}
                 </p>
                 <ul>
-                    <li v-for="item in normalizedData(items.pages)" :key="item.title">
+                    <li
+                        v-for="item in normalizedData(items.pages)"
+                        :key="item.title"
+                    >
                         <router-link v-if="item.title" :to="item.path!">
-                            <span class="sidebar-menu-text">{{ item.title }}</span>
+                            <span class="sidebar-menu-text">{{
+                                item.title
+                            }}</span>
                             <b-tag v-if="item.isNew" type="is-success">
                                 New!
                             </b-tag>
@@ -27,11 +32,19 @@
                                     :key="subItem.title"
                                 >
                                     <router-link :to="subItem.path!">
-                                        <span class="sidebar-menu-text">{{ subItem.title }}</span>
-                                        <b-tag v-if="subItem.isNew" type="is-success">
+                                        <span class="sidebar-menu-text">{{
+                                            subItem.title
+                                        }}</span>
+                                        <b-tag
+                                            v-if="subItem.isNew"
+                                            type="is-success"
+                                        >
                                             New!
                                         </b-tag>
-                                        <b-tag v-if="subItem.isUpdated" type="is-info">
+                                        <b-tag
+                                            v-if="subItem.isUpdated"
+                                            type="is-info"
+                                        >
                                             Updated
                                         </b-tag>
                                     </router-link>
@@ -57,14 +70,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import { BIcon, BTag } from '@ntohq/buefy-next'
+import { BIcon, BTag } from 'buefy'
 
 import type { PageTree } from '@/data/menu'
 import routes from '@/data/routes'
 import type { Route } from '@/data/routes'
 import SidebarSearch from './SidebarSearch.vue'
 
-type PageRoute = Partial<PageTree & Route>
+type PageRoute = Partial<PageTree & Route>;
 
 export default defineComponent({
     components: {
@@ -78,9 +91,7 @@ export default defineComponent({
     methods: {
         normalizedData(items: PageTree['pages']): PageRoute[] {
             return items.map((item) => {
-                return typeof item === 'string'
-                    ? routes[item]
-                    : item
+                return typeof item === 'string' ? routes[item] : item
             })
         },
         backToTop() {

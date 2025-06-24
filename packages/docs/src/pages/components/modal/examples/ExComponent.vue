@@ -4,7 +4,8 @@
             label="Launch component modal"
             type="is-primary"
             size="is-medium"
-            @click="isComponentModalActive = true" />
+            @click="isComponentModalActive = true"
+        />
 
         <b-modal
             v-model="isComponentModalActive"
@@ -14,21 +15,25 @@
             aria-role="dialog"
             aria-label="Example Modal"
             close-button-aria-label="Close"
-            aria-modal>
+            aria-modal
+        >
             <template #default="props">
-                <modal-form v-bind="formProps" @close="props.close"></modal-form>
+                <modal-form
+                    v-bind="formProps"
+                    @close="props.close"
+                ></modal-form>
             </template>
         </b-modal>
     </section>
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue'
-    import { BButton, BModal } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BButton, BModal } from "buefy";
 
-    const ModalForm = defineComponent({
-        props: ['email', 'password', 'canCancel'],
-        template: `
+const ModalForm = defineComponent({
+    props: ["email", "password", "canCancel"],
+    template: `
             <form action="">
                 <div class="modal-card" style="width: auto">
                     <header class="modal-card-head">
@@ -70,23 +75,23 @@
                     </footer>
                 </div>
             </form>
-        `
-    })
+        `,
+});
 
-    export default {
-        components: {
-            BButton,
-            BModal,
-            ModalForm
-        },
-        data() {
-            return {
-                isComponentModalActive: false,
-                formProps: {
-                    email: 'evan@you.com',
-                    password: 'testing'
-                }
-            }
-        }
-    }
+export default {
+    components: {
+        BButton,
+        BModal,
+        ModalForm,
+    },
+    data() {
+        return {
+            isComponentModalActive: false,
+            formProps: {
+                email: "evan@you.com",
+                password: "testing",
+            },
+        };
+    },
+};
 </script>

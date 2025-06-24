@@ -22,25 +22,25 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { BColorpicker, BField, BSelect, Color } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BColorpicker, BField, BSelect, Color } from "buefy";
 
 export default defineComponent({
     data() {
         return {
-            format: 'rgb',
-            selected: Color.parse('#3e8ed0')
-        }
+            format: "rgb",
+            selected: Color.parse("#3e8ed0"),
+        };
     },
     computed: {
         hasAlpha() {
-            return /a\s*$/i.test(this.format)
-        }
+            return /a\s*$/i.test(this.format);
+        },
     },
     methods: {
-        formatter (color: Color) {
-            return color.toString(this.format)
-        }
-    }
-})
+        formatter(color: Color) {
+            return color.toString(this.format);
+        },
+    },
+});
 </script>

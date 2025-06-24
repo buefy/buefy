@@ -26,9 +26,12 @@
                     <option value="24">24</option>
                 </b-select>
             </b-field>
-            <b-field label="Bulma color class"></b-field>
-            <b-field v-for="color in colors" :key="color">
-                <b-radio v-model="selectedColor" :native-value="color">is-{{color}}</b-radio>
+            <b-field label="Bulma color class">
+                <b-select v-model="selectedColor">
+                    <option v-for="color in colors" :key="color" :value="color">
+                        is-{{ color }}
+                    </option>
+                </b-select>
             </b-field>
         </div>
         <div class="column">
@@ -37,41 +40,42 @@
                 inline
                 :type="'is-' + selectedColor"
                 :locale="locale"
-                :hour-format="hourFormat"></b-clockpicker>
+                :hour-format="hourFormat"
+            ></b-clockpicker>
         </div>
     </section>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { BClockpicker, BField, BRadio, BSelect } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BClockpicker, BField, BRadio, BSelect } from "buefy";
 
 export default defineComponent({
     components: {
         BClockpicker,
         BField,
         BRadio,
-        BSelect
+        BSelect,
     },
     data() {
         return {
             time: new Date(),
             isAmPm: false,
-            selectedColor: 'primary',
+            selectedColor: "primary",
             colors: [
-                'primary',
-                'info',
-                'success',
-                'warning',
-                'danger',
-                'white',
-                'black',
-                'light',
-                'dark'
+                "primary",
+                "info",
+                "success",
+                "warning",
+                "danger",
+                "white",
+                "black",
+                "light",
+                "dark",
             ],
             hourFormat: undefined, // Browser locale
-            locale: undefined // Browser locale
-        }
-    }
-})
+            locale: undefined, // Browser locale
+        };
+    },
+});
 </script>

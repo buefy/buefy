@@ -10,5 +10,5 @@
 </template>
 
 <script setup lang="ts">
-import { BButton } from '@ntohq/buefy-next'
+import { BButton } from "buefy";
 </script>

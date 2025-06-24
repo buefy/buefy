@@ -20,14 +20,20 @@
                 </b-field>
             </b-field>
             <b-switch v-model="showValue"> Show Value </b-switch>
-            <b-switch v-model="keepTrailingZeroes" :disabled="!showValue"> Keep Trailing Zeroes </b-switch>
+            <b-switch v-model="keepTrailingZeroes" :disabled="!showValue">
+                Keep Trailing Zeroes
+            </b-switch>
             <b-field label="Format and Precision">
                 <b-field>
                     <b-select v-model="format" :disabled="!showValue">
                         <option value="raw">Raw</option>
                         <option value="percent">Percent</option>
                     </b-select>
-                    <b-numberinput v-model="precision" :disabled="!showValue" controls-position="compact" />
+                    <b-numberinput
+                        v-model="precision"
+                        :disabled="!showValue"
+                        controls-position="compact"
+                    />
                 </b-field>
             </b-field>
             <b-field label="Locale">
@@ -59,33 +65,34 @@
             :format="format"
             :precision="precision"
             :keep-trailing-zeroes="keepTrailingZeroes"
-            :locale="locale"></b-progress>
+            :locale="locale"
+        ></b-progress>
     </section>
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue'
-    import { BField, BNumberinput, BProgress, BSelect, BSwitch } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BField, BNumberinput, BProgress, BSelect, BSwitch } from "buefy";
 
-    export default defineComponent({
-        components: {
-            BField,
-            BNumberinput,
-            BProgress,
-            BSelect,
-            BSwitch
-        },
-        data() {
-            return {
-                indeterminate: false,
-                type: undefined,
-                size: 'is-medium',
-                showValue: true,
-                format: 'raw',
-                precision: 2,
-                keepTrailingZeroes: false,
-                locale: undefined // Browser locale
-            }
-        }
-    })
+export default defineComponent({
+    components: {
+        BField,
+        BNumberinput,
+        BProgress,
+        BSelect,
+        BSwitch,
+    },
+    data() {
+        return {
+            indeterminate: false,
+            type: undefined,
+            size: "is-medium",
+            showValue: true,
+            format: "raw",
+            precision: 2,
+            keepTrailingZeroes: false,
+            locale: undefined, // Browser locale
+        };
+    },
+});
 </script>

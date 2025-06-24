@@ -1,7 +1,7 @@
 <template>
     <div class="sidebar-page">
         <section class="sidebar-layout">
-             <b-sidebar
+            <b-sidebar
                 position="static"
                 :mobile="mobile"
                 :expand-on-hover="expandOnHover"
@@ -20,22 +20,49 @@
                     </div>
                     <b-menu class="is-custom-mobile">
                         <b-menu-list label="Menu">
-                            <b-menu-item icon="information-outline" label="Info"></b-menu-item>
-                            <b-menu-item model-value expanded icon="settings" label="Administrator">
-                                <b-menu-item icon="account" label="Users"></b-menu-item>
-                                <b-menu-item icon="cellphone-link" label="Devices"></b-menu-item>
-                                <b-menu-item icon="cash-multiple" label="Payments" disabled></b-menu-item>
+                            <b-menu-item
+                                icon="information-outline"
+                                label="Info"
+                            ></b-menu-item>
+                            <b-menu-item
+                                model-value
+                                expanded
+                                icon="settings"
+                                label="Administrator"
+                            >
+                                <b-menu-item
+                                    icon="account"
+                                    label="Users"
+                                ></b-menu-item>
+                                <b-menu-item
+                                    icon="cellphone-link"
+                                    label="Devices"
+                                ></b-menu-item>
+                                <b-menu-item
+                                    icon="cash-multiple"
+                                    label="Payments"
+                                    disabled
+                                ></b-menu-item>
                             </b-menu-item>
                             <b-menu-item icon="account" label="My Account">
-                                <b-menu-item icon="account-box" label="Account data"></b-menu-item>
-                                <b-menu-item icon="home-account" label="Addresses"></b-menu-item>
+                                <b-menu-item
+                                    icon="account-box"
+                                    label="Account data"
+                                ></b-menu-item>
+                                <b-menu-item
+                                    icon="home-account"
+                                    label="Addresses"
+                                ></b-menu-item>
                             </b-menu-item>
                         </b-menu-list>
                         <b-menu-list>
                             <b-menu-item label="Expo" icon="link"></b-menu-item>
                         </b-menu-list>
                         <b-menu-list label="Actions">
-                            <b-menu-item icon="logout" label="Logout"></b-menu-item>
+                            <b-menu-item
+                                icon="logout"
+                                label="Logout"
+                            ></b-menu-item>
                         </b-menu-list>
                     </b-menu>
                 </div>
@@ -49,7 +76,9 @@
                     <b-switch v-model="expandOnHover">Expand on hover</b-switch>
                 </b-field>
                 <b-field>
-                    <b-switch v-model="expandWithDelay">Hover with delay</b-switch>
+                    <b-switch v-model="expandWithDelay"
+                        >Hover with delay</b-switch
+                    >
                 </b-field>
                 <b-field label="Mobile Layout">
                     <b-select v-model="mobile">
@@ -65,39 +94,42 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
 import {
-  BField,
-  BMenu,
-  BMenuItem,
-  BMenuList,
-  BSelect,
-  BSidebar,
-  BSwitch
-} from '@ntohq/buefy-next'
-
-export default defineComponent({
-  components: {
     BField,
     BMenu,
     BMenuItem,
     BMenuList,
     BSelect,
     BSidebar,
-    BSwitch
-  },
-  data() {
-    return {
-      expandOnHover: false,
-      expandWithDelay: false,
-      mobile: "reduce",
-      reduce: false
-    };
-  }
-})
+    BSwitch,
+} from "buefy";
+
+export default defineComponent({
+    components: {
+        BField,
+        BMenu,
+        BMenuItem,
+        BMenuList,
+        BSelect,
+        BSidebar,
+        BSwitch,
+    },
+    data() {
+        return {
+            expandOnHover: false,
+            expandWithDelay: false,
+            mobile: "reduce",
+            reduce: false,
+        };
+    },
+});
 </script>
 
 <style lang="scss">
+.p-1 {
+    padding: 1em;
+}
 .sidebar-page {
     display: flex;
     flex-direction: column;

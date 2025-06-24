@@ -1,12 +1,22 @@
 <template>
     <section>
-        <b-field horizontal label="Subject" type="is-danger" message="Please enter a subject">
+        <b-field
+            horizontal
+            label="Subject"
+            type="is-danger"
+            message="Please enter a subject"
+        >
             <b-input name="subject" expanded></b-input>
         </b-field>
 
         <b-field horizontal label="From">
             <b-input name="name" placeholder="Name" expanded></b-input>
-            <b-input name="email" type="email" placeholder="nobody@nowhere.com" expanded></b-input>
+            <b-input
+                name="email"
+                type="email"
+                placeholder="nobody@nowhere.com"
+                expanded
+            ></b-input>
         </b-field>
 
         <b-field horizontal label="Topic">
@@ -21,15 +31,15 @@
             <b-input type="textarea"></b-input>
         </b-field>
 
-        <b-field horizontal><!-- Label left empty for spacing -->
+        <b-field horizontal
+            ><!-- Label left empty for spacing -->
             <p class="control">
                 <b-button label="Send message" type="is-primary" />
             </p>
         </b-field>
-
     </section>
 </template>
 
 <script setup lang="ts">
-import { BButton, BField, BInput, BSelect } from '@ntohq/buefy-next'
+import { BButton, BField, BInput, BSelect } from "buefy";
 </script>

@@ -4,11 +4,12 @@
             type="month"
             placeholder="Click to select..."
             icon="calendar-today"
-            trap-focus>
+            trap-focus
+        >
         </b-datepicker>
     </b-field>
 </template>
 
 <script setup lang="ts">
-import { BDatepicker, BField } from '@ntohq/buefy-next'
+import { BDatepicker, BField } from "buefy";
 </script>

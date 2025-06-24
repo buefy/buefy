@@ -33,8 +33,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { BButton } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BButton } from "buefy";
 
 export default defineComponent({
     components: { BButton },
@@ -44,11 +44,11 @@ export default defineComponent({
                 message: `What's your name?`,
                 inputAttrs: {
                     placeholder: "e.g. Walter",
-                    maxlength: 10
+                    maxlength: 10,
                 },
                 trapFocus: true,
-                onConfirm: value =>
-                    this.$buefy.toast.open(`Your name is: ${value}`)
+                onConfirm: (value) =>
+                    this.$buefy.toast.open(`Your name is: ${value}`),
             });
         },
         promptNumber() {
@@ -59,11 +59,11 @@ export default defineComponent({
                     placeholder: "Type your age",
                     value: "18",
                     min: 18,
-                    max: 99
+                    max: 99,
                 },
                 trapFocus: true,
-                onConfirm: value =>
-                    this.$buefy.toast.open(`Your age is: ${value}`)
+                onConfirm: (value) =>
+                    this.$buefy.toast.open(`Your age is: ${value}`),
             });
         },
         promptNotClosed() {
@@ -72,7 +72,7 @@ export default defineComponent({
                 inputAttrs: {
                     type: "text",
                     placeholder: "My message is...",
-                    value: "Hello moon!"
+                    value: "Hello moon!",
                 },
                 confirmText: "Send",
                 trapFocus: true,
@@ -84,7 +84,7 @@ export default defineComponent({
                         this.$buefy.toast.open(`Success message send!`);
                         close();
                     }, 2000);
-                }
+                },
             });
         },
         promptNotClosedWithLoading() {
@@ -93,7 +93,7 @@ export default defineComponent({
                 inputAttrs: {
                     type: "text",
                     placeholder: "My message is...",
-                    value: "Hello moon!"
+                    value: "Hello moon!",
                 },
                 confirmText: "Send",
                 trapFocus: true,
@@ -105,9 +105,9 @@ export default defineComponent({
                         this.$buefy.toast.open(`Success message send!`);
                         cancelLoading();
                     }, 2000);
-                }
+                },
             });
-        }
-    }
-})
+        },
+    },
+});
 </script>

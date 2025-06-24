@@ -7,7 +7,10 @@
                         <p>
                             <small>
                                 Buefy's source code is licensed under
-                                <a href="http://opensource.org/licenses/mit-license.php" target="_blank">MIT</a>.
+                                <a
+                                    href="http://opensource.org/licenses/mit-license.php"
+                                    target="_blank"
+                                >MIT</a>.
                             </small>
                         </p>
 
@@ -34,7 +37,8 @@
                             </p>
                         </b-field>
                         <small>
-                            This site is powered by <a href="https://www.netlify.com">Netlify</a>
+                            This site is powered by
+                            <a href="https://www.netlify.com">Netlify</a>
                         </small>
                     </div>
 
@@ -75,5 +79,5 @@
 </template>
 
 <script setup lang="ts">
-import { BField, BIcon } from '@ntohq/buefy-next'
+import { BField, BIcon } from 'buefy'
 </script>

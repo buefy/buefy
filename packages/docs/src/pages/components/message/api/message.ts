@@ -12,11 +12,18 @@ export default [
                 default: '—'
             },
             {
-                name: '<code>active</code>',
-                description: 'Whether notification is active or not, use the <code>.sync</code> modifier to make it two-way binding',
+                name: '<code>v-model</code>',
+                description: 'Whether message is active or not',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
+            },
+            {
+                name: '<code>message</code>',
+                description: 'Message text content',
+                type: 'String',
+                values: '—',
+                default: '—'
             },
             {
                 name: '<code>closable</code>',
@@ -98,6 +105,11 @@ export default [
         ],
         slots: [
             {
+                name: 'default',
+                description: 'Main message content',
+                props: '—'
+            },
+            {
                 name: '<code>header</code>',
                 description: 'Message custom header',
                 props: '—'
@@ -108,6 +120,23 @@ export default [
                 name: '<code>close</code>',
                 description: 'Triggers when user closes the message',
                 parameters: '—'
+            },
+            {
+                name: '<code>update:modelValue</code>',
+                description: 'Triggers when the message visibility changes',
+                parameters: '<code>value: Boolean</code>'
+            },
+            {
+                name: '<code>click</code>',
+                description: 'Triggers when the message is clicked',
+                parameters: '—'
+            }
+        ],
+        methods: [
+            {
+                name: '<code>close</code>',
+                description: 'Programmatically close the message',
+                return: '—'
             }
         ]
     }

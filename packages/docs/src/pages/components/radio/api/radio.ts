@@ -53,9 +53,21 @@ export default [
                     <code>is-warning</code>, <code>is-danger</code>,
                     and any other colors you've set in the <code>$colors</code> list on Sass`,
                 default: '—'
+            },
+            {
+                name: '<code>required</code>',
+                description: 'Same as native <code>required</code>',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             }
         ],
         events: [
+            {
+                name: '<code>update:modelValue</code>',
+                description: 'Triggers when the value of radio is changed',
+                parameters: '<code>value: Any</code>'
+            },
             {
                 name: '<code>input</code>',
                 description: 'Triggers when the value of checkbox is changed',
@@ -65,6 +77,20 @@ export default [
                 name: '<code>[any].native</code>',
                 description: 'Listen to any event using this syntax, e.g <code>click.native</code>',
                 parameters: '<code>event: $event</code>'
+            }
+        ],
+        slots: [
+            {
+                name: '<code>default</code>',
+                description: 'Radio label content',
+                props: '—'
+            }
+        ],
+        methods: [
+            {
+                name: '<code>focus</code>',
+                description: 'Set focus on the radio input element',
+                return: '—'
             }
         ]
     },
@@ -122,6 +148,39 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>required</code>',
+                description: 'Same as native <code>required</code>',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            }
+        ],
+        events: [
+            {
+                name: '<code>update:modelValue</code>',
+                description: 'Triggers when the value of radio button is changed',
+                parameters: '<code>value: Any</code>'
+            },
+            {
+                name: '<code>[any].native</code>',
+                description: 'Listen to any event using this syntax, e.g <code>click.native</code>',
+                parameters: '<code>event: $event</code>'
+            }
+        ],
+        slots: [
+            {
+                name: '<code>default</code>',
+                description: 'Radio button content',
+                props: '—'
+            }
+        ],
+        methods: [
+            {
+                name: '<code>focus</code>',
+                description: 'Set focus on the radio button input element',
+                return: '—'
             }
         ]
     }

@@ -25,37 +25,45 @@
 
         <b-field grouped group-multiline>
             <div class="control">
-                <b-tag type="is-primary"
+                <b-tag
+                    type="is-primary"
                     attached
                     aria-close-label="Close tag"
-                    closable>
+                    closable
+                >
                     Technology
                 </b-tag>
             </div>
 
             <div class="control">
-                <b-tag type="is-primary"
+                <b-tag
+                    type="is-primary"
                     attached
                     aria-close-label="Close tag"
-                    closable>
+                    closable
+                >
                     Vuejs
                 </b-tag>
             </div>
 
             <div class="control">
-                <b-tag type="is-primary"
+                <b-tag
+                    type="is-primary"
                     attached
                     aria-close-label="Close tag"
-                    closable>
+                    closable
+                >
                     CSS
                 </b-tag>
             </div>
 
             <div class="control">
-                <b-tag type="is-primary"
+                <b-tag
+                    type="is-primary"
                     attached
                     aria-close-label="Close tag"
-                    closable>
+                    closable
+                >
                     Flexbox
                 </b-tag>
             </div>
@@ -64,14 +72,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { BField, BTag, BTaglist } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BField, BTag, BTaglist } from "buefy";
 
 export default defineComponent({
     components: {
         BField,
         BTag,
-        BTaglist
-    }
-})
+        BTaglist,
+    },
+});
 </script>

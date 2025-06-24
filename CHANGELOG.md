@@ -1,5 +1,28 @@
 # Buefy Changelog
 
+## [1.0.0](https://github.com/buefy/buefy/pull/4077) unreleased
+
+### Breaking changes
+
+* [#4135](https://github.com/buefy/buefy/pull/4135) `Tooltip` introduced a new variant `is-auto` for the `position` prop and made it the new default.
+
+### Fixes
+* Updated workflows and scripts to reference the package as "buefy" instead of "@ntohq/buefy-next".
+* Updated main repo references:
+* package.json now points to the new repository and issues URLs.
+* Linting, type check, and unit test scripts reference "buefy" workspace.
+* All configuration and ignore files renamed/moved from buefy-next to buefy.
+
+### Fixes (docs)
+* README installation and usage instructions updated to use buefy as the npm package.
+* Documentation now references buefy instead of @ntohq/buefy-next everywhere.
+* Clarified developer release installation instructions and naming conventions in the README.
+
+### Others
+* Version bump: package.json version set to 1.0.0.
+* jsconfig updated to reference new source directory.
+* Large updates to package-lock.json and workflow YAML files to match new structure.
+
 ## Buefy-next 0.2.1 unreleased
 
 Buefy-next 0.2.1 is now compiled with Vue 3.4.13, so the recommended Vue version is 3.4.13 or higher.
@@ -10,6 +33,9 @@ Buefy-next 0.2.1 is now compiled with Vue 3.4.13, so the recommended Vue version
   `SlotComponent` which is internally used by `Table`, and `Tabs` ceased adding the update hook to the component specified to the `component` prop, and dropped the `event` prop.
 * [#429](https://github.com/ntohq/buefy-next/issues/429) `Numberinput` may have accepted an invalid number as valid with Vue 3.4.28 or higher.
 * [#434](https://github.com/ntohq/buefy-next/issues/434) The multi column sorting feature of `Table` did not work since Buefy-next v0.2.0.
+* [#460](https://github.com/ntohq/buefy-next/issues/460) The `editable` prop of `Clockpicker` did not work (thanks @Moritz-Schmidt)
+* [#461](https://github.com/ntohq/buefy-next/pull/461) The initial value of `Clockpicker` was not rendered (thanks @Moritz-Schmidt)
+* [#461](https://github.com/ntohq/buefy-next/pull/461) `Clockpicker` did not work on a mobile device
 
 ### Others
 

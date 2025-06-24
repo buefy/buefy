@@ -37,29 +37,30 @@
                 icon="clock"
                 :enable-seconds="enableSeconds"
                 :hour-format="hourFormat"
-                :locale="locale">
+                :locale="locale"
+            >
             </b-timepicker>
         </b-field>
     </section>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { BField, BSelect, BSwitch, BTimepicker } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BField, BSelect, BSwitch, BTimepicker } from "buefy";
 
 export default defineComponent({
     components: {
         BField,
         BSelect,
         BSwitch,
-        BTimepicker
+        BTimepicker,
     },
     data() {
         return {
             hourFormat: undefined, // Browser locale
             enableSeconds: false,
-            locale: undefined // Browser locale
-        }
-    }
-})
+            locale: undefined, // Browser locale
+        };
+    },
+});
 </script>

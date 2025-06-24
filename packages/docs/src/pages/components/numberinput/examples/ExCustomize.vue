@@ -5,14 +5,18 @@
         </b-field>
 
         <b-field label="Compact and rounded controls">
-            <b-numberinput controls-position="compact" controls-rounded></b-numberinput>
+            <b-numberinput
+                controls-position="compact"
+                controls-rounded
+            ></b-numberinput>
         </b-field>
 
         <b-field label="Compact, rounded and right aligned controls">
-            <b-numberinput 
+            <b-numberinput
                 controls-alignment="right"
                 controls-position="compact"
-                controls-rounded></b-numberinput>
+                controls-rounded
+            ></b-numberinput>
         </b-field>
 
         <b-field label="Grouped">
@@ -20,7 +24,7 @@
                 <p class="control">
                     <b-button label="Button" />
                 </p>
-                <b-numberinput/>
+                <b-numberinput />
             </b-field>
         </b-field>
 
@@ -29,7 +33,7 @@
                 <p class="control">
                     <b-button label="Button" />
                 </p>
-                <b-numberinput expanded/>
+                <b-numberinput expanded />
             </b-field>
         </b-field>
 
@@ -38,7 +42,7 @@
                 <p class="control">
                     <b-button label="Button" />
                 </p>
-                <b-numberinput controls-position="compact"/>
+                <b-numberinput controls-position="compact" />
             </b-field>
         </b-field>
 
@@ -47,22 +51,25 @@
                 <p class="control">
                     <b-button label="Button" />
                 </p>
-                <b-numberinput expanded controls-position="compact"/>
+                <b-numberinput expanded controls-position="compact" />
             </b-field>
         </b-field>
-
 
         <b-field label="With addons, expanded and right aligned controls">
             <b-field>
                 <p class="control">
                     <b-button label="Button" />
                 </p>
-                <b-numberinput expanded controls-position="compact" controls-alignment="right" />
+                <b-numberinput
+                    expanded
+                    controls-position="compact"
+                    controls-alignment="right"
+                />
             </b-field>
         </b-field>
     </section>
 </template>
 
 <script setup lang="ts">
-import { BButton, BField, BNumberinput } from '@ntohq/buefy-next'
+import { BButton, BField, BNumberinput } from "buefy";
 </script>

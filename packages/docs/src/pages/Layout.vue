@@ -6,15 +6,14 @@
             <li><a href="https://bulma.io/documentation/layout/hero/" target="_blank">Hero</a></li>
             <li><a href="https://bulma.io/documentation/layout/section/" target="_blank">Section</a></li>
             <li><a href="https://bulma.io/documentation/layout/footer/" target="_blank">Footer</a></li>
-            <li><a href="https://bulma.io/documentation/layout/tiles/" target="_blank">Tile system</a></li>
             <li><a href="https://bulma.io/documentation/layout/level/" target="_blank">Level</a></li>
             <li><a href="https://bulma.io/documentation/layout/media-object/" target="_blank">Media</a></li>
         </ul>
 
         <p class="subtitle">Grid</p>
         <ul>
-            <li><a href="https://bulma.io/documentation/columns/" target="_blank">Grid system</a></li>
-            <li><a href="https://bulma.io/documentation/layout/tiles/" target="_blank">Tile system</a></li>
+            <li><a href="https://bulma.io/documentation/grid/" target="_blank">Grid system</a></li>
+            <li><a href="https://bulma.io/documentation/columns/" target="_blank">Column system</a></li>
         </ul>
 
         <p class="subtitle">Elements</p>

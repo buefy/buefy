@@ -18,12 +18,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { BTable } from '@ntohq/buefy-next'
+import { BTable } from 'buefy'
 
 interface VariableInfo {
-    name?: string
-    description?: string
-    default?: string
+    name?: string;
+    description?: string;
+    default?: string;
 }
 
 export default defineComponent({
@@ -35,13 +35,25 @@ export default defineComponent({
         variablesColumns() {
             const columns = []
             if (this.data!.some((d) => d.name !== undefined)) {
-                columns.push({ label: 'Name', field: 'name', renderHtml: true })
+                columns.push({
+                    label: 'Name',
+                    field: 'name',
+                    renderHtml: true
+                })
             }
             if (this.data!.some((d) => d.description !== undefined)) {
-                columns.push({ label: 'Description', field: 'description', renderHtml: true })
+                columns.push({
+                    label: 'Description',
+                    field: 'description',
+                    renderHtml: true
+                })
             }
             if (this.data!.some((d) => d.default !== undefined)) {
-                columns.push({ label: 'Default', field: 'default', renderHtml: true })
+                columns.push({
+                    label: 'Default',
+                    field: 'default',
+                    renderHtml: true
+                })
             }
             return columns
         }

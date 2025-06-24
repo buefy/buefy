@@ -1,11 +1,11 @@
 <template>
     <section>
         <!-- Left -->
-        <b-breadcrumb
-            align="is-left"
-        >
+        <b-breadcrumb align="is-left">
             <b-breadcrumb-item tag="router-link" to="/">Home</b-breadcrumb-item>
-            <b-breadcrumb-item tag="router-link" to="/documentation">Docs</b-breadcrumb-item>
+            <b-breadcrumb-item tag="router-link" to="/documentation"
+                >Docs</b-breadcrumb-item
+            >
             <b-breadcrumb-item
                 tag="router-link"
                 to="/documentation/breadcrumb"
@@ -15,9 +15,7 @@
             </b-breadcrumb-item>
         </b-breadcrumb>
         <!-- Center -->
-        <b-breadcrumb
-            align="is-centered"
-        >
+        <b-breadcrumb align="is-centered">
             <b-breadcrumb-item href="/">Home</b-breadcrumb-item>
             <b-breadcrumb-item href="/documentation">Docs</b-breadcrumb-item>
             <b-breadcrumb-item href="/documentation/breadcrumb" active>
@@ -25,9 +23,7 @@
             </b-breadcrumb-item>
         </b-breadcrumb>
         <!-- Right -->
-        <b-breadcrumb
-            align="is-right"
-        >
+        <b-breadcrumb align="is-right">
             <b-breadcrumb-item href="/">Home</b-breadcrumb-item>
             <b-breadcrumb-item href="/documentation">Docs</b-breadcrumb-item>
             <b-breadcrumb-item href="/documentation/breadcrumb" active>
@@ -38,15 +34,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { BBreadcrumb, BBreadcrumbItem } from '@ntohq/buefy-next'
+import { defineComponent } from "vue";
+import { BBreadcrumb, BBreadcrumbItem } from "buefy";
 
 export default defineComponent({
     components: {
         BBreadcrumb,
-        BBreadcrumbItem
+        BBreadcrumbItem,
     },
-    name: 'ExAlignments'
-
-})
+    name: "ExAlignments",
+});
 </script>

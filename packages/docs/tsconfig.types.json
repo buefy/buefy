@@ -1,12 +1,29 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["src/**/*", "src/**/*.vue", "../buefy-next/src/**/*", "../buefy-next/src/**/*.vue"],
-  "exclude": ["node_modules", "src/assets/*", "../buefy-next/src/**/*.spec.*", "../buefy-next/node_modules"],
+  "include": [
+    "src/**/*",
+    "src/**/*.vue",
+    "../buefy/src/**/*",
+    "../buefy/src/**/*.vue"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/assets/*",
+    "../buefy/src/**/*.spec.*",
+    "../buefy/node_modules"
+  ],
   "compilerOptions": {
-    "rootDirs": ["./src", "../buefy-next/src"],
+    "rootDirs": [
+      "./src",
+      "../buefy/src"
+    ],
     "paths": {
-      "@ntohq/buefy-next": ["../buefy-next/src"],
-      "@/*": ["./src/*"]
+      "buefy": [
+        "../buefy/src"
+      ],
+      "@/*": [
+        "./src/*"
+      ]
     }
   }
 }

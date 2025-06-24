@@ -11,12 +11,15 @@
                 <b-icon
                     icon="magnify"
                     aria-hidden="true"
-                    style="vertical-align: middle;"
+                    style="vertical-align: middle"
                 />
                 Search
             </span>
-            <b-tag type="is-primary is-light is-hidden-touch" aria-hidden="true">
-                {{ isMacOS ? '⌘' : 'Ctrl' }} K
+            <b-tag
+                type="is-primary is-light is-hidden-touch"
+                aria-hidden="true"
+            >
+                {{ isMacOS ? "⌘" : "Ctrl" }} K
             </b-tag>
         </div>
 
@@ -34,10 +37,15 @@
                             placeholder="Search docs"
                             aria-label="Search in the documentation"
                             aria-controls="sidebarSearchResults"
-                            :aria-invalid="isTermEmpty || sortedResults.length > 0 ? null : 'true'"
-                            :aria-errormessage="isTermEmpty || sortedResults.length > 0
-                                ? null
-                                :'sidebarSearchNoresult'
+                            :aria-invalid="
+                                isTermEmpty || sortedResults.length > 0
+                                    ? null
+                                    : 'true'
+                            "
+                            :aria-errormessage="
+                                isTermEmpty || sortedResults.length > 0
+                                    ? null
+                                    : 'sidebarSearchNoresult'
                             "
                             @update:model-value="search"
                             maxlength="32"
@@ -57,9 +65,7 @@
                     aria-labelledby="Search results"
                     aria-live="polite"
                 >
-                    <template
-                        v-if="sortedResults.length > 0"
-                    >
+                    <template v-if="sortedResults.length > 0">
                         <template
                             v-for="section in sortedResults"
                             :key="section.category"
@@ -78,18 +84,24 @@
                                     :key="result.path"
                                     class="notification"
                                     :class="{
-                                        'is-active': result.index === selectedIndex
+                                        'is-active':
+                                            result.index === selectedIndex,
                                     }"
                                     @mouseenter="select(result.index)"
                                     @click="navigateTo"
                                     role="option"
-                                    :aria-selected="result.index === selectedIndex"
+                                    :aria-selected="
+                                        result.index === selectedIndex
+                                    "
                                     :aria-setsize="results.length"
                                     :aria-posinset="result.index + 1"
                                     tabindex="-1"
                                 >
                                     <!-- eslint-disable-next-line vue/no-v-html -->
-                                    <p v-html="highlightTerm(result.title)" class="is-size-6" />
+                                    <p
+                                        v-html="highlightTerm(result.title)"
+                                        class="is-size-6"
+                                    />
                                     <p class="is-size-7">
                                         {{ stripTags(result.subtitle) }}
                                     </p>
@@ -103,11 +115,15 @@
                         id="sidebarSearchNoresult"
                         class="is-size-4 has-text-dark sidebar-search-noresult"
                     >
-                        No results for “<strong class="has-text-primary">{{ term }}</strong>„
+                        No results for “<strong class="has-text-primary">{{
+                            term
+                        }}</strong>„
                     </p>
                 </div>
 
-                <ul class="panel-block sidebar-search-shortcuts is-hidden-touch">
+                <ul
+                    class="panel-block sidebar-search-shortcuts is-hidden-touch"
+                >
                     <li aria-keyshortcuts="Enter">
                         <b-tag type="is-primary is-light">
                             Enter
@@ -128,8 +144,7 @@
                         <b-tag type="is-primary is-light">
                             Esc
                         </b-tag>
-                        &nbsp;
-                        to close
+                        &nbsp; to close
                     </li>
                 </ul>
             </article>
@@ -144,25 +159,25 @@ import routes from '@/data/routes'
 import menu from '@/data/menu'
 import type { PageTree } from '@/data/menu'
 
-import { BIcon, BInput, BModal, BTag } from '@ntohq/buefy-next'
+import { BIcon, BInput, BModal, BTag } from 'buefy'
 
-type BInputInstance = InstanceType<typeof BInput>
+type BInputInstance = InstanceType<typeof BInput>;
 
 interface SearchResult {
-    title: string
-    subtitle: string
-    path: string
-    score?: number
+    title: string;
+    subtitle: string;
+    path: string;
+    score?: number;
 }
 
 interface IndexedSearchResult extends SearchResult {
-    index: number
+    index: number;
 }
 
 interface SearchResultsSection<R extends SearchResult = SearchResult> {
-    category: string
-    results: R[]
-    score: number
+    category: string;
+    results: R[];
+    score: number;
 }
 
 export default defineComponent({
@@ -199,8 +214,9 @@ export default defineComponent({
     },
     computed: {
         docRoutes() {
-            return Object.values(routes)
-                .filter((route) => route.menu === 'documentation')
+            return Object.values(routes).filter(
+                (route) => route.menu === 'documentation'
+            )
         },
         isTermEmpty() {
             return /^\s*$/.test(this.term)
@@ -210,16 +226,26 @@ export default defineComponent({
             let index = 0
 
             this.results.forEach((result) => {
-                const category = this.categoryByPage[result.path.replace(/^\//, '')] || 'Others'
-                const score = this.term.trim().toLowerCase() !== result.title.trim().toLowerCase()
-                    ? new RegExp('^' + this.term.trim(), 'i').test(result.title) === false
-                        ? RegExp('\\s+' + this.term.trim(), 'i').test(result.title) === false
-                            ? RegExp(this.term.trim(), 'i').test(result.title) === false
-                                ? 0
-                                : 2
-                            : 3
-                        : 4
-                    : 5
+                const category =
+                    this.categoryByPage[result.path.replace(/^\//, '')] ||
+                    'Others'
+                const score =
+                    this.term.trim().toLowerCase() !==
+                    result.title.trim().toLowerCase()
+                        ? new RegExp('^' + this.term.trim(), 'i').test(
+                            result.title
+                        ) === false
+                            ? RegExp('\\s+' + this.term.trim(), 'i').test(
+                                result.title
+                            ) === false
+                                ? RegExp(this.term.trim(), 'i').test(
+                                    result.title
+                                ) === false
+                                    ? 0
+                                    : 2
+                                : 3
+                            : 4
+                        : 5
 
                 if (typeof resultsByCategory[category] === 'undefined') {
                     resultsByCategory[category] = {
@@ -238,13 +264,16 @@ export default defineComponent({
                 })
             })
 
-            const sorted = Object.values(resultsByCategory)
-                .sort((a, b) => String(b.score).localeCompare(String(a.score)))
+            const sorted = Object.values(resultsByCategory).sort((a, b) =>
+                String(b.score).localeCompare(String(a.score))
+            )
             return sorted.map((category) => {
                 return {
                     ...category,
                     results: category.results
-                        .sort((a, b) => String(b.score).localeCompare(String(a.score)))
+                        .sort((a, b) =>
+                            String(b.score).localeCompare(String(a.score))
+                        )
                         .map((result) => ({ ...result, index: index++ }))
                 }
             })
@@ -263,19 +292,27 @@ export default defineComponent({
             (this.$refs.searchbar as BInputInstance).focus()
         },
         select(index: number) {
-            this.selectedIndex = Math.max(0, Math.min(index, this.results.length - 1))
+            this.selectedIndex = Math.max(
+                0,
+                Math.min(index, this.results.length - 1)
+            )
         },
         search(term: string | number | undefined) {
             this.selectedIndex = 0
             this.term = term as string
             this.results = this.docRoutes.filter((route) => {
-                const regexp = new RegExp(this.term.replace(/\s+/g, '.*\\s+'), 'i')
+                const regexp = new RegExp(
+                    this.term.replace(/\s+/g, '.*\\s+'),
+                    'i'
+                )
                 return regexp.test(route.title) || regexp.test(route.subtitle)
             })
         },
         scrollToSelection() {
             if (this.$refs[`result_${this.selectedIndex}`]) {
-                (this.$refs[`result_${this.selectedIndex}`] as HTMLElement[])[0].scrollIntoView({
+                (
+                    this.$refs[`result_${this.selectedIndex}`] as HTMLElement[]
+                )[0].scrollIntoView({
                     behavior: 'auto',
                     block: 'center',
                     inline: 'nearest'
@@ -333,7 +370,10 @@ export default defineComponent({
                     break
                 case 'PageDown':
                     if (this.isActive) {
-                        this.selectedIndex = Math.max(0, this.results.length - 1)
+                        this.selectedIndex = Math.max(
+                            0,
+                            this.results.length - 1
+                        )
                         this.scrollToSelection()
                     }
                     break
@@ -374,7 +414,7 @@ export default defineComponent({
         flex-grow: 1;
     }
 }
-.sidebar-search  {
+.sidebar-search {
     .modal {
         justify-content: flex-start;
         .modal-content {
@@ -394,14 +434,14 @@ export default defineComponent({
 
         .notification {
             cursor: pointer;
-            margin-bottom: .5rem;
+            margin-bottom: 0.5rem;
 
             &.is-active {
                 background: #7957d5;
                 color: #fff;
 
                 em {
-                    color: inherit!important;
+                    color: inherit !important;
                     text-decoration: underline;
                 }
             }

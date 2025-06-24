@@ -50,7 +50,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { BButton, BIcon } from '@ntohq/buefy-next'
+import { BButton, BIcon } from 'buefy'
 
 export default defineComponent({
     components: {

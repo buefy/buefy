@@ -5,14 +5,14 @@
 </template>
 
 <script lang="ts">
-    import { BButton } from '@ntohq/buefy-next'
+import { BButton } from "buefy";
 
-    export default {
-        components: { BButton },
-        methods: {
-            clickMe() {
-                this.$buefy.notification.open('Clicked!!')
-            }
-        }
-    }
+export default {
+    components: { BButton },
+    methods: {
+        clickMe() {
+            this.$buefy.notification.open("Clicked!!");
+        },
+    },
+};
 </script>
