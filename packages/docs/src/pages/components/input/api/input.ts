@@ -1,0 +1,176 @@
+export default [
+    {
+        props: [
+            {
+                name: '<code>v-model</code>',
+                description: 'Binding value',
+                type: 'String, Number',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>lazy</code>',
+                description: 'Makes the binding lazy. Note: <code>v-model.lazy</code> won\'t work',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>type</code>',
+                description: 'Input type, like native',
+                type: 'String',
+                values: 'Any native input type, and <code>textarea</code>',
+                default: '<code>text</code>'
+            },
+            {
+                name: '<code>size</code>',
+                description: 'Vertical size of input, optional',
+                type: 'String',
+                values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
+                default: '—'
+            },
+            {
+                name: '<code>expanded</code>',
+                description: 'Makes input full width when inside a grouped or addon field',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>password-reveal</code>',
+                description: 'Add the reveal password functionality',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>loading</code>',
+                description: 'Add the loading state to the input',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>icon-pack</code>',
+                description: 'Icon pack to use',
+                type: 'String',
+                values: '<code>mdi</code>, <code>fa</code>, <code>fas</code>, <code>far</code>, <code>fad</code>, <code>fal</code>',
+                default: '<code>mdi</code>'
+            },
+            {
+                name: '<code>icon</code>',
+                description: 'Icon name to be added',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>icon-right</code>',
+                description: 'Icon name to be added on the right side',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>icon-clickable</code>',
+                description: 'Make the icon clickable',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>icon-right-clickable</code>',
+                description: 'Make the icon right clickable',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>maxlength</code>',
+                description: 'Same as native <code>maxlength</code>, plus character counter',
+                type: 'String, Number',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>has-counter</code>',
+                description: 'Show character counter when <code>maxlength</code> prop is passed',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>custom-class</code>',
+                description: 'CSS classes to be applied on input',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>validation-message</code>',
+                description: 'The message which is shown when a validation error occurs',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>compat-fallthrough</code>',
+                description: 'Whether <code>class</code>, <code>style</code>, and <code>id</code> attributes are applied to the root &lt;div&gt;, or either of &lt;input&gt; or &lt;textarea&gt; element. If <code>true</code>, they are applied to the root &lt;div&gt; element, which is compatible with Vue 2.',
+                type: 'Boolean',
+                values: '-',
+                default: '<code>true</code>. Can be changed via <code>defaultCompatFallthrough</code> config option.'
+            },
+            {
+                name: 'Any native attribute',
+                description: '—',
+                type: '—',
+                values: '—',
+                default: '—'
+            }
+        ],
+        events: [
+            {
+                name: '<code>input</code>',
+                description: 'Triggers when value is changed',
+                parameters: '<code>value: String|Number</code>'
+            },
+            {
+                name: '<code>focus</code>',
+                description: 'Triggers when input has received focus',
+                parameters: '<code>event: $event</code>'
+            },
+            {
+                name: '<code>blur</code>',
+                description: 'Triggers when input has lost focus',
+                parameters: '<code>event: $event</code>'
+            },
+            {
+                name: '<code>icon-click</code>',
+                description: 'Triggers when the icon is clickable and have been clicked',
+                parameters: '<code>event: $event</code>'
+            },
+            {
+                name: '<code>icon-right-click</code>',
+                description: 'Triggers when the right icon is clickable and have been clicked',
+                parameters: '<code>event: $event</code>'
+            },
+            {
+                name: '<code>[any].native</code>',
+                description: 'Listen to any native event, e.g. <code>click.native</code>',
+                parameters: '<code>event: $event</code>'
+            }
+        ],
+        methods: [
+            {
+                name: '<code>checkHtml5Validity</code>',
+                description: 'Check validation of HTML5 (add the message and type/color), also updates the <code>isValid</code> property',
+                return: '<code>isValid: Boolean</code>'
+            },
+            {
+                name: '<code>focus</code>',
+                description: 'Set focus (internally uses the native <code>.select()</code> method)',
+                return: '—'
+            }
+        ]
+    }
+]

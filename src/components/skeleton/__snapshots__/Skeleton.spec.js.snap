@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`BSkeleton render correctly 1`] = `
-<div class="b-skeleton is-animated">
-    <div class="b-skeleton-item is-rounded"></div>
-</div>
-`;

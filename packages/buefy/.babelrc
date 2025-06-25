@@ -1,0 +1,17 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "modules": "auto",
+        "exclude": ["@babel/plugin-proposal-optional-chaining"]
+      }
+    ],
+  ],
+  "plugins": ["@babel/plugin-transform-runtime"],
+  "env": {
+    "test": {
+      "presets": ["@babel/preset-env"]
+    }
+  }
+}

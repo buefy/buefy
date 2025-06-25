@@ -1,0 +1,143 @@
+$dropdown-mobile-breakpoint: $desktop !default;
+$dropdown-background-color: rgba($scheme-invert, 0.86) !default;
+$dropdown-disabled-opacity: 0.5 !default;
+
+.dropdown {
+    & + .dropdown {
+        margin-left: 0.5em;
+    }
+    .background {
+        @include overlay;
+        position: fixed;
+        background-color: $dropdown-background-color;
+        z-index: 40;
+        cursor: pointer;
+        @media screen and (min-width: $dropdown-mobile-breakpoint) {
+            display: none;
+        }
+    }
+    &.dropdown-menu-animation {
+        .dropdown-menu {
+            display: block;
+        }
+    }
+    .dropdown-menu {
+        .dropdown-item {
+            &.is-disabled {
+                cursor: not-allowed;
+                &:hover {
+                    background: inherit;
+                    color: inherit;
+                }
+            }
+        }
+        .has-link a {
+            @extend .dropdown-item;
+            padding-right: 3rem;
+            white-space: nowrap;
+        }
+    }
+    &.is-hoverable:not(.is-active) {
+        .dropdown-menu {
+            display: none;
+        }
+    }
+    &.is-hoverable:not(.is-touch-enabled) {
+        &:hover {
+            .dropdown-menu {
+                display: inherit;
+            }
+        }
+    }
+    &.is-expanded {
+        width: 100%;
+        .dropdown-trigger {
+            width: 100%;
+        }
+        .dropdown-menu {
+            width: 100%;
+        }
+        &.is-mobile-modal {
+            .dropdown-menu {
+                max-width: 100%;
+            }
+        }
+    }
+    &:not(.is-disabled) {
+        .dropdown-menu {
+            .dropdown-item {
+                &.is-disabled {
+                    opacity: $dropdown-disabled-opacity;
+                }
+            }
+        }
+    }
+    .navbar-item {
+        height: 100%;
+    }
+    &.is-disabled {
+        opacity: $dropdown-disabled-opacity;
+        cursor: not-allowed;
+        .dropdown-trigger {
+            pointer-events: none;
+        }
+    }
+    &.is-inline {
+        .dropdown-menu {
+            position: static;
+            display: inline-block;
+            padding: 0;
+        }
+    }
+    &.is-top-right {
+        .dropdown-menu {
+            top: auto;
+            bottom: 100%;
+        }
+    }
+    &.is-top-left {
+        .dropdown-menu {
+            top: auto;
+            bottom: 100%;
+            right: 0;
+            left: auto;
+        }
+    }
+    &.is-bottom-left {
+        .dropdown-menu {
+            right: 0;
+            left: auto;
+        }
+    }
+    @media screen and (max-width: $dropdown-mobile-breakpoint - 1px) {
+        /* prevents modal on hover unless it is on touch devices */
+        &.is-mobile-modal:not(.is-hoverable),
+        &.is-mobile-modal.is-touch-enabled {
+            > .dropdown-menu {
+                position: fixed !important;
+                width: calc(100vw - 40px);
+                max-width: 460px;
+                max-height: calc(100vh - 120px);
+                top: 25% !important;
+                left: 50% !important;
+                bottom: auto !important;
+                right: auto !important;
+                transform: translate3d(-50%, -25%, 0);
+                white-space: normal;
+                overflow-y: auto;
+                z-index: 50 !important;
+                > .dropdown-content {
+                    > .dropdown-item, > .has-link a {
+                        padding: 1rem 1.5rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+html.is-clipped-touch {
+    @include touch {
+        overflow: hidden !important;
+    }
+}

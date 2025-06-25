@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`BSelect render correctly 1`] = `
-<div class="control"><span class="select is-empty"><select><!----> </select></span>
-    <!---->
-</div>
-`;

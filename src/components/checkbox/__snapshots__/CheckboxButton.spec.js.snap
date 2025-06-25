@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`BCheckboxButton render correctly 1`] = `<div class="control"><label class="b-checkbox checkbox button is-primary"> <input type="checkbox" value="false"></label></div>`;

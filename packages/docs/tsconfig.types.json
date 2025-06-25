@@ -1,0 +1,29 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "src/**/*",
+    "src/**/*.vue",
+    "../buefy/src/**/*",
+    "../buefy/src/**/*.vue"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/assets/*",
+    "../buefy/src/**/*.spec.*",
+    "../buefy/node_modules"
+  ],
+  "compilerOptions": {
+    "rootDirs": [
+      "./src",
+      "../buefy/src"
+    ],
+    "paths": {
+      "buefy": [
+        "../buefy/src"
+      ],
+      "@/*": [
+        "./src/*"
+      ]
+    }
+  }
+}

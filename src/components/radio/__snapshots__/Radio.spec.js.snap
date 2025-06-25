@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`BRadio render correctly 1`] = `<label class="b-radio radio"><input type="radio" value="false"> <span class="check"></span> <span class="control-label"></span></label>`;

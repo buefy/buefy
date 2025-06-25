@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`BTooltip render correctly 1`] = `<span class="b-tooltip is-primary is-top is-medium"><div class="tooltip-content" style="display: none;" name="fade"><!----></div> <div class="tooltip-trigger"></div></span>`;

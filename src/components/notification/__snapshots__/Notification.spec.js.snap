@@ -1,8 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`BNotification render correctly 1`] = `
-<article class="notification" name="fade"><button type="button" class="delete"></button>
-    <!---->
-    <!---->
-</article>
-`;

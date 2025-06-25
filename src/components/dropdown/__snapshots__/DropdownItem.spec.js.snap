@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`BDropdownItem render correctly 1`] = `<a tabindex="0" class="dropdown-item"></a>`;

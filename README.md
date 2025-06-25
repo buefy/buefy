@@ -13,15 +13,29 @@
 
 > Buefy is a lightweight library of responsive UI components for [Vue.js](https://vuejs.org/) based on [Bulma](http://bulma.io/) framework and design.
 
+### Breaking changes
+
+Because not all of Vue 2 features could be reproduced with Vue 3, there are some breaking changes.
+Please refer to [CHANGELOG.md](/CHANGELOG.md) for more details.
+The biggest breaking change is obviously, **buefy does not work with Vue 2**.
+
+### How to install
+
+To install this fork, please run the following command,
+
+```sh
+npm install buefy
+```
+
 ## Features
 
-* Keep your current Bulma theme / variables easily
-* Supports both [Material Design Icons](https://materialdesignicons.com/) and [FontAwesome](http://fontawesome.io/)
-* Very lightweight with none internal dependencies aside from Vue & Bulma
-* About 88KB min+gzip (with Bulma included)
-* Semantic code output
-* Follows Bulma design and some of the [Material Design UX](https://material.io/)
-* Focus on usability and performance without *over-animating* stuff
+-   Keep your current Bulma theme / variables easily
+-   Supports both [Material Design Icons](https://materialdesignicons.com/) and [FontAwesome](http://fontawesome.io/)
+-   Very lightweight with none internal dependencies aside from Vue & Bulma
+-   About 88KB min+gzip (with Bulma included)
+-   Semantic code output
+-   Follows Bulma design and some of the [Material Design UX](https://material.io/)
+-   Focus on usability and performance without _over-animating_ stuff
 
 ## Documentation
 
@@ -31,7 +45,7 @@ Browse [online documentation here](https://buefy.org/).
 
 ## Quick start
 
-You need [Vue.js](https://vuejs.org/) **version 2.6+**. (Vue 3 is [not supported](https://github.com/buefy/buefy/issues/2505#issuecomment-997000720))
+You need [Vue.js](https://vuejs.org/) **version 3.0+**. (Vue 2 is not supported)
 
 ### 1 Install via npm
 
@@ -42,30 +56,37 @@ npm install buefy
 ### 2 Import and use Buefy
 
 Bundle
+
 ```javascript
-import Vue from 'vue';
-import Buefy from 'buefy';
-import 'buefy/dist/buefy.css';
+import { createApp } from "vue";
+import Buefy from "buefy";
+import "buefy/dist/buefy.css";
 
-Vue.use(Buefy);
+const app = createApp();
 
+app.use(Buefy);
 ```
+
 or Individual Components
+
 ```javascript
+import { createApp } from "vue";
+import { Field, Input } from "buefy";
+import "buefy/dist/buefy.css";
 
-import Vue from 'vue'
-import { Field, Input } from 'buefy'
-import 'buefy/dist/buefy.css'
+const app = createApp();
 
-Vue.use(Field)
-Vue.use(Input)
-
+app.use(Field);
+app.use(Input);
 ```
 
 ### 3 Include Material Design Icons
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.8.55/css/materialdesignicons.min.css">
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@mdi/font@5.8.55/css/materialdesignicons.min.css"
+/>
 ```
 
 If you want to customize the icons or the theme, refer to the [customization section on the documentation](https://buefy.org/documentation/customization).
@@ -74,11 +95,79 @@ If you want to customize the icons or the theme, refer to the [customization sec
 
 ```html
 <!-- Buefy CSS -->
-<link rel="stylesheet" href="https://unpkg.com/buefy/dist/buefy.min.css">
+<link rel="stylesheet" href="https://unpkg.com/buefy/dist/buefy.min.css" />
 
 <!-- Buefy JavaScript -->
 <script src="https://unpkg.com/buefy/dist/buefy.min.js"></script>
 ```
+
+**Currently, including `buefy-next` via `<script>` is not working.**
+Please see the issue [#221](https://github.com/ntohq/buefy-next/issues/221).
+
+### Installing Developer Release(s) from GitHub npm Registry to Access the Latest Features
+
+To incorporate the latest changes from the development branch of buefy-next, you can install developer releases from the GitHub npm registry. However, proceed with caution as these packages may be deleted or retracted without notice.
+
+Steps:
+
+1. Generate a Personal Access Token:
+
+    Create a personal access token on GitHub with read access to the GitHub Packages registry.
+
+2. Configure npm:
+
+    In your terminal, execute the following commands:
+
+    ```bash
+    npm login --auth-type=legacy --registry=https://npm.pkg.github.com
+     USERNAME: <their GitHub username>
+     PASSWORD: <personal access token issued at Step 1>
+    echo "@buefy:registry=https://npm.pkg.github.com" > .npmrc
+    ```
+
+3. Select a Developer Release:
+
+    Visit the Buefy package registry: https://github.com/buefy/buefy/pkgs/npm/buefy on GitHub.
+
+    Choose any developer release that suits your needs.
+
+    - Consider the features and bug fixes introduced in each release.
+    - Choose a more recent release if you need the latest features, but be aware of potential instabilities.
+    - Opt for a slightly older release if stability is a higher priority.
+
+    **Package Naming Conventions:**
+
+    Buefy developer releases follow a specific naming format:
+
+    ```
+    @buefy/buefy@<package version>-<dev commit hash>
+    ```
+
+    `<package version>`: This represents the intended stable release version that the developer release will eventually be included in.
+
+    `<dev commit hash>`: This part indicates that it's a developer release and includes a unique commit hash that identifies the specific code changes in that release.
+
+    **Due to the GitHub npm registry's requirements, the package name must be scoped; i.e., prefixed with `@buefy/`.**
+
+4. Install the Package:
+
+    Copy the provided command from GitHub, which will resemble this:
+
+    ```bash
+    npm install buefy@npm:@buefy/buefy@<package version>-<dev commit hash>
+    ```
+
+    Alternatively, to fetch the latest release from the developer release registry, run:
+
+    ```bash
+    npm install buefy@npm:@buefy/buefy@latest
+    ```
+
+    **However, note it is not recommended to use the latest version of our developer release, as its stability fluctuates.**
+
+Congratulations! You've successfully installed a Buefy developer release.
+
+For further details on the GitHub npm registry refer to the [official GitHub documentation](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry#installing-a-package)
 
 ## Start On Cloud IDE
 
@@ -90,24 +179,25 @@ Recent versions of Firefox, Chrome, Edge, Opera and Safari. IE10+ is only partia
 
 ## Contributing
 
-Please see the [contributing guidelines](./.github/CONTRIBUTING.md)
+Please see the [contributing guidelines](/.github/CONTRIBUTING.md)
 
 ## Versioning
 
 Version will follow **v0.Y.Z**, where:
 
-* **Y**: Major (breaking changes)
-* **Z**: Minor or patch
+-   **Y**: Major (breaking changes)
+-   **Z**: Minor or patch
 
 ## Core Team
 
 <table>
   <tr>
-    <td align="center"><a href="https://twitter.com/walter_tommasi"><img src="https://avatars0.githubusercontent.com/u/8029488?v=4" width="80px;" alt=""/><br /><sub><b>Walter Tommasi</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/kikuomax"><img src="https://avatars.githubusercontent.com/u/3257531?v=4" width="80px;" alt=""/><br /><sub><b>Kikuo Emoto</b></sub></a><br /></td>
+    <td align="center"><a href="https://twitter.com/wesdevpro"><img src="https://avatars.githubusercontent.com/u/11604664?v=4" width="80px;" alt=""/><br /><sub><b>Wesley Ford</b></sub></a><br /></td>
   </tr>
 </table>
 
-Special thanks to <a href="http://twitter.com/rafaelpimpa">Rafael Beraldo</a>, the original author.
+Special thanks to <a href="http://twitter.com/rafaelpimpa">Rafael Beraldo</a>, the original author, and <a href="https://twitter.com/walter_tommasi">Walter Tommasi</a>, a former core maintainter of Buefy.
 
 ## Contributors ✨
 
@@ -134,6 +224,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

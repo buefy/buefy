@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`BTabItem render correctly 1`] = `<div class="tab-item" role="tabpanel" id="tab2-content" aria-labelledby="tab2-label" tabindex="-1" style="display: none;"></div>`;

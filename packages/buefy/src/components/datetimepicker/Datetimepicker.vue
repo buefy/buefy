@@ -1,0 +1,491 @@
+<template>
+    <b-datepicker
+        v-if="!isMobile || inline"
+        ref="datepicker"
+        v-model="computedValue"
+        v-bind="datepicker"
+        :rounded="rounded"
+        :open-on-focus="openOnFocus"
+        :position="position"
+        :loading="loading"
+        :inline="inline"
+        :editable="editable"
+        :expanded="expanded"
+        :close-on-click="false"
+        :first-day-of-week="firstDayOfWeek"
+        :rules-for-first-week="rulesForFirstWeek"
+        :date-formatter="defaultDatetimeFormatter"
+        :date-parser="defaultDatetimeParser"
+        :min-date="minDate"
+        :max-date="maxDate"
+        :nearby-month-days="nearbyMonthDays"
+        :icon="icon"
+        :icon-right="iconRight"
+        :icon-right-clickable="iconRightClickable"
+        :icon-pack="iconPack"
+        :size="datepickerSize"
+        :placeholder="placeholder"
+        :horizontal-time-picker="horizontalTimePicker"
+        :range="false"
+        :disabled="disabledOrUndefined"
+        :mobile-native="isMobileNative"
+        :locale="locale"
+        :focusable="focusable"
+        :append-to-body="appendToBody"
+        @focus="onFocus"
+        @blur="onBlur"
+        @active-change="onActiveChange"
+        @icon-right-click="$emit('icon-right-click')"
+        @change-month="$emit('change-month', $event)"
+        @change-year="$emit('change-year', $event)"
+    >
+        <nav class="level is-mobile">
+            <div
+                class="level-item has-text-centered"
+                v-if="$slots.left !== undefined"
+            >
+                <slot name="left" />
+            </div>
+            <div class="level-item has-text-centered">
+                <b-timepicker
+                    ref="timepicker"
+                    v-bind="timepicker"
+                    v-model="computedValue"
+                    inline
+                    :editable="editable"
+                    :min-time="minTime"
+                    :max-time="maxTime"
+                    :size="timepickerSize"
+                    :disabled="timepickerDisabled || undefined"
+                    :focusable="focusable"
+                    :mobile-native="isMobileNative"
+                    :locale="locale"
+                />
+            </div>
+            <div
+                class="level-item has-text-centered"
+                v-if="$slots.right !== undefined"
+            >
+                <slot name="right" />
+            </div>
+        </nav>
+    </b-datepicker>
+    <b-input
+        v-else
+        ref="input"
+        type="datetime-local"
+        autocomplete="off"
+        :model-value="formatNative(computedValue)"
+        :placeholder="placeholder"
+        :size="size"
+        :icon="icon"
+        :icon-pack="iconPack"
+        :rounded="rounded"
+        :loading="loading"
+        :max="formatNative(maxDate)"
+        :min="formatNative(minDate)"
+        :disabled="disabledOrUndefined"
+        :readonly="false"
+        v-bind="$attrs"
+        :use-html5-validation="useHtml5Validation"
+        @change="onChangeNativePicker"
+        @focus="onFocus"
+        @blur="onBlur"
+    />
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
+
+import FormElementMixin from '../../utils/FormElementMixin'
+import { isMobile, matchWithGroups } from '../../utils/helpers'
+import config from '../../utils/config'
+import BInput from '../input/Input.vue'
+import BDatepicker from '../datepicker/Datepicker.vue'
+import BTimepicker from '../timepicker/Timepicker.vue'
+
+type BDatepickerInstance = InstanceType<typeof BDatepicker>
+type BTimepickerInstance = InstanceType<typeof BTimepicker>
+
+export type DatetimeFormatter = (date: Date) => string
+export type DatetimeParser = (date: string) => Date | null
+export type DatetimeCreator = (date: Date) => Date
+
+const AM = 'AM'
+const PM = 'PM'
+export default defineComponent({
+    name: 'BDatetimepicker',
+    components: {
+        BDatepicker,
+        BInput,
+        BTimepicker
+    },
+    mixins: [FormElementMixin],
+    inheritAttrs: false,
+    props: {
+        modelValue: {
+            type: [Date, null] as PropType<Date | null>
+        },
+        editable: {
+            type: Boolean,
+            default: false
+        },
+        placeholder: String,
+        horizontalTimePicker: Boolean,
+        disabled: Boolean,
+        firstDayOfWeek: {
+            type: Number,
+            default: () => {
+                if (typeof config.defaultFirstDayOfWeek === 'number') {
+                    return config.defaultFirstDayOfWeek
+                } else {
+                    return 0
+                }
+            }
+        },
+        rulesForFirstWeek: {
+            type: Number,
+            default: () => 4
+        },
+        icon: String,
+        iconRight: String,
+        iconRightClickable: Boolean,
+        iconPack: String,
+        inline: Boolean,
+        openOnFocus: Boolean,
+        position: String,
+        mobileNative: {
+            type: Boolean,
+            default: true
+        },
+        minDatetime: Date,
+        maxDatetime: Date,
+        nearbyMonthDays: {
+            type: Boolean,
+            default: config.defaultDatepickerNearbyMonthDays
+        },
+        datetimeFormatter: {
+            type: Function as PropType<DatetimeFormatter>
+        },
+        datetimeParser: {
+            type: Function as PropType<DatetimeParser>
+        },
+        datetimeCreator: {
+            type: Function as PropType<DatetimeCreator>,
+            default: (date: Date) => {
+                if (typeof config.defaultDatetimeCreator === 'function') {
+                    return config.defaultDatetimeCreator(date)
+                } else {
+                    return date
+                }
+            }
+        },
+        datepicker: Object,
+        timepicker: Object,
+        tzOffset: {
+            type: Number,
+            default: 0
+        },
+        focusable: {
+            type: Boolean,
+            default: true
+        },
+        appendToBody: Boolean
+    },
+    emits: {
+        /* eslint-disable @typescript-eslint/no-unused-vars */
+        'active-change': (_active: boolean) => true,
+        'change-month': (_month: number) => true,
+        'change-year': (_year: number) => true,
+        'icon-right-click': () => true,
+        'update:modelValue': (_value: Date | null | undefined) => true
+        /* eslint-enable @typescript-eslint/no-unused-vars */
+    },
+    data() {
+        return {
+            newValue: this.adjustValue(this.modelValue)
+        }
+    },
+    computed: {
+        computedValue: {
+            get() {
+                return this.newValue
+            },
+            set(value: Date | null) {
+                if (value) {
+                    let val = new Date(value.getTime())
+                    if (this.newValue) {
+                        // restore time part
+                        if ((value.getDate() !== this.newValue.getDate() ||
+                            value.getMonth() !== this.newValue.getMonth() ||
+                            value.getFullYear() !== this.newValue.getFullYear()) &&
+                            value.getHours() === 0 &&
+                            value.getMinutes() === 0 &&
+                            value.getSeconds() === 0) {
+                            val.setHours(this.newValue.getHours(),
+                                this.newValue.getMinutes(),
+                                this.newValue.getSeconds(), 0)
+                        }
+                    } else {
+                        val = this.datetimeCreator(value)
+                    }
+                    // check min and max range
+                    if (this.minDatetime && val < this.adjustValue(this.minDatetime)!) {
+                        val = this.adjustValue(this.minDatetime)!
+                    } else if (this.maxDatetime && val > this.adjustValue(this.maxDatetime)!) {
+                        val = this.adjustValue(this.maxDatetime)!
+                    }
+                    this.newValue = new Date(val.getTime())
+                } else {
+                    this.newValue = this.adjustValue(value)
+                }
+                const adjustedValue = this.adjustValue(this.newValue, true) // reverse adjust
+                this.$emit('update:modelValue', adjustedValue)
+            }
+        },
+        localeOptions() {
+            return new Intl.DateTimeFormat(this.locale, {
+                year: 'numeric',
+                month: 'numeric',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                second: this.enableSeconds() ? 'numeric' : undefined
+            }).resolvedOptions() as Intl.DateTimeFormatOptions
+        },
+        dtf() {
+            return new Intl.DateTimeFormat(this.locale, {
+                year: this.localeOptions.year || 'numeric',
+                month: this.localeOptions.month || 'numeric',
+                day: this.localeOptions.day || 'numeric',
+                hour: this.localeOptions.hour || 'numeric',
+                minute: this.localeOptions.minute || 'numeric',
+                second: this.enableSeconds() ? this.localeOptions.second || 'numeric' : undefined,
+                hourCycle: !this.isHourFormat24() ? 'h12' : 'h23'
+            })
+        },
+        isMobileNative() {
+            return this.mobileNative && this.tzOffset === 0
+        },
+        isMobile() {
+            return this.isMobileNative && isMobile.any()
+        },
+        minDate() {
+            if (!this.minDatetime) {
+                return this.datepicker ? this.adjustValue(this.datepicker.minDate) : null
+            }
+            const adjMinDatetime = this.adjustValue(this.minDatetime)!
+            return new Date(adjMinDatetime.getFullYear(),
+                adjMinDatetime.getMonth(),
+                adjMinDatetime.getDate(), 0, 0, 0, 0)
+        },
+        maxDate() {
+            if (!this.maxDatetime) {
+                return this.datepicker ? this.adjustValue(this.datepicker.maxDate) : null
+            }
+            const adjMaxDatetime = this.adjustValue(this.maxDatetime)!
+            return new Date(adjMaxDatetime.getFullYear(),
+                adjMaxDatetime.getMonth(),
+                adjMaxDatetime.getDate(), 0, 0, 0, 0)
+        },
+        minTime() {
+            if (!this.minDatetime || (this.newValue === null || typeof this.newValue === 'undefined')) {
+                return this.timepicker ? this.adjustValue(this.timepicker.minTime) : null
+            }
+            const adjMinDatetime = this.adjustValue(this.minDatetime)!
+            if (adjMinDatetime.getFullYear() === this.newValue.getFullYear() &&
+                adjMinDatetime.getMonth() === this.newValue.getMonth() &&
+                adjMinDatetime.getDate() === this.newValue.getDate()) {
+                return adjMinDatetime
+            }
+            return undefined
+        },
+        maxTime() {
+            if (!this.maxDatetime || (this.newValue === null || typeof this.newValue === 'undefined')) {
+                return this.timepicker ? this.adjustValue(this.timepicker.maxTime) : null
+            }
+            const adjMaxDatetime = this.adjustValue(this.maxDatetime)!
+            if (adjMaxDatetime.getFullYear() === this.newValue.getFullYear() &&
+                adjMaxDatetime.getMonth() === this.newValue.getMonth() &&
+                adjMaxDatetime.getDate() === this.newValue.getDate()) {
+                return adjMaxDatetime
+            }
+            return undefined
+        },
+        datepickerSize() {
+            return this.datepicker && this.datepicker.size
+                ? this.datepicker.size
+                : this.size
+        },
+        timepickerSize() {
+            return this.timepicker && this.timepicker.size
+                ? this.timepicker.size
+                : this.size
+        },
+        timepickerDisabled() {
+            return this.timepicker && this.timepicker.disabled
+                ? this.timepicker.disabled
+                : this.disabled
+        },
+
+        disabledOrUndefined() {
+            // On Vue 3, setting a boolean attribute `false` does not remove it,
+            // `null` or `undefined` has to be given to remove it.
+            return this.disabled || undefined
+        }
+    },
+    watch: {
+        modelValue() {
+            this.newValue = this.adjustValue(this.modelValue)
+        },
+        tzOffset() {
+            this.newValue = this.adjustValue(this.modelValue)
+        }
+    },
+    methods: {
+        enableSeconds() {
+            if (this.$refs.timepicker) {
+                return (this.$refs.timepicker as BTimepickerInstance).enableSeconds
+            }
+            return false
+        },
+        isHourFormat24() {
+            if (this.$refs.timepicker) {
+                return (this.$refs.timepicker as BTimepickerInstance).isHourFormat24
+            }
+            return !this.localeOptions.hour12
+        },
+        adjustValue(value: Date | null | undefined, reverse: boolean = false) {
+            if (!value) return value
+            if (reverse) {
+                return new Date(value.getTime() - this.tzOffset * 60000)
+            } else {
+                return new Date(value.getTime() + this.tzOffset * 60000)
+            }
+        },
+        defaultDatetimeParser(date: string) {
+            if (typeof this.datetimeParser === 'function') {
+                return this.datetimeParser(date)
+            } else if (typeof config.defaultDatetimeParser === 'function') {
+                return config.defaultDatetimeParser(date)
+            } else {
+                if (this.dtf.formatToParts && typeof this.dtf.formatToParts === 'function') {
+                    const dayPeriods = [AM, PM, AM.toLowerCase(), PM.toLowerCase()]
+                    if (this.$refs.timepicker) {
+                        dayPeriods.push((this.$refs.timepicker as BTimepickerInstance).amString)
+                        dayPeriods.push((this.$refs.timepicker as BTimepickerInstance).pmString)
+                    }
+                    const parts = this.dtf.formatToParts(new Date())
+                    const formatRegex = parts.map((part, idx) => {
+                        if (part.type === 'literal') {
+                            if (idx + 1 < parts.length && parts[idx + 1].type === 'hour') {
+                                return '[^\\d]+'
+                            }
+                            return part.value.replace(/ /g, '\\s?')
+                        } else if (part.type === 'dayPeriod') {
+                            return `((?!=<${part.type}>)(${dayPeriods.join('|')})?)`
+                        }
+                        return `((?!=<${part.type}>)\\d+)`
+                    }).join('')
+                    const datetimeGroups = matchWithGroups(formatRegex, date)
+
+                    // We do a simple validation for the group.
+                    // If it is not valid, it will fallback to Date.parse below
+                    if (
+                        datetimeGroups.year &&
+                        datetimeGroups.year.length === 4 &&
+                        datetimeGroups.month &&
+                        +datetimeGroups.month <= 12 &&
+                        datetimeGroups.day &&
+                        +datetimeGroups.day <= 31 &&
+                        datetimeGroups.hour &&
+                        +datetimeGroups.hour >= 0 &&
+                        +datetimeGroups.hour < 24 &&
+                        datetimeGroups.minute &&
+                        +datetimeGroups.minute >= 0 &&
+                        +datetimeGroups.minute <= 59
+                    ) {
+                        const d = new Date(
+                            +datetimeGroups.year,
+                            +datetimeGroups.month - 1,
+                            +datetimeGroups.day,
+                            +datetimeGroups.hour,
+                            +datetimeGroups.minute,
+                            +(datetimeGroups.second || 0))
+                        return d
+                    }
+                }
+
+                return new Date(Date.parse(date))
+            }
+        },
+        defaultDatetimeFormatter(date: Date | Date[]) {
+            // FIXME: BDatepicker.dateFormatter should deal with an array
+            // but this function is not ready yet
+            date = date as Date
+            if (typeof this.datetimeFormatter === 'function') {
+                return this.datetimeFormatter(date)
+            } else if (typeof config.defaultDatetimeFormatter === 'function') {
+                return config.defaultDatetimeFormatter(date)
+            } else {
+                return this.dtf.format(date)
+            }
+        },
+        /*
+        * Parse date from string
+        */
+        onChangeNativePicker(event: { target: { value: string } }) {
+            const date = event.target.value
+            const s = date ? date.split(/\D/) : []
+            if (s.length >= 5) {
+                const year = parseInt(s[0], 10)
+                const month = parseInt(s[1], 10) - 1
+                const day = parseInt(s[2], 10)
+                const hours = parseInt(s[3], 10)
+                const minutes = parseInt(s[4], 10)
+                // Seconds are omitted intentionally; they are unsupported by input
+                // type=datetime-local and cause the control to fail native validation
+                this.computedValue = new Date(year, month, day, hours, minutes)
+            } else {
+                this.computedValue = null
+            }
+        },
+        /*
+         * Emit 'active-change' on datepicker active state change
+         */
+        onActiveChange(value: boolean) {
+            this.$emit('active-change', value)
+        },
+        formatNative(value: Date | null | undefined) {
+            const date = new Date(value!)
+            if (value && !isNaN(date.valueOf())) {
+                const year = date.getFullYear()
+                const month = date.getMonth() + 1
+                const day = date.getDate()
+                const hours = date.getHours()
+                const minutes = date.getMinutes()
+                const seconds = date.getSeconds()
+                return year + '-' +
+                    ((month < 10 ? '0' : '') + month) + '-' +
+                    ((day < 10 ? '0' : '') + day) + 'T' +
+                    ((hours < 10 ? '0' : '') + hours) + ':' +
+                    ((minutes < 10 ? '0' : '') + minutes) + ':' +
+                    ((seconds < 10 ? '0' : '') + seconds)
+            }
+            return ''
+        },
+        toggle() {
+            (this.$refs.datepicker as BDatepickerInstance).toggle()
+        }
+    },
+    mounted() {
+        if (!this.isMobile || this.inline) {
+            // $refs attached, it's time to refresh datepicker (input)
+            if (this.newValue) {
+                (this.$refs.datepicker as BDatepickerInstance).$forceUpdate()
+            }
+        }
+    }
+})
+</script>
