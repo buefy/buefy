@@ -55,7 +55,8 @@ export function createDocsRouter(vueApp: App) {
                     // Documentation
                     route('documentation', () => import('@/pages/Documentation.vue')),
                     route('documentation/start', () => import('@/pages/installation/Start.vue')),
-                    route('documentation/customization', () => import('@/pages/installation/Customization.vue')),
+                    route('documentation/sass', () => import('@/pages/installation/Sass.vue')),
+                    route('documentation/css-variables', () => import('@/pages/installation/CssVariables.vue')),
                     route('documentation/constructor-options', () => import('@/pages/installation/ConstructorOptions.vue')),
                     route('documentation/layout', () => import('@/pages/Layout.vue')),
                     route('documentation/icon', () => import('@/pages/components/icon/Icon.vue')),

@@ -4,7 +4,13 @@
             "category": "Installation",
             "pages": [
                 "documentation/start",
-                "documentation/customization",
+                {
+                    "category": "Customization",
+                    "pages": [
+                        "documentation/sass",
+                        "documentation/css-variables"
+                    ]
+                },
                 "documentation/constructor-options"
             ]
         },
