@@ -106,9 +106,14 @@ export default [
         ],
         events: [
             {
-                name: '<code>input</code>',
-                description: 'Triggers when the value of checkbox is changed',
+                name: '<code>update:modelValue</code>',
+                description: 'Triggers when the value of checkbox is changed (Vue 3 v-model event)',
                 parameters: '<code>value: Boolean</code>'
+            },
+            {
+                name: '<code>change</code>',
+                description: 'Native change event that bubbles up from the underlying input element',
+                parameters: '<code>event: Event</code>'
             },
             {
                 name: '<code>[any].native</code>',
@@ -196,9 +201,14 @@ export default [
         ],
         events: [
             {
-                name: '<code>input</code>',
-                description: 'Triggers when the value of checkbox button is changed',
+                name: '<code>update:modelValue</code>',
+                description: 'Triggers when the value of checkbox button is changed (Vue 3 v-model event)',
                 parameters: '<code>value: Any</code>'
+            },
+            {
+                name: '<code>change</code>',
+                description: 'Native change event that bubbles up from the underlying input element',
+                parameters: '<code>event: Event</code>'
             },
             {
                 name: '<code>[any].native</code>',

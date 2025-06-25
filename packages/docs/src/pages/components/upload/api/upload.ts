@@ -103,6 +103,11 @@ export default [
                 parameters: '<code>value: File</code> or <code>File[]</code>'
             },
             {
+                name: '<code>change</code>',
+                description: 'Native change event that bubbles up from the underlying input element',
+                parameters: '<code>event: Event</code>'
+            },
+            {
                 name: '<code>invalid</code>',
                 description: 'Triggers when a file is rejected due to type validation',
                 parameters: '—'
