@@ -29,7 +29,7 @@
         <Example :component="ExSizes" :code="ExSizesCode" title="Sizes" vertical/>
 
         <ApiView :data="api"/>
-        <VariablesView :data="variables"/>
+        <VariablesView :data="variables" link="https://bulma.io/documentation/form/input/#sass-and-css-variables"/>
     </div>
 </template>
 
