@@ -1,6 +1,6 @@
 # Buefy Changelog
 
-## [1.0.0](https://github.com/buefy/buefy/pull/4077) unreleased
+## [1.0.1](https://github.com/buefy/buefy/pull/4077)
 
 ### Breaking changes
 
@@ -19,9 +19,16 @@
 * Clarified developer release installation instructions and naming conventions in the README.
 
 ### Others
-* Version bump: package.json version set to 1.0.0.
+* Version bump: package.json version set to 1.0.1.
 * jsconfig updated to reference new source directory.
 * Large updates to package-lock.json and workflow YAML files to match new structure.
+
+
+## [1.0.0](https://www.npmjs.com/package/buefy/v/1.0.0) depricated
+This version was published more than 8 years before the intended release of Buefy 1.0 and does **not** represent the official, stable `v1`. It was released prematurely and lacks the features, structure, and design decisions that define the true `Buefy v1.0.0`
+
+Please upgrade to `v1.0.1` or newer to access the latest architecture, complete documentation, and active support.
+
 
 ## Buefy-next 0.2.1 unreleased
 
