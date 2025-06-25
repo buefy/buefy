@@ -179,6 +179,16 @@ export default [
                 parameters: '<code>value: String|Number</code>'
             },
             {
+                name: '<code>input</code>',
+                description: 'Native input event that bubbles up from the underlying input element',
+                parameters: '<code>event: Event</code>'
+            },
+            {
+                name: '<code>change</code>',
+                description: 'Native change event that bubbles up from the underlying input element',
+                parameters: '<code>event: Event</code>'
+            },
+            {
                 name: '<code>focus</code>',
                 description: 'Triggers when input has received focus',
                 parameters: '<code>event: $event</code>'

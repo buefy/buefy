@@ -128,6 +128,11 @@ export default [
                 parameters: '<code>value: Any</code>'
             },
             {
+                name: '<code>change</code>',
+                description: 'Native change event that bubbles up from the underlying select element',
+                parameters: '<code>event: Event</code>'
+            },
+            {
                 name: '<code>focus</code>',
                 description: 'Triggers when input has received focus',
                 parameters: '<code>event: $event</code>'

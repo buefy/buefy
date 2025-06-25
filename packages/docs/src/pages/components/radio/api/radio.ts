@@ -69,9 +69,9 @@ export default [
                 parameters: '<code>value: Any</code>'
             },
             {
-                name: '<code>input</code>',
-                description: 'Triggers when the value of checkbox is changed',
-                parameters: '<code>value: Boolean</code>'
+                name: '<code>change</code>',
+                description: 'Native change event that bubbles up from the underlying input element',
+                parameters: '<code>event: Event</code>'
             },
             {
                 name: '<code>[any].native</code>',
@@ -162,6 +162,11 @@ export default [
                 name: '<code>update:modelValue</code>',
                 description: 'Triggers when the value of radio button is changed',
                 parameters: '<code>value: Any</code>'
+            },
+            {
+                name: '<code>change</code>',
+                description: 'Native change event that bubbles up from the underlying input element',
+                parameters: '<code>event: Event</code>'
             },
             {
                 name: '<code>[any].native</code>',

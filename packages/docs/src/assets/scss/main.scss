@@ -1,13 +1,8 @@
-// Bulma vars
-// @use "bulma/sass/utilities";
-
 // Docs variables - MUST come before Buefy to configure Bulma
 @forward "_variables";
 
 // Buefy vars
 @use "buefy/src/scss/utils/_all";
-
-// @use "@ntohq/buefy-next/src/scss/utils/all";
 
 // Docs elements / components
 @use "_apiview";
