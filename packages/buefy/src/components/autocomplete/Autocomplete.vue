@@ -219,7 +219,8 @@ export default defineComponent({
             _isAutocomplete: true,
             _elementRef: 'input',
             _bodyEl: undefined as Element | undefined, // Used to append to body
-            timeOutID: undefined as ReturnType<typeof setTimeout> | undefined
+            timeOutID: undefined as ReturnType<typeof setTimeout> | undefined,
+            _scrollThrottled: false // Performance optimization for scroll events
         }
     },
     computed: {
@@ -260,10 +261,12 @@ export default defineComponent({
          * Add input, dropdown and all children.
          */
         whiteList() {
+            // access computedData to make this property reactive when data changes
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const _ = this.computedData
             const whiteList = []
             whiteList.push((this.$refs.input as BInputComponent).$el.querySelector('input'))
             whiteList.push(this.$refs.dropdown)
-            // Add all children from dropdown
             if (this.$refs.dropdown != null) {
                 const children = (this.$refs.dropdown as Element).querySelectorAll('*')
                 for (const child of children) {
@@ -271,9 +274,7 @@ export default defineComponent({
                 }
             }
             if ((this.$parent?.$data as TaginputData)._isTaginput) {
-                // Add taginput container
                 whiteList.push(this.$parent!.$el)
-                // Add .tag and .delete
                 const tagInputChildren = this.$parent!.$el.querySelectorAll('*')
                 for (const tagInputChild of tagInputChildren) {
                     whiteList.push(tagInputChild)
@@ -354,6 +355,12 @@ export default defineComponent({
          * to open upwards.
          */
         isActive(active) {
+            // Clear any existing timeout to prevent race conditions
+            if (this.timeOutID) {
+                clearTimeout(this.timeOutID)
+                this.timeOutID = undefined
+            }
+
             if (this.dropdownPosition === 'auto') {
                 if (active) {
                     this.calcDropdownInViewportVertical()
@@ -361,6 +368,7 @@ export default defineComponent({
                     // Timeout to wait for the animation to finish before recalculating
                     this.timeOutID = setTimeout(() => {
                         this.calcDropdownInViewportVertical()
+                        this.timeOutID = undefined // Clear reference after execution
                     }, 100)
                 }
             }
@@ -374,13 +382,12 @@ export default defineComponent({
          * When checkInfiniteScroll property changes scroll event should be removed or added
          */
         checkInfiniteScroll(checkInfiniteScroll) {
-            if ((this.$refs.dropdown && (this.$refs.dropdown as Element).querySelector('.dropdown-content')) === false) return
-
-            const list = (this.$refs.dropdown as Element).querySelector('.dropdown-content')!
+            if (!this.$refs.dropdown) return
+            const list = (this.$refs.dropdown as Element).querySelector('.dropdown-content')
+            if (!list) return
 
             if (checkInfiniteScroll === true) {
                 list.addEventListener('scroll', this.checkIfReachedTheEndOfScroll)
-
                 return
             }
 
@@ -397,12 +404,12 @@ export default defineComponent({
             this.$emit('update:modelValue', value)
             // Check if selected is invalid
             const currentValue = this.getValue(this.selected)
-            if (currentValue && currentValue !== value) {
+            if (currentValue !== undefined && currentValue !== null && currentValue !== value) {
                 this.setSelected(null, false)
             }
             // Close dropdown if input is clear or else open it
-            if (this.hasFocus && (!this.openOnFocus || value)) {
-                this.isActive = !!value
+            if (this.hasFocus && (!this.openOnFocus || value !== '')) {
+                this.isActive = value !== '' && value !== undefined && value !== null
             }
         },
 
@@ -413,6 +420,10 @@ export default defineComponent({
          */
         modelValue(value) {
             this.newValue = value
+        },
+
+        keepFirst(value) {
+            this.ariaAutocomplete = value ? 'both' : 'list'
         },
 
         /*
@@ -439,6 +450,25 @@ export default defineComponent({
                     }
                 }
             }
+        },
+
+        /*
+         * When appendToBody property changes, handle the transition properly
+         */
+        appendToBody(newValue, oldValue) {
+            if (newValue && !oldValue) {
+                // Changing from false to true - need to create _bodyEl if dropdown is active
+                if (this.isActive && this.$refs.dropdown && !this.$data._bodyEl) {
+                    this.$data._bodyEl = createAbsoluteElement(this.$refs.dropdown as Element)
+                    this.updateAppendToBody()
+                }
+            } else if (!newValue && oldValue) {
+                // Changing from true to false - need to clean up _bodyEl
+                if (this.$data._bodyEl) {
+                    removeElement(this.$data._bodyEl)
+                    this.$data._bodyEl = undefined
+                }
+            }
         }
     },
     methods: {
@@ -463,10 +493,7 @@ export default defineComponent({
             this.$emit('select', this.selected, event)
             if (this.selected !== null) {
                 if (this.clearOnSelect) {
-                    const input = this.$refs.input as BInputComponent
-                    input.newValue = ''
-                    const innerInput = input.$refs.input as HTMLInputElement | HTMLTextAreaElement
-                    innerInput.value = ''
+                    this.newValue = ''
                 } else {
                     this.newValue = this.getValue(this.selected)
                 }
@@ -492,6 +519,30 @@ export default defineComponent({
                 } else {
                     this.setHovered(null)
                 }
+            })
+        },
+
+        /*
+         * Find index of hovered item in data array by comparing display values
+         * instead of object references. This fixes the bug with computed data
+         * where proxy objects cause indexOf to fail.
+         */
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        findHoveredIndex(data: any[]) {
+            if (this.hovered === null || this.hovered === undefined) {
+                return -1
+            }
+
+            const hoveredValue = this.getValue(this.hovered)
+            if (hoveredValue === null || hoveredValue === undefined) {
+                return -1
+            }
+
+            return data.findIndex((item) => {
+                if (item === null || item === undefined) {
+                    return hoveredValue === null || hoveredValue === undefined
+                }
+                return this.getValue(item) === hoveredValue
             })
         },
 
@@ -550,7 +601,7 @@ export default defineComponent({
          */
         clickedOutside(event: MouseEvent) {
             const target = isCustomElement(this) ? event.composedPath()[0] : event.target
-            if (!this.hasFocus && this.whiteList.indexOf(target) < 0) {
+            if (!this.hasFocus && target && this.whiteList.indexOf(target as Element) < 0) {
                 if (this.keepFirst && this.hovered && this.selectOnClickOutside) {
                     this.setSelected(this.hovered, true)
                 } else {
@@ -578,17 +629,33 @@ export default defineComponent({
          * reached it's end.
          */
         checkIfReachedTheEndOfScroll() {
-            const list = (this.$refs.dropdown as Element).querySelector('.dropdown-content')!
-            const footerHeight = this.hasFooterSlot
-                ? list.querySelectorAll('div.dropdown-footer')[0].clientHeight
-                : 0
-            if (list.clientHeight !== list.scrollHeight &&
-                (list.scrollTop +
-                 list.parentElement!.clientHeight +
-                 footerHeight) >= list.scrollHeight
-            ) {
-                this.$emit('infinite-scroll')
-            }
+            // Simple throttling to improve performance
+            if (this._scrollThrottled) return
+            this._scrollThrottled = true
+
+            requestAnimationFrame(() => {
+                try {
+                    const list = (this.$refs.dropdown as Element)?.querySelector('.dropdown-content')
+                    if (!list) return
+
+                    const footerHeight = this.hasFooterSlot
+                        ? (list.querySelector('div.dropdown-footer') as HTMLElement)?.clientHeight || 0
+                        : 0
+
+                    if (list.clientHeight !== list.scrollHeight &&
+                        (list.scrollTop +
+                         list.parentElement!.clientHeight +
+                         footerHeight) >= list.scrollHeight
+                    ) {
+                        this.$emit('infinite-scroll')
+                    }
+                } catch (error) {
+                    // eslint-disable-next-line no-console
+                    console.warn('Autocomplete: Error in scroll handler', error)
+                } finally {
+                    this._scrollThrottled = false
+                }
+            })
         },
 
         /*
@@ -603,12 +670,21 @@ export default defineComponent({
                  */
                 if (this.$refs.dropdown == null) return
 
-                const rect = (this.$refs.dropdown as Element).getBoundingClientRect()
+                try {
+                    const rect = (this.$refs.dropdown as Element).getBoundingClientRect()
 
-                this.isListInViewportVertically = rect.top >= 0 &&
-                    rect.bottom <= (window?.innerHeight || document?.documentElement?.clientHeight)
-                if (this.appendToBody) {
-                    this.updateAppendToBody()
+                    this.isListInViewportVertically = rect.top >= 0 &&
+                        rect.bottom <= (
+                            window?.innerHeight || document?.documentElement?.clientHeight
+                        )
+                    if (this.appendToBody) {
+                        this.updateAppendToBody()
+                    }
+                } catch (error) {
+                    // eslint-disable-next-line no-console
+                    console.warn('Autocomplete: Error calculating dropdown position', error)
+                    // Fallback to default positioning
+                    this.isListInViewportVertically = true
                 }
             })
         },
@@ -635,7 +711,7 @@ export default defineComponent({
                 } else if (this.footerHovered) {
                     index = (data.length - 1) + sum
                 } else {
-                    index = data.indexOf(this.hovered) + sum
+                    index = this.findHoveredIndex(data) + sum
                 }
 
                 index = index > data.length - 1 ? data.length - 1 : index
@@ -705,7 +781,8 @@ export default defineComponent({
         },
         onInput() {
             const currentValue = this.getValue(this.selected)
-            if (currentValue && currentValue === this.newValue) return
+            if ((currentValue !== undefined && currentValue !== null) &&
+                currentValue === this.newValue) return
             this.$emit('typing', this.newValue)
             this.checkValidity()
         },
@@ -733,6 +810,10 @@ export default defineComponent({
                 ? this.$parent!.$el
                 : (this.$refs.input as BInputComponent).$el
             if (dropdownMenu && trigger) {
+                // Ensure _bodyEl exists before trying to update it
+                if (!this.$data._bodyEl) {
+                    this.$data._bodyEl = createAbsoluteElement(dropdownMenu)
+                }
                 // update wrapper dropdown
                 const root = this.$data._bodyEl!
                 root.classList.forEach((item) => root.classList.remove(item))
@@ -764,6 +845,7 @@ export default defineComponent({
         if (typeof window !== 'undefined') {
             document.addEventListener('click', this.clickedOutside)
             if (this.dropdownPosition === 'auto') { window.addEventListener('resize', this.calcDropdownInViewportVertical) }
+            if (this.appendToBody) { window.addEventListener('scroll', this.calcDropdownInViewportVertical) }
         }
     },
     mounted() {
@@ -782,17 +864,22 @@ export default defineComponent({
         if (typeof window !== 'undefined') {
             document.removeEventListener('click', this.clickedOutside)
             if (this.dropdownPosition === 'auto') { window.removeEventListener('resize', this.calcDropdownInViewportVertical) }
+            if (this.appendToBody) { window.removeEventListener('scroll', this.calcDropdownInViewportVertical) }
         }
         if (this.checkInfiniteScroll &&
-            this.$refs.dropdown && (this.$refs.dropdown as Element).querySelector('.dropdown-content')
+                this.$refs.dropdown && (this.$refs.dropdown as Element).querySelector('.dropdown-content')
         ) {
             const list = (this.$refs.dropdown as Element).querySelector('.dropdown-content')!
             list.removeEventListener('scroll', this.checkIfReachedTheEndOfScroll)
         }
-        if (this.appendToBody) {
-            removeElement(this.$data._bodyEl!)
+        if (this.appendToBody && this.$data._bodyEl) {
+            removeElement(this.$data._bodyEl)
         }
-        clearTimeout(this.timeOutID)
+        // Clean up any pending timeouts to prevent memory leaks
+        if (this.timeOutID) {
+            clearTimeout(this.timeOutID)
+            this.timeOutID = undefined
+        }
     }
 })
 </script>

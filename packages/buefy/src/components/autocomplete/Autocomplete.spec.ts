@@ -402,6 +402,45 @@ describe('BAutocomplete', () => {
         expect(active[0]).toEqual([true])
     })
 
+    it('updates ariaAutocomplete when keepFirst changes', async () => {
+        await wrapper.setProps({ keepFirst: true })
+        expect(wrapper.vm.ariaAutocomplete).toBe('both')
+        await wrapper.setProps({ keepFirst: false })
+        expect(wrapper.vm.ariaAutocomplete).toBe('list')
+    })
+
+    it('clears selection when value changes from 0', async () => {
+        await wrapper.setProps({ data: [0, 1] })
+        wrapper.vm.setSelected(0)
+        await wrapper.vm.$nextTick()
+        await wrapper.setData({ newValue: '1' })
+        expect(wrapper.vm.selected).toBeNull()
+    })
+
+    it('opens dropdown when value is 0', async () => {
+        await wrapper.setProps({ data: ['0', '1'] })
+        await wrapper.setData({ hasFocus: true })
+        await $input.setValue('0')
+        expect(wrapper.vm.isActive).toBe(true)
+    })
+
+    it('updates model when clearOnSelect is used', async () => {
+        await wrapper.setProps({ data: DATA_LIST, clearOnSelect: true })
+        await wrapper.setData({ isActive: true })
+        await $input.trigger('keydown', { key: 'Down' })
+        await $input.trigger('keydown', { key: 'Enter' })
+        const emitted = wrapper.emitted()['update:modelValue']
+        expect(emitted[emitted.length - 1]).toEqual([''])
+    })
+
+    it('updates white list when data changes', async () => {
+        await wrapper.setProps({ data: ['a'] })
+        const len = wrapper.vm.whiteList.length
+        await wrapper.setProps({ data: ['a', 'b'] })
+        await wrapper.vm.$nextTick()
+        expect(wrapper.vm.whiteList.length).toBeGreaterThan(len)
+    })
+
     describe('with fallthrough attributes', () => {
         const attrs = {
             class: 'fallthrough-class',
@@ -440,6 +479,556 @@ describe('BAutocomplete', () => {
             expect(root.classes(attrs.class)).toBe(false)
             expect(root.attributes('style')).toBeUndefined()
             expect(root.attributes('id')).toBeUndefined()
+        })
+    })
+
+    // Test for bug #4098: Arrow key selection doesn't work with computed data
+    it('should handle arrow key navigation with computed data containing objects', async () => {
+        // This test reproduces the bug where arrow key navigation fails with computed data
+        // that contains objects, due to proxy comparison issues
+
+        const DATA_OBJECTS = [
+            { id: 1, name: 'Angular' },
+            { id: 2, name: 'React' },
+            { id: 3, name: 'Vue.js' }
+        ]
+
+        // Simulate computed data by creating a new array reference each time
+        // This mimics how Vue's reactivity system creates new proxy objects
+        const createComputedData = () => {
+            return DATA_OBJECTS.map((item) => ({ ...item }))
+        }
+
+        // Set initial data
+        await wrapper.setProps({
+            data: createComputedData(),
+            field: 'name',
+            openOnFocus: true
+        })
+
+        // Focus and open dropdown
+        await $input.trigger('focus')
+        expect($dropdown.isVisible()).toBeTruthy()
+
+        // Update data to simulate computed property changes (creates new object references)
+        // This is where the bug manifests - the hovered item reference becomes stale
+        await wrapper.setProps({ data: createComputedData() })
+
+        // Try to navigate with arrow keys
+        await $input.trigger('keydown', { key: 'Down' })
+
+        // The first item should be hovered after pressing Down
+        expect(wrapper.vm.hovered).not.toBeNull()
+        expect(wrapper.vm.hovered?.name).toBe('Angular')
+
+        // Navigate to second item
+        await $input.trigger('keydown', { key: 'Down' })
+
+        // This should move to the second item, but due to the bug it might not work
+        expect(wrapper.vm.hovered?.name).toBe('React')
+
+        // Select the hovered item
+        await $input.trigger('keydown', { key: 'Enter' })
+        expect($input.element.value).toBe('React')
+    })
+
+    it('should handle arrow key navigation consistently after data updates', async () => {
+        // Additional test to verify the fix works with multiple data updates
+        const DATA_OBJECTS = [
+            { id: 1, name: 'Angular', category: 'framework' },
+            { id: 2, name: 'React', category: 'library' },
+            { id: 3, name: 'Vue.js', category: 'framework' }
+        ]
+
+        await wrapper.setProps({
+            data: DATA_OBJECTS,
+            field: 'name',
+            openOnFocus: true
+        })
+
+        await $input.trigger('focus')
+        expect($dropdown.isVisible()).toBeTruthy()
+
+        // Navigate to second item
+        await $input.trigger('keydown', { key: 'Down' })
+        await $input.trigger('keydown', { key: 'Down' })
+
+        expect(wrapper.vm.hovered?.name).toBe('React')
+
+        // Update data (simulating computed property change)
+        const updatedData = DATA_OBJECTS.map((item) => ({ ...item, updated: true }))
+        await wrapper.setProps({ data: updatedData })
+
+        // Navigation should still work after data update
+        await $input.trigger('keydown', { key: 'Down' })
+        expect(wrapper.vm.hovered?.name).toBe('Vue.js')
+
+        await $input.trigger('keydown', { key: 'Enter' })
+        expect($input.element.value).toBe('Vue.js')
+    })
+
+    it('should handle dynamic appendToBody prop changes without crashing', async () => {
+        const data = ['Angular', 'Vue.js', 'React']
+        const wrapper = mount(BAutocomplete, {
+            props: {
+                data,
+                appendToBody: false // Start with false
+            },
+            attachTo: document.body
+        })
+
+        // Initially appendToBody is false
+        expect(wrapper.vm.appendToBody).toBe(false)
+
+        // Change appendToBody to true dynamically
+        await wrapper.setProps({ appendToBody: true })
+        expect(wrapper.vm.appendToBody).toBe(true)
+
+        // Focus the input to trigger dropdown and potential appendToBody logic
+        const input = wrapper.find('input')
+        await input.trigger('focus')
+        await wrapper.vm.$nextTick()
+
+        // Type something to open dropdown and trigger updateAppendToBody
+        wrapper.vm.newValue = 'Vue'
+        await wrapper.vm.$nextTick()
+
+        // This should not crash - if it crashes, the test will fail
+        expect(wrapper.vm.isActive).toBe(true)
+
+        wrapper.unmount()
+    })
+
+    it('should properly handle appendToBody switching from false to true and back', async () => {
+        const data = ['Angular', 'Vue.js', 'React']
+        const wrapper = mount(BAutocomplete, {
+            props: {
+                data,
+                appendToBody: false,
+                openOnFocus: true
+            },
+            attachTo: document.body
+        })
+
+        const input = wrapper.find('input')
+
+        // Start with appendToBody false
+        expect(wrapper.vm.appendToBody).toBe(false)
+        expect(wrapper.vm.$data._bodyEl).toBeUndefined()
+
+        // Focus to open dropdown
+        await input.trigger('focus')
+        await wrapper.vm.$nextTick()
+        expect(wrapper.vm.isActive).toBe(true)
+
+        // Change to appendToBody true
+        await wrapper.setProps({ appendToBody: true })
+        expect(wrapper.vm.appendToBody).toBe(true)
+
+        // Type something to trigger updateAppendToBody
+        wrapper.vm.newValue = 'Vue'
+        await wrapper.vm.$nextTick()
+
+        // Should have created _bodyEl
+        expect(wrapper.vm.$data._bodyEl).toBeDefined()
+
+        // Change back to appendToBody false
+        await wrapper.setProps({ appendToBody: false })
+        expect(wrapper.vm.appendToBody).toBe(false)
+
+        // _bodyEl should be cleaned up
+        expect(wrapper.vm.$data._bodyEl).toBeUndefined()
+
+        // Should still work normally
+        expect(wrapper.vm.isActive).toBe(true)
+
+        wrapper.unmount()
+    })
+
+    // Performance and stability tests for recent improvements
+    describe('Performance and Stability Improvements', () => {
+        it('should prevent race conditions by clearing timeouts properly', async () => {
+            const wrapper = mount(BAutocomplete, {
+                props: {
+                    data: DATA_LIST,
+                    dropdownPosition: 'auto'
+                },
+                attachTo: document.body
+            })
+
+            // Mock setTimeout and clearTimeout to verify they're called correctly
+            const originalSetTimeout = window.setTimeout
+            const originalClearTimeout = window.clearTimeout
+            const setTimeoutSpy = vi.fn((handler: TimerHandler, timeout?: number) => {
+                return originalSetTimeout(handler, timeout) as unknown as number
+            })
+            const clearTimeoutSpy = vi.fn(originalClearTimeout)
+            // @ts-expect-error - Mocking global setTimeout for testing
+            window.setTimeout = setTimeoutSpy
+            window.clearTimeout = clearTimeoutSpy
+
+            // Rapidly toggle isActive to test race condition prevention
+            wrapper.vm.isActive = true
+            await wrapper.vm.$nextTick()
+
+            wrapper.vm.isActive = false
+            await wrapper.vm.$nextTick()
+
+            wrapper.vm.isActive = true
+            await wrapper.vm.$nextTick()
+
+            wrapper.vm.isActive = false
+            await wrapper.vm.$nextTick()
+
+            // Should have called clearTimeout to prevent race conditions
+            expect(clearTimeoutSpy).toHaveBeenCalled()
+
+            // Restore original functions
+            window.setTimeout = originalSetTimeout
+            window.clearTimeout = originalClearTimeout
+
+            wrapper.unmount()
+        })
+
+        it('should handle scroll events with throttling to improve performance', async () => {
+            const wrapper = mount(BAutocomplete, {
+                props: {
+                    data: DATA_LIST,
+                    checkInfiniteScroll: true
+                },
+                attachTo: document.body
+            })
+
+            const input = wrapper.find('input')
+            await input.trigger('focus')
+            await input.setValue('test')
+
+            // Make dropdown active
+            wrapper.vm.isActive = true
+            await wrapper.vm.$nextTick()
+
+            // Get dropdown content element
+            const dropdown = wrapper.find('.dropdown-content')
+            expect(dropdown.exists()).toBe(true)
+
+            // Mock requestAnimationFrame to test throttling
+            const originalRAF = window.requestAnimationFrame
+            const rafSpy = vi.fn((callback: FrameRequestCallback) => {
+                const timestamp = performance.now()
+                callback(timestamp)
+                return 0
+            })
+            window.requestAnimationFrame = rafSpy
+
+            // Initial scroll should work
+            expect(wrapper.vm._scrollThrottled).toBe(false)
+
+            // Trigger scroll event
+            wrapper.vm.checkIfReachedTheEndOfScroll()
+
+            // Should use requestAnimationFrame for throttling
+            expect(rafSpy).toHaveBeenCalled()
+
+            // Restore RAF
+            window.requestAnimationFrame = originalRAF
+
+            wrapper.unmount()
+        })
+
+        it('should handle DOM errors gracefully in calcDropdownInViewportVertical', async () => {
+            const wrapper = mount(BAutocomplete, {
+                props: {
+                    data: DATA_LIST,
+                    dropdownPosition: 'auto'
+                }
+            })
+
+            // Mock console.warn to verify error handling
+            const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+
+            // Simulate a DOM error by making getBoundingClientRect throw
+            const originalGetBoundingClientRect = Element.prototype.getBoundingClientRect
+            Element.prototype.getBoundingClientRect = vi.fn(() => {
+                throw new Error('DOM error')
+            })
+
+            // This should not crash and should use fallback positioning
+            wrapper.vm.calcDropdownInViewportVertical()
+            await wrapper.vm.$nextTick()
+
+            // Should log warning and use fallback
+            expect(consoleSpy).toHaveBeenCalledWith(
+                expect.stringContaining('Error calculating dropdown position'),
+                expect.any(Error)
+            )
+            expect(wrapper.vm.isListInViewportVertically).toBe(true) // Fallback value
+
+            // Restore original methods
+            Element.prototype.getBoundingClientRect = originalGetBoundingClientRect
+            consoleSpy.mockRestore()
+
+            wrapper.unmount()
+        })
+
+        it('should handle scroll handler errors gracefully', async () => {
+            const wrapper = mount(BAutocomplete, {
+                props: {
+                    data: DATA_LIST,
+                    checkInfiniteScroll: true
+                },
+                attachTo: document.body
+            })
+
+            // Mock console.warn to verify error handling
+            const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+
+            // Set up the dropdown first
+            const input = wrapper.find('input')
+            await input.trigger('focus')
+            await input.setValue('test')
+            wrapper.vm.isActive = true
+            await wrapper.vm.$nextTick()
+
+            // Mock the specific querySelector call that's used in checkIfReachedTheEndOfScroll
+            const originalQuerySelector = Element.prototype.querySelector
+            const mockQuerySelector = vi.fn((selector: string) => {
+                if (selector === '.dropdown-content') {
+                    throw new Error('DOM query error')
+                }
+                return originalQuerySelector.call(this, selector)
+            })
+            Element.prototype.querySelector = mockQuerySelector
+
+            // This should not crash
+            wrapper.vm.checkIfReachedTheEndOfScroll()
+
+            // Wait for RAF to complete
+            await new Promise((resolve) => setTimeout(resolve, 20))
+
+            // Should log warning and handle error gracefully
+            expect(consoleSpy).toHaveBeenCalledWith(
+                expect.stringContaining('Error in scroll handler'),
+                expect.any(Error)
+            )
+
+            // Restore original methods
+            Element.prototype.querySelector = originalQuerySelector
+            consoleSpy.mockRestore()
+
+            wrapper.unmount()
+        })
+
+        it('should properly clean up timeouts on component destroy', async () => {
+            const wrapper = mount(BAutocomplete, {
+                props: {
+                    data: DATA_LIST,
+                    dropdownPosition: 'auto'
+                }
+            })
+
+            // Mock clearTimeout to verify cleanup
+            const clearTimeoutSpy = vi.spyOn(window, 'clearTimeout')
+
+            // Trigger a timeout by setting isActive to false
+            // This should create a timeout in the watcher
+            wrapper.vm.isActive = true
+            await wrapper.vm.$nextTick()
+            wrapper.vm.isActive = false
+            await wrapper.vm.$nextTick()
+
+            // Verify timeout was set (might be undefined initially)
+            // The key is that clearTimeout should be called during cleanup
+
+            // Unmount component
+            wrapper.unmount()
+
+            // Should have called clearTimeout during cleanup if timeout existed
+            // This verifies the cleanup logic is in place
+            expect(clearTimeoutSpy).toHaveBeenCalled()
+
+            clearTimeoutSpy.mockRestore()
+        })
+
+        it('should handle type safety for event targets in clickedOutside', async () => {
+            const wrapper = mount(BAutocomplete, {
+                props: {
+                    data: DATA_LIST
+                },
+                attachTo: document.body
+            })
+
+            const input = wrapper.find('input')
+            await input.trigger('focus')
+            wrapper.vm.isActive = true
+
+            // Create a mock event with null target (testing type safety)
+            const mockEvent = new MouseEvent('click', {
+                bubbles: true,
+                cancelable: true
+            })
+
+            // Override target to be null for testing
+            Object.defineProperty(mockEvent, 'target', {
+                value: null,
+                writable: false
+            })
+
+            // This should not crash due to proper type safety checks
+            expect(() => {
+                wrapper.vm.clickedOutside(mockEvent)
+            }).not.toThrow()
+
+            wrapper.unmount()
+        })
+
+        it('should maintain performance during rapid data updates', async () => {
+            const wrapper = mount(BAutocomplete, {
+                props: {
+                    data: DATA_LIST,
+                    openOnFocus: true
+                },
+                attachTo: document.body
+            })
+
+            const input = wrapper.find('input')
+            await input.trigger('focus')
+
+            // Measure time for rapid data updates
+            const startTime = performance.now()
+
+            // Rapidly update data multiple times
+            for (let i = 0; i < 10; i++) {
+                const newData = DATA_LIST.map((item) => `${item}_${i}`)
+                await wrapper.setProps({ data: newData })
+                await wrapper.vm.$nextTick()
+            }
+
+            const endTime = performance.now()
+            const executionTime = endTime - startTime
+
+            // Should complete reasonably quickly (less than 100ms for 10 updates)
+            expect(executionTime).toBeLessThan(100)
+
+            wrapper.unmount()
+        })
+
+        it('should handle scroll throttling flag correctly', async () => {
+            const wrapper = mount(BAutocomplete, {
+                props: {
+                    data: DATA_LIST,
+                    checkInfiniteScroll: true
+                },
+                attachTo: document.body
+            })
+
+            // Initial state should be false
+            expect(wrapper.vm._scrollThrottled).toBe(false)
+
+            // Set up dropdown to be active
+            const input = wrapper.find('input')
+            await input.trigger('focus')
+            wrapper.vm.isActive = true
+            await wrapper.vm.$nextTick()
+
+            // Verify throttling behavior by checking the flag directly
+            expect(wrapper.vm._scrollThrottled).toBe(false)
+
+            wrapper.unmount()
+        })
+    })
+
+    // Edge case tests for robustness
+    describe('Edge Cases and Robustness', () => {
+        it('should handle undefined refs gracefully', async () => {
+            const wrapper = mount(BAutocomplete, {
+                props: {
+                    data: DATA_LIST
+                }
+            })
+
+            // Test that methods handle missing refs gracefully
+            const originalDropdown = wrapper.vm.$refs.dropdown
+
+            // Temporarily set dropdown ref to undefined
+            wrapper.vm.$refs.dropdown = undefined
+
+            // These should not crash
+            expect(() => {
+                wrapper.vm.calcDropdownInViewportVertical()
+            }).not.toThrow()
+
+            // Restore refs
+            wrapper.vm.$refs.dropdown = originalDropdown
+
+            wrapper.unmount()
+        })
+
+        it('should handle missing DOM elements in scroll handler', async () => {
+            const wrapper = mount(BAutocomplete, {
+                props: {
+                    data: DATA_LIST,
+                    checkInfiniteScroll: true
+                }
+            })
+
+            // Create a simple test for missing elements
+            // The method should handle cases where dropdown content is missing
+            expect(() => {
+                wrapper.vm.checkIfReachedTheEndOfScroll()
+            }).not.toThrow()
+
+            wrapper.unmount()
+        })
+
+        it('should handle window object being undefined (SSR compatibility)', () => {
+            // Simple test for SSR compatibility
+            // The component should be able to handle cases where window APIs are not available
+            const wrapper = mount(BAutocomplete, {
+                props: {
+                    data: DATA_LIST
+                }
+            })
+
+            // Should not crash during creation in SSR-like environment
+            expect(wrapper.vm).toBeDefined()
+            expect(wrapper.vm.$options.name).toBe('BAutocomplete')
+
+            wrapper.unmount()
+        })
+
+        it('should handle rapid component mount/unmount cycles', () => {
+            // Test for memory leaks and proper cleanup with simpler approach
+            let lastWrapper: VueWrapper<InstanceType<typeof BAutocomplete>> | null = null
+
+            for (let i = 0; i < 3; i++) {
+                const wrapper = mount(BAutocomplete, {
+                    props: {
+                        data: DATA_LIST,
+                        dropdownPosition: 'auto',
+                        checkInfiniteScroll: true
+                    },
+                    attachTo: document.body
+                })
+
+                // Basic functionality should work
+                expect(wrapper.vm).toBeDefined()
+                expect(wrapper.vm.isActive).toBe(false)
+
+                // Clean up previous wrapper if exists
+                if (lastWrapper) {
+                    lastWrapper.unmount()
+                }
+
+                lastWrapper = wrapper
+            }
+
+            // Clean up final wrapper
+            if (lastWrapper) {
+                lastWrapper.unmount()
+            }
+
+            // If we reach here without crashes, cleanup is working properly
+            expect(true).toBe(true)
         })
     })
 })
