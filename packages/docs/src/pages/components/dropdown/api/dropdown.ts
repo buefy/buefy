@@ -101,6 +101,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>append-to-body-copy-parent</code>',
+                description: 'Copy parent classes when appending to body',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>scrollable</code>',
                 description: 'Dropdown content will be scrollable',
                 type: 'Boolean',
@@ -135,6 +142,11 @@ export default [
             }
         ],
         events: [
+            {
+                name: '<code>update:modelValue</code>',
+                description: 'Triggers when the selected value changes (v-model event)',
+                parameters: '<code>value: Any | Any[]</code>'
+            },
             {
                 name: '<code>change</code>',
                 description: 'Triggers when an item is selected',

@@ -136,6 +136,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>lazy</code>',
+                description: 'Only emit modelValue on dragend, not during dragging',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             }
         ],
         slots: [
@@ -147,7 +154,7 @@ export default [
         ],
         events: [
             {
-                name: '<code>input</code>',
+                name: '<code>update:modelValue</code>',
                 description: 'Triggers when value is changed',
                 parameters: '<code>value: Number|Array</code>'
             },

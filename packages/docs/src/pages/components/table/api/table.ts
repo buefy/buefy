@@ -649,6 +649,26 @@ export default [
                 parameters: '<code> filter: Object </code>'
             },
             {
+                name: '<code>update:checkedRows</code>',
+                description: 'Triggers when checked rows are updated (Vue 3 v-model for checkedRows)',
+                parameters: '<code>checkedRows: Array</code>'
+            },
+            {
+                name: '<code>update:currentPage</code>',
+                description: 'Triggers when current page is updated (Vue 3 v-model for currentPage)',
+                parameters: '<code>page: Number</code>'
+            },
+            {
+                name: '<code>update:openedDetailed</code>',
+                description: 'Triggers when opened detailed rows are updated (Vue 3 v-model for openedDetailed)',
+                parameters: '<code>rows: Array</code>'
+            },
+            {
+                name: '<code>update:selected</code>',
+                description: 'Triggers when selected row is updated (Vue 3 v-model for selected)',
+                parameters: '<code>row: Object</code>'
+            },
+            {
                 name: '<code>filters-event-[filters-event]</code>',
                 description: 'Triggers <code>filters-event</code> event from filter (it works only with Vue 2.6.x)',
                 parameters: '<code> event: Event </code>, <code> filter: Object </code>'

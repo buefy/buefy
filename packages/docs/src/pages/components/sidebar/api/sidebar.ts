@@ -3,6 +3,13 @@ export default [
       title: 'Sidebar',
       props: [
             {
+                name: '<code>v-model</code>',
+                description: 'To control the behaviour of the sidebar programmatically (two-way binding)',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>open</code>',
                 description: 'To control the behaviour of the sidebar programmatically, use the <code>.sync</code> modifier to make it two-way binding',
                 type: 'Boolean',
@@ -19,7 +26,7 @@ export default [
             {
               name: '<code>type</code>',
               description: 'Type (color) of the background, optional',
-              type: 'String, ',
+              type: 'String, Object',
               values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
                   <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
                   <code>is-warning</code>, <code>is-danger</code>,
@@ -121,9 +128,27 @@ export default [
       ],
       events: [
         {
+            name: '<code>update:modelValue</code>',
+            description: 'Triggers when sidebar is opened/closed',
+            parameters: '<code>value: Boolean</code>'
+        },
+        {
             name: '<code>close</code>',
             description: 'Triggers when user closed/canceled',
             parameters: '—'
+        }
+    ],
+    methods: [
+        {
+            name: '<code>close</code>',
+            description: 'Programmatically close the sidebar',
+            return: '—'
+        },
+        {
+            name: '<code>cancel</code>',
+            description: 'Close the sidebar with a specific cancel method',
+            parameters: '<code>method: String, ...args</code>',
+            return: '—'
         }
     ]
   }

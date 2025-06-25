@@ -88,18 +88,44 @@ export default [
                 type: 'String',
                 values: '—',
                 default: '—'
+            },
+            {
+                name: '<code>autocomplete</code>',
+                description: 'Native HTML5 autocomplete attribute',
+                type: 'String',
+                values: '—',
+                default: '<code>on</code>'
+            }
+        ],
+        slots: [
+            {
+                name: 'default',
+                description: 'Label content for the checkbox',
+                props: '—'
             }
         ],
         events: [
             {
-                name: '<code>input</code>',
-                description: 'Triggers when the value of checkbox is changed',
+                name: '<code>update:modelValue</code>',
+                description: 'Triggers when the value of checkbox is changed (Vue 3 v-model event)',
                 parameters: '<code>value: Boolean</code>'
+            },
+            {
+                name: '<code>change</code>',
+                description: 'Native change event that bubbles up from the underlying input element',
+                parameters: '<code>event: Event</code>'
             },
             {
                 name: '<code>[any].native</code>',
                 description: 'Listen to any event using this syntax, e.g <code>@click.native</code>',
                 parameters: '<code>event: $event</code>'
+            }
+        ],
+        methods: [
+            {
+                name: '<code>focus()</code>',
+                description: 'Set focus on the checkbox input',
+                return: '—'
             }
         ]
     },
@@ -138,6 +164,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>required</code>',
+                description: 'Same as native <code>required</code>',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>name</code>',
                 description: 'Same as native <code>name</code>',
                 type: 'String',
@@ -157,6 +190,37 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            }
+        ],
+        slots: [
+            {
+                name: 'default',
+                description: 'Button content for the checkbox button',
+                props: '—'
+            }
+        ],
+        events: [
+            {
+                name: '<code>update:modelValue</code>',
+                description: 'Triggers when the value of checkbox button is changed (Vue 3 v-model event)',
+                parameters: '<code>value: Any</code>'
+            },
+            {
+                name: '<code>change</code>',
+                description: 'Native change event that bubbles up from the underlying input element',
+                parameters: '<code>event: Event</code>'
+            },
+            {
+                name: '<code>[any].native</code>',
+                description: 'Listen to any event using this syntax, e.g <code>@click.native</code>',
+                parameters: '<code>event: $event</code>'
+            }
+        ],
+        methods: [
+            {
+                name: '<code>focus()</code>',
+                description: 'Set focus on the checkbox button input',
+                return: '—'
             }
         ]
     }

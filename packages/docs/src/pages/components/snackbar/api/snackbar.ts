@@ -82,6 +82,25 @@ export default [
                 default: '—'
             }
         ],
+        events: [
+            {
+                name: '<code>click</code>',
+                description: 'Triggers when the snackbar is clicked',
+                parameters: '—'
+            },
+            {
+                name: '<code>close</code>',
+                description: 'Triggers when the snackbar is closed',
+                parameters: '—'
+            }
+        ],
+        slots: [
+            {
+                name: '<code>default</code>',
+                description: 'Custom content to replace the message text',
+                props: '—'
+            }
+        ],
         methods: [
             {
                 name: '<code>open</code>',

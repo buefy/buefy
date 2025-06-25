@@ -50,12 +50,12 @@ export default [
                 default: '<code>mdi</code>'
             },
             {
-                name: '<code>aria-role</code>',
-                description: 'Role attribute to be passed to list container for better accessibility. Use <code>menu</code> only in situations where your dropdown is really related to navigation.',
+                name: '<code>size</code>',
+                description: 'Icon size',
                 type: 'String',
-                values: '<code>menu</code>',
-                default: '—'
-            },
+                values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
+                default: '<code>is-small</code>'
+            }
         ],
         slots: [
             {
@@ -102,15 +102,15 @@ export default [
                 default: 'false'
             },
             {
-                name: '<code>active</code>',
-                description: 'Item is active, use the .sync modifier to make it two-way binding',
+                name: '<code>v-model</code>',
+                description: 'Item is active',
                 type: 'Boolean',
                 values: '-',
                 default: 'false'
             },
             {
-                name: '<code>expanded</code>',
-                description: 'Item is expanded when <code>default</code> contains menu items, use the .sync modifier to make it two-way binding',
+                name: '<code>v-model:expanded</code>',
+                description: 'Item is expanded when <code>default</code> contains menu items',
                 type: 'Boolean',
                 values: '-',
                 default: 'false'
@@ -144,6 +144,13 @@ export default [
                 default: '<code>true</code>. Can be changed via the <code>defaultCompatFallthrough</code> config option.'
             },
             {
+                name: '<code>size</code>',
+                description: 'Icon size',
+                type: 'String',
+                values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
+                default: '<code>is-small</code>'
+            },
+            {
                 name: 'Any native attribute',
                 description: '—',
                 type: '—',
@@ -161,6 +168,18 @@ export default [
                 name: '<code>label</code>',
                 description: 'Menu list custom label',
                 props: '<code>active: Boolean</code>,<code>expanded: Boolean</code>'
+            }
+        ],
+        events: [
+            {
+                name: '<code>update:modelValue</code>',
+                description: 'Triggers when the active state changes',
+                parameters: '<code>value: Boolean</code>'
+            },
+            {
+                name: '<code>update:expanded</code>',
+                description: 'Triggers when the expanded state changes',
+                parameters: '<code>value: Boolean</code>'
             }
         ]
     }

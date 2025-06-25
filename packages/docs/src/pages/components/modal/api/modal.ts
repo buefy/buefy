@@ -2,8 +2,8 @@ export default [
     {
         props: [
             {
-                name: '<code>active</code>',
-                description: 'Whether modal is active or not, use the <code>.sync</code> modifier to make it two-way binding',
+                name: '<code>v-model</code>',
+                description: 'Whether modal is active or not',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
@@ -17,11 +17,11 @@ export default [
                 default: '—'
             },
             {
-                name: '<code>parent</code>',
-                description: `Parent component of the modal, <strong>required</strong> if using <code>component</code>`,
-                type: 'Vue',
+                name: '<code>programmatic</code>',
+                description: 'Indicates if the modal was created programmatically',
+                type: 'Boolean',
                 values: '—',
-                default: '—'
+                default: '<code>false</code>'
             },
             {
                 name: '<code>props</code>',
@@ -116,6 +116,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>custom-content-class</code>',
+                description: 'CSS classes to be applied on modal content',
+                type: 'String, Array, Object',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: '<code>destroy-on-hide</code>',
                 description: 'Destroy modal on hide',
                 type: 'Boolean',
@@ -173,6 +180,36 @@ export default [
                 name: '<code>after-leave</code>',
                 description: 'Triggers when the modal transition <code>after-leave</code> hook is called.',
                 parameters: '—'
+            },
+            {
+                name: '<code>update:modelValue</code>',
+                description: 'Triggers when the modal visibility changes',
+                parameters: '<code>value: Boolean</code>'
+            },
+            {
+                name: '<code>cancel</code>',
+                description: 'Triggers when user cancels the modal (escape, x, or outside click)',
+                parameters: '<code>method: String</code> - The cancellation method (escape, x, outside)'
+            }
+        ],
+        slots: [
+            {
+                name: 'default',
+                description: 'Modal content',
+                props: '<code>canCancel: Boolean</code>, <code>close: Function</code>'
+            }
+        ],
+        methods: [
+            {
+                name: '<code>close</code>',
+                description: 'Programmatically close the modal',
+                return: '—'
+            },
+            {
+                name: '<code>cancel</code>',
+                description: 'Programmatically cancel the modal with a specific method',
+                parameters: '<code>method: String</code> - The cancellation method (escape, x, outside)',
+                return: '—'
             }
         ]
     }

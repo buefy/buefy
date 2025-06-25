@@ -97,9 +97,14 @@ export default [
       ],
       events: [
           {
+              name: '<code>update:modelValue</code>',
+              description: 'Triggers when rate value is changed',
+              parameters: '<code>value: Number</code>'
+          },
+          {
               name: '<code>change</code>',
               description: 'Triggers when rate value is changed',
-              parameters: '<code>value: Boolean</code>'
+              parameters: '<code>value: Number</code>'
           }
       ]
   }

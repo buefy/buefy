@@ -151,6 +151,124 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>v-model</code>',
+                description: 'Binding value for dialog visibility',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>width</code>',
+                description: 'Width of the dialog',
+                type: 'String, Number',
+                values: '—',
+                default: '<code>960</code>'
+            },
+            {
+                name: '<code>full-screen</code>',
+                description: 'Display dialog as full screen',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>auto-focus</code>',
+                description: 'Automatically focus dialog when opened',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>custom-class</code>',
+                description: 'Custom class to apply to the dialog',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>custom-content-class</code>',
+                description: 'Custom class to apply to the dialog content',
+                type: 'String, Array, Object',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>aria-label</code>',
+                description: 'Accessibility label for the dialog',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>close-button-aria-label</code>',
+                description: 'Accessibility label for the close button',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>destroy-on-hide</code>',
+                description: 'Destroy dialog component when hidden',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            }
+        ],
+        events: [
+            {
+                name: '<code>confirm</code>',
+                description: 'Triggers when the confirm button is clicked',
+                parameters: '<code>value: String, dialog: VueInstance</code>'
+            },
+            {
+                name: '<code>cancel</code>',
+                description: 'Triggers when the dialog is canceled',
+                parameters: '<code>method: String</code>'
+            },
+            {
+                name: '<code>close</code>',
+                description: 'Triggers when the dialog is closed',
+                parameters: '—'
+            },
+            {
+                name: '<code>update:modelValue</code>',
+                description: 'Triggers when the dialog visibility changes (v-model event)',
+                parameters: '<code>active: Boolean</code>'
+            },
+            {
+                name: '<code>after-enter</code>',
+                description: 'Triggers after the dialog enter transition completes',
+                parameters: '—'
+            },
+            {
+                name: '<code>after-leave</code>',
+                description: 'Triggers after the dialog leave transition completes',
+                parameters: '—'
+            }
+        ],
+        methods: [
+            {
+                name: '<code>confirm</code>',
+                description: 'Trigger the confirm action (validates input if prompt dialog)'
+            },
+            {
+                name: '<code>close</code>',
+                description: 'Close the dialog'
+            },
+            {
+                name: '<code>cancel</code>',
+                description: 'Cancel the dialog',
+                parameters: '<code>method: String</code>'
+            },
+            {
+                name: '<code>startLoading</code>',
+                description: 'Start the loading state for the confirm button'
+            },
+            {
+                name: '<code>cancelLoading</code>',
+                description: 'Cancel the loading state for the confirm button'
             }
         ]
     }
