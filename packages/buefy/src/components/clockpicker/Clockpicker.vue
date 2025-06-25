@@ -121,6 +121,7 @@
                             </div>
                         </div>
                         <b-clockpicker-face
+                            ref="clockpickerFace"
                             :picker-size="faceSize"
                             :min="minFaceValue"
                             :max="maxFaceValue"
