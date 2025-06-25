@@ -90,11 +90,25 @@ export default [
                 type: 'String',
                 values: '—',
                 default: '—'
+            },
+            {
+                name: '<code>required</code>',
+                description: 'Same as native <code>required</code>',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>left-label</code>',
+                description: 'Label is shown on the left side',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             }
         ],
         events: [
             {
-                name: '<code>input</code>',
+                name: '<code>update:modelValue</code>',
                 description: 'Triggers when the value of the switch is changed',
                 parameters: '<code>value: Boolean</code>'
             },
@@ -102,6 +116,20 @@ export default [
                 name: '<code>[any].native</code>',
                 description: 'Listen to any event using this syntax, e.g <code>click.native</code>',
                 parameters: '<code>event: $event</code>'
+            }
+        ],
+        slots: [
+            {
+                name: 'default',
+                description: 'Switch label',
+                props: '—'
+            }
+        ],
+        methods: [
+            {
+                name: '<code>focus</code>',
+                description: 'Focus the switch',
+                return: 'void'
             }
         ]
     }

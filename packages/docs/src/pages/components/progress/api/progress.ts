@@ -5,7 +5,7 @@ export default [
             {
                 name: '<code>type</code>',
                 description: 'Type (color) of the progress bar, optional',
-                type: 'String',
+                type: 'String, Object',
                 values: `<code>is-white</code>, <code>is-black</code>, <code>is-light</code>,
                     <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
                     <code>is-warning</code>, <code>is-danger</code>,
@@ -68,7 +68,7 @@ export default [
                 description: 'Truncate or not the trailing zeroes',
                 type: 'Boolean',
                 values: '—',
-                default: '<code>true</code>'
+                default: '<code>false</code>'
             },
             {
                 name: '<code>locale</code>',
@@ -89,6 +89,14 @@ export default [
                 name: '<code>bar</code>',
                 description: 'You can insert <code>b-progress-bar</code> components if you want to have multiple bars.',
                 props: '—'
+            }
+        ],
+        methods: [
+            {
+                name: '<code>calculateValue</code>',
+                description: 'Calculate and format the display value based on the current value, format, precision, and locale settings',
+                parameters: '<code>value: Number</code>',
+                return: '<code>String | undefined</code>'
             }
         ]
     },

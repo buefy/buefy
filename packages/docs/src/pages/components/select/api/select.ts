@@ -58,6 +58,55 @@ export default [
                 default: '<code>4</code>'
             },
             {
+                name: '<code>multiple</code>',
+                description: 'Same as native <code>multiple</code>',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>rounded</code>',
+                description: 'Makes the element rounded',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>maxlength</code>',
+                description: 'Same as native maxlength, plus character counter',
+                type: 'Number, String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>use-html5-validation</code>',
+                description: 'Enable HTML5 native validation',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>defaultUseHtml5Validation</code> config, <code>true</code> by default'
+            },
+            {
+                name: '<code>validation-message</code>',
+                description: 'The message which is shown when a validation error occurs',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>locale</code>',
+                description: 'Locale to be used for form validation and date formatting',
+                type: 'String, Array',
+                values: '—',
+                default: '<code>defaultLocale</code> config (which is <code>undefined</code> by default)'
+            },
+            {
+                name: '<code>status-icon</code>',
+                description: 'Show status icon using field and variant prop',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>defaultStatusIcon</code> config, <code>true</code> by default'
+            },
+            {
                 name: '<code>compat-fallthrough</code>',
                 description: 'Whether the <code>class</code>, <code>style</code>, and <code>id</code> attributes are applied to the root &lt;div&gt; element or the underlying &lt;select&gt; element. If <code>true</code>, they are applied to the root &lt;div&gt; element, which is compatible with Buefy for Vue 2.',
                 type: 'Boolean',
@@ -74,7 +123,7 @@ export default [
         ],
         events: [
             {
-                name: '<code>input</code>',
+                name: '<code>update:modelValue</code>',
                 description: 'Triggers when value is changed',
                 parameters: '<code>value: Any</code>'
             },
@@ -92,6 +141,13 @@ export default [
                 name: '<code>[any].native</code>',
                 description: 'Listen to any native event, e.g. <code>click.native</code>',
                 parameters: '<code>event: $event</code>'
+            }
+        ],
+        slots: [
+            {
+                name: '<code>default</code>',
+                description: 'Option elements for the select',
+                props: '—'
             }
         ],
         methods: [

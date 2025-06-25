@@ -9,7 +9,7 @@ export default [
                     <code>is-dark</code>, <code>is-primary</code>, <code>is-info</code>, <code>is-success</code>,
                     <code>is-warning</code>, <code>is-danger</code>,
                     and any other colors you've set in the <code>$colors</code> list on Sass`,
-                default: '<code>is-success</code>'
+                default: '<code>is-dark</code>'
             },
             {
                 name: '<code>message</code>',
@@ -80,6 +80,25 @@ export default [
                 type: 'String',
                 values: '—',
                 default: '—'
+            }
+        ],
+        events: [
+            {
+                name: '<code>click</code>',
+                description: 'Triggers when the snackbar is clicked',
+                parameters: '—'
+            },
+            {
+                name: '<code>close</code>',
+                description: 'Triggers when the snackbar is closed',
+                parameters: '—'
+            }
+        ],
+        slots: [
+            {
+                name: '<code>default</code>',
+                description: 'Custom content to replace the message text',
+                props: '—'
             }
         ],
         methods: [

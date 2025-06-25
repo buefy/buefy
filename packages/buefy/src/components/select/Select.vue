@@ -18,8 +18,8 @@
 
                 <template v-if="placeholder">
                     <option
-                        v-if="computedValue == null"
-                        :value="null"
+                        v-if="computedValue == null || computedValue === ''"
+                        value=""
                         disabled
                         hidden
                     >
@@ -78,7 +78,7 @@ export default defineComponent({
     },
     data() {
         return {
-            selected: this.modelValue,
+            selected: this.modelValue ?? (this.multiple ? [] : (this.placeholder ? '' : null)),
             _elementRef: 'select'
         }
     },
@@ -90,7 +90,8 @@ export default defineComponent({
             set(value: ModelValue) {
                 this.selected = value
                 this.$emit('update:modelValue', value)
-                !this.isValid && this.checkHtml5Validity()
+                // Always check validity when value changes, not just when invalid
+                this.checkHtml5Validity()
             }
         },
         spanClasses() {
@@ -99,7 +100,7 @@ export default defineComponent({
                 'is-loading': this.loading,
                 'is-multiple': this.multiple,
                 'is-rounded': this.rounded,
-                'is-empty': this.selected === null
+                'is-empty': this.selected === null || this.selected === ''
             }]
         }
     },
@@ -110,8 +111,9 @@ export default defineComponent({
         *   2. If it's invalid, validate again.
         */
         modelValue(value) {
-            this.selected = value
-            !this.isValid && this.checkHtml5Validity()
+            this.selected = value ?? (this.multiple ? [] : (this.placeholder ? '' : null))
+            // Always check validity when model value changes
+            this.checkHtml5Validity()
         }
     }
 })
