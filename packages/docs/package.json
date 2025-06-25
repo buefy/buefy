@@ -1,6 +1,6 @@
 {
   "name": "docs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "author": "Rafael Beraldo <rafael.pimpa@gmail.com>",
   "maintainers": [
@@ -11,10 +11,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ntohq/buefy.git"
+    "url": "git+https://github.com/buefy/buefy.git"
   },
   "bugs": {
-    "url": "https://github.com/ntohq/buefy/issues"
+    "url": "https://github.com/buefy/buefy/issues"
   },
   "scripts": {
     "dev": "vite",
