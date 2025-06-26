@@ -24,7 +24,7 @@
                     aria-controls="contentIdForA11y2"
                     :aria-expanded="isOpen"
                 >
-                    <strong>Title</strong>
+                    <p>Title</p>
                 </div>
             </template>
             <p class="panel-tabs">
