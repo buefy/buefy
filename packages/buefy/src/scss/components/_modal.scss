@@ -1,10 +1,13 @@
 @use "bulma/sass/utilities/css-variables" as cv;
 @use "bulma/sass/utilities/initial-variables" as iv;
 @use "bulma/sass/utilities/mixins" as mixins;
-// @use "bulma/sass/components/modal" as modal;
 @use "bulma/sass/utilities/extends";
 
 .#{iv.$class-prefix}modal {
+    &.is-embedded {
+        position: relative;
+        display: block;
+    }
     &.is-full-screen {
         > .animation-content,
         > .animation-content > .modal-card {

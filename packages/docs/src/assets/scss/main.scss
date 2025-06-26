@@ -1,8 +1,8 @@
 // Docs variables - MUST come before Buefy to configure Bulma
 @forward "_variables";
 
-// Buefy vars
-@use "buefy/src/scss/utils/_all";
+// Buefy
+@use "buefy/src/scss/buefy";
 
 // Docs elements / components
 @use "_apiview";
@@ -16,13 +16,6 @@
 @use "_home";
 @use "_sidebar";
 @use "_templates";
-
-// Bulma is already loaded in _variables.scss with configuration
-// @use "bulma/bulma"; // Removed to avoid duplicate loading
-
-// Buefy
-@use "buefy/src/scss/buefy";
-
 
 // Highlight.js
 @use "highlight.js/styles/base16/atelier-cave-light.css" as *;
