@@ -68,6 +68,13 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>expanded</code>',
+                description: 'Makes the field take up the full width available',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>horizontal</code>',
                 description: 'Group label and control on the same line for horizontal forms. Do not mix with <code>grouped</code> because there is an issue that the validation error cannot be reset once it is set if combined with <code>grouped</code>.',
                 type: 'Boolean',
@@ -83,6 +90,11 @@ export default [
             }
         ],
         slots: [
+            {
+                name: 'default',
+                description: 'Main content area where form controls are placed',
+                props: '—'
+            },
             {
                 name: '<code>label</code>',
                 description: 'Custom label',

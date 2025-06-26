@@ -23,6 +23,13 @@ export default [
                 values: '<code>is-small</code>, <code>is-medium</code>, <code>is-large</code>',
                 default: '<code>is-medium</code>'
             }
+        ],
+        slots: [
+            {
+                name: 'default',
+                description: 'Breadcrumb items',
+                props: '—'
+            }
         ]
     },
     {
@@ -48,6 +55,13 @@ export default [
                 type: 'Boolean',
                 values: '-',
                 default: '<code>true</code>. Can be changed via <code>defaultCompatFallthrough</code> config option.'
+            }
+        ],
+        slots: [
+            {
+                name: 'default',
+                description: 'Breadcrumb item content',
+                props: '—'
             }
         ]
     }

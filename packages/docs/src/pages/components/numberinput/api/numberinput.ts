@@ -138,6 +138,69 @@ export default [
                 default: '<code>true</code>'
             },
             {
+                name: '<code>disabled</code>',
+                description: 'Same as native disabled',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>placeholder</code>',
+                description: 'Same as native placeholder',
+                type: 'Number, String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>autocomplete</code>',
+                description: 'Same as native autocomplete',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>rounded</code>',
+                description: 'Makes the element rounded',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>maxlength</code>',
+                description: 'Same as native maxlength, plus character counter',
+                type: 'Number, String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>use-html5-validation</code>',
+                description: 'Enable HTML5 native validation',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>defaultUseHtml5Validation</code> config, <code>true</code> by default'
+            },
+            {
+                name: '<code>validation-message</code>',
+                description: 'The message which is shown when a validation error occurs',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>locale</code>',
+                description: 'Locale to be used for form validation and date formatting',
+                type: 'String, Array',
+                values: '—',
+                default: '<code>defaultLocale</code> config (which is <code>undefined</code> by default)'
+            },
+            {
+                name: '<code>status-icon</code>',
+                description: 'Show status icon using field and variant prop',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>defaultStatusIcon</code> config, <code>true</code> by default'
+            },
+            {
                 name: '<code>compat-fallthrough</code>',
                 description: 'Whether the <code>class</code>, <code>style</code>, and <code>id</code> attributes are applied to the root &lt;div&gt; element or the underlying &lt;b-input&gt; component. If <code>true</code>, they are applied to the root &lt;div&gt; element, which is compatible with Buefy for Vue 2.',
                 type: 'Boolean',
@@ -153,6 +216,11 @@ export default [
             }
         ],
         events: [
+            {
+                name: '<code>update:modelValue</code>',
+                description: 'Triggers when value is changed',
+                parameters: '<code>value: Number|null</code>'
+            },
             {
                 name: '<code>input</code>',
                 description: 'Triggers when value is changed',
@@ -175,6 +243,16 @@ export default [
             }
         ],
         methods: [
+            {
+                name: '<code>increment</code>',
+                description: 'Programmatically increment the input value by the step amount',
+                return: '—'
+            },
+            {
+                name: '<code>decrement</code>',
+                description: 'Programmatically decrement the input value by the step amount',
+                return: '—'
+            },
             {
                 name: '<code>checkHtml5Validity</code>',
                 description: 'Check validation of HTML5 (add the message and type/color), also updates the <code>isValid</code> property',

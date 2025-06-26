@@ -60,6 +60,32 @@ export default [
                 values: '—',
                 default: '<code>body</code>'
             }
+        ],
+        events: [
+            {
+                name: '<code>click</code>',
+                description: 'Triggers when the toast is clicked',
+                parameters: '—'
+            },
+            {
+                name: '<code>close</code>',
+                description: 'Triggers when the toast is closed',
+                parameters: '—'
+            }
+        ],
+        slots: [
+            {
+                name: 'default',
+                description: 'Toast content (overrides the message prop)',
+                props: '—'
+            }
+        ],
+        methods: [
+            {
+                name: '<code>close</code>',
+                description: 'Close the toast',
+                return: 'void'
+            }
         ]
     }
 ]

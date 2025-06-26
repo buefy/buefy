@@ -5,7 +5,7 @@ export default [
             {
                 name: '<code>total</code>',
                 description: `Total count of items`,
-                type: 'Number',
+                type: 'Number, String',
                 values: '—',
                 default: '—'
             },
@@ -27,6 +27,13 @@ export default [
                 name: '<code>range-after</code>',
                 description: 'Items to paginatation items to show after current page',
                 type: 'Number',
+                values: '—',
+                default: '<code>1</code>'
+            },
+            {
+                name: '<code>v-model</code>',
+                description: 'Current page number (two-way binding)',
+                type: 'Number, String',
                 values: '—',
                 default: '<code>1</code>'
             },
@@ -155,9 +162,46 @@ export default [
         ],
         events: [
             {
+                name: '<code>update:modelValue</code>',
+                description: 'Triggers when the current page is changed',
+                parameters: '<code>value: Number</code>'
+            },
+            {
                 name: '<code>change</code>',
                 description: 'Triggers when the current page is changed',
                 parameters: '<code>value: Number</code>'
+            }
+        ],
+        methods: [
+            {
+                name: '<code>prev</code>',
+                description: 'Go to the previous page',
+                parameters: '<code>event?: Event</code>',
+                return: '—'
+            },
+            {
+                name: '<code>next</code>',
+                description: 'Go to the next page',
+                parameters: '<code>event?: Event</code>',
+                return: '—'
+            },
+            {
+                name: '<code>first</code>',
+                description: 'Go to the first page',
+                parameters: '<code>event?: Event</code>',
+                return: '—'
+            },
+            {
+                name: '<code>last</code>',
+                description: 'Go to the last page',
+                parameters: '<code>event?: Event</code>',
+                return: '—'
+            },
+            {
+                name: '<code>changePage</code>',
+                description: 'Go to a specific page number',
+                parameters: '<code>num: Number, event?: Event</code>',
+                return: '—'
             }
         ]
     },

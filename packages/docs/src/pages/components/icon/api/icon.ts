@@ -12,6 +12,13 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>component</code>',
+                description: 'Component to be used instead of default <code>&lt;i&gt;</code> tag. Useful for custom icon components like FontAwesome Vue components',
+                type: 'String',
+                values: '—',
+                default: 'Uses global config <code>defaultIconComponent</code> or <code>&lt;i&gt;</code> tag'
+            },
+            {
                 name: '<code>pack</code>',
                 description: 'Icon pack to use',
                 type: 'String',

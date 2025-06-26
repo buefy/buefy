@@ -132,13 +132,20 @@ export default [
             {
                 name: '<code>close</code>',
                 description: 'Triggers when close/delete button is clicked or <b>delete</b> key is pressed',
-                parameters: '—'
+                parameters: '<code>event: Event</code>'
             },
             {
                 name: "<code>click</code>",
                 description: "Triggers when clicking the content of the tag",
-                parameters: "—",
+                parameters: "<code>event: Event</code>",
             },
+        ],
+        slots: [
+            {
+                name: 'default',
+                description: 'Tag content',
+                props: '—'
+            }
         ]
     },
     {
@@ -150,6 +157,13 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            }
+        ],
+        slots: [
+            {
+                name: 'default',
+                description: 'Tags content',
+                props: '—'
             }
         ]
     }
