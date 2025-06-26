@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section class="is-flex is-flex-direction-row">
         <b-dropdown aria-role="list">
             <template #trigger="{ active }">
                 <b-button

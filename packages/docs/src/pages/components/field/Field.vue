@@ -93,7 +93,7 @@
         </Example>
 
         <ApiView :data="api"/>
-        <VariablesView :data="variables"/>
+        <VariablesView :data="variables" link="https://bulma.io/documentation/form/general/#sass-and-css-variables"/>
     </div>
 </template>
 

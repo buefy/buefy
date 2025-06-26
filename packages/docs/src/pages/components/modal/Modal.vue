@@ -26,7 +26,7 @@
         </Example>
 
         <ApiView :data="api"/>
-        <VariablesView :data="variables"/>
+        <VariablesView :data="variables" link="https://bulma.io/documentation/components/modal/#sass-and-css-variables"/>
     </div>
 </template>
 

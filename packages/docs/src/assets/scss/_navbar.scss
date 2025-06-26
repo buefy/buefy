@@ -3,7 +3,7 @@
 
 .docs-navbar.navbar {
     &.is-transparent {
-        box-shadow: 0 1px 0 cv.getRgbaVar('scheme-main', 0.2);
+        box-shadow: cv.getVar('shadow');
     }
 
     .is-version {

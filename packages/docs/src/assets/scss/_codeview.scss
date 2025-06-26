@@ -67,7 +67,7 @@
             right: 0;
             top: 0;
             align-items: center;
-            background-color: cv.getRgbaVar('scheme-main', 0.8);
+            background-color: hsla(cv.getVar('scheme-h'), cv.getVar('scheme-s'), cv.getVar('scheme-main-l'), 0.8);
             border: none;
             color: cv.getVar('grey');
             cursor: pointer;
@@ -76,7 +76,7 @@
             width: 100%;
             font-weight:  cv.getVar('weight-semibold');
             &:hover {
-                background-color: cv.getRgbaVar('warning', 0.8);
+                background-color: hsla(cv.getVar('warning-h'), cv.getVar('warning-s'), cv.getVar('warning-light-l'), 0.8);
             }
             .icon {
                 margin-right: 0.5rem;

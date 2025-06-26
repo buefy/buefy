@@ -7,7 +7,7 @@
             </p>
             <p>
                 <a
-                    :href="`https://github.com/buefy/buefy/blob/dev/docs/${githubPath}`"
+                    :href="`https://github.com/buefy/buefy/blob/dev/packages/docs/src/${githubPath}`"
                     target="_blank"
                     style="text-decoration: underline"
                 >

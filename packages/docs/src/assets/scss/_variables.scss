@@ -1,7 +1,7 @@
-
 // Forward Bulma with configuration - this makes it available with the custom primary color
 @forward "bulma/sass" with (
     $primary: #7957d5,
+    $link: #363636,
 );
 
 $twitter: #4099FF;
@@ -17,3 +17,6 @@ $vuetelemetry: #0bdca0;
     --vuetelemetry: #0bdca0;
 }
 
+.has-text-bulma {
+    color: var(--bulma);
+}

@@ -1,26 +1,44 @@
 export default [
     {
-        name: '<code>$sidebar-background</code>',
+        sass: '<code>$sidebar-overlay-background</code>',
+        css: '<code>--bulma-sidebar-overlay-background</code>',
+        description: 'The background color of the sidebar overlay',
         default: '<code>$modal-background-background-color</code>'
     },
     {
-        name: '<code>$sidebar-box-shadow</code>',
-        default: '<code>5px 0px 13px 3px rgba($black, 0.1)</code>'
+        sass: '<code>$sidebar-box-shadow</code>',
+        css: '<code>--bulma-sidebar-box-shadow</code>',
+        description: 'The box shadow of the sidebar',
+        default: '<code>5px 0 13px 3px cv.getVar(\'background\')</code>'
     },
     {
-        name: '<code>$sidebar-width</code>',
+        sass: '<code>$sidebar-width</code>',
+        css: '<code>--bulma-sidebar-width</code>',
+        description: 'The width of the sidebar',
         default: '<code>260px</code>'
     },
     {
-        name: '<code>$sidebar-mobile-width</code>',
+        sass: '<code>$sidebar-mobile-width</code>',
+        css: '<code>--bulma-sidebar-mobile-width</code>',
+        description: 'The width of the sidebar on mobile',
         default: '<code>80px</code>'
     },
     {
-        name: '<code>$sidebar-mobile-breakpoint</code>',
+        sass: '<code>$sidebar-mobile-breakpoint</code>',
+        css: '<code>--bulma-sidebar-mobile-breakpoint</code>',
+        description: 'The breakpoint for mobile sidebar',
         default: '<code>$tablet</code>'
     },
     {
-        name: '<code>$sidebar-colors</code>',
-        default: '<code>$navbar-colors</code>'
+        sass: '<code>$sidebar-close-button-background</code>',
+        css: '<code>--bulma-sidebar-close-button-background</code>',
+        description: 'The background color of the sidebar close button',
+        default: '<code>rgba(10,10,10,.3)</code>'
+    },
+    {
+        sass: '<code>$sidebar-close-button-dark-background</code>',
+        css: '<code>--bulma-sidebar-close-button-dark-background</code>',
+        description: 'The background color of the sidebar close button in dark mode',
+        default: '<code>rgba(10,10,10,.86)</code>'
     }
 ]

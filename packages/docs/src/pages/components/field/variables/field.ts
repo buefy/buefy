@@ -1,10 +1,8 @@
 export default [
     {
-        name: '<code>$floating-in-height</code>',
+        sass: '<code>$floating-in-height</code>',
+        css: '<code>--bulma-floating-in-height</code>',
+        description: 'The height of the floating input field',
         default: '<code>3.25em</code>'
-    },
-    {
-        name: 'Bulma variables',
-        default: '<a target="_blank" href="https://bulma.io/documentation/form/general/#variables">Link</a>'
     }
 ]

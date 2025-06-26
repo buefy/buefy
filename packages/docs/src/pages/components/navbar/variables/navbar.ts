@@ -1,6 +1,8 @@
 export default [
     {
-        name: 'Bulma variables',
-        default: '<a target="_blank" href="https://bulma.io/documentation/components/navbar/#variables">Link</a>'
+        sass: '<code>$shadow</code>',
+        css: '<code>--bulma-shadow</code>',
+        description: 'The box shadow used for boxed navbar dropdowns',
+        default: '<code>$shadow</code>'
     }
 ]

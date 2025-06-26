@@ -1,57 +1,68 @@
 export default [
     {
-        name: '<code>$carousel-min-height</code>',
+        sass: '<code>$carousel-min-height</code>',
+        css: '<code>--bulma-carousel-min-height</code>',
         description: 'The carousel default height before image load',
         default: '<code>120px</code>'
     },
     {
-        name: '<code>$carousel-arrow-background</code>',
-        description: 'The carousel arrow background',
+        sass: '<code>$carousel-arrow-background</code>',
+        css: '<code>--bulma-carousel-arrow-background</code>',
+        description: 'The carousel arrow background color',
         default: '<code>$scheme-main</code>'
     },
     {
-        name: '<code>$carousel-arrow-color</code>',
-        description: 'The carousel color border',
+        sass: '<code>$carousel-arrow-color</code>',
+        css: '<code>--bulma-carousel-arrow-color</code>',
+        description: 'The carousel arrow color',
         default: '<code>$primary</code>'
     },
     {
-        name: '<code>$carousel-arrow-icon-spaced</code>',
-        description: 'The carousel arrow icon spaced left and right',
+        sass: '<code>$carousel-arrow-icon-spaced</code>',
+        css: '<code>--bulma-carousel-arrow-icon-spaced</code>',
+        description: 'The carousel arrow icon spacing from left and right edges',
         default: '<code>1.5rem</code>'
     },
     {
-        name: '<code>$carousel-arrow-top</code>',
-        description: 'The carousel position by top',
+        sass: '<code>$carousel-arrow-top</code>',
+        css: '<code>--bulma-carousel-arrow-top</code>',
+        description: 'The carousel arrow vertical position from top',
         default: '<code>50%</code>'
     },
     {
-        name: '<code>$carousel-indicator-background</code>',
-        description: 'The carousel indicator background',
-        default: '<code>rgba($scheme-invert, 0.45)</code>'
+        sass: '<code>$carousel-indicator-background</code>',
+        css: '<code>--bulma-carousel-indicator-background</code>',
+        description: 'The carousel indicator background color',
+        default: '<code>rgba($scheme-invert, 0.50)</code>'
     },
     {
-        name: '<code>$carousel-indicator-border</code>',
-        description: 'The carousel indicator color border',
+        sass: '<code>$carousel-indicator-border</code>',
+        css: '<code>--bulma-carousel-indicator-border</code>',
+        description: 'The carousel indicator border color',
         default: '<code>$scheme-main</code>'
     },
     {
-        name: '<code>$carousel-indicator-color</code>',
-        description: 'The carousel indicator color',
+        sass: '<code>$carousel-indicator-color</code>',
+        css: '<code>--bulma-carousel-indicator-color</code>',
+        description: 'The carousel indicator active color',
         default: '<code>$primary</code>'
     },
     {
-        name: '<code>$carousel-indicator-spaced</code>',
-        description: 'The carousel indicator spaced',
+        sass: '<code>$carousel-indicator-spaced</code>',
+        css: '<code>--bulma-carousel-indicator-spaced</code>',
+        description: 'The carousel indicator spacing between items',
         default: '<code>.5rem</code>'
     },
     {
-        name: '<code>$carousel-overlay-background</code>',
-        description: 'The carousel background when overlay',
+        sass: '<code>$carousel-overlay-background</code>',
+        css: '<code>--bulma-carousel-overlay-background</code>',
+        description: 'The carousel background color when displayed as overlay',
         default: '<code>rgba($scheme-invert, 0.86)</code>'
     },
     {
-        name: '<code>$carousel-overlay-z</code>',
-        description: 'The carousel z-index for overlay',
+        sass: '<code>$carousel-overlay-z</code>',
+        css: '<code>--bulma-carousel-overlay-z</code>',
+        description: 'The carousel z-index when displayed as overlay',
         default: '<code>40</code>'
     }
 ]

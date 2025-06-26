@@ -47,6 +47,9 @@ $dropdown-disabled-opacity: 0.5 !default;
                     color: inherit;
                 }
             }
+            &.is-paddingless {
+                padding: 0;
+            }
         }
         .has-link a {
             @extend .dropdown-item;
