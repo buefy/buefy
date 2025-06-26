@@ -236,7 +236,6 @@ import { defineComponent } from "vue";
 
 import { BIcon } from "buefy";
 
-import ScrollReveal from "scrollreveal";
 import TheNavbar from "../components/TheNavbar.vue";
 import TheFooter from "../components/TheFooter.vue";
 import Package from "../../../../package.json";
@@ -294,15 +293,39 @@ export default defineComponent({
         }
     },
     mounted() {
-        const sr = ScrollReveal({
-            duration: 400,
-            delay: 200,
-        });
-        sr.reveal(".home-hero", { delay: 0, origin: "top" }, 200);
-        sr.reveal(".features", 200);
-        
         // Apply initial theme
         this.handleThemeChange(this.isLightTheme)
+        
+        this.$nextTick(() => {
+            const homeHeroElements = document.querySelectorAll('.home-hero');
+            const featuresElements = document.querySelectorAll('.features');
+            
+            // Add reveal classes with delay
+            homeHeroElements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.classList.add('reveal-animation');
+                }, index * 100);
+            });
+            
+            featuresElements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.classList.add('reveal-animation');
+                }, 500 + index * 200);
+            });
+        });
     },
 });
 </script>
+
+<style scoped>
+.home-hero, .features {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease-out;
+}
+
+.home-hero.reveal-animation, .features.reveal-animation {
+    opacity: 1;
+    transform: translateY(0);
+}
+</style>
