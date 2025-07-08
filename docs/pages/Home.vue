@@ -13,18 +13,17 @@
                     </h2>
                     <div class="home-hero">
                         <p><strong>Vue 2</strong></p>
-                        <pre class="npm"><code><span class="is-unselectable">$ </span>npm install buefy</code></pre>
+                        <pre class="npm"><code><span class="is-unselectable">$ </span>npm install buefy@{{ version }}</code></pre>
                     </div>
                     <div class="home-hero">
                         <p>
                             <strong>Vue 3</strong>
-                            (<a href="https://github.com/ntohq/buefy-next" target="_blank">
-                                <b-icon icon="progress-wrench" size="is-small" />
-                                official fork in development
+                            (<a href="https://buefy.org" target="_blank">
+                                buefy vue3 docs
                                 <b-icon icon="github-circle" size="is-small" />
                             </a>)
                         </p>
-                        <pre class="npm"><code><span class="is-unselectable">$ </span>npm install buefy@npm:@ntohq/buefy-next</code></pre>
+                        <pre class="npm"><code><span class="is-unselectable">$ </span>npm install buefy</code></pre>
                     </div>
 
                     <div class="github-button home-hero">

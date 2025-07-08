@@ -74,8 +74,8 @@
                 <div class="content">
                     <p>Just download or use these as CDN:</p>
                     <ul>
-                        <li>Script: <a href="https://unpkg.com/buefy/dist/buefy.min.js" target="_blank">https://unpkg.com/buefy/dist/buefy.min.js</a></li>
-                        <li>Style: <a href="https://unpkg.com/buefy/dist/buefy.min.css" target="_blank">https://unpkg.com/buefy/dist/buefy.min.css</a></li>
+                        <li>Script: <a href="https://cdn.jsdelivr.net/npm/buefy/dist/buefy.min.js" target="_blank">https://cdn.jsdelivr.net/npm/buefy/dist/buefy.min.js</a></li>
+                        <li>Style: <a href="https://cdn.jsdelivr.net/npm/buefy/dist/buefy.min.css" target="_blank">https://cdn.jsdelivr.net/npm/buefy/dist/buefy.min.css</a></li>
                     </ul>
                 </div>
 
@@ -159,7 +159,7 @@
                 <head>
                     <meta charset="utf-8">
                     <meta name="viewport" content="width=device-width, initial-scale=1">
-                    <link rel="stylesheet" href="https://unpkg.com/buefy/dist/buefy.min.css">
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/buefy/dist/buefy.min.css">
                 </head>
 
                 <body>
@@ -167,9 +167,9 @@
                         <!-- Buefy components goes here -->
                     </div>
 
-                    <script src="https://unpkg.com/vue@2"></\script>
+                    <script src="https://cdn.jsdelivr.net/npm/vue@2"></\script>
                     <!-- Full bundle -->
-                    <script src="https://unpkg.com/buefy/dist/buefy.min.js"></\script>
+                    <script src="https://cdn.jsdelivr.net/npm/buefy/dist/buefy.min.js"></\script>
 
                     <!-- Individual components -->
                     <script src="https://unpkg.com/buefy/dist/components/table"></\script>

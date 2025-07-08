@@ -96,7 +96,7 @@
     "eslint-config-buefy": "0.0.3",
     "esm": "3.2.25",
     "eventsource-polyfill": "0.9.6",
-    "express": "4.18.2",
+    "express": "4.19.2",
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "2.0.0",
     "font-awesome": "4.7.0",
