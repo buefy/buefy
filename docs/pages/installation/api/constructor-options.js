@@ -274,7 +274,7 @@ export default [
                 description: 'Default years range relative to selected year',
                 type: 'Array',
                 values: '—',
-                default: '<code>[-100, 3]</code>'
+                default: '<code>[-100, 10]</code>'
             },
             {
                 name: '<code>defaultDatepickerNearbyMonthDays</code>',
