@@ -31,7 +31,7 @@
                 <a
                     class="navbar-item"
                     :class="{ 'has-text-discord': !light }"
-                    href="https://discordapp.com/invite/ZkdFJMr"
+                    href="https://discord.buefy.org/"
                     target="_blank"
                     title="Discord">
                     <b-icon icon="discord"/>
