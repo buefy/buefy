@@ -98,9 +98,21 @@ export default [
         ],
         events: [
             {
-                name: '<code>input</code>',
+                name: '<code>update:modelValue</code>',
                 description: 'Triggers when the file list is changed',
                 parameters: '<code>value: File</code> or <code>File[]</code>'
+            },
+            {
+                name: '<code>invalid</code>',
+                description: 'Triggers when a file is rejected due to type validation',
+                parameters: '—'
+            }
+        ],
+        slots: [
+            {
+                name: 'default',
+                description: 'Upload button/content area',
+                props: '—'
             }
         ],
         methods: [

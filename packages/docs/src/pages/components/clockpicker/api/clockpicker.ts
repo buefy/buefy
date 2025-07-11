@@ -33,6 +33,125 @@ export default [
                 default: '<code>5</code>'
             },
             {
+                name: '<code>picker-size</code>',
+                description: 'Size of the clock face',
+                type: 'Number',
+                values: '—',
+                default: '<code>290</code>'
+            },
+            {
+                name: '<code>placeholder</code>',
+                description: 'Input placeholder',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>expanded</code>',
+                description: 'Makes input full width when inside a grouped or addon field',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>rounded</code>',
+                description: 'Makes the input rounded',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>maxlength</code>',
+                description: 'Same as native maxlength, plus character counter',
+                type: 'Number, String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>use-html5-validation</code>',
+                description: 'Enable HTML5 native validation',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>validation-message</code>',
+                description: 'The message which is shown when a validation error occurs',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>status-icon</code>',
+                description: 'Show status icon using field and variant prop',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>time-creator</code>',
+                description: 'Function used internally to create a new Date instance',
+                type: 'Function',
+                values: '—',
+                default: '<code>() => new Date()</code>'
+            },
+            {
+                name: '<code>increment-hours</code>',
+                description: 'Hour interval for increment',
+                type: 'Number',
+                values: '—',
+                default: '<code>1</code>'
+            },
+            {
+                name: '<code>increment-seconds</code>',
+                description: 'Second interval for increment',
+                type: 'Number',
+                values: '—',
+                default: '<code>1</code>'
+            },
+            {
+                name: '<code>enable-seconds</code>',
+                description: 'Enable seconds selection',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>default-minutes</code>',
+                description: 'Default minutes to set when selecting an hour',
+                type: 'Number',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>default-seconds</code>',
+                description: 'Default seconds to set when selecting a minute',
+                type: 'Number',
+                values: '—',
+                default: '—'
+            },
+            {
+                name: '<code>focusable</code>',
+                description: 'Clockpicker container can be focused',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>tz-offset</code>',
+                description: 'Timezone offset',
+                type: 'Number',
+                values: '—',
+                default: '<code>0</code>'
+            },
+            {
+                name: '<code>reset-on-meridian-change</code>',
+                description: 'Reset time selection when meridian (AM/PM) changes',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
                 name: '<code>time-formatter</code>',
                 description: 'Function to format time (<code>Date</code> type) to a string for display in the input',
                 type: 'Function',
@@ -195,6 +314,23 @@ export default [
                 default: '—'
             },
         ],
+        events: [
+            {
+                name: '<code>update:modelValue</code>',
+                description: 'Triggers when the time value changes',
+                parameters: '<code>value: Date | null</code>'
+            },
+            {
+                name: '<code>focus</code>',
+                description: 'Triggers when input receives focus',
+                parameters: '<code>event: Event</code>'
+            },
+            {
+                name: '<code>blur</code>',
+                description: 'Triggers when input loses focus',
+                parameters: '<code>event: Event</code>'
+            }
+        ],
         slots: [
             {
                 name: 'default',
@@ -209,8 +345,21 @@ export default [
         ],
         methods: [
             {
+                name: '<code>toggle</code>',
+                description: 'Toggle clockpicker visibility',
+                parameters: '<code>active: Boolean</code>'
+            },
+            {
                 name: '<code>close</code>',
                 description: 'Close dropdown'
+            },
+            {
+                name: '<code>focus</code>',
+                description: 'Set focus on the input element'
+            },
+            {
+                name: '<code>checkHtml5Validity</code>',
+                description: 'Check HTML5 validation, set isValid property. If validation fails, send \'is-danger\' type, and error message to parent if it\'s a Field'
             }
         ]
     }

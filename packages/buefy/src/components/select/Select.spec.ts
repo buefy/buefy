@@ -71,4 +71,117 @@ describe('BSelect', () => {
             expect(select.attributes('id')).toBe(attrs.id)
         })
     })
+
+    describe('validation behavior', () => {
+        it('should pass required attribute to native select element', () => {
+            const wrapper = shallowMount(BSelect, {
+                attrs: {
+                    required: true
+                }
+            })
+
+            const select = wrapper.find('select')
+            expect(select.attributes('required')).toBeDefined()
+        })
+
+        it('should trigger validation on blur when required and no value selected', async () => {
+            const wrapper = shallowMount(BSelect, {
+                props: {
+                    placeholder: 'Select an option',
+                    useHtml5Validation: true
+                },
+                attrs: {
+                    required: true
+                }
+            })
+
+            // Initially should be valid (not dirty)
+            expect(wrapper.vm.isValid).toBe(true)
+
+            // Simulate focus and blur without selecting a value
+            const select = wrapper.find('select')
+            await select.trigger('focus')
+            await select.trigger('blur')
+
+            // Should now be invalid due to required validation
+            expect(wrapper.vm.isValid).toBe(false)
+        })
+
+        it('should handle required validation with null placeholder value', async () => {
+            const wrapper = shallowMount(BSelect, {
+                props: {
+                    placeholder: 'Choose...',
+                    useHtml5Validation: true
+                },
+                attrs: {
+                    required: true
+                }
+            })
+
+            // Verify placeholder option has empty string value
+            const placeholderOption = wrapper.find('option[disabled]')
+            expect(placeholderOption.attributes('value')).toBe('')
+            expect(placeholderOption.text()).toBe('Choose...')
+
+            // Simulate interaction that should trigger validation
+            const select = wrapper.find('select')
+            await select.trigger('focus')
+            await select.trigger('blur')
+
+            // Check that HTML5 validation was called
+            expect(wrapper.vm.isValid).toBe(false)
+        })
+
+        it('should become valid when a value is selected after being invalid', async () => {
+            const wrapper = shallowMount(BSelect, {
+                props: {
+                    placeholder: 'Select...',
+                    useHtml5Validation: true
+                },
+                attrs: {
+                    required: true
+                },
+                slots: {
+                    default: '<option value="test">Test Option</option>'
+                }
+            })
+
+            // Make it invalid first
+            const select = wrapper.find('select')
+            await select.trigger('focus')
+            await select.trigger('blur')
+            expect(wrapper.vm.isValid).toBe(false)
+
+            // Simulate actual user selection by changing the DOM value and triggering change
+            const selectElement = select.element as HTMLSelectElement
+            selectElement.value = 'test'
+            await select.trigger('change')
+
+            // Should become valid after change event
+            expect(wrapper.vm.isValid).toBe(true)
+        })
+
+        it('should work with multiple select and required validation', async () => {
+            const wrapper = shallowMount(BSelect, {
+                props: {
+                    multiple: true,
+                    useHtml5Validation: true
+                },
+                attrs: {
+                    required: true
+                }
+            })
+
+            // Should start as valid
+            expect(wrapper.vm.isValid).toBe(true)
+
+            // Focus and blur without selection
+            const select = wrapper.find('select')
+            await select.trigger('focus')
+            await select.trigger('blur')
+
+            // Should be invalid for multiple select with no selections
+            expect(wrapper.vm.isValid).toBe(false)
+        })
+    })
 })

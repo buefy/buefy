@@ -82,10 +82,27 @@ export default [
         ],
         events: [
             {
-                name: '<code>input</code>',
+                name: '<code>update:modelValue</code>',
                 description: 'Triggers when tab is changed',
                 parameters: '<code>value: String|Number</code>'
+            }
+        ],
+        slots: [
+            {
+                name: 'default',
+                description: 'Tab items',
+                props: '—'
             },
+            {
+                name: 'start',
+                description: 'Content before the tabs',
+                props: '—'
+            },
+            {
+                name: 'end',
+                description: 'Content after the tabs',
+                props: '—'
+            }
         ]
     },
     {
