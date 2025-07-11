@@ -91,7 +91,7 @@
                             Info
                         </div>
 
-                        <div class="navbar-dropdown is-boxed">
+                        <div class="navbar-dropdown">
                             <strong class="navbar-item is-version">
                                 <span class="has-text-primary">Buefy version</span>
                                 <span class="has-text-grey">{{ version }}</span>
@@ -104,13 +104,15 @@
                             </strong>
 
                             <hr class="navbar-divider">
-                            <a
-                                class="navbar-item"
-                                href="https://github.com/buefy/buefy/releases"
-                                target="_blank"
-                            >
-                                Changelogs
-                            </a>
+                            <div class="navbar-item">
+                                <a
+                                    href="https://github.com/buefy/buefy/releases"
+                                    target="_blank"
+                                    rel="noopener"
+                                >
+                                    Changelogs
+                                </a>
+                            </div>
                         </div>
                     </div>
 

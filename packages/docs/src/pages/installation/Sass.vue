@@ -124,7 +124,7 @@
             <h4 class="title is-4">Learn More</h4>
             <p>
                 For a complete list of Bulma variables, visit the 
-                <a href="https://bulma.io/documentation/customize/with-sass/" target="_blank" rel="noopener">
+                <a href="https://bulma.io/documentation/customize/list-of-sass-variables/" target="_blank" rel="noopener">
                     Bulma Sass customization documentation
                 </a>.
             </p>
