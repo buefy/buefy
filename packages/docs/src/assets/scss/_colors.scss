@@ -1,0 +1,58 @@
+:root {
+    --bulma-text: #050316; /* Text color */
+    --bulma-background: #fbfaf4; /* Background color */
+    --bulma-primary: #5e35b1; /* Primary color */
+    --bulma-secondary: #a382fe; /* Secondary color */
+    --bulma-accent: #491ab6; /* Accent color */
+    --bulma-light: #f3f4f6; /* Light Theme */
+    --bulma-dark: #2e333d;  /* Dark Theme */
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --bulma-text: #050316; /* Text color */
+        --bulma-background: #fbfaf4; /* Background color */
+        --bulma-primary: #5e35b1; /* Primary color */
+        --bulma-secondary: #a382fe; /* Secondary color */
+        --bulma-accent: #491ab6; /* Accent color */
+        --bulma-light: #f3f4f6; /* Light Theme */
+        --bulma-dark: #2e333d;  /* Dark Theme */
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* CSS Variables */
+        --bulma-text: #eae9fc;
+        --bulma-background: #1a1a1a;
+        --bulma-primary: #a281fe;
+        --bulma-secondary: #23017e;
+        --bulma-accent: #491ab7;
+        --bulma-dark: var(--); /* Light Theme */
+        --bulma-light: #2e333d;  /* Dark Theme */
+    }
+}
+
+[data-theme=light],
+.theme-light {
+    /* CSS Variables */
+    --bulma-text: #050316; /* Text color */
+    --bulma-background: #fbfaf4; /* Background color */
+    --bulma-primary: #5e35b1; /* Primary color */
+    --bulma-secondary: #a382fe; /* Secondary color */
+    --bulma-accent: #491ab6; /* Accent color */
+    --bulma-light: #f3f4f6; /* Light Theme */
+    --bulma-dark: #2e333d;  /* Dark Theme */
+}
+
+[data-theme=dark],
+.theme-dark {
+    /* CSS Variables */
+    --bulma-text: #eae9fc;
+    --bulma-background: #1a1a1a;
+    --bulma-primary: #a281fe;
+    --bulma-secondary: #23017e;
+    --bulma-accent: #491ab7;
+    --bulma-dark: #f3f4f6; /* Light Theme */
+    --bulma-light: #2e333d;  /* Dark Theme */
+
