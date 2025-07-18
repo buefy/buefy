@@ -39,6 +39,8 @@ interface VariableInfo {
     name?: string;
     description?: string;
     default?: string;
+    sass?: string;
+    css?: string;
 }
 
 export default defineComponent({
