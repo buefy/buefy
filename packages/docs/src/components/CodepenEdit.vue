@@ -43,7 +43,7 @@ export default defineComponent({
         return {
             hasHtml: false,
             externalScripts: [
-                'https://unpkg.com/vue@2/dist/vue.min.js',
+                'https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js',
                 'https://unpkg.com/buefy/dist/buefy.min.js'
             ],
             externalStyles: [
@@ -67,7 +67,12 @@ export default defineComponent({
                 css: this.getStyle(),
                 css_pre_processor: 'scss',
                 html_classes: 'section',
-                head: "<meta name='viewport' content='width=device-width, initial-scale=1'>",
+                head: `<meta name='viewport' content='width=device-width, initial-scale=1'>
+                       <script>
+                           // we need this tweak because Buefy is not built for browsers
+                           window.process = { env: { NODE_ENV: 'production' } };
+                       <\/script>
+                `,
                 css_external: this.externalStyles.join(';'),
                 js_external: this.externalScripts.join(';')
             })
@@ -106,20 +111,26 @@ export default defineComponent({
                 `)
         },
         getScript() {
-            const start = this.code.indexOf('<script>')
+            const start = this.code.indexOf('<script lang="ts">')
             const end = this.code.lastIndexOf("<\/script>"); // eslint-disable-line
             let js
 
             if (start >= 0 && end >= 0) {
-                js = this.code.substring(start + 8, end)
-                js = js.replace('export default ', 'const example = ')
+                js = this.code.substring(start + 19, end)
+                js = js.replace('export default defineComponent({', 'const example = {')
 
                 js = js.replace("require('@/data/sample.json')", dataTest)
 
                 // Vue
                 if (this.code.indexOf('vue')) {
-                    js = js.replace("import Vue from 'vue'", '')
+                    js = js.replace('import { defineComponent } from "vue";', '')
                 }
+
+                // Imported Components
+                js = js.replace(/import\s*\{[^}]*\}\s*from\s*['"]buefy['"];\s*/g, '');
+
+                // Defintion of Components
+                js = js.replace(/components\s*:\s*\{[^}]*\},?/gs, '');
 
                 // Axios
                 if (this.code.indexOf('this.$http')) {
@@ -167,13 +178,22 @@ export default defineComponent({
                         'https://cdn.jsdelivr.net/npm/vee-validate@2.1.0-beta.9/dist/vee-validate.min.js'
                     )
                 }
+
+                // Fix the clpsing tag of the example const
+                js = js.replace("});", "};")
             }
 
             return preformat(`
+                const { createApp } = Vue
+
                 ${js || ''}
-                const app = new Vue(${js ? 'example' : ''})
-                app.$mount('#app')
+
+                const app = createApp(${js ? 'example' : ''})
+                // .default is a workaround for CodePen
+                app.use(Buefy.default)
+                app.mount('#app')
             `)
+            debugger;
         },
         getStyle() {
             const match = this.code.match(/<style.*>/)
