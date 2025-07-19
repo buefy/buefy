@@ -7,7 +7,11 @@
                     <button
                         class="button is-twitter"
                         @click="tweet">
-                        <b-icon icon="twitter"/>
+                        <b-icon
+                            pack="fa"
+                            custom-class="fa-brands"
+                            icon="x-twitter"
+                        />
                         <span>#MadeWithBuefy</span>
                     </button>
                     <a
