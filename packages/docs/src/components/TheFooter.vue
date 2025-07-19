@@ -27,12 +27,21 @@
                             </p>
                             <p class="control">
                                 <a
+                                    class="button is-discord"
+                                    href="https://discord.buefy.org"
+                                    target="_blank"
+                                >
+                                    <b-icon icon="discord" />
+                                    <span>Discord</span>
+                                </a>
+                            </p>
+                            <p class="control">
+                                <a
                                     class="button is-twitter"
                                     href="https://twitter.com/buefycss"
                                     target="_blank"
                                 >
-                                    <b-icon icon="twitter" />
-                                    <span>Twitter</span>
+                                    <b-icon pack="fa" custom-class="fa-brands" icon="x-twitter" />
                                 </a>
                             </p>
                         </b-field>
