@@ -41,7 +41,11 @@
                                     href="https://twitter.com/buefycss"
                                     target="_blank"
                                 >
-                                    <b-icon pack="fa" custom-class="fa-brands" icon="x-twitter" />
+                                    <b-icon
+                                        pack="fa"
+                                        custom-class="fa-brands"
+                                        icon="x-twitter"
+                                    />
                                 </a>
                             </p>
                         </b-field>

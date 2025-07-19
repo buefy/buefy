@@ -50,7 +50,11 @@
                     target="_blank"
                     title="Twitter"
                 >
-                    <b-icon pack="fa" custom-class="fa-brands" icon="x-twitter" />
+                    <b-icon
+                        pack="fa"
+                        custom-class="fa-brands"
+                        icon="x-twitter"
+                    />
                 </a>
 
                 <span
