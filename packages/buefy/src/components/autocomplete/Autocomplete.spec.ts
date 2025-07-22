@@ -1,6 +1,7 @@
 import { mount, shallowMount } from '@vue/test-utils'
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { nextTick } from 'vue'
 import BAutocomplete from '@components/autocomplete/Autocomplete.vue'
 
 const findStringsStartingWith = (array: string[], value: string) =>
@@ -42,7 +43,7 @@ describe('BAutocomplete', () => {
         $dropdown = wrapper.find(dropdownMenu)
     })
 
-    it('is called', () => {
+    it('renders and initializes correctly', () => {
         expect(wrapper.vm).toBeTruthy()
         expect(wrapper.vm.$options.name).toBe('BAutocomplete')
     })
@@ -218,6 +219,7 @@ describe('BAutocomplete', () => {
         window.document.body.click()
         await wrapper.vm.$nextTick()
         expect($dropdown.isVisible()).toBeFalsy()
+        vi.useRealTimers()
     })
 
     it('open dropdown on down key click', async () => {
@@ -297,7 +299,7 @@ describe('BAutocomplete', () => {
         expect($input.element.value).toBe('')
     })
 
-    it('can be used with a custom data formatter', async () => {
+    it('supports custom formatter', async () => {
         await wrapper.setProps({
             data: DATA_LIST,
             customFormatter: (val: string) => `${val} formatted`
@@ -377,7 +379,7 @@ describe('BAutocomplete', () => {
         expect(wrapper.emitted()['icon-right-click']).toBeTruthy()
     })
 
-    it('reset events before destroy', () => {
+    it('cleans up event listeners on unmount', () => {
         document.removeEventListener = vi.fn()
         window.removeEventListener = vi.fn()
 
@@ -447,8 +449,7 @@ describe('BAutocomplete', () => {
             style: 'font-size: 2rem;',
             id: 'fallthrough-id'
         }
-
-        it('should bind class, style, and id to the root div if compatFallthrough is true (default)', async () => {
+        it('binds class/style/id to root if compatFallthrough true', async () => {
             const wrapper = shallowMount(BAutocomplete, { attrs })
 
             const root = wrapper.find('div.autocomplete.control')
@@ -461,13 +462,10 @@ describe('BAutocomplete', () => {
             expect(input.attributes('style')).toBeUndefined()
             expect(input.attributes('id')).toBeUndefined()
         })
-
-        it('should bind class, style, and id to the input if compatFallthrough is false', async () => {
+        it('binds class/style/id to input if compatFallthrough false', async () => {
             const wrapper = shallowMount(BAutocomplete, {
                 attrs,
-                props: {
-                    compatFallthrough: false
-                }
+                props: { compatFallthrough: false }
             })
 
             const input = wrapper.findComponent({ ref: 'input' })

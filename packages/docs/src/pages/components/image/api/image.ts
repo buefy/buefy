@@ -91,6 +91,13 @@ export default [
                 type: 'String',
                 values: '—',
                 default: '—'
+            },
+            {
+                name: '<code>caption-first</code>',
+                description: 'Controls the position of the caption. When true, caption is displayed before the image, when false, after the image.',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
             }
         ],
         slots: [
@@ -98,6 +105,11 @@ export default [
                 name: '<code>placeholder</code>',
                 description: 'This is to customize the placeholder waiting the image to load.',
             },
+            {
+                name: '<code>caption</code>',
+                description: 'Content for the image caption displayed as a figcaption element. Position controlled by the <code>caption-first</code> prop.',
+                props: '—'
+            }
         ],
         events: [
             {

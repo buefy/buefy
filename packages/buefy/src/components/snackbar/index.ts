@@ -8,7 +8,7 @@ import config from '../../utils/config'
 import { copyAppContext, getComponentFromVNode } from '../../utils/helpers'
 import { registerComponentProgrammatic } from '../../utils/plugins'
 
-type SnackbarOpenParams = Omit<SnackbarProps, 'message'> & {
+export type SnackbarOpenParams = Omit<SnackbarProps, 'message'> & {
     // programmatically opened snackbar can have VNode(s) as the message
     message?: string | VNode | (string | VNode)[]
     onClose?: () => void
