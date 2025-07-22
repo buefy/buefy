@@ -45,5 +45,8 @@
   "pre-commit": "lint:staged",
   "lint-staged": {
     "*.js": "eslint --fix"
+  },
+  "dependencies": {
+    "@stackblitz/sdk": "^1.11.0"
   }
 }
