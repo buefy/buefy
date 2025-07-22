@@ -46,11 +46,15 @@
                 <a
                     class="navbar-item"
                     :class="{ 'has-text-twitter': !light }"
-                    href="https://twitter.com/buefycss"
+                    href="https://x.com/buefycss"
                     target="_blank"
                     title="Twitter"
                 >
-                    <b-icon icon="twitter" />
+                    <b-icon
+                        pack="fa"
+                        custom-class="fa-brands"
+                        icon="x-twitter"
+                    />
                 </a>
 
                 <span

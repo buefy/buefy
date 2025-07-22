@@ -5,7 +5,11 @@
             <div class="expo-head-button">
                 <div class="buttons">
                     <button class="button is-twitter" @click="tweet">
-                        <b-icon icon="twitter" />
+                        <b-icon
+                            pack="fa"
+                            custom-class="fa-brands"
+                            icon="x-twitter"
+                        />
                         <span>#MadeWithBuefy</span>
                     </button>
                     <a
@@ -73,12 +77,12 @@ export default defineComponent({
             const height = 400;
             const left = (window.screen.width - width) / 2;
             const top = (window.screen.height - height) / 2;
-            const url = `https://twitter.com/share?url=${encodeURIComponent(
+            const url = `https://x.com/share?url=${encodeURIComponent(
                 document.location.protocol + "//" + document.location.host
             )}&text=My website made with Buefy!&hashtags=madewithbuefy`;
             const opts = `status=1,width=${width},height=${height},top=${top},left=${left}`;
 
-            window.open(url, "", opts);
+            window.open(url, "_blank", opts);
         },
         getImg(img: string) {
             return new URL(`/src/assets/expo/${img}`, import.meta.url).href;
