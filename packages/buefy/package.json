@@ -67,6 +67,7 @@
     "@types/jsdom": "^21.1.7",
     "@vue/test-utils": "^2.4.6",
     "clean-css-cli": "^5.6.2",
+    "esbuild": "^0.25.8",
     "esm": "^3.2.25",
     "jsdom": "^26.0.0",
     "rimraf": "^5.0.10",
