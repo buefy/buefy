@@ -6,7 +6,7 @@
                 <div class="column is-one-third">
                     <h5 class="title is-6">Community</h5>
                     <ul>
-                        <li><router-link to="/collective">Developers Collective</router-link></li>
+                        <li><router-link to="https://opencollective.com/buefy">Buefy Open Collective</router-link></li>
                         <li><router-link to="/events">Events & Meetups</router-link></li>
                         <li><router-link to="/contribute">Contribute</router-link></li>
                     </ul>
