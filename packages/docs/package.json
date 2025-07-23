@@ -29,8 +29,6 @@
   "dependencies": {
     "buefy": "*",
     "bulma": "^0.9.4",
-    "run": "^1.5.0",
-    "type-check": "^0.4.0",
     "vue": "*"
   },
   "devDependencies": {
