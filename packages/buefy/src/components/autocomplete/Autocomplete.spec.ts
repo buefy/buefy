@@ -1,7 +1,6 @@
 import { mount, shallowMount } from '@vue/test-utils'
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { nextTick } from 'vue'
 import BAutocomplete from '@components/autocomplete/Autocomplete.vue'
 
 const findStringsStartingWith = (array: string[], value: string) =>
