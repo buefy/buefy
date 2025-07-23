@@ -14,8 +14,8 @@
     "packages/*"
   ],
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^7.18.0",
-    "@typescript-eslint/parser": "^7.18.0",
+    "@typescript-eslint/eslint-plugin": "^8.38.0",
+    "@typescript-eslint/parser": "^8.38.0",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/tsconfig": "^0.7.0",
     "eslint": "^8.57.1",
@@ -45,8 +45,5 @@
   "pre-commit": "lint:staged",
   "lint-staged": {
     "*.js": "eslint --fix"
-  },
-  "dependencies": {
-    "@stackblitz/sdk": "^1.11.0"
   }
 }
