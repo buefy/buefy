@@ -134,6 +134,27 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>keep-open</code>',
+                description: 'Keep the dropdown list open after selecting',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>true</code>'
+            },
+            {
+                name: '<code>keep-first</code>',
+                description: 'Keep the first option selected',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>native-autocomplete</code>',
+                description: 'Same as native <code>autocomplete</code> options to use in HTML5 validation',
+                type: 'String',
+                values: '—',
+                default: '—'
+            },
+            {
                 name: '<code>remove-on-keys</code>',
                 description: 'Allow removing last tag when pressing given keys, if input is empty',
                 type: 'Array',
@@ -245,7 +266,7 @@ export default [
         ],
         events: [
             {
-                name: '<code>input</code>',
+                name: '<code>update:modelValue</code>',
                 description: 'Triggers when tags are added/removed',
                 parameters: '<code>value: Array</code>'
             },
@@ -268,6 +289,25 @@ export default [
                 name: '<code>infinite-scroll</code>',
                 description: 'Triggers when the autocomplete <code>.dropdown-list</code> has reached scroll end',
                 parameters: '—'
+            }
+        ],
+        methods: [
+            {
+                name: '<code>addTag</code>',
+                description: 'Add a tag programmatically',
+                parameters: '<code>tag?: String|Object</code>',
+                return: 'void'
+            },
+            {
+                name: '<code>removeTag</code>',
+                description: 'Remove tag at specific index',
+                parameters: '<code>index: Number, event?: Event</code>',
+                return: 'String|Object'
+            },
+            {
+                name: '<code>removeLastTag</code>',
+                description: 'Remove the last tag',
+                return: 'void'
             }
         ]
     }

@@ -2,8 +2,8 @@ export default [
     {
         props: [
             {
-                name: '<code>open</code>',
-                description: 'Whether collapse is open or not, use the .sync modifier to make it two-way binding',
+                name: '<code>v-model</code>',
+                description: 'Whether collapse is open or not',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>true</code>'
@@ -43,6 +43,11 @@ export default [
             }
         ],
         events: [
+            {
+                name: '<code>update:modelValue</code>',
+                description: 'Triggers when the collapse state changes (v-model event)',
+                parameters: '<code>value: Boolean</code>'
+            },
             {
                 name: '<code>open</code>',
                 description: 'Triggers when user opened',

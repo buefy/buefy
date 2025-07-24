@@ -1,6 +1,6 @@
 {
   "name": "docs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "author": "Rafael Beraldo <rafael.pimpa@gmail.com>",
   "maintainers": [
@@ -11,10 +11,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ntohq/buefy.git"
+    "url": "git+https://github.com/buefy/buefy.git"
   },
   "bugs": {
-    "url": "https://github.com/ntohq/buefy/issues"
+    "url": "https://github.com/buefy/buefy/issues"
   },
   "scripts": {
     "dev": "vite",
@@ -34,6 +34,7 @@
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
     "@mdi/font": "^6.9.96",
+    "@stackblitz/sdk": "^1.11.0",
     "@types/cleave.js": "^1.4.12",
     "@types/lodash": "^4.17.15",
     "@types/scrollreveal": "^0.0.11",

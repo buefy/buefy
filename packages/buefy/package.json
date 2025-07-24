@@ -1,6 +1,6 @@
 {
   "name": "buefy",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Lightweight UI components for Vue.js (v3) based on Bulma",
   "keywords": [
     "vuejs",
@@ -34,10 +34,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ntohq/buefy.git"
+    "url": "git+https://github.com/buefy/buefy.git"
   },
   "bugs": {
-    "url": "https://github.com/ntohq/buefy/issues"
+    "url": "https://github.com/buefy/buefy/issues"
   },
   "scripts": {
     "test": "npm run lint && npm run unit:update",
