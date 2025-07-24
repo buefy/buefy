@@ -21,6 +21,14 @@
                 Inline display is also availble by specifying the <code>inline</code> prop.
             </p>
         </Example>
+        <Example :component="ExCloseOnSelect" :code="ExCloseOnSelectCode" title="Clockpicker Reference" vertical>
+            <p>
+                The <code>clockpickerFace</code> ref can be used to detect user interaction with the clock face.
+                In this example, it is used together with a <code>mouseup</code> event listener to determine when
+                the user releases the mouse after selecting a time.
+                If the user is selecting minutes and is not dragging, the Clockpicker will automatically close.
+            </p>
+        </Example>
 
         <ApiView :data="api"/>
     </div>
@@ -50,6 +58,9 @@
     import ExColors from './examples/ExColors.vue'
     import ExColorsCode from './examples/ExColors.vue?raw'
 
+    import ExCloseOnSelect from './examples/ExCloseOnSelect.vue'
+    import ExCloseOnSelectCode from './examples/ExCloseOnSelect.vue?raw'
+
     export default defineComponent({
         components: {
             ApiView,
@@ -63,13 +74,15 @@
                     ExNonReadonly,
                     ExRange,
                     ExFooter,
-                    ExColors
+                    ExColors,
+                    ExCloseOnSelect
                 }),
                 ExSimpleCode,
                 ExNonReadonlyCode,
                 ExRangeCode,
                 ExFooterCode,
-                ExColorsCode
+                ExColorsCode,
+                ExCloseOnSelectCode
             }
         }
     })
