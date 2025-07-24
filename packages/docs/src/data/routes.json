@@ -362,7 +362,8 @@
             "/",
             "documentation",
             "documentation/clockpicker"
-        ]
+        ],
+        "isUpdated": true
     },
     "documentation/datetimepicker": {
         "title": "Datetimepicker",
