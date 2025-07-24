@@ -21,7 +21,7 @@
                 Inline display is also availble by specifying the <code>inline</code> prop.
             </p>
         </Example>
-        <Example :component="ExCloseOnSelect" :code="ExCloseOnSelectCode" title="Clockpicker Reference" vertical>
+        <Example :component="ExCloseOnSelect" :code="ExCloseOnSelectCode" title="ClockpickerFace Reference" vertical>
             <p>
                 The <code>clockpickerFace</code> ref can be used to detect user interaction with the clock face.
                 In this example, it is used together with a <code>mouseup</code> event listener to determine when
