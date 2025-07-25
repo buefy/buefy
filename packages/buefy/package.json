@@ -71,5 +71,8 @@
     "rimraf": "^5.0.10",
     "rollup-plugin-esbuild": "^6.1.0",
     "vitest": "^3.0.6"
+  },
+  "dependencies": {
+    "bulma": "^0.9.4"
   }
 }
