@@ -21,8 +21,6 @@ The biggest breaking change is obviously, **buefy does not work with Vue 2**.
 
 ### How to install
 
-To install this fork, please run the following command,
-
 ```sh
 npm install buefy
 ```
@@ -101,12 +99,12 @@ If you want to customize the icons or the theme, refer to the [customization sec
 <script src="https://unpkg.com/buefy/dist/buefy.min.js"></script>
 ```
 
-**Currently, including `buefy-next` via `<script>` is not working.**
+**Currently, including `buefy` via `<script>` is not working.**
 Please see the issue [#221](https://github.com/ntohq/buefy-next/issues/221).
 
 ### Installing Developer Release(s) from GitHub npm Registry to Access the Latest Features
 
-To incorporate the latest changes from the development branch of buefy-next, you can install developer releases from the GitHub npm registry. However, proceed with caution as these packages may be deleted or retracted without notice.
+To incorporate the latest changes from the development branch, you can install developer releases from the GitHub npm registry. However, proceed with caution as these packages may be deleted or retracted without notice.
 
 Steps:
 
