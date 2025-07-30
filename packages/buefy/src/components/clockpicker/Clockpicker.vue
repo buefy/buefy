@@ -202,10 +202,6 @@ export default defineComponent({
             type: Number,
             default: 5
         },
-        autoSwitch: {
-            type: Boolean,
-            default: true
-        },
         type: {
             type: String,
             default: 'is-primary'
@@ -276,8 +272,13 @@ export default defineComponent({
             }
         },
         onClockChange() {
-            if (this.autoSwitch && this.isSelectingHour) {
+            if (this.isSelectingHour) {
                 this.isSelectingHour = !this.isSelectingHour
+            } else {
+                const dropdown = this.$refs.dropdown as BDropdownInstance
+                if (dropdown && dropdown.isActive) {
+                    dropdown.toggle(false)
+                }
             }
         },
         onMeridienClick(value: string) {
