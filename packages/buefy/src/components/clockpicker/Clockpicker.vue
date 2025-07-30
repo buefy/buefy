@@ -275,9 +275,10 @@ export default defineComponent({
             if (this.isSelectingHour) {
                 this.isSelectingHour = !this.isSelectingHour
             } else {
+                // Minutes selected, let's close the clockpicker
                 const dropdown = this.$refs.dropdown as BDropdownInstance
                 if (dropdown && dropdown.isActive) {
-                    dropdown.toggle(false)
+                    dropdown.toggle()
                 }
             }
         },
