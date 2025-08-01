@@ -5,6 +5,8 @@
         -->
 
         <router-view />
+        <!-- Show BSA ad only when route is not "/" -->
+        <BuySellAds v-if="$route.path !== '/'" />
     </div>
 </template>
 

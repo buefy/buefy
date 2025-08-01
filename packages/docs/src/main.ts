@@ -15,6 +15,7 @@ import ApiView from './components/ApiView.vue'
 import CodeView from './components/CodeView.vue'
 import VariablesView from './components/VariablesView.vue'
 import Example from './components/Example.vue'
+import BuySellAds from './components/BuySellAds.vue'
 
 // global Vue instance should be replaced with `vueApp`
 const vueApp = createApp({
@@ -72,6 +73,7 @@ vueApp.component('CodeView', CodeView)
 vueApp.component('VariablesView', VariablesView)
 // eslint-disable-next-line vue/multi-word-component-names
 vueApp.component('Example', Example)
+vueApp.component('BuySellAds', BuySellAds)
 
 vueApp.directive('highlight', {
     beforeMount(el, binding) {
