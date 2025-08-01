@@ -1,10 +1,8 @@
 import type { Project } from '@stackblitz/sdk'
-import {
-    INDEX_HTML,
-    PACKAGE_JSON,
-    VITE_CONFIG,
-    MAIN_JS
-} from '../data/stackblitz'
+import indexHtml from '../templates/stackblitz/index.html?raw'
+import packageJson from '../templates/stackblitz/package.json?raw'
+import viteConfig from '../templates/stackblitz/vite.config.ts?raw'
+import mainJs from '../templates/stackblitz/main.ts?raw'
 
 export function createCustomVueProject(exampleCode: string, exampleTitle: string): Project {
     return {
@@ -12,14 +10,11 @@ export function createCustomVueProject(exampleCode: string, exampleTitle: string
         description: 'Generated project with App.vue scaffolded programmatically',
         template: 'node',
         files: {
-            'index.html': INDEX_HTML,
-            'package.json': PACKAGE_JSON,
-            'vite.config.js': VITE_CONFIG,
-            'src/main.js': MAIN_JS,
+            'index.html': indexHtml,
+            'package.json': packageJson,
+            'vite.config.js': viteConfig,
+            'src/main.js': mainJs,
             'src/App.vue': exampleCode
-        },
-        dependencies: {
-            '@vitejs/plugin-vue': '^6.0.0'
         }
     }
 }
