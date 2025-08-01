@@ -1,7 +1,7 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
   "include": ["src/**/*", "src/**/*.vue"],
-  "exclude": ["node_modules", "src/assets/*"],
+  "exclude": ["node_modules", "src/assets/*", "src/templates/stackblitz/"],
   "compilerOptions": {
     "allowJs": true,
     "types": ["jsdom", "vite/client"],
