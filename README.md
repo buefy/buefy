@@ -102,6 +102,15 @@ If you want to customize the icons or the theme, refer to the [customization sec
 **Currently, including `buefy` via `<script>` is not working.**
 Please see the issue [#221](https://github.com/ntohq/buefy-next/issues/221).
 
+As a temporary workaround, add the following snippet before initializing Buefy:
+
+```html
+<script>
+    // we need this tweak because Buefy is not built for browsers
+    window.process = { env: { NODE_ENV: 'production' } };
+</script>
+```
+
 ### Installing Developer Release(s) from GitHub npm Registry to Access the Latest Features
 
 To incorporate the latest changes from the development branch, you can install developer releases from the GitHub npm registry. However, proceed with caution as these packages may be deleted or retracted without notice.
@@ -230,3 +239,4 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 ## License <a href="https://github.com/buefy/buefy/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/buefy.svg?logo=github" /></a>
 
 Code released under [MIT](https://github.com/buefy/buefy/blob/master/LICENSE) license.
+
