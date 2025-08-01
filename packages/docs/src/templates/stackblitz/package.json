@@ -1,0 +1,22 @@
+{
+  "name": "buefy-example-templates",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.5.17",
+    "buefy": "^1.0.1",
+    "@stackblitz/sdk": "^1.11.0",
+    "@fortawesome/fontawesome-free": "^6.7.2",
+    "@mdi/font": "^6.9.96"
+  },
+  "devDependencies": {
+    "vite": "^7.0.4",
+    "@vitejs/plugin-vue": "^6.0.0"
+  }
+}
