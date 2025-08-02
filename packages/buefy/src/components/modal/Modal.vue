@@ -79,7 +79,6 @@ const Modal = defineComponent({
         content: {
             type: [String, Object, Array] as PropType<string | VNode | (string | VNode)[] >
         },
-        programmatic: Boolean,
         props: Object,
         events: {
             type: Object,
@@ -250,21 +249,9 @@ const Modal = defineComponent({
             this.close()
         },
 
-        /*
-        * Call the cancelCallback prop (function).
-        * Emit events, and destroy modal if it's programmatic.
-        */
         close() {
             this.$emit('close')
             this.$emit('update:modelValue', false)
-
-            // Timeout for the animation complete before destroying
-            if (this.programmatic) {
-                this.isActive = false
-                setTimeout(() => {
-                    removeElement(this.$el)
-                }, 150)
-            }
         },
 
         /*
@@ -303,16 +290,6 @@ const Modal = defineComponent({
         if (typeof window !== 'undefined') {
             document.addEventListener('keyup', this.keyPress)
         }
-    },
-    mounted() {
-        if (this.programmatic) {
-            // Insert the Modal component in body tag
-            // only if it's programmatic
-            // the following line used be in `beforeMount`
-            // but $el is null at `beforeMount`
-            document.body.appendChild(this.$el)
-            this.isActive = true
-        } else if (this.isActive) this.handleScroll()
     },
     beforeUnmount() {
         if (typeof window !== 'undefined') {
