@@ -55,7 +55,7 @@
                 </ul>
             </template>
         </div>
-
+        <sidebar-ads />
         <a
             class="sidebar-btt"
             role="button"
@@ -76,6 +76,7 @@ import type { PageTree } from '@/data/menu'
 import routes from '@/data/routes'
 import type { Route } from '@/data/routes'
 import SidebarSearch from './SidebarSearch.vue'
+import SidebarAds from './SidebarAds.vue'
 
 type PageRoute = Partial<PageTree & Route>;
 
@@ -83,7 +84,8 @@ export default defineComponent({
     components: {
         BIcon,
         BTag,
-        SidebarSearch
+        SidebarSearch,
+        SidebarAds
     },
     props: {
         data: Array<PageTree>
