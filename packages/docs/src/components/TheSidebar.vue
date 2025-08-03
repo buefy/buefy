@@ -76,7 +76,7 @@ import type { PageTree } from '@/data/menu'
 import routes from '@/data/routes'
 import type { Route } from '@/data/routes'
 import SidebarSearch from './SidebarSearch.vue'
-import SidebarAds from './SidebarAds.vue'
+import SidebarAds from './SideBarAds.vue'
 
 type PageRoute = Partial<PageTree & Route>;
 
