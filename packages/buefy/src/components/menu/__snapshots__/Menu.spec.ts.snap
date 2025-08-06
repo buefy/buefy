@@ -1,3 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`BMenu > render correctly 1`] = `"<div class="menu"></div>"`;
+exports[`BMenu > render correctly 1`] = `
+"<section>
+  <div class="menu"></div>
+</section>"
+`;

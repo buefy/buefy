@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`BColorpickerAlphaSlider > render correctly 1`] = `
-"<div class="b-colorpicker-alpha-slider" style="background-size: 100% 100%, 1em 1em, 1em 1em;">
+"<div class="b-colorpicker-alpha-slider" style="background-image: linear-gradient(90deg, #123456 0%, #12345600 100%), linear-gradient(45deg, #c7c7c7 25%, transparent 25%, transparent 75%, #c7c7c7 75%, #c7c7c7), linear-gradient(45deg, #c7c7c7 25%, transparent 25%, transparent 75%, #c7c7c7 75%, #c7c7c7); background-size: 100% 100%, 1em 1em, 1em 1em;">
   <div role="slider" class="alpha-range-thumb" tabindex="0" aria-label="Tranparency" aria-valuemin="0" aria-valuenow="61" aria-valuemax="100" style="left: 61%;">
     <b-tooltip-stub label="61%" active="true" type="is-primary" position="is-top" triggers="hover" always="false" square="false" dashed="false" multilined="false" size="is-medium" appendtobody="false" animated="true" animation="fade" autoclose="true"></b-tooltip-stub>
   </div>
