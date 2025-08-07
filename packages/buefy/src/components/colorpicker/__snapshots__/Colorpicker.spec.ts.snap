@@ -3,7 +3,7 @@
 exports[`BColorpicker > render correctly 1`] = `
 "<div class="colorpicker control">
   <div class="dropdown dropdown-menu-animation is-mobile-modal">
-    <div tabindex="0" class="dropdown-trigger" aria-haspopup="true"><button class="button" style="background-color: rgb(255, 255, 255); background-image: linear-gradient( 45deg, #000000 50%, #000000 50% ), linear-gradient(45deg, #c7c7c7 25%, transparent 25%, transparent 75%, #c7c7c7 75%, #c7c7c7), linear-gradient(45deg, #c7c7c7 25%, transparent 25%, transparent 75%, #c7c7c7 75%, #c7c7c7); background-size: 100% 100%, 16px 16px, 16px 16px; color: rgb(255, 255, 255); text-shadow: 0 0 2px #000000AA;" type="button">
+    <div tabindex="0" class="dropdown-trigger" aria-haspopup="true"><button class="button" style="background-color: rgb(255, 255, 255); background-size: 100% 100%, 16px 16px, 16px 16px; color: rgb(255, 255, 255); text-shadow: 0 0 2px #000000AA;" type="button">
         <!--v-if--><span><span class="color-name">#00000000</span></span>
         <!--v-if-->
       </button></div>
