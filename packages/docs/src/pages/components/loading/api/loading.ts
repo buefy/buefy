@@ -2,11 +2,25 @@ export default [
     {
         props: [
             {
-                name: '<code>active</code>',
-                description: 'Whether loading is active or not, use the <code>.sync</code> modifier to make it two-way binding',
+                name: '<code>v-model</code>',
+                description: 'Whether loading is active or not',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>programmatic</code>',
+                description: 'Indicates if the loading was created programmatically',
+                type: 'Boolean',
+                values: '—',
+                default: '<code>false</code>'
+            },
+            {
+                name: '<code>container</code>',
+                description: 'DOM element where the loading component will be created on (for programmatic usage)',
+                type: 'Object, Function, HTMLElement',
+                values: '—',
+                default: '<code>document.body</code>'
             },
             {
                 name: '<code>animation</code>',
@@ -49,6 +63,23 @@ export default [
                 name: '<code>close</code>',
                 description: 'Triggers when user closed/canceled or called programmatically from the injected component',
                 parameters: '—'
+            },
+            {
+                name: '<code>update:modelValue</code>',
+                description: 'Triggers when the loading state changes',
+                parameters: '<code>value: Boolean</code>'
+            },
+            {
+                name: '<code>update:is-full-page</code>',
+                description: 'Triggers when the full-page state changes',
+                parameters: '<code>value: Boolean</code>'
+            },
+        ],
+        methods: [
+            {
+                name: '<code>close</code>',
+                description: 'Programmatically close the loading overlay',
+                return: '—'
             }
         ]
     }

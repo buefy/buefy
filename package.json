@@ -1,7 +1,7 @@
 {
   "name": "root",
   "private": true,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "homepage": "https://buefy.org",
   "description": "Lightweight UI components for Vue.js (v3) based on Bulma",
   "license": "MIT",
@@ -34,10 +34,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ntohq/buefy"
+    "url": "https://github.com/buefy/buefy"
   },
   "bugs": {
-    "url": "https://github.com/ntohq/buefy/issues"
+    "url": "https://github.com/buefy/buefy/issues"
   },
   "scripts": {
     "lint:staged": "lint-staged"

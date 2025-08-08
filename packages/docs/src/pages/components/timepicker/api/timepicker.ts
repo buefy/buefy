@@ -30,6 +30,13 @@ export default [
                 default: '<code>1</code>'
             },
             {
+                name: '<code>increment-seconds</code>',
+                description: 'Step seconds for select component',
+                type: 'Number',
+                values: '—',
+                default: '<code>1</code>'
+            },
+            {
                 name: '<code>time-formatter</code>',
                 description: 'Function to format time (<code>Date</code> type) to a string for display in the input',
                 type: 'Function',
@@ -192,6 +199,13 @@ export default [
                 default: '<code>false</code>'
             },
             {
+                name: '<code>tz-offset</code>',
+                description: 'Timezone offset in minutes',
+                type: 'Number',
+                values: '—',
+                default: '<code>0</code>'
+            },
+            {
                 name: '<code>compat-fallthrough</code>',
                 description: 'Whether <code>class</code>, <code>style</code>, and <code>id</code> attributes are applied to the root &lt;div&gt; element or the underlying input component. If <code>true</code>, they are applied to the root &lt;div&gt; element, which is compatible with Vue 2.',
                 type: 'Boolean',
@@ -218,10 +232,24 @@ export default [
                 props: '—'
             }
         ],
+        events: [
+            {
+                name: '<code>update:modelValue</code>',
+                description: 'Triggers when the time is changed',
+                parameters: '<code>value: Date</code>'
+            }
+        ],
         methods: [
             {
                 name: '<code>close</code>',
-                description: 'Close dropdown'
+                description: 'Close dropdown',
+                return: 'void'
+            },
+            {
+                name: '<code>toggle</code>',
+                description: 'Toggle the dropdown open/closed',
+                parameters: '<code>active?: Boolean</code>',
+                return: 'void'
             }
         ]
     }

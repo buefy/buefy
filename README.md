@@ -7,7 +7,7 @@
     <a href="https://www.npmjs.com/package/buefy"><img src="https://img.shields.io/npm/dt/buefy.svg" /></a>
     <a href="https://circleci.com/gh/buefy/buefy"><img src="https://img.shields.io/circleci/project/github/buefy/buefy.svg?style=flat-square" /></a>
     <a href="https://codecov.io/gh/buefy/buefy"><img src="https://img.shields.io/codecov/c/github/buefy/buefy.svg?style=flat-square" /></a>
-    <a href="https://discordapp.com/invite/ZkdFJMr"><img src="https://img.shields.io/badge/chat-on%20discord-7289DA.svg?logo=discord" /></a>
+    <a href="https://discord.buefy.org/"><img src="https://img.shields.io/badge/chat-on%20discord-7289DA.svg?logo=discord" /></a>
     <a href="https://buefy.org"><img src="https://img.shields.io/badge/code_style-buefy-7957d5.svg?style=flat-square" /></a>
 </p>
 
@@ -20,8 +20,6 @@ Please refer to [CHANGELOG.md](/CHANGELOG.md) for more details.
 The biggest breaking change is obviously, **buefy does not work with Vue 2**.
 
 ### How to install
-
-To install this fork, please run the following command,
 
 ```sh
 npm install buefy
@@ -101,12 +99,21 @@ If you want to customize the icons or the theme, refer to the [customization sec
 <script src="https://unpkg.com/buefy/dist/buefy.min.js"></script>
 ```
 
-**Currently, including `buefy-next` via `<script>` is not working.**
+**Currently, including `buefy` via `<script>` is not working.**
 Please see the issue [#221](https://github.com/ntohq/buefy-next/issues/221).
+
+As a temporary workaround, add the following snippet before initializing Buefy:
+
+```html
+<script>
+    // we need this tweak because Buefy is not built for browsers
+    window.process = { env: { NODE_ENV: 'production' } };
+</script>
+```
 
 ### Installing Developer Release(s) from GitHub npm Registry to Access the Latest Features
 
-To incorporate the latest changes from the development branch of buefy-next, you can install developer releases from the GitHub npm registry. However, proceed with caution as these packages may be deleted or retracted without notice.
+To incorporate the latest changes from the development branch, you can install developer releases from the GitHub npm registry. However, proceed with caution as these packages may be deleted or retracted without notice.
 
 Steps:
 
@@ -232,3 +239,4 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 ## License <a href="https://github.com/buefy/buefy/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/buefy.svg?logo=github" /></a>
 
 Code released under [MIT](https://github.com/buefy/buefy/blob/master/LICENSE) license.
+

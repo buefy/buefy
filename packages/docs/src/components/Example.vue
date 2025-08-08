@@ -16,7 +16,7 @@
             :class="{ 'is-vertical': vertical }"
         >
             <div class="button-container">
-                <CodepenEdit :code="code" :title="title" />
+                <StackBlitzEdit :code="code" :title="title" />
             </div>
             <div class="example-component" :class="{ 'is-paddingless': paddingless }">
                 <component :is="component" />
@@ -34,7 +34,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import CodepenEdit from './CodepenEdit.vue'
+import StackBlitzEdit from './StackBlitzEdit.vue'
+// import CodepenEdit from './CodepenEdit.vue'
 import CodeView from './CodeView.vue'
 
 export default defineComponent({
@@ -42,7 +43,7 @@ export default defineComponent({
     name: 'Example',
     components: {
         CodeView,
-        CodepenEdit
+        StackBlitzEdit
     },
     props: {
         component: [Object, Function],

@@ -35,14 +35,8 @@
             For any installation and usage method, you need
             <strong
                 ><a href="https://vuejs.org" target="_blank">Vue.js</a> version
-                2.6+</strong
+                3.4+</strong
             >.
-            <strong
-                ><a href="https://github.com/ntohq/buefy/" target="_blank"
-                    >Vue.js version 3+ is supported here (official fork in
-                    development).</a
-                ></strong
-            >
         </b-message>
 
         <div class="media">

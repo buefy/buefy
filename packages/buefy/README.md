@@ -7,7 +7,7 @@
     <a href="https://www.npmjs.com/package/buefy"><img src="https://img.shields.io/npm/dt/buefy.svg" /></a>
     <a href="https://circleci.com/gh/buefy/buefy"><img src="https://img.shields.io/circleci/project/github/buefy/buefy.svg?style=flat-square" /></a>
     <a href="https://codecov.io/gh/buefy/buefy"><img src="https://img.shields.io/codecov/c/github/buefy/buefy.svg?style=flat-square" /></a>
-    <a href="https://discordapp.com/invite/ZkdFJMr"><img src="https://img.shields.io/badge/chat-on%20discord-7289DA.svg?logo=discord" /></a>
+    <a href="https://discord.buefy.org/"><img src="https://img.shields.io/badge/chat-on%20discord-7289DA.svg?logo=discord" /></a>
     <a href="https://buefy.org"><img src="https://img.shields.io/badge/code_style-buefy-7957d5.svg?style=flat-square" /></a>
 </p>
 
@@ -20,8 +20,6 @@ Please refer to [CHANGELOG.md](/CHANGELOG.md) for more details.
 The biggest breaking change is obviously, **buefy does not work with Vue 2**.
 
 ### How to install
-
-To install this fork, please run the following command,
 
 ```sh
 npm install buefy
@@ -101,12 +99,21 @@ If you want to customize the icons or the theme, refer to the [customization sec
 <script src="https://unpkg.com/buefy/dist/buefy.min.js"></script>
 ```
 
-**Currently, including `buefy-next` via `<script>` is not working.**
+**Currently, including `buefy` via `<script>` is not working.**
 Please see the issue [#221](https://github.com/ntohq/buefy-next/issues/221).
+
+As a temporary workaround, add the following snippet before initializing Buefy:
+
+```html
+<script>
+    // we need this tweak because Buefy is not built for browsers
+    window.process = { env: { NODE_ENV: 'production' } };
+</script>
+```
 
 ### Installing Developer Release(s) from GitHub npm Registry to Access the Latest Features
 
-To incorporate the latest changes from the development branch of buefy-next, you can install developer releases from the GitHub npm registry. However, proceed with caution as these packages may be deleted or retracted without notice.
+To incorporate the latest changes from the development branch, you can install developer releases from the GitHub npm registry. However, proceed with caution as these packages may be deleted or retracted without notice.
 
 Steps:
 
@@ -140,30 +147,32 @@ Steps:
     Buefy developer releases follow a specific naming format:
 
     ```
-    buefy@<package version>-<dev commit hash>
+    @buefy/buefy@<package version>-<dev commit hash>
     ```
 
     `<package version>`: This represents the intended stable release version that the developer release will eventually be included in.
 
     `<dev commit hash>`: This part indicates that it's a developer release and includes a unique commit hash that identifies the specific code changes in that release.
 
+    **Due to the GitHub npm registry's requirements, the package name must be scoped; i.e., prefixed with `@buefy/`.**
+
 4. Install the Package:
 
     Copy the provided command from GitHub, which will resemble this:
 
     ```bash
-    npm install buefy@<package version>-<dev commit hash>
+    npm install buefy@npm:@buefy/buefy@<package version>-<dev commit hash>
     ```
 
-    Alternatively, to fetch the latest release from the developer snapshot registry, run:
+    Alternatively, to fetch the latest release from the developer release registry, run:
 
     ```bash
-    npm install buefy@latest
+    npm install buefy@npm:@buefy/buefy@latest
     ```
 
-    **However, note it is not recommended to use the latest version of our developer snapshot, as its stability fluctuates.**
+    **However, note it is not recommended to use the latest version of our developer release, as its stability fluctuates.**
 
-Congratulations! You've successfully installed a Buefy-next developer package.
+Congratulations! You've successfully installed a Buefy developer release.
 
 For further details on the GitHub npm registry refer to the [official GitHub documentation](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry#installing-a-package)
 
@@ -230,3 +239,4 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 ## License <a href="https://github.com/buefy/buefy/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/buefy.svg?logo=github" /></a>
 
 Code released under [MIT](https://github.com/buefy/buefy/blob/master/LICENSE) license.
+

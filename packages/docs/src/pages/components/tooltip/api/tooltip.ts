@@ -108,9 +108,28 @@ export default [
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'
+            },
+            {
+                name: '<code>animation</code>',
+                description: 'Custom animation name for tooltip appearance',
+                type: 'String',
+                values: '—',
+                default: '<code>fade</code>'
+            },
+            {
+                name: '<code>content-class</code>',
+                description: 'CSS class to apply to the tooltip content',
+                type: 'String',
+                values: '—',
+                default: '—'
             }
         ],
         slots: [
+            {
+                name: 'default',
+                description: 'Trigger element that will show the tooltip on interaction',
+                props: '—'
+            },
             {
                 name: 'content',
                 description: 'Tooltip Content (HTML or components)',
@@ -127,7 +146,19 @@ export default [
                 name: '<code>close</code>',
                 description: 'Triggers when the tooltip is closed',
                 parameters: '—'
+            }
+        ],
+        methods: [
+            {
+                name: '<code>open</code>',
+                description: 'Open the tooltip programmatically',
+                return: 'void'
             },
+            {
+                name: '<code>close</code>',
+                description: 'Close the tooltip programmatically',
+                return: 'void'
+            }
         ]
     }
 ]
