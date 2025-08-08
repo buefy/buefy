@@ -1,6 +1,33 @@
 # Buefy Changelog
 
-### [3.0.0]()
+## [1.0.2](https://github.com/buefy/buefy/pull/4174)
+
+### Fixes
+
+* [#4139](https://github.com/buefy/buefy/pull/4139) Fixed various bugs in the `Autocomplete` component.
+* [#4189](https://github.com/buefy/buefy/pull/4189) Fixed `Clockpicker` not closing properly and removed the `autoSwitch` prop.
+* [#4156](https://github.com/buefy/buefy/pull/4156) Exported `SnackbarOpenParams` type for better TypeScript support.
+* [#4176](https://github.com/buefy/buefy/pull/4176) Fixed issues in the `ImproveThis` component.
+* Removed deprecated high contrast styles and references.
+* Removed accidental dependencies and cleaned up unused references to `buefy-next`.
+
+### Fixes (docs)
+
+* [#4142](https://github.com/buefy/buefy/pull/4142) Updated documentation for Vue 3 components.
+* [#4193](https://github.com/buefy/buefy/pull/4193) Cleaned up README content and formatting.
+* Updated social and Discord links across documentation.
+* Migrated interactive examples from CodePen to StackBlitz.
+
+### Others
+
+* [#4173](https://github.com/buefy/buefy/pull/4173) Version bump: package.json version set to 1.0.2
+* [#4197](https://github.com/buefy/buefy/pull/4197) Update Changelog for version 1.0.2
+* [#4184](https://github.com/buefy/buefy/pull/4184) Added `bulma` as a direct dependency of Buefy.
+* [#4192](https://github.com/buefy/buefy/pull/4192) Cleaned up StackBlitz integration and dev dependencies.
+* [#4196](https://github.com/buefy/buefy/pull/4196) Implemented Carbon Ads integration.
+* Updated workflows and access levels for dev packages.
+* Added reference to `ClockpickerFace` component.
+* Added Buefy Collective metadata for community support.
 
 ## [1.0.1](https://github.com/buefy/buefy/pull/4077)
 

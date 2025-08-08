@@ -10,7 +10,8 @@
     "node_modules",
     "src/assets/*",
     "../buefy/src/**/*.spec.*",
-    "../buefy/node_modules"
+    "../buefy/node_modules",
+    "src/templates/stackblitz/"
   ],
   "compilerOptions": {
     "rootDirs": [

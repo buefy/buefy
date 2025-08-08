@@ -15,8 +15,8 @@
             <b-button label="Right" type="is-dark" />
         </b-tooltip>
 
-        <b-tooltip label="Tooltip top">
-            <b-button label="Top (default)" type="is-dark" />
+        <b-tooltip label="Tooltip top" position="is-top">
+            <b-button label="Top" type="is-dark" />
         </b-tooltip>
         <b-tooltip label="Tooltip top" position="is-top">
             <b-button label="Top" type="is-dark" />
