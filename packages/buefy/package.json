@@ -52,6 +52,9 @@
     "build:scss": "node ./build/banner.js < src/scss/buefy-build.scss | sass --load-path=../../node_modules --load-path=node_modules src/scss/buefy-build.scss dist/buefy.css && cleancss -o dist/buefy.min.css dist/buefy.css",
     "vetur": "node -r esm build/vetur.js"
   },
+  "dependencies": {
+    "bulma": "^1.0.4"
+  },
   "peerDependencies": {
     "vue": "^3.0.0"
   },
@@ -73,8 +76,5 @@
     "rimraf": "^5.0.10",
     "rollup-plugin-esbuild": "^6.1.0",
     "vitest": "^3.0.6"
-  },
-  "dependencies": {
-    "bulma": "^0.9.4"
   }
 }
