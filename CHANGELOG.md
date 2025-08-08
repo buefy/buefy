@@ -1,5 +1,40 @@
 # Buefy Changelog
 
+## [3.0.0](https://github.com/buefy/buefy/pull/4199)
+
+### Breaking Changes
+
+* Migrated entire codebase to **Bulma v1.0.3** for modernized styling and layout.
+* Deprecated Sass global built-in functions; replaced with modern equivalents.
+* Removed legacy `bulmacssvars` and outdated style references.
+* Replaced all `value` props with `modelValue` across components to align with Vue 3 standards.
+* Programmatically mounted components (e.g., `Modal`, `Dialog`, `Snackbar`) now require standalone Vue apps and cannot use plugins.
+* `StepItem`, `CarouselItem`, and `TabItem` now require explicit `order` props to maintain consistent rendering order.
+
+### New Features
+
+* Introduced a **new color system** for Buefy v3 documentation and component theming.
+* Added support for **Cleave.js** as a directive for input formatting.
+* Updated all style variables and documentation to reflect Bulma v1 conventions.
+
+### Fixes
+
+* Resolved SCSS issues in `Dropdown`, `Navbar`, and `Input` loading states.
+* Fixed deprecated Sass usage and lint/type check errors across the codebase.
+* Updated unit tests to reflect new architecture and styling.
+
+### Fixes (docs)
+
+* Updated documentation for Sass and CSS variable usage.
+* Refreshed component style variable references and examples.
+* Migrated interactive examples to StackBlitz and updated Netlify deploy previews.
+
+### Others
+
+* Merged 28 commits for Bulma v1 migration and v3 release.
+* Bumped version to `v3.0.0` and updated changelog accordingly.
+* Cleaned up dev dependencies and workflows for modern build tools.
+
 ## [1.0.2](https://github.com/buefy/buefy/pull/4174)
 
 ### Fixes
