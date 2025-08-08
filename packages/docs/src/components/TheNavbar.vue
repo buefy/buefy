@@ -175,7 +175,7 @@ export default defineComponent({
             get() {
                 return this.light ? 'light' : 'dark'
             },
-            set(newTheme) {
+            set(newTheme: string) {
                 this.$emit('theme-changed', newTheme === 'light')
             }
         }
