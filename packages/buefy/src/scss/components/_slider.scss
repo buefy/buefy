@@ -1,45 +1,78 @@
-$slider-radius: $radius !default;
-$slider-track-background: $grey-lighter !default;
-$slider-track-radius: $radius !default;
-$slider-track-border: 0px solid $grey !default;
-$slider-track-shadow: 0px 0px 0px $grey !default;
-$slider-thumb-background: $scheme-main !default;
-$slider-thumb-radius: $radius !default;
-$slider-thumb-border: 1px solid $grey-light !default;
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/utilities/derived-variables" as dv;
+@use "bulma/sass/utilities/mixins" as mixins;
+
+$slider-radius: cv.getVar("radius") !default;
+$slider-track-background: cv.getVar("grey-lighter") !default;
+$slider-track-radius: cv.getVar("radius") !default;
+$slider-track-border: 0px solid cv.getVar("grey") !default;
+$slider-track-shadow: 0px 0px 0px cv.getVar("grey") !default;
+$slider-thumb-background: cv.getVar("scheme-main") !default;
+$slider-thumb-radius: cv.getVar("radius") !default;
+$slider-thumb-border: 1px solid cv.getVar("grey-light") !default;
 $slider-thumb-shadow: none !default;
 $slider-thumb-to-track-ratio: 2 !default;
 $slider-tick-to-track-ratio: 0.5 !default;
 $slider-tick-width: 3px !default;
-$slider-tick-radius: $radius !default;
-$slider-tick-background: $grey-light !default;
+$slider-tick-radius: cv.getVar("radius") !default;
+$slider-tick-background: cv.getVar("grey-light") !default;
 $slider-mark-size: 0.75rem !default;
-$slider-colors: $colors !default;
+$slider-colors: dv.$colors !default;
 
-@mixin slider-size($size) {
-	$track-height: divide($size, $slider-thumb-to-track-ratio);
-	$tick-height: $track-height * $slider-tick-to-track-ratio;
-	$thumb-size: $size;
+.#{iv.$class-prefix}b-slider  {
+    @include cv.register-vars((
+        "slider-radius": #{$slider-radius},
+        "slider-track-background": #{$slider-track-background},
+        "slider-fill-background": #{$slider-track-background},
+        "slider-track-radius": #{$slider-track-radius},
+        "slider-track-border": #{$slider-track-border},
+        "slider-track-shadow": #{$slider-track-shadow},
+        "slider-thumb-background": #{$slider-thumb-background},
+        "slider-thumb-radius": #{$slider-thumb-radius},
+        "slider-thumb-border": #{$slider-thumb-border},
+        "slider-thumb-shadow": #{$slider-thumb-shadow},
+        "slider-thumb-to-track-ratio": #{$slider-thumb-to-track-ratio},
+        "slider-tick-to-track-ratio": #{$slider-tick-to-track-ratio},
+        "slider-tick-width": #{$slider-tick-width},
+        "slider-tick-radius": #{$slider-tick-radius},
+        "slider-tick-background": #{$slider-tick-background},
+        "slider-mark-size": #{$slider-mark-size}
+    ));
 
-    .b-slider-track {
-        height: $track-height;
+    @each $name, $pair in $slider-colors {
+        &.is-#{$name} {
+            @include cv.register-vars((
+                "slider-fill-background": #{cv.getVar($name)}
+            ));
+        }
     }
 
-	.b-slider-thumb {
-		height: $thumb-size;
-		width: $thumb-size;
+    @include cv.register-vars((
+        "track-height": calc(#{cv.getVar('size-normal')} / #{cv.getVar('slider-thumb-to-track-ratio')}),
+        "tick-height": calc(#{cv.getVar('track-height')} * #{cv.getVar('slider-thumb-to-track-ratio')}),
+        "thumb-size": cv.getVar('size-normal')
+    ));
+
+    &.is-small {
+        @include cv.register-vars((
+            "track-height": calc(#{cv.getVar('size-small')} / #{cv.getVar('slider-thumb-to-track-ratio')}),
+            "thumb-size": cv.getVar('size-small')
+        ));
+    }
+    &.is-medium {
+        @include cv.register-vars((
+            "track-height": calc(#{cv.getVar('size-medium')} / #{cv.getVar('slider-thumb-to-track-ratio')}),
+            "thumb-size": cv.getVar('size-medium')
+        ));
+    }
+    &.is-large {
+        @include cv.register-vars((
+            "track-height": calc(#{cv.getVar('size-large')} / #{cv.getVar('slider-thumb-to-track-ratio')}),
+            "thumb-size": cv.getVar('size-large')
+        ));
     }
 
-    .b-slider-tick {
-        height: $tick-height;
-    }
-
-    .b-slider-tick-label {
-        font-size: $slider-mark-size;
-        position: absolute;
-        top: calc(#{$track-height} * 0.5 + 2px);
-        left: 50%;
-        transform: translateX(-50%);
-    }
 }
 
 .b-slider {
@@ -52,16 +85,17 @@ $slider-colors: $colors !default;
         align-items: center;
         position: relative;
         cursor: pointer;
-        background: $slider-track-background;
-        border-radius: $slider-radius;
+        background: cv.getVar('slider-track-background');
+        border-radius: cv.getVar('slider-radius');
+        height: cv.getVar("track-height");
     }
     .b-slider-fill {
         position: absolute;
         height: 100%;
-        box-shadow: $slider-track-shadow;
-        background: $slider-track-background;
-        border-radius: $slider-track-radius;
-        border: $slider-track-border;
+        box-shadow: cv.getVar('slider-track-shadow');
+        background: cv.getVar('slider-fill-background');
+        border-radius: cv.getVar('slider-track-radius');
+        border: cv.getVar('slider-track-border');
         // Fix alignment in IE 11. Cancel out for others
         top: 50%;
         transform: translateY(-50%);
@@ -76,10 +110,12 @@ $slider-colors: $colors !default;
         flex-direction: column; // Fix shrinked thumb at the end in IE 11
 
         .b-slider-thumb {
-            box-shadow: $slider-thumb-shadow;
-            border: $slider-thumb-border;
-            border-radius: $slider-thumb-radius;
-            background: $slider-thumb-background;
+            box-shadow: cv.getVar('slider-thumb-shadow');
+            border: cv.getVar('slider-thumb-border');
+            border-radius: cv.getVar('slider-thumb-radius');
+            background: cv.getVar('slider-thumb-background');
+            height:  cv.getVar("thumb-size");
+            width:  cv.getVar("thumb-size");
             &:focus {
                 transform: scale(1.25);
             }
@@ -112,7 +148,7 @@ $slider-colors: $colors !default;
 
     &.is-rounded {
         .b-slider-thumb {
-            border-radius: $radius-rounded;
+            border-radius: cv.getVar('radius-rounded');
         }
     }
     &.is-disabled {
@@ -128,33 +164,22 @@ $slider-colors: $colors !default;
         }
     }
 
-    @include slider-size($size-normal);
-    &.is-small {
-        @include slider-size($size-small);
-    }
-    &.is-medium {
-        @include slider-size($size-medium);
-    }
-    &.is-large {
-        @include slider-size($size-large);
-    }
-
-    @each $name, $pair in $slider-colors {
-        $color: nth($pair, 1);
-        &.is-#{$name} {
-            .b-slider-fill {
-                background: $color !important;
-            }
-        }
+    .b-slider-tick-label {
+        font-size: cv.getVar('slider-mark-size');
+        position: absolute;
+        top: calc(cv.getVar("track-height") + 10px);
+        left: 50%;
+        transform: translateX(-50%);
     }
 
     .b-slider-tick {
         position: absolute;
-		width: $slider-tick-width;
+		width: cv.getVar('slider-tick-width');
+        height: cv.getVar("tick-height");
         transform: translate(-50%, -50%);
         top: 50%;
-        background: $slider-tick-background;
-        border-radius: $slider-tick-radius;
+        background: cv.getVar('slider-tick-background');
+        border-radius: cv.getVar('slider-tick-radius');
         &.is-tick-hidden {
             background: transparent;
         }

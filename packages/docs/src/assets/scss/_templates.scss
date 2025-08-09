@@ -1,3 +1,6 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/mixins" as mixins;
+
 .documentation {
     position: relative;
     .docs-template-horizontal {
@@ -8,23 +11,23 @@
     }
     .docs-main {
         position: relative;
-        background: $scheme-main;
+        background: cv.getVar('scheme-main');
         overflow: hidden;
         width: 100%;
     }
     .docs-main-container {
         padding: 3rem;
         &.is-header {
-            border-bottom: 2px solid $scheme-main-ter;
+            border-bottom: 2px solid cv.getVar('scheme-main-ter');
         }
     }
     .docs-improve-this {
         text-align: center;
         margin-top: 5em;
         padding-top: 1.5rem;
-        border-top: 2px solid $scheme-main-ter;
+        border-top: 2px solid cv.getVar('scheme-main-ter');
     }
-    @include touch {
+    @include mixins.touch {
         .docs-template-horizontal {
             flex-direction: column;
         }
@@ -32,7 +35,7 @@
             padding: 1.5rem;
         }
     }
-    @include fullhd {
+    @include mixins.fullhd {
         .docs-main-container {
             margin-right: -3rem;
         }

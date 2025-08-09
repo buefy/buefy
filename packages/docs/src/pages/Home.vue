@@ -1,6 +1,9 @@
 <template>
     <section class="home">
-        <TheNavbar light />
+        <TheNavbar 
+            :light="isLightTheme" 
+            @theme-changed="handleThemeChange"
+        />
         <div class="hero is-fullheight is-primary">
             <div class="hero-body is-block">
                 <div class="container has-text-centered">
@@ -233,7 +236,6 @@ import { defineComponent } from "vue";
 
 import { BIcon } from "buefy";
 
-import ScrollReveal from "scrollreveal";
 import TheNavbar from "../components/TheNavbar.vue";
 import TheFooter from "../components/TheFooter.vue";
 import Package from "../../../../package.json";
@@ -254,6 +256,7 @@ export default defineComponent({
                 return item.featured;
             }),
             sponsors: sponsorsData,
+            isLightTheme: localStorage.getItem('theme') === 'light' || localStorage.getItem('theme') === null
         };
     },
     methods: {
@@ -281,14 +284,48 @@ export default defineComponent({
             // see also https://stackoverflow.com/a/71514878
             return new URL(`/src/assets/sponsors/${img}`, import.meta.url).href;
         },
+        handleThemeChange(isLight: boolean) {
+            this.isLightTheme = isLight
+            const theme = isLight ? 'light' : 'dark'
+            localStorage.setItem('theme', theme)
+            document.documentElement.classList.toggle('theme-dark', !isLight)
+            document.documentElement.classList.toggle('theme-light', isLight)
+        }
     },
     mounted() {
-        const sr = ScrollReveal({
-            duration: 400,
-            delay: 200,
+        // Apply initial theme
+        this.handleThemeChange(this.isLightTheme)
+        
+        this.$nextTick(() => {
+            const homeHeroElements = document.querySelectorAll('.home-hero');
+            const featuresElements = document.querySelectorAll('.features');
+            
+            // Add reveal classes with delay
+            homeHeroElements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.classList.add('reveal-animation');
+                }, index * 100);
+            });
+            
+            featuresElements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.classList.add('reveal-animation');
+                }, 500 + index * 200);
+            });
         });
-        sr.reveal(".home-hero", { delay: 0, origin: "top" }, 200);
-        sr.reveal(".features", 200);
     },
 });
 </script>
+
+<style scoped>
+.home-hero, .features {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease-out;
+}
+
+.home-hero.reveal-animation, .features.reveal-animation {
+    opacity: 1;
+    transform: translateY(0);
+}
+</style>

@@ -1,3 +1,8 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/mixins" as mixins;
+
+$navbar-height: 3.25rem;
+
 .home {
     .hero.is-fullheight {
         min-height: calc(100vh - #{$navbar-height});
@@ -13,7 +18,7 @@
         justify-content: center;
     }
     .logo-rounded {
-        background: $light;
+        background: cv.getVar('light');
         display: inline-block;
         padding: 2.5rem;
         border-radius: 32px;
@@ -21,7 +26,7 @@
         img {
             width: 320px;
         }
-        @include mobile {
+        @include mixins.mobile {
             padding: 2rem;
             img {
                 width: 220px;
@@ -34,8 +39,8 @@
     .npm {
         display: inline-flex;
         font-size: 1.1em;
-        color: lighten($primary, 20%);
-        background: darken($primary, 20%);
+        color: cv.getVar('primary-invert');
+        background: cv.getVar('primary-40');
         max-width: 100%;
     }
     iframe {

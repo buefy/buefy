@@ -1,6 +1,10 @@
+@use "sass:list";
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/mixins" as mixins;
+
 @mixin paginationPositions($classes...) {
-    @for $i from 0 to length($classes) {
-       #{nth($classes, $i + 1)} {
+    @for $i from 0 to list.length($classes) {
+       #{list.nth($classes, $i + 1)} {
             order: $i + 1;
         }
     }
@@ -9,8 +13,8 @@
 .pagination {
     .pagination-next,
     .pagination-previous {
-        padding-left: $pagination-nav-padding-left;
-        padding-right: $pagination-nav-padding-right;
+        padding-left: cv.getVar("pagination-nav-padding-left");
+        padding-right: cv.getVar("pagination-nav-padding-right");
         &.is-disabled {
             pointer-events: none;
             cursor: not-allowed;
@@ -32,7 +36,7 @@
     }
 }
 
-@include tablet {
+@include mixins.tablet {
     .pagination.has-input {
         @include paginationPositions(".pagination-list", ".pagination-input", ".pagination-previous", ".pagination-next");
         &.is-centered {

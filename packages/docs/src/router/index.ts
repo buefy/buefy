@@ -55,7 +55,8 @@ export function createDocsRouter(vueApp: App) {
                     // Documentation
                     route('documentation', () => import('@/pages/Documentation.vue')),
                     route('documentation/start', () => import('@/pages/installation/Start.vue')),
-                    route('documentation/customization', () => import('@/pages/installation/Customization.vue')),
+                    route('documentation/sass', () => import('@/pages/installation/Sass.vue')),
+                    route('documentation/css-variables', () => import('@/pages/installation/CssVariables.vue')),
                     route('documentation/constructor-options', () => import('@/pages/installation/ConstructorOptions.vue')),
                     route('documentation/layout', () => import('@/pages/Layout.vue')),
                     route('documentation/icon', () => import('@/pages/components/icon/Icon.vue')),
@@ -105,7 +106,6 @@ export function createDocsRouter(vueApp: App) {
                     route('extensions/cleavejs', () => import('@/pages/extensions/cleavejs/Cleavejs.vue')),
                     route('extensions/sortablejs', () => import('@/pages/extensions/sortablejs/Sortablejs.vue')),
                     route('extensions/veevalidate', () => import('@/pages/extensions/veevalidate/VeeValidate.vue')),
-                    route('extensions/bulmacssvars', () => import('@/pages/extensions/bulmacssvars/BulmaCssVars.vue')),
                     route('extensions/vuebreakpointmixin', () => import('@/pages/extensions/vuebreakpointmixin/VueBreakpointMixin.vue')),
                     // Expo
                     route('expo', () => import('@/pages/Expo.vue'))

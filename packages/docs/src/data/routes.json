@@ -33,17 +33,30 @@
             "documentation/start"
         ]
     },
-    "documentation/customization": {
-        "title": "Customization",
+    "documentation/sass": {
+        "title": "With Sass",
         "subtitle": "If you're familiar with <a href='http://sass-lang.com' target='_blank'>Sass</a> and want to <strong>customize</strong> Buefy with your own theme, follow these steps",
-        "path": "/documentation/customization",
-        "githubPath": "pages/installation/Customization.vue",
+        "path": "/documentation/sass",
+        "githubPath": "pages/installation/Sass.vue",
         "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
-            "documentation/customization"
+            "documentation/sass"
         ]
+    },
+    "documentation/css-variables": {
+        "title": "CSS Variables",
+        "subtitle": "How to use and customize Buefy's CSS variables for advanced theming.",
+        "path": "/documentation/css-variables",
+        "githubPath": "pages/installation/CssVariables.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/css-variables"
+        ],
+        "isNew": true
     },
     "documentation/constructor-options": {
         "title": "Constructor options",
@@ -92,7 +105,7 @@
             "documentation",
             "documentation/dialog"
         ],
-        "isUpdated": true
+        "isUpdated": false
     },
     "documentation/dropdown": {
         "title": "Dropdown",
@@ -129,7 +142,7 @@
             "documentation",
             "documentation/tooltip"
         ],
-        "isUpdated": true
+        "isUpdated": false
     },
     "documentation/modal": {
         "title": "Modal",
@@ -154,7 +167,7 @@
             "documentation",
             "documentation/navbar"
         ],
-        "isUpdated": true
+        "isUpdated": false
     },
     "documentation/tabs": {
         "title": "Tabs",
@@ -167,7 +180,7 @@
             "documentation",
             "documentation/tabs"
         ],
-        "isUpdated": true
+        "isUpdated": false
     },
     "documentation/tag": {
         "title": "Tag",
@@ -252,7 +265,7 @@
             "documentation",
             "documentation/field"
         ],
-        "isUpdated": true
+        "isUpdated": false
     },
     "documentation/input": {
         "title": "Input",
@@ -289,7 +302,7 @@
             "documentation",
             "documentation/autocomplete"
         ],
-        "isUpdated": true
+        "isUpdated": false
     },
     "documentation/checkbox": {
         "title": "Checkbox",
@@ -338,7 +351,7 @@
             "documentation",
             "documentation/datepicker"
         ],
-        "isUpdated": true
+        "isUpdated": false
     },
     "documentation/timepicker": {
         "title": "Timepicker",
@@ -411,7 +424,7 @@
             "documentation",
             "documentation/table"
         ],
-        "isUpdated": true
+        "isUpdated": false
     },
     "documentation/pagination": {
         "title": "Pagination",
@@ -460,7 +473,7 @@
             "documentation",
             "documentation/numberinput"
         ],
-        "isUpdated": true
+        "isUpdated": false
     },
     "documentation/steps": {
         "title": "Steps",
@@ -473,7 +486,7 @@
             "documentation",
             "documentation/steps"
         ],
-        "isUpdated": true
+        "isUpdated": false
     },
     "documentation/menu": {
         "title": "Menu",
@@ -510,7 +523,7 @@
             "documentation",
             "documentation/progress"
         ],
-        "isUpdated": true
+        "isUpdated": false
     },
     "documentation/carousel": {
         "title": "Carousel",
@@ -523,7 +536,7 @@
             "documentation",
             "documentation/carousel"
         ],
-        "isUpdated": true
+        "isUpdated": false
     },
     "documentation/rate": {
         "title": "Rate",
@@ -584,7 +597,7 @@
             "documentation",
             "documentation/colorpicker"
         ],
-        "isNew": true
+        "isNew": false
     },
     "extensions": {
         "title": "Extensions",
@@ -632,19 +645,6 @@
             "extensions",
             "extensions/veevalidate"
         ]
-    },
-    "extensions/bulmacssvars": {
-        "title": "BulmaCssVars",
-        "subtitle": "Use CSS Variables for Bulma",
-        "path": "/extensions/bulmacssvars",
-        "githubPath": "pages/extensions/bulmacssvars/BulmaCssVars.vue",
-        "menu": "extensions",
-        "breadcrumb": [
-            "/",
-            "extensions",
-            "extensions/bulmacssvars"
-        ],
-        "isNew": true
     },
     "extensions/vuebreakpointmixin": {
         "title": "Vue Breakpoint Mixin",

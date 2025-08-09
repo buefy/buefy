@@ -1,15 +1,31 @@
-$colorpicker-radius: $dropdown-content-radius !default;
-$colorpicker-hue-selected-stroke: $primary !default;
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/utilities/derived-variables" as dv;
+@use "bulma/sass/utilities/mixins" as mixins;
 
-.colorpicker {
+$colorpicker-radius: cv.getVar("radius") !default;
+$colorpicker-hue-selected-stroke: cv.getVar("primary") !default;
+
+.#{iv.$class-prefix}colorpicker {
+  
+    @include cv.register-vars(
+      (
+        "colorpicker-radius": #{$colorpicker-radius},
+        "colorpicker-hue-selected-stroke": #{$colorpicker-hue-selected-stroke}
+      )
+    );
+}
+
+
+.#{iv.$class-prefix}colorpicker {
     .color-name {
-        font-family: $family-monospace;
+        font-family: cv.getVar("family-monospace");
         text-transform: uppercase;
     }
     .colorpicker-footer {
         margin-top: .875rem;
         padding-top: .875rem;
-        border: 1px solid #dbdbdb;
+        border: 1px solid cv.getVar("border");
         border-width: 1px 0 0 0;
 
         .colorpicker-fields {
@@ -65,7 +81,7 @@ svg.b-colorpicker-triangle {
     height: 200px;
     user-select: none;
 
-    @media (max-width: $tablet) {
+    @media (max-width: iv.$tablet) {
         width: 100%;
         height: auto;
     }
@@ -99,7 +115,7 @@ svg.b-colorpicker-triangle {
     .hue-range-thumb,
     .sl-range-thumb {
         background: transparent;
-        border-radius: $colorpicker-radius;
+        border-radius: cv.getVar("colorpicker-radius");
         box-shadow:
             inset 0 0 0 1px #fff,
             0 0 0 1px #dbdbdb;
@@ -116,8 +132,8 @@ svg.b-colorpicker-triangle {
         &:focus {
             box-shadow:
                 inset 0 0 0 1px #fff,
-                0 0 0 1px $colorpicker-hue-selected-stroke,
-                0 0 0 .125em rgba($colorpicker-hue-selected-stroke, .25);
+                0 0 0 1px cv.getVar("colorpicker-hue-selected-stroke"),
+                0 0 0 .125em rgba(cv.getVar("colorpicker-hue-selected-stroke"), .25);
         }
         &:active {
             cursor: grabbing;
@@ -141,7 +157,7 @@ div.b-colorpicker-square {
                 #f0f,
                 #f00
             );
-        border-radius: $colorpicker-radius;
+        border-radius: cv.getVar("colorpicker-radius");
         position: absolute;
         top: 0;
         right: 0;
@@ -149,7 +165,7 @@ div.b-colorpicker-square {
         left: 0;
 
         .hue-range-thumb {
-            border-radius: calc(#{$colorpicker-radius} / 1.75);
+            border-radius: calc(#{cv.getVar("colorpicker-radius")} / 1.75);
             position: absolute;
             aspect-ratio: 1 / 1;
             transform: translate(-50%, -50%);
@@ -167,8 +183,8 @@ div.b-colorpicker-square {
             &:focus {
                 box-shadow:
                     inset 0 0 0 1px #fff,
-                    0 0 0 1px $colorpicker-hue-selected-stroke,
-                    0 0 0 .125em rgba($colorpicker-hue-selected-stroke, .25);
+                    0 0 0 1px cv.getVar("colorpicker-hue-selected-stroke"),
+                    0 0 0 .125em cv.getRgbaVar("colorpicker-hue-selected-stroke", .25);
             }
             &:active {
                 cursor: grabbing;
@@ -177,7 +193,7 @@ div.b-colorpicker-square {
     }
     .colorpicker-square-slider-sl {
         background: #fff;
-        border-radius: $colorpicker-radius*0.5;
+        border-radius: calc(cv.getVar("colorpicker-radius") * 0.5);
         position: absolute;
         top: 0;
         right: 0;
@@ -197,7 +213,7 @@ div.b-colorpicker-square {
 
         .sl-range-thumb {
             display: block;
-            border-radius: $colorpicker-radius;
+            border-radius: cv.getVar("colorpicker-radius");
             position: absolute;
             width: 8px;
             height: 8px;
@@ -216,8 +232,8 @@ div.b-colorpicker-square {
             &:focus {
                 box-shadow:
                     inset 0 0 0 1px #fff,
-                    0 0 0 1px $colorpicker-hue-selected-stroke,
-                    0 0 0 .125em rgba($colorpicker-hue-selected-stroke, .25);
+                    0 0 0 1px cv.getVar("colorpicker-hue-selected-stroke"),
+                    0 0 0 .125em cv.getRgbaVar("colorpicker-hue-selected-stroke", .25);
             }
             &:active {
                 cursor: grabbing;
@@ -233,7 +249,7 @@ div.b-colorpicker-square {
         linear-gradient(45deg, #c7c7c7 25%, transparent 25%, transparent 75%, #c7c7c7 75%, #c7c7c7);
     background-size: 1em 1em;
     background-position: .5em .5em, 0 0;
-    border-radius: $colorpicker-radius;
+    border-radius: cv.getVar("colorpicker-radius");
     margin-top: .125em;
     margin-bottom: .875rem;
     position: relative;
@@ -241,7 +257,7 @@ div.b-colorpicker-square {
     .alpha-range-thumb {
         width: .4em;
         height: 1.25em;
-        border-radius: $colorpicker-radius;
+        border-radius: cv.getVar("colorpicker-radius");
         box-shadow:
             inset 0 0 0 1px #fff,
             inset 0 0 0 2px #dbdbdb,
@@ -261,8 +277,8 @@ div.b-colorpicker-square {
         &:focus {
             box-shadow:
                 inset 0 0 0 1px #fff,
-                0 0 0 1px $colorpicker-hue-selected-stroke,
-                0 0 0 .125em rgba($colorpicker-hue-selected-stroke, .25);
+                0 0 0 1px cv.getVar("colorpicker-hue-selected-stroke"),
+                0 0 0 .125em cv.getRgbaVar("colorpicker-hue-selected-stroke", .25);
         }
         &:active {
             cursor: grabbing;

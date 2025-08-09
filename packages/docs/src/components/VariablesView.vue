@@ -13,6 +13,21 @@
             :data="data"
             :columns="variablesColumns"
         />
+
+        <b-message type="is-info" v-if="link">
+            <div class="content">
+                <p>
+                    See all variables in the
+                    <a
+                        :href="link"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        Bulma documentation
+                    </a>.
+                </p>
+            </div>
+        </b-message>
     </section>
 </template>
 
@@ -24,12 +39,15 @@ interface VariableInfo {
     name?: string;
     description?: string;
     default?: string;
+    sass?: string;
+    css?: string;
 }
 
 export default defineComponent({
     components: { BTable },
     props: {
-        data: Array<VariableInfo>
+        data: Array<VariableInfo>,
+        link: String
     },
     computed: {
         variablesColumns() {
@@ -41,13 +59,27 @@ export default defineComponent({
                     renderHtml: true
                 })
             }
-            if (this.data!.some((d) => d.description !== undefined)) {
+            if (this.data!.some((d) => d.sass !== undefined)) {
                 columns.push({
-                    label: 'Description',
-                    field: 'description',
+                    label: 'Sass',
+                    field: 'sass',
                     renderHtml: true
                 })
             }
+            if (this.data!.some((d) => d.css !== undefined)) {
+                columns.push({
+                    label: 'CSS',
+                    field: 'css',
+                    renderHtml: true
+                })
+            }
+            // if (this.data!.some((d) => d.description !== undefined)) {
+            //     columns.push({
+            //         label: 'Description',
+            //         field: 'description',
+            //         renderHtml: true
+            //     })
+            // }
             if (this.data!.some((d) => d.default !== undefined)) {
                 columns.push({
                     label: 'Default',

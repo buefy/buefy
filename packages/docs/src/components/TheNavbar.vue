@@ -95,7 +95,7 @@
                             Info
                         </div>
 
-                        <div class="navbar-dropdown is-boxed">
+                        <div class="navbar-dropdown">
                             <strong class="navbar-item is-version">
                                 <span class="has-text-primary">Buefy version</span>
                                 <span class="has-text-grey">{{ version }}</span>
@@ -108,14 +108,37 @@
                             </strong>
 
                             <hr class="navbar-divider">
-                            <a
-                                class="navbar-item"
-                                href="https://github.com/buefy/buefy/releases"
-                                target="_blank"
-                            >
-                                Changelogs
-                            </a>
+                            <div class="navbar-item">
+                                <a
+                                    href="https://github.com/buefy/buefy/releases"
+                                    target="_blank"
+                                    rel="noopener"
+                                >
+                                    Changelogs
+                                </a>
+                            </div>
                         </div>
+                    </div>
+
+                    <div class="navbar-item">
+                        <b-icon
+                            icon="white-balance-sunny"
+                            size="is-small"
+                            :class="{'is-warning': theme === 'light' }"
+                        />
+                        <b-switch
+                            v-model="theme"
+                            type="is-warning"
+                            true-value="dark"
+                            false-value="light"
+                            size="is-small"
+                            label="Theme"
+                        />
+                        <b-icon
+                            icon="moon-waning-crescent"
+                            size="is-small"
+                            :class="{'is-primary': theme === 'dark' }"
+                        />
                     </div>
                 </div>
             </div>
@@ -133,14 +156,33 @@ import bulmaPackage from 'bulma/package.json'
 
 export default defineComponent({
     components: { BIcon },
+    emits: ['theme-changed'],
     props: {
-        light: Boolean
+        light: {
+            type: Boolean,
+            default: true
+        }
     },
     data() {
         return {
             isMenuActive: false,
             version: buefyPackage.version,
             bulmaVersion: bulmaPackage.version
+        }
+    },
+    computed: {
+        theme: {
+            get() {
+                return this.light ? 'light' : 'dark'
+            },
+            set(newTheme: string) {
+                this.$emit('theme-changed', newTheme === 'light')
+            }
+        }
+    },
+    watch: {
+        isMenuActive() {
+            this.toggleHtmlClip()
         }
     },
     methods: {

@@ -4,7 +4,13 @@
             "category": "Installation",
             "pages": [
                 "documentation/start",
-                "documentation/customization",
+                {
+                    "category": "Customization",
+                    "pages": [
+                        "documentation/sass",
+                        "documentation/css-variables"
+                    ]
+                },
                 "documentation/constructor-options"
             ]
         },
@@ -84,12 +90,6 @@
             "category": "Drag & drop",
             "pages": [
                 "extensions/sortablejs"
-            ]
-        },
-        {
-            "category": "CSS Variables",
-            "pages": [
-                "extensions/bulmacssvars"
             ]
         },
         {

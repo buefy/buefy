@@ -1,6 +1,19 @@
+@use "bulma/sass/utilities/controls" as controls;
+@use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/mixins" as mixins;
+
 $floating-in-height: 3.25em !default;
 
-.field {
+.#{iv.$class-prefix}field {
+    @include cv.register-vars(
+    (
+        "floating-in-height": #{$floating-in-height},
+    )
+    )
+}
+
+.#{iv.$class-prefix}field {
     &.is-grouped {
         .field {
             flex-shrink: 0;
@@ -19,16 +32,16 @@ $floating-in-height: 3.25em !default;
             .button,
             .input,
             .select select {
-                border-bottom-left-radius: $input-radius;
-                border-top-left-radius: $input-radius;
+                border-bottom-left-radius: cv.getVar('input-radius');
+                border-top-left-radius: cv.getVar('input-radius');
             }
         }
         &:last-child .control {
             .button,
             .input,
             .select select {
-                border-bottom-right-radius: $input-radius;
-                border-top-right-radius: $input-radius;
+                border-bottom-right-radius: cv.getVar('input-radius');
+                border-top-right-radius: cv.getVar('input-radius');
             }
         }
         .control {
@@ -71,7 +84,7 @@ $floating-in-height: 3.25em !default;
     }
 }
 
-.field {
+.#{iv.$class-prefix}field {
     &.is-floating-label,
     &.is-floating-in-label {
         position: relative;
@@ -79,7 +92,7 @@ $floating-in-height: 3.25em !default;
         .label {
             position: absolute;
             left: 1em;
-            font-size: calc(#{$size-normal} * 0.75);
+            font-size: calc(#{cv.getVar('size-normal')} * 0.75);
             background-color: transparent;
             z-index: 5;
             white-space: nowrap;
@@ -88,13 +101,13 @@ $floating-in-height: 3.25em !default;
             overflow: hidden;
 
             &.is-small {
-                font-size: calc(#{$size-small} * 0.75);
+                font-size: calc(#{cv.getVar('size-small')} * 0.75);
             }
             &.is-medium {
-                font-size: calc(#{$size-medium} * 0.75);
+                font-size: calc(#{cv.getVar('size-medium')} * 0.75);
             }
             &.is-large {
-                font-size: calc(#{$size-large} * 0.75);
+                font-size: calc(#{cv.getVar('size-large')} * 0.75);
             }
         }
         .taginput .counter {
@@ -108,8 +121,8 @@ $floating-in-height: 3.25em !default;
                     .button,
                     .input,
                     .select select {
-                        border-bottom-left-radius: $input-radius;
-                        border-top-left-radius: $input-radius;
+                        border-bottom-left-radius: cv.getVar('input-radius');
+                        border-top-left-radius: cv.getVar('input-radius');
                     }
                 }
             }
@@ -129,23 +142,12 @@ $floating-in-height: 3.25em !default;
                 left: 0;
                 right: 0;
                 height: 0.375em;
-                background-color: $input-background-color;
+                background-color: cv.getVar('input-background-color');
                 z-index: -1;
-            }
-        }
-        .input,
-        .textarea,
-        .select
-        select {
-            &:focus {
-                box-shadow: none;
             }
         }
         .taginput .taginput-container {
             padding-top: 0.475em;
-            &.is-focused {
-                box-shadow: none;
-            }
         }
     }
     &.is-floating-in-label {
@@ -155,24 +157,24 @@ $floating-in-height: 3.25em !default;
             + .control {
                 &.datepicker, &.timepicker {
                     .input {
-                        padding-top: calc(#{$floating-in-height} * 0.5 - (#{$size-large} * 0.75) * 0.5);
+                        padding-top: calc(#{cv.getVar('floating-in-height')} * 0.5 - (#{cv.getVar('size-large')} * 0.75) * 0.5);
                         padding-bottom: 1px;
-                        height: $floating-in-height;
+                        height: cv.getVar('floating-in-height');
                     }
                 }
                 &:not(.datepicker):not(.timepicker):not(.taginput) {
                     .input,
                     .textarea,
                     select {
-                        padding-top: calc(#{$floating-in-height} * 0.5 - (#{$size-large} * 0.75) * 0.5);
+                        padding-top: calc(#{cv.getVar('floating-in-height')} * 0.5 - (#{cv.getVar('size-large')} * 0.75) * 0.5);
                         padding-bottom: 1px;
-                        height: $floating-in-height;
+                        height: cv.getVar('floating-in-height');
                     }
                     .select:not(multiple) {
-                        height: $floating-in-height;
+                        height: cv.getVar('floating-in-height');
                         &.is-loading {
                             &::after {
-                                margin-top: calc(#{$floating-in-height} * 0.5 - (#{$size-large} * 0.75) * 0.5);
+                                margin-top: calc(#{cv.getVar('floating-in-height')} * 0.5 - (#{cv.getVar('size-large')} * 0.75) * 0.5);
                             }
                         }
                         &::after {
@@ -183,20 +185,20 @@ $floating-in-height: 3.25em !default;
                 &.taginput {
                     .taginput-container {
                         // 0.275em - 1px _taginput.scss
-                        padding-top: calc(#{$floating-in-height} * 0.5 - (#{$size-large} * 0.75) * 0.5 + (0.275em - 1px));
+                        padding-top: calc(#{cv.getVar('floating-in-height')} * 0.5 - (#{cv.getVar('size-large')} * 0.75) * 0.5 + (0.275em - 1px));
                     }
                 }
                 &:not(.taginput) {
                     .is-left.icon,
                     .is-right.icon {
-                        height: $floating-in-height;
+                        height: cv.getVar('floating-in-height');
                     }
                     .is-left.icon {
-                        padding-top: calc(#{$floating-in-height} * 0.5 - (#{$size-large} * 0.75) * 0.5);
+                        padding-top: calc(#{cv.getVar('floating-in-height')} * 0.5 - (#{cv.getVar('size-large')} * 0.75) * 0.5);
                     }
                 }
                 &.is-loading::after {
-                    margin-top: calc(#{$floating-in-height} * 0.5 - (#{$size-large} * 0.75) * 0.5);
+                    margin-top: calc(#{cv.getVar('floating-in-height')} * 0.5 - (#{cv.getVar('size-large')} * 0.75) * 0.5);
                 }
             }
 
@@ -207,14 +209,14 @@ $floating-in-height: 3.25em !default;
                         .input,
                         .textarea,
                         select {
-                            padding-top: calc(#{$floating-in-height} * 0.5 - (#{$size-large} * 0.75) * 0.5);
+                            padding-top: calc(#{cv.getVar('floating-in-height')} * 0.5 - (#{cv.getVar('size-large')} * 0.75) * 0.5);
                             padding-bottom: 1px;
                         }
                         .input,
                         .textarea,
                         select,
                         .button {
-                            height: $floating-in-height;
+                            height: cv.getVar('floating-in-height');
                         }
                     }
                 }
@@ -226,7 +228,7 @@ $floating-in-height: 3.25em !default;
                 .control {
                     .input,
                     .button {
-                        height: $floating-in-height;
+                        height: cv.getVar('floating-in-height');
                     }
                 }
             }
@@ -235,41 +237,41 @@ $floating-in-height: 3.25em !default;
     &.is-floating-label, &.is-floating-in-label {
         &.has-numberinput {
             .label {
-                margin-left: calc(#{$size-normal} * 3);
+                margin-left: calc(#{cv.getVar('size-normal')} * 3);
             }
             &.has-numberinput-is-small {
                 .label {
-                    margin-left: calc(#{$size-small} * 3);
+                    margin-left: calc(#{cv.getVar('size-small')} * 3);
                 }
             }
             &.has-numberinput-is-medium {
                 .label {
-                    margin-left: calc(#{$size-medium} * 3);
+                    margin-left: calc(#{cv.getVar('size-medium')} * 3);
                 }
             }
             &.has-numberinput-is-large {
                 .label {
-                    margin-left: calc(#{$size-large} * 3);
+                    margin-left: calc(#{cv.getVar('size-large')} * 3);
                 }
             }
         }
         &.has-numberinput-compact {
             .label {
-                margin-left: calc(#{$size-normal} * 2.25);
+                margin-left: calc(#{cv.getVar('size-normal')} * 2.25);
             }
             &.has-numberinput-is-small {
                 .label {
-                    margin-left: calc(#{$size-small} * 2.25);
+                    margin-left: calc(#{cv.getVar('size-small')} * 2.25);
                 }
             }
             &.has-numberinput-is-medium {
                 .label {
-                    margin-left: calc(#{$size-medium} * 2.25);
+                    margin-left: calc(#{cv.getVar('size-medium')} * 2.25);
                 }
             }
             &.has-numberinput-is-large {
                 .label {
-                    margin-left: calc(#{$size-large} * 2.25);
+                    margin-left: calc(#{cv.getVar('size-large')} * 2.25);
                 }
             }
         }
@@ -290,7 +292,7 @@ $floating-in-height: 3.25em !default;
     }
 }
 
-.control {
+.#{iv.$class-prefix}control {
     .help.counter {
         float: right;
         margin-left: 0.5em;

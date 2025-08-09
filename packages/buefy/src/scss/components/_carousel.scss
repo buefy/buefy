@@ -1,31 +1,54 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/utilities/mixins" as mixins;
+
+
 $carousel-min-height: 120px !default;
 
-$carousel-arrow-background: $scheme-main !default;
-$carousel-arrow-color: $primary !default;
+$carousel-arrow-background: cv.getVar('scheme-main') !default;
+$carousel-arrow-color: cv.getVar('primary') !default;
 $carousel-arrow-icon-spaced: 1.5rem !default;
 $carousel-arrow-top: 50% !default;
 
-$carousel-indicator-background: rgba($scheme-invert, 0.50) !default;
-$carousel-indicator-border: $scheme-main !default;
-$carousel-indicator-color: $primary !default;
+$carousel-indicator-background: rgba(cv.getVar('scheme-invert'), 0.50) !default;
+$carousel-indicator-border: cv.getVar('scheme-main') !default;
+$carousel-indicator-color: cv.getVar('primary') !default;
 $carousel-indicator-spaced: .5rem !default;
 
-$carousel-overlay-background: rgba($scheme-invert, 0.86) !default;
+$carousel-overlay-background: rgba(cv.getVar('scheme-invert'), 0.86) !default;
 $carousel-overlay-z: 40 !default;
 
-.carousel {
-    @extend %unselectable;
-    min-height: $carousel-min-height;
+.#{iv.$class-prefix}carousel {
+    @include cv.register-vars(
+    (
+        "carousel-min-height": #{$carousel-min-height},
+        "carousel-arrow-background": #{$carousel-arrow-background},
+        "carousel-arrow-color": #{$carousel-arrow-color},
+        "carousel-arrow-icon-spaced": #{$carousel-arrow-icon-spaced},
+        "carousel-arrow-top": #{$carousel-arrow-top},
+        "carousel-indicator-background": #{$carousel-indicator-background},
+        "carousel-indicator-border": #{$carousel-indicator-border},
+        "carousel-indicator-color": #{$carousel-indicator-color},
+        "carousel-indicator-spaced": #{$carousel-indicator-spaced},
+        "carousel-overlay-background": #{$carousel-overlay-background},
+        "carousel-overlay-z": #{$carousel-overlay-z}
+    )
+    );
+}
+
+.#{iv.$class-prefix}carousel {
+    @include mixins.unselectable;
+    min-height: cv.getVar('carousel-min-height');
     position: relative;
     &.is-overlay {
-        background-color: $carousel-overlay-background;
+        background-color: cv.getVar('carousel-overlay-background');
         align-items: center;
         flex-direction: column;
         justify-content: center;
         display: flex;
         max-height: 100vh;
         position: fixed;
-        z-index: $carousel-overlay-z;
+        z-index: cv.getVar('carousel-overlay-z');
         .carousel-item img {
             cursor: default;
         }
@@ -34,7 +57,7 @@ $carousel-overlay-z: 40 !default;
         }
     }
     .progress {
-        border-radius: $radius-small;
+        border-radius: cv.getVar('radius-small');
         height: 0.25rem;
         margin-bottom: 0;
     }
@@ -44,7 +67,7 @@ $carousel-overlay-z: 40 !default;
         overflow: hidden;
         width: 100%;
         &:hover .carousel-arrow.is-hovered {
-            @include tablet {
+            @include mixins.tablet {
                 opacity: 1;
             }
         }
@@ -62,17 +85,17 @@ $carousel-overlay-z: 40 !default;
     }
     .carousel-indicator {
         width: 100%;
-        padding: $carousel-indicator-spaced;
+        padding: cv.getVar('carousel-indicator-spaced');
         display: flex;
         align-items: center;
         justify-content: center;
         &.has-background {
-            background: $carousel-indicator-background;
+            background: cv.getVar('carousel-indicator-background');
         }
         &.has-custom {
             flex-wrap: nowrap;
             justify-content: flex-start;
-            @include overflow-touch;
+            @include mixins.overflow-touch;
             overflow: hidden;
             overflow-x: auto;
             &.is-small .indicator-item {
@@ -93,25 +116,25 @@ $carousel-overlay-z: 40 !default;
         }
         .indicator-item {
             &:not(:last-child) {
-                margin-right: $carousel-indicator-spaced;
+                margin-right: cv.getVar('carousel-indicator-spaced');
             }
             &.is-active .indicator-style,
             .indicator-style:hover {
-                background: $carousel-indicator-color;
-                border: 1px solid $carousel-indicator-border;
+                background: cv.getVar('carousel-indicator-color');
+                border: 1px solid cv.getVar('carousel-indicator-border');
             }
             .indicator-style {
                 display: block;
-                border: 1px solid $carousel-indicator-color;
-                background: $carousel-indicator-border;
+                border: 1px solid cv.getVar('carousel-indicator-color');
+                background: cv.getVar('carousel-indicator-border');
                 outline: none;
-                transition: $speed-slow $easing;
+                transition: cv.getVar('speed-slow') cv.getVar('easing');
                 &.is-boxes {
                     height: 10px;
                     width: 10px;
                 }
                 &.is-dots {
-                    border-radius: $radius-rounded;
+                    border-radius: cv.getVar('radius-rounded');
                     height: 10px;
                     width: 10px;
                 }
@@ -125,7 +148,7 @@ $carousel-overlay-z: 40 !default;
 }
 
 .carousel-list {
-    @extend %unselectable;
+    @include mixins.unselectable;
     position: relative;
     overflow: hidden;
     width: 100%;
@@ -133,7 +156,7 @@ $carousel-overlay-z: 40 !default;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
     }
     &:hover .carousel-arrow.is-hovered {
-        @include tablet {
+        @include mixins.tablet {
             opacity: 1;
         }
     }
@@ -142,7 +165,7 @@ $carousel-overlay-z: 40 !default;
         display: flex;
         width: 100%;
         &:not(.is-dragging) {
-            transition: all $speed-slower ease-out 0s;
+            transition: all cv.getVar('speed-slower') ease-out 0s;
         }
         &.has-grayscale {
             .carousel-slide {
@@ -172,33 +195,33 @@ $carousel-overlay-z: 40 !default;
 }
 
 .carousel-arrow {
-    transition: $speed-slow $easing;
+    transition: cv.getVar('speed-slow') cv.getVar('easing');
     &.is-hovered {
         opacity: 0;
     }
     .icon {
-        background: $carousel-arrow-background;
-        color: $carousel-arrow-color;
+        background: cv.getVar('carousel-arrow-background');
+        color: cv.getVar('carousel-arrow-color');
         cursor: pointer;
-        border: 1px solid $carousel-arrow-background;
-        border-radius: $radius-rounded;
+        border: 1px solid cv.getVar('carousel-arrow-background');
+        border-radius: cv.getVar('radius-rounded');
         outline: 0;
         &:hover {
-            border: 1px solid $carousel-arrow-color;
+            border: 1px solid cv.getVar('carousel-arrow-color');
             opacity: 1;
         }
         &.has-icons-left,
         &.has-icons-right {
             position: absolute;
-            top: $carousel-arrow-top;
-            transform: translateY(-$carousel-arrow-top);
+            top: cv.getVar('carousel-arrow-top');
+            transform: translateY(-50%);
             z-index: 1;
         }
         &.has-icons-left {
-            left: $carousel-arrow-icon-spaced;
+            left: cv.getVar('carousel-arrow-icon-spaced');
         }
         &.has-icons-right {
-            right: $carousel-arrow-icon-spaced;
+            right: cv.getVar('carousel-arrow-icon-spaced');
         }
     }
 }

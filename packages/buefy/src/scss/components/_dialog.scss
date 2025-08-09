@@ -1,29 +1,47 @@
-.dialog {
+@use "bulma/sass/utilities/controls" as controls;
+@use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/mixins" as mixins;
+
+$dialog-card-head-padding: 1.2rem !default;
+
+.#{iv.$class-prefix}dialog {
+  
+    @include cv.register-vars(
+      (
+        "dialog-card-head-padding": #{$dialog-card-head-padding}
+      )
+    );
+}
+
+.#{iv.$class-prefix}dialog {
     .modal-card {
         max-width: 460px;
         width: auto;
         .modal-card-head {
-            font-size: $size-5;
-            font-weight: $weight-semibold;
+            font-size: cv.getVar('size-5');
+            font-weight: cv.getVar('weight-semibold');
+            border-top-left-radius: cv.getVar('radius');
+            border-top-right-radius: cv.getVar('radius');
+            padding: cv.getVar('dialog-card-head-padding');
+            border-bottom: 1px solid cv.getVar('border');
+            box-shadow: none;
         }
         .modal-card-body {
             .field {
                 margin-top: 16px;
             }
             &.is-titleless {
-                border-top-left-radius: $card-radius;
-                border-top-right-radius: $card-radius;
+                border-top-left-radius: cv.getVar('radius');
+                border-top-right-radius: cv.getVar('radius');
             }
         }
         .modal-card-foot {
             justify-content: flex-end;
-            .button {
-                display: inline; // Fix Safari centering
-                min-width: 5em;
-                font-weight: $weight-semibold;
-            }
+            padding: cv.getVar('dialog-card-head-padding');
+            border-top: 1px solid cv.getVar('border');
         }
-        @include tablet {
+        @include mixins.tablet {
             min-width: 320px;
         }
     }
@@ -31,21 +49,21 @@
         .modal-card,
         .input,
         .button {
-            @include control-small;
+            @include controls.control-small;
         }
     }
     &.is-medium {
         .modal-card,
         .input,
         .button {
-            @include control-medium;
+            @include controls.control-medium;
         }
     }
     &.is-large {
         .modal-card,
         .input,
         .button {
-            @include control-large;
+            @include controls.control-large;
         }
     }
     &.has-custom-container {

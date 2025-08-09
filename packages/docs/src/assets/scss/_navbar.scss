@@ -1,6 +1,9 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/mixins" as mixins;
+
 .docs-navbar.navbar {
     &.is-transparent {
-        box-shadow: 0 1px 0 rgba($scheme-main, 0.2);
+        box-shadow: cv.getVar('shadow');
     }
 
     .is-version {
@@ -16,7 +19,7 @@
 
     .has-dropdown > .navbar-link {
         cursor: default;
-        @include unselectable;
+        @include mixins.unselectable;
     }
 
     .navbar-dropdown {
@@ -28,7 +31,7 @@
         }
         .is-subitem {
             text-transform: uppercase;
-            color: $grey;
+            color: cv.getVar('grey');
             &:not(:first-child) {
                 margin-top: 1rem;
             }

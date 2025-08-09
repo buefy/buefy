@@ -113,7 +113,7 @@ As a temporary workaround, add the following snippet before initializing Buefy:
 
 ### Installing Developer Release(s) from GitHub npm Registry to Access the Latest Features
 
-To incorporate the latest changes from the development branch, you can install developer releases from the GitHub npm registry. However, proceed with caution as these packages may be deleted or retracted without notice.
+To incorporate the latest changes from the development branch of buefy-next, you can install developer releases from the GitHub npm registry. However, proceed with caution as these packages may be deleted or retracted without notice.
 
 Steps:
 

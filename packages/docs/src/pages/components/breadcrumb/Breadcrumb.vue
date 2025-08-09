@@ -19,7 +19,7 @@
         />
 
         <ApiView :data="api"/>
-        <VariablesView :data="variables"/>
+        <VariablesView :data="variables" link="https://bulma.io/documentation/components/breadcrumb/#sass-and-css-variables"/>
     </section>
 </template>
 

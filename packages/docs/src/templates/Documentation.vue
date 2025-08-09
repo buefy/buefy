@@ -1,6 +1,9 @@
 <template>
     <main>
-        <TheNavbar />
+        <TheNavbar
+            :light="isLightTheme"
+            @theme-changed="handleThemeChange"
+        />
 
         <section class="documentation">
             <div v-if="!meta.hideSidebar" class="sidebar-bg" />
@@ -50,7 +53,8 @@ export default defineComponent({
     data() {
         return {
             menu: [] as PageTree[],
-            meta: {} as Partial<Route>
+            meta: {} as Partial<Route>,
+            isLightTheme: localStorage.getItem('theme') === 'light' || localStorage.getItem('theme') === null
         }
     },
     methods: {
@@ -60,6 +64,13 @@ export default defineComponent({
         },
         scrollTo(hash: string) {
             location.href = hash
+        },
+        handleThemeChange(isLight: boolean) {
+            this.isLightTheme = isLight
+            const theme = isLight ? 'light' : 'dark'
+            localStorage.setItem('theme', theme)
+            document.documentElement.classList.toggle('theme-dark', !isLight)
+            document.documentElement.classList.toggle('theme-light', isLight)
         }
     },
     mounted() {
@@ -68,6 +79,9 @@ export default defineComponent({
         if (this.$route.hash) {
             this.$nextTick(() => this.scrollTo(this.$route.hash))
         }
+
+        // Apply initial theme
+        this.handleThemeChange(this.isLightTheme)
     },
 
     beforeUnmount() {

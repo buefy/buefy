@@ -1,24 +1,19 @@
 export default [
     {
-        name: '<code>$tooltip-arrow-size</code>',
+        sass: '<code>$tooltip-arrow-size</code>',
+        css: '<code>--bulma-tooltip-arrow-size</code>',
+        description: 'The size of the tooltip arrow',
         default: '<code>5px</code>'
     },
     {
-        name: '<code>$tooltip-arrow-margin</code>',
+        sass: '<code>$tooltip-arrow-margin</code>',
+        css: '<code>--bulma-tooltip-arrow-margin</code>',
+        description: 'The margin of the tooltip arrow',
         default: '<code>2px</code>'
     },
     {
-        name: '<code>$tooltip-multiline-sizes</code>',
-        default: `<code>
-        (
-            small: 180px,
-            medium: 240px,
-            large: 300px
-        )
-        </code>`
-    },
-    {
-        name: '<code>$tooltip-colors</code>',
-        default: '<code>$colors</code>'
+        sass: '<code>$tooltip-multiline-sizes</code>',
+        description: 'The sizes for multiline tooltips',
+        default: `<code>(small: 180px, medium: 240px, large: 300px)</code>`
     }
 ]

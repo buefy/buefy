@@ -1,5 +1,7 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+
 .docs-header {
-    border-bottom: 2px solid $scheme-main-ter;
+    border-bottom: 2px solid cv.getVar('scheme-main-ter');
     margin-bottom: 3rem;
     padding-bottom: 3rem;
     .breadcrumb {
@@ -18,7 +20,7 @@
     .subtitle {
         &,
         strong {
-            color: $grey;
+            color: cv.getVar('grey');
         }
     }
 }

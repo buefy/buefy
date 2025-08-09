@@ -1,15 +1,17 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+
 .codeview {
     .codeview-title {
         // background: lighten($primary, 10%);
-        background: $grey;
+        background: cv.getVar('grey');
         padding-left: 1rem;
         padding-right: 1rem;
         line-height: 2;
         min-height: 0.25rem;
-        color: $scheme-main;
-        font-size: $size-5;
-        border-top-left-radius: $radius;
-        border-top-right-radius: $radius;
+        color: cv.getVar('scheme-main');
+        font-size: cv.getVar('size-5');
+        border-top-left-radius: cv.getVar('radius');
+        border-top-right-radius: cv.getVar('radius');
     }
     .highlight {
         position: relative;
@@ -21,7 +23,7 @@
             position: absolute;
             display: inline-flex;
             background: transparent;
-            border-radius: $radius $radius 0 0;
+            border-radius: cv.getVar('radius') cv.getVar('radius') 0 0;
             top: 0.25rem;
             right: 1.35rem;
             padding: 0 0 0 8px;
@@ -39,7 +41,7 @@
                 }
                 &:hover,
                 &:focus {
-                    color: $link;
+                    color: cv.getVar('link');
                     background: transparent;
                 }
             }
@@ -65,16 +67,16 @@
             right: 0;
             top: 0;
             align-items: center;
-            background-color: rgba($scheme-main, 0.8);
+            background-color: hsla(cv.getVar('scheme-h'), cv.getVar('scheme-s'), cv.getVar('scheme-main-l'), 0.8);
             border: none;
-            color: $grey;
+            color: cv.getVar('grey');
             cursor: pointer;
             font-size: 0.75rem;
             justify-content: center;
             width: 100%;
-            font-weight: $weight-semibold;
+            font-weight:  cv.getVar('weight-semibold');
             &:hover {
-                background-color: rgba($warning, 0.8);
+                background-color: hsla(cv.getVar('warning-h'), cv.getVar('warning-s'), cv.getVar('warning-light-l'), 0.8);
             }
             .icon {
                 margin-right: 0.5rem;
@@ -92,7 +94,7 @@
             }
         }
         &.is-collapsed {
-            border: 1px solid $warning;
+            border: 1px solid cv.getVar('warning');;
         }
     }
     &:not(:last-child) {

@@ -1,4 +1,16 @@
-.upload {
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/utilities/derived-variables" as dv;
+@use "bulma/sass/utilities/mixins" as mixins;
+
+// .#{iv.$class-prefix}upload {
+//     @include cv.register-vars((
+//         ""
+//     ))
+// };
+
+
+.#{iv.$class-prefix}upload {
     position: relative;
     display: inline-flex;
     input[type="file"] {
@@ -15,8 +27,8 @@
     .upload-draggable {
         cursor: pointer;
         padding: 0.25em;
-        border: 1px dashed $grey-light;
-        border-radius: $radius-large;
+        border: 1px dashed cv.getVar("grey-light");
+        border-radius: cv.getVar("radius-large");
         &.is-disabled {
             opacity: 0.5;
             cursor: not-allowed;
@@ -26,22 +38,12 @@
             pointer-events: none;
             opacity: 0.5;
             &:after {
-                @include loader;
+                @include mixins.loader;
                 top: 0;
                 left: calc(50% - 1.5em);
                 width: 3em;
                 height: 3em;
                 border-width: 0.25em;
-            }
-        }
-        &:hover,
-        &.is-hovered {
-            @each $name, $pair in $file-colors {
-                $color: nth($pair, 1);
-                &.is-#{$name} {
-                    border-color: $color;
-                    background: rgba($color, 0.05);
-                }
             }
         }
         &.is-expanded {
@@ -52,11 +54,11 @@
         width: 100%;
     }
     &.is-rounded {
-        border-radius: $radius-rounded;
+        border-radius: cv.getVar("radius-rounded");
 
         .file-name {
-            border-top-right-radius: $radius-rounded;
-            border-bottom-right-radius: $radius-rounded;
+            border-top-right-radius: cv.getVar("radius-rounded");
+            border-bottom-right-radius: cv.getVar("radius-rounded");
         }
     }
 }
