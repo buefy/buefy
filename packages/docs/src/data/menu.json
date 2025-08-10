@@ -7,8 +7,9 @@
                 {
                     "category": "Customization",
                     "pages": [
-                        "documentation/sass",
-                        "documentation/css-variables"
+                        "documentation/customize/sass",
+                        "documentation/customize/css-variables",
+                        "documentation/customize/icons"
                     ]
                 },
                 "documentation/constructor-options"

@@ -33,28 +33,42 @@
             "documentation/start"
         ]
     },
-    "documentation/sass": {
+    "documentation/customize/sass": {
         "title": "With Sass",
         "subtitle": "If you're familiar with <a href='http://sass-lang.com' target='_blank'>Sass</a> and want to <strong>customize</strong> Buefy with your own theme, follow these steps",
-        "path": "/documentation/sass",
+        "path": "/documentation/customize/sass",
         "githubPath": "pages/installation/Sass.vue",
         "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
-            "documentation/sass"
-        ]
+            "documentation/customize/sass"
+        ],
+        "isNew": true
     },
-    "documentation/css-variables": {
+    "documentation/customize/css-variables": {
         "title": "CSS Variables",
         "subtitle": "How to use and customize Buefy's CSS variables for advanced theming.",
-        "path": "/documentation/css-variables",
+        "path": "/documentation/customize/css-variables",
         "githubPath": "pages/installation/CssVariables.vue",
         "menu": "documentation",
         "breadcrumb": [
             "/",
             "documentation",
-            "documentation/css-variables"
+            "documentation/customize/css-variables"
+        ],
+        "isNew": true
+    },
+    "documentation/customize/icons": {
+        "title": "Icons",
+        "subtitle": "How to iconify your Buefy experience.",
+        "path": "/documentation/customize/icons",
+        "githubPath": "pages/installation/Icons.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/customize/icons"
         ],
         "isNew": true
     },

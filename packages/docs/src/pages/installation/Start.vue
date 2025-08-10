@@ -1,36 +1,5 @@
 <template>
     <div>
-        <p :id="slugifyTitle('Icons')" class="title">
-            <router-link :to="`#${slugifyTitle('Icons')}`">#</router-link>
-            Icons
-        </p>
-        <p class="subtitle">
-            Several components use icons, you might want to add a pack
-        </p>
-        <CodeView
-            title="Material Design Icons CDN"
-            :code="materialIcons"
-            expanded
-        />
-        <CodeView title="Font Awesome 5 CDN" :code="fontAwesome5" expanded />
-        <div class="content">
-            <blockquote>
-                <p>Refer to its documentation for latest release / CDN.</p>
-                <p>
-                    Please note that Buefy doesn't include icon packs. You have
-                    to import it as you prefer (NPM, CDN, etc.).
-                </p>
-                <p>
-                    If you opted for Font Awesome, you should update your
-                    <router-link to="/documentation/constructor-options"
-                        >constructor options</router-link
-                    >.
-                </p>
-            </blockquote>
-        </div>
-
-        <hr />
-
         <b-message type="is-warning" size="is-medium">
             For any installation and usage method, you need
             <strong
