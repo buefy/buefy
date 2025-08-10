@@ -9,19 +9,19 @@
                     </h5>
                     <ul>
                         <li>
-                            <router-link to="https://opencollective.com/buefy">
+                            <a href="https://opencollective.com/buefy" class="navbar-item has-text-weight-semibold" target="_blank">
                                 Buefy Open Collective
-                            </router-link>
+                            </a>
                         </li>
                         <li>
-                            <router-link to="/events">
+                            <router-link to="/events" class="navbar-item has-text-weight-semibold">
                                 Events & Meetups
                             </router-link>
                         </li>
                         <li>
-                            <router-link to="/contribute">
+                            <a href="https://github.com/buefy/buefy/blob/dev/.github/CONTRIBUTING.md" class="navbar-item has-text-weight-semibold" target="_blank">
                                 Contribute
-                            </router-link>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -33,17 +33,22 @@
                     </h5>
                     <ul>
                         <li>
-                            <router-link to="/documentation">
+                            <router-link to="/" exact class="navbar-item has-text-weight-semibold">
+                                Home
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link to="/documentation" class="navbar-item has-text-weight-semibold">
                                 Documentation
                             </router-link>
                         </li>
                         <li>
-                            <router-link to="/stackblitz">
+                            <router-link to="/documentation/start#stackblitz" class="navbar-item has-text-weight-semibold">
                                 StackBlitz Examples
                             </router-link>
                         </li>
                         <li>
-                            <router-link to="/expo">
+                            <router-link to="/expo" class="navbar-item has-text-weight-semibold">
                                 Expo
                             </router-link>
                         </li>
@@ -57,12 +62,12 @@
                     </h5>
                     <ul>
                         <li>
-                            <router-link to="/sponsors">
+                            <router-link to="/sponsors" class="navbar-item has-text-weight-semibold">
                                 Sponsors
                             </router-link>
                         </li>
                         <li>
-                            <router-link to="/support">
+                            <router-link to="/support" class="navbar-item has-text-weight-semibold">
                                 Get Support
                             </router-link>
                         </li>
@@ -77,14 +82,14 @@
                     <div class="level-item">
                         <p>
                             Buefy © 2017–2025
-                            <a href="http://opensource.org/licenses/mit-license.php" target="_blank">MIT License</a><br>
+                            <a href="http://opensource.org/licenses/mit-license.php" class="has-text-primary" target="_blank">MIT License</a><br>
                         </p>
                     </div>
                 </div>
                 <div class="level-item has-text-centered">
                     <p>
-                        Website content licensed <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a><br>
-                        Powered by <a href="https://www.netlify.com">Netlify</a>
+                        Website content licensed <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="has-text-primary" target="_blank">CC BY-NC-SA 4.0</a><br>
+                        Powered by <a href="https://www.netlify.com" class="has-text-primary">Netlify</a>
                     </p>
                 </div>
 
