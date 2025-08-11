@@ -31,17 +31,3 @@
         width: 100%;
     }
 }
-
-// temporary fix for modal close button
-// as ::before and ::after pseudo elements from bulma
-// are not working properly
-.#{iv.$class-prefix}modal-close {
-    &::before {
-        content: "×";
-        display: block;
-        font-size: 1.5rem;
-        line-height: 1;
-        text-align: center;
-        width: 1.5rem;
-    }
-}
