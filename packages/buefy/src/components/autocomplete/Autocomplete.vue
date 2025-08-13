@@ -219,7 +219,8 @@ export default defineComponent({
             _isAutocomplete: true,
             _elementRef: 'input',
             _bodyEl: undefined as Element | undefined, // Used to append to body
-            timeOutID: undefined as ReturnType<typeof setTimeout> | undefined
+            timeOutID: undefined as ReturnType<typeof setTimeout> | undefined,
+            _scrollThrottled: false // Performance optimization for scroll events
         }
     },
     computed: {
@@ -253,9 +254,7 @@ export default defineComponent({
         },
         isEmpty() {
             if (!this.computedData) return true
-            return !this.computedData.some(
-                (element) => element.items && element.items.length
-            )
+            return !this.computedData.some((element) => element.items && element.items.length)
         },
         /*
          * White-listed items to not close when clicked.
@@ -269,17 +268,14 @@ export default defineComponent({
             whiteList.push((this.$refs.input as BInputComponent).$el.querySelector('input'))
             whiteList.push(this.$refs.dropdown)
             if (this.$refs.dropdown != null) {
-                const children = (
-                    this.$refs.dropdown as Element
-                ).querySelectorAll('*')
+                const children = (this.$refs.dropdown as Element).querySelectorAll('*')
                 for (const child of children) {
                     whiteList.push(child)
                 }
             }
             if ((this.$parent?.$data as TaginputData)._isTaginput) {
                 whiteList.push(this.$parent!.$el)
-                const tagInputChildren =
-                    this.$parent!.$el.querySelectorAll('*')
+                const tagInputChildren = this.$parent!.$el.querySelectorAll('*')
                 for (const tagInputChild of tagInputChildren) {
                     whiteList.push(tagInputChild)
                 }
@@ -329,8 +325,7 @@ export default defineComponent({
         isOpenedTop() {
             return (
                 this.dropdownPosition === 'top' ||
-                (this.dropdownPosition === 'auto' &&
-                    !this.isListInViewportVertically)
+                    (this.dropdownPosition === 'auto' && !this.isListInViewportVertically)
             )
         },
 
@@ -360,6 +355,12 @@ export default defineComponent({
          * to open upwards.
          */
         isActive(active) {
+            // Clear any existing timeout to prevent race conditions
+            if (this.timeOutID) {
+                clearTimeout(this.timeOutID)
+                this.timeOutID = undefined
+            }
+
             if (this.dropdownPosition === 'auto') {
                 if (active) {
                     this.calcDropdownInViewportVertical()
@@ -367,6 +368,7 @@ export default defineComponent({
                     // Timeout to wait for the animation to finish before recalculating
                     this.timeOutID = setTimeout(() => {
                         this.calcDropdownInViewportVertical()
+                        this.timeOutID = undefined // Clear reference after execution
                     }, 100)
                 }
             }
@@ -381,23 +383,15 @@ export default defineComponent({
          */
         checkInfiniteScroll(checkInfiniteScroll) {
             if (!this.$refs.dropdown) return
-            const list = (this.$refs.dropdown as Element).querySelector(
-                '.dropdown-content'
-            )
+            const list = (this.$refs.dropdown as Element).querySelector('.dropdown-content')
             if (!list) return
 
             if (checkInfiniteScroll === true) {
-                list.addEventListener(
-                    'scroll',
-                    this.checkIfReachedTheEndOfScroll
-                )
+                list.addEventListener('scroll', this.checkIfReachedTheEndOfScroll)
                 return
             }
 
-            list.removeEventListener(
-                'scroll',
-                this.checkIfReachedTheEndOfScroll
-            )
+            list.removeEventListener('scroll', this.checkIfReachedTheEndOfScroll)
         },
 
         /*
@@ -410,17 +404,12 @@ export default defineComponent({
             this.$emit('update:modelValue', value)
             // Check if selected is invalid
             const currentValue = this.getValue(this.selected)
-            if (
-                currentValue !== undefined &&
-                currentValue !== null &&
-                currentValue !== value
-            ) {
+            if (currentValue !== undefined && currentValue !== null && currentValue !== value) {
                 this.setSelected(null, false)
             }
             // Close dropdown if input is clear or else open it
             if (this.hasFocus && (!this.openOnFocus || value !== '')) {
-                this.isActive =
-                    value !== '' && value !== undefined && value !== null
+                this.isActive = value !== '' && value !== undefined && value !== null
             }
         },
 
@@ -454,9 +443,8 @@ export default defineComponent({
                 if (this.hovered) {
                     // reset hovered if list doesn't contain it
                     const hoveredValue = this.getValue(this.hovered)
-                    const data = this.computedData
-                        .map((d) => d.items)
-                        .reduce((a, b) => [...a, ...b], [])
+                    const data = this.computedData.map((d) => d.items)
+                        .reduce((a, b) => ([...a, ...b]), [])
                     if (!data.some((d) => this.getValue(d) === hoveredValue)) {
                         this.setHovered(null)
                     }
@@ -470,14 +458,8 @@ export default defineComponent({
         appendToBody(newValue, oldValue) {
             if (newValue && !oldValue) {
                 // Changing from false to true - need to create _bodyEl if dropdown is active
-                if (
-                    this.isActive &&
-                    this.$refs.dropdown &&
-                    !this.$data._bodyEl
-                ) {
-                    this.$data._bodyEl = createAbsoluteElement(
-                        this.$refs.dropdown as Element
-                    )
+                if (this.isActive && this.$refs.dropdown && !this.$data._bodyEl) {
+                    this.$data._bodyEl = createAbsoluteElement(this.$refs.dropdown as Element)
                     this.updateAppendToBody()
                 }
             } else if (!newValue && oldValue) {
@@ -517,10 +499,9 @@ export default defineComponent({
                 }
                 this.setHovered(null)
             }
-            closeDropdown &&
-                this.$nextTick(() => {
-                    this.isActive = false
-                })
+            closeDropdown && this.$nextTick(() => {
+                this.isActive = false
+            })
             this.checkValidity()
         },
 
@@ -552,13 +533,6 @@ export default defineComponent({
                 return -1
             }
 
-            // First try to find by exact object reference (original behavior)
-            const exactIndex = data.indexOf(this.hovered)
-            if (exactIndex !== -1) {
-                return exactIndex
-            }
-
-            // Fallback to value comparison for computed data with proxy objects
             const hoveredValue = this.getValue(this.hovered)
             if (hoveredValue === null || hoveredValue === undefined) {
                 return -1
@@ -589,21 +563,14 @@ export default defineComponent({
                 if (this.hovered === null) {
                     // header and footer uses headerHovered && footerHovered. If header or footer
                     // was selected then fire event otherwise just return so a value isn't selected
-                    this.checkIfHeaderOrFooterSelected(
-                        event,
-                        null,
-                        closeDropdown
-                    )
+                    this.checkIfHeaderOrFooterSelected(event, null, closeDropdown)
                     return
                 }
                 this.setSelected(this.hovered, closeDropdown, event)
             }
         },
 
-        selectHeaderOrFoterByClick(
-            event: MouseEvent,
-            origin: 'header' | 'footer'
-        ) {
+        selectHeaderOrFoterByClick(event: MouseEvent, origin: 'header' | 'footer') {
             this.checkIfHeaderOrFooterSelected(event, { origin })
         },
 
@@ -615,21 +582,13 @@ export default defineComponent({
             triggerClick: { origin: 'header' | 'footer' } | null,
             closeDropdown = true
         ) {
-            if (
-                this.selectableHeader &&
-                (this.headerHovered ||
-                    (triggerClick && triggerClick.origin === 'header'))
-            ) {
+            if (this.selectableHeader && (this.headerHovered || (triggerClick && triggerClick.origin === 'header'))) {
                 this.$emit('select-header', event)
                 this.headerHovered = false
                 if (triggerClick) this.setHovered(null)
                 if (closeDropdown) this.isActive = false
             }
-            if (
-                this.selectableFooter &&
-                (this.footerHovered ||
-                    (triggerClick && triggerClick.origin === 'footer'))
-            ) {
+            if (this.selectableFooter && (this.footerHovered || (triggerClick && triggerClick.origin === 'footer'))) {
                 this.$emit('select-footer', event)
                 this.footerHovered = false
                 if (triggerClick) this.setHovered(null)
@@ -641,15 +600,9 @@ export default defineComponent({
          * Close dropdown if clicked outside.
          */
         clickedOutside(event: MouseEvent) {
-            const target = isCustomElement(this)
-                ? event.composedPath()[0]
-                : event.target
-            if (!this.hasFocus && this.whiteList.indexOf(target) < 0) {
-                if (
-                    this.keepFirst &&
-                    this.hovered &&
-                    this.selectOnClickOutside
-                ) {
+            const target = isCustomElement(this) ? event.composedPath()[0] : event.target
+            if (!this.hasFocus && target && this.whiteList.indexOf(target as Element) < 0) {
+                if (this.keepFirst && this.hovered && this.selectOnClickOutside) {
                     this.setSelected(this.hovered, true)
                 } else {
                     this.isActive = false
@@ -668,9 +621,7 @@ export default defineComponent({
             if (typeof this.customFormatter !== 'undefined') {
                 return this.customFormatter(option)
             }
-            return typeof option === 'object'
-                ? getValueByPath(option, this.field)
-                : option
+            return typeof option === 'object' ? getValueByPath(option, this.field) : option
         },
 
         /*
@@ -678,21 +629,33 @@ export default defineComponent({
          * reached it's end.
          */
         checkIfReachedTheEndOfScroll() {
-            const list = (this.$refs.dropdown as Element).querySelector(
-                '.dropdown-content'
-            )!
-            const footerHeight = this.hasFooterSlot
-                ? list.querySelectorAll('div.dropdown-footer')[0].clientHeight
-                : 0
-            if (
-                list.clientHeight !== list.scrollHeight &&
-                list.scrollTop +
-                    list.parentElement!.clientHeight +
-                    footerHeight >=
-                    list.scrollHeight
-            ) {
-                this.$emit('infinite-scroll')
-            }
+            // Simple throttling to improve performance
+            if (this._scrollThrottled) return
+            this._scrollThrottled = true
+
+            requestAnimationFrame(() => {
+                try {
+                    const list = (this.$refs.dropdown as Element)?.querySelector('.dropdown-content')
+                    if (!list) return
+
+                    const footerHeight = this.hasFooterSlot
+                        ? (list.querySelector('div.dropdown-footer') as HTMLElement)?.clientHeight || 0
+                        : 0
+
+                    if (list.clientHeight !== list.scrollHeight &&
+                        (list.scrollTop +
+                         list.parentElement!.clientHeight +
+                         footerHeight) >= list.scrollHeight
+                    ) {
+                        this.$emit('infinite-scroll')
+                    }
+                } catch (error) {
+                    // eslint-disable-next-line no-console
+                    console.warn('Autocomplete: Error in scroll handler', error)
+                } finally {
+                    this._scrollThrottled = false
+                }
+            })
         },
 
         /*
@@ -707,17 +670,21 @@ export default defineComponent({
                  */
                 if (this.$refs.dropdown == null) return
 
-                const rect = (
-                    this.$refs.dropdown as Element
-                ).getBoundingClientRect()
+                try {
+                    const rect = (this.$refs.dropdown as Element).getBoundingClientRect()
 
-                this.isListInViewportVertically =
-                    rect.top >= 0 &&
-                    rect.bottom <=
-                        (window?.innerHeight ||
-                            document?.documentElement?.clientHeight)
-                if (this.appendToBody) {
-                    this.updateAppendToBody()
+                    this.isListInViewportVertically = rect.top >= 0 &&
+                        rect.bottom <= (
+                            window?.innerHeight || document?.documentElement?.clientHeight
+                        )
+                    if (this.appendToBody) {
+                        this.updateAppendToBody()
+                    }
+                } catch (error) {
+                    // eslint-disable-next-line no-console
+                    console.warn('Autocomplete: Error calculating dropdown position', error)
+                    // Fallback to default positioning
+                    this.isListInViewportVertically = true
                 }
             })
         },
@@ -729,9 +696,8 @@ export default defineComponent({
         keyArrows(direction: 'down' | 'up') {
             const sum = direction === 'down' ? 1 : -1
             if (this.isActive) {
-                const data = this.computedData
-                    .map((d) => d.items)
-                    .reduce((a, b) => [...a, ...b], [])
+                const data = this.computedData.map(
+                    (d) => d.items).reduce((a, b) => ([...a, ...b]), [])
                 if (this.hasHeaderSlot && this.selectableHeader) {
                     data.unshift(undefined)
                 }
@@ -743,7 +709,7 @@ export default defineComponent({
                 if (this.headerHovered) {
                     index = 0 + sum
                 } else if (this.footerHovered) {
-                    index = data.length - 1 + sum
+                    index = (data.length - 1) + sum
                 } else {
                     index = this.findHoveredIndex(data) + sum
                 }
@@ -754,24 +720,14 @@ export default defineComponent({
                 this.footerHovered = false
                 this.headerHovered = false
                 this.setHovered(data[index] !== undefined ? data[index] : null)
-                if (
-                    this.hasFooterSlot &&
-                    this.selectableFooter &&
-                    index === data.length - 1
-                ) {
+                if (this.hasFooterSlot && this.selectableFooter && index === data.length - 1) {
                     this.footerHovered = true
                 }
-                if (
-                    this.hasHeaderSlot &&
-                    this.selectableHeader &&
-                    index === 0
-                ) {
+                if (this.hasHeaderSlot && this.selectableHeader && index === 0) {
                     this.headerHovered = true
                 }
 
-                const list = (this.$refs.dropdown as Element).querySelector(
-                    '.dropdown-content'
-                )!
+                const list = (this.$refs.dropdown as Element).querySelector('.dropdown-content')!
                 let querySelectorText = 'a.dropdown-item:not(.is-disabled)'
                 if (this.hasHeaderSlot && this.selectableHeader) {
                     querySelectorText += ',div.dropdown-header'
@@ -779,23 +735,18 @@ export default defineComponent({
                 if (this.hasFooterSlot && this.selectableFooter) {
                     querySelectorText += ',div.dropdown-footer'
                 }
-                const element = list.querySelectorAll(querySelectorText)[
-                    index
-                ] as HTMLElement | null
+                const element =
+                    list.querySelectorAll(querySelectorText)[index] as HTMLElement | null
 
                 if (!element) return
 
                 const visMin = list.scrollTop
-                const visMax =
-                    list.scrollTop + list.clientHeight - element.clientHeight
+                const visMax = list.scrollTop + list.clientHeight - element.clientHeight
 
                 if (element.offsetTop < visMin) {
                     list.scrollTop = element.offsetTop
                 } else if (element.offsetTop >= visMax) {
-                    list.scrollTop =
-                        element.offsetTop -
-                        list.clientHeight +
-                        element.clientHeight
+                    list.scrollTop = element.offsetTop - list.clientHeight + element.clientHeight
                 }
             } else {
                 this.isActive = true
@@ -830,11 +781,8 @@ export default defineComponent({
         },
         onInput() {
             const currentValue = this.getValue(this.selected)
-            if (
-                currentValue !== undefined &&
-                currentValue !== null &&
-                currentValue === this.newValue
-            ) { return }
+            if ((currentValue !== undefined && currentValue !== null) &&
+                currentValue === this.newValue) return
             this.$emit('typing', this.newValue)
             this.checkValidity()
         },
@@ -896,71 +844,42 @@ export default defineComponent({
     created() {
         if (typeof window !== 'undefined') {
             document.addEventListener('click', this.clickedOutside)
-            if (this.dropdownPosition === 'auto') {
-                window.addEventListener(
-                    'resize',
-                    this.calcDropdownInViewportVertical
-                )
-            }
-            if (this.appendToBody) {
-                window.addEventListener(
-                    'scroll',
-                    this.calcDropdownInViewportVertical
-                )
-            }
+            if (this.dropdownPosition === 'auto') { window.addEventListener('resize', this.calcDropdownInViewportVertical) }
+            if (this.appendToBody) { window.addEventListener('scroll', this.calcDropdownInViewportVertical) }
         }
     },
     mounted() {
-        if (
-            this.checkInfiniteScroll &&
-            this.$refs.dropdown &&
-            (this.$refs.dropdown as Element).querySelector('.dropdown-content')
+        if (this.checkInfiniteScroll &&
+            this.$refs.dropdown && (this.$refs.dropdown as Element).querySelector('.dropdown-content')
         ) {
-            const list = (this.$refs.dropdown as Element).querySelector(
-                '.dropdown-content'
-            )!
+            const list = (this.$refs.dropdown as Element).querySelector('.dropdown-content')!
             list.addEventListener('scroll', this.checkIfReachedTheEndOfScroll)
         }
         if (this.appendToBody) {
-            this.$data._bodyEl = createAbsoluteElement(
-                this.$refs.dropdown as Element
-            )
+            this.$data._bodyEl = createAbsoluteElement(this.$refs.dropdown as Element)
             this.updateAppendToBody()
         }
     },
     beforeUnmount() {
         if (typeof window !== 'undefined') {
             document.removeEventListener('click', this.clickedOutside)
-            if (this.dropdownPosition === 'auto') {
-                window.removeEventListener(
-                    'resize',
-                    this.calcDropdownInViewportVertical
-                )
-            }
-            if (this.appendToBody) {
-                window.removeEventListener(
-                    'scroll',
-                    this.calcDropdownInViewportVertical
-                )
-            }
+            if (this.dropdownPosition === 'auto') { window.removeEventListener('resize', this.calcDropdownInViewportVertical) }
+            if (this.appendToBody) { window.removeEventListener('scroll', this.calcDropdownInViewportVertical) }
         }
-        if (
-            this.checkInfiniteScroll &&
-            this.$refs.dropdown &&
-            (this.$refs.dropdown as Element).querySelector('.dropdown-content')
+        if (this.checkInfiniteScroll &&
+                this.$refs.dropdown && (this.$refs.dropdown as Element).querySelector('.dropdown-content')
         ) {
-            const list = (this.$refs.dropdown as Element).querySelector(
-                '.dropdown-content'
-            )!
-            list.removeEventListener(
-                'scroll',
-                this.checkIfReachedTheEndOfScroll
-            )
+            const list = (this.$refs.dropdown as Element).querySelector('.dropdown-content')!
+            list.removeEventListener('scroll', this.checkIfReachedTheEndOfScroll)
         }
         if (this.appendToBody && this.$data._bodyEl) {
             removeElement(this.$data._bodyEl)
         }
-        clearTimeout(this.timeOutID)
+        // Clean up any pending timeouts to prevent memory leaks
+        if (this.timeOutID) {
+            clearTimeout(this.timeOutID)
+            this.timeOutID = undefined
+        }
     }
 })
 </script>
