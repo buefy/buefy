@@ -31,8 +31,8 @@ $dropdown-content-max-height: 200px !default;
         overflow: hidden;
         text-overflow: ellipsis;
         &.is-hovered {
-            background: $dropdown-item-hover-background-color;
-            color: $dropdown-item-hover-color;
+            background: cv.getVar("dropdown-item-hover-background-color");
+            color: cv.getVar("dropdown-item-hover-color");
         }
         &.is-disabled {
             opacity: 0.5;
