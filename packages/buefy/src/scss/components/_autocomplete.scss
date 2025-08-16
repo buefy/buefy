@@ -2,6 +2,7 @@
 @use "bulma/sass/utilities/initial-variables" as iv;
 @use "bulma/sass/utilities/controls" as controls;
 
+
 $dropdown-content-max-height: 200px !default;
 
 .#{iv.$class-prefix}autocomplete {
@@ -30,6 +31,10 @@ $dropdown-content-max-height: 200px !default;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        &.is-hovered {
+            --bulma-dropdown-item-background-l-delta: var(--bulma-dropdown-item-hover-background-l-delta);
+            --bulma-dropdown-item-border-l-delta: var(--bulma-dropdown-item-hover-border-l-delta);
+        }
         &.is-disabled {
             opacity: 0.5;
             cursor: not-allowed;
