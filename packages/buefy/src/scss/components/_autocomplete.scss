@@ -1,6 +1,12 @@
 @use "bulma/sass/utilities/css-variables" as cv;
 @use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/utilities/derived-variables" as dv;
 @use "bulma/sass/utilities/controls" as controls;
+
+@include cv.register-vars((
+  "bulma-dropdown-item-hover-background-l-delta": dv.$dropdown-item-hover-background-l-delta,
+  "bulma-dropdown-item-hover-border-l-delta": dv.$dropdown-item-hover-border-l-delta
+));
 
 $dropdown-content-max-height: 200px !default;
 
