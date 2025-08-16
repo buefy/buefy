@@ -31,8 +31,8 @@ $dropdown-content-max-height: 200px !default;
         overflow: hidden;
         text-overflow: ellipsis;
         &.is-hovered {
-            background: cv.getVar("dropdown-item-hover-background-color");
-            color: cv.getVar("dropdown-item-hover-color");
+            $bulma-dropdown-item-background-l-delta: cv.getVar("bulma-dropdown-item-hover-background-l-delta");
+            $bulma-dropdown-item-border-l-delta: cv.getVar("bulma-dropdown-item-hover-border-l-delta");
         }
         &.is-disabled {
             opacity: 0.5;
