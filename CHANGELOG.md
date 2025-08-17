@@ -1,5 +1,18 @@
 # Buefy Changelog
 
+## [3.0.1](https://github.com/buefy/buefy/pull/4224)
+
+### Fixes
+
+* [#4211](https://github.com/buefy/buefy/pull/4211) Restored autocomplete arrow key hover styles.
+* [#4205](https://github.com/buefy/buefy/pull/4205) Removed old modal style for closing "x" (now fixed in Bulma v1).
+* [#4204](https://github.com/buefy/buefy/pull/4204) Added missing span to NavBurger.
+* [#4210](https://github.com/buefy/buefy/pull/4210) chore(lib): use `@forward` in Buefy main Sass file to allow custom Sass variables.
+
+### Fixes (docs)
+
+* [#4202](https://github.com/buefy/buefy/pull/4202) Updated the Buefy footer.
+
 ## [3.0.0](https://github.com/buefy/buefy/pull/4199)
 
 ### Breaking Changes

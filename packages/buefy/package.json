@@ -1,6 +1,6 @@
 {
   "name": "buefy",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Lightweight UI components for Vue.js (v3) based on Bulma",
   "keywords": [
     "vuejs",
