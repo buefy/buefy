@@ -17,6 +17,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import type { TableRow } from 'buefy'
 import { BTable } from 'buefy';
 
 export default defineComponent({
@@ -92,15 +93,15 @@ export default defineComponent({
     };
   },
   methods: {
-    rowClick(row) {
+    rowClick(row: TableRow) {
       console.log(row);
       this.selectedRowClicked = row.id;
     },
-    rowMouseEnter(event, row) {
+    rowMouseEnter(event: MouseEvent, row: TableRow) {
       console.log(row);
       this.selectedRowHovered = row.id;
     },
-    rowMouseLeave(event, row) {
+    rowMouseLeave(event: MouseEvent, row: TableRow) {
       console.log(row);
       this.selectedRowHovered = '';
     },
