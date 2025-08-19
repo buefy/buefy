@@ -17,6 +17,8 @@
   },
   "devDependencies": {
     "vite": "^7.0.4",
+    "sass": "^1.90.0",
+    "sass-loader": "^16.0.5",
     "@vitejs/plugin-vue": "^6.0.0"
   }
 }
