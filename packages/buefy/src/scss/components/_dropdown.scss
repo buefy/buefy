@@ -132,7 +132,7 @@ $dropdown-disabled-opacity: 0.5 !default;
             left: auto;
         }
     }
-    @media screen and (max-width: calc(iv.$desktop - 1px)) {
+    @media screen and (max-width: calc(cv.getVar('dropdown-mobile-breakpoint') - 1px)) {
         /* prevents modal on hover unless it is on touch devices */
         &.is-mobile-modal:not(.is-hoverable),
         &.is-mobile-modal.is-touch-enabled {
