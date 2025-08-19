@@ -705,6 +705,8 @@ export default defineComponent({
         dragstart: (_event: TableRowDragEvent) => true,
         drop: (_event: TableRowDragEvent) => true,
         'filters-change': (_value: Record<string, string | number>) => true,
+        mouseenter: (_row: TableRow, _event: MouseEvent) => true,
+        mouseleave: (_row: TableRow, _event: MouseEvent) => true,
         'page-change': (_page: string | number) => true,
         select: (_new: TableRow, _old: TableRow) => true,
         sort: (
