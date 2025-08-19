@@ -3,6 +3,7 @@ import indexHtml from '../templates/stackblitz/index.html?raw'
 import packageJson from '../templates/stackblitz/package.json?raw'
 import viteConfig from '../templates/stackblitz/vite.config.ts?raw'
 import mainJs from '../templates/stackblitz/main.ts?raw'
+import buefySass from '../templates/stackblitz/buefy.scss?raw'
 
 export function createCustomVueProject(exampleCode: string, exampleTitle: string): Project {
     return {
@@ -14,7 +15,8 @@ export function createCustomVueProject(exampleCode: string, exampleTitle: string
             'package.json': packageJson,
             'vite.config.js': viteConfig,
             'src/main.js': mainJs,
-            'src/App.vue': exampleCode
+            'src/App.vue': exampleCode,
+            'src/styles/buefy.scss': buefySass
         }
     }
 }

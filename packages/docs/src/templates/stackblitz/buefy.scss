@@ -1,0 +1,19 @@
+// Forward Bulma with configuration - this makes it available with the custom primary color
+$buefy-custom-colors: (
+    'secondary': hsl(228deg, 32%, 41%),
+    'accent': hsl(259deg, 72%, 51%),
+    'twitter': #000000,
+    'discord': #7289DA,
+    'bulma': #00D1B2,
+    'vuetelemetry': #0bdca0,
+);
+
+@forward "bulma/sass" with (
+    $primary: hsl(256.19deg, 60%, 58.82%),
+    $background: hsl(0deg, 0%, 100%),
+    $text: hsl(0deg, 0%, 29%),
+    $link: hsl(0deg, 0%, 21.18%),
+    $custom-colors: $buefy-custom-colors,
+);
+
+@use "buefy/src/scss/buefy";
