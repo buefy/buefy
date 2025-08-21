@@ -441,7 +441,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, toRaw } from 'vue'
+import { camelize, defineComponent, toHandlerKey, toRaw } from 'vue'
 import type { PropType } from 'vue'
 
 import type { VueClassAttribute } from '../../utils/config'
@@ -1506,19 +1506,25 @@ export default defineComponent({
             this.$emit('dragleave', { event, row, index })
         },
 
-        // FIXME: this method may emit events not listed in `emits`.
-        // I decided not to list them to check if event listeners are actually
-        // set in `$attrs`. The original idea of this method was to address
-        // some performance issues and introduced at the commit:
-        // https://github.com/ntohq/buefy-next/commit/e38726497785145195e9605840e33980fd4ae9e0
-        // I am not sure whether the justification at https://github.com/buefy/buefy/pull/2150
-        // is still relevant with Vue 3.
+        // this method is for "mouseenter", and "mouseleave" events.
+        // the original idea of this method was introduced by the PR
+        // https://github.com/buefy/buefy/pull/2150
+        // to address some performance issues related to these events.
+        // I am not sure whether the justification made at the PR is still
+        // relevant to Vue 3.
+        // btw, this function was made by the PR https://github.com/buefy/buefy/pull/3236
         emitEventForRow(eventName: string, event: Event, row: TableRow) {
-            // eventName should not be in `emits` because it is never included
+            // eventName should not be in `emits` because it won't be included
             // in `$attrs` if it is listed in `emits`.
-            // @ts-expect-error `on${eventName}` unlikely matches the actual prop.
-            // we should use `toHandlerKey` with/without `camelize` instead.
-            return this.$attrs[`on${eventName}`] ? this.$emit(eventName, row, event) : null
+            // less known `toHandlerKey` helps us to make a proper name for the
+            // listener. the following code also supports camelCase event names
+            // but may be too much for our use case.
+            // reference: https://github.com/vuejs/core/blob/a48ffdad65d9c97eb0a342a6cd53836a16289afe/packages/runtime-core/src/componentEmits.ts#L194-L197
+            const listener =
+                this.$attrs[toHandlerKey(eventName)] ||
+                this.$attrs[toHandlerKey(camelize(eventName))]
+            // @ts-expect-error $emit expects a name in the `emits` list
+            return listener != null ? this.$emit(eventName, row, event) : null
         },
 
         /*
