@@ -97,11 +97,11 @@ export default defineComponent({
       console.log(row);
       this.selectedRowClicked = row.id;
     },
-    rowMouseEnter(event: MouseEvent, row: TableRow) {
+    rowMouseEnter(row: TableRow) {
       console.log(row);
       this.selectedRowHovered = row.id;
     },
-    rowMouseLeave(event: MouseEvent, row: TableRow) {
+    rowMouseLeave(row: TableRow) {
       console.log(row);
       this.selectedRowHovered = '';
     },
