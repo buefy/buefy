@@ -2,7 +2,7 @@
     <div>
         <div class="content">
             <p>
-                Customize Buefy with <strong>Sass</strong> by overriding Bulma variables before importing the framework. 
+                Customize Buefy with <strong>Sass</strong> by overriding Bulma variables before importing the framework.
                 This guide covers both modern Sass (with <code>@use</code>) and legacy Sass (with <code>@import</code>) approaches.
             </p>
         </div>
@@ -61,7 +61,7 @@
                 <b-message type="is-warning">
                     <div class="content">
                         <p>
-                            <b>Note:</b> The <code>@import</code> directive is deprecated and will be removed in Dart Sass 2.0. 
+                            <b>Note:</b> The <code>@import</code> directive is deprecated and will be removed in Dart Sass 2.0.
                             Consider migrating to <code>@use</code> for new projects.
                         </p>
                     </div>
@@ -78,10 +78,10 @@
                 <p class="content">
                     Configure your build tool to use Dart Sass:
                 </p>
-                
+
                 <h5 class="title is-5">Vite Configuration</h5>
                 <CodeView :code="preformat(viteConfig)" lang="javascript" expanded />
-                
+
                 <h5 class="title is-5 mt-5">Webpack Configuration</h5>
                 <CodeView :code="preformat(webpackConfig)" lang="javascript" expanded />
             </div>
@@ -100,8 +100,8 @@
                 <b-message type="is-success">
                     <div class="content">
                         <p>
-                            <b>Important:</b> When using Sass customization, do not import 
-                            <code>buefy/dist/buefy.css</code> as your custom Sass will generate 
+                            <b>Important:</b> When using Sass customization, do not import
+                            <code>buefy/dist/css/buefy.css</code> as your custom Sass will generate
                             the CSS with your customizations.
                         </p>
                     </div>
@@ -120,16 +120,16 @@
                 <li><strong>Spacing:</strong> <code>$radius</code>, <code>$radius-small</code>, <code>$radius-large</code>, <code>$radius-rounded</code></li>
                 <li><strong>Buefy specific:</strong> <code>$speed-slow</code>, <code>$speed-slower</code></li>
             </ul>
-            
+
             <h4 class="title is-4">Learn More</h4>
             <p>
-                For a complete list of Bulma variables, visit the 
+                For a complete list of Bulma variables, visit the
                 <a href="https://bulma.io/documentation/customize/list-of-sass-variables/" target="_blank" rel="noopener">
                     Bulma Sass customization documentation
                 </a>.
             </p>
             <p>
-                For CSS Variables approach (no compilation required), see the 
+                For CSS Variables approach (no compilation required), see the
                 <router-link to="/documentation/css-variables">CSS Variables section</router-link>.
             </p>
         </div>
@@ -144,13 +144,13 @@ import { BMessage } from "buefy";
 import CodeView from "@/components/CodeView.vue";
 import { preformat } from "@/utils";
 
-import { 
-    importing, 
-    sass, 
-    sassLegacy, 
-    packageJsonSetup, 
-    viteConfig, 
-    webpackConfig 
+import {
+    importing,
+    sass,
+    sassLegacy,
+    packageJsonSetup,
+    viteConfig,
+    webpackConfig
 } from "./usage/customization";
 
 export default defineComponent({
