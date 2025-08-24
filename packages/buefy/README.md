@@ -58,7 +58,7 @@ Bundle
 ```javascript
 import { createApp } from "vue";
 import Buefy from "buefy";
-import "buefy/dist/buefy.css";
+import "buefy/dist/css/buefy.css";
 
 const app = createApp();
 
@@ -70,7 +70,7 @@ or Individual Components
 ```javascript
 import { createApp } from "vue";
 import { Field, Input } from "buefy";
-import "buefy/dist/buefy.css";
+import "buefy/dist/css/buefy.css";
 
 const app = createApp();
 
