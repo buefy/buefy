@@ -37,7 +37,7 @@ vueApp.config.globalProperties.$http = Axios
 vueApp.config.globalProperties.$eventHub = new TinyEmitter()
 
 // allows access to `$http` and `$eventHub` in all components
-declare module '@vue/runtime-core' {
+declare module 'vue' {
     interface ComponentCustomProperties {
         $http: typeof Axios;
         $eventHub: TinyEmitter;
