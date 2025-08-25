@@ -1,5 +1,7 @@
 # Buefy Changelog
 
+## [3.0.1](tbd)
+
 ## [3.0.1](https://github.com/buefy/buefy/pull/4224)
 
 ### Fixes
