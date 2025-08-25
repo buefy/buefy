@@ -58,7 +58,7 @@ Bundle
 ```javascript
 import { createApp } from "vue";
 import Buefy from "buefy";
-import "buefy/dist/buefy.css";
+import "buefy/dist/css/buefy.css";
 
 const app = createApp();
 
@@ -70,7 +70,7 @@ or Individual Components
 ```javascript
 import { createApp } from "vue";
 import { Field, Input } from "buefy";
-import "buefy/dist/buefy.css";
+import "buefy/dist/css/buefy.css";
 
 const app = createApp();
 
@@ -93,7 +93,7 @@ If you want to customize the icons or the theme, refer to the [customization sec
 
 ```html
 <!-- Buefy CSS -->
-<link rel="stylesheet" href="https://unpkg.com/buefy/dist/buefy.min.css" />
+<link rel="stylesheet" href="https://unpkg.com/buefy/dist/css/buefy.min.css" />
 
 <!-- Buefy JavaScript -->
 <script src="https://unpkg.com/buefy/dist/buefy.min.js"></script>
