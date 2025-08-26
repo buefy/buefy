@@ -25,7 +25,6 @@
 
                 <a
                     class="navbar-item"
-                    :class="{ 'has-text-dark': !light }"
                     href="https://github.com/buefy/buefy"
                     target="_blank"
                     title="Github"
@@ -35,7 +34,6 @@
 
                 <a
                     class="navbar-item"
-                    :class="{ 'has-text-discord': !light }"
                     href="https://discord.buefy.org/"
                     target="_blank"
                     title="Discord"
@@ -45,7 +43,6 @@
 
                 <a
                     class="navbar-item"
-                    :class="{ 'has-text-twitter': !light }"
                     href="https://x.com/buefycss"
                     target="_blank"
                     title="Twitter"
@@ -62,6 +59,7 @@
                     :class="{ 'is-active': isMenuActive }"
                     @click="isMenuActive = !isMenuActive"
                 >
+                    <span />
                     <span />
                     <span />
                     <span />
