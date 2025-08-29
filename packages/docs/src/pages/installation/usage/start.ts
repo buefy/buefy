@@ -6,7 +6,7 @@
 export const importingBundle = `
 import Vue from 'vue'
 import Buefy from 'buefy'
-import 'buefy/dist/buefy.css'
+import 'buefy/dist/css/buefy.css'
 
 Vue.use(Buefy)
 `
@@ -14,7 +14,7 @@ Vue.use(Buefy)
 export const importingComponentsAsVuePlugins = `
 import Vue from 'vue'
 import { Table, Input } from 'buefy'
-import 'buefy/dist/buefy.css'
+import 'buefy/dist/css/buefy.css'
 
 Vue.use(Table)
 Vue.use(Input)
@@ -23,7 +23,7 @@ Vue.use(Input)
 export const importingSSR = `
 import Vue from 'vue'
 import Buefy from 'buefy'
-import 'buefy/dist/buefy.css'
+import 'buefy/dist/css/buefy.css'
 
 Vue.use(Buefy) `
 

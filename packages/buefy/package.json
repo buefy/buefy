@@ -1,6 +1,6 @@
 {
   "name": "buefy",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Lightweight UI components for Vue.js (v3) based on Bulma",
   "keywords": [
     "vuejs",
@@ -49,7 +49,11 @@
     "build": "rimraf dist && npm run build:js && npm run build:scss && npm run build:dts",
     "build:js": "rollup -c && rollup -c --environment MINIFY",
     "build:dts": "rimraf temp-dts && vue-tsc -b tsconfig.types.json --force && api-extractor run --local && node build/augment-dts.mjs",
-    "build:scss": "node ./build/banner.js < src/scss/buefy-build.scss | sass --load-path=../../node_modules --load-path=node_modules src/scss/buefy-build.scss dist/buefy.css && cleancss -o dist/buefy.min.css dist/buefy.css",
+    "build:scss": "npm run build:scss-buefy && npm run build:scss-buefy-standalone && npm run build:scss-no-reset",
+    "build:scss-buefy": "sass --load-path=../../node_modules --load-path=node_modules src/scss/versions/buefy-bulma-bundle.scss dist/css/buefy.css && node ./build/banner.js < dist/css/buefy.css > dist/css/buefy.banner.css && mv dist/css/buefy.banner.css dist/css/buefy.css && cleancss -o dist/css/buefy.min.css dist/css/buefy.css",
+    "build:scss-buefy-standalone": "sass --load-path=../../node_modules --load-path=node_modules src/scss/buefy.scss dist/css/versions/buefy-standalone.css && node ./build/banner.js < dist/css/versions/buefy-standalone.css > dist/css/buefy.banner.css && mv dist/css/buefy.banner.css dist/css/versions/buefy-standalone.css && cleancss -o dist/css/versions/buefy-standalone.min.css dist/css/versions/buefy-standalone.css",
+    "build:scss-no-reset": "sass --load-path=../../node_modules --load-path=node_modules src/scss/versions/buefy-no-reset.scss dist/css/versions/buefy-no-reset.css && node ./build/banner.js < dist/css/versions/buefy-no-reset.css > dist/css/buefy.banner.css && mv dist/css/buefy.banner.css dist/css/versions/buefy-no-reset.css && cleancss -o dist/css/versions/buefy-no-reset.min.css dist/css/versions/buefy-no-reset.css",
+
     "vetur": "node -r esm build/vetur.js"
   },
   "dependencies": {

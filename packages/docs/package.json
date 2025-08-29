@@ -1,6 +1,6 @@
 {
   "name": "docs",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "private": true,
   "author": "Rafael Beraldo <rafael.pimpa@gmail.com>",
   "maintainers": [
@@ -52,6 +52,6 @@
     "vite": "^6.1.1",
     "vite-plugin-commonjs": "^0.10.4",
     "vue-breakpoint-mixin": "1.5.0",
-    "vue-router": "^4.5.0"
+    "vue-router": "^4.5.1"
   }
 }
