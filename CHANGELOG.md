@@ -14,7 +14,6 @@
 
 * [#4227](https://github.com/buefy/buefy/pull/4227) Updated StackBlitz integration to reflect latest component usage and styling.
 
-
 ## [3.0.1](https://github.com/buefy/buefy/pull/4224)
 
 ### Fixes
