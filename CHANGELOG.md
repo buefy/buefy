@@ -1,5 +1,20 @@
 # Buefy Changelog
 
+## [3.0.2](https://github.com/buefy/buefy/pull/4243)
+
+### Fixes
+
+* [#4238](https://github.com/buefy/buefy/pull/4238) Updated navbar icon colors and fixed NavBurger rendering.
+* [#4229](https://github.com/buefy/buefy/pull/4229) Bubble up mouse events from `b-table` rows for better interactivity (@kikuomax).
+* [#4236](https://github.com/buefy/buefy/pull/4236) Augmented `Using Vue` docs and examples for clarity (@ElteHupkes).
+* [#4235](https://github.com/buefy/buefy/pull/4235) Extended Buefy CSS output to include built versions for CDN and static use.
+* [#4237](https://github.com/buefy/buefy/pull/4237) Updated internal CSS path references for consistency.
+
+### Fixes (docs)
+
+* [#4227](https://github.com/buefy/buefy/pull/4227) Updated StackBlitz integration to reflect latest component usage and styling.
+
+
 ## [3.0.1](https://github.com/buefy/buefy/pull/4224)
 
 ### Fixes
