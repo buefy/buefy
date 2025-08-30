@@ -4,7 +4,7 @@
 @use "bulma/sass/utilities/initial-variables" as iv;
 @use "bulma/sass/utilities/mixins" as mixins;
 
-$dropdown-mobile-breakpoint: cv.getVar('desktop') !default;
+$dropdown-mobile-breakpoint: iv.$desktop !default;
 $dropdown-background-color: rgba(cv.getVar('scheme-invert'), 0.86) !default;
 $dropdown-disabled-opacity: 0.5 !default;
 
@@ -132,7 +132,7 @@ $dropdown-disabled-opacity: 0.5 !default;
             left: auto;
         }
     }
-    @media screen and (max-width: calc(#{cv.getVar('dropdown-mobile-breakpoint')} - 1px)) {
+    @media screen and (max-width: calc(cv.getVar('dropdown-mobile-breakpoint') - 1px)) {
         /* prevents modal on hover unless it is on touch devices */
         &.is-mobile-modal:not(.is-hoverable),
         &.is-mobile-modal.is-touch-enabled {
