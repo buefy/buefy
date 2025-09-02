@@ -12,8 +12,7 @@
                     :class="{ 'has-text-primary': light === false }"
                     title="Buefy: lightweight UI components for Vue.js based on Bulma"
                     active-class=""
-                >
-                </router-link>
+                />
 
                 <a
                     class="navbar-item"
