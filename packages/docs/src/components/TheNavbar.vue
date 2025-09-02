@@ -7,20 +7,12 @@
             <div class="navbar-brand">
                 <router-link
                     to="/"
-                    class="navbar-item"
+                    v-html="buefyBrandImage"
+                    class="navbar-item brand-logo"
+                    :class="{ 'has-text-primary': light === false }"
                     title="Buefy: lightweight UI components for Vue.js based on Bulma"
                     active-class=""
                 >
-                    <img
-                        v-if="light"
-                        src="../assets/buefy-light.png"
-                        alt="Buefy"
-                    >
-                    <img
-                        v-else
-                        src="../assets/buefy.png"
-                        alt="Buefy"
-                    >
                 </router-link>
 
                 <a
@@ -151,6 +143,7 @@ import { BIcon } from 'buefy'
 
 import buefyPackage from '../../../../package.json'
 import bulmaPackage from 'bulma/package.json'
+import buefyBrandImage from '../assets/buefy.svg?raw'
 
 export default defineComponent({
     components: { BIcon },
@@ -165,7 +158,8 @@ export default defineComponent({
         return {
             isMenuActive: false,
             version: buefyPackage.version,
-            bulmaVersion: bulmaPackage.version
+            bulmaVersion: bulmaPackage.version,
+            buefyBrandImage
         }
     },
     computed: {
