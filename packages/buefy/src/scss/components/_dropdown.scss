@@ -2,16 +2,16 @@
 @use "bulma/sass/utilities/extends" as extends;
 @use "bulma/sass/utilities/css-variables" as cv;
 @use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/utilities/derived-variables.scss" as dv;
 @use "bulma/sass/utilities/mixins" as mixins;
 
-$dropdown-mobile-breakpoint: cv.getVar('desktop') !default;
-$dropdown-background-color: rgba(cv.getVar('scheme-invert'), 0.86) !default;
+$dropdown-mobile-breakpoint: calc(iv.$desktop - 1px) !default;
+$dropdown-background-color: rgba(dv.$scheme-invert, 0.86) !default;
 $dropdown-disabled-opacity: 0.5 !default;
 
 .#{iv.$class-prefix}dropdown {
     @include cv.register-vars(
     (
-        "dropdown-mobile-breakpoint": #{$dropdown-mobile-breakpoint},
         "dropdown-background-color": #{$dropdown-background-color},
         "dropdown-disabled-opacity": #{$dropdown-disabled-opacity}
     )
@@ -25,10 +25,10 @@ $dropdown-disabled-opacity: 0.5 !default;
     .background {
         @extend %overlay;
         position: fixed;
-        background-color: cv.getVar('dropdown-background-color');
+        background-color: #{cv.getVar('dropdown-background-color')};
         z-index: 10;
         cursor: pointer;
-        @media screen and (min-width: cv.getVar('dropdown-mobile-breakpoint')) {
+        @media screen and (min-width: $dropdown-mobile-breakpoint) {
             display: none;
         }
     }
@@ -132,7 +132,7 @@ $dropdown-disabled-opacity: 0.5 !default;
             left: auto;
         }
     }
-    @media screen and (max-width: calc(#{cv.getVar('dropdown-mobile-breakpoint')} - 1px)) {
+    @media screen and (max-width: $dropdown-mobile-breakpoint) {
         /* prevents modal on hover unless it is on touch devices */
         &.is-mobile-modal:not(.is-hoverable),
         &.is-mobile-modal.is-touch-enabled {
