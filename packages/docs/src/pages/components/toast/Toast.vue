@@ -7,11 +7,6 @@
 
         <Example title="From inside Vue instance" :component="ExSimple" :code="ExSimpleCode"/>
 
-        <Example title="From outside Vue instance">
-            <p>You can use it on Vuex or VueRouter using this syntax:</p>
-            <CodeView lang="javascript" :code="preformat(outsideVueInstance)" expanded/>
-        </Example>
-
         <ApiView :data="api"/>
         <VariablesView :data="variables"/>
     </div>
@@ -32,7 +27,8 @@
     import ExSimple from './examples/ExSimple.vue'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
 
-    import outsideVueInstance from './outside-vue-instance.js?raw'
+    import ExCompositionApi from './examples/ExCompositionApi.vue'
+    import ExCompositionApiCode from './examples/ExCompositionApi.vue?raw'
 
     export default defineComponent({
         components: {
@@ -46,10 +42,11 @@
                 api,
                 variables,
                 ...shallowFields({
-                    ExSimple
+                    ExSimple,
+                    ExCompositionApi,
                 }),
                 ExSimpleCode,
-                outsideVueInstance,
+                ExCompositionApiCode,
             }
         },
         methods: {

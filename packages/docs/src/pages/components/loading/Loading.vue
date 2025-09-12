@@ -20,6 +20,11 @@
             <p>Slot is available for loading content.</p>
         </Example>
 
+        <Example :component="ExCompositionApi" :code="ExCompositionApiCode" title="Composition API">
+            When using the Composition API, you can access the current Loading instance
+            with <code>useLoading()</code>:
+        </Example>
+
         <ApiView :data="api"/>
         <VariablesView :data="variables"/>
     </div>
@@ -45,6 +50,9 @@
     import ExTemplated from './examples/ExTemplated.vue'
     import ExTemplatedCode from './examples/ExTemplated.vue?raw'
 
+    import ExCompositionApi from "./examples/ExCompositionApi.vue";
+    import ExCompositionApiCode from "./examples/ExCompositionApi.vue?raw";
+
     export default defineComponent({
         components: {
             ApiView,
@@ -58,11 +66,13 @@
                 ...shallowFields({
                     ExSimple,
                     ExProgrammatically,
-                    ExTemplated
+                    ExTemplated,
+                    ExCompositionApi,
                 }),
                 ExSimpleCode,
                 ExProgrammaticallyCode,
-                ExTemplatedCode
+                ExTemplatedCode,
+                ExCompositionApiCode,
             }
         }
     })
