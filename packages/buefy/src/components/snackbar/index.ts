@@ -1,5 +1,5 @@
-import { createApp, h as createElement } from 'vue'
-import type { App, ComponentPublicInstance, VNode } from 'vue'
+import { createApp, h as createElement, inject } from 'vue'
+import type { App, ComponentPublicInstance, VNode, InjectionKey } from 'vue'
 
 import Snackbar from './Snackbar.vue'
 import type { SnackbarProps } from './Snackbar.vue'
@@ -104,9 +104,15 @@ class SnackbarProgrammatic {
     }
 }
 
+const snackbarInjectionKey = Symbol('Buefy Snackbar') as InjectionKey<SnackbarProgrammatic>
+
+export function useSnackbar() {
+    return inject(snackbarInjectionKey)!
+}
+
 const Plugin = {
     install(Vue: App) {
-        registerComponentProgrammatic(Vue, 'snackbar', new SnackbarProgrammatic(Vue))
+        registerComponentProgrammatic(Vue, 'snackbar', new SnackbarProgrammatic(Vue), snackbarInjectionKey)
     }
 }
 

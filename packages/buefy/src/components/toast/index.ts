@@ -1,5 +1,5 @@
-import { createApp, h as createElement } from 'vue'
-import type { App, ComponentPublicInstance, VNode } from 'vue'
+import { createApp, h as createElement, inject } from 'vue'
+import type { App, ComponentPublicInstance, VNode, InjectionKey } from 'vue'
 
 import Toast from './Toast.vue'
 import type { ToastProps } from './Toast.vue'
@@ -106,9 +106,15 @@ class ToastProgrammatic {
     }
 }
 
+const toastInjectionKey = Symbol('Buefy Toast') as InjectionKey<ToastProgrammatic>
+
+export function useToast() {
+    return inject(toastInjectionKey)!
+}
+
 const Plugin = {
     install(Vue: App) {
-        registerComponentProgrammatic(Vue, 'toast', new ToastProgrammatic(Vue))
+        registerComponentProgrammatic(Vue, 'toast', new ToastProgrammatic(Vue), toastInjectionKey)
     }
 }
 

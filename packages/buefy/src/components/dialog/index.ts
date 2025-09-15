@@ -1,5 +1,5 @@
-import { createApp, h as createElement } from 'vue'
-import type { App, ComponentPublicInstance } from 'vue'
+import { createApp, h as createElement, inject } from 'vue'
+import type { App, ComponentPublicInstance, InjectionKey } from 'vue'
 
 import Dialog from './Dialog.vue'
 import type { DialogProps } from './Dialog.vue'
@@ -154,10 +154,16 @@ class DialogProgrammatic {
     }
 }
 
+const dialogInjectionKey = Symbol('Buefy Dialog') as InjectionKey<DialogProgrammatic>
+
+export function useDialog() {
+    return inject(dialogInjectionKey)!
+}
+
 const Plugin = {
     install(Vue: App) {
         registerComponent(Vue, Dialog)
-        registerComponentProgrammatic(Vue, 'dialog', new DialogProgrammatic(Vue))
+        registerComponentProgrammatic(Vue, 'dialog', new DialogProgrammatic(Vue), dialogInjectionKey)
     }
 }
 

@@ -6,14 +6,14 @@
 
         <Example :component="ExPromptDialog" :code="ExPromptDialogCode" title="Prompt"/>
 
-        <Example title="From outside Vue instance">
-            <p>You can use it on Vuex or VueRouter using this syntax:</p>
-            <CodeView lang="javascript" :code="preformat(outsideVueInstance)" expanded/>
-        </Example>
-
         <Example title="Promise">
             <p>You can set <code>defaultProgrammaticPromise</code> constructor option to get a Promise</p>
             <CodeView lang="javascript" :code="preformat(promise)" expanded/>
+        </Example>
+
+        <Example :component="ExCompositionApi" :code="ExCompositionApiCode" title="Composition API">
+            When using the Composition API, you can access the current Dialog instance
+            with <code>useDialog()</code>:
         </Example>
 
         <ApiView :data="api"/>
@@ -36,10 +36,12 @@
     import ExConfirmDialog from './examples/ExConfirmDialog.vue'
     import ExConfirmDialogCode from './examples/ExConfirmDialog.vue?raw'
 
+    import ExCompositionApi from "./examples/ExCompositionApi.vue"
+    import ExCompositionApiCode from "./examples/ExCompositionApi.vue?raw"
+
     import ExPromptDialog from './examples/ExPromptDialog.vue'
     import ExPromptDialogCode from './examples/ExPromptDialog.vue?raw'
 
-    import outsideVueInstance from './outside-vue-instance.js?raw'
     import promise from './promise.js?raw'
 
     export default defineComponent({
@@ -54,12 +56,13 @@
                 ...shallowFields({
                     ExAlertDialog,
                     ExConfirmDialog,
-                    ExPromptDialog
+                    ExPromptDialog,
+                    ExCompositionApi,
                 }),
                 ExAlertDialogCode,
                 ExConfirmDialogCode,
                 ExPromptDialogCode,
-                outsideVueInstance,
+                ExCompositionApiCode,
                 promise,
             }
         },

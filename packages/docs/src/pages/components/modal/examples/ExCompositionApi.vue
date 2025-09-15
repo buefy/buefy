@@ -2,24 +2,38 @@
     <section>
         <div class="buttons">
             <b-button
-                label="Launch image modal (HTML)"
+                label="Launch image modal"
                 type="is-primary"
                 size="is-medium"
-                @click="imageModal"
+                @click="launchImageModal"
             />
+
             <b-button
-                label="Launch card modal (Component)"
+                label="Launch card modal (component)"
                 type="is-primary"
                 size="is-medium"
-                @click="cardModal"
+                @click="launchCardModal"
             />
         </div>
     </section>
 </template>
-
-<script lang="ts">
+<script setup>
 import { defineComponent, h } from "vue";
-import { BButton } from "buefy";
+import { BButton, useModal } from "buefy";
+
+const Modal = useModal();
+
+function launchImageModal() {
+    const vnode = h("p", { class: "image is-4by3" }, [
+        h("img", {
+            src: "https://buefy.org/static/img/placeholder-1280x960.png",
+        }),
+    ]);
+    Modal.open({
+        content: [vnode],
+    });
+}
+
 
 const ModalForm = defineComponent({
     props: ["email", "password"],
@@ -68,27 +82,12 @@ const ModalForm = defineComponent({
         `,
 });
 
-export default defineComponent({
-    components: { BButton },
-    methods: {
-        imageModal() {
-            const vnode = h("p", { class: "image is-4by3" }, [
-                h("img", {
-                    src: "https://buefy.org/static/img/placeholder-1280x960.png",
-                }),
-            ]);
-            this.$buefy.modal.open({
-                content: [vnode],
-            });
-        },
-        cardModal() {
-            this.$buefy.modal.open({
-                component: ModalForm,
-                hasModalCard: true,
-                customClass: "custom-class custom-class-2",
-                trapFocus: true,
-            });
-        },
-    },
-});
+function launchCardModal() {
+    Modal.open({
+        component: ModalForm,
+        hasModalCard: true,
+        customClass: "custom-class custom-class-2",
+        trapFocus: true,
+    });
+}
 </script>

@@ -1,5 +1,5 @@
-import { createApp, h as createElement } from 'vue'
-import type { App, ComponentPublicInstance, VNode } from 'vue'
+import { createApp, h as createElement, inject } from 'vue'
+import type { App, ComponentPublicInstance, VNode, InjectionKey } from 'vue'
 
 import Notification from './Notification.vue'
 import type { NotificationProps } from './Notification.vue'
@@ -106,10 +106,16 @@ class NotificationProgrammatic {
     }
 }
 
+const notificationInjectionKey = Symbol('Buefy Notification') as InjectionKey<NotificationProgrammatic>
+
+export function useNotification() {
+    return inject(notificationInjectionKey)!
+}
+
 const Plugin = {
     install(Vue: App) {
         registerComponent(Vue, Notification)
-        registerComponentProgrammatic(Vue, 'notification', new NotificationProgrammatic(Vue))
+        registerComponentProgrammatic(Vue, 'notification', new NotificationProgrammatic(Vue), notificationInjectionKey)
     }
 }
 

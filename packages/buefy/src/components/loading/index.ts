@@ -1,5 +1,5 @@
-import { createApp, h as createElement } from 'vue'
-import type { App, ComponentPublicInstance } from 'vue'
+import { createApp, h as createElement, inject } from 'vue'
+import type { App, ComponentPublicInstance, InjectionKey } from 'vue'
 
 import Loading from './Loading.vue'
 import type { LoadingProps } from './Loading.vue'
@@ -76,10 +76,16 @@ class LoadingProgrammatic {
     }
 }
 
+const loadingInjectionKey = Symbol('Buefy Loading') as InjectionKey<LoadingProgrammatic>
+
+export function useLoading() {
+    return inject(loadingInjectionKey)!
+}
+
 const Plugin = {
     install(Vue: App) {
         registerComponent(Vue, Loading)
-        registerComponentProgrammatic(Vue, 'loading', new LoadingProgrammatic(Vue))
+        registerComponentProgrammatic(Vue, 'loading', new LoadingProgrammatic(Vue), loadingInjectionKey)
     }
 }
 

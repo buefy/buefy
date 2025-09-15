@@ -7,9 +7,9 @@
 
         <Example title="From inside Vue instance" :component="ExSimple" :code="ExSimpleCode"/>
 
-        <Example title="From outside Vue instance">
-            <p>You can use it on Vuex or VueRouter using this syntax:</p>
-            <CodeView lang="javascript" :code="preformat(outsideVueInstance)" expanded/>
+        <Example :component="ExCompositionApi" :code="ExCompositionApiCode" title="Composition API">
+            When using the Composition API, you can access the current Snackbar instance
+            with <code>useSnackbar()</code>:
         </Example>
 
         <ApiView :data="api"/>
@@ -32,7 +32,8 @@
     import ExSimple from './examples/ExSimple.vue'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
 
-    import outsideVueInstance from './outside-vue-instance.js?raw'
+    import ExCompositionApi from './examples/ExCompositionApi.vue'
+    import ExCompositionApiCode from './examples/ExCompositionApi.vue?raw'
 
     export default defineComponent({
         components: {
@@ -46,10 +47,11 @@
                 api,
                 variables,
                 ...shallowFields({
-                    ExSimple
+                    ExSimple,
+                    ExCompositionApi,
                 }),
                 ExSimpleCode,
-                outsideVueInstance,
+                ExCompositionApiCode,
             }
         },
         methods: { preformat }

@@ -1,5 +1,5 @@
-import { createApp, h as createElement } from 'vue'
-import type { App, ComponentPublicInstance } from 'vue'
+import { createApp, h as createElement, inject } from 'vue'
+import type { App, ComponentPublicInstance, InjectionKey } from 'vue'
 
 import Modal from './Modal.vue'
 import type { ModalProps } from './Modal.vue'
@@ -92,10 +92,16 @@ class ModalProgrammatic {
     }
 }
 
+const modalInjectionKey = Symbol('Buefy Modal') as InjectionKey<ModalProgrammatic>
+
+export function useModal() {
+    return inject(modalInjectionKey)!
+}
+
 const Plugin = {
     install(Vue: App) {
         registerComponent(Vue, Modal)
-        registerComponentProgrammatic(Vue, 'modal', new ModalProgrammatic(Vue))
+        registerComponentProgrammatic(Vue, 'modal', new ModalProgrammatic(Vue), modalInjectionKey)
     }
 }
 

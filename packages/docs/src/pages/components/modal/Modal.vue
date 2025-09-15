@@ -12,17 +12,17 @@
             </p>
         </Example>
 
-        <Example :component="ExProgrammatic" :code="ExProgrammaticCode" title="Programmatic">
-            <p>Syntax:</p>
-            <CodeView lang="javascript" :code="preformat(programmaticSyntax)" expanded/>
-        </Example>
-
         <Example :component="ExFullScreen" :code="ExFullScreenCode" title="Full Screen">
             <div class="tags has-addons">
                 <span class="tag is-success">Since</span>
                 <span class="tag is-info">0.7.8</span>
             </div>
             <p>Add the <code>full-screen</code> prop to cover the whole page.</p>
+        </Example>
+
+        <Example :component="ExCompositionApi" :code="ExCompositionApiCode" title="Composition API">
+            When using the Composition API, you can access the current Model instance
+            with <code>useModal()</code>:
         </Example>
 
         <ApiView :data="api"/>
@@ -33,7 +33,7 @@
 <script lang="ts">
     import { defineComponent } from 'vue'
 
-    import { preformat as _preformat, shallowFields } from '@/utils'
+    import { shallowFields } from '@/utils'
     import ApiView from '@/components/ApiView.vue'
     import CodeView from '@/components/CodeView.vue'
     import Example from '@/components/Example.vue'
@@ -41,7 +41,6 @@
 
     import api from './api/modal'
     import variables from './variables/modal'
-    import programmaticSyntax from './programmatic-syntax.js?raw'
 
     import ExSimple from './examples/ExSimple.vue'
     import ExSimpleCode from './examples/ExSimple.vue?raw'
@@ -49,11 +48,11 @@
     import ExComponent from './examples/ExComponent.vue'
     import ExComponentCode from './examples/ExComponent.vue?raw'
 
-    import ExProgrammatic from './examples/ExProgrammatic.vue'
-    import ExProgrammaticCode from './examples/ExProgrammatic.vue?raw'
-
     import ExFullScreen from './examples/ExFullScreen.vue'
     import ExFullScreenCode from './examples/ExFullScreen.vue?raw'
+
+    import ExCompositionApi from './examples/ExCompositionApi.vue'
+    import ExCompositionApiCode from './examples/ExCompositionApi.vue?raw'
 
     export default defineComponent({
         components: {
@@ -69,20 +68,14 @@
                 ...shallowFields({
                     ExSimple,
                     ExComponent,
-                    ExProgrammatic,
-                    ExFullScreen
+                    ExFullScreen,
+                    ExCompositionApi,
                 }),
                 ExSimpleCode,
                 ExComponentCode,
-                ExProgrammaticCode,
                 ExFullScreenCode,
-                programmaticSyntax
+                ExCompositionApiCode,
             }
         },
-        methods: {
-            preformat(text: string) {
-                return _preformat(text)
-            }
-        }
     })
 </script>
