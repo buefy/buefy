@@ -34,9 +34,6 @@ export default {
 	--carbon-font-size: 14px;
 	--carbon-padding: 1.5ch;
 	--carbon-max-char: 20ch;
-	--carbon-bg-primary: var(--bulma-primary);
-	--carbon-bg-secondary: var(--bulma-secondary);
-	--carbon-text-color: var(--bulma-text);
 }
 
 #carbonads {
@@ -62,12 +59,13 @@ export default {
 }
 
 #carbonads a {
-	color: var(--bulma-text);
+	color: var(--bulma-light);
 	text-decoration: none;
 }
 
 #carbonads a:hover {
-	color: var(--bulma-text);
+	color: var(--bulma-light);
+    background-color: var(--bulma-accent)
 }
 
 #carbonads .carbon-wrap {
@@ -94,7 +92,7 @@ export default {
 #carbonads .carbon-poweredby {
 	padding: 6px 8px;
 	background: var(--bulma-secondary);
-	color: var(--bulma-text);
+	color: var(--bulma-light);
 	font-weight: 600;
 	font-size: 0.6em;
 	line-height: 1.4;
