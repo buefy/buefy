@@ -36,14 +36,15 @@ export default defineConfig({
     vue(),
     copyFontsPlugin(),
     {
-      // replaces `@ntohq/buefy-next` with the path to the source code
-      // // in development to ease debugging
+      // replaces `buefy` with the path to the source code so that we do not
+      // have to run `npm run build` every time we edit Buefy code during
+      // development
       name: 'link-buefy-src',
       apply: 'serve', // development only
       resolveId: {
         order: 'pre', // otherwise, IDs become "plugin-vue:export-helper"
         handler(id) {
-          if (id === '@buefy/buefy') {
+          if (id === 'buefy') {
             return path.resolve(__dirname, '../buefy/src/index.ts')
           }
         },

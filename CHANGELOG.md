@@ -1,5 +1,11 @@
 # Buefy Changelog
 
+## 3.0.3 unreleased
+
+### Fixes (docs)
+
+* `npm run dev` stopped working.
+
 ## [3.0.2](https://github.com/buefy/buefy/pull/4243)
 
 ### Fixes
