@@ -1,18 +1,22 @@
 <template>
-  <div id="carbon-cover" class="carbon-ad-container" ref="adContainer"></div>
+    <div
+        id="carbon-cover"
+        class="carbon-ad-container"
+        ref="adContainer"
+    />
 </template>
 
 <script>
 export default {
-  name: 'CarbonAd',
-  mounted() {
-    const script = document.createElement('script')
-    script.async = true
-    script.type = 'text/javascript'
-    script.src = '//cdn.carbonads.com/carbon.js?serve=CWYITK77&placement=buefyorg'
-    script.id = '_carbonads_js'
-    this.$refs.adContainer.appendChild(script)
-  }
+    name: 'CarbonAd',
+    mounted() {
+        const script = document.createElement('script')
+        script.async = true
+        script.type = 'text/javascript'
+        script.src = '//cdn.carbonads.com/carbon.js?serve=CWYITK77&placement=buefyorg'
+        script.id = '_carbonads_js'
+        this.$refs.adContainer.appendChild(script)
+    }
 }
 </script>
 
