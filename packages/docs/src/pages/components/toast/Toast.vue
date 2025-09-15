@@ -7,6 +7,11 @@
 
         <Example title="From inside Vue instance" :component="ExSimple" :code="ExSimpleCode"/>
 
+        <Example :component="ExCompositionApi" :code="ExCompositionApiCode" title="Composition API">
+            When using the Composition API, you can access the current Toast instance
+            with <code>useToast()</code>:
+        </Example>
+
         <ApiView :data="api"/>
         <VariablesView :data="variables"/>
     </div>
