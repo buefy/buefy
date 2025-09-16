@@ -1,10 +1,22 @@
 # Buefy Changelog
 
-## 3.0.3 unreleased
+## [3.0.3](https://github.com/buefy/buefy/pull/4256)
+
+
+### Fixes
+
+* [#4228](https://github.com/buefy/buefy/pull/4228) Fixed dropdown style inconsistencies.
+* [#4253](https://github.com/buefy/buefy/pull/4253) Added `use[Component]()` functions and improved documentation (@ElteHupkes).
+* [#4254](https://github.com/buefy/buefy/pull/4254) Updated ad components to match Buefy theme.
 
 ### Fixes (docs)
 
-* `npm run dev` stopped working.
+* [#4254](https://github.com/buefy/buefy/pull/4254) Fixed CarbonAds code and themed it around buefy's theme.
+* [#4255](https://github.com/buefy/buefy/pull/4255) Fixed broken dev script in documentation - `npm run dev` stopped working.
+
+### Chores (docs)
+
+* [#4249](https://github.com/buefy/buefy/pull/4249) Bumped `vite` from 6.3.5 to 6.3.6.
 
 ## [3.0.2](https://github.com/buefy/buefy/pull/4243)
 
