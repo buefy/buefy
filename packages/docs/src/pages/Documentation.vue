@@ -1,6 +1,10 @@
 <template>
     <article class="content">
         <p>
+            Documentation for v2 can be found <a href="https://v2.buefy.org/documentation/">here</a>.
+        </p>
+        
+        <p>
             Buefy (pronounced /ˈbyo͞oˌfī/, like <b>beau-fy</b>) is a user interface component library made on top
             of <a href="https://vuejs.org" target="_blank">Vue.js</a> and <a href="https://bulma.io/">Bulma</a>;
             two <em>fresh</em>, but well-known, frameworks.
