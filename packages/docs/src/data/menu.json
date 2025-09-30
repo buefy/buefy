@@ -2,10 +2,12 @@
     "documentation": [
         {
             "category": "Installation",
+            "categoryIcon": "download",
             "pages": [
                 "documentation/start",
                 {
                     "category": "Customization",
+                    "categoryIcon": "sliders-h",
                     "pages": [
                         "documentation/sass",
                         "documentation/css-variables"
@@ -16,12 +18,14 @@
         },
         {
             "category": "Layout",
+            "categoryIcon": "th-large",
             "pages": [
                 "documentation/layout"
             ]
         },
         {
             "category": "UI components",
+            "categoryIcon": "puzzle-piece",
             "pages": [
                 "documentation/breadcrumb",
                 "documentation/button",
