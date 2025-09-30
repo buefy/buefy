@@ -2,7 +2,7 @@ import menu from './menu.json'
 
 export interface PageTree {
     category: string
-    categoryIcon: string
+    categoryIcon?: string
     pages: (PageTree | string)[]
 }
 
