@@ -4,7 +4,8 @@
             <sidebar-search />
             <template v-for="items in data" :key="items.category">
                 <p class="sidebar-label">
-                    <b-icon v-if="items.categoryIcon"
+                    <b-icon
+                        v-if="items.categoryIcon"
                         pack="fa"
                         :icon="items.categoryIcon"
                     />
