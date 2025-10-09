@@ -3,13 +3,13 @@
         <div
             v-if="isActive"
             class="dialog modal is-active"
-            :class="dialogClass"
+            :class="[dialogClass, customClass]"
             v-trap-focus="trapFocus"
             :role="ariaRole"
             :aria-modal="ariaModal"
         >
             <div class="modal-background" @click="cancel('outside')" />
-            <div class="modal-card animation-content">
+            <div class="modal-card animation-content" :class="customContentClass">
                 <header class="modal-card-head" v-if="title">
                     <p class="modal-card-title">
                         {{ title }}
@@ -115,6 +115,14 @@ const Dialog = defineComponent({
     },
     extends: Modal,
     props: {
+        customClass: {
+            type: String,
+            default: ''
+        },
+        customContentClass: {
+            type: String,
+            default: ''
+        },
         title: String,
         message: [String, Array],
         icon: String,
