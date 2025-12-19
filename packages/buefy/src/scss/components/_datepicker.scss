@@ -156,7 +156,7 @@ $datepicker-item-selected-background-color: cv.getVar("primary") !default;
                         border-top-right-radius: 0;
                     }
                     &.is-within-selected {
-                        background-color: cv.getRgbaVar("datepicker-item-selected-background-color", 0.5);
+                        background-color: rgb(from $datepicker-item-selected-background-color r g b / 0.5);
                         border-radius: 0;
                     }
                     &.is-last-selected {
