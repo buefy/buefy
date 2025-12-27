@@ -180,6 +180,32 @@
                 />
             </div>
         </div>
+        <div class="section columns">
+            <div class="column card">
+                <div class="card-image">
+                    VueJS Image Here!
+                </div>
+                <div>
+                    Describe what this is!
+                </div>
+            </div>
+            <div class="column card">
+                <div class="card-image">
+                    NuxtJs Image Here!
+                </div>
+                <div>
+                    Describe what this is!
+                </div>
+            </div>
+            <div class="column card">
+                <div class="card-image">
+                    AstroJs Image Here!
+                </div>
+                <div>
+                    Describe what this is!
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
