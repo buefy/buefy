@@ -1,6 +1,7 @@
 @use "bulma/sass/utilities/css-variables" as cv;
 @use "bulma/sass/utilities/initial-variables" as iv;
 @use "bulma/sass/utilities/mixins" as mixins;
+@use "../utils/_functions" as fn;
 
 $table-sticky-header-height: 300px !default;
 
@@ -188,7 +189,7 @@ $table-sticky-header-height: 300px !default;
             &.is-selected {
                 .checkbox input {
                     &:checked + .check {
-                        background: cv.getVar('table-row-active-color') url(checkmark(cv.getVar('table-row-active-background-color'))) no-repeat center center;
+                        background: cv.getVar('table-row-active-color') url(fn.checkmark(cv.getVar('table-row-active-background-color'))) no-repeat center center;
                     }
                     + .check {
                         border-color: cv.getVar('table-row-active-color');
