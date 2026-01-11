@@ -70,13 +70,13 @@ $input-border-l-delta: 0% !default;
   display: inline-flex;
   align-items: center;
   position: relative;
-  margin-right: 0.5em;
+  margin-inline-end: 0.5em;
   & + .switch:last-child {
-    margin-right: 0;
+    margin-inline-end: 0;
   }
   input[type=checkbox] {
     position: absolute;
-    left: 0;
+    inset-inline-start: 0;
     opacity: 0;
     outline: none;
     z-index: -1;
@@ -133,13 +133,13 @@ $input-border-l-delta: 0% !default;
   &.has-left-label {
     flex-direction: row-reverse;
     .control-label {
-      padding-right: cv.getVar('control-padding-horizontal');
+      padding-inline-end: cv.getVar('control-padding-horizontal');
     }
   }
   
   &:not(.has-left-label) {
     .control-label {
-      padding-left: cv.getVar('control-padding-horizontal');
+      padding-inline-start: cv.getVar('control-padding-horizontal');
     }
   }
   
@@ -208,3 +208,26 @@ $input-border-l-delta: 0% !default;
     color: cv.getVar('input-disabled-color');
   }
 }
+
+// RTL support for switch toggle animation
+// In RTL, the transform direction and origin need to be flipped
+[dir="rtl"] .#{iv.$class-prefix}switch {
+  input[type=checkbox] {
+    + .check {
+      &:before {
+        transform-origin: right;
+      }
+    }
+    &:checked + .check {
+      &:before {
+        // In RTL, move left (negative direction) by the same amount
+        transform: translate3d(-100%, 0, 0);
+      }
+      &.is-elastic:before {
+        // Might be a little offset if base font is not 16px
+        transform: translate3d(-50%, 0, 0) scaleX(1.5);
+      }
+    }
+  }
+}
+

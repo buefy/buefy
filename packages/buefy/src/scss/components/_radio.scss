@@ -42,18 +42,18 @@ $radio-shadow: cv.getVar('shadow') !default;
         display: inline-flex;
         align-items: center;
         &:not(.button) {
-            margin-right: 0.5em;
+            margin-inline-end: 0.5em;
             & + .radio:last-child {
-                margin-right: 0;
+                margin-inline-end: 0;
             }
         }
         // reset Bulma
         & + .radio {
-            margin-left: 0;
+            margin-inline-start: 0;
         }
         input[type=radio] {
             position: absolute;
-            left: 0;
+            inset-inline-start: 0;
             opacity: 0;
             outline: none;
             z-index: -1;
@@ -71,10 +71,10 @@ $radio-shadow: cv.getVar('shadow') !default;
                     content: "";
                     display: flex;
                     position: absolute;
-                    left: 50%;
-                    margin-left: calc(#{cv.getVar('radio-size')} * -0.5);
-                    bottom: 50%;
-                    margin-bottom: calc(#{ cv.getVar('radio-size')} * -0.5);
+                    inset-inline-start: 50%;
+                    margin-inline-start: calc(#{cv.getVar('radio-size')} * -0.5);
+                    inset-block-end: 50%;
+                    margin-block-end: calc(#{ cv.getVar('radio-size')} * -0.5);
                     width:  cv.getVar('radio-size');
                     height:  cv.getVar('radio-size');
                     transition: transform  cv.getVar('speed-slow')  cv.getVar('easing');
@@ -102,7 +102,7 @@ $radio-shadow: cv.getVar('shadow') !default;
             }
         }
         .control-label {
-            padding-left:  cv.getVar('control-padding-horizontal');
+            padding-inline-start:  cv.getVar('control-padding-horizontal');
         }
         &.button {
             display: flex;
