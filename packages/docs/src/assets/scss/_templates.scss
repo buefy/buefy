@@ -37,7 +37,7 @@
     }
     @include mixins.fullhd {
         .docs-main-container {
-            margin-right: -3rem;
+            margin-inline-end: -3rem;
         }
     }
 }
