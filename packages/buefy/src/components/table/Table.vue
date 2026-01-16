@@ -991,7 +991,7 @@ export default defineComponent({
                     if (this.sortMultiple &&
                         this.sortMultipleDataLocal && this.sortMultipleDataLocal.length > 0) {
                         this.doSortMultiColumn()
-                    } else if (Object.keys(this.currentSortColumn).length > 0) {
+                    } else if (this.currentSortColumn[0]) {
                         this.doSortSingleColumn(this.currentSortColumn)
                     }
                 }
