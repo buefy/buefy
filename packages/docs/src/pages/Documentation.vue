@@ -7,6 +7,11 @@
             Buefy has two core principles: 1. keep stuff simple and 2. be lightweight.
         </p>
 
+        <blockquote>
+            You can explore the full documentation for Buefy v0.9.x (Vue 2)
+            <a href="https://buefy.org/documentation" target="_blank">here</a>.
+        </blockquote>
+
         <p>
             We like to think that Buefy is the javascript layer for your Bulma interface, since it doesn't require for it to be
             a sophisticated Single-Page Application.

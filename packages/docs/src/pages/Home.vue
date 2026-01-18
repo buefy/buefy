@@ -1,7 +1,7 @@
 <template>
     <section class="home">
-        <TheNavbar 
-            :light="isLightTheme" 
+        <TheNavbar
+            :light="isLightTheme"
             @theme-changed="handleThemeChange"
         />
         <div class="hero is-fullheight is-primary">
@@ -51,6 +51,7 @@
                         <p>
                             The Vue 2 version of Buefy is deprecated but will remain available as Version "0.x".
                         </p>
+                        <a href="https://v2.buefy.org" alt="Buefy Vue2 documentation website">Buefy Vue2</a>
                     </div>
 
 
@@ -295,18 +296,18 @@ export default defineComponent({
     mounted() {
         // Apply initial theme
         this.handleThemeChange(this.isLightTheme)
-        
+
         this.$nextTick(() => {
             const homeHeroElements = document.querySelectorAll('.home-hero');
             const featuresElements = document.querySelectorAll('.features');
-            
+
             // Add reveal classes with delay
             homeHeroElements.forEach((el, index) => {
                 setTimeout(() => {
                     el.classList.add('reveal-animation');
                 }, index * 100);
             });
-            
+
             featuresElements.forEach((el, index) => {
                 setTimeout(() => {
                     el.classList.add('reveal-animation');

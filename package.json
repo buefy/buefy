@@ -1,7 +1,7 @@
 {
   "name": "root",
   "private": true,
-  "version": "3.0.3",
+  "version": "3.0.4",
   "homepage": "https://buefy.org",
   "description": "Lightweight UI components for Vue.js (v3) based on Bulma",
   "license": "MIT",
@@ -23,7 +23,7 @@
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-vue": "^9.32.0",
     "lint-staged": "^15.4.3",
-    "pre-commit": "1.2.2",
+    "pre-commit": "^1.0.10",
     "rollup": "^4.34.8",
     "sass": "^1.85.0",
     "vue": "3.4.13",

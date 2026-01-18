@@ -69,15 +69,15 @@ $checkbox-colors: shared.$form-colors !default;
     align-items: center;
     
     &:not(.button) {
-      margin-right: 0.5em;
+      margin-inline-end: 0.5em;
       & + .checkbox:last-child {
-        margin-right: 0;
+        margin-inline-end: 0;
       }
     }
 
     input[type=checkbox] {
       position: absolute;
-      left: 0;
+      inset-inline-start: 0;
       opacity: 0;
       outline: none;
       z-index: -1;
@@ -116,7 +116,7 @@ $checkbox-colors: shared.$form-colors !default;
       }
     }
     .control-label {
-      padding-left: cv.getVar('control-padding-horizontal');
+      padding-inline-start: cv.getVar('control-padding-horizontal');
     }
     &.button {
       display: flex;

@@ -18,7 +18,7 @@ $floating-in-height: 3.25em !default;
         .field {
             flex-shrink: 0;
             &:not(:last-child) {
-                margin-right: 0.75rem;
+                margin-inline-end: 0.75rem;
             }
             &.is-expanded {
                 flex-grow: 1;
@@ -32,16 +32,16 @@ $floating-in-height: 3.25em !default;
             .button,
             .input,
             .select select {
-                border-bottom-left-radius: cv.getVar('input-radius');
-                border-top-left-radius: cv.getVar('input-radius');
+                border-start-start-radius: cv.getVar('input-radius');
+                border-end-start-radius: cv.getVar('input-radius');
             }
         }
         &:last-child .control {
             .button,
             .input,
             .select select {
-                border-bottom-right-radius: cv.getVar('input-radius');
-                border-top-right-radius: cv.getVar('input-radius');
+                border-start-end-radius: cv.getVar('input-radius');
+                border-end-end-radius: cv.getVar('input-radius');
             }
         }
         .control {
@@ -60,8 +60,8 @@ $floating-in-height: 3.25em !default;
                     .button,
                     .input,
                     .select select {
-                        border-bottom-left-radius: 0;
-                        border-top-left-radius: 0;
+                        border-start-start-radius: 0;
+                        border-end-start-radius: 0;
                     }
                 }
             }
@@ -70,15 +70,15 @@ $floating-in-height: 3.25em !default;
                     .button,
                     .input,
                     .select select {
-                        border-bottom-right-radius: 0;
-                        border-top-right-radius: 0;
+                        border-start-end-radius: 0;
+                        border-end-end-radius: 0;
                     }
                 }
             }
         }
         &.b-numberinput {
             .control {
-                margin-right: unset;
+                margin-inline-end: unset;
             }
         }
     }
@@ -91,7 +91,7 @@ $floating-in-height: 3.25em !default;
 
         .label {
             position: absolute;
-            left: 1em;
+            inset-inline-start: 1em;
             font-size: calc(#{cv.getVar('size-normal')} * 0.75);
             background-color: transparent;
             z-index: 5;
@@ -112,7 +112,7 @@ $floating-in-height: 3.25em !default;
         }
         .taginput .counter {
             float: none;
-            text-align: right;
+            text-align: end;
         }
 
         &.has-addons {
@@ -121,8 +121,8 @@ $floating-in-height: 3.25em !default;
                     .button,
                     .input,
                     .select select {
-                        border-bottom-left-radius: cv.getVar('input-radius');
-                        border-top-left-radius: cv.getVar('input-radius');
+                        border-start-start-radius: cv.getVar('input-radius');
+                        border-end-start-radius: cv.getVar('input-radius');
                     }
                 }
             }
@@ -132,15 +132,15 @@ $floating-in-height: 3.25em !default;
     &.is-floating-label {
         .label {
             top: -0.775em;
-            padding-left: 0.125em;
-            padding-right: 0.125em;
+            padding-inline-start: 0.125em;
+            padding-inline-end: 0.125em;
             &:before {
                 content: '';
                 display: block;
                 position: absolute;
                 top: 0.775em;
-                left: 0;
-                right: 0;
+                inset-inline-start: 0;
+                inset-inline-end: 0;
                 height: 0.375em;
                 background-color: cv.getVar('input-background-color');
                 z-index: -1;
@@ -237,41 +237,41 @@ $floating-in-height: 3.25em !default;
     &.is-floating-label, &.is-floating-in-label {
         &.has-numberinput {
             .label {
-                margin-left: calc(#{cv.getVar('size-normal')} * 3);
+                margin-inline-start: calc(#{cv.getVar('size-normal')} * 3);
             }
             &.has-numberinput-is-small {
                 .label {
-                    margin-left: calc(#{cv.getVar('size-small')} * 3);
+                    margin-inline-start: calc(#{cv.getVar('size-small')} * 3);
                 }
             }
             &.has-numberinput-is-medium {
                 .label {
-                    margin-left: calc(#{cv.getVar('size-medium')} * 3);
+                    margin-inline-start: calc(#{cv.getVar('size-medium')} * 3);
                 }
             }
             &.has-numberinput-is-large {
                 .label {
-                    margin-left: calc(#{cv.getVar('size-large')} * 3);
+                    margin-inline-start: calc(#{cv.getVar('size-large')} * 3);
                 }
             }
         }
         &.has-numberinput-compact {
             .label {
-                margin-left: calc(#{cv.getVar('size-normal')} * 2.25);
+                margin-inline-start: calc(#{cv.getVar('size-normal')} * 2.25);
             }
             &.has-numberinput-is-small {
                 .label {
-                    margin-left: calc(#{cv.getVar('size-small')} * 2.25);
+                    margin-inline-start: calc(#{cv.getVar('size-small')} * 2.25);
                 }
             }
             &.has-numberinput-is-medium {
                 .label {
-                    margin-left: calc(#{cv.getVar('size-medium')} * 2.25);
+                    margin-inline-start: calc(#{cv.getVar('size-medium')} * 2.25);
                 }
             }
             &.has-numberinput-is-large {
                 .label {
-                    margin-left: calc(#{cv.getVar('size-large')} * 2.25);
+                    margin-inline-start: calc(#{cv.getVar('size-large')} * 2.25);
                 }
             }
         }
@@ -280,13 +280,13 @@ $floating-in-height: 3.25em !default;
         &.is-floating-in-label {
             .label {
                 position: relative;
-                left: calc(3.25em + 2em);
+                inset-inline-start: calc(3.25em + 2em);
             }
         }
         &.is-floating-label {
             .label {
                 position: relative;
-                left: calc(3.25em + 2em);
+                inset-inline-start: calc(3.25em + 2em);
             }
         }
     }
@@ -294,8 +294,8 @@ $floating-in-height: 3.25em !default;
 
 .#{iv.$class-prefix}control {
     .help.counter {
-        float: right;
-        margin-left: 0.5em;
+        float: inline-end;
+        margin-inline-start: 0.5em;
     }
     .icon {
         &.is-clickable {
@@ -306,6 +306,6 @@ $floating-in-height: 3.25em !default;
     // fix Bulma 0.8.2
     &.is-loading::after {
         top: calc(50% - (1em * 0.5));
-        right: calc((2.5em * 0.5) - .5em);
+        inset-inline-end: calc((2.5em * 0.5) - .5em);
     }
 }
