@@ -1,5 +1,30 @@
 # Buefy Changelog
 
+
+## [3.0.4](https://github.com/buefy/buefy/pull/XXXX)
+
+## [3.0.4](https://github.com/buefy/buefy/pull/XXXX)
+
+### Fixes
+
+* [#4277](https://github.com/buefy/buefy/pull/4277) Fixed dropdown style for link-based items.
+* [#4280](https://github.com/buefy/buefy/pull/4280) Fixed missing background color in Datepicker.
+* [#4283](https://github.com/buefy/buefy/pull/4283) Added missing reference to Table component.
+
+### Enhancements
+
+* [#4261](https://github.com/buefy/buefy/pull/4261) Updated and expanded documentation as part of the revamp.
+* [#4287](https://github.com/buefy/buefy/pull/4287) Enhanced RTL support for Checkbox, Radio, Switch, and Form Field components.
+* [#4267](https://github.com/buefy/buefy/pull/4267) Added support for custom class props across components.
+
+### Chores & Dependency Updates
+
+* [#4268](https://github.com/buefy/buefy/pull/4268) Bumped Vite from 6.3.6 to 6.4.1.
+* [#4273](https://github.com/buefy/buefy/pull/4273) Bumped js-yaml from 4.1.0 to 4.1.1.
+* [#4279](https://github.com/buefy/buefy/pull/4279) Upgraded various project dependencies.
+* [#4281](https://github.com/buefy/buefy/pull/4281) Bumped shelljs and pre-commit versions.
+
+
 ## [3.0.3](https://github.com/buefy/buefy/pull/4256)
 
 
