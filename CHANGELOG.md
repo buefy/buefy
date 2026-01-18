@@ -1,9 +1,7 @@
 # Buefy Changelog
 
 
-## [3.0.4](https://github.com/buefy/buefy/pull/XXXX)
-
-## [3.0.4](https://github.com/buefy/buefy/pull/XXXX)
+## [3.0.4](https://github.com/buefy/buefy/pull/4290)
 
 ### Fixes
 
