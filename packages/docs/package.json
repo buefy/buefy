@@ -44,7 +44,7 @@
     "clipboard": "^2.0.11",
     "copyfiles": "^2.4.1",
     "highlight.js": "^11.9.0",
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "npm-run-all2": "^7.0.2",
     "scrollreveal": "3.3.6",
     "sortablejs": "1.15.6",
