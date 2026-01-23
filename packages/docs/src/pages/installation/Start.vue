@@ -129,9 +129,9 @@
                         <li>
                             Style:
                             <a
-                                href="https://unpkg.com/buefy/dist/buefy.min.css"
+                                href="https://unpkg.com/buefy/dist/css/buefy.min.css"
                                 target="_blank"
-                                >https://unpkg.com/buefy/dist/buefy.min.css</a
+                                >https://unpkg.com/buefy/dist/css/buefy.min.css</a
                             >
                         </li>
                     </ul>
