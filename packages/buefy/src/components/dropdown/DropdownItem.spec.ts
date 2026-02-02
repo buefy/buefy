@@ -75,4 +75,10 @@ describe('BDropdownItem', () => {
         expect(parent.selectItem).toHaveBeenCalled()
         expect(wrapper.emitted().click).toBeTruthy()
     })
+
+    it('applies option role for listbox/option accessibility', async () => {
+        await wrapper.setProps({ ariaRole: 'option' })
+        expect(wrapper.vm.ariaRoleItem).toBe('option')
+        expect(wrapper.find('.dropdown-item').attributes('role')).toBe('option')
+    })
 })
