@@ -24,7 +24,7 @@
     "eslint-plugin-vue": "^9.32.0",
     "lint-staged": "^15.4.3",
     "pre-commit": "^1.0.10",
-    "rollup": "^4.34.8",
+    "rollup": "^4.59.0",
     "sass": "^1.85.0",
     "vue": "3.4.13",
     "vue-tsc": "^2.2.2"
