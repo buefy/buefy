@@ -69,7 +69,10 @@ class ModalProgrammatic {
                         ...propsData,
                         programmatic: true,
                         onClose: () => {
-                            vueInstance.unmount()
+                            // Delay unmount so Modal's leave transition and 150ms timeout can run.
+                            setTimeout(() => {
+                                vueInstance.unmount()
+                            }, 160)
                         },
                         // intentionally overrides propsData.onCancel
                         // to prevent propsData.onCancel from receiving a "cancel" event
