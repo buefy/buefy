@@ -1,6 +1,6 @@
 <template>
     <div
-        class="carousel-list"
+        class="carousel carousel-list"
         :class="{'has-shadow': scrollIndex > 0}"
         @mousedown.prevent="dragStart"
         @touchstart="dragStart"
