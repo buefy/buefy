@@ -112,6 +112,58 @@ Reference: https://stackoverflow.blog/2021/12/23/best-practices-for-writing-code
 - Do not reformat unrelated code.
 - Update docs/examples when behavior or API changes are user-visible.
 
+## Documentation Impact Assessment (Mandatory)
+
+For every code change, explicitly determine whether documentation updates are required.
+
+Update docs in `packages/docs` when any of the following changes are user-visible:
+
+- Component API changes (props, events, slots, methods, defaults, accepted values).
+- Behavioral changes in examples, emitted events, validation, formatting, or state handling.
+- Styling/theming changes that affect CSS variables, Sass variables, or appearance contracts.
+- New/deprecated/removed features, options, components, directives, or extension integrations.
+- Installation/configuration changes (constructor options, Sass/CSS variable setup, usage workflow).
+
+If no docs update is needed, state why in the final report.
+
+## Docs App Structure and Patterns (`packages/docs`)
+
+The docs site is a Vue 3 + Vite app that mirrors component behavior through examples and API tables.
+
+### Key Folders
+
+- `src/pages/components/<component>/` — Component docs page module.
+- `src/pages/components/<component>/examples/` — Runnable example snippets shown in docs.
+- `src/pages/components/<component>/api/<component>.ts` — API table data for props/events/slots/methods.
+- `src/pages/components/<component>/variables/<component>.ts` — Variables table data.
+- `src/pages/installation/` — Install and setup docs (start, Sass, CSS variables, constructor options).
+- `src/pages/extensions/<extension>/` — Extension integration docs and examples.
+- `src/data/routes.json` — Page metadata (title, subtitle, breadcrumbs, githubPath, flags).
+- `src/data/menu.json` — Sidebar structure and category/page grouping.
+- `src/router/index.ts` — Route registration and lazy-loaded page components.
+
+### Component Docs Page Pattern
+
+Typical component docs entry includes:
+
+1. Main page file: `src/pages/components/<component>/<Component>.vue`
+2. Imported example components from `examples/`
+3. Raw code imports via `?raw` for display
+4. `ApiView` fed by `api/<component>.ts`
+5. `VariablesView` fed by `variables/<component>.ts` when applicable
+
+When component behavior/API changes, keep examples and API/variables data synchronized.
+
+### Navigation and Metadata Pattern
+
+When adding/removing/renaming docs pages, update all routing and navigation sources together:
+
+1. Route definition in `src/router/index.ts`
+2. Route metadata in `src/data/routes.json`
+3. Sidebar placement in `src/data/menu.json`
+
+Use `githubPath` in route metadata for editable page links, keep `breadcrumb` arrays consistent, and set `isNew` / `isUpdated` flags only when intentionally highlighting changes.
+
 ## Commit Message Standards
 
 Follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) format:

@@ -19,6 +19,13 @@ Implement high-quality changes in this repository with minimal risk, strong test
 
 ## Required Quality Gates
 
+### Documentation Impact Rule (Strict)
+
+- For every change, determine whether `packages/docs` must be updated.
+- Documentation updates are required for user-visible API, behavior, styling/theming, installation/configuration, or feature-surface changes.
+- If docs are not updated, explicitly justify why in the final report.
+- If docs are updated, validate that examples and API/variables tables stay aligned with implementation.
+
 ### Component Change Rule (Strict)
 
 - Every component change must be accompanied by test updates.
@@ -63,6 +70,29 @@ Run commands from the appropriate package root(s):
 - `packages/docs`: relevant lint/type-check/tests if docs code changed
 
 Prefer repository scripts over custom ad hoc commands.
+
+## Docs Update Playbook (`packages/docs`)
+
+When docs changes are required, use these repository patterns:
+
+- `src/pages/components/<component>/<Component>.vue`: Main component docs page.
+- `src/pages/components/<component>/examples/`: Interactive examples used in docs.
+- `src/pages/components/<component>/api/<component>.ts`: API table definitions.
+- `src/pages/components/<component>/variables/<component>.ts`: Variables table definitions.
+- `src/pages/installation/`: Installation and configuration guides.
+- `src/pages/extensions/<extension>/`: Extension-specific docs.
+
+For new/renamed/removed docs pages, keep routing and navigation in sync:
+
+1. `src/router/index.ts`
+2. `src/data/routes.json`
+3. `src/data/menu.json`
+
+Metadata conventions:
+
+- Keep `githubPath` aligned to the docs source file for "Improve this page" links.
+- Keep `breadcrumb` chains valid.
+- Use `isNew` and `isUpdated` flags intentionally.
 
 ## Vue 3 Implementation Rules
 
