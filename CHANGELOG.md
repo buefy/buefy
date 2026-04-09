@@ -4,26 +4,24 @@
 
 ### Fixes
 
-- [#4317](https://github.com/buefy/buefy/pull/4317) Fixed desktop scrolling behavior when using mobile-sized viewports.
-- [#4314](https://github.com/buefy/buefy/pull/4314) Generated checkbox checkmark SVG with concrete colors for consistent rendering.
-- [#4308](https://github.com/buefy/buefy/pull/4308) Updated carousel list component to include the `carousel` class.
+- [#4315](https://github.com/buefy/buefy/pull/4315) Fixed desktop scrolling issues on mobile-sized viewports.
+- [#4314](https://github.com/buefy/buefy/pull/4314) Checkbox SVG now uses concrete colors for consistent rendering.
+- [#4313](https://github.com/buefy/buefy/pull/4313) Ensure Carousel list includes the `.carousel` class.
 
 ### Enhancements
 
-- [#4319](https://github.com/buefy/buefy/pull/4319) Modernized docs sidebar navigation and added pager and icon improvements.
-- [#4294](https://github.com/buefy/buefy/pull/4294) Updated CDN URLs and usage examples.
+- [#4308](https://github.com/buefy/buefy/pull/4308) Modernize docs sidebar, pager, and icons.
+- [#4317](https://github.com/buefy/buefy/pull/4317) Update CDN links and usage examples in the documentation.
 
 ### Chores & Dependency Updates
 
-- [#4316](https://github.com/buefy/buefy/pull/4316) Added documentation impact assessment rules to contribution instructions.
-- [#4315](https://github.com/buefy/buefy/pull/4315) Fixed npm audit vulnerabilities.
-- [#4311](https://github.com/buefy/buefy/pull/4311) Bumped `lodash` from 4.17.23 to 4.18.1.
-- [#4309](https://github.com/buefy/buefy/pull/4309) Bumped `flatted` from 3.3.3 to 3.4.2.
-- [#4310](https://github.com/buefy/buefy/pull/4310) Bumped `picomatch`.
-- [#4303](https://github.com/buefy/buefy/pull/4303) Bumped `rollup` from 4.41.1 to 4.59.0.
-- [#4305](https://github.com/buefy/buefy/pull/4305) Bumped `immutable` from 5.1.2 to 5.1.5.
-- [#4304](https://github.com/buefy/buefy/pull/4304) Bumped `minimatch`.
-- [#4293](https://github.com/buefy/buefy/pull/4293) Bumped `lodash` from 4.17.21 to 4.17.23.
+- [#4318](https://github.com/buefy/buefy/pull/4318) Add documentation impact assessment rules to contribution guidance.
+- [#4319](https://github.com/buefy/buefy/pull/4319) Address npm audit vulnerabilities.
+- [#4316](https://github.com/buefy/buefy/pull/4316) Bump dependencies: `lodash`, `flatted`, `picomatch`, `rollup`, `immutable`, `minimatch`.
+
+### New Contributors
+
+- @EduardFoch made their first contribution in [#4313](https://github.com/buefy/buefy/pull/4313)
 
 ## [3.0.4](https://github.com/buefy/buefy/pull/4290)
 
