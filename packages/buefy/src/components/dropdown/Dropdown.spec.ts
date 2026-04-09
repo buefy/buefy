@@ -226,4 +226,17 @@ describe('BDropdown', () => {
         expect(document.removeEventListener).toBeCalledWith('click', expect.any(Function))
         expect(document.removeEventListener).toBeCalledWith('keyup', expect.any(Function))
     })
+
+    it('removes is-clipped-touch on unmount while dropdown is open (#scroll-regression)', async () => {
+        // Simulate dropdown open in mobile-modal mode so is-clipped-touch is
+        // added to the html element, then destroy the component (e.g. route
+        // navigation) without closing it first.  The class must be removed so
+        // that scrolling is not permanently locked on desktop at mobile widths.
+        await wrapper.setData({ isActive: true })
+        expect(document.documentElement.classList.contains('is-clipped-touch')).toBe(true)
+
+        wrapper.unmount()
+
+        expect(document.documentElement.classList.contains('is-clipped-touch')).toBe(false)
+    })
 })

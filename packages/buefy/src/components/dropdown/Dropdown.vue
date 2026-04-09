@@ -480,6 +480,11 @@ export default defineComponent({
         if (typeof window !== 'undefined') {
             document.removeEventListener('click', this.clickedOutside)
             document.removeEventListener('keyup', this.keyPress)
+            // Clean up scroll lock in case the component is destroyed while the
+            // dropdown is open (e.g., route navigation in a SPA). Without this,
+            // is-clipped-touch persists on the html element and permanently
+            // prevents scrolling on desktop browsers at mobile viewport widths.
+            document.documentElement.classList.remove('is-clipped-touch')
         }
         if (this.appendToBody) {
             removeElement(this.$data._bodyEl!)
