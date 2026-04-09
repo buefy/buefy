@@ -6,7 +6,8 @@
                 <p class="sidebar-label">
                     <span
                         v-if="items.categoryIcon"
-                        :class="['sidebar-category-icon', items.categoryColor ? `is-${items.categoryColor}` : '']"
+                        :class="['sidebar-category-icon',
+                                 items.categoryColor ? `is-${items.categoryColor}` : '']"
                     >
                         <b-icon :icon="items.categoryIcon" size="is-small" />
                     </span>

@@ -6,8 +6,13 @@
             "categoryColor": "primary",
             "pages": [
                 "documentation/start",
-                "documentation/sass",
-                "documentation/css-variables",
+                {
+                    "category": "Customization",
+                    "pages": [
+                        "documentation/sass",
+                        "documentation/css-variables"
+                    ]
+                },
                 "documentation/constructor-options"
             ]
         },
@@ -52,7 +57,7 @@
             ]
         },
         {
-            "category": "Data Input",
+            "category": "Form Controls",
             "categoryIcon": "keyboard",
             "categoryColor": "danger",
             "pages": [

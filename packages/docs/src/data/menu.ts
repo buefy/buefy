@@ -1,4 +1,4 @@
-import menu from "./menu.json";
+import menu from './menu.json'
 
 export interface PageTree {
     category: string;
@@ -7,4 +7,4 @@ export interface PageTree {
     pages: (PageTree | string)[];
 }
 
-export default menu as Record<string, PageTree[]>;
+export default menu as Record<string, PageTree[]>
