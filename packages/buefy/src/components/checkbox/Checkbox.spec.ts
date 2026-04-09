@@ -1,3 +1,5 @@
+import { existsSync, readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { shallowMount } from '@vue/test-utils'
 import type { VueWrapper } from '@vue/test-utils'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
@@ -20,7 +22,9 @@ describe('BCheckbox', () => {
     })
 
     it('has an input checkbox', () => {
-        expect(wrapper.find('label input[type=checkbox]').exists()).toBeTruthy()
+        expect(
+            wrapper.find('label input[type=checkbox]').exists()
+        ).toBeTruthy()
     })
 
     it('emit input event with value when value change', async () => {
@@ -35,6 +39,36 @@ describe('BCheckbox', () => {
         (wrapper.vm.$refs.input as HTMLElement).focus = vi.fn()
         wrapper.vm.focus()
         await wrapper.vm.$nextTick()
-        expect((wrapper.vm.$refs.input as HTMLElement).focus).toHaveBeenCalled()
+        expect(
+            (wrapper.vm.$refs.input as HTMLElement).focus
+        ).toHaveBeenCalled()
+    })
+
+    it('generates svg checkmark images from concrete colors in checkbox styles', () => {
+        const scssPathCandidates = [
+            join(process.cwd(), 'src/scss/components/_checkbox.scss'),
+            join(process.cwd(), 'buefy/src/scss/components/_checkbox.scss')
+        ]
+        const scssPath = scssPathCandidates.find((candidate) =>
+            existsSync(candidate)
+        )
+
+        expect(scssPath).toBeTruthy()
+        if (!scssPath) {
+            throw new Error(
+                'Unable to locate _checkbox.scss for regression assertion'
+            )
+        }
+        const source = readFileSync(scssPath, 'utf8')
+
+        // Regression: CSS variables inside data-uri SVG are not resolved by browsers.
+        expect(source).toContain('fn.checkmark($checkbox-checkmark-color)')
+        expect(source).toContain('fn.indeterminate($checkbox-checkmark-color)')
+        expect(source).not.toContain(
+            'fn.checkmark(cv.getVar("checkbox-checkmark-color"))'
+        )
+        expect(source).not.toContain(
+            'fn.indeterminate(cv.getVar("checkbox-checkmark-color"))'
+        )
     })
 })
