@@ -4,11 +4,13 @@
             <sidebar-search />
             <template v-for="items in data" :key="items.category">
                 <p class="sidebar-label">
-                    <b-icon
+                    <span
                         v-if="items.categoryIcon"
-                        pack="fa"
-                        :icon="items.categoryIcon"
-                    />
+                        :class="['sidebar-category-icon',
+                                 items.categoryColor ? `is-${items.categoryColor}` : '']"
+                    >
+                        <b-icon :icon="items.categoryIcon" size="is-small" />
+                    </span>
                     {{ items.category }}
                 </p>
                 <ul>

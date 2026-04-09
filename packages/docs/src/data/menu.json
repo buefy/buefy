@@ -1,13 +1,13 @@
 {
     "documentation": [
         {
-            "category": "Installation",
-            "categoryIcon": "download",
+            "category": "Getting Started",
+            "categoryIcon": "rocket-launch",
+            "categoryColor": "primary",
             "pages": [
                 "documentation/start",
                 {
                     "category": "Customization",
-                    "categoryIcon": "sliders-h",
                     "pages": [
                         "documentation/sass",
                         "documentation/css-variables"
@@ -18,62 +18,80 @@
         },
         {
             "category": "Layout",
-            "categoryIcon": "th-large",
+            "categoryIcon": "view-dashboard",
+            "categoryColor": "info",
             "pages": [
                 "documentation/layout"
             ]
         },
         {
-            "category": "UI components",
-            "categoryIcon": "puzzle-piece",
+            "category": "Actions",
+            "categoryIcon": "cursor-default-click",
+            "categoryColor": "warning",
             "pages": [
-                "documentation/breadcrumb",
                 "documentation/button",
-                "documentation/carousel",
-                "documentation/collapse",
                 "documentation/dialog",
                 "documentation/dropdown",
-                {
-                    "category": "Form controls",
-                    "pages": [
-                        "documentation/autocomplete",
-                        "documentation/checkbox",
-                        "documentation/clockpicker",
-                        "documentation/colorpicker",
-                        "documentation/datepicker",
-                        "documentation/datetimepicker",
-                        "documentation/field",
-                        "documentation/input",
-                        "documentation/numberinput",
-                        "documentation/radio",
-                        "documentation/rate",
-                        "documentation/select",
-                        "documentation/slider",
-                        "documentation/switch",
-                        "documentation/taginput",
-                        "documentation/timepicker",
-                        "documentation/upload"
-                    ]
-                },
+                "documentation/modal"
+            ]
+        },
+        {
+            "category": "Data Display",
+            "categoryIcon": "eye",
+            "categoryColor": "success",
+            "pages": [
+                "documentation/carousel",
+                "documentation/collapse",
                 "documentation/icon",
                 "documentation/image",
                 "documentation/loading",
-                "documentation/menu",
                 "documentation/message",
-                "documentation/modal",
-                "documentation/navbar",
                 "documentation/notification",
-                "documentation/pagination",
                 "documentation/progress",
                 "documentation/skeleton",
-                "documentation/sidebar",
                 "documentation/snackbar",
-                "documentation/steps",
                 "documentation/table",
-                "documentation/tabs",
                 "documentation/tag",
                 "documentation/toast",
                 "documentation/tooltip"
+            ]
+        },
+        {
+            "category": "Form Controls",
+            "categoryIcon": "keyboard",
+            "categoryColor": "danger",
+            "pages": [
+                "documentation/autocomplete",
+                "documentation/checkbox",
+                "documentation/clockpicker",
+                "documentation/colorpicker",
+                "documentation/datepicker",
+                "documentation/datetimepicker",
+                "documentation/field",
+                "documentation/input",
+                "documentation/numberinput",
+                "documentation/radio",
+                "documentation/rate",
+                "documentation/select",
+                "documentation/slider",
+                "documentation/switch",
+                "documentation/taginput",
+                "documentation/timepicker",
+                "documentation/upload"
+            ]
+        },
+        {
+            "category": "Navigation",
+            "categoryIcon": "compass",
+            "categoryColor": "link",
+            "pages": [
+                "documentation/breadcrumb",
+                "documentation/menu",
+                "documentation/navbar",
+                "documentation/pagination",
+                "documentation/sidebar",
+                "documentation/steps",
+                "documentation/tabs"
             ]
         }
     ],

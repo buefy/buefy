@@ -27,6 +27,49 @@
         padding-top: 1.5rem;
         border-top: 2px solid cv.getVar('scheme-main-ter');
     }
+    .docs-pager {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 4rem;
+        padding-top: 1.5rem;
+        border-top: 2px solid cv.getVar('scheme-main-ter');
+        gap: 1rem;
+        .docs-pager-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border: 1px solid cv.getVar('border');
+            border-radius: 0.5rem;
+            color: cv.getVar('text');
+            text-decoration: none;
+            max-width: 48%;
+            transition: border-color 0.15s, color 0.15s;
+            &:hover {
+                border-color: cv.getVar('link');
+                color: cv.getVar('link');
+            }
+        }
+        .docs-pager-next {
+            margin-left: auto;
+            text-align: right;
+        }
+        .docs-pager-label {
+            display: flex;
+            flex-direction: column;
+        }
+        .docs-pager-direction {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: cv.getVar('grey');
+            font-weight: cv.getVar('weight-semibold');
+        }
+        .docs-pager-title {
+            font-weight: cv.getVar('weight-semibold');
+            font-size: 0.95rem;
+        }
+    }
     @include mixins.touch {
         .docs-template-horizontal {
             flex-direction: column;

@@ -23,11 +23,49 @@
     .sidebar-menu {
         width: 100%;
         .sidebar-label {
+            display: flex;
+            align-items: center;
             margin-bottom: 0.5em;
             color: cv.getVar('grey');
             font-size: 0.9em;
             text-transform: uppercase;
             letter-spacing: 0.1em;
+        }
+        .sidebar-category-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 0.375rem;
+            margin-right: 0.5rem;
+            background: cv.getVar('border');
+            color: cv.getVar('text');
+            &.is-primary {
+                background: cv.getVar('primary');
+                color: cv.getVar('primary-invert');
+            }
+            &.is-info {
+                background: cv.getVar('info');
+                color: cv.getVar('info-invert');
+            }
+            &.is-warning {
+                background: cv.getVar('warning');
+                color: cv.getVar('warning-invert');
+            }
+            &.is-success {
+                background: cv.getVar('success');
+                color: cv.getVar('success-invert');
+            }
+            &.is-danger {
+                background: cv.getVar('danger');
+                color: cv.getVar('danger-invert');
+            }
+            &.is-link {
+                background: cv.getVar('link');
+                color: cv.getVar('link-invert');
+            }
         }
         ul {
             margin-bottom: 1.5em;

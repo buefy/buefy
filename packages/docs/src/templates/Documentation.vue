@@ -16,6 +16,8 @@
 
                         <router-view />
 
+                        <DocsPager :menu="menu" />
+
                         <template v-if="meta.githubPath">
                             <ImproveThis v-bind="meta" />
                         </template>
@@ -36,6 +38,7 @@ import TheNavbar from '@/components/TheNavbar.vue'
 import TheFooter from '@/components/TheFooter.vue'
 import TheSidebar from '@/components/TheSidebar.vue'
 import ImproveThis from '@/components/ImproveThis.vue'
+import DocsPager from '@/components/DocsPager.vue'
 import menuData from '@/data/menu'
 import type { PageTree } from '@/data/menu'
 import type { Route } from '@/data/routes'
@@ -48,7 +51,8 @@ export default defineComponent({
         TheNavbar,
         TheFooter,
         TheSidebar,
-        ImproveThis
+        ImproveThis,
+        DocsPager
     },
     data() {
         return {
