@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`BCarouselList > render correctly 1`] = `
-"<div class="carousel-list">
+"<div class="carousel carousel-list">
   <div class="carousel-slides" style="transform: translateX(0px);">
     <div class="carousel-slide is-active" style="width: 0px;">
       <b-image-stub src="https://picsum.photos/id/0/1230/500" lazy="true" responsive="true" srcsetformatter="[Function]" rounded="false" captionfirst="false" title="Slide 1" image="https://picsum.photos/id/0/1230/500"></b-image-stub>
