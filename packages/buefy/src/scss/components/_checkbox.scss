@@ -12,7 +12,10 @@ $checkbox-border-color: cv.getVar('primary') !default;
 $checkbox-background: cv.getVar("scheme-main") !default;
 $checkbox-border-radius: cv.getVar('radius') !default;
 $checkbox-border-width: 2px !default;
-$checkbox-checkmark-color: cv.getVar('primary-invert') !default;
+// white: the invert of Bulma's default primary (turquoise). Bulma 1.x
+// removed $primary-invert as a Sass variable, so a concrete color is required
+// to produce a resolvable fill in the compiled SVG mask image.
+$checkbox-checkmark-color: white !default;
 $checkbox-size: 1.25em !default;
 $checkbox-colors: shared.$form-colors !default;
 
@@ -39,16 +42,16 @@ $checkbox-colors: shared.$form-colors !default;
   &.checkbox input[type=checkbox] + .check {
 
     @each $name, $pair in $checkbox-colors {
-      $color-invert: cv.getVar($name, "", "-invert");
+      $checkmark-color: if($name == "warning", cv.getVar($name, "", "-invert"), $checkbox-checkmark-color);
 
       &.#{iv.$class-prefix}is-#{$name} {
         @include cv.register-vars(
           (
             "checkbox-active-background-color": #{cv.getVar($name)},
             "checkbox-border-color": #{cv.getVar($name)},
-            "checkbox-checkmark-color": #{$color-invert},
-            "checkbox-checkmark-image": #{url(fn.checkmark($color-invert))},
-            "checkbox-indeterminate-image":  #{url(fn.indeterminate($color-invert))} 
+            // Keep warning using Bulma's darker contrast color; the other
+            // semantic color variants use a white tick in the docs/dev examples.
+            "checkbox-checkmark-color": #{$checkmark-color},
           )
         );
       }
@@ -84,6 +87,7 @@ $checkbox-colors: shared.$form-colors !default;
       + .check {
         // @extend %input;
 
+        position: relative;
         padding: 0;
         background: cv.getVar("checkbox-background-color");
         border-style: solid;
@@ -98,12 +102,28 @@ $checkbox-colors: shared.$form-colors !default;
         transition: background cv.getVar('speed-slow') cv.getVar('easing');
       }
       &:checked + .check {
-        background: cv.getVar('checkbox-active-background-color') cv.getVar('checkbox-checkmark-image') no-repeat center center;
+        background-color: cv.getVar('checkbox-active-background-color');
         border-color: cv.getVar("checkbox-border-color");
       }
+      &:checked + .check::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-color: cv.getVar('checkbox-checkmark-color');
+        -webkit-mask: cv.getVar('checkbox-checkmark-image') no-repeat center / contain;
+        mask: cv.getVar('checkbox-checkmark-image') no-repeat center / contain;
+      }
       &:indeterminate + .check {
-        background: cv.getVar('checkbox-active-background-color') cv.getVar('checkbox-indeterminate-image') no-repeat center center;
+        background-color: cv.getVar('checkbox-active-background-color');
         border-color: cv.getVar('checkbox-border-color');
+      }
+      &:indeterminate + .check::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-color: cv.getVar('checkbox-checkmark-color');
+        -webkit-mask: cv.getVar('checkbox-indeterminate-image') no-repeat center / contain;
+        mask: cv.getVar('checkbox-indeterminate-image') no-repeat center / contain;
       }
       &:focus {
         + .check {

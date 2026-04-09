@@ -14,7 +14,8 @@
     "packages/*"
   ],
   "overrides": {
-    "cross-spawn": "^7.0.6"
+    "cross-spawn": "^7.0.6",
+    "lodash": "4.17.21"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^7.18.0",

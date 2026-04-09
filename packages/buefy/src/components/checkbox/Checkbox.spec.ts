@@ -61,7 +61,15 @@ describe('BCheckbox', () => {
         }
         const source = readFileSync(scssPath, 'utf8')
 
-        // Regression: CSS variables inside data-uri SVG are not resolved by browsers.
+        // Regression (#4251): $checkbox-checkmark-color must NOT be assigned a CSS
+        // var reference. Bulma 1.x has no $primary-invert Sass variable, and CSS
+        // vars embedded in SVG data URIs are never resolved by browsers.
+        expect(source).not.toContain(
+            "$checkbox-checkmark-color: cv.getVar('primary-invert')"
+        )
+
+        // The SVG image functions must still receive the SCSS variable so the
+        // compiled default image contains a concrete fill color.
         expect(source).toContain('fn.checkmark($checkbox-checkmark-color)')
         expect(source).toContain('fn.indeterminate($checkbox-checkmark-color)')
         expect(source).not.toContain(
@@ -69,6 +77,20 @@ describe('BCheckbox', () => {
         )
         expect(source).not.toContain(
             'fn.indeterminate(cv.getVar("checkbox-checkmark-color"))'
+        )
+
+        // Regression (#4251 follow-up): checkmark color must be applied via CSS
+        // mask + background-color so that --bulma-checkbox-checkmark-color is
+        // resolved correctly at runtime (CSS vars on background-color resolve;
+        // CSS vars embedded in SVG data URIs do not).
+        expect(source).toContain('mask:')
+        expect(source).toContain('checkbox-checkmark-color')
+
+        // The semantic variants should use a white tick by default, except for
+        // warning which keeps Bulma's darker invert color for contrast.
+        expect(source).toContain('$checkbox-checkmark-color: white !default;')
+        expect(source).toContain(
+            '$checkmark-color: if($name == "warning", cv.getVar($name, "", "-invert"), $checkbox-checkmark-color);'
         )
     })
 })
