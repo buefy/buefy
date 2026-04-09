@@ -75,4 +75,15 @@ describe('BDropdownItem', () => {
         expect(parent.selectItem).toHaveBeenCalled()
         expect(wrapper.emitted().click).toBeTruthy()
     })
+
+    it('applies option role for listbox/option accessibility', async () => {
+        await wrapper.setProps({ ariaRole: 'option', value: dropdownSelected })
+        expect(wrapper.vm.ariaRoleItem).toBe('option')
+        expect(wrapper.find('.dropdown-item').attributes('role')).toBe('option')
+        expect(wrapper.find('.dropdown-item').attributes('aria-selected')).toBe('true')
+
+        await wrapper.setProps({ value: 'other-value' })
+        expect(wrapper.find('.dropdown-item').attributes('role')).toBe('option')
+        expect(['false', undefined]).toContain(wrapper.find('.dropdown-item').attributes('aria-selected'))
+    })
 })
