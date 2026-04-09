@@ -103,7 +103,9 @@ Sass example:
 
 # Development Setup
 
-You need [Node.js](https://nodejs.org/) **version >= 16**.
+You need [Node.js](https://nodejs.org/) **version >= 20**.
+
+Node 18 is intentionally excluded because current build-tool engine and security requirements are aligned to Node 20+.
 
 After cloning the repo, run:
 
