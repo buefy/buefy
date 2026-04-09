@@ -58,6 +58,19 @@
         ],
         "isNew": true
     },
+    "documentation/buefy-css-variables": {
+        "title": "CSS Variables New!",
+        "subtitle": "Complete list of Buefy CSS variables (excluding Bulma core variables).",
+        "path": "/documentation/buefy-css-variables",
+        "githubPath": "pages/installation/BuefyCssVariables.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/buefy-css-variables"
+        ],
+        "isNew": true
+    },
     "documentation/constructor-options": {
         "title": "Constructor options",
         "subtitle": "These are global default options, which are set on Buefy initialization",

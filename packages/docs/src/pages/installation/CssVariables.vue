@@ -2,10 +2,18 @@
     <div>
         <div class="content">
             <p>
-                Buefy is built on top of <strong>Bulma CSS Framework</strong>, which uses 
-                <strong>CSS Variables</strong> (also called CSS custom properties) for theming. 
+                Buefy is built on top of <strong>Bulma CSS Framework</strong>, which uses
+                <strong>CSS Variables</strong> (also called CSS custom properties) for theming.
                 This allows you to customize your Buefy components without needing to recompile Sass.
             </p>
+            <b-message type="is-info">
+                <div class="content">
+                    <p>
+                        Need every Buefy variable in one place?
+                        <router-link to="/documentation/buefy-css-variables">Open the full Buefy CSS variables list</router-link>.
+                    </p>
+                </div>
+            </b-message>
         </div>
 
         <div class="media">
@@ -15,15 +23,15 @@
             <div class="media-content">
                 <h3 class="subtitle">Basic Color Customization</h3>
                 <p class="content">
-                    Override Bulma's CSS variables to change the primary, secondary, and semantic colors 
+                    Override Bulma's CSS variables to change the primary, secondary, and semantic colors
                     used throughout all Buefy components:
                 </p>
                 <CodeView :code="preformat(basicExample)" lang="css" expanded />
                 <b-message type="is-info">
                     <div class="content">
                         <p>
-                            <b>Tip:</b> Bulma uses HSL (Hue, Saturation, Lightness) values for colors. 
-                            You can see all available CSS variables in the 
+                            <b>Tip:</b> Bulma uses HSL (Hue, Saturation, Lightness) values for colors.
+                            You can see all available CSS variables in the
                             <a href="https://bulma.io/documentation/features/css-variables/" target="_blank" rel="noopener">
                                 Bulma CSS Variables documentation
                             </a>.
@@ -59,8 +67,8 @@
                 <b-message type="is-success">
                     <div class="content">
                         <p>
-                            <b>Component Scope:</b> CSS variables defined on specific components 
-                            (like <code>.button</code>) will override global values, giving you 
+                            <b>Component Scope:</b> CSS variables defined on specific components
+                            (like <code>.button</code>) will override global values, giving you
                             fine-grained control over individual component styling.
                         </p>
                     </div>
@@ -102,15 +110,15 @@
             <div class="media-content">
                 <h3 class="subtitle">Using with Vue.js</h3>
                 <p class="content">
-                    Import Buefy in your Vue.js application. The CSS variables will automatically apply 
+                    Import Buefy in your Vue.js application. The CSS variables will automatically apply
                     to all Buefy components:
                 </p>
                 <CodeView :code="preformat(vueUsage)" lang="javascript" expanded />
                 <b-message type="is-warning">
                     <div class="content">
                         <p>
-                            <b>Note:</b> When using CSS variables for customization, you don't need to 
-                            recompile Sass. Simply include your custom CSS variables in your stylesheet 
+                            <b>Note:</b> When using CSS variables for customization, you don't need to
+                            recompile Sass. Simply include your custom CSS variables in your stylesheet
                             and they will override Bulma's defaults.
                         </p>
                     </div>
@@ -127,10 +135,10 @@
                 <li><strong>Easier maintenance:</strong> Centralized theme configuration</li>
                 <li><strong>Browser support:</strong> Supported in all modern browsers</li>
             </ul>
-            
+
             <h4 class="title is-4">Learn More</h4>
             <p>
-                For a complete list of available CSS variables and advanced theming options, 
+                For a complete list of available CSS variables and advanced theming options,
                 visit the <a href="https://bulma.io/documentation/features/css-variables/" target="_blank" rel="noopener">
                 Bulma CSS Variables documentation</a>.
             </p>
@@ -146,13 +154,13 @@ import { BMessage } from "buefy";
 import CodeView from "@/components/CodeView.vue";
 import { preformat } from "@/utils";
 
-import { 
-    basicExample, 
-    advancedExample, 
-    componentExample, 
-    darkModeExample, 
-    jsToggle, 
-    vueUsage 
+import {
+    basicExample,
+    advancedExample,
+    componentExample,
+    darkModeExample,
+    jsToggle,
+    vueUsage
 } from "./usage/css-variables";
 
 export default defineComponent({

@@ -10,7 +10,8 @@
                     "category": "Customization",
                     "pages": [
                         "documentation/sass",
-                        "documentation/css-variables"
+                        "documentation/css-variables",
+                        "documentation/buefy-css-variables"
                     ]
                 },
                 "documentation/constructor-options"
