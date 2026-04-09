@@ -178,20 +178,9 @@ export default defineComponent({
             }
         }
     },
-    watch: {
-        isMenuActive() {
-            this.toggleHtmlClip()
-        }
-    },
     methods: {
         closeMenu() {
             this.isMenuActive = false
-        },
-        toggleHtmlClip() {
-            document.documentElement.classList.toggle(
-                'is-clipped-touch',
-                this.isMenuActive
-            )
         }
     },
     mounted() {
@@ -200,6 +189,9 @@ export default defineComponent({
 
     beforeUnmount() {
         this.$eventHub.off('navigate', this.closeMenu)
+        // Clean up any scroll-lock class that may have been left by a previous
+        // version of this component or by a BDropdown mobile-modal interaction.
+        document.documentElement.classList.remove('is-clipped-touch')
     }
 })
 </script>
