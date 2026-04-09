@@ -122,17 +122,15 @@
                         <b-button
                             class="theme-toggle-button"
                             type="is-ghost"
-                            size="is-small"
                             :title="`Switch to ${light ? 'dark' : 'light'} theme`"
                             :aria-label="`Switch to ${light ? 'dark' : 'light'} theme`"
                             @click="toggleTheme"
                         >
                             <b-icon
                                 :icon="themeIcon"
-                                size="is-small"
+                                size="is-medium"
                                 :class="light ? 'is-warning' : 'is-primary'"
                             />
-                            <span class="theme-toggle-label">Theme</span>
                         </b-button>
                     </div>
                 </div>
@@ -202,14 +200,18 @@ export default defineComponent({
 <style scoped>
 .theme-toggle-button {
     align-items: center;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    border-radius: 999px;
-    display: inline-flex;
-    gap: 0.4rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem;
+    transition: background-color 0.3s ease;
 }
 
-.theme-toggle-label {
-    font-size: 0.8rem;
-    font-weight: 600;
+.theme-toggle-button:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.navbar.is-primary .theme-toggle-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 </style>

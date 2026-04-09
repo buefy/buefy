@@ -86,6 +86,7 @@
             a {
                 display: flex;
                 color: cv.getVar('text');
+                transition: color 0.2s ease;
                 &.is-active {
                     color: cv.getVar('primary');
                     font-weight: cv.getVar('weight-semibold');
@@ -95,10 +96,14 @@
                 }
                 &:hover:not(.is-active) {
                     color: cv.getVar('link');
+                    .sidebar-menu-text {
+                        text-decoration: underline;
+                    }
                 }
             }
             .sidebar-menu-text {
                 flex: 1;
+                transition: text-decoration 0.2s ease;
             }
         }
     }
