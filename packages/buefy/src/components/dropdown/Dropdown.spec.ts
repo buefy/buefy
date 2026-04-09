@@ -228,13 +228,13 @@ describe('BDropdown', () => {
     })
 
     it('removes is-clipped-touch on unmount while dropdown is open', async () => {
-        // Simulate dropdown open in mobile-modal mode so is-clipped-touch is
-        // added to the html element, then destroy the component (e.g. route
-        // navigation) without closing it first.  The class must be removed so
-        // that scrolling is not permanently locked on desktop at mobile widths.
+        // Simulate dropdown open in mobile-modal mode (mobileModal defaults to
+        // true) so the isActive watcher calls handleScroll(), which adds
+        // is-clipped-touch to the html element.  Then destroy the component
+        // (e.g. route navigation) without closing it first.  The class must be
+        // removed so that scrolling is not permanently locked.
         await wrapper.setData({ isActive: true })
-        // Confirm the component's handleScroll watcher added the class (precondition).
-        wrapper.vm.handleScroll()
+        // The isActive watcher triggers handleScroll() which adds the class.
         expect(document.documentElement.classList.contains('is-clipped-touch')).toBe(true)
 
         wrapper.unmount()
