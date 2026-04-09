@@ -5,6 +5,7 @@
             "categoryIcon": "download",
             "pages": [
                 "documentation/start",
+                "documentation/stackblitz-starters",
                 {
                     "category": "Customization",
                     "categoryIcon": "sliders-h",

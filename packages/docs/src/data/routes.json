@@ -33,6 +33,19 @@
             "documentation/start"
         ]
     },
+    "documentation/stackblitz-starters": {
+        "title": "StackBlitz Starters",
+        "subtitle": "Launch a ready-to-run Buefy starter for Vue, Nuxt, or Astro.",
+        "path": "/documentation/stackblitz-starters",
+        "githubPath": "pages/installation/StackBlitzStarters.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/stackblitz-starters"
+        ],
+        "isNew": true
+    },
     "documentation/sass": {
         "title": "With Sass",
         "subtitle": "If you're familiar with <a href='http://sass-lang.com' target='_blank'>Sass</a> and want to <strong>customize</strong> Buefy with your own theme, follow these steps",
