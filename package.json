@@ -13,6 +13,9 @@
   "workspaces": [
     "packages/*"
   ],
+  "overrides": {
+    "cross-spawn": "^7.0.6"
+  },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
@@ -23,7 +26,7 @@
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-vue": "^9.32.0",
     "lint-staged": "^15.4.3",
-    "pre-commit": "^1.0.10",
+    "pre-commit": "^1.2.2",
     "rollup": "^4.59.0",
     "sass": "^1.85.0",
     "vue": "3.4.13",
