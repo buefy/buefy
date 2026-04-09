@@ -119,24 +119,21 @@
                     </div>
 
                     <div class="navbar-item">
-                        <b-icon
-                            icon="white-balance-sunny"
+                        <b-button
+                            class="theme-toggle-button"
+                            type="is-ghost"
                             size="is-small"
-                            :class="{'is-warning': theme === 'light' }"
-                        />
-                        <b-switch
-                            v-model="theme"
-                            type="is-warning"
-                            true-value="dark"
-                            false-value="light"
-                            size="is-small"
-                            label="Theme"
-                        />
-                        <b-icon
-                            icon="moon-waning-crescent"
-                            size="is-small"
-                            :class="{'is-primary': theme === 'dark' }"
-                        />
+                            :title="`Switch to ${light ? 'dark' : 'light'} theme`"
+                            :aria-label="`Switch to ${light ? 'dark' : 'light'} theme`"
+                            @click="toggleTheme"
+                        >
+                            <b-icon
+                                :icon="themeIcon"
+                                size="is-small"
+                                :class="light ? 'is-warning' : 'is-primary'"
+                            />
+                            <span class="theme-toggle-label">Theme</span>
+                        </b-button>
                     </div>
                 </div>
             </div>
@@ -147,13 +144,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import { BIcon } from 'buefy'
+import { BButton, BIcon } from 'buefy'
 
 import buefyPackage from '../../../../package.json'
 import bulmaPackage from 'bulma/package.json'
 
 export default defineComponent({
-    components: { BIcon },
+    components: { BButton, BIcon },
     emits: ['theme-changed'],
     props: {
         light: {
@@ -169,13 +166,8 @@ export default defineComponent({
         }
     },
     computed: {
-        theme: {
-            get() {
-                return this.light ? 'light' : 'dark'
-            },
-            set(newTheme: string) {
-                this.$emit('theme-changed', newTheme === 'light')
-            }
+        themeIcon() {
+            return this.light ? 'moon-waning-crescent' : 'white-balance-sunny'
         }
     },
     watch: {
@@ -184,6 +176,9 @@ export default defineComponent({
         }
     },
     methods: {
+        toggleTheme() {
+            this.$emit('theme-changed', !this.light)
+        },
         closeMenu() {
             this.isMenuActive = false
         },
@@ -203,3 +198,18 @@ export default defineComponent({
     }
 })
 </script>
+
+<style scoped>
+.theme-toggle-button {
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 999px;
+    display: inline-flex;
+    gap: 0.4rem;
+}
+
+.theme-toggle-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+</style>
