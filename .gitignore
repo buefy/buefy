@@ -13,3 +13,4 @@ cypress/screenshots/
 .vscode/
 yarn.lock
 *.tsbuildinfo
+.ideas

@@ -31,25 +31,24 @@ $checkbox-colors: shared.$form-colors !default;
     "checkbox-border-width": #{$checkbox-border-width},
     "checkbox-checkmark-color": #{$checkbox-checkmark-color},
     "checkbox-size": #{$checkbox-size},
-    "checkbox-checkmark-image": #{url(fn.checkmark(cv.getVar("checkbox-checkmark-color")))},
-    "checkbox-indeterminate-image":  #{url(fn.indeterminate(cv.getVar("checkbox-checkmark-color")))} 
-
+    "checkbox-checkmark-image": #{url(fn.checkmark($checkbox-checkmark-color))},
+    "checkbox-indeterminate-image":  #{url(fn.indeterminate($checkbox-checkmark-color))} 
     )
   );
 
   &.checkbox input[type=checkbox] + .check {
 
     @each $name, $pair in $checkbox-colors {
-      $color: list.nth($pair, 1);
+      $color-invert: cv.getVar($name, "", "-invert");
 
       &.#{iv.$class-prefix}is-#{$name} {
         @include cv.register-vars(
           (
             "checkbox-active-background-color": #{cv.getVar($name)},
             "checkbox-border-color": #{cv.getVar($name)},
-            "checkbox-checkmark-color": #{cv.getVar($name, "", "-invert")},
-            "checkbox-checkmark-image": #{url(fn.checkmark(cv.getVar($name, "", "-invert")))},
-            "checkbox-indeterminate-image":  #{url(fn.indeterminate(cv.getVar($name, "", "-invert")))} 
+            "checkbox-checkmark-color": #{$color-invert},
+            "checkbox-checkmark-image": #{url(fn.checkmark($color-invert))},
+            "checkbox-indeterminate-image":  #{url(fn.indeterminate($color-invert))} 
           )
         );
       }
