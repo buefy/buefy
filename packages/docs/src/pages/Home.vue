@@ -26,14 +26,14 @@
                             ></strong
                         >
                     </h2>
-                    <div class="home-hero">
+                    <div class="home-hero my-6">
                         <pre
                             class="npm"
                         ><code><span class="is-unselectable">$ </span>npm install buefy</code></pre>
                     </div>
 
 
-                    <div class="buttons">
+                    <div class="buttons my-6">
                         <router-link
                             class="button is-medium home-hero"
                             to="/documentation/start"
