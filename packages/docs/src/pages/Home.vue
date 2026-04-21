@@ -14,12 +14,14 @@
                         <strong>Lightweight</strong> UI components for
                         <strong
                             ><a href="https://vuejs.org/" target="_blank"
+                                class="has-text-light is-underlined"
                                 >Vue 3</a
                             ></strong
                         >
                         based on
                         <strong
                             ><a href="http://bulma.io/" target="_blank"
+                                class="has-text-light is-underlined"
                                 >Bulma</a
                             ></strong
                         >
@@ -39,7 +41,7 @@
                             Get started
                         </router-link>
                         <a
-                            class="button is-medium is-primary home-hero"
+                            class="button is-medium is-outlined home-hero"
                             href="https://github.com/buefy/buefy/releases"
                             target="_blank"
                         >
@@ -51,7 +53,7 @@
                         <p>
                             The Vue 2 version of Buefy is deprecated but will remain available as Version "0.x".
                         </p>
-                        <a href="https://v2.buefy.org" alt="Buefy Vue2 documentation website">Buefy Vue2</a>
+                        <a class="has-text-light is-underlined" href="https://v2.buefy.org" alt="Buefy Vue2 documentation website">Buefy Vue2</a>
                     </div>
 
 
@@ -322,7 +324,7 @@ export default defineComponent({
 .home-hero, .features {
     opacity: 0;
     transform: translateY(20px);
-    transition: all 0.6s ease-out;
+    transition: transform 0.6s ease-out;
 }
 
 .home-hero.reveal-animation, .features.reveal-animation {
