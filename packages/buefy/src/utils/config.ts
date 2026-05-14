@@ -75,6 +75,101 @@ export interface IconPack {
 }
 
 /*
+ * Icon alias that renders an inline SVG `<path>` element.
+ * Color is controlled via CSS `color` / `fill="currentColor"`.
+ *
+ * @public
+ */
+export type SvgIconAlias = {
+    type: 'svg'
+    /* SVG path `d` attribute. */
+    path: string
+    /* SVG viewBox. Defaults to "0 0 24 24". */
+    viewBox?: string
+}
+
+/*
+ * Icon alias that delegates rendering to a Vue component (e.g. FontAwesomeIcon).
+ *
+ * @public
+ */
+export type ComponentIconAlias = {
+    type: 'component'
+    /* The Vue component to render. */
+    component: string | object
+    /*
+     * Passed as the `:icon` prop to the component.
+     * Typed as `any` because it is forwarded verbatim to an external component
+     * (e.g. `['fas', 'check']` for FontAwesomeIcon), whose prop type is opaque to Buefy.
+     */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    icon: any
+}
+
+/*
+ * Icon alias that uses the existing CSS-class pack approach.
+ *
+ * @public
+ */
+export type CssIconAlias = {
+    type: 'css'
+    /* Icon pack name (e.g. "mdi", "fas"). */
+    pack: string
+    /* Icon name within the pack. */
+    icon: string
+}
+
+/*
+ * A named icon alias — one of three rendering modes.
+ *
+ * @public
+ */
+export type IconAlias = SvgIconAlias | ComponentIconAlias | CssIconAlias
+
+/*
+ * Named icon aliases used by Buefy components.
+ * Override any entry via the `iconAliases` config option.
+ *
+ * @public
+ */
+export interface IconAliases {
+    /* Checked checkbox mark. */
+    checkboxOn: IconAlias
+    /* Indeterminate checkbox mark. */
+    checkboxIndeterminate: IconAlias
+    /* Pagination / dropdown previous/left chevron. */
+    chevronLeft: IconAlias
+    /* Pagination / dropdown next/right chevron. */
+    chevronRight: IconAlias
+    /* Downward chevron. */
+    chevronDown: IconAlias
+    /* Upward chevron. */
+    chevronUp: IconAlias
+    /* Dropdown open indicator. */
+    menuDown: IconAlias
+    /* Dropdown close indicator. */
+    menuUp: IconAlias
+    /* Success status icon. */
+    check: IconAlias
+    /* Danger / error status icon. */
+    alertCircle: IconAlias
+    /* Warning status icon. */
+    alert: IconAlias
+    /* Info status icon. */
+    information: IconAlias
+    /* Close / dismiss icon. */
+    close: IconAlias
+    /* Close circle icon. */
+    closeCircle: IconAlias
+    /* Eye / show-password icon. */
+    eye: IconAlias
+    /* Eye-off / hide-password icon. */
+    eyeOff: IconAlias
+    /* Additional user-defined aliases. */
+    [key: string]: IconAlias
+}
+
+/*
  * Buefy configuration.
  *
  * @public
@@ -512,7 +607,13 @@ export interface BuefyConfig {
      * Custom icon packs.
      * No custom icon packs by default.
      */
-    customIconPacks?: Record<string, IconPack> | null
+    customIconPacks?: Record<string, IconPack> | null,
+    /*
+     * Named icon aliases.
+     * Overrides specific entries in the default alias set.
+     * No overrides by default.
+     */
+    iconAliases?: Partial<IconAliases> | null
 }
 
 let config: BuefyConfig = {
@@ -600,7 +701,8 @@ let config: BuefyConfig = {
     defaultBreadcrumbAlign: 'is-left',
     defaultBreadcrumbSeparator: '',
     defaultBreadcrumbSize: 'is-medium',
-    customIconPacks: null
+    customIconPacks: null,
+    iconAliases: null
 }
 
 /*

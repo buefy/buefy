@@ -40,6 +40,28 @@
             <p>You can also add your own custom font.</p>
         </Example>
 
+        <Example :component="ExAliases" :code="ExAliasesCode" title="Icon Aliases" vertical>
+            <div class="tags has-addons">
+                <span class="tag is-success">New</span>
+            </div>
+            <p>
+                Use the <code>alias</code> prop to render icons by name from the global
+                <code>iconAliases</code> config. Built-in aliases use inline SVG with
+                <code>fill="currentColor"</code>, so the <code>type</code> prop controls the
+                color at runtime — no CSS rebuild needed.
+            </p>
+        </Example>
+
+        <b-message type="is-info">
+            Override any alias at install time to use
+            <a href="https://www.npmjs.com/package/@fortawesome/vue-fontawesome" target="_blank">vue-fontawesome</a>
+            or any other icon component via <code>ComponentIconAlias</code>.
+        </b-message>
+
+        <div class="example is-paddingless">
+            <CodeView :code="preformat(usageAliases)" lang="javascript" expanded/>
+        </div>
+
         <ApiView :data="api"/>
         <VariablesView :data="variables"/>
     </div>
@@ -70,6 +92,11 @@
     import ExCustom from './examples/ExCustom.vue'
     import ExCustomCode from './examples/ExCustom.vue?raw'
 
+    import ExAliases from './examples/ExAliases.vue'
+    import ExAliasesCode from './examples/ExAliases.vue?raw'
+
+    import usageAliases from './usageAliases.js?raw'
+
     export default defineComponent({
         components: {
             ApiView,
@@ -85,13 +112,16 @@
                     ExMdi,
                     ExFa,
                     ExObjectSyntax,
-                    ExCustom
+                    ExCustom,
+                    ExAliases
                 }),
                 ExMdiCode,
                 ExFaCode,
                 ExObjectSyntaxCode,
                 ExCustomCode,
-                usage
+                ExAliasesCode,
+                usage,
+                usageAliases
             }
         },
         methods: {

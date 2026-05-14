@@ -15,3 +15,13 @@ export default Plugin
 export {
     Icon as BIcon
 }
+
+export type {
+    IconAlias,
+    SvgIconAlias,
+    ComponentIconAlias,
+    CssIconAlias,
+    IconAliases
+} from '../../utils/config'
+
+export { resolveAlias, getIconAliases } from '../../utils/iconAliases'

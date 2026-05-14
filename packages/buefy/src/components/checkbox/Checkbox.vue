@@ -27,7 +27,16 @@
             :false-value="falseValue"
             :aria-labelledby="ariaLabelledby"
         >
-        <span class="check" :class="type" />
+        <span class="check" :class="type">
+            <svg
+                v-if="isChecked || indeterminate"
+                :viewBox="checkmarkAlias.viewBox || '0 0 1 1'"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+            >
+                <path fill="currentColor" :d="checkmarkAlias.path" />
+            </svg>
+        </span>
         <span :id="ariaLabelledby" class="control-label"><slot /></span>
     </label>
 </template>
@@ -35,6 +44,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import CheckRadioMixin from '../../utils/CheckRadioMixin'
+import { resolveAlias } from '../../utils/iconAliases'
+import type { SvgIconAlias } from '../../utils/config'
 
 export default defineComponent({
     name: 'BCheckbox',
@@ -57,6 +68,19 @@ export default defineComponent({
         inputId: {
             type: String,
             default: ''
+        }
+    },
+    computed: {
+        isChecked(): boolean {
+            const val = this.computedValue
+            if (Array.isArray(val)) {
+                return val.includes(this.nativeValue)
+            }
+            return val === this.trueValue
+        },
+        checkmarkAlias(): SvgIconAlias {
+            const key = this.indeterminate ? 'checkboxIndeterminate' : 'checkboxOn'
+            return resolveAlias(key) as SvgIconAlias
         }
     }
 })

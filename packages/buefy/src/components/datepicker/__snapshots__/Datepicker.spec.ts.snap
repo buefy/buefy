@@ -16,9 +16,9 @@ exports[`BDatepicker > render correctly 1`] = `
             <div>
               <header class="datepicker-header">
                 <div class="pagination field is-centered"><a class="pagination-previous" role="button" href="#">
-                    <b-icon-stub icon="chevron-left" type="is-primary is-clickable" both="true"></b-icon-stub>
+                    <b-icon-stub type="is-primary is-clickable" icon="chevron-left" both="true"></b-icon-stub>
                   </a><a class="pagination-next" role="button" href="#">
-                    <b-icon-stub icon="chevron-right" type="is-primary is-clickable" both="true"></b-icon-stub>
+                    <b-icon-stub type="is-primary is-clickable" icon="chevron-right" both="true"></b-icon-stub>
                   </a>
                   <div class="pagination-list">
                     <div class="field">
