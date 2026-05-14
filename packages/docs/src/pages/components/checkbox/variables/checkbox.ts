@@ -47,16 +47,4 @@ export default [
         description: 'The size of the checkbox',
         default: '<code>1.25em</code>'
     },
-    {
-        sass: '<code>$checkbox-checkmark-image</code>',
-        css: '<code>--bulma-checkbox-checkmark-image</code>',
-        description: 'The checkmark image for the checkbox',
-        default: '<code>url(fn.checkmark($checkbox-checkmark-color))</code>'
-    },
-    {
-        sass: '<code>$checkbox-indeterminate-image</code>',
-        css: '<code>--bulma-checkbox-indeterminate-image</code>',
-        description: 'The indeterminate image for the checkbox',
-        default: '<code>url(fn.indeterminate($checkbox-checkmark-color))</code>'
-    }
 ]

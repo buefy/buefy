@@ -1,6 +1,8 @@
 import { shallowMount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import BIcon from '@components/icon/Icon.vue'
+import type { ComponentIconAlias } from '@utils/config'
+import config from '@utils/config'
 
 describe('BIcon', () => {
     it('render correctly', () => {
@@ -138,5 +140,70 @@ describe('BIcon', () => {
         })
 
         expect(wrapper.find('i').classes()).toContain('foo-bar')
+    })
+
+    it('renders inline SVG when alias resolves to a SvgIconAlias', () => {
+        const wrapper = shallowMount(BIcon, {
+            props: { alias: 'chevronLeft' }
+        })
+
+        const svg = wrapper.find('svg')
+        expect(svg.exists()).toBe(true)
+        expect(svg.attributes('aria-hidden')).toBe('true')
+        const path = svg.find('path')
+        expect(path.exists()).toBe(true)
+        expect(path.attributes('fill')).toBe('currentColor')
+        expect(path.attributes('d')).toBeTruthy()
+    })
+
+    it('renders viewBox from the alias on the SVG element', () => {
+        const wrapper = shallowMount(BIcon, {
+            props: { alias: 'checkboxOn' }
+        })
+
+        expect(wrapper.find('svg').attributes('viewBox')).toBe('0 0 1 1')
+    })
+
+    it('falls back to 0 0 24 24 viewBox when alias has none', () => {
+        const wrapper = shallowMount(BIcon, {
+            props: { alias: 'chevronLeft' }
+        })
+
+        expect(wrapper.find('svg').attributes('viewBox')).toBe('0 0 24 24')
+    })
+
+    it('renders a component alias (ComponentIconAlias)', () => {
+        const FakeIcon = { name: 'FakeIcon', template: '<span />' }
+        const alias: ComponentIconAlias = {
+            type: 'component',
+            component: FakeIcon,
+            icon: ['fas', 'check']
+        }
+
+        const original = config.iconAliases
+        config.iconAliases = { customAlias: alias }
+
+        const wrapper = shallowMount(BIcon, {
+            props: { alias: 'customAlias' }
+        })
+
+        const fakeIcon = wrapper.findComponent(FakeIcon)
+        expect(fakeIcon.exists()).toBe(true)
+
+        config.iconAliases = original
+    })
+
+    it('alias prop takes precedence over icon/pack when both are provided', () => {
+        const wrapper = shallowMount(BIcon, {
+            props: {
+                alias: 'chevronLeft',
+                icon: 'eye',
+                pack: 'mdi'
+            }
+        })
+
+        // Should render SVG (from alias), not <i> (from pack)
+        expect(wrapper.find('svg').exists()).toBe(true)
+        expect(wrapper.find('i').exists()).toBe(false)
     })
 })

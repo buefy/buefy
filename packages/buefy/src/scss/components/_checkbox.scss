@@ -4,7 +4,6 @@
 @use "bulma/sass/utilities/mixins" as mixins;
 @use "bulma/sass/utilities/controls" as controls;
 @use "bulma/sass/form/shared";
-@use "../utils/functions" as fn;
 @use "sass:list";
 
 $checkbox-active-background-color: cv.getVar('primary') !default;
@@ -22,7 +21,7 @@ $checkbox-colors: shared.$form-colors !default;
   @include cv.register-vars(
     (
     "checkbox-active-background-color": #{$checkbox-active-background-color},
-    
+
     "checkbox-shadow": #{shared.$input-shadow},
 
     "checkbox-background-color": #{$checkbox-background},
@@ -31,24 +30,18 @@ $checkbox-colors: shared.$form-colors !default;
     "checkbox-border-width": #{$checkbox-border-width},
     "checkbox-checkmark-color": #{$checkbox-checkmark-color},
     "checkbox-size": #{$checkbox-size},
-    "checkbox-checkmark-image": #{url(fn.checkmark($checkbox-checkmark-color))},
-    "checkbox-indeterminate-image":  #{url(fn.indeterminate($checkbox-checkmark-color))} 
     )
   );
 
   &.checkbox input[type=checkbox] + .check {
 
     @each $name, $pair in $checkbox-colors {
-      $color-invert: cv.getVar($name, "", "-invert");
-
       &.#{iv.$class-prefix}is-#{$name} {
         @include cv.register-vars(
           (
             "checkbox-active-background-color": #{cv.getVar($name)},
             "checkbox-border-color": #{cv.getVar($name)},
-            "checkbox-checkmark-color": #{$color-invert},
-            "checkbox-checkmark-image": #{url(fn.checkmark($color-invert))},
-            "checkbox-indeterminate-image":  #{url(fn.indeterminate($color-invert))} 
+            "checkbox-checkmark-color": #{cv.getVar($name, "", "-100")},
           )
         );
       }
@@ -66,7 +59,7 @@ $checkbox-colors: shared.$form-colors !default;
     outline: none;
     display: inline-flex;
     align-items: center;
-    
+
     &:not(.button) {
       margin-inline-end: 0.5em;
       & + .checkbox:last-child {
@@ -82,27 +75,32 @@ $checkbox-colors: shared.$form-colors !default;
       z-index: -1;
 
       + .check {
-        // @extend %input;
-
         padding: 0;
         background: cv.getVar("checkbox-background-color");
         border-style: solid;
         border-width: cv.getVar('checkbox-border-width');
-        // border-color: cv.getVar("checkbox-border-color");
         box-shadow: cv.getVar('checkbox-shadow');
+        position: relative;
 
         width: cv.getVar('checkbox-size');
         height: cv.getVar('checkbox-size');
         flex-shrink: 0;
         border-radius: cv.getVar('checkbox-border-radius');
         transition: background cv.getVar('speed-slow') cv.getVar('easing');
+
+        svg {
+          display: block;
+          width: 100%;
+          height: 100%;
+          color: cv.getVar('checkbox-checkmark-color');
+        }
       }
       &:checked + .check {
-        background: cv.getVar('checkbox-active-background-color') cv.getVar('checkbox-checkmark-image') no-repeat center center;
+        background: cv.getVar('checkbox-active-background-color');
         border-color: cv.getVar("checkbox-border-color");
       }
       &:indeterminate + .check {
-        background: cv.getVar('checkbox-active-background-color') cv.getVar('checkbox-indeterminate-image') no-repeat center center;
+        background: cv.getVar('checkbox-active-background-color');
         border-color: cv.getVar('checkbox-border-color');
       }
       &:focus {

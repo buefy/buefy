@@ -1,10 +1,24 @@
 <template>
     <span class="icon" :class="[newType, size]">
+        <svg
+            v-if="isSvgAlias"
+            :viewBox="resolvedAliasSvg.viewBox || '0 0 24 24'"
+            xmlns="http://www.w3.org/2000/svg"
+            :class="customClass"
+            aria-hidden="true"
+        >
+            <path fill="currentColor" :d="resolvedAliasSvg.path" />
+        </svg>
+        <component
+            v-else-if="isComponentAlias"
+            :is="resolvedAliasComponent.component"
+            :icon="resolvedAliasComponent.icon"
+            :class="customClass"
+        />
         <i
-            v-if="!useIconComponent"
+            v-else-if="!useIconComponent"
             :class="[newPack, newIcon, newCustomSize, customClass]"
         />
-
         <component
             v-else
             :is="useIconComponent"
@@ -18,8 +32,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import config from '../../utils/config'
+import config, { type SvgIconAlias, type ComponentIconAlias } from '../../utils/config'
 import getIcons, { type InternalIconPack } from '../../utils/icons'
+import { resolveAlias } from '../../utils/iconAliases'
 
 export default defineComponent({
     name: 'BIcon',
@@ -29,14 +44,34 @@ export default defineComponent({
         pack: String,
         icon: {
             type: String,
-            required: true
+            required: false,
+            default: undefined
         },
+        /** Key into IconAliases (e.g. "chevronLeft"). Takes precedence over icon/pack. */
+        alias: String,
         size: String,
         customSize: String,
         customClass: String,
         both: Boolean // This is used internally to show both MDI and FA icon
     },
     computed: {
+        resolvedAlias() {
+            if (!this.alias) return null
+            return resolveAlias(this.alias) ?? null
+        },
+        isSvgAlias(): boolean {
+            return this.resolvedAlias?.type === 'svg'
+        },
+        isComponentAlias(): boolean {
+            return this.resolvedAlias?.type === 'component'
+        },
+        // Typed accessors used in the template
+        resolvedAliasSvg(): SvgIconAlias {
+            return this.resolvedAlias as SvgIconAlias
+        },
+        resolvedAliasComponent(): ComponentIconAlias {
+            return this.resolvedAlias as ComponentIconAlias
+        },
         iconConfig() {
             const allIcons = getIcons()
             return allIcons[this.newPack]
@@ -53,7 +88,7 @@ export default defineComponent({
         * internal icons are always MDI.
         */
         newIcon() {
-            return `${this.iconPrefix}${this.getEquivalentIconOf(this.icon)}`
+            return `${this.iconPrefix}${this.getEquivalentIconOf(this.icon ?? '')}`
         },
         newPack() {
             return this.pack || config.defaultIconPack

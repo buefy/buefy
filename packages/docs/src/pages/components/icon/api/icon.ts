@@ -33,6 +33,21 @@ export default [
                 default: '—'
             },
             {
+                name: '<code>alias</code>',
+                description: `Named icon alias from the global <code>iconAliases</code> config
+                    (e.g. <code>"chevronLeft"</code>, <code>"check"</code>).
+                    When set, renders an inline SVG or delegated component instead of a CSS-class icon.
+                    Takes precedence over <code>icon</code> and <code>pack</code>.`,
+                type: 'String',
+                values: `Any key defined in <code>IconAliases</code>:
+                    <code>checkboxOn</code>, <code>checkboxIndeterminate</code>,
+                    <code>chevronLeft</code>, <code>chevronRight</code>, <code>chevronDown</code>, <code>chevronUp</code>,
+                    <code>menuDown</code>, <code>menuUp</code>, <code>check</code>, <code>alertCircle</code>,
+                    <code>alert</code>, <code>information</code>, <code>close</code>, <code>closeCircle</code>,
+                    <code>eye</code>, <code>eyeOff</code>, or any custom key added via <code>iconAliases</code>`,
+                default: '—'
+            },
+            {
                 name: '<code>size</code>',
                 description: 'Icon size, optional',
                 type: 'String',

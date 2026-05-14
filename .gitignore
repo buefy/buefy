@@ -14,3 +14,4 @@ cypress/screenshots/
 yarn.lock
 *.tsbuildinfo
 .ideas
+/.claude
