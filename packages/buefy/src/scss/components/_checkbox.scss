@@ -31,8 +31,8 @@ $checkbox-colors: shared.$form-colors !default;
     "checkbox-border-width": #{$checkbox-border-width},
     "checkbox-checkmark-color": #{$checkbox-checkmark-color},
     "checkbox-size": #{$checkbox-size},
-    "checkbox-checkmark-image": #{url(fn.checkmark($checkbox-checkmark-color))},
-    "checkbox-indeterminate-image":  #{url(fn.indeterminate($checkbox-checkmark-color))} 
+    "checkbox-checkmark-image": #{url(fn.checkmark(black))},
+    "checkbox-indeterminate-image":  #{url(fn.indeterminate(black))}
     )
   );
 
@@ -47,8 +47,6 @@ $checkbox-colors: shared.$form-colors !default;
             "checkbox-active-background-color": #{cv.getVar($name)},
             "checkbox-border-color": #{cv.getVar($name)},
             "checkbox-checkmark-color": #{$color-invert},
-            "checkbox-checkmark-image": #{url(fn.checkmark($color-invert))},
-            "checkbox-indeterminate-image":  #{url(fn.indeterminate($color-invert))} 
           )
         );
       }
@@ -90,6 +88,7 @@ $checkbox-colors: shared.$form-colors !default;
         border-width: cv.getVar('checkbox-border-width');
         // border-color: cv.getVar("checkbox-border-color");
         box-shadow: cv.getVar('checkbox-shadow');
+        position: relative;
 
         width: cv.getVar('checkbox-size');
         height: cv.getVar('checkbox-size');
@@ -97,13 +96,32 @@ $checkbox-colors: shared.$form-colors !default;
         border-radius: cv.getVar('checkbox-border-radius');
         transition: background cv.getVar('speed-slow') cv.getVar('easing');
       }
+      &:checked + .check,
+      &:indeterminate + .check {
+        &::after {
+          content: '';
+          display: block;
+          position: absolute;
+          inset: 0;
+          background-color: cv.getVar('checkbox-checkmark-color');
+          mask-repeat: no-repeat;
+          mask-position: center;
+          mask-size: contain;
+        }
+      }
       &:checked + .check {
-        background: cv.getVar('checkbox-active-background-color') cv.getVar('checkbox-checkmark-image') no-repeat center center;
+        background: cv.getVar('checkbox-active-background-color');
         border-color: cv.getVar("checkbox-border-color");
+        &::after {
+          mask-image: cv.getVar('checkbox-checkmark-image');
+        }
       }
       &:indeterminate + .check {
-        background: cv.getVar('checkbox-active-background-color') cv.getVar('checkbox-indeterminate-image') no-repeat center center;
+        background: cv.getVar('checkbox-active-background-color');
         border-color: cv.getVar('checkbox-border-color');
+        &::after {
+          mask-image: cv.getVar('checkbox-indeterminate-image');
+        }
       }
       &:focus {
         + .check {

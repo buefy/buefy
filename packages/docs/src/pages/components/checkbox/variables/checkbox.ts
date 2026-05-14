@@ -50,13 +50,13 @@ export default [
     {
         sass: '<code>$checkbox-checkmark-image</code>',
         css: '<code>--bulma-checkbox-checkmark-image</code>',
-        description: 'The checkmark image for the checkbox',
-        default: '<code>url(fn.checkmark($checkbox-checkmark-color))</code>'
+        description: 'The checkmark mask shape (SVG data URI). Color is controlled by <code>--bulma-checkbox-checkmark-color</code>.',
+        default: '<code>url(fn.checkmark(black))</code>'
     },
     {
         sass: '<code>$checkbox-indeterminate-image</code>',
         css: '<code>--bulma-checkbox-indeterminate-image</code>',
-        description: 'The indeterminate image for the checkbox',
-        default: '<code>url(fn.indeterminate($checkbox-checkmark-color))</code>'
+        description: 'The indeterminate mask shape (SVG data URI). Color is controlled by <code>--bulma-checkbox-checkmark-color</code>.',
+        default: '<code>url(fn.indeterminate(black))</code>'
     }
 ]
