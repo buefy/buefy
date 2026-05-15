@@ -1,5 +1,15 @@
 # Buefy Changelog
 
+## [3.0.6](https://github.com/buefy/buefy/compare/v3.0.5...v3.0.6)
+
+### Features
+
+- [#4329](https://github.com/buefy/buefy/pull/4329) Add icon alias system and inline SVG checkmarks for Checkbox component.
+
+### Fixes (docs)
+
+- [#4324](https://github.com/buefy/buefy/pull/4324) Adjust links and spacings on the homepage.
+
 ## [3.0.5](https://github.com/buefy/buefy/compare/v3.0.4...v3.0.5)
 
 ### Fixes
