@@ -78,7 +78,7 @@ export default defineComponent({
             }
         },
         ariaRoleItem() {
-            return this.ariaRole === 'menuitem' || this.ariaRole === 'listitem' ? this.ariaRole : undefined
+            return this.ariaRole === 'menuitem' || this.ariaRole === 'listitem' || this.ariaRole === 'option' ? this.ariaRole : undefined
         },
         isClickable() {
             return !(this.parent as DropdownInstance).disabled &&

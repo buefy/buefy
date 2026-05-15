@@ -35,6 +35,16 @@ describe('BDropdown', () => {
         expect(position.validator && position.validator('is-bottom-left')).toBeTruthy()
     })
 
+    it('accepts listbox as ariaRole for accessibility', () => {
+        const ariaRole = wrapper.vm.$options.props.ariaRole
+
+        expect(ariaRole.type).toBe(String)
+        expect(ariaRole.validator && ariaRole.validator('listbox')).toBeTruthy()
+        expect(ariaRole.validator && ariaRole.validator('menu')).toBeTruthy()
+        expect(ariaRole.validator && ariaRole.validator('list')).toBeTruthy()
+        expect(ariaRole.validator && ariaRole.validator('invalid')).toBeFalsy()
+    })
+
     it('react accordingly when changing v-model', async () => {
         const value = 'value'
         await wrapper.setProps({ modelValue: value })
