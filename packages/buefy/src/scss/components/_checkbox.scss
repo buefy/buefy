@@ -36,14 +36,12 @@ $checkbox-colors: shared.$form-colors !default;
   &.checkbox input[type=checkbox] + .check {
 
     @each $name, $pair in $checkbox-colors {
-      $color-invert: cv.getVar($name, "", "-invert");
-
       &.#{iv.$class-prefix}is-#{$name} {
         @include cv.register-vars(
           (
             "checkbox-active-background-color": #{cv.getVar($name)},
             "checkbox-border-color": #{cv.getVar($name)},
-            "checkbox-checkmark-color": #{$color-invert},
+            "checkbox-checkmark-color": #{cv.getVar($name, "", "-100")},
           )
         );
       }
