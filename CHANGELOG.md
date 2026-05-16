@@ -1,5 +1,12 @@
 # Buefy Changelog
 
+## [3.0.7](https://github.com/buefy/buefy/compare/v3.0.6...v3.0.7)
+
+### Chores & Dependency Updates
+
+- Resolve 15 Dependabot security alerts by updating `axios` (^1.15.2), `@babel/preset-env` (^7.29.5), and adding overrides for `fast-uri` (^3.1.2), `follow-redirects` (^1.16.0), and `postcss` (^8.5.10).
+- Add `workflow_dispatch` trigger to npm publish workflow.
+
 ## [3.0.6](https://github.com/buefy/buefy/compare/v3.0.5...v3.0.6)
 
 ### Features
