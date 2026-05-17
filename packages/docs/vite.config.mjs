@@ -68,6 +68,9 @@ export default defineConfig({
     }
   },
   assetsInclude: ['**/*.woff', '**/*.woff2', '**/*.eot', '**/*.ttf'],
+  optimizeDeps: {
+    include: ['lodash']
+  },
   build: {
     rollupOptions: {
       output: {

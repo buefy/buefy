@@ -10,10 +10,10 @@
   },
   "dependencies": {
     "vue": "^3.5.17",
-    "buefy": "^3.0.0",
+    "buefy": "^3.0.7",
     "@stackblitz/sdk": "^1.11.0",
     "@fortawesome/fontawesome-free": "^6.7.2",
-    "@mdi/font": "^6.9.96"
+    "@mdi/font": "^7.4.47"
   },
   "devDependencies": {
     "vite": "^7.0.4",

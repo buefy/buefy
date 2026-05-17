@@ -23,7 +23,7 @@
     },
     "documentation/start": {
         "title": "Start",
-        "subtitle": "<strong>Three ways</strong> to install and use Buefy",
+        "subtitle": "Install and start using Buefy in your Vue 3 project",
         "path": "/documentation/start",
         "githubPath": "pages/installation/Start.vue",
         "menu": "documentation",
