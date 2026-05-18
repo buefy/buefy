@@ -29,6 +29,10 @@
     &.is-active {
         background-color: cv.getVar('scheme-invert');
         color: cv.getVar('scheme-main');
+
+        @media (max-width: 768px) {
+            display: none;
+        }
     }
 }
 
@@ -51,6 +55,12 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+
+    @media (max-width: 768px) {
+        left: 0;
+        width: 100%;
+        box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.15);
+    }
 }
 
 // Slide transition
@@ -62,6 +72,10 @@
 .customizer-slide-enter-from,
 .customizer-slide-leave-to {
     transform: translateX(100%);
+
+    @media (max-width: 768px) {
+        transform: translateY(100%);
+    }
 }
 
 // Backdrop fade transition
