@@ -1,5 +1,10 @@
 <template>
     <div>
+        <p :id="slugifyTitle('Installing Buefy')" class="title">
+            <router-link :to="`#${slugifyTitle('Installing Buefy')}`">#</router-link>
+            Installing Buefy
+        </p>
+
         <b-message type="is-warning" size="is-medium">
             For all installation methods, you need
             <strong
