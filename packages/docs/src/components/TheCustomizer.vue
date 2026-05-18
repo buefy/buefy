@@ -255,6 +255,7 @@ const COMPONENT_SELECTORS: Record<string, string> = {
     clockpicker: '.b-clockpicker',
     colorpicker: '.colorpicker',
     datepicker: '.datepicker',
+    dialog: '.dialog',
     dropdown: '.dropdown',
     field: '.field',
     icon: '.icon',
