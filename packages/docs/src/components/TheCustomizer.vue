@@ -74,8 +74,7 @@
                             </h4>
                             <div class="customizer-row">
                                 <label>Base font size</label>
-                                <span class="customizer-value"
-                                >{{ values.sizeNormal.toFixed(2) }}rem</span>
+                                <span class="customizer-value">{{ values.sizeNormal.toFixed(2) }}rem</span>
                             </div>
                             <input
                                 v-model.number="values.sizeNormal"
@@ -147,10 +146,8 @@
                                     class="customizer-var-entry"
                                 >
                                     <div class="customizer-var-meta">
-                                        <code class="customizer-var-name"
-                                        >{{ stripBulmaPrefix(extractVarName(entry.css)) }}</code>
-                                        <span class="customizer-var-desc"
-                                        >{{ entry.description }}</span>
+                                        <code class="customizer-var-name">{{ stripBulmaPrefix(extractVarName(entry.css)) }}</code>
+                                        <span class="customizer-var-desc">{{ entry.description }}</span>
                                     </div>
                                     <input
                                         type="text"
@@ -356,6 +353,9 @@ export default defineComponent({
                 this.saveToStorage()
             },
             deep: true
+        },
+        $route(to: { path: string }) {
+            this.syncComponentFromRoute(to.path)
         }
     },
     methods: {
@@ -520,6 +520,16 @@ export default defineComponent({
             return stripHtml(html)
         },
 
+        syncComponentFromRoute(path: string) {
+            const match = path.match(/\/documentation\/(\w+)$/)
+            if (match) {
+                const name = match[1]
+                if (this.availableComponents.includes(name)) {
+                    this.selectedComponent = name
+                }
+            }
+        },
+
         formatComponentName(name: string): string {
             const label = name.charAt(0).toUpperCase() + name.slice(1)
             return Object.keys(this.componentVarOverrides[name] || {}).length
@@ -529,24 +539,24 @@ export default defineComponent({
     },
     mounted() {
         const saved = localStorage.getItem(STORAGE_KEY)
-        if (!saved) return
-        try {
-            const parsed = JSON.parse(saved)
-            // Support old format (plain values object) and new
-            // { values, componentVarOverrides } format
-            if (parsed.values) {
-                Object.assign(this.values, parsed.values)
-                if (parsed.componentVarOverrides) {
-                    this.componentVarOverrides = parsed.componentVarOverrides
+        if (saved) {
+            try {
+                const parsed = JSON.parse(saved)
+                if (parsed.values) {
+                    Object.assign(this.values, parsed.values)
+                    if (parsed.componentVarOverrides) {
+                        this.componentVarOverrides = parsed.componentVarOverrides
+                    }
+                } else {
+                    Object.assign(this.values, parsed)
                 }
-            } else {
-                Object.assign(this.values, parsed)
+                this.applyGlobalVars(this.values)
+                this.updateStyleTag()
+            } catch {
+                // ignore corrupted storage
             }
-            this.applyGlobalVars(this.values)
-            this.updateStyleTag()
-        } catch {
-            // ignore corrupted storage
         }
+        this.syncComponentFromRoute(this.$route.path)
     },
     beforeUnmount() {
         const el = document.getElementById('buefy-customizer-styles')
