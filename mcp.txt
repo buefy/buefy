@@ -1,0 +1,2265 @@
+---
+description: Buefy 3 — Vue 3 UI components based on Bulma CSS
+version: 3.0.7
+---
+
+# Buefy 3
+Buefy is a lightweight library of responsive UI components for Vue.js 3 based on the Bulma CSS framework. All components are registered globally with the `B` prefix (e.g. `<BButton>`, `<BInput>`).
+
+- [Documentation](https://buefy.org)
+- [GitHub](https://github.com/buefy/buefy)
+
+## Installation
+```sh
+npm install buefy
+```
+
+Register the full library:
+```javascript
+import { createApp } from 'vue'
+import Buefy from 'buefy'
+import 'buefy/dist/buefy.css'
+
+const app = createApp(App)
+app.use(Buefy)
+app.mount('#app')
+```
+
+Or import individual components:
+```javascript
+import { BButton, BInput } from 'buefy'
+```
+
+## Usage
+1. All components use the `B` prefix: `<BButton>`, `<BInput>`, `<BModal>`, etc.
+2. Color/type values follow Bulma class names: `is-primary`, `is-success`, `is-warning`, `is-danger`, `is-info`, `is-dark`, `is-light`
+3. Size values: `is-small` (default), `is-medium`, `is-large`
+4. Icons use Material Design Icons (mdi) by default; Font Awesome packs (`fa`, `fas`, `far`, `fad`, `fal`) are also supported
+5. Wrap form inputs in `<BField>` to get labels, messages, grouped layouts, and validation styling
+
+## Components
+
+### BAutocomplete
+Extended input that provide suggestions while the user types. Use with Field to access all functionalities
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| v-model | String, Number | — | Binding value |
+| data | Array, Array, Array | — | Options / suggestions |
+| field | String | value | Property of the object (if data is array of objects) to use as display text, and to keep track of selected option |
+| custom-formatter | Function | — | Function to format an option to a string for display in the input as alternative to field prop) |
+| group-field | String | — | Property of the object (if data is array of objects) to use as display text of group |
+| group-options | String | — | Property of the object (if data is array of objects) to use as key to get items array of each group, optional |
+| clear-on-select | Boolean | false | Clear input text on select |
+| open-on-focus | Boolean | false | Open dropdown list on focus |
+| keep-first | Boolean | false | The first option will always be pre-selected (easier to just hit enter or tab) |
+| size | String | — | Vertical size of input, optional |
+| expanded | Boolean | false | Makes input full width when inside a grouped or addon field |
+| loading | Boolean | false | Add the loading state to the input |
+| rounded | Boolean | false | Makes the input rounded |
+| icon | String | — | Icon name to be added |
+| icon-pack | String | mdi | Icon pack to use |
+| confirm-keys | Array | ["Tab", "Enter"] | Array of keys (https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values) which will select an option when typing (default tab and enter) |
+| clearable | Boolean | false | Add a button to clear the inputed text |
+| icon-right | String | — | Icon name to be added on the right side |
+| icon-right-clickable | Boolean | false | Makes the right icon clickable |
+| maxlength | String, Number | — | Same as native maxlength, plus character counter |
+| check-infinite-scroll | Boolean | false | Makes the component check if list reached scroll end and emit infinite-scroll event. |
+| keep-open | Boolean | false | Keeps the dropdown open after selection |
+| max-height | String, Number | 200px | Max height of dropdown content |
+| dropdown-position | String | auto | Position of dropdown |
+| append-to-body | Boolean | false | Append autocomplete content to body (prevents event bubbling) |
+| select-on-click-outside | Boolean | false | Trigger the @select event for the first pre-selected option when clicking outside and keep-first is enabled |
+| selectable-header | Boolean | false | Allows the header in the autocomplete to be selectable |
+| selectable-footer | Boolean | false | Allows the footer in the autocomplete to be selectable |
+| compat-fallthrough | Boolean | true. Can be changed via defaultCompatFallthrough config option. | Whether class, style, and id attributes are applied to the root <div> element or the underlying <b-input>. If true, they are applied to the root <div> element, which is compatible with Vue 2. |
+| type | String | text | Input type |
+| autocomplete | String | off | Native HTML5 autocomplete attribute |
+| Any native attribute | — | — | — |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| update:modelValue | value: String|Number | Triggers when the value is changed (Vue 3 v-model event) |
+| input | event: Event | Native input event that bubbles up from the underlying input element |
+| select | option: String|Number|Object, event: $event | Triggers when an option is selected or unset |
+| focus | event: $event | Triggers when input has received focus |
+| blur | event: $event | Triggers when input has lost focus |
+| typing | value: String | Triggers when user is typing |
+| active | value: Boolean | Triggers when dropdown is active |
+| [any].native | event: $event | Listen to any native event, e.g. click.native |
+| infinite-scroll | — | Triggers when .dropdown-list has reached scroll end |
+| select-header | event: $event | Triggers when the header slot is selected |
+| select-footer | event: $event | Triggers when the footer slot is selected |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | option: String|Object, index: Number | — |
+| empty | — | Show like an option if data array prop is empty |
+| header | — | Show a custom header as first option |
+| footer | — | Show a custom footer as last option |
+| group | — | Control how the group header is output |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| checkHtml5Validity | — | isValid: Boolean | Check validation of HTML5 (add the message and type/color), also updates the isValid property |
+| focus | — | — | Set focus (internally uses the native .select() method) |
+| setSelected(selected: Any) | — | — | Select an option by an object (same type of data property) |
+
+### BBreadcrumb
+Breadcrumb component for flexible navigation through the pages of your website!
+
+#### BBreadcrumb
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| align | String | is-right | Breadcrumb alignment. |
+| separator | String | — | Symbol that separates the breadcrumb items. |
+| size | String | is-medium | The breadcrumb size |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Breadcrumb items |
+
+#### BBreadcrumbItem
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| tag | String, Object | a | a, router-link and it's html attributes like href, to, etc... |
+| active | Boolean | false | is the current breadcrumb is actually the current page. |
+| compat-fallthrough | Boolean | true. Can be changed via defaultCompatFallthrough config option. | Whether class, style, and id attributes are applied to the root <li> element or the underlying tag. If true, they are applied to the root <li> element, which is compatible with Vue 2. |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Breadcrumb item content |
+
+### BButton
+The classic button, in different colors, sizes, and states
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| type | String, Object | — | Type (color) of the control, optional |
+| size | String | — | Vertical size of button, optional |
+| label | String | — | Button label, optional when default slot |
+| loading | Boolean | false | Add the loading state to the button |
+| rounded | Boolean | false | Rounded style |
+| outlined | Boolean | false | Outlined style |
+| focused | Boolean | false | Focused style |
+| inverted | Boolean | false | Inverted style |
+| hovered | Boolean | false | Hovered style |
+| active | Boolean | false | Active style |
+| selected | Boolean | false | Selected style |
+| expanded | Boolean | false | Button will be expanded (full-width) |
+| icon-left | String | — | Icon name to show on the left |
+| icon-right | String | — | Icon name to show on the right |
+| icon-pack | String | mdi | Icon pack to use |
+| native-type | String | button | Button type, like native |
+| tag | String, Object | button | Button tag name |
+| Any native attribute | — | — | — |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| click | event: $event | Triggers on click |
+| [any].native | event: $event | Listen to any event using this syntax, e.g mousedown.native |
+
+### BCarousel
+A Slideshow for cycling images in confined spaces
+
+#### BCarousel
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| v-model | Number | 0 | Binding value |
+| animated | String | slide | Transition effect |
+| interval | Number | 3500 | Interval of the autoplay, in milliseconds |
+| has-drag | Boolean | true | Toggle touch dragging, when touch not detected. Auto switch mouse dragging |
+| autoplay | Boolean | true | Whether to automatically loop the slides |
+| pause-hover | Boolean | true | Pause carousel when autoplay and mouse enter |
+| pause-info | Boolean | true | Show information about pause when autoplay and pause-hover |
+| pause-info-type | String | is-white | Type (color) of the pause-info, optional |
+| pause-text | String | Pause | Text when pause |
+| arrow | Boolean | true | Display the "next" and "prev" action |
+| arrow-hover | Boolean | true | Display the "next" and "prev" action when hover, but hidden on mobile |
+| repeat | Boolean | true | Controls whether the carousel loops around at the start and end |
+| icon-pack | String | mdi | Icon pack to use |
+| icon-size | String | — | Arrow icon size, optional |
+| icon-prev | String | chevron-left | Icon to use for previous arrow |
+| icon-next | String | chevron-right | Icon to use for next arrow |
+| indicator | Boolean | true | Display the indicator for jumping to specific item |
+| indicator-background | Boolean | false | Adds background to indicator |
+| indicator-custom | Boolean | false | Use when there are more than 6 images so that the indicator is not too small |
+| indicator-custom-size | String | is-small | Image size of the indicator when the indicator-custom is used |
+| indicator-inside | Boolean | true | Display the indicator inside the carousel |
+| indicator-mode | String | click | Trigger for action indicator |
+| indicator-position | String | is-bottom | Position indicator only when indicator-inside |
+| indicator-style | String | is-dots | Style for indicator of carousel |
+| overlay | Boolean | false | Switch like a gallery |
+| progress | Boolean | false | Display the progress item of carousel |
+| progress-type | String | is-primary | Type (color) of the progress, optional |
+| with-carousel-list | Boolean | false | Use when indicator custom with b-carousel-list |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| change | value: Boolean, value: String | Triggers when carousel item value is changed |
+| input | value: Boolean, value: String | Triggers when indicator-mode value is changed |
+| click | — | Non-native click event, will trigger only when clicking an element that should normally not be clickable/focusable |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| indicators | i: Number | Custom indicators |
+| list | active: Number, switch: Number | Custom indicators when with-carousel-list |
+| overlay | — | Custom other when overlay |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| next() | — | — | Move to next slide |
+| prev() | — | — | Move to previous slide |
+| changeActive(index: Number) | — | — | Change to specific slide by index |
+
+#### BItem
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| order | Number | - | Order of the item. Carousel sorts the items in ascending order of this value. By default, the order is determined according to when items are mounted in sequence. You have to give an explicit value if you want to keep the ordering when the number of items in Carousel may vary. |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| click | — | Non-native click event, will trigger only on an element that should normally not be clickable/focusable |
+
+#### BList
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| v-model | Number | 0 | Binding value |
+| scroll-value | Number | 0 | Initial scroll position value |
+| data | Array | — | Carousel-list data (any b-image prop can be used) |
+| has-drag | Boolean | true | Toggle touch dragging, when touch not detected. Auto switch mouse dragging |
+| has-grayscale | Boolean | false | Give a grayscale effect to img |
+| has-opacity | Boolean | false | Give an opacity effect to img |
+| repeat | Boolean | false | Returns carousel to start when active item matches length of data |
+| items-to-show | Number | 4 | Count of items to be showed per view (supports a decimal). |
+| items-to-list | Number | 1 | Count of items to list when using navigation buttons |
+| as-indicator | Boolean | false | Switch mode to indicator for carousel |
+| breakpoints | Object | {} | Responsive breakpoint settings for different screen sizes |
+| arrow | Boolean | true | Display the "next" or "prev" action when first or last item |
+| arrow-hover | Boolean | true | Display arrow action when hovered. Hidden on mobile |
+| icon-pack | String | mdi | Icon pack to use |
+| icon-size | String | — | Arrow icon size, optional |
+| icon-prev | String | chevron-left | Icon to use for previous arrow |
+| icon-next | String | chevron-right | Icon to use for next arrow |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| switch | value: Boolean, value: Number, value: String | Triggers when value is changed |
+| updated:scroll | index: Number | Triggers when scroll position changes |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| item | ...item (all the properties of the item are bound at the root), index: Number, active: Number, scroll: Number | Custom item |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| next() | — | — | Move to next items |
+| prev() | — | — | Move to previous items |
+| switchTo(index: Number) | — | — | Switch to specific index |
+| refresh() | — | — | Refresh the carousel layout |
+
+### BCheckbox
+Select a single or grouped options
+
+#### BCheckbox
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| v-model | Any | false | Binding value |
+| native-value | Any | — | Same as native value |
+| indeterminate | Boolean | — | Same as native indeterminate |
+| true-value | Any | true | Overrides the returned value when it's checked |
+| false-value | Any | false | Overrides the returned value when it's not checked |
+| disabled | Boolean | false | Same as native disabled |
+| required | Boolean | false | Same as native required |
+| name | String | — | Same as native name |
+| size | String | — | Size of the control, optional |
+| type | String | — | Type (color) of the control, optional |
+| aria-labelledby | String | — | Accessibility label to establish relationship between the checkbox and control label |
+| input-id | String | — | String to set the inner input id |
+| autocomplete | String | on | Native HTML5 autocomplete attribute |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| update:modelValue | value: Boolean | Triggers when the value of checkbox is changed (Vue 3 v-model event) |
+| change | event: Event | Native change event that bubbles up from the underlying input element |
+| [any].native | event: $event | Listen to any event using this syntax, e.g @click.native |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Label content for the checkbox |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| focus() | — | — | Set focus on the checkbox input |
+
+#### BButton
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| v-model | Any | — | Binding value |
+| native-value | Any | — | Same as native value |
+| type | String | is-primary | Type (color) of the button when checked |
+| disabled | Boolean | false | Same as native disabled |
+| required | Boolean | false | Same as native required |
+| name | String | — | Same as native name |
+| size | String | — | Size of the button, optional |
+| expanded | Boolean | false | Checkbox button will be expanded (full-width) |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| update:modelValue | value: Any | Triggers when the value of checkbox button is changed (Vue 3 v-model event) |
+| change | event: Event | Native change event that bubbles up from the underlying input element |
+| [any].native | event: $event | Listen to any event using this syntax, e.g @click.native |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Button content for the checkbox button |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| focus() | — | — | Set focus on the checkbox button input |
+
+### BClockpicker
+An input with a dropdown/modal clock interface for selecting a time, uses native timepicker for mobile
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| v-model | Date | — | Binding value |
+| type | String | is-primary | Type (color) of the button when checked |
+| hour-format | String | undefined: default to browser locale. | Hour format for input and display |
+| increment-minutes | Number | 5 | Unit for increment minutes |
+| picker-size | Number | 290 | Size of the clock face |
+| placeholder | String | — | Input placeholder |
+| expanded | Boolean | false | Makes input full width when inside a grouped or addon field |
+| rounded | Boolean | false | Makes the input rounded |
+| maxlength | Number, String | — | Same as native maxlength, plus character counter |
+| use-html5-validation | Boolean | true | Enable HTML5 native validation |
+| validation-message | String | — | The message which is shown when a validation error occurs |
+| status-icon | Boolean | true | Show status icon using field and variant prop |
+| time-creator | Function | () => new Date() | Function used internally to create a new Date instance |
+| increment-hours | Number | 1 | Hour interval for increment |
+| increment-seconds | Number | 1 | Second interval for increment |
+| enable-seconds | Boolean | false | Enable seconds selection |
+| default-minutes | Number | — | Default minutes to set when selecting an hour |
+| default-seconds | Number | — | Default seconds to set when selecting a minute |
+| focusable | Boolean | true | Clockpicker container can be focused |
+| tz-offset | Number | 0 | Timezone offset |
+| reset-on-meridian-change | Boolean | false | Reset time selection when meridian (AM/PM) changes |
+| time-formatter | Function | (time) => new Intl.DateTimeFormat(locale).format(time) | Function to format time (Date type) to a string for display in the input |
+| time-parser | Function | Tries to parse the time using the locale specific format. Fallback to HH:mm or HH:mm AM/PM | Function to parse string to a time (Date type) for set a time from the input to the component |
+| min-time | Date | — | Earliest time available for selection |
+| max-time | Date | — | Latest time available for selection |
+| size | String | — | Vertical size of input, optional |
+| inline | Boolean | false | Clockpicker is shown inline, input is removed |
+| editable | Boolean | false | Enable input/typing. Note that you might have to set a custom time parser |
+| disabled | Boolean | false | Disables the input field and/or picker |
+| loading | Boolean | false | Add the loading state to the input |
+| icon | String | — | Icon name to be added |
+| icon-pack | String | mdi | Icon pack to use |
+| unselectable-times | Array | - | Array of unselectable times (Date object) |
+| mobile-native | Boolean | true | Enable native timepicker on mobile |
+| mobile-modal | Boolean | true | Clockpicker is shown into a modal on mobile |
+| position | String | Bottom Right | Optional, position of the timepicker relative to the input |
+| auto-switch | Boolean | true | Automatically switches between hour and minutes selection after click |
+| open-on-focus | Boolean | false | Open clockpicker on input focus |
+| hours-label | String | Hours | Label to show on hour button |
+| minutes-label | String | Min | Label to show on minutes button |
+| append-to-body | Boolean | false | Append clockpicker calendar to body (prevents event bubbling) |
+| locale | String, Array of String | undefined: default to browser locale. | Accept a string with a BCP 47 language tag, or an array of such strings. See Unicode BCP 47 locale identifier |
+| compat-fallthrough | Boolean | true. Can be changed via defaultCompatFallthrough config option. | Whether class, style, and id attributes are applied to the root <div> element or the underlying input component. If true, they are applied to the root <div> element, which is compatible with Vue 2. |
+| Any native attribute | — | — | — |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| update:modelValue | value: Date | null | Triggers when the time value changes |
+| focus | event: Event | Triggers when input receives focus |
+| blur | event: Event | Triggers when input loses focus |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Footer |
+| trigger | — | Trigger |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| toggle | active: Boolean | — | Toggle clockpicker visibility |
+| close | — | — | Close dropdown |
+| focus | — | — | Set focus on the input element |
+| checkHtml5Validity | — | — | Check HTML5 validation, set isValid property. If validation fails, send 'is-danger' type, and error message to parent if it's a Field |
+
+### BCollapse
+Collapse is a easy way to toggle what you want
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| v-model | Boolean | true | Whether collapse is open or not |
+| animation | String | fade | Custom animation (transition name) |
+| aria-id | String | — | Id for the container div. Should be used with aria-controls on trigger for better accessibility. |
+| position | String | is-top | Trigger position |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| update:modelValue | value: Boolean | Triggers when the collapse state changes (v-model event) |
+| open | — | Triggers when user opened |
+| close | — | Triggers when user closed |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Content to show/hide |
+| trigger | open: Boolean | Trigger content |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| toggle | — | — | Toggle activation |
+
+### BColorpicker
+An Input that lets a user specify a color
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| v-model | Object (Color) | — | Binding value |
+| representation | String | "triangle" | Representation of Saturation & Lightness values |
+| alpha | Boolean | false | Allow color with transparency |
+| color-formatter | Function | (color) => color.toString('hex') | Function to format color to a string for display in the button |
+| color-parser | Function | (color) => Color.parse(color) | Function to parse value to a color |
+| size | String | — | Vertical size of input and picker, optional |
+| inline | Boolean | false | Colorpicker is shown inline, button is removed |
+| position | String | Bottom right | Optional, position of the colorpicker relative to the button |
+| open-on-focus | Boolean | false | Open colorpicker on button focus |
+| focusable | Boolean | true | Colorpicker container can be focused |
+| trap-focus | Boolean | true | Trap focus inside the colorpicker. |
+| close-on-click | Boolean | true | Choose whether the Colorpicker should close after selecting a color |
+| append-to-body | Boolean | false | Append colorpicker dropdown to body (prevents event bubbling) |
+| mobile-native | Boolean | false | Use native mobile color picker |
+| disabled | Boolean | false | Disable the colorpicker |
+| horizontal-color-picker | Boolean | false | Horizontal layout for the color picker |
+| expanded | Boolean | false | Expand the trigger button (full-width) |
+| mobile-modal | Boolean | From config | Use modal on mobile devices |
+| rounded | Boolean | false | Make the trigger button rounded |
+| loading | Boolean | false | Add loading state to the trigger button |
+| icon | String | — | Icon name for the trigger button |
+| icon-pack | String | mdi | Icon pack to use |
+| maxlength | String, Number | — | Same as native maxlength, plus character counter |
+| use-html5-validation | Boolean | From config | Enable HTML5 validation |
+| validation-message | String | — | Custom validation message |
+| locale | String, Array | From config | Locale for validation messages |
+| status-icon | Boolean | From config | Show status icon for validation |
+| Any native attribute | — | — | — |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| update:modelValue | value: Color | Triggers when the value of colorpicker is changed (Vue 3 v-model event) |
+| active-change | active: Boolean | Triggers when the colorpicker opens or closes |
+| focus | event: $event | Triggers when colorpicker receives focus |
+| blur | event: $event | Triggers when colorpicker loses focus |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| trigger | — | Custom trigger button |
+| header | — | Header content in the colorpicker dropdown |
+| footer | color: Color | Footer content in the colorpicker dropdown (default slot) |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| focus() | — | — | Set focus on the colorpicker |
+| checkHtml5Validity() | — | Boolean | Check HTML5 validation, returns validation state |
+| togglePicker(active: Boolean) | — | — | Toggle colorpicker visibility |
+
+### BDatepicker
+An input with a simple dropdown/modal for selecting a date, uses native datepicker for mobile
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| v-model | Date | — | Binding value |
+| date-formatter | Function | (date) => new Intl.DateTimeFormat(locale, { timeZone: "UTC" }).format(date) | Function to format date to a string for display in the input |
+| date-parser | Function | Tries to parse the date using the locale specific format. Fallback to Date.parse | Function to parse string to a date for set a date from the input to the component |
+| date-creator | Function | () => new Date() | Function used internally to create a new Date instance |
+| min-date | Date | — | Earliest date available for selection |
+| max-date | Date | — | Latest date available for selection |
+| events | Array | — | Dates to display indicators |
+| indicators | String | dots | Shape to use when showing event indicators |
+| focused-date | Date | new Date() | Date that should be initially focused upon |
+| size | String | — | Vertical size of input and picker, optional |
+| inline | Boolean | false | Datepicker is shown inline, input is removed |
+| editable | Boolean | false | Enable input/typing. Note that you might have to set a custom date parser |
+| loading | Boolean | false | Add the loading state to the input |
+| icon | String | — | Icon name to be added |
+| icon-right | String | — | Icon name to be added on the right side |
+| icon-right-clickable | Boolean | false | Make the right icon clickable |
+| icon-pack | String | mdi | Icon pack to use |
+| placeholder | String | — | Input placeholder |
+| disabled | Boolean | false | Same as native disabled |
+| horizontal-time-picker | Boolean | false | Show time picker horizontal |
+| maxlength | Number, String | — | Same as native maxlength, plus character counter |
+| use-html5-validation | Boolean | true | Enable HTML5 native validation |
+| validation-message | String | — | The message which is shown when a validation error occurs |
+| status-icon | Boolean | true | Show status icon using field and variant prop |
+| icon-prev | String | chevron-left | Icon to use for previous month |
+| icon-next | String | chevron-right | Icon to use for next month |
+| unselectable-dates | Array, Function | - | Array of unselectable dates, or a function to identify unselectable dates |
+| unselectable-days-of-week | Array | - | Array of unselectable days of week |
+| selectable-dates | Array, Function | - | Array of selectable dates, or a function to identify selectable dates |
+| locale | String, Array of String | undefined: default to browser locale. | Accept a string with a BCP 47 language tag, or an array of such strings. See Unicode BCP 47 locale identifier |
+| month-names | Array | undefined: default to browser locale. | Names of months to display in table header |
+| day-names | Array | undefined: default to browser locale. | Names of days to display in table header |
+| first-day-of-week | Number | 0 | First day of week to display in table header |
+| mobile-native | Boolean | true | Enable native datepicker on mobile |
+| mobile-modal | Boolean | true | Datepicker is shown into a modal on mobile |
+| position | String | Bottom right | Optional, position of the datepicker relative to the input |
+| open-on-focus | Boolean | false | Open datepicker on input focus |
+| type | String | - | Type of picker |
+| years-range | Array | [-100, 3] | Years range relative to selected year |
+| nearby-month-days | Boolean | true | Show/Hide nearby month days (prev and next month) |
+| nearby-selectable-month-days | Boolean | false | When nearby-month-days, it allows to select/unselect nearby month days |
+| show-week-number | Boolean | false | Display week number |
+| week-number-clickable | Boolean | false | Enable click on week number |
+| rules-for-first-week | Number | 4 | Choose the rule to determinate the first week of Year, 4 for ISO or 1 for other |
+| range | Boolean | false | Flag to allow choosing a range of date |
+| multiple | Boolean | false | Flag to allow choosing multiple dates |
+| focusable | Boolean | true | Datepicker container can be focused |
+| trap-focus | Boolean | true | Trap focus inside the datepicker. |
+| close-on-click | Boolean | true | Choose whether the Datepicker should close after selecting a date |
+| append-to-body | Boolean | false | Append datepicker calendar to body (prevents event bubbling) |
+| aria-next-label | String | — | Accessibility label for the next month button. |
+| aria-previous-label | String | — | Accessibility label for the previous month button. |
+| compat-fallthrough | Boolean | true. Can be changed via defaultCompatFallthrough config option. | Whether class, style, and id attributes are applied to the root <div> element or the underlying <b-input> component. If true, they are applied to the root <div> element, which is compatible with Buefy for Vue 2. |
+| Any native attribute | — | — | — |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| update:modelValue | value: Date | Date[] | null | Triggers when the value of datepicker is changed |
+| active-change | active: Boolean | Triggers when the datepicker visibility (active state) changes |
+| focus | event: Event | Triggers when input receives focus |
+| blur | event: Event | Triggers when input loses focus |
+| icon-right-click | event: $event | Triggers when the right icon is clickable and has been clicked |
+| change-month | month: Number(0-11) | Triggers when calendar month is changed |
+| change-year | year: Number | Triggers when calendar year is changed |
+| range-start | date: Date | Triggers when user starts selecting a date range (Only when range prop is set) |
+| range-end | date: Date | Triggers when user ends selecting a date range (Only when range prop is set) |
+| week-number-click | week: Number | Triggers when user click on week number (Only when show-week-number and week-number-clickable props are set) |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Footer |
+| header | — | Header |
+| trigger | active: Boolean | Trigger |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| toggle | — | — | Toggle activation (picker visibility) |
+| focus | — | — | Set focus on the input element |
+| checkHtml5Validity | — | — | Check HTML5 validation, set isValid property. If validation fails, send 'is-danger' type, and error message to parent if it's a Field |
+| togglePicker | active: Boolean | — | Toggle datepicker visibility with explicit active state |
+
+### BDatetimepicker
+An input with a simple dropdown/modal for selecting a date and time, uses native datetimepicker for mobile
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| v-model | Date | — | Binding value |
+| datetime-formatter | Function | (time) => new Intl.DateTimeFormat(locale).format(time) | Function to format datetime (Date type) to a string for displaying in the input |
+| datetime-parser | Function | Tries to parse the time using the locale specific format. Fallback to HH:mm or HH:mm AM/PM | Function to parse string to a datetime (Date type) for setting the component's datetime from the input |
+| datetime-creator | Function | (date) => date | Function used internally to create a new Date instance from a given date |
+| placeholder | String | — | Input placeholder |
+| disabled | Boolean | false | Same as native disabled |
+| rules-for-first-week | Number | 4 | Choose the rule to determine the first week of year, 4 for ISO or 1 for other |
+| tz-offset | Number | 0 | Timezone offset in minutes |
+| expanded | Boolean | false | Makes input full width when inside a grouped or addon field |
+| rounded | Boolean | false | Makes the input rounded |
+| maxlength | Number, String | — | Same as native maxlength, plus character counter |
+| use-html5-validation | Boolean | true | Enable HTML5 native validation |
+| validation-message | String | — | The message which is shown when a validation error occurs |
+| status-icon | Boolean | true | Show status icon using field and variant prop |
+| min-datetime | Date | — | Earliest datetime available for selection |
+| max-datetime | Date | — | Latest datetime available for selection |
+| first-day-of-week | Number | 0 | First day of week to display in table header |
+| nearby-month-days | Boolean | true | Show/Hide nearby month days (prev and next month) |
+| size | String | — | Vertical size of input and picker, optional |
+| inline | Boolean | false | Datimepicker is shown inline, input is removed |
+| editable | Boolean | false | Enable input/typing. Note that you might have to set a custom time parser |
+| loading | Boolean | false | Add the loading state to the input |
+| icon | String | — | Icon name to be added |
+| icon-right | String | — | Icon name to be added on the right side |
+| icon-right-clickable | Boolean | false | Make the right icon clickable |
+| icon-pack | String | mdi | Icon pack to use |
+| mobile-native | Boolean | true | Enable native datetimepicker on mobile |
+| position | String | Bottom right | Optional, position of the timepicker relative to the input |
+| open-on-focus | Boolean | false | Open timepicker on input focus |
+| datepicker | Object | — | Any datepicker props |
+| timepicker | Object | — | Any timepicker props |
+| focusable | Boolean | true | Datetimepicker container can be focused |
+| horizontal-time-picker | Boolean | false | Changes the time picker layout to a horizontal position |
+| append-to-body | Boolean | false | Append datetimepicker calendar to body (prevents event bubbling) |
+| locale | String, Array of String | undefined: default to browser locale. | Accept a string with a BCP 47 language tag, or an array of such strings. See Unicode BCP 47 locale identifier |
+| Any native attribute | — | — | — |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| update:modelValue | value: Date | null | Triggers when the datetime value changes |
+| active-change | active: Boolean | Triggers when the datetimepicker visibility (active state) changes |
+| focus | event: Event | Triggers when input receives focus |
+| blur | event: Event | Triggers when input loses focus |
+| icon-right-click | event: $event | Triggers when the right icon is clickable and has been clicked |
+| change-month | month: Number(0-11) | Triggers when calendar month is changed |
+| change-year | year: Number | Triggers when calendar year is changed |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| left | — | Left side of footer |
+| right | — | Right side of footer |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| toggle | — | — | Toggle activation (picker visibility) |
+| focus | — | — | Set focus on the input element |
+| checkHtml5Validity | — | — | Check HTML5 validation, set isValid property. If validation fails, send 'is-danger' type, and error message to parent if it's a Field |
+
+### BDialog
+Dialogs inform users about a specific task and may contain critical information or require decisions
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| type | String | is-primary | Type (color) of the confirm button (and the icon if hasIcon) |
+| title | String | — | Dialog title |
+| message | String, Array | — | Message text (can contain HTML). Dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to XSS vulnerabilities. Only use HTML interpolation on trusted content and never on user-provided content. |
+| hasIcon | Boolean | false | Adds an icon on the left side depending on the type or icon |
+| icon | String | — | Icon name if hasIcon, optional |
+| iconPack | String | — | Icon pack to use if hasIcon, optional |
+| size | String | — | Dialog's size, optional |
+| animation | String | zoom-out | Custom animation (transition name) |
+| confirmText | String | OK | Text of the confirm button |
+| cancelText | String | Cancel | Text of the cancel button |
+| canCancel | Boolean, Array | true for Confirm/Prompt, false for Alert | Can close dialog by clicking cancel button, pressing escape or clicking outside |
+| inputAttrs | Object | — | Prompt only: input's attributes |
+| onConfirm | Function (value: String, dialog: VueInstance) | — | Callback function when the confirm button is clicked |
+| closeOnConfirm | Boolean | true | Turning this prop into false allows to make async requests in onConfirm callback |
+| onCancel | Function | — | Callback function when the dialog is canceled (cancel button is clicked / pressed escape / clicked outside) |
+| scroll | String | clip | clip to remove the <body> scrollbar, keep to have a non scrollable scrollbar to avoid shifting background, but will set <body> to position fixed, might break some layouts |
+| container | String | body | DOM element the dialog will be created on. Note that this also changes the position of the dialog from fixed to absolute. Meaning that the container should be fixed. Also note that this will override the defaultContainerElement if you specified it in your Buefy Constructor Options. See Constructor options for more details. |
+| focusOn | String | confirm | Focus on confirm or cancel button (when dialog is not prompt) |
+| trap-focus | Boolean | true | Trap focus inside the dialog. |
+| aria-role | String | — | Role attribute to be passed to modal container for better accessibility. |
+| aria-modal | Boolean | false | Improve accessiblity when enabled. |
+| v-model | Boolean | false | Binding value for dialog visibility |
+| width | String, Number | 960 | Width of the dialog |
+| full-screen | Boolean | false | Display dialog as full screen |
+| auto-focus | Boolean | true | Automatically focus dialog when opened |
+| custom-class | String | — | Custom class to apply to the dialog |
+| custom-content-class | String, Array, Object | — | Custom class to apply to the dialog content |
+| aria-label | String | — | Accessibility label for the dialog |
+| close-button-aria-label | String | — | Accessibility label for the close button |
+| destroy-on-hide | Boolean | true | Destroy dialog component when hidden |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| confirm | value: String, dialog: VueInstance | Triggers when the confirm button is clicked |
+| cancel | method: String | Triggers when the dialog is canceled |
+| close | — | Triggers when the dialog is closed |
+| update:modelValue | active: Boolean | Triggers when the dialog visibility changes (v-model event) |
+| after-enter | — | Triggers after the dialog enter transition completes |
+| after-leave | — | Triggers after the dialog leave transition completes |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| confirm | — | — | Trigger the confirm action (validates input if prompt dialog) |
+| close | — | — | Close the dialog |
+| cancel | method: String | — | Cancel the dialog |
+| startLoading | — | — | Start the loading state for the confirm button |
+| cancelLoading | — | — | Cancel the loading state for the confirm button |
+
+### BDropdown
+Dropdowns are very versatile, can used as a quick menu or even like a select for discoverable content
+
+#### BDropdown
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| v-model | Any | null | Binding value |
+| triggers | Array | ['click'] | Dropdown will be triggered by any events |
+| position | String | Bottom right | Optional, position of the dropdown relative to the trigger |
+| disabled | Boolean | false | Disables dropdown |
+| animation | String | fade | Custom animation (transition name) |
+| inline | Boolean | false | Dropdown content (items) are shown inline, trigger is removed |
+| mobile-modal | Boolean | true | Dropdown content (items) are shown into a modal on mobile |
+| expanded | Boolean | false | Dropdown will be expanded (full-width) |
+| aria-role | String | — | Role attribute to be passed to list container for better accessibility. Use menu only in situations where your dropdown is related to navigation menus. |
+| multiple | Boolean | false | Allows multiple selections |
+| trap-focus | Boolean | true | Trap focus inside the dropdown. |
+| can-close | Boolean, Array | true | Can close dropdown by pressing escape or by clicking outside |
+| close-on-click | Boolean | true | Close dropdown when content is clicked |
+| append-to-body | Boolean | false | Append dropdown content to body (prevents event bubbling) |
+| append-to-body-copy-parent | Boolean | false | Copy parent classes when appending to body |
+| scrollable | Boolean | false | Dropdown content will be scrollable |
+| max-height | String, Number | 200px | Max height of dropdown content |
+| trigger-tabindex | Number | 0 | Set the tabindex attribute on the dropdown trigger div (-1 to prevent selection via tab key) |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| update:modelValue | value: Any | Any[] | Triggers when the selected value changes (v-model event) |
+| change | value: String | Triggers when an item is selected |
+| active-change | active: Boolean | Triggers when dropdown is activated or deactivated (visibility of list) |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | slot-scope="{ active }" *Only works when not hoverable. | — |
+| trigger | active: Boolean | Trigger content for the dropdown |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| toggle | — | — | Toggle activation (dropdown list visibility) |
+
+#### BItem
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| value | Any | null | The value that will be returned on events and v-model |
+| separator | Boolean | false | Set the item to be a separator |
+| disabled | Boolean | false | Item is disabled |
+| focusable | Boolean | true | Item can be focused |
+| custom | Boolean | false | Item is not a clickable item |
+| has-link | Boolean | false | Use it if your item is an anchor tag or router-link |
+| paddingless | Boolean | false | Remove padding |
+| aria-role | String | — | Role attribute to be passed to list item for better accessibility. Use menuitem only in situations where your dropdown is related to navigation menus. |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| click | — | Triggers when the item is clicked |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | — |
+
+### BField
+Fields are used to add functionality to controls and to attach/group components and elements together
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| type | String, Object | — | Type (color) of the field and help message, also adds a matching icon, optional. Used by Input, Select and Autocomplete |
+| label | String | — | Field label |
+| label-for | String | — | Same as native for set on the label |
+| custom-class | String | — | CSS classes to be applied on field label |
+| message | String, Object, Array, Array | — | Help message text |
+| grouped | Boolean | false | Direct child components/elements of Field will be grouped horizontally (see which ones at the top of the page). Do not mix with horizontal because there is an issue that the validation error cannot be reset once it is set if combined with horizontal. |
+| group-multiline | Boolean | false | Allow controls to fill up multiple lines, making it responsive |
+| position | String | — | Which position should the addons appear, optional |
+| addons | Boolean | true | Field automatically attach controls together |
+| expanded | Boolean | false | Makes the field take up the full width available |
+| horizontal | Boolean | false | Group label and control on the same line for horizontal forms. Do not mix with grouped because there is an issue that the validation error cannot be reset once it is set if combined with grouped. |
+| label-position | String | - | Position of label |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Main content area where form controls are placed |
+| label | - | Custom label |
+| message | messages: [string] | Custom message |
+
+### BIcon
+Icons take an important role of any application
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| type | String, Object | — | Type (color) of the icon, optional |
+| component | String | Uses global config defaultIconComponent or <i> tag | Component to be used instead of default <i> tag. Useful for custom icon components like FontAwesome Vue components |
+| pack | String | mdi | Icon pack to use |
+| icon | String | — | Icon name |
+| alias | String | — | Named icon alias from the global iconAliases config (e.g. "chevronLeft", "check"). When set, renders an inline SVG or delegated component instead of a CSS-class icon. Takes precedence over icon and pack. |
+| size | String | — | Icon size, optional |
+| custom-size | String | Depends on size prop | Overrides icon font size, optional |
+| custom-class | String | — | Add class to icon font (<i> tag), optional. See here for MDI, here for FontAwesome 4 and here for FontAwesome 5 custom classes |
+
+### BImage
+Lazy loading responsive images
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| src | String | — | The image url you want to display. You can use webp extension here. Do not forget to specify a fallback for browsers that do not support this format yet. |
+| alt | String | — | The image alternate text, if it cannot be displayed. |
+| src-fallback | String | — | The image url you want to display if the image specified using src fails to load. |
+| webp-fallback | String | — | Fallback when using webp format. You can specify an extension only (.jpg, .jpeg, .png, .gif) if the filename is the same. You can use a full url if not. |
+| lazy | Boolean | true | Use IntersectionObserver to display the image only when in viewport. |
+| responsive | Boolean | true | The image will take 100% of the parent width. Use this with ratio to prevent page jump when images are loading. |
+| ratio | String | — | The space will be reserved. Prevent page jump when images are loading when using responsive. |
+| placeholder | String | — | The image that will be displayed before the src load. Useful if you want to use lqip technique. Will use webp-fallback if only an extension is given. |
+| srcset | String | — | You can enter a valid srcset value (ex. "image1.webp 400w,image2.webp 800w"). Will use webp-fallback if only an extension is given. |
+| srcset-sizes | Array | — | It will generate a srcset string using those sizes. |
+| srcset-formatter | Function | (src, size) => `${srcFilename}-${size}.${srcExt}` | Function to format src according to a given size. |
+| rounded | Boolean | false | Rounded image. |
+| custom-class | String | — | Add custom css class to the img tag. |
+| caption-first | Boolean | false | Controls the position of the caption. When true, caption is displayed before the image, when false, after the image. |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| load | event: Event, src: String | Triggers when the image is loaded. |
+| error | event: Event, src: String | Triggers when the image fails to load. |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| placeholder | — | This is to customize the placeholder waiting the image to load. |
+| caption | — | Content for the image caption displayed as a figcaption element. Position controlled by the caption-first prop. |
+
+### BInput
+Get user Input. Use with Field to access all functionalities
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| v-model | String, Number | — | Binding value |
+| lazy | Boolean | false | Makes the binding lazy. Note: v-model.lazy won't work |
+| type | String | text | Input type, like native |
+| size | String | — | Vertical size of input, optional |
+| expanded | Boolean | false | Makes input full width when inside a grouped or addon field |
+| password-reveal | Boolean | false | Add the reveal password functionality |
+| loading | Boolean | false | Add the loading state to the input |
+| icon-pack | String | mdi | Icon pack to use |
+| icon | String | — | Icon name to be added |
+| icon-right | String | — | Icon name to be added on the right side |
+| icon-clickable | Boolean | false | Make the icon clickable |
+| icon-right-clickable | Boolean | false | Make the icon right clickable |
+| icon-right-type | String | — | Type (color) for the right icon |
+| rounded | Boolean | false | Makes the input rounded |
+| autocomplete | String | Uses global config defaultInputAutocomplete | Native HTML5 autocomplete attribute |
+| use-html5-validation | Boolean | true. Can be changed via defaultUseHtml5Validation config option. | Enable HTML5 native validation |
+| locale | String, Array | Uses global config defaultLocale | Accept a locale string to display date in certain language (month and days names). See Moment.js documentation for valid locales. This overrides the default locale assigned globally. |
+| status-icon | Boolean | true. Can be changed via defaultStatusIcon config option. | Show status icon using field and variant prop |
+| maxlength | String, Number | — | Same as native maxlength, plus character counter |
+| has-counter | Boolean | true | Show character counter when maxlength prop is passed |
+| custom-class | String | — | CSS classes to be applied on input |
+| validation-message | String | — | The message which is shown when a validation error occurs |
+| compat-fallthrough | Boolean | true. Can be changed via defaultCompatFallthrough config option. | Whether class, style, and id attributes are applied to the root <div>, or either of <input> or <textarea> element. If true, they are applied to the root <div> element, which is compatible with Vue 2. |
+| Any native attribute | — | — | — |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| update:modelValue | value: String|Number | Triggers when the value is changed (Vue 3 v-model event) |
+| input | event: Event | Native input event that bubbles up from the underlying input element |
+| change | event: Event | Native change event that bubbles up from the underlying input element |
+| focus | event: $event | Triggers when input has received focus |
+| blur | event: $event | Triggers when input has lost focus |
+| icon-click | event: $event | Triggers when the icon is clickable and have been clicked |
+| icon-right-click | event: $event | Triggers when the right icon is clickable and have been clicked |
+| [any].native | event: $event | Listen to any native event, e.g. click.native |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| checkHtml5Validity | — | isValid: Boolean | Check validation of HTML5 (add the message and type/color), also updates the isValid property |
+| focus | — | — | Set focus (internally uses the native .select() method) |
+
+### BLoading
+A simple loading overlay
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| v-model | Boolean | false | Whether loading is active or not |
+| programmatic | Boolean | false | Indicates if the loading was created programmatically |
+| container | Object, Function, HTMLElement | document.body | DOM element where the loading component will be created on (for programmatic usage) |
+| animation | String | fade | Custom animation (transition name) |
+| is-full-page | Boolean | true | Loader will overlay the full page |
+| can-cancel | Boolean | false | Can close Loading by pressing escape or clicking outside |
+| on-cancel | Function | — | Callback function to call after user canceled (pressed escape / clicked outside) |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| close | — | Triggers when user closed/canceled or called programmatically from the injected component |
+| update:modelValue | value: Boolean | Triggers when the loading state changes |
+| update:is-full-page | value: Boolean | Triggers when the full-page state changes |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Loading icon |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| close | — | — | Programmatically close the loading overlay |
+
+### BMenu
+A simple vertical menu
+
+#### BMenu
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| accordion | Boolean | true | Close automatically the previous selected menu list |
+| activable | Boolean | true | Active automatically the clicked menu item |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Menu list elements |
+
+#### BList
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| label | String | — | Menu list label |
+| icon | String | — | Icon name |
+| icon-pack | String | mdi | Icon pack to use |
+| size | String | is-small | Icon size |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Menu item elements |
+| label | — | Menu list custom label |
+
+#### BItem
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| label | String | — | Menu item label |
+| icon | String | — | Icon name |
+| icon-pack | String | mdi | Icon pack to use |
+| disabled | Boolean | false | Item is disabled |
+| v-model | Boolean | false | Item is active |
+| v-model:expanded | Boolean | false | Item is expanded when default contains menu items |
+| animation | String | fade | Custom animation (transition name) |
+| tag | String, Object | a | Button tag name |
+| aria-role | String | — | Role attribute to be passed to list item for better accessibility. Use menuitem only in situations where your menu item is really related to navigation. |
+| compat-fallthrough | Boolean | true. Can be changed via the defaultCompatFallthrough config option. | Whether class, style, and id attributes are applied to the root <li> element or the underlying tag. If true, they are applied to the root <li> element, which is compatible with Buefy for Vue 2. |
+| size | String | is-small | Icon size |
+| Any native attribute | — | — | — |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| update:modelValue | value: Boolean | Triggers when the active state changes |
+| update:expanded | value: Boolean | Triggers when the expanded state changes |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Menu item body |
+| label | active: Boolean,expanded: Boolean | Menu list custom label |
+
+### BMessage
+Colored message blocks, to draw attention of your user
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| type | String | — | Type (color) of the message, optional |
+| v-model | Boolean | true | Whether message is active or not |
+| message | String | — | Message text content |
+| closable | Boolean | true | Adds an 'X' button that closes the notification — works if has a title |
+| auto-close | Boolean | false | Hide notification after duration |
+| duration | Number | 2000 | Visibility duration in miliseconds |
+| progress-bar | Boolean | false | remaining seconds before the alert will close (in seconds) |
+| icon-pack | String | mdi | Icon pack to use |
+| has-icon | Boolean | false | Adds an icon on the left side depending on the type (or the icon prop if defined) |
+| icon | Boolean | — | Icon name to use with has-icon |
+| size | String | — | Size of the control, optional |
+| icon-size | String | is-large or size prop | Size of the icon, optional |
+| title | String | — | Message title |
+| aria-close-label | String | — | Label for the close button, to be read by accessibility screenreaders. |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| close | — | Triggers when user closes the message |
+| update:modelValue | value: Boolean | Triggers when the message visibility changes |
+| click | — | Triggers when the message is clicked |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Main message content |
+| header | — | Message custom header |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| close | — | — | Programmatically close the message |
+
+### BModal
+Classic modal overlay to include any content you may need
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| v-model | Boolean | false | Whether modal is active or not |
+| component | Object, Function | — | Component to be injected, used to open a component modal programmatically. Close modal within the component by emitting a 'close' event — this.$emit('close') |
+| programmatic | Boolean | false | Indicates if the modal was created programmatically |
+| props | Object | — | Props to be binded to the injected component |
+| events | Object | — | Events to be binded to the injected component |
+| content | String, Array | — | HTML content Dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to XSS vulnerabilities. Only use HTML interpolation on trusted content and never on user-provided content. |
+| width | Number, String | 960 | Width of the Modal |
+| full-screen | Boolean | false | Display modal as full screen |
+| has-modal-card | Boolean | false | If your modal content has a .modal-card as root, add this prop or the card might break on mobile |
+| animation | String | zoom-out | Custom animation (transition name) |
+| can-cancel | Boolean, Array | ['escape', 'x', 'outside'] | Can close Modal by clicking 'X', pressing escape or clicking outside |
+| on-cancel | Function | — | Callback function to call after user canceled (clicked 'X' / pressed escape / clicked outside) |
+| scroll | String | clip | clip to remove the <body> scrollbar, keep to have a non scrollable scrollbar to avoid shifting background, but will set <body> to position fixed, might break some layouts |
+| trap-focus | Boolean | true | Trap focus inside the modal. |
+| auto-focus | Boolean | true | Automatically focus modal when active. |
+| custom-class | String | — | CSS classes to be applied on modal |
+| custom-content-class | String, Array, Object | — | CSS classes to be applied on modal content |
+| destroy-on-hide | Boolean | true | Destroy modal on hide |
+| aria-role | String | — | Role attribute to be passed to modal container for better accessibility. |
+| aria-label | String | — | Aria label attribute to be passed to modal container for better accessibility. |
+| aria-modal | Boolean | false | Improve accessiblity when enabled. |
+| close-button-aria-label | String | — | Aria label attribute to be passed to the close button for better accessibility. |
+| render-on-mounted | Boolean | false | Create DOM for the modal content whether modal is active or not |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| close | — | Triggers when user closed/canceled or called programmatically from the injected component |
+| after-enter | — | Triggers when the modal transition after-enter hook is called. |
+| after-leave | — | Triggers when the modal transition after-leave hook is called. |
+| update:modelValue | value: Boolean | Triggers when the modal visibility changes |
+| cancel | method: String - The cancellation method (escape, x, outside) | Triggers when user cancels the modal (escape, x, or outside click) |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | canCancel: Boolean, close: Function | Modal content |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| close | — | — | Programmatically close the modal |
+| cancel | method: String - The cancellation method (escape, x, outside) | — | Programmatically cancel the modal with a specific method |
+
+### BNavbar
+A responsive horizontal navbar that can support images, links, buttons, and dropdowns
+
+#### BNavbar
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| transparent | Boolean | false | Remove any hover or active background from the navbar items |
+| fixed-top | Boolean | false | Fixes the navbar to the top of the page |
+| fixed-bottom | Boolean | false | Fixes the navbar to the bottom of the page |
+| v-model | Boolean | false | To control the behaviour of the mobile menu programmatically |
+| centered | Boolean | false | To center the navbar-start slot |
+| type | String, | — | Type (color) of the background, optional |
+| wrapper-class | String | — | To wrap the navbar content into an div with the provided class |
+| close-on-click | Boolean | true | Control the behavior of the mobile menu by clicking on a link or outside the menu |
+| mobile-burger | Boolean | true | Use to display or not the burger on mobile resolution. |
+| spaced | Boolean | false | Sets Top and Bottom paddings with 1rem, Left and Right paddings with 2rem |
+| shadow | Boolean | false | Add a shadow to navbar |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| update:modelValue | value: Boolean | Triggers when the mobile menu visibility changes (Vue 3 v-model event) |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| brand | — | The slot for the brand logo |
+| burger | isOpened: Boolean, toggleActive: Function | The slot for the burger that triggers the menu toggle |
+| start | — | Items that will appear on the left |
+| end | — | Items that will appear on the right |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| toggleActive | — | — | Toggle the mobile menu visibility |
+| closeMenu | — | — | Close the mobile menu |
+
+#### BItem
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| tag | String, Object | a | Sets the type of the component that have to render as navbar-item |
+| active | Boolean | false | Item is active |
+
+#### BDropdown
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| label | String | — | Dropdown label text |
+| tag | String, Object | a | Sets the type of the component that have to render as navbar-item |
+| hoverable | Boolean | false | Dropdown will be triggered by hover instead of click |
+| active | Boolean | false | Item is active |
+| right | Boolean | false | Dropdown will be anchored to the right side |
+| arrowless | Boolean | false | Show/hide arrow icon on dropdown |
+| boxed | Boolean | false | Show a boxed version of the dropdown |
+| collapsible | Boolean | false | Collapsible dropdown on mobile |
+| close-on-click | Boolean | true | Close dropdown when clicking inside |
+| compat-fallthrough | Boolean | true. Can be changed via the defaultCompatFallthrough config option. | Whether class, style, and id attributes are applied to the root <div> element or the underlying tag. If true, they are applied to the root <div> element, which is compatible with Buefy for Vue 2. |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| active-change | active: Boolean | Triggers when dropdown is activated or deactivated (visibility of list) |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Menu item body |
+| label | - | Dropdown menu custom label |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| toggleMenu | — | — | Toggle the dropdown menu visibility |
+| showMenu | — | — | Show the dropdown menu |
+| closeMenu | — | — | Close the dropdown menu |
+
+### BNotification
+Bold notification blocks to alert your users of something
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| v-model | Boolean | true | Active state - set on `true` to reopen after close |
+| type | String | — | Type (color) of the notification, optional |
+| title | String | — | Notification title |
+| size | String | — | Size of the notification, optional |
+| closable | Boolean | true | Adds an 'X' button that closes the notification |
+| auto-close | Boolean | false | Hide notification after duration |
+| duration | Number | 2000 | Visibility duration in miliseconds |
+| progress-bar | Boolean | false | remaining seconds before the alert will close (in seconds) |
+| animation | String | fade | Custom animation (transition name) |
+| icon-pack | String | mdi | Icon pack to use |
+| has-icon | Boolean | false | Adds an icon on the left side depending on the type (or the icon prop if defined) |
+| icon | Boolean | — | Icon name to use with has-icon |
+| icon-size | String | Depends on size prop | Size of the icon, optional |
+| aria-close-label | String | — | Label for the close button, to be read by accessibility screenreaders. |
+| message | String, Array | — | Message text (can contain HTML). Dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to XSS vulnerabilities. Only use HTML interpolation on trusted content and never on user-provided content. |
+| position | String | is-top-right | Which position the notification will appear when opened programmatically |
+| queue | Boolean | true | If should queue with others notices (snackbar/toast/notification) |
+| indefinite | Boolean | false | Show the Notification indefinitely until it is dismissed when opened programmatically |
+| pause-on-hover | Boolean | false | Pause and show on hover until hover off when opened programmatically, if indefinite is false. |
+| container | String | body | DOM element the toast will be created on. Note that this also changes the position of the toast from fixed to absolute. Meaning that the container should be fixed. |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| update:modelValue | value: Boolean | Triggers when the notification visibility changes |
+| close | — | Triggers when user closes the notification |
+| click | — | Triggers when user clicks the notification |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Main notification content |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| close | — | — | Programmatically close the notification |
+
+### BNumberinput
+A simple number input with controls
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| v-model | String, Number | — | Binding value |
+| type | String | is-primary | Type (color) of the control, optional |
+| size | String | — | Vertical size of input, optional |
+| expanded | Boolean | false | Makes input full width when inside a grouped or addon field |
+| loading | Boolean | false | Add the loading state to the input |
+| editable | Boolean | true | Editable input |
+| icon-pack | String | mdi | Icon pack to use |
+| min | Number, String | — | Minimum allowed value |
+| max | Number, String | — | Maximum allowed value |
+| step | Number, String | 1 | Incremental number step |
+| min-step | Number, String | Defaults to value of step | Minimum step-size allowed. Input value is validated to be integer multiple of min-step |
+| exponential | Boolean, Number | false | The factor of incrementation on long press |
+| controls | Boolean | true | Show controls (+/-) |
+| controls-rounded | Boolean | false | Show rounded controls |
+| controls-position | String | — | Position of controls |
+| controls-alignment | String | center | Alignment of controls |
+| aria-minus-label | String | — | Accessibility label for the minus button. |
+| aria-plus-label | String | — | Accessibility label for the plus button. |
+| long-press | Boolean | true | Long press on the plus or minus button will increment/decrement the input value. |
+| disabled | Boolean | false | Same as native disabled |
+| placeholder | Number, String | — | Same as native placeholder |
+| autocomplete | String | — | Same as native autocomplete |
+| rounded | Boolean | false | Makes the element rounded |
+| maxlength | Number, String | — | Same as native maxlength, plus character counter |
+| use-html5-validation | Boolean | defaultUseHtml5Validation config, true by default | Enable HTML5 native validation |
+| validation-message | String | — | The message which is shown when a validation error occurs |
+| locale | String, Array | defaultLocale config (which is undefined by default) | Locale to be used for form validation and date formatting |
+| status-icon | Boolean | defaultStatusIcon config, true by default | Show status icon using field and variant prop |
+| compat-fallthrough | Boolean | true. Can be changed via the defaultCompatFallthrough config option. | Whether the class, style, and id attributes are applied to the root <div> element or the underlying <b-input> component. If true, they are applied to the root <div> element, which is compatible with Buefy for Vue 2. |
+| Any native attribute | — | — | — |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| update:modelValue | value: Number|null | Triggers when value is changed |
+| input | value: String|Number | Triggers when value is changed |
+| focus | event: $event | Triggers when input has received focus |
+| blur | event: $event | Triggers when input has lost focus |
+| [any].native | event: $event | Listen to any native event, e.g. click.native |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| increment | — | — | Programmatically increment the input value by the step amount |
+| decrement | — | — | Programmatically decrement the input value by the step amount |
+| checkHtml5Validity | — | isValid: Boolean | Check validation of HTML5 (add the message and type/color), also updates the isValid property |
+| focus | — | — | Set focus (internally uses the native .select() method) |
+
+### BPagination
+A responsive and flexible pagination
+
+#### BPagination
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| total | Number, String | — | Total count of items |
+| per-page | Number | 20 | Items count for each page |
+| range-before | Number | 1 | Number of pagination items to show before current page |
+| range-after | Number | 1 | Items to paginatation items to show after current page |
+| v-model | Number, String | 1 | Current page number (two-way binding) |
+| current | Number | 1 | Current page number, use the .sync modifier to make it two-way binding |
+| order | String | — | Buttons order, optional |
+| size | String | — | Pagination size, optional |
+| simple | Boolean | false | Simpler style |
+| rounded | Boolean | false | Rounded button styles |
+| icon-pack | String | mdi | Icon pack to use |
+| icon-prev | String | chevron-left | Icon to use for previous button |
+| icon-next | String | chevron-right | Icon to use for next button |
+| aria-next-label | String | — | Accessibility label for the next page link. |
+| aria-previous-label | String | — | Accessibility label for the previous page link. |
+| aria-page-label | String | — | Accessibility label for the page link. If passed, this text will be prepended to the number of the page. |
+| aria-current-label | String | — | Accessibility label for the current page link. If passed, this text will be prepended to the current page. |
+| page-input | Boolean | false | Include page number input. |
+| page-input-position | String | — | Page input position. |
+| debounce-page-input | Number | — | Sets the page input debounce time (in milliseconds) |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| update:modelValue | value: Number | Triggers when the current page is changed |
+| change | value: Number | Triggers when the current page is changed |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | :page="props.page" | This is to customize numbered pagination buttons with the Button subcomponent. |
+| next | :page="props.page" | This is to customize the next pagination button with the Button subcomponent. |
+| previous | :page="props.page" | This is to customize the previous pagination button with the Button subcomponent. |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| prev | event?: Event | — | Go to the previous page |
+| next | event?: Event | — | Go to the next page |
+| first | event?: Event | — | Go to the first page |
+| last | event?: Event | — | Go to the last page |
+| changePage | num: Number, event?: Event | — | Go to a specific page number |
+
+#### BButton
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| page | Object | — | The prop page need to be passed upon the component (:page="props.page"). |
+| tag | String, Object | a | Button tag name |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | - | Required, pagination button content |
+
+### BProgress
+Wrapper around Bulma / Native HTML progress bars
+
+#### BProgress
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| type | String, Object | is-darkgrey | Type (color) of the progress bar, optional |
+| size | String | — | Size of the progress bar, optional |
+| rounded | Boolean | true | rounded style of the progress bar, optional |
+| value | Number | — | The progress value, progress will be indeterminate if undefined. |
+| max | Number | 100 | The maximum value for the progress bar. |
+| show-value | Boolean | false | If the value should be displayed inside the progress bar. |
+| format | String | raw | Which format should be used to display the value (if show-value is true). The value will be displayed as-is if using raw. The percent using value and max will be calculated and displayed if using percent |
+| precision | Number | 2 | How many decimals should be displayed. |
+| keep-trailing-zeroes | Boolean | false | Truncate or not the trailing zeroes |
+| locale | String, Array of String | undefined: default to browser locale. | Accept a string with a BCP 47 language tag, or an array of such strings. See Unicode BCP 47 locale identifier |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | This will be displayed inside the progress bar instead of the calculated value |
+| bar | — | You can insert b-progress-bar components if you want to have multiple bars. |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| calculateValue | value: Number | String | undefined | Calculate and format the display value based on the current value, format, precision, and locale settings |
+
+#### BBar
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| type | String | inherited from parent | Type (color) of the progress bar, optional |
+| value | Number | — | The progress value. |
+| show-value | Boolean | inherited from parent | If the value should be displayed inside the progress bar. |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | This will be displayed inside the progress bar instead of the calculated value |
+
+### BRadio
+Select an option from a set
+
+#### BRadio
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| v-model | Any | — | Binding value |
+| native-value | Any | — | Same as native value |
+| disabled | Boolean | false | Same as native disabled |
+| required | Boolean | false | Same as native required |
+| name | String | — | Same as native name |
+| size | String | — | Size of the control, optional |
+| type | String | — | Type (color) of the control, optional |
+| required | Boolean | false | Same as native required |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| update:modelValue | value: Any | Triggers when the value of radio is changed |
+| change | event: Event | Native change event that bubbles up from the underlying input element |
+| [any].native | event: $event | Listen to any event using this syntax, e.g click.native |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Radio label content |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| focus | — | — | Set focus on the radio input element |
+
+#### BButton
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| v-model | Any | — | Binding value |
+| native-value | Any | — | Same as native value |
+| type | String | is-primary | Type (color) of the button when checked |
+| disabled | Boolean | false | Same as native disabled |
+| name | String | — | Same as native name |
+| size | String | — | Size of the button, optional |
+| expanded | Boolean | false | Radio button will be expanded (full-width) |
+| required | Boolean | false | Same as native required |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| update:modelValue | value: Any | Triggers when the value of radio button is changed |
+| change | event: Event | Native change event that bubbles up from the underlying input element |
+| [any].native | event: $event | Listen to any event using this syntax, e.g click.native |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Radio button content |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| focus | — | — | Set focus on the radio button input element |
+
+### BRate
+A quick rating operation on something
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| v-model | Number | 0 | Binding value |
+| max | Number | 5 | Max rating score |
+| icon | String | star | to specify the icon |
+| icon-pack | String | mdi | Icon pack to use |
+| size | String | — | Include show-text, show-score and custom-text, optional |
+| rtl | Boolean | false | Change text direction show-text, show-score and custom-text to left |
+| spaced | Boolean | false | Added spacing for icons |
+| disabled | Boolean | false | Read only, if true Support decimal value |
+| show-score | Boolean | false | Display value |
+| show-text | Boolean | false | Display texts template. show-score and show-text cannot be true at the same time |
+| custom-text | String | — | Display custom text like a total points or total reviews, and this only for show-score |
+| texts | Array | — | Texts template only for show-text, like on e-commerce |
+| locale | String, Array of String | undefined: default to browser locale. | Accept a string with a BCP 47 language tag, or an array of such strings. See Unicode BCP 47 locale identifier |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| update:modelValue | value: Number | Triggers when rate value is changed |
+| change | value: Number | Triggers when rate value is changed |
+
+### BSelect
+Select an item in a dropdown list. Use with Field to access all functionalities
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| v-model | Any | — | Binding value |
+| size | String | — | Size of the select, optional |
+| placeholder | String | — | Text when nothing is selected |
+| loading | Boolean | false | Add the loading state to the Select |
+| expanded | Boolean | false | Select will be expanded (full-width) |
+| icon | String | — | Icon name to be added |
+| icon-pack | String | mdi | Icon pack to use |
+| native-size | Number | 4 | Same as native size |
+| multiple | Boolean | false | Same as native multiple |
+| rounded | Boolean | false | Makes the element rounded |
+| maxlength | Number, String | — | Same as native maxlength, plus character counter |
+| use-html5-validation | Boolean | defaultUseHtml5Validation config, true by default | Enable HTML5 native validation |
+| validation-message | String | — | The message which is shown when a validation error occurs |
+| locale | String, Array | defaultLocale config (which is undefined by default) | Locale to be used for form validation and date formatting |
+| status-icon | Boolean | defaultStatusIcon config, true by default | Show status icon using field and variant prop |
+| compat-fallthrough | Boolean | true. Can be changed via the defaultCompatFallthrough config option. | Whether the class, style, and id attributes are applied to the root <div> element or the underlying <select> element. If true, they are applied to the root <div> element, which is compatible with Buefy for Vue 2. |
+| Any native attribute | — | — | — |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| update:modelValue | value: Any | Triggers when value is changed |
+| change | event: Event | Native change event that bubbles up from the underlying select element |
+| focus | event: $event | Triggers when input has received focus |
+| blur | event: $event | Triggers when input has lost focus |
+| [any].native | event: $event | Listen to any native event, e.g. click.native |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Option elements for the select |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| checkHtml5Validity | — | isValid: Boolean | Check validation of HTML5 (add the message and type/color), also updates the isValid property |
+| focus | — | — | Set focus |
+
+### BSidebar
+A sidebar to use as left/right overlay or static
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| v-model | Boolean | false | To control the behaviour of the sidebar programmatically (two-way binding) |
+| open | Boolean | false | To control the behaviour of the sidebar programmatically, use the .sync modifier to make it two-way binding |
+| position | String | fixed | Set display position of sidebar |
+| type | String, Object | — | Type (color) of the background, optional |
+| can-cancel | Boolean, Array | ['escape', 'outside'] | Can close Sidebar pressing escape or clicking outside |
+| on-cancel | Function | — | Callback function to call after user canceled (clicked 'X' / pressed escape / clicked outside) |
+| fullwidth | Boolean | false | Show sidebar in fullwidth. A close button will be present for a fullwidth sidebar. |
+| fullheight | Boolean | false | Show sidebar in fullheight. |
+| mobile | String | — | Custom layout on mobile |
+| right | Boolean | false | Show the sidebar on right |
+| overlay | Boolean | false | Show an overlay when sidebar is open |
+| expand-on-hover | Boolean | false | Expand sidebar on hover when reduced or mobile is reduce |
+| expand-on-hover-fixed | Boolean | false | Expand sidebar on hover with fixed position when reduced or mobile is reduce |
+| reduce | Boolean | false | Show a small sidebar |
+| scroll | String | clip | clip to remove the <body> scrollbar, keep to have a non scrollable scrollbar to avoid shifting background, but will set <body> to position fixed, might break some layouts |
+| delay | Number | 0 | Sidebar delay before it open (number in ms) |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| update:modelValue | value: Boolean | Triggers when sidebar is opened/closed |
+| close | — | Triggers when user closed/canceled |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Content of sidebar |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| close | — | — | Programmatically close the sidebar |
+| cancel | method: String, ...args | — | Close the sidebar with a specific cancel method |
+
+### BSkeleton
+A placeholder for content to load
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| active | Boolean | true | Show or hide loader |
+| animated | Boolean | true | Display a loading animation |
+| rounded | Boolean | true | Rounded style |
+| size | String | — | Vertical size of skeleton, optional |
+| width | String, Number | - | Custom width |
+| height | String, Number | - | Custom height |
+| circle | Boolean | false | Show a circle shape |
+| count | Number | 1 | Number of shapes to display |
+| position | String | — | Position of the skeleton, optional |
+
+### BSlider
+A slider to select a value or range from a given range
+
+#### BSlider
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| v-model | Number, Array | — | Binding value |
+| min | Number | 0 | Minimum value |
+| max | Number | 100 | Maximum value |
+| step | Number | 1 | Step interval of ticks |
+| type | String | is-primary | Type (color) of the slider, optional |
+| size | String | — | Thickness of the slider, optional |
+| ticks | Boolean | false | Show tick marks |
+| tooltip | Boolean | false | Show tooltip when thumb is being dragged |
+| indicator | Boolean | true | Show v-model value inside thumb |
+| tooltip-type | String | type | The type (color) of the tooltip. Defaults to type |
+| rounded | Boolean | false | Rounded thumb |
+| disabled | Boolean | false | Disable the slider |
+| custom-formatter | Function | — | Function to format the tooltip label for display |
+| format | String | raw | Which format should be used to display the value. The value will be displayed as-is if using raw. The percent using value, min and max will be calculated and displayed if using percent |
+| locale | String, Array of String | undefined: default to browser locale. | Accept a string with a BCP 47 language tag, or an array of such strings. See Unicode BCP 47 locale identifier |
+| aria-label | String, Array | — | Accessibility label for the thumbs |
+| bigger-slider-focus | Boolean | false | Increase the clickable area |
+| tooltip-always | Boolean | false | Tooltip displays always |
+| lazy | Boolean | false | Only emit modelValue on dragend, not during dragging |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| update:modelValue | value: Number|Array | Triggers when value is changed |
+| change | value: Number|Array | Triggers when value is changed after user interaction |
+| dragstart | — | Triggers when thumb is pressed |
+| dragend | — | Triggers when thumb is released |
+| dragging | value: Number|Array | Triggers when thumb is being dragged |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Use SliderTick for custom ticks and labels |
+
+#### BSliderTick
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| value | Number | — | The value that the tick represents |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Label |
+
+### BSnackbar
+When a Dialog seems a bit overkill for the task, Snackbars are good candidates
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| type | String | is-success | Type (color) of the action button. Please notice that it is the name of the parent class also |
+| message | String, Array | — | Message text (can contain HTML). Dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to XSS vulnerabilities. Only use HTML interpolation on trusted content and never on user-provided content. |
+| position | String | is-bottom-right | Which position the snackbar will appear |
+| duration | Number | 3500 | Visibility duration in miliseconds |
+| queue | Boolean | true | If should queue with others notices (snackbar/toast/notification) |
+| indefinite | Boolean | false | Show the Snackbar indefinitely until it is dismissed |
+| pause-on-hover | Boolean | false | Pause and show on hover until hover off (it works when indefinite is false) |
+| container | String | body | DOM element the toast will be created on. Note that this also changes the position of the toast from fixed to absolute. Meaning that the container should be fixed. Also note that this will override the defaultContainerElement if you specified it in your Buefy Constructor Options. See Constructor options for more details. |
+| actionText | String | OK | Snackbar's button text, set null for buttonless |
+| onAction | Function | — | Callback function when the button is clicked |
+| cancelText | String | — | Snackbar's cancel button text. Default is no cancel button |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| click | — | Triggers when the snackbar is clicked |
+| close | — | Triggers when the snackbar is closed |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Custom content to replace the message text |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| open | String, Object | Reference to the opened Snackbar | Opens the snackbar |
+| close | — | — | Close the snackbar |
+
+### BSteps
+Responsive horizontal process steps
+
+#### BSteps
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| v-model | Number, String | undefined | Binding value, step index. Passing undefined will show the first step |
+| animated | Boolean | true | Steps have slide animation |
+| animateInitially | Boolean | undefined | Apply animation on the initial render |
+| animation | String | slide-next slide-prev | Custom animation (transition name) |
+| type | String | — | Default Type/Style for the steps, optional |
+| size | String | — | Size of the step, optional |
+| destroy-on-hide | Boolean | false | Destroy stepitem on hide |
+| icon-pack | String | mdi | Icon pack to use for the navigation |
+| icon-prev | String | chevron-left | Icon to use for navigation button |
+| icon-next | String | chevron-right | Icon to use for navigation button |
+| has-navigation | Boolean | true | Next and previous buttons below the component. You can use this property if you want to use your own custom navigation items. |
+| vertical | Boolean | false | Display the steps vertically |
+| position | String | — | Position of the vertical step, optional |
+| label-position | String | bottom | Position of the marker label, optional |
+| rounded | Boolean | true | Rounded step markers |
+| mobile-mode | String | minimalist | How Steps will be displayed for mobile user |
+| aria-next-label | String | — | Accessibility label for the next navigation button |
+| aria-previous-label | String | — | Accessibility label for the previous navigation button |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| update:modelValue | value: String|Number | Triggers when active step is changed |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Step body where step-item can be included |
+| navigation | {previous, next}: Each object contains disabled: boolean and action: Function | Used to customize navigation button |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| prev | — | void | Go to previous step |
+| next | — | void | Go to next step |
+
+#### BItem
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| step | String | Number | — | Step marker content (when there is no icon) |
+| label | String | — | Step label |
+| value | String | Vnode uid | Step identifier |
+| type | String | — | Default Type/Style for the step, optional. This will override parent type. Could be used to set a completed step to is-success for example |
+| icon | String | — | Icon name |
+| icon-pack | String | mdi | Icon pack to use |
+| clickable | Boolean | — | Item can be used directly to navigate. If undefined, previous steps are clickable while the others are not. |
+| visible | Boolean | true | Item is visible |
+| headerClass | String, Array, Object | - | The classes to add to the step label container |
+| order | Number | - | The order of the step. Steps sorts the steps in ascending order of this value. By default, the order is determined according to when steps are mounted in sequence. You have to give an explicit value if you want to keep the ordering when the number of steps in Steps may vary. |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Step item body |
+
+### BSwitch
+Switch between two opposing states
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| type | String | — | Type (color) of the switch, optional |
+| passive-type | String | — | Type (color) of the switch when switch is passive, optional |
+| v-model | Any | false | Binding value |
+| native-value | Any | — | Same as native value |
+| true-value | Any | true | Overrides the returned value when it's checked |
+| false-value | Any | false | Overrides the returned value when it's not checked |
+| disabled | Boolean | false | Same as native disabled |
+| name | String | — | Same as native name |
+| size | String | — | Size of the control, optional |
+| rounded | Boolean | true | Rounded style |
+| outlined | Boolean | false | Outlined style |
+| aria-labelledby | String | — | Accessibility label to establish relationship between the switch and control label |
+| required | Boolean | false | Same as native required |
+| left-label | Boolean | false | Label is shown on the left side |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| update:modelValue | value: Boolean | Triggers when the value of the switch is changed |
+| change | event: Event | Native change event that bubbles up from the underlying input element |
+| [any].native | event: $event | Listen to any event using this syntax, e.g click.native |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Switch label |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| focus | — | void | Focus the switch |
+
+### BTable
+Tabulated data are sometimes needed, it's even better when it's responsive
+
+#### BTable
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| data | Array | — | Table data |
+| columns | Array (same as TableColumns props) | — | Table columns |
+| default-sort | String, Array | order: default-sort-direction prop | Sets the default sort column and order — e.g. ['first_name', 'desc'] |
+| default-sort-direction | String | asc | Sets the default sort column direction on the first click |
+| sort-icon | String | arrow-up | Sets the header sorting icon |
+| sort-icon-size | String | is-small | Sets the size of the sorting icon |
+| bordered | Boolean | false | Border to all cells |
+| striped | Boolean | false | Whether table is striped |
+| narrowed | Boolean | false | Makes the cells narrower |
+| selected | Object | — | Set which row is selected, use the .sync modifier to make it two-way binding |
+| focusable | Boolean | false | Table can be focused and user can navigate with keyboard arrows (require selected.sync) and rows are highlighted when hovering |
+| hoverable | Boolean | false | Rows are highlighted when hovering |
+| checkable | Boolean | false | Rows can be checked (multiple), checked rows will have a .is-checked class if you want to style |
+| checkbox-position | String | left | Position of the checkbox (if checkable is true) |
+| sticky-checkbox | Boolean | false | Make the checkbox column sticky when checkable |
+| checked-rows | Array | — | Set which rows are checked, use the .sync modifier to make it two-way binding |
+| header-checkable | Boolean | true | Show check/uncheck all checkbox in table header when checkable |
+| checkbox-type | String | is-primary | Type (color) of the checkbox when checkable, optional |
+| mobile-cards | Boolean | true | Rows appears as cards on mobile (collapse rows) |
+| backend-sorting | Boolean | false | Columns won't be sorted with Javascript, use with sort event to sort in your backend |
+| backend-pagination | Boolean | false | Rows won't be paginated with Javascript, use with page-change event to paginate in your backend |
+| total | Number | 0 | Total number of table data if backend-pagination is enabled |
+| current-page | Number | 1 | Current page of table data (if paginated) |
+| loading | Boolean | false | Loading state |
+| paginated | Boolean | false | Adds pagination to the table |
+| pagination-simple | Boolean | false | Simple pagination (if paginated) |
+| pagination-rounded | Boolean | false | Rounded pagination (if paginated) |
+| pagination-order | String | — | Buttons order, optional |
+| pagination-size | String | — | Pagination size (if paginated) |
+| pagination-position | String | bottom | Pagination position (if paginated) |
+| per-page | Number | 20 | How many rows per page (if paginated) |
+| page-input | Boolean | false | Include page number input. |
+| page-input-position | String | — | Page input position. |
+| debounce-page-input | Number | — | Sets the page input debounce time (in milliseconds) |
+| sort-multiple | Boolean | false | Adds multiple column sorting |
+| sort-multiple-data | Object | [] | Used in combination with backend-sorting |
+| sort-multiple-key | String | null | Adds a key which will be required for multi column sorting to work. Will always be enabled if null is selected (default). Requires sort-multiple |
+| row-class | Function (row: Object, index: Number) | — | Add a class to row (<tr> element) based on the return |
+| detailed | Boolean | false | Allow row details (check scoped slots documentation) |
+| custom-detail-row | Boolean | false | Allow a custom detail row |
+| show-detail-icon | Boolean | true | Allow chevron icon and column to be visible |
+| detail-icon | String | chevron-right | Icon name |
+| opened-detailed | Array | [] | Allow pre-defined opened details. Ideal to open details via vue-router. (A unique key is required; check detail-key prop) |
+| has-detailed-visible | Function (row: Object) | true | Controls the visibility of the trigger that toggles the detailed rows. |
+| detail-key | String | — | Use a unique key of your data Object when use detailed or opened detailed. (id recommended) |
+| detail-transition | String | — | Transition name to use when toggling row details. |
+| custom-is-checked | Function (a: Object, b: Object) | — | Custom method to verify if row is checked, works when is checkable. Useful for backend pagination |
+| is-row-checkable | Function (row: Object) | true | Custom method to verify if a row is checkable, works when is checkable. |
+| is-row-selectable | Function (row: Object) | true | Custom method to verify if a row is selectable, works when is selected. |
+| icon-pack | String | mdi | Icon pack to use |
+| mobile-sort-placeholder | String | — | Text when nothing is selected |
+| custom-row-key | String | - | Use a unique key of your data Object for each row. Useful if your data prop has dynamic indices. (id recommended) |
+| draggable | Boolean | false | Allows rows to be draggable |
+| draggable-column | Boolean | false | Allows columns to be draggable |
+| backend-filtering | Boolean | false | Columns won't be filtered with Javascript, use with searchable prop to the columns to filter in your backend |
+| sticky-header | Boolean | false | Show a sticky table header |
+| scrollable | Boolean | false | Add a horizontal scrollbar when table is too wide |
+| height | Number, String | — | Table fixed height in pixels |
+| filters-event | String | — | Add a native event to filter |
+| card-layout | Boolean | false | Rows appears as cards (collapse rows) |
+| show-header | Boolean | true | Show table column header |
+| aria-next-label | String | — | Accessibility label for the next page link (if paginated) |
+| aria-previous-label | String | — | Accessibility label for the previous page link (if paginated) |
+| aria-page-label | String | — | Accessibility label for the page link. If passed, this text will be prepended to the number of the page (if paginated) |
+| aria-current-label | String | — | Accessibility label for the current page link. If passed, this text will be prepended to the current page (if paginated) |
+| debounce-search | Number | — | Sets the filtering debounce time (in milliseconds) |
+| compat-fallthrough | Boolean | true. Can be changed via the defaultCompatFallthrough config option. | Whether the class, style, and id attributes are applied to the root <div> element or the underlying pagination components. If true, they are applied to the root <div> element, which is compatible with Buefy for Vue 2. |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| click | row: Object | Triggers when a row is clicked |
+| dblclick | row: Object | Triggers when a row is double clicked |
+| cellclick | row: Object, column: Vue Object, rowIndex: Number, columnIndex: Number, | Triggers when a cell is clicked |
+| sort | field: String, order: String | Triggers when a sortable column is clicked |
+| sorting-priority-removed | field: String | Triggers when a multiselect sortable column remove button has been clicked |
+| select | row: Object, oldRow: Object | Triggers when a row is selected |
+| check | checkedList: Array, row: Object | Triggers when the checkbox in a row is clicked and/or when the header checkbox is clicked |
+| check-all | checkedList: Array | Triggers when the header checkbox is clicked |
+| page-change | page: Number | Triggers when pagination page is changed |
+| details-open | row: Object | Triggers when details is opened |
+| details-close | row: Object | Triggers when details is closed |
+| contextmenu | row: Object, contextMenuNativeEvent: Event | Triggers when right-click on a row |
+| dragstart | row: Object , dragEvent: Event , index: Number | Triggers when starting to drag a row |
+| dragend | row: Object , dragEvent: Event , index: Number | Triggers when ending to drag a row |
+| drop | row: Object , drop: Event , index: Number | Triggers when dropping on a row |
+| dragover | row: Object , dragover: Event , index: Number | Triggers when dragging over a row |
+| dragleave | row: Object , dragover: Event , index: Number | Triggers after dragging over a row |
+| columndragstart | column: Object , dragEvent: Event , index: Number | Triggers when starting to drag a column |
+| columndragend | column: Object , dragEvent: Event , index: Number | Triggers when ending to drag a column |
+| columndrop | column: Object , drop: Event , index: Number | Triggers when dropping on a column |
+| columndragover | column: Object , dragover: Event , index: Number | Triggers when dragging over a column |
+| columndragleave | column: Object , dragover: Event , index: Number | Triggers after dragging over a column |
+| mouseenter | row: Object , event: Event | Triggers when mouse enters a row |
+| mouseleave | row: Object | Triggers when mouse leaves a row |
+| filters-change | filter: Object | Triggers when filter change |
+| update:checkedRows | checkedRows: Array | Triggers when checked rows are updated (Vue 3 v-model for checkedRows) |
+| update:currentPage | page: Number | Triggers when current page is updated (Vue 3 v-model for currentPage) |
+| update:openedDetailed | rows: Array | Triggers when opened detailed rows are updated (Vue 3 v-model for openedDetailed) |
+| update:selected | row: Object | Triggers when selected row is updated (Vue 3 v-model for selected) |
+| filters-event-[filters-event] | event: Event , filter: Object | Triggers filters-event event from filter (it works only with Vue 2.6.x) |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | toggleDetails: Function (row: Object) | Required, table body and header |
+| header | column: Vue Object, index: Number | Table custom header |
+| subheading | column: Vue Object, index: Number | Table subheading |
+| detail | row: Object, index: Number | Row detail (collapsible) |
+| empty | — | Replaces table body when data array prop is empty |
+| footer | — | Table custom footer |
+| bottom-left | — | Custom bottom-left (opposite side of bottom pagination) |
+| top-left | — | Custom top-left (opposite side of top pagination) |
+| pagination | — | Table custom pagination |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| initSort | — | — | Sort using default-sort prop parameters |
+| focus | — | — | Focus table element if is focusable |
+| toggleDetails | row: Object | — | Toggle row detail if table is detailed |
+| openDetailRow | row: Object | — | Open row detail if table is detailed |
+| closeDetailRow | row: Object | — | Close row detail if table is detailed |
+| resetMultiSorting | — | — | Resets the multi column sorting |
+
+#### BColumn
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| label | String | — | Column header text, also used to identify column if custom-key prop is missing |
+| custom-key | String, Number | this.label | Unique identifier, use when label is missing or there are duplicate label names |
+| field | String | — | Property of the object the column is attributed, used for sorting |
+| meta | Any | — | Meta prop to add anything, useful when creating custom headers |
+| width | Number, String | — | Column fixed width in any unit, or pixels when none is provided |
+| numeric | Boolean | false | Align the cell content to the right, sort icon on left |
+| centered | Boolean | false | Align the cell content to the center |
+| sortable | Boolean | false | Whether the column can be sorted |
+| visible | Boolean | true | Whether the column is visible |
+| custom-sort | Function (a: Object, b: Object, isAsc: Boolean) | — | Custom sort method, works when column is sortable |
+| searchable | Boolean | false | Add a input below the header to filter data |
+| custom-search | Function (a: Object, input: String) | — | Custom search method, works when column is searchable |
+| subheading | String, Number | — | Column subheading text |
+| sticky | Boolean | false | Show a sticky column |
+| header-selectable | Boolean | false | Whether the header text is selectable, works when column is sortable. |
+| header-class | String | - | CSS classes to be applied on header |
+| cell-class | String | - | CSS classes to be applied on cell |
+| th-attrs | Function | - | Adds native attributes to th :th-attrs="(column)" => ({})" |
+| td-attrs | Function: (row, column) => Record<string, any> | - | Adds native attributes to td. Do not specify an inline arrow function to this prop. Otherwise, you will face infinite updates. |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | row: Object, column: Vue Object, index: Number, colindex: Number, toggleDetails: Function, isActiveDetailRow: Function | Required, table column body |
+| header | column: Vue Object, index: Number | Table column custom header |
+| subheading | column: Vue Object, index: Number | Table column custom subheading |
+| searchable | column: Vue Object, filters: Object | This is to customize the search input when searchable. |
+
+### BTabs
+Responsive horizontal navigation tabs, switch between contents with ease
+
+#### BTabs
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| v-model | String, Number, Null | undefined | Binding value, tab index. Passing undefined will show the first tab, null will show no tab |
+| expanded | Boolean | false | Make tab full width |
+| animated | Boolean | true | Tabs have slide animation |
+| animateInitially | Boolean | undefined | Apply animation on the initial render |
+| animation | String | slide-next slide-prev | Custom animation (transition name) |
+| type | String | — | Type/Style of the tab, optional |
+| size | String | — | Size of the tab, optional |
+| position | String | — | Position of the tab, optional |
+| vertical | Boolean | false | Display the tabs vertically. The content will be placed at right. |
+| destroy-on-hide | Boolean | false | Destroy tabitem on hide |
+| multiline | Boolean | false | Tabs will be multilined |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| update:modelValue | value: String|Number | Triggers when tab is changed |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Tab items |
+| start | — | Content before the tabs |
+| end | — | Content after the tabs |
+
+#### BItem
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| label | String | — | Tab label |
+| value | String | Vnode uid | Tab identifier |
+| icon | String | — | Icon name |
+| icon-pack | String | mdi | Icon pack to use |
+| disabled | Boolean | false | Item is disabled |
+| visible | Boolean | true | Item is visible |
+| headerClass | String, Array, Object | - | The classes to add to the tab header |
+| order | Number | - | Order of the tab. Tabs sorts the tabs in ascending order of this value. By default, the order is determined according to when tabs are mounted in sequence. You have to give an explicit value if you want to keep the ordering when the number of tabs in Tabs may vary. |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Tab item body |
+| header | — | Tab item custom header |
+
+### BTag
+Tag labels to insert anywhere
+
+#### BTag
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| type | String | — | Type (color) of the tag, optional |
+| close-type | String | — | Type (color) of the cross button of tag, optional |
+| size | String | — | Size of the tag, optional |
+| rounded | Boolean | false | Tag border rounded |
+| closable | Boolean | false | Add close/delete button to the tag |
+| attached | Boolean | false | Close/delete button style equal to attached tags |
+| ellipsis | Boolean | false | Adds ellipsis to not overflow the text |
+| tabstop | Boolean | true | If should stop when using tab key |
+| disabled | Boolean | false | Disable delete button |
+| aria-close-label | String | - | Accessibility label for the close button |
+| icon | String | - | Adds an icon to the left of the tag. |
+| icon-pack | String | mdi | Icon pack to use |
+| icon-type | String | — | Type (color) of the icon on the left side of tag, optional |
+| close-icon | String | - | Replace times in close button with a customized icon. closable and attached props should be needed. |
+| close-icon-pack | String | mdi | Icon pack to use |
+| close-icon-type | String | — | Type (color) of the close icon of tag, optional |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| close | event: Event | Triggers when close/delete button is clicked or delete key is pressed |
+| click | event: Event | Triggers when clicking the content of the tag |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Tag content |
+
+#### BTaglist
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| attached | Boolean | false | Tags inside are attached together |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Tags content |
+
+### BTaginput
+A simple tag input field that can have autocomplete functionality
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| v-model | Array, Array, Array | — | Binding value |
+| maxlength | String, Number | — | Limits the length of each tag, plus character counter |
+| maxtags | String, Number | — | Limits the number of tags, plus tag counter |
+| has-counter | Boolean | true | Show counter when maxlength or maxtags props are passed |
+| type | String | is-light | Type (color) of the tags, optional |
+| closeType | String | - | Type (color) of the close icon, optional |
+| size | String | — | Tag and input size, optional |
+| rounded | Boolean | false | Makes the tags rounded, optional |
+| attached | Boolean | false | Makes the tags attached instead of having an appended delete button, optional |
+| ellipsis | Boolean | false | Adds ellipsis on tags to not overflow the text. Title is then added to the tag with full text |
+| closable | Boolean | true | Add close/delete button to the tag |
+| aria-close-label | String | - | Accessibility label for the close button |
+| field | String | value | Property of the object (if data is array of objects) to use as display text |
+| autocomplete | Boolean | false | Add autocomplete feature (if true, any Autocomplete props may be used too) |
+| group-field | String | — | Property of the object (if data is array of objects) to use as display text of group |
+| group-options | String | — | Property of the object (if data is array of objects) to use as key to get items array of each group, optional |
+| allow-new | Boolean | false | When autocomplete, it allow to add new tags |
+| open-on-focus | Boolean | false | Opens a dropdown with choices when the input field is focused |
+| keep-open | Boolean | true | Keep the dropdown list open after selecting |
+| keep-first | Boolean | false | Keep the first option selected |
+| native-autocomplete | String | — | Same as native autocomplete options to use in HTML5 validation |
+| remove-on-keys | Array | ["Backspace"] | Allow removing last tag when pressing given keys, if input is empty |
+| confirm-keys | Array | [",", "Tab", "Enter"] | Array of keys (https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values) which will add a tag when typing (default comma, tab and enter) |
+| on-paste-separators | Array | [','] | Array of chars used to split when pasting a new string |
+| before-adding | Function | (tagToAdd) => true | Function to validate the value of the tag before adding |
+| allow-duplicates | Boolean | false | Allows adding the same tag multiple times |
+| create-tag | Function | (tagToAdd) => tagToAdd | Function to create tag item to push into v-model (tags) |
+| readonly | Boolean | false | Disable input/typing |
+| check-infinite-scroll | Boolean | false | Makes the autocomplete component check if list reached scroll end and emit infinite-scroll event. |
+| append-to-body | Boolean | false | Append autocomplete content to body (prevents event bubbling) |
+| compat-fallthrough | Boolean | true. Can be changed via the defaultCompatFallthrough config option. | Whether the class, style, and id attributes are applied to the root <div> element or the underlying <b-autocomplete> component. If true, they are applied to the root <div> element, which is compatible with Buefy for Vue 2. |
+| Any other native attribute | — | — | — |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| update:modelValue | value: Array | Triggers when tags are added/removed |
+| typing | value: String | User started typing a tag |
+| add | value: String|Object | Triggers when a tag has been added |
+| remove | value: String|Object | Triggers when a tag has been removed |
+| infinite-scroll | — | Triggers when the autocomplete .dropdown-list has reached scroll end |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | option: String|Object, index: Number | — |
+| empty | — | Show like an option if data array prop is empty |
+| header | — | Show a custom header as first option |
+| footer | — | Show a custom footer as last option |
+| tag | tag: String|Number|Object | For customizing content in tag item. |
+| selected | tags: Array | For customizing content of selected item. |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| addTag | tag?: String|Object | void | Add a tag programmatically |
+| removeTag | index: Number, event?: Event | String|Object | Remove tag at specific index |
+| removeLastTag | — | void | Remove the last tag |
+
+### BTimepicker
+An input with a simple dropdown/modal for selecting a time, uses native timepicker for mobile
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| v-model | Date | — | Binding value |
+| hour-format | String | undefined: default to browser locale. | Hour format for input and display |
+| increment-hours | Number | 1 | Step hours for select component |
+| increment-minutes | Number | 1 | Step minutes for select component |
+| increment-seconds | Number | 1 | Step seconds for select component |
+| time-formatter | Function | (time) => new Intl.DateTimeFormat(locale).format(time) | Function to format time (Date type) to a string for display in the input |
+| time-parser | Function | Tries to parse the time using the locale specific format. Fallback to HH:mm or HH:mm AM/PM | Function to parse string to a time (Date type) for set a time from the input to the component |
+| min-time | Date | — | Earliest time available for selection |
+| max-time | Date | — | Latest time available for selection |
+| size | String | — | Vertical size of input and picker, optional |
+| inline | Boolean | false | Timepicker is shown inline, input is removed |
+| editable | Boolean | false | Enable input/typing. Note that you might have to set a custom time parser |
+| loading | Boolean | false | Add the loading state to the input |
+| icon | String | — | Icon name to be added |
+| icon-pack | String | mdi | Icon pack to use |
+| unselectable-times | Array | - | Array of unselectable times (Date object) |
+| mobile-native | Boolean | true | Enable native timepicker on mobile |
+| mobile-modal | Boolean | true | Timepicker is shown into a modal on mobile |
+| position | String | Bottom right | Optional, position of the timepicker relative to the input |
+| open-on-focus | Boolean | false | Open timepicker on input focus |
+| enable-seconds | Boolean | false | Show seconds picker |
+| default-minutes | Number | - | Default value when hours change |
+| default-seconds | Number | - | Default value when hours or minutes change |
+| time-creator | Function | () => new Date() | Function used internally to create a new Date instance |
+| focusable | Boolean | true | Timepicker container can be focused |
+| append-to-body | Boolean | false | Append timepicker calendar to body (prevents event bubbling) |
+| locale | String, Array of String | undefined: default to browser locale. | Accept a string with a BCP 47 language tag, or an array of such strings. See Unicode BCP 47 locale identifier |
+| reset-on-meridian-change | Boolean | false | Reset timepicker values on meridian change |
+| tz-offset | Number | 0 | Timezone offset in minutes |
+| compat-fallthrough | Boolean | true. Can be changed via defaultCompatFallthrough config option. | Whether class, style, and id attributes are applied to the root <div> element or the underlying input component. If true, they are applied to the root <div> element, which is compatible with Vue 2. |
+| Any native attribute | — | — | — |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| update:modelValue | value: Date | Triggers when the time is changed |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Footer |
+| trigger | — | Trigger |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| close | — | void | Close dropdown |
+| toggle | active?: Boolean | void | Toggle the dropdown open/closed |
+
+### BToast
+Toasts are simple text messages to inform the user
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| type | String | is-dark | Type (color) of the toast |
+| message | String, Array | — | Message text (can contain HTML). Dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to XSS vulnerabilities. Only use HTML interpolation on trusted content and never on user-provided content. |
+| position | String | is-top | Which position the toast will appear |
+| duration | Number | 2000 | Visibility duration in milliseconds |
+| queue | Boolean | true | If should queue with others notices (snackbar/toast/notification) |
+| indefinite | Boolean | false | Show indefinitely until it is dismissed programmatically |
+| pause-on-hover | Boolean | false | Pause and show on hover until hover off (it works when indefinite is false) |
+| container | String | body | DOM element the toast will be created on. Note that this also changes the position of the toast from fixed to absolute. Meaning that the container should be fixed. Also note that this will override the defaultContainerElement if you specified it in your Buefy Constructor Options. See Constructor options for more details. |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| click | — | Triggers when the toast is clicked |
+| close | — | Triggers when the toast is closed |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Toast content (overrides the message prop) |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| close | — | void | Close the toast |
+
+### BTooltip
+Display a brief helper text to your user
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| type | String | is-primary | Type (color) of the tooltip |
+| active | Boolean | true | Whether tooltip is active or not |
+| auto-close | Boolean, Array | true | The event(s) that should trigger the tooltip to close |
+| label | String | — | Tooltip text |
+| triggers | Array | ['hover'] | Tooltip will be triggered by any events |
+| position | String | is-auto | Tooltip position in relation to the element. By default, it places itself away from the nearest window border. |
+| always | Boolean | false | Tooltip will be always active |
+| animated | Boolean | true | Tooltip will have a little fade animation |
+| square | Boolean | false | Tooltip will be square (not rounded corners) |
+| dashed | Boolean | false | Tooltip slot will have a dashed underline |
+| multilined | Boolean | false | Tooltip will be multilined |
+| size | String | is-medium | Tooltip multiline size (only works for multilined tooltips) |
+| delay | Number | 0 | Tooltip delay before it appears (number in ms) |
+| close-delay | Number | 0 | Tooltip delay before it disappears (number in ms) |
+| append-to-body | Boolean | false | Append tooltip content to body (prevents event bubbling) |
+| animation | String | fade | Custom animation name for tooltip appearance |
+| content-class | String | — | CSS class to apply to the tooltip content |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| open | — | Triggers when the tooltip is opened |
+| close | — | Triggers when the tooltip is closed |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Trigger element that will show the tooltip on interaction |
+| content | - | Tooltip Content (HTML or components) |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| open | — | void | Open the tooltip programmatically |
+| close | — | void | Close the tooltip programmatically |
+
+### BUpload
+Upload one or more files
+
+#### Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| v-model | File, Array | [] | Binding value |
+| drag-drop | Boolean | false | Accepts drag & drop and change its style |
+| type | String | is-primary | Type (color) of the drag area when hovered |
+| disabled | Boolean | false | Same as native disabled |
+| name | String | - | Same as native name |
+| required | Boolean | false | Same as native required |
+| accept | String | - | Same as native accept |
+| loading | Boolean | false | Add the loading state to the drag & drop area |
+| multiple | Boolean | false | Same as native, also push new item to v-model instead of replacing |
+| native | Boolean | false | Replace last chosen files every time (like native file input element) |
+| expanded | Boolean | false | Upload will be expanded (full-width) |
+| rounded | Boolean | false | Upload will be rounded |
+| compat-fallthrough | Boolean | true. Can be changed via the defaultCompatFallthrough config option. | Whether the class, style, and id attributes are applied to the root <label> element or the underlying <input> element. If true, they are applied to the root <label> element, which is compatible with Buefy for Vue 2. |
+
+#### Events
+| Event | Parameters | Description |
+|-------|-----------|-------------|
+| update:modelValue | value: File or File[] | Triggers when the file list is changed |
+| change | event: Event | Native change event that bubbles up from the underlying input element |
+| invalid | — | Triggers when a file is rejected due to type validation |
+
+#### Slots
+| Slot | Props | Description |
+|------|-------|-------------|
+| default | — | Upload button/content area |
+
+#### Methods
+| Method | Parameters | Return | Description |
+|--------|-----------|--------|-------------|
+| checkHtml5Validity | — | isValid: Boolean | Check validation of HTML5 (add the message and type/color), also updates the isValid property |
