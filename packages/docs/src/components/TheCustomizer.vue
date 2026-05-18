@@ -30,7 +30,9 @@
 
                     <div class="customizer-body">
                         <div class="customizer-section">
-                            <h4 class="customizer-section-title">Colors</h4>
+                            <h4 class="customizer-section-title">
+                                Colors
+                            </h4>
                             <div
                                 v-for="(label, key) in colorLabels"
                                 :key="key"
@@ -40,13 +42,18 @@
                                 <input
                                     type="color"
                                     :value="values[key as ColorKey]"
-                                    @input="(e) => updateColor(key as ColorKey, (e.target as HTMLInputElement).value)"
-                                />
+                                    @input="(e) => updateColor(
+                                        key as ColorKey,
+                                        (e.target as HTMLInputElement).value
+                                    )"
+                                >
                             </div>
                         </div>
 
                         <div class="customizer-section">
-                            <h4 class="customizer-section-title">Shape</h4>
+                            <h4 class="customizer-section-title">
+                                Shape
+                            </h4>
                             <div class="customizer-row">
                                 <label>Border radius</label>
                                 <span class="customizer-value">{{ values.radius }}px</span>
@@ -58,14 +65,17 @@
                                 min="0"
                                 max="20"
                                 step="1"
-                            />
+                            >
                         </div>
 
                         <div class="customizer-section">
-                            <h4 class="customizer-section-title">Typography</h4>
+                            <h4 class="customizer-section-title">
+                                Typography
+                            </h4>
                             <div class="customizer-row">
                                 <label>Base font size</label>
-                                <span class="customizer-value">{{ values.sizeNormal.toFixed(2) }}rem</span>
+                                <span class="customizer-value"
+                                >{{ values.sizeNormal.toFixed(2) }}rem</span>
                             </div>
                             <input
                                 v-model.number="values.sizeNormal"
@@ -74,11 +84,13 @@
                                 min="0.75"
                                 max="1.25"
                                 step="0.05"
-                            />
+                            >
                         </div>
 
                         <div class="customizer-section">
-                            <h4 class="customizer-section-title">Animations</h4>
+                            <h4 class="customizer-section-title">
+                                Animations
+                            </h4>
                             <div class="customizer-row">
                                 <label>Speed slow</label>
                                 <span class="customizer-value">{{ values.speedSlow }}ms</span>
@@ -90,7 +102,7 @@
                                 min="0"
                                 max="500"
                                 step="10"
-                            />
+                            >
                             <div class="customizer-row">
                                 <label>Speed slower</label>
                                 <span class="customizer-value">{{ values.speedSlower }}ms</span>
@@ -102,21 +114,27 @@
                                 min="0"
                                 max="500"
                                 step="10"
-                            />
+                            >
                         </div>
 
                         <div class="customizer-section">
-                            <h4 class="customizer-section-title">Component Variables</h4>
+                            <h4 class="customizer-section-title">
+                                Component Variables
+                            </h4>
                             <select
                                 v-model="selectedComponent"
                                 class="customizer-select"
                             >
-                                <option value="">Select a component…</option>
+                                <option value="">
+                                    Select a component…
+                                </option>
                                 <option
                                     v-for="name in availableComponents"
                                     :key="name"
                                     :value="name"
-                                >{{ formatComponentName(name) }}</option>
+                                >
+                                    {{ formatComponentName(name) }}
+                                </option>
                             </select>
 
                             <div
@@ -129,16 +147,25 @@
                                     class="customizer-var-entry"
                                 >
                                     <div class="customizer-var-meta">
-                                        <code class="customizer-var-name">{{ stripBulmaPrefix(extractVarName(entry.css)) }}</code>
-                                        <span class="customizer-var-desc">{{ entry.description }}</span>
+                                        <code class="customizer-var-name"
+                                        >{{ stripBulmaPrefix(extractVarName(entry.css)) }}</code>
+                                        <span class="customizer-var-desc"
+                                        >{{ entry.description }}</span>
                                     </div>
                                     <input
                                         type="text"
                                         class="customizer-var-input"
                                         :placeholder="extractDefault(entry.default)"
-                                        :value="getCompVarValue(selectedComponent, extractVarName(entry.css))"
-                                        @change="(e) => setCompVar(selectedComponent, extractVarName(entry.css), (e.target as HTMLInputElement).value)"
-                                    />
+                                        :value="getCompVarValue(
+                                            selectedComponent,
+                                            extractVarName(entry.css)
+                                        )"
+                                        @change="(e) => setCompVar(
+                                            selectedComponent,
+                                            extractVarName(entry.css),
+                                            (e.target as HTMLInputElement).value
+                                        )"
+                                    >
                                 </div>
                             </div>
                         </div>
@@ -259,7 +286,7 @@ const COMPONENT_SELECTORS: Record<string, string> = {
     timepicker: '.timepicker',
     toast: '.notices',
     tooltip: '.b-tooltip',
-    upload: '.upload',
+    upload: '.upload'
 }
 
 // Load all docs variable files at build time via Vite glob import.
@@ -311,7 +338,7 @@ export default defineComponent({
             colorLabels: COLOR_LABELS,
             values: { ...DEFAULTS } as CustomizerValues,
             selectedComponent: '',
-            componentVarOverrides: {} as Record<string, Record<string, string>>,
+            componentVarOverrides: {} as Record<string, Record<string, string>>
         }
     },
     computed: {
@@ -330,30 +357,6 @@ export default defineComponent({
             },
             deep: true
         }
-    },
-    mounted() {
-        const saved = localStorage.getItem(STORAGE_KEY)
-        if (!saved) return
-        try {
-            const parsed = JSON.parse(saved)
-            // Support old format (plain values object) and new { values, componentVarOverrides } format
-            if (parsed.values) {
-                Object.assign(this.values, parsed.values)
-                if (parsed.componentVarOverrides) {
-                    this.componentVarOverrides = parsed.componentVarOverrides
-                }
-            } else {
-                Object.assign(this.values, parsed)
-            }
-            this.applyGlobalVars(this.values)
-            this.updateStyleTag()
-        } catch {
-            // ignore corrupted storage
-        }
-    },
-    beforeUnmount() {
-        const el = document.getElementById('buefy-customizer-styles')
-        if (el) el.remove()
     },
     methods: {
         updateColor(key: ColorKey, hex: string) {
@@ -522,7 +525,32 @@ export default defineComponent({
             return Object.keys(this.componentVarOverrides[name] || {}).length
                 ? `${label} ●`
                 : label
-        },
+        }
+    },
+    mounted() {
+        const saved = localStorage.getItem(STORAGE_KEY)
+        if (!saved) return
+        try {
+            const parsed = JSON.parse(saved)
+            // Support old format (plain values object) and new
+            // { values, componentVarOverrides } format
+            if (parsed.values) {
+                Object.assign(this.values, parsed.values)
+                if (parsed.componentVarOverrides) {
+                    this.componentVarOverrides = parsed.componentVarOverrides
+                }
+            } else {
+                Object.assign(this.values, parsed)
+            }
+            this.applyGlobalVars(this.values)
+            this.updateStyleTag()
+        } catch {
+            // ignore corrupted storage
+        }
+    },
+    beforeUnmount() {
+        const el = document.getElementById('buefy-customizer-styles')
+        if (el) el.remove()
     }
 })
 </script>
