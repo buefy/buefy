@@ -44,6 +44,7 @@ import TheCustomizer from '@/components/TheCustomizer.vue'
 import menuData from '@/data/menu'
 import type { PageTree } from '@/data/menu'
 import type { Route } from '@/data/routes'
+import { useTheme } from '@/composables/useTheme'
 
 export default defineComponent({
     // eslint-disable-next-line vue/multi-word-component-names
@@ -61,7 +62,7 @@ export default defineComponent({
         return {
             menu: [] as PageTree[],
             meta: {} as Partial<Route>,
-            isLightTheme: localStorage.getItem('theme') === 'light' || localStorage.getItem('theme') === null
+            isLightTheme: useTheme().isLight
         }
     },
     methods: {
@@ -73,11 +74,7 @@ export default defineComponent({
             location.href = hash
         },
         handleThemeChange(isLight: boolean) {
-            this.isLightTheme = isLight
-            const theme = isLight ? 'light' : 'dark'
-            localStorage.setItem('theme', theme)
-            document.documentElement.classList.toggle('theme-dark', !isLight)
-            document.documentElement.classList.toggle('theme-light', isLight)
+            useTheme().setTheme(isLight ? 'light' : 'dark')
         }
     },
     mounted() {
@@ -87,8 +84,8 @@ export default defineComponent({
             this.$nextTick(() => this.scrollTo(this.$route.hash))
         }
 
-        // Apply initial theme
-        this.handleThemeChange(this.isLightTheme)
+        const { getTheme, setTheme } = useTheme()
+        setTheme(getTheme())
     },
 
     beforeUnmount() {

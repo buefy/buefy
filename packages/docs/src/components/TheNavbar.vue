@@ -119,23 +119,14 @@
                     </div>
 
                     <div class="navbar-item">
-                        <b-icon
-                            icon="white-balance-sunny"
+                        <b-button
+                            :icon-left="light ? 'white-balance-sunny' : 'moon-waning-crescent'"
+                            class="theme-toggle"
                             size="is-small"
-                            :class="{'is-warning': theme === 'light' }"
-                        />
-                        <b-switch
-                            v-model="theme"
-                            type="is-warning"
-                            true-value="dark"
-                            false-value="light"
-                            size="is-small"
-                            label="Theme"
-                        />
-                        <b-icon
-                            icon="moon-waning-crescent"
-                            size="is-small"
-                            :class="{'is-primary': theme === 'dark' }"
+                            rounded
+                            :title="light ? 'Switch to dark theme' : 'Switch to light theme'"
+                            :aria-label="light ? 'Switch to dark theme' : 'Switch to light theme'"
+                            @click="toggleTheme"
                         />
                     </div>
                 </div>
@@ -147,13 +138,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import { BIcon } from 'buefy'
+import { BButton, BIcon } from 'buefy'
 
 import buefyPackage from '../../../../package.json'
 import bulmaPackage from 'bulma/package.json'
 
 export default defineComponent({
-    components: { BIcon },
+    components: { BButton, BIcon },
     emits: ['theme-changed'],
     props: {
         light: {
@@ -168,19 +159,12 @@ export default defineComponent({
             bulmaVersion: bulmaPackage.version
         }
     },
-    computed: {
-        theme: {
-            get() {
-                return this.light ? 'light' : 'dark'
-            },
-            set(newTheme: string) {
-                this.$emit('theme-changed', newTheme === 'light')
-            }
-        }
-    },
     methods: {
         closeMenu() {
             this.isMenuActive = false
+        },
+        toggleTheme() {
+            this.$emit('theme-changed', !this.light)
         }
     },
     mounted() {
@@ -195,3 +179,26 @@ export default defineComponent({
     }
 })
 </script>
+
+<style scoped>
+:deep(.theme-toggle.button) {
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    color: inherit;
+    transition: background-color 0.15s ease;
+}
+
+:deep(.theme-toggle.button:hover),
+:deep(.theme-toggle.button:focus-visible) {
+    background-color: rgba(127, 127, 127, 0.15);
+    border-color: transparent;
+    color: inherit;
+}
+
+:deep(.theme-toggle.button:active) {
+    background-color: rgba(127, 127, 127, 0.25);
+    border-color: transparent;
+    color: inherit;
+}
+</style>

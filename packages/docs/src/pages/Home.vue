@@ -244,6 +244,7 @@ import TheFooter from "../components/TheFooter.vue";
 import Package from "../../../../package.json";
 import expoData from "@/data/expo";
 import sponsorsData from "@/data/sponsors";
+import { useTheme } from "@/composables/useTheme";
 
 export default defineComponent({
     name: "App",
@@ -259,7 +260,7 @@ export default defineComponent({
                 return item.featured;
             }),
             sponsors: sponsorsData,
-            isLightTheme: localStorage.getItem('theme') === 'light' || localStorage.getItem('theme') === null
+            isLightTheme: useTheme().isLight
         };
     },
     methods: {
@@ -288,16 +289,12 @@ export default defineComponent({
             return new URL(`/src/assets/sponsors/${img}`, import.meta.url).href;
         },
         handleThemeChange(isLight: boolean) {
-            this.isLightTheme = isLight
-            const theme = isLight ? 'light' : 'dark'
-            localStorage.setItem('theme', theme)
-            document.documentElement.classList.toggle('theme-dark', !isLight)
-            document.documentElement.classList.toggle('theme-light', isLight)
+            useTheme().setTheme(isLight ? 'light' : 'dark')
         }
     },
     mounted() {
-        // Apply initial theme
-        this.handleThemeChange(this.isLightTheme)
+        const { getTheme, setTheme } = useTheme()
+        setTheme(getTheme())
 
         this.$nextTick(() => {
             const homeHeroElements = document.querySelectorAll('.home-hero');
