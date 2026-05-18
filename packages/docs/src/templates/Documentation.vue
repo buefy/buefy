@@ -27,6 +27,7 @@
         </section>
 
         <TheFooter />
+        <TheCustomizer />
     </main>
 </template>
 
@@ -39,6 +40,7 @@ import TheFooter from '@/components/TheFooter.vue'
 import TheSidebar from '@/components/TheSidebar.vue'
 import ImproveThis from '@/components/ImproveThis.vue'
 import DocsPager from '@/components/DocsPager.vue'
+import TheCustomizer from '@/components/TheCustomizer.vue'
 import menuData from '@/data/menu'
 import type { PageTree } from '@/data/menu'
 import type { Route } from '@/data/routes'
@@ -52,7 +54,8 @@ export default defineComponent({
         TheFooter,
         TheSidebar,
         ImproveThis,
-        DocsPager
+        DocsPager,
+        TheCustomizer
     },
     data() {
         return {
