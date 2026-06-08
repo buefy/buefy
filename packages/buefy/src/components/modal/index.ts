@@ -68,7 +68,7 @@ class ModalProgrammatic {
                     {
                         ...propsData,
                         programmatic: true,
-                        onClose: () => {
+                        onAfterLeave: () => {
                             vueInstance.unmount()
                         },
                         // intentionally overrides propsData.onCancel

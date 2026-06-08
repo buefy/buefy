@@ -1,17 +1,236 @@
 @use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/mixins" as mixins;
 
 .expo {
-    .image-has-shadow {
-        box-shadow: 0 4px 10px 0 cv.getRgbaVar('dark', 0.25);
+    // --- Header strip ---
+
+    .expo-header {
+        background: var(--gradient-hero);
+        text-align: center;
+        padding: 64px 24px;
+        margin: -3rem -3rem 0;
+
+        @include mixins.mobile {
+            margin: -1.5rem -1.5rem 0;
+            padding: 48px 20px;
+        }
     }
-    .expo-head {
+
+    .expo-title {
+        font-size: var(--text-h1);
+        font-weight: 700;
+        color: var(--color-text-on-dark);
+        margin-bottom: 8px;
+        line-height: 1.2;
+    }
+
+    .expo-subtitle {
+        font-size: var(--text-body-lg);
+        color: var(--color-text-on-dark-muted);
+        margin-bottom: 28px;
+    }
+
+    .expo-head-actions {
         display: flex;
+        gap: 12px;
         justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .expo-action-btn {
+        display: inline-flex;
         align-items: center;
-        padding-bottom: 1.5rem;
-        .expo-head-text {
-            font-weight: cv.getVar('weight-semibold');
-            padding-right: 1rem;
+        gap: 8px;
+        padding: 8px 18px;
+        border-radius: 6px;
+        font-size: var(--text-sm);
+        font-weight: 500;
+        cursor: pointer;
+        text-decoration: none;
+        border: 1px solid var(--color-border);
+        color: var(--color-text-on-dark);
+        background: rgba(255, 255, 255, 0.06);
+        transition:
+            background var(--duration-fast),
+            border-color var(--duration-fast);
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--color-border-strong);
+            color: var(--color-text-on-dark);
+        }
+    }
+
+    // --- Card grid ---
+
+    .expo-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 24px;
+        padding: 48px 0 0;
+
+        @include mixins.mobile {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .expo-card {
+        position: relative;
+        background: var(--color-bg);
+        border: 1px solid var(--color-border-subtle);
+        border-radius: 12px;
+        overflow: hidden;
+        transition:
+            box-shadow var(--duration-normal) var(--ease-out),
+            transform var(--duration-normal) var(--ease-out);
+
+        &:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-3px);
+        }
+
+        [data-theme="dark"] & {
+            background: var(--color-bg-raised);
+        }
+    }
+
+    .expo-card-link-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+    }
+
+    .card-thumb-wrap {
+        position: relative;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        background: linear-gradient(135deg, var(--color-bg-invert-card), #3D2D60);
+    }
+
+    .card-thumb {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform var(--duration-slow) var(--ease-out);
+
+        .expo-card:hover & {
+            transform: scale(1.03);
+        }
+    }
+
+    .card-hover-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.45);
+        color: #fff;
+        font-weight: 600;
+        font-size: var(--text-body);
+        opacity: 0;
+        transition: opacity var(--duration-normal) var(--ease-out);
+        letter-spacing: 0.02em;
+
+        .expo-card:hover & {
+            opacity: 1;
+        }
+    }
+
+    .card-body {
+        padding: 16px 20px;
+    }
+
+    .card-title {
+        font-size: var(--text-h3);
+        font-weight: 600;
+        color: var(--color-text);
+        margin-bottom: 4px;
+    }
+
+    .card-desc {
+        font-size: var(--text-sm);
+        color: var(--color-text-muted);
+        margin: 4px 0 8px;
+        line-height: 1.5;
+    }
+
+    .card-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 6px;
+        margin-bottom: 4px;
+    }
+
+    .card-tag {
+        background: var(--color-bg-subtle);
+        border: 1px solid var(--color-border-subtle);
+        color: var(--color-text-faint);
+        font-size: var(--text-xs);
+        padding: 2px 8px;
+        border-radius: 100px;
+    }
+
+    .card-date {
+        font-size: var(--text-sm);
+        color: var(--color-text-faint);
+    }
+
+    // --- Submission CTA ---
+
+    .expo-cta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        background: var(--color-bg-invert-card);
+        border: 1px solid var(--color-border);
+        border-radius: 12px;
+        padding: 28px 32px;
+        margin-top: 48px;
+
+        h3 {
+            color: var(--color-text-on-dark);
+            font-size: var(--text-h3);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        p {
+            color: var(--color-text-on-dark-muted);
+            font-size: var(--text-body);
+            margin: 0;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            background: var(--color-brand);
+            color: #fff;
+            padding: 10px 22px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: var(--text-sm);
+            text-decoration: none;
+            white-space: nowrap;
+            box-shadow: var(--shadow-brand);
+            transition:
+                background var(--duration-normal) var(--ease-out),
+                transform var(--duration-fast) var(--ease-out);
+
+            &:hover {
+                background: var(--color-brand-dark);
+                color: #fff;
+                transform: translateY(-1px);
+            }
+        }
+
+        @include mixins.mobile {
+            flex-direction: column;
+            align-items: flex-start;
         }
     }
 }

@@ -1,7 +1,10 @@
 @use "bulma/sass/utilities/css-variables" as cv;
 
 .footer {
+    --buefy-brand: var(--color-brand);
     position: relative;
+
+    // Legacy class kept for backwards compatibility
     .footer-label {
         text-transform: uppercase;
         font-weight: cv.getVar('weight-bold');
@@ -10,4 +13,117 @@
             padding-top: 1rem;
         }
     }
+
+    // Five-column responsive grid
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+        gap: 2rem;
+        margin-bottom: 2.5rem;
+
+        @media (max-width: 1023px) {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @media (max-width: 767px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    // Brand column
+    .footer-logo {
+        max-width: 160px;
+        height: auto;
+        display: block;
+        margin-bottom: 1rem;
+    }
+
+    .footer-tagline {
+        font-size: 0.875rem;
+        margin-bottom: 0.75rem;
+        line-height: 1.5;
+    }
+
+    .footer-version {
+        background-color: var(--buefy-brand);
+        color: #fff;
+        border-radius: 4px;
+        padding: 0.1em 0.5em;
+        font-size: 0.75rem;
+        font-weight: 600;
+        display: inline-block;
+    }
+
+    .footer-ctas {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .footer-npm {
+        background: var(--color-bg-invert);
+        color: #e8e8e8;
+        border-radius: 4px;
+        padding: 0.5em 0.75em;
+        font-size: 0.8rem;
+        margin: 0;
+        user-select: all;
+
+        code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+            font-size: inherit;
+        }
+    }
+
+    .footer-compat {
+        line-height: 1.8;
+        opacity: 0.85;
+    }
+
+    // Nav columns
+    nav {
+        h5.footer-heading {
+            font-size: 0.7rem;
+            font-weight: cv.getVar('weight-bold');
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            opacity: 0.6;
+            margin-bottom: 0.75rem;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            li {
+                margin-bottom: 0.6rem;
+            }
+        }
+    }
+
+    // Link style (nav links and general footer links)
+    .footer-link,
+    nav a {
+        font-size: 0.875rem;
+        font-weight: 500;
+        text-decoration: none;
+        opacity: 0.85;
+        transition: opacity 0.15s ease;
+
+        &:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        &:focus-visible {
+            outline: 2px solid var(--buefy-brand);
+            outline-offset: 2px;
+            border-radius: 2px;
+            opacity: 1;
+        }
+    }
+
 }

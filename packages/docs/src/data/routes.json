@@ -23,7 +23,7 @@
     },
     "documentation/start": {
         "title": "Start",
-        "subtitle": "<strong>Three ways</strong> to install and use Buefy",
+        "subtitle": "Install and start using Buefy in your Vue 3 project",
         "path": "/documentation/start",
         "githubPath": "pages/installation/Start.vue",
         "menu": "documentation",
@@ -55,6 +55,32 @@
             "/",
             "documentation",
             "documentation/css-variables"
+        ],
+        "isNew": true
+    },
+    "documentation/theme-switching": {
+        "title": "Theme Switching",
+        "subtitle": "Add light/dark mode to your app using Buefy components and a shared composable.",
+        "path": "/documentation/theme-switching",
+        "githubPath": "pages/installation/ThemeSwitching.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/theme-switching"
+        ],
+        "isNew": true
+    },
+    "documentation/typography": {
+        "title": "Typography",
+        "subtitle": "Type scale, font helpers, custom fonts, and fluid sizing for Vue 3 with Bulma",
+        "path": "/documentation/typography",
+        "githubPath": "pages/installation/Typography.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/typography"
         ],
         "isNew": true
     },
@@ -668,6 +694,72 @@
         "breadcrumb": [
             "/",
             "expo"
+        ],
+        "hideSidebar": true
+    },
+    "changelog": {
+        "title": "Changelog",
+        "subtitle": "Release history, version notes, and upgrade guides",
+        "path": "/changelog",
+        "githubPath": "pages/Changelog.vue",
+        "breadcrumb": [
+            "/",
+            "changelog"
+        ],
+        "hideSidebar": true
+    },
+    "privacy": {
+        "title": "Privacy Policy",
+        "subtitle": "How buefy.org handles your data",
+        "path": "/privacy",
+        "githubPath": "pages/Privacy.vue",
+        "breadcrumb": [
+            "/",
+            "privacy"
+        ],
+        "hideSidebar": true
+    },
+    "enterprise": {
+        "title": "Enterprise",
+        "subtitle": "Enterprise support, licensing, and consulting for Buefy",
+        "path": "/enterprise",
+        "githubPath": "pages/Enterprise.vue",
+        "breadcrumb": [
+            "/",
+            "enterprise"
+        ],
+        "hideSidebar": true
+    },
+    "contribute": {
+        "title": "Contribute",
+        "subtitle": "Help shape Buefy — every contribution matters",
+        "path": "/contribute",
+        "githubPath": "pages/Contribute.vue",
+        "breadcrumb": [
+            "/",
+            "contribute"
+        ],
+        "hideSidebar": true
+    },
+    "sponsors": {
+        "title": "Sponsors",
+        "subtitle": "Organizations and individuals supporting Buefy",
+        "path": "/sponsors",
+        "githubPath": "pages/Sponsors.vue",
+        "breadcrumb": [
+            "/",
+            "sponsors"
+        ],
+        "hideSidebar": true
+    },
+    "support": {
+        "title": "Get Support",
+        "subtitle": "Help resources, community channels, and support options",
+        "path": "/support",
+        "githubPath": "pages/Support.vue",
+        "breadcrumb": [
+            "/",
+            "support"
         ],
         "hideSidebar": true
     }

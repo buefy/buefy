@@ -1,45 +1,47 @@
 <template>
-    <footer class="footer">
+    <footer
+        class="footer"
+        role="contentinfo"
+        aria-label="Site footer"
+    >
         <div class="container">
-            <div class="columns is-multiline is-variable is-6">
-                <!-- Community -->
-                <div class="column is-one-third">
-                    <h5 class="title is-6">
-                        Community
-                    </h5>
-                    <ul>
-                        <li>
-                            <a
-                                href="https://opencollective.com/buefy"
-                                class="navbar-item has-text-weight-semibold"
-                                target="_blank"
-                            >
-                                Buefy Open Collective
-                            </a>
-                        </li>
-                        <li>
-                            <router-link
-                                to="/events"
-                                class="navbar-item has-text-weight-semibold"
-                            >
-                                Events & Meetups
-                            </router-link>
-                        </li>
-                        <li>
-                            <a
-                                href="https://github.com/buefy/buefy/blob/dev/.github/CONTRIBUTING.md"
-                                class="navbar-item has-text-weight-semibold"
-                                target="_blank"
-                            >
-                                Contribute
-                            </a>
-                        </li>
-                    </ul>
+            <div class="footer-grid">
+                <!-- Brand column -->
+                <div class="footer-brand">
+                    <img
+                        src="../assets/buefy.png"
+                        alt="Buefy logo"
+                        class="footer-logo"
+                    >
+                    <p class="footer-tagline mt-2">
+                        Lightweight UI components for Vue.js based on Bulma.
+                    </p>
+                    <span class="footer-version tag is-primary">v{{ version }}</span>
+                    <div class="footer-ctas mt-3">
+                        <a
+                            href="https://github.com/buefy/buefy"
+                            class="button is-small is-dark"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Star Buefy on GitHub"
+                        >
+                            <b-icon icon="github" size="is-small" />
+                            <span>Star on GitHub</span>
+                        </a>
+                    </div>
+                    <div class="footer-install mt-3">
+                        <pre class="footer-npm"><code>npm install buefy</code></pre>
+                        <p class="footer-compat is-size-7 mt-2">
+                            <span class="has-text-warning">⚠</span>
+                            Vue 2 — EOL, no longer receiving updates<br>
+                            <span class="has-text-success">✓</span> Vue 3 — fully supported
+                        </p>
+                    </div>
                 </div>
 
                 <!-- Resources -->
-                <div class="column is-one-third">
-                    <h5 class="title is-6">
+                <nav aria-label="Resources navigation">
+                    <h5 class="footer-heading">
                         Resources
                     </h5>
                     <ul>
@@ -47,7 +49,7 @@
                             <router-link
                                 to="/"
                                 exact
-                                class="navbar-item has-text-weight-semibold"
+                                class="footer-link"
                             >
                                 Home
                             </router-link>
@@ -55,40 +57,113 @@
                         <li>
                             <router-link
                                 to="/documentation"
-                                class="navbar-item has-text-weight-semibold"
+                                class="footer-link"
                             >
                                 Documentation
                             </router-link>
                         </li>
                         <li>
                             <router-link
-                                to="/documentation/start#stackblitz"
-                                class="navbar-item has-text-weight-semibold"
+                                to="/changelog"
+                                class="footer-link"
                             >
-                                StackBlitz Examples
+                                Changelog
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link
+                                to="/documentation"
+                                class="footer-link"
+                            >
+                                Component gallery
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link
+                                to="/documentation/start#stackblitz"
+                                class="footer-link"
+                            >
+                                StackBlitz examples
                             </router-link>
                         </li>
                         <li>
                             <router-link
                                 to="/expo"
-                                class="navbar-item has-text-weight-semibold"
+                                class="footer-link"
                             >
                                 Expo
                             </router-link>
                         </li>
                     </ul>
-                </div>
+                </nav>
+
+                <!-- Community -->
+                <nav aria-label="Community navigation">
+                    <h5 class="footer-heading">
+                        Community
+                    </h5>
+                    <ul>
+                        <li>
+                            <a
+                                href="https://opencollective.com/buefy"
+                                class="footer-link"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Open Collective
+                            </a>
+                        </li>
+                        <li>
+                            <router-link
+                                to="/events"
+                                class="footer-link"
+                            >
+                                Events &amp; Meetups
+                            </router-link>
+                        </li>
+                        <li>
+                            <a
+                                href="https://github.com/buefy/buefy/blob/dev/.github/CONTRIBUTING.md"
+                                class="footer-link"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Contribute
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://github.com/buefy/buefy/discussions"
+                                class="footer-link"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                GitHub Discussions
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://github.com/buefy/buefy/issues/new?template=BUG_REPORT.md"
+                                class="footer-link"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Report a bug
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
 
                 <!-- Partners -->
-                <div class="column is-one-third">
-                    <h5 class="title is-6">
+                <nav aria-label="Partners navigation">
+                    <h5 class="footer-heading">
                         Partners
                     </h5>
                     <ul>
                         <li>
                             <router-link
                                 to="/sponsors"
-                                class="navbar-item has-text-weight-semibold"
+                                class="footer-link"
                             >
                                 Sponsors
                             </router-link>
@@ -96,13 +171,58 @@
                         <li>
                             <router-link
                                 to="/support"
-                                class="navbar-item has-text-weight-semibold"
+                                class="footer-link"
                             >
-                                Get Support
+                                Get support
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link
+                                to="/enterprise"
+                                class="footer-link"
+                            >
+                                Enterprise
                             </router-link>
                         </li>
                     </ul>
-                </div>
+                </nav>
+
+                <!-- Legal -->
+                <nav aria-label="Legal navigation">
+                    <h5 class="footer-heading">
+                        Legal
+                    </h5>
+                    <ul>
+                        <li>
+                            <a
+                                href="http://opensource.org/licenses/mit-license.php"
+                                class="footer-link"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                MIT License
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+                                class="footer-link"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                CC BY-NC-SA 4.0
+                            </a>
+                        </li>
+                        <li>
+                            <router-link
+                                to="/privacy"
+                                class="footer-link"
+                            >
+                                Privacy Policy
+                            </router-link>
+                        </li>
+                    </ul>
+                </nav>
             </div>
 
             <!-- Social & Copyright -->
@@ -111,7 +231,7 @@
                 <div class="level-left has-text-centered-mobile">
                     <div class="level-item">
                         <p>
-                            Buefy © 2017–2025
+                            Buefy &copy; 2017&ndash;{{ currentYear }}
                             <a
                                 href="http://opensource.org/licenses/mit-license.php"
                                 class="has-text-primary"
@@ -179,4 +299,8 @@
 
 <script setup lang="ts">
 import { BIcon } from 'buefy'
+import Package from '../../../../package.json'
+
+const version = Package.version
+const currentYear = new Date().getFullYear()
 </script>

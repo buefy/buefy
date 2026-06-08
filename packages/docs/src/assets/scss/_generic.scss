@@ -16,3 +16,11 @@ html.is-clipped-touch {
     overflow-y: hidden;
     overflow-x: auto;
 }
+
+body {
+    font-family: var(--font-body);
+}
+
+code, pre, kbd {
+    font-family: var(--font-mono);
+}

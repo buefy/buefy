@@ -31,5 +31,11 @@
             Now that you know what Buefy is, get on to the next step and
             <router-link to="/documentation/start">install it</router-link>!
         </p>
+
+        <div class="is-flex is-justify-content-flex-end mt-5">
+            <router-link to="/documentation/start" class="button is-primary">
+                Get started &rarr;
+            </router-link>
+        </div>
     </article>
 </template>

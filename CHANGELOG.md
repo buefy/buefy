@@ -1,5 +1,11 @@
 # Buefy Changelog
 
+## [3.0.8](https://github.com/buefy/buefy/compare/v3.0.7...v3.0.8)
+
+### Fixes
+
+- [#4307](https://github.com/buefy/buefy/pull/4307) Fix programmatic Modal unmounting before leave transition completes by using the `after-leave` hook instead of `setTimeout`.
+
 ## [3.0.7](https://github.com/buefy/buefy/compare/v3.0.6...v3.0.7)
 
 ### Chores & Dependency Updates

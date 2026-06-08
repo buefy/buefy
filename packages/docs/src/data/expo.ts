@@ -6,6 +6,8 @@ export interface ExpoInfo {
     img: string
     url: string
     featured?: boolean
+    description?: string
+    tags?: string[]
 }
 
 export default expo as ExpoInfo[]

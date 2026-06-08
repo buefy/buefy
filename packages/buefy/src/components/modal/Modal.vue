@@ -260,12 +260,8 @@ const Modal = defineComponent({
             this.$emit('close')
             this.$emit('update:modelValue', false)
 
-            // Timeout for the animation complete before destroying
             if (this.programmatic) {
                 this.isActive = false
-                setTimeout(() => {
-                    removeElement(this.$el)
-                }, 150)
             }
         },
 
@@ -319,6 +315,9 @@ const Modal = defineComponent({
     beforeUnmount() {
         if (typeof window !== 'undefined') {
             document.removeEventListener('keyup', this.keyPress)
+            if (this.programmatic) {
+                removeElement(this.$el)
+            }
             // reset scroll
             document.documentElement.classList.remove('is-clipped')
             const savedScrollTop = !this.savedScrollTop

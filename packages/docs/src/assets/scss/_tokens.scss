@@ -1,0 +1,129 @@
+:root {
+  // --- Brand ---
+  --color-brand:       #7957D5;
+  --color-brand-light: #9B7AE8;
+  --color-brand-dark:  #5C3DC7;
+  --color-brand-glow:  rgba(121, 87, 213, 0.15);
+
+  // --- Backgrounds ---
+  --color-bg:            #FFFFFF;
+  --color-bg-raised:     #F7F7FB;
+  --color-bg-subtle:     #EFECFB;
+  --color-bg-invert:     #1A1523;
+  --color-bg-invert-card:#231D30;
+
+  // --- Text ---
+  --color-text:              #1A1523;
+  --color-text-muted:        #6B6880;
+  --color-text-faint:        #9D9AAD;
+  --color-text-on-dark:      #F0EDFF;
+  --color-text-on-dark-muted:#9D9AAD;
+
+  // --- Borders ---
+  --color-border-subtle: rgba(121, 87, 213, 0.12);
+  --color-border:        rgba(121, 87, 213, 0.2);
+  --color-border-strong: rgba(121, 87, 213, 0.4);
+
+  // --- Gradients ---
+  --gradient-hero:       linear-gradient(135deg, #1A1523 0%, #2D2240 50%, #1A1523 100%);
+  --gradient-brand:      linear-gradient(135deg, #7957D5 0%, #9B7AE8 100%);
+  --gradient-card-hover: linear-gradient(135deg, rgba(121,87,213,0.08) 0%, rgba(155,122,232,0.04) 100%);
+
+  // --- Shadows ---
+  --shadow-sm:    0 1px 3px rgba(26, 21, 35, 0.08), 0 1px 2px rgba(26, 21, 35, 0.04);
+  --shadow-md:    0 4px 12px rgba(26, 21, 35, 0.1), 0 2px 4px rgba(26, 21, 35, 0.06);
+  --shadow-lg:    0 12px 32px rgba(26, 21, 35, 0.12), 0 4px 8px rgba(26, 21, 35, 0.08);
+  --shadow-brand: 0 4px 20px rgba(121, 87, 213, 0.3);
+
+  // --- Motion ---
+  --ease-out:        cubic-bezier(0.0, 0, 0.2, 1);
+  --ease-in:         cubic-bezier(0.4, 0, 1, 1);
+  --duration-fast:   120ms;
+  --duration-normal: 200ms;
+  --duration-slow:   300ms;
+
+  // --- Spacing ---
+  --section-padding:    96px 0;
+  --section-padding-sm: 64px 0;
+  --container-max:      1200px;
+  --container-padding:  0 24px;
+
+  // --- Typography ---
+  --font-display: 'DM Sans', 'Segoe UI', system-ui, sans-serif;
+  --font-body:    'DM Sans', 'Segoe UI', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+
+  --text-display: clamp(2.75rem, 6vw, 4.5rem);
+  --text-h1:      clamp(2rem, 4vw, 3rem);
+  --text-h2:      clamp(1.5rem, 3vw, 2rem);
+  --text-h3:      1.25rem;
+  --text-body-lg: 1.125rem;
+  --text-body:    1rem;
+  --text-sm:      0.875rem;
+  --text-xs:      0.75rem;
+}
+
+// Dark mode — explicit attribute
+[data-theme="dark"] {
+  --color-bg:             #1C1728;
+  --color-bg-raised:      #261F36;
+  --color-bg-subtle:      rgba(121, 87, 213, 0.18);
+  --color-bg-invert:      #100C18;
+  --color-bg-invert-card: #1A1523;
+
+  --color-text:       #F0EDFF;
+  --color-text-muted: #BDB9CC;
+  --color-text-faint: #7A7888;
+
+  --color-border-subtle: rgba(121, 87, 213, 0.18);
+  --color-border:        rgba(121, 87, 213, 0.3);
+  --color-border-strong: rgba(121, 87, 213, 0.5);
+
+  --gradient-hero:       linear-gradient(135deg, #0D0B14 0%, #1E1533 50%, #0D0B14 100%);
+  --gradient-card-hover: linear-gradient(135deg, rgba(121,87,213,0.14) 0%, rgba(155,122,232,0.07) 100%);
+
+  --shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.4),  0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md:  0 4px 12px rgba(0, 0, 0, 0.5),  0 2px 4px rgba(0, 0, 0, 0.35);
+  --shadow-lg:  0 12px 32px rgba(0, 0, 0, 0.55), 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+// Dark mode — system preference fallback (no stored preference)
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg:             #1C1728;
+    --color-bg-raised:      #261F36;
+    --color-bg-subtle:      rgba(121, 87, 213, 0.18);
+    --color-bg-invert:      #100C18;
+    --color-bg-invert-card: #1A1523;
+
+    --color-text:       #F0EDFF;
+    --color-text-muted: #BDB9CC;
+    --color-text-faint: #7A7888;
+
+    --color-border-subtle: rgba(121, 87, 213, 0.18);
+    --color-border:        rgba(121, 87, 213, 0.3);
+    --color-border-strong: rgba(121, 87, 213, 0.5);
+
+    --gradient-hero:       linear-gradient(135deg, #0D0B14 0%, #1E1533 50%, #0D0B14 100%);
+    --gradient-card-hover: linear-gradient(135deg, rgba(121,87,213,0.14) 0%, rgba(155,122,232,0.07) 100%);
+
+    --shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.4),  0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md:  0 4px 12px rgba(0, 0, 0, 0.5),  0 2px 4px rgba(0, 0, 0, 0.35);
+    --shadow-lg:  0 12px 32px rgba(0, 0, 0, 0.55), 0 4px 8px rgba(0, 0, 0, 0.4);
+  }
+}
+
+// Theme-switch transition suppressor
+html.no-transition *, html.no-transition *::before, html.no-transition *::after {
+  transition: none !important;
+  animation: none !important;
+}
+
+// Reduced motion guard
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,9 +1,6 @@
 <template>
     <main>
-        <TheNavbar
-            :light="isLightTheme"
-            @theme-changed="handleThemeChange"
-        />
+        <TheNavbar />
 
         <section class="documentation">
             <div v-if="!meta.hideSidebar" class="sidebar-bg" />
@@ -27,6 +24,7 @@
         </section>
 
         <TheFooter />
+        <TheCustomizer />
     </main>
 </template>
 
@@ -39,10 +37,10 @@ import TheFooter from '@/components/TheFooter.vue'
 import TheSidebar from '@/components/TheSidebar.vue'
 import ImproveThis from '@/components/ImproveThis.vue'
 import DocsPager from '@/components/DocsPager.vue'
+import TheCustomizer from '@/components/TheCustomizer.vue'
 import menuData from '@/data/menu'
 import type { PageTree } from '@/data/menu'
 import type { Route } from '@/data/routes'
-
 export default defineComponent({
     // eslint-disable-next-line vue/multi-word-component-names
     name: 'Documentation',
@@ -52,13 +50,13 @@ export default defineComponent({
         TheFooter,
         TheSidebar,
         ImproveThis,
-        DocsPager
+        DocsPager,
+        TheCustomizer
     },
     data() {
         return {
             menu: [] as PageTree[],
-            meta: {} as Partial<Route>,
-            isLightTheme: localStorage.getItem('theme') === 'light' || localStorage.getItem('theme') === null
+            meta: {} as Partial<Route>
         }
     },
     methods: {
@@ -68,13 +66,6 @@ export default defineComponent({
         },
         scrollTo(hash: string) {
             location.href = hash
-        },
-        handleThemeChange(isLight: boolean) {
-            this.isLightTheme = isLight
-            const theme = isLight ? 'light' : 'dark'
-            localStorage.setItem('theme', theme)
-            document.documentElement.classList.toggle('theme-dark', !isLight)
-            document.documentElement.classList.toggle('theme-light', isLight)
         }
     },
     mounted() {
@@ -83,9 +74,6 @@ export default defineComponent({
         if (this.$route.hash) {
             this.$nextTick(() => this.scrollTo(this.$route.hash))
         }
-
-        // Apply initial theme
-        this.handleThemeChange(this.isLightTheme)
     },
 
     beforeUnmount() {

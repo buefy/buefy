@@ -117,11 +117,14 @@ describe('BModal', () => {
             })
             await modal.$nextTick() // makes sure DOM is updated
             expect(document.querySelector('.modal')).toBeTruthy()
-            vi.useFakeTimers()
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const modalProxy = (modal.$data as any).modalVNode?.component?.proxy
+            const modalVm = modalProxy as InstanceType<typeof BModal>
             modal.close()
-            vi.advanceTimersByTime(150)
+            // JSDOM has no CSS transitions; manually trigger the after-leave hook
+            modalVm.afterLeave()
+            await modal.$nextTick()
             expect(document.querySelector('.modal')).toBeFalsy()
-            vi.useRealTimers()
         })
     })
 

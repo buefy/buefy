@@ -54,6 +54,8 @@ export function createDocsRouter(vueApp: App) {
                     route('documentation/start', () => import('@/pages/installation/Start.vue')),
                     route('documentation/sass', () => import('@/pages/installation/Sass.vue')),
                     route('documentation/css-variables', () => import('@/pages/installation/CssVariables.vue')),
+                    route('documentation/theme-switching', () => import('@/pages/installation/ThemeSwitching.vue')),
+                    route('documentation/typography', () => import('@/pages/installation/Typography.vue')),
                     route('documentation/constructor-options', () => import('@/pages/installation/ConstructorOptions.vue')),
                     route('documentation/layout', () => import('@/pages/Layout.vue')),
                     route('documentation/icon', () => import('@/pages/components/icon/Icon.vue')),
@@ -105,7 +107,14 @@ export function createDocsRouter(vueApp: App) {
                     route('extensions/veevalidate', () => import('@/pages/extensions/veevalidate/VeeValidate.vue')),
                     route('extensions/vuebreakpointmixin', () => import('@/pages/extensions/vuebreakpointmixin/VueBreakpointMixin.vue')),
                     // Expo
-                    route('expo', () => import('@/pages/Expo.vue'))
+                    route('expo', () => import('@/pages/Expo.vue')),
+                    // Standalone pages
+                    route('changelog', () => import('@/pages/Changelog.vue')),
+                    route('privacy', () => import('@/pages/Privacy.vue')),
+                    route('enterprise', () => import('@/pages/Enterprise.vue')),
+                    route('contribute', () => import('@/pages/Contribute.vue')),
+                    route('sponsors', () => import('@/pages/Sponsors.vue')),
+                    route('support', () => import('@/pages/Support.vue'))
                 ]
             },
             // Global redirect

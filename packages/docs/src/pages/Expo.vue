@@ -1,60 +1,83 @@
 <template>
     <article class="content expo">
-        <div class="expo-head">
-            <div class="expo-head-text">Show us your own project or job!</div>
-            <div class="expo-head-button">
-                <div class="buttons">
-                    <button class="button is-twitter" @click="tweet">
-                        <b-icon
-                            pack="fa"
-                            custom-class="fa-brands"
-                            icon="x-twitter"
-                        />
-                        <span>#MadeWithBuefy</span>
-                    </button>
-                    <a
-                        class="button is-vuetelemetry"
-                        href="https://www.vuetelescope.com/explore?ui.slug=buefy&_sort=lastDetectedAt:desc"
-                        target="_blank"
-                    >
-                        <b-icon icon="nuxt" />
-                        <span>Explore VueTelemetry</span>
-                    </a>
-                </div>
+        <header class="expo-header">
+            <h1 class="expo-title">Built with Buefy</h1>
+            <p class="expo-subtitle">Projects and apps from the community</p>
+            <div class="expo-head-actions">
+                <button class="expo-action-btn" @click="tweet">
+                    <b-icon
+                        pack="fa"
+                        custom-class="fa-brands"
+                        icon="x-twitter"
+                    />
+                    <span>#MadeWithBuefy</span>
+                </button>
+                <a
+                    class="expo-action-btn"
+                    href="https://www.vuetelescope.com/explore?ui.slug=buefy&_sort=lastDetectedAt:desc"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <b-icon icon="nuxt" />
+                    <span>Explore VueTelemetry</span>
+                </a>
             </div>
-        </div>
-        <div class="columns is-multiline">
-            <div
-                v-for="(item, i) in expo"
+        </header>
+
+        <div class="expo-grid">
+            <article
+                v-for="item in expo"
                 :key="item.title"
-                class="column has-text-centered"
-                style="padding-right: 2.5em"
-                :class="i % 3 ? 'is-half' : 'is-full'"
+                class="expo-card"
             >
-                <a :href="item.url" target="_blank" rel="noopener noreferrer">
+                <a
+                    :href="item.url"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="expo-card-link-overlay"
+                    :aria-label="item.title"
+                />
+                <div class="card-thumb-wrap">
                     <img
-                        class="image-has-shadow"
+                        class="card-thumb"
                         :src="getImg(item.img)"
                         :alt="item.title"
                     />
-                </a>
-
-                <p>
-                    <a
-                        class="title is-5"
-                        :href="item.url"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        {{ item.title }}
-                    </a>
-                    <br />
-                    <span class="subtitle is-6">
-                        {{ new Date(item.date).toLocaleDateString() }}
-                    </span>
-                </p>
-            </div>
+                    <div class="card-hover-overlay" aria-hidden="true">
+                        Visit →
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">{{ item.title }}</div>
+                    <p v-if="item.description" class="card-desc">
+                        {{ item.description }}
+                    </p>
+                    <div v-if="item.tags && item.tags.length" class="card-tags">
+                        <span
+                            v-for="tag in item.tags"
+                            :key="tag"
+                            class="card-tag"
+                        >{{ tag }}</span>
+                    </div>
+                    <div class="card-date">{{ new Date(item.date).toLocaleDateString() }}</div>
+                </div>
+            </article>
         </div>
+
+        <section class="expo-cta">
+            <div class="expo-cta-content">
+                <h3>Built something with Buefy?</h3>
+                <p>Share your project with the community.</p>
+            </div>
+            <a
+                href="https://github.com/buefy/buefy/discussions"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-primary"
+            >
+                Submit your project →
+            </a>
+        </section>
     </article>
 </template>
 

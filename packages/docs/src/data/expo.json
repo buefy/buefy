@@ -40,7 +40,9 @@
         "date": "2020-04-13",
         "img": "leasy.png",
         "url": "https://leasy.co/",
-        "featured": true
+        "featured": true,
+        "description": "Modern property management platform for landlords and tenants.",
+        "tags": ["SaaS", "Dashboard", "Real Estate"]
     },
     {
         "title": "Taskflex",
@@ -143,7 +145,9 @@
         "date": "2019-06-13",
         "img": "travelstop.png",
         "url": "https://travelstop.com",
-        "featured": true
+        "featured": true,
+        "description": "Corporate travel management and expense tracking for teams.",
+        "tags": ["Travel", "Enterprise", "Finance"]
     },
     {
         "title": "Brand Finance",
@@ -174,7 +178,9 @@
         "date": "2019-04-24",
         "img": "moonlight.png",
         "url": "https://www.moonlightwork.com",
-        "featured": true
+        "featured": true,
+        "description": "Freelance marketplace connecting engineers with top companies.",
+        "tags": ["Marketplace", "Freelance", "Tech"]
     },
     {
         "title": "Im Done",

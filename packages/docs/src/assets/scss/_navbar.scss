@@ -6,6 +6,36 @@
         box-shadow: cv.getVar('shadow');
     }
 
+    &.is-scrolled {
+        backdrop-filter: blur(12px) saturate(180%);
+        background: rgba(255, 255, 255, 0.85) !important;
+        box-shadow: var(--shadow-sm);
+    }
+
+    [data-theme="dark"] &.is-scrolled {
+        background: rgba(28, 23, 40, 0.88) !important;
+    }
+
+    .navbar-cta {
+        display: inline-flex;
+        align-items: center;
+        background: var(--color-brand);
+        color: #fff !important;
+        border-radius: 6px;
+        padding: 8px 18px;
+        font-size: var(--text-sm);
+        font-weight: 600;
+        text-decoration: none;
+        transition:
+            background var(--duration-normal) var(--ease-out),
+            box-shadow var(--duration-normal) var(--ease-out);
+
+        &:hover {
+            background: var(--color-brand-dark) !important;
+            box-shadow: var(--shadow-brand);
+        }
+    }
+
     .is-version {
         flex-direction: column;
         align-items: flex-start;

@@ -51,7 +51,7 @@ class SnackbarProgrammatic {
         const propsData: SnackbarProps = {
             type: 'is-success',
             position: config.defaultSnackbarPosition || 'is-bottom-right',
-            queue: true,
+            queue: config.defaultNoticeQueue,
             message,
             ...restParams
         }

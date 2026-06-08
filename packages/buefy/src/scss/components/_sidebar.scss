@@ -80,7 +80,7 @@ $sidebar-close-button-dark-background: rgba(10,10,10,.86) !default;
             flex-direction: column;
             align-content: stretch;
         }
-        @media screen and (max-width: calc(cv.getVar("sidebar-mobile-breakpoint") - 1px)) {
+        @media screen and (max-width: #{$sidebar-mobile-breakpoint - 1px}) {
             &.is-mini-mobile {
                 width: cv.getVar("sidebar-mobile-width");
                 &.is-mini-expand:hover {

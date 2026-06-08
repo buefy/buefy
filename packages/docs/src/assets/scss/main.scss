@@ -1,8 +1,14 @@
+// Local font faces — must come first so the fonts are declared before use
+@use "_fonts";
+
 // Docs variables - MUST come before Buefy to configure Bulma
 @forward "_variables";
 
 // Buefy
 @use "buefy/src/scss/buefy";
+
+// Design tokens (CSS custom properties)
+@use "_tokens";
 
 // Docs elements / components
 @use "_apiview";
@@ -16,6 +22,7 @@
 @use "_home";
 @use "_sidebar";
 @use "_templates";
+@use "_customizer";
 
 // Highlight.js
 @use "highlight.js/styles/base16/atelier-cave-light.css" as *;

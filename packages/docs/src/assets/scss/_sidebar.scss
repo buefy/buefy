@@ -83,6 +83,12 @@
                 margin-top: 0.25em;
                 margin-bottom: 0.5em;
             }
+            li > p {
+                padding: 0.4rem 0.625rem;
+                margin: 0;
+                color: cv.getVar('text');
+                font-weight: cv.getVar('weight-semibold');
+            }
             a {
                 display: flex;
                 align-items: center;

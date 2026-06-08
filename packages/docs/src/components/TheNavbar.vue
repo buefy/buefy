@@ -1,197 +1,161 @@
 <template>
-    <nav
-        class="navbar docs-navbar is-spaced has-shadow"
-        :class="{ 'is-primary is-transparent': light }"
+    <b-navbar
+        ref="navbar"
+        v-model="isMenuOpen"
+        class="docs-navbar"
+        :type="isLight ? 'is-primary' : ''"
+        :transparent="isLight"
+        wrapper-class="container"
+        spaced
+        shadow
     >
-        <div class="container">
-            <div class="navbar-brand">
-                <router-link
-                    to="/"
-                    class="navbar-item"
-                    title="Buefy: lightweight UI components for Vue.js based on Bulma"
-                    active-class=""
+        <template #brand>
+            <b-navbar-item
+                tag="router-link"
+                to="/"
+                active-class=""
+                title="Buefy: lightweight UI components for Vue.js based on Bulma"
+            >
+                <img
+                    v-if="isLight"
+                    src="../assets/buefy-light.png"
+                    alt="Buefy"
                 >
-                    <img
-                        v-if="light"
-                        src="../assets/buefy-light.png"
-                        alt="Buefy"
-                    >
-                    <img
-                        v-else
-                        src="../assets/buefy.png"
-                        alt="Buefy"
-                    >
+                <img
+                    v-else
+                    src="../assets/buefy.png"
+                    alt="Buefy"
+                >
+            </b-navbar-item>
+
+            <b-navbar-item
+                tag="a"
+                href="https://github.com/buefy/buefy"
+                target="_blank"
+                title="Github"
+            >
+                <b-icon icon="github" />
+            </b-navbar-item>
+
+            <b-navbar-item
+                tag="a"
+                href="https://discord.buefy.org/"
+                target="_blank"
+                title="Discord"
+            >
+                <b-icon icon="discord" />
+            </b-navbar-item>
+
+            <b-navbar-item
+                tag="a"
+                href="https://x.com/buefycss"
+                target="_blank"
+                title="Twitter"
+            >
+                <b-icon
+                    pack="fa"
+                    custom-class="fa-brands"
+                    icon="x-twitter"
+                />
+            </b-navbar-item>
+        </template>
+
+        <template #end>
+            <b-navbar-item
+                tag="router-link"
+                to="/"
+                exact
+            >
+                Home
+            </b-navbar-item>
+
+            <b-navbar-item tag="router-link" to="/documentation">
+                Documentation
+            </b-navbar-item>
+
+            <b-navbar-item tag="router-link" to="/extensions">
+                Extensions
+            </b-navbar-item>
+
+            <b-navbar-item tag="router-link" to="/expo">
+                Expo
+            </b-navbar-item>
+
+            <b-navbar-dropdown label="Info" hoverable>
+                <strong class="navbar-item is-version">
+                    <span class="has-text-primary">Buefy version</span>
+                    <span class="has-text-grey">{{ version }}</span>
+                </strong>
+                <strong class="navbar-item is-version">
+                    <span class="has-text-bulma">Bulma version</span>
+                    <span class="has-text-grey">{{ bulmaVersion }}</span>
+                </strong>
+                <hr class="navbar-divider">
+                <b-navbar-item
+                    tag="a"
+                    href="https://github.com/buefy/buefy/releases"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    Changelogs
+                </b-navbar-item>
+            </b-navbar-dropdown>
+
+            <b-navbar-item tag="div">
+                <router-link to="/documentation/start" class="navbar-cta">
+                    Get Started
                 </router-link>
+            </b-navbar-item>
 
-                <a
-                    class="navbar-item"
-                    href="https://github.com/buefy/buefy"
-                    target="_blank"
-                    title="Github"
-                >
-                    <b-icon icon="github" />
-                </a>
-
-                <a
-                    class="navbar-item"
-                    href="https://discord.buefy.org/"
-                    target="_blank"
-                    title="Discord"
-                >
-                    <b-icon icon="discord" />
-                </a>
-
-                <a
-                    class="navbar-item"
-                    href="https://x.com/buefycss"
-                    target="_blank"
-                    title="Twitter"
-                >
-                    <b-icon
-                        pack="fa"
-                        custom-class="fa-brands"
-                        icon="x-twitter"
-                    />
-                </a>
-
-                <span
-                    class="navbar-burger burger"
-                    :class="{ 'is-active': isMenuActive }"
-                    @click="isMenuActive = !isMenuActive"
-                >
-                    <span />
-                    <span />
-                    <span />
-                    <span />
-                </span>
-            </div>
-
-            <div class="navbar-menu" :class="{ 'is-active': isMenuActive }">
-                <div class="navbar-end">
-                    <router-link
-                        to="/"
-                        exact
-                        class="navbar-item"
-                    >
-                        Home
-                    </router-link>
-
-                    <router-link to="/documentation" class="navbar-item">
-                        Documentation
-                    </router-link>
-
-                    <router-link to="/extensions" class="navbar-item">
-                        Extensions
-                    </router-link>
-
-                    <router-link to="/expo" class="navbar-item">
-                        Expo
-                    </router-link>
-
-                    <div class="navbar-item has-dropdown is-hoverable">
-                        <div class="navbar-link">
-                            Info
-                        </div>
-
-                        <div class="navbar-dropdown">
-                            <strong class="navbar-item is-version">
-                                <span class="has-text-primary">Buefy version</span>
-                                <span class="has-text-grey">{{ version }}</span>
-                            </strong>
-                            <strong class="navbar-item is-version">
-                                <span class="has-text-bulma">Bulma version</span>
-                                <span class="has-text-grey">{{
-                                    bulmaVersion
-                                }}</span>
-                            </strong>
-
-                            <hr class="navbar-divider">
-                            <div class="navbar-item">
-                                <a
-                                    href="https://github.com/buefy/buefy/releases"
-                                    target="_blank"
-                                    rel="noopener"
-                                >
-                                    Changelogs
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="navbar-item">
-                        <b-icon
-                            icon="white-balance-sunny"
-                            size="is-small"
-                            :class="{'is-warning': theme === 'light' }"
-                        />
-                        <b-switch
-                            v-model="theme"
-                            type="is-warning"
-                            true-value="dark"
-                            false-value="light"
-                            size="is-small"
-                            label="Theme"
-                        />
-                        <b-icon
-                            icon="moon-waning-crescent"
-                            size="is-small"
-                            :class="{'is-primary': theme === 'dark' }"
-                        />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+            <b-navbar-item tag="div">
+                <ThemeToggle />
+            </b-navbar-item>
+        </template>
+    </b-navbar>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { BNavbar, BNavbarItem, BNavbarDropdown, BIcon } from 'buefy'
 
-import { BIcon } from 'buefy'
-
+import ThemeToggle from '@/components/ThemeToggle.vue'
 import buefyPackage from '../../../../package.json'
 import bulmaPackage from 'bulma/package.json'
+import { useTheme } from '@/composables/useTheme'
 
 export default defineComponent({
-    components: { BIcon },
-    emits: ['theme-changed'],
-    props: {
-        light: {
-            type: Boolean,
-            default: true
-        }
-    },
+    components: { BNavbar, BNavbarItem, BNavbarDropdown, BIcon, ThemeToggle },
     data() {
         return {
-            isMenuActive: false,
+            isMenuOpen: false,
+            isLight: useTheme().isLight,
             version: buefyPackage.version,
             bulmaVersion: bulmaPackage.version
         }
     },
-    computed: {
-        theme: {
-            get() {
-                return this.light ? 'light' : 'dark'
-            },
-            set(newTheme: string) {
-                this.$emit('theme-changed', newTheme === 'light')
-            }
-        }
-    },
     methods: {
         closeMenu() {
-            this.isMenuActive = false
+            this.isMenuOpen = false
+        },
+        onScroll() {
+            const navEl = (this.$refs.navbar as InstanceType<typeof BNavbar>).$el as HTMLElement
+            navEl.classList.toggle('is-scrolled', window.scrollY > 60)
         }
     },
     mounted() {
         this.$eventHub.on('navigate', this.closeMenu)
-    },
 
+        // Apply scroll-blur class directly on the underlying <nav> element
+        // since BNavbar uses a render function (class fallthrough isn't guaranteed)
+        const navEl = (this.$refs.navbar as InstanceType<typeof BNavbar>).$el as HTMLElement
+        navEl.classList.add('docs-navbar')
+        window.addEventListener('scroll', this.onScroll, { passive: true })
+
+        useTheme().setTheme(useTheme().getTheme())
+    },
     beforeUnmount() {
         this.$eventHub.off('navigate', this.closeMenu)
-        // Clean up any scroll-lock class that may have been left by a previous
-        // version of this component or by a BDropdown mobile-modal interaction.
-        document.documentElement.classList.remove('is-clipped-touch')
+        window.removeEventListener('scroll', this.onScroll)
     }
 })
 </script>
