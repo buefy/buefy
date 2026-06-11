@@ -12,7 +12,7 @@
                     animation="slide"
                     :model-value="openItems[index]"
                     :aria-id="'faq-item-' + index"
-                    @update:modelValue="openItems[index] = $event"
+                    @update:model-value="openItems[index] = $event"
                 >
                     <template #trigger="props">
                         <div
@@ -47,8 +47,8 @@ export default defineComponent({
     data() {
         return {
             faq,
-            openItems: faq.map(() => false) as boolean[],
+            openItems: faq.map(() => false) as boolean[]
         }
-    },
+    }
 })
 </script>

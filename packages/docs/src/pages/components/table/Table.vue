@@ -70,7 +70,8 @@
         >
             <p>
                 You can add search filtering to rows by using the
-                <code>searchable</code> prop.
+                <code>searchable</code> prop, and specifying a <code>field</code>
+                name.
             </p>
             <b-message type="is-warning">
                 This feature is not available on mobile when
