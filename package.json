@@ -15,6 +15,7 @@
   ],
   "overrides": {
     "cross-spawn": "^7.0.6",
+    "esbuild": "^0.28.1",
     "fast-uri": "^3.1.2",
     "follow-redirects": "^1.16.0",
     "js-cookie": "^3.0.7",
