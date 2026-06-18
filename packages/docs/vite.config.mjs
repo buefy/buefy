@@ -69,9 +69,13 @@ export default defineConfig({
   },
   assetsInclude: ['**/*.woff', '**/*.woff2', '**/*.eot', '**/*.ttf'],
   optimizeDeps: {
-    include: ['lodash']
+    include: ['lodash'],
+    esbuildOptions: {
+      target: 'esnext',
+    },
   },
   build: {
+    target: 'esnext',
     rollupOptions: {
       output: {
         assetFileNames: (assetInfo) => {

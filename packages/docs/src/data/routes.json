@@ -246,6 +246,19 @@
             "documentation/tag"
         ]
     },
+    "documentation/tree": {
+        "title": "Tree",
+        "subtitle": "An extensible hierarchical tree component with lazy loading, checkbox tri-state, and full ARIA keyboard navigation",
+        "path": "/documentation/tree",
+        "githubPath": "pages/components/tree/Tree.vue",
+        "menu": "documentation",
+        "breadcrumb": [
+            "/",
+            "documentation",
+            "documentation/tree"
+        ],
+        "isNew": true
+    },
     "documentation/toast": {
         "title": "Toast",
         "subtitle": "Toasts are simple text messages to inform the user",

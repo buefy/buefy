@@ -63,6 +63,7 @@
                 "documentation/snackbar",
                 "documentation/table",
                 "documentation/tag",
+                "documentation/tree",
                 "documentation/toast",
                 "documentation/tooltip"
             ]

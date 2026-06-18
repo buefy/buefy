@@ -1,0 +1,103 @@
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/initial-variables" as iv;
+
+$tree-indent-size: 1.5em !default;
+$tree-node-padding-v: 0.25em !default;
+$tree-node-padding-h: 0.5em !default;
+$tree-node-radius: cv.getVar("radius") !default;
+
+.b-tree {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.b-tree-children {
+    list-style: none;
+    margin: 0;
+    padding-left: $tree-indent-size;
+}
+
+.b-tree-node {
+    outline: none;
+
+    &:focus > .b-tree-node-content {
+        outline: 2px solid cv.getVar("focus");
+        outline-offset: -2px;
+    }
+
+    &.is-selected > .b-tree-node-content {
+        background-color: cv.getVar("primary");
+        color: cv.getVar("primary-invert");
+    }
+
+    &.is-disabled > .b-tree-node-content {
+        opacity: 0.5;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+}
+
+.b-tree-node-content {
+    display: flex;
+    align-items: center;
+    gap: 0.25em;
+    padding: $tree-node-padding-v $tree-node-padding-h;
+    border-radius: $tree-node-radius;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+        background-color: cv.getVar("background");
+    }
+}
+
+.b-tree-node-toggle {
+    flex-shrink: 0;
+    width: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &.is-invisible {
+        visibility: hidden;
+        pointer-events: none;
+    }
+}
+
+.b-tree-node-checkbox {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+
+    .b-checkbox {
+        margin: 0;
+    }
+}
+
+.b-tree-node-icon {
+    flex-shrink: 0;
+}
+
+.b-tree-node-label {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.b-tree-node-error {
+    flex-shrink: 0;
+}
+
+.b-tree-loading-icon {
+    animation: spinAround 0.5s infinite linear;
+}
+
+.b-tree-empty {
+    padding: 0.5em;
+    color: cv.getVar("grey");
+    list-style: none;
+}

@@ -81,6 +81,8 @@ import Toast from './toast'
 export * from './toast'
 import Tooltip from './tooltip'
 export * from './tooltip'
+import Tree from './tree'
+export * from './tree'
 import Upload from './upload'
 export * from './upload'
 /* eslint-enable import/first */
@@ -128,6 +130,7 @@ export {
     Timepicker,
     Toast,
     Tooltip,
+    Tree,
     Upload
 }
 
@@ -174,6 +177,7 @@ const allComponents = [
     Timepicker,
     Toast,
     Tooltip,
+    Tree,
     Upload
 ] as const
 export default allComponents

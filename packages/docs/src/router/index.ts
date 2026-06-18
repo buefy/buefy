@@ -102,6 +102,7 @@ export function createDocsRouter(vueApp: App) {
                     route('documentation/skeleton', () => import('@/pages/components/skeleton/Skeleton.vue')),
                     route('documentation/image', () => import('@/pages/components/image/Image.vue')),
                     route('documentation/colorpicker', () => import('@/pages/components/colorpicker/Colorpicker.vue')),
+                    route('documentation/tree', () => import('@/pages/components/tree/Tree.vue')),
                     // Extensions
                     route('extensions', () => import('@/pages/Extensions.vue')),
                     route('extensions/cleavejs', () => import('@/pages/extensions/cleavejs/Cleavejs.vue')),
