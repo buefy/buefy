@@ -1,9 +1,9 @@
 export interface TreeFieldMapping {
-    label: string
-    children: string
-    isLeaf: string
-    id: string
-    disabled: string
+    label: string;
+    children: string;
+    isLeaf: string;
+    id: string;
+    disabled: string;
 }
 
 export const DEFAULT_FIELDS: TreeFieldMapping = {
@@ -14,13 +14,15 @@ export const DEFAULT_FIELDS: TreeFieldMapping = {
     disabled: 'disabled'
 }
 
-export type TreeNodeData = Record<string, unknown>
+export type TreeNodeData = Record<string, unknown>;
 
-export type SelectionMode = 'none' | 'single' | 'multiple' | 'checkbox'
+export type SelectionMode = 'none' | 'single' | 'multiple' | 'checkbox';
 
-export type CheckState = 'checked' | 'unchecked' | 'indeterminate'
+export type CheckState = 'checked' | 'unchecked' | 'indeterminate';
 
-export function mergeFields(partial?: Partial<TreeFieldMapping>): TreeFieldMapping {
+export function mergeFields(
+    partial?: Partial<TreeFieldMapping>
+): TreeFieldMapping {
     return { ...DEFAULT_FIELDS, ...partial }
 }
 
@@ -28,25 +30,40 @@ export function getLabel(data: TreeNodeData, fields: TreeFieldMapping): string {
     return String(data[fields.label] ?? '')
 }
 
-export function getChildren(data: TreeNodeData, fields: TreeFieldMapping): TreeNodeData[] | undefined {
+export function getChildren(
+    data: TreeNodeData,
+    fields: TreeFieldMapping
+): TreeNodeData[] | undefined {
     const val = data[fields.children]
     return Array.isArray(val) ? (val as TreeNodeData[]) : undefined
 }
 
-export function getIsLeaf(data: TreeNodeData, fields: TreeFieldMapping): boolean {
+export function getIsLeaf(
+    data: TreeNodeData,
+    fields: TreeFieldMapping
+): boolean {
     const val = data[fields.isLeaf]
     return val !== undefined ? Boolean(val) : false
 }
 
-export function getNodeKey(data: TreeNodeData, fields: TreeFieldMapping): unknown {
+export function getNodeKey(
+    data: TreeNodeData,
+    fields: TreeFieldMapping
+): unknown {
     return data[fields.id]
 }
 
-export function isNodeDisabled(data: TreeNodeData, fields: TreeFieldMapping): boolean {
+export function isNodeDisabled(
+    data: TreeNodeData,
+    fields: TreeFieldMapping
+): boolean {
     return Boolean(data[fields.disabled])
 }
 
-export function getDescendantKeys(data: TreeNodeData, fields: TreeFieldMapping): unknown[] {
+export function getDescendantKeys(
+    data: TreeNodeData,
+    fields: TreeFieldMapping
+): unknown[] {
     const children = getChildren(data, fields)
     if (!children) return []
     const keys: unknown[] = []
@@ -70,9 +87,11 @@ export function computeCheckState(
         return checkedKeys.includes(key) ? 'checked' : 'unchecked'
     }
 
-    const states = children.map(c => computeCheckState(c, checkedKeys, fields))
-    if (states.every(s => s === 'checked')) return 'checked'
-    if (states.every(s => s === 'unchecked')) return 'unchecked'
+    const states = children.map((c) =>
+        computeCheckState(c, checkedKeys, fields)
+    )
+    if (states.every((s) => s === 'checked')) return 'checked'
+    if (states.every((s) => s === 'unchecked')) return 'unchecked'
     return 'indeterminate'
 }
 
@@ -82,9 +101,12 @@ export function addToChecked(keys: unknown[], toAdd: unknown[]): unknown[] {
     return Array.from(set)
 }
 
-export function removeFromChecked(keys: unknown[], toRemove: unknown[]): unknown[] {
+export function removeFromChecked(
+    keys: unknown[],
+    toRemove: unknown[]
+): unknown[] {
     const set = new Set(toRemove)
-    return keys.filter(k => !set.has(k))
+    return keys.filter((k) => !set.has(k))
 }
 
 export function matchesFilter(
@@ -105,5 +127,5 @@ export function nodeOrDescendantMatches(
     if (matchesFilter(data, filter, fields)) return true
     const children = getChildren(data, fields)
     if (!children) return false
-    return children.some(c => nodeOrDescendantMatches(c, filter, fields))
+    return children.some((c) => nodeOrDescendantMatches(c, filter, fields))
 }

@@ -1,12 +1,7 @@
 <template>
     <div>
         <p class="content">Children are loaded asynchronously when a node is first expanded.</p>
-        <b-tree
-            :data="roots"
-            :load="loadChildren"
-            lazy
-            @load-error="onLoadError"
-        />
+        <b-tree :data="roots" :load="loadChildren" lazy @load-error="onLoadError" />
         <p v-if="errorMsg" class="has-text-danger mt-2">{{ errorMsg }}</p>
     </div>
 </template>
@@ -30,7 +25,7 @@ export default defineComponent({
         }
     },
     methods: {
-        loadChildren(node: Record<string, unknown>): Promise<unknown[]> {
+        loadChildren(node: Record<string, unknown>): Promise<Record<string, unknown>[]> {
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
                     if (node.id === 'node-b') {

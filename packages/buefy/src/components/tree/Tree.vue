@@ -5,7 +5,11 @@
         :class="[size]"
         role="tree"
         :aria-label="ariaLabel || undefined"
-        :aria-multiselectable="selectionMode === 'multiple' || selectionMode === 'checkbox' || undefined"
+        :aria-multiselectable="
+            selectionMode === 'multiple'
+                || selectionMode === 'checkbox'
+                || undefined
+        "
         @keydown="onKeydown"
     >
         <b-tree-node
@@ -21,7 +25,9 @@
             class="b-tree-empty"
             role="presentation"
         >
-            <slot name="empty">No data</slot>
+            <slot name="empty">
+                No data
+            </slot>
         </li>
     </ul>
 </template>
@@ -32,7 +38,6 @@ import type { PropType } from 'vue'
 import BTreeNode from './TreeNode.vue'
 import type { BTreeProvide } from './TreeTypes'
 import {
-    DEFAULT_FIELDS,
     mergeFields,
     getNodeKey,
     getDescendantKeys,
@@ -106,23 +111,24 @@ export default defineComponent({
         }
     },
 
-    emits: {
-        'update:selected': (_value: unknown) => true,
-        'update:expandedKeys': (_value: unknown[]) => true,
-        'update:checkedKeys': (_value: unknown[]) => true,
-        'select': (_data: TreeNodeData, _key: unknown) => true,
-        'check': (_data: TreeNodeData, _checked: boolean, _indeterminate: boolean) => true,
-        'expand': (_data: TreeNodeData, _key: unknown) => true,
-        'collapse': (_data: TreeNodeData, _key: unknown) => true,
-        'node-click': (_data: TreeNodeData, _key: unknown) => true,
-        'load-start': (_data: TreeNodeData, _key: unknown) => true,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        'load-error': (_data: TreeNodeData, _key: unknown, _err: any) => true
-    },
+    emits: [
+        'update:selected',
+        'update:expandedKeys',
+        'update:checkedKeys',
+        'select',
+        'check',
+        'expand',
+        'collapse',
+        'node-click',
+        'load-start',
+        'load-error'
+    ],
 
     data() {
         return {
-            internalExpandedKeys: this.defaultExpandAll ? [] : ([...this.expandedKeys] as unknown[]),
+            internalExpandedKeys: this.defaultExpandAll
+                ? []
+                : ([...this.expandedKeys] as unknown[]),
             internalCheckedKeys: [...this.checkedKeys] as unknown[],
             internalSelected: (this.selectionMode === 'multiple'
                 ? (Array.isArray(this.selected) ? [...this.selected] : [])
@@ -154,12 +160,6 @@ export default defineComponent({
             } else {
                 this.internalSelected = val
             }
-        }
-    },
-
-    mounted() {
-        if (this.defaultExpandAll) {
-            this.internalExpandedKeys = this.collectAllKeys(this.data)
         }
     },
 
@@ -216,10 +216,10 @@ export default defineComponent({
                     ...this.lazyChildrenCache,
                     [String(key)]: children
                 }
-                this.loadingKeys = this.loadingKeys.filter(k => k !== key)
-                this.loadErrorKeys = this.loadErrorKeys.filter(k => k !== key)
+                this.loadingKeys = this.loadingKeys.filter((k) => k !== key)
+                this.loadErrorKeys = this.loadErrorKeys.filter((k) => k !== key)
             } catch (err) {
-                this.loadingKeys = this.loadingKeys.filter(k => k !== key)
+                this.loadingKeys = this.loadingKeys.filter((k) => k !== key)
                 this.loadErrorKeys = [...this.loadErrorKeys, key]
                 this.$emit('load-error', nodeData, key, err)
             }
@@ -283,7 +283,7 @@ export default defineComponent({
 
             const active = document.activeElement as HTMLElement
             let currentIdx = items.indexOf(active)
-            if (currentIdx < 0) currentIdx = items.findIndex(i => i.tabIndex === 0)
+            if (currentIdx < 0) currentIdx = items.findIndex((i) => i.tabIndex === 0)
             if (currentIdx < 0) currentIdx = 0
 
             let nextIdx = currentIdx
@@ -353,6 +353,12 @@ export default defineComponent({
             if (nextIdx !== currentIdx) {
                 items[nextIdx].focus()
             }
+        }
+    },
+
+    mounted() {
+        if (this.defaultExpandAll) {
+            this.internalExpandedKeys = this.collectAllKeys(this.data)
         }
     }
 })

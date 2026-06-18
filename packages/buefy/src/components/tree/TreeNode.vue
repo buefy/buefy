@@ -229,37 +229,23 @@ export default defineComponent({
         },
 
         labelSlotComponent(): Component | null {
-            const slot = this.tree.$slots['default']
+            const slot = this.tree.$slots.default
             if (!slot) return null
-            const self = this
             return (() => slot({
-                node: self.data,
-                data: self.data,
-                depth: self.depth,
-                expanded: self.isExpanded,
-                checked: self.checkState === 'checked',
-                indeterminate: self.checkState === 'indeterminate',
-                selected: self.isSelected
+                node: this.data,
+                data: this.data,
+                depth: this.depth,
+                expanded: this.isExpanded,
+                checked: this.checkState === 'checked',
+                indeterminate: this.checkState === 'indeterminate',
+                selected: this.isSelected
             })) as Component
         },
 
         iconSlotComponent(): Component | null {
-            const slot = this.tree.$slots['icon']
+            const slot = this.tree.$slots.icon
             if (!slot) return null
-            const self = this
-            return (() => slot({ node: self.data, expanded: self.isExpanded })) as Component
-        }
-    },
-
-    mounted() {
-        if (this.myKey !== undefined && this.myKey !== null) {
-            this.tree.registerNode(this.myKey, this.data)
-        }
-    },
-
-    beforeUnmount() {
-        if (this.myKey !== undefined && this.myKey !== null) {
-            this.tree.unregisterNode(this.myKey)
+            return (() => slot({ node: this.data, expanded: this.isExpanded })) as Component
         }
     },
 
@@ -288,6 +274,18 @@ export default defineComponent({
 
         onFocus(): void {
             this.tree.setFocused(this.myKey)
+        }
+    },
+
+    mounted() {
+        if (this.myKey !== undefined && this.myKey !== null) {
+            this.tree.registerNode(this.myKey, this.data)
+        }
+    },
+
+    beforeUnmount() {
+        if (this.myKey !== undefined && this.myKey !== null) {
+            this.tree.unregisterNode(this.myKey)
         }
     }
 })
