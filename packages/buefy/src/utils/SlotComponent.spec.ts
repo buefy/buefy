@@ -28,7 +28,7 @@ describe('BSlotComponent', () => {
         })
         const wrapper = shallowMount(BSlotComponent, {
             props: {
-                component: Component.vm
+                component: { $slots: Component.vm.$slots }
             }
         })
         expect(wrapper.html()).toBe(`<div>${slot}</div>`)
@@ -45,7 +45,7 @@ describe('BSlotComponent', () => {
         const tag = 'span'
         const wrapper = shallowMount(BSlotComponent, {
             props: {
-                component: Component.vm,
+                component: { $slots: Component.vm.$slots },
                 tag,
                 name: slotName
             }

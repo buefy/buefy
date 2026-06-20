@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BTree > renders correctly 1`] = `
+"<ul class="b-tree" role="tree">
+  <b-tree-node-stub data="[object Object]" depth="1" setsize="2" posinset="1"></b-tree-node-stub>
+  <b-tree-node-stub data="[object Object]" depth="1" setsize="2" posinset="2"></b-tree-node-stub>
+  <!--v-if-->
+</ul>"
+`;

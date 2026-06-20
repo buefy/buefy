@@ -157,6 +157,7 @@ describe('BDatepickerTableRow', () => {
     })
 
     it('emit clicked week and year', async () => {
+        const datepickerEmit = vi.fn()
         const wrapper = shallowMount(BDatepickerTableRow, {
             props: {
                 ...Object.assign(props, {
@@ -167,14 +168,7 @@ describe('BDatepickerTableRow', () => {
             },
             global: {
                 provide: {
-                    $datepicker: {
-                        // TODO: it should be sufficient to test if `$emit` is called
-                        $emit(event: string, week: number, year: number) {
-                            // Vue warns because BDatepickerTableRow is not
-                            // supposed to emit "week-number-click"
-                            wrapper.vm.$emit(event, week, year)
-                        }
-                    }
+                    $datepicker: { $emit: datepickerEmit }
                 }
             }
         })
@@ -182,8 +176,9 @@ describe('BDatepickerTableRow', () => {
         const $weekButton = wrapper.find('.is-week-number')
         await $weekButton.trigger('click')
 
-        expect(wrapper.emitted()['week-number-click']).toBeTruthy()
-        expect((wrapper.emitted()['week-number-click'][0] as number[]).sort()).toEqual([weekDate.getDate(), weekDate.getFullYear()].sort())
+        expect(datepickerEmit).toHaveBeenCalledWith('week-number-click', expect.any(Number), expect.any(Number))
+        const [, week, year] = datepickerEmit.mock.calls[0] as [string, number, number]
+        expect([week, year].sort()).toEqual([weekDate.getDate(), weekDate.getFullYear()].sort())
     })
 
     it('emit focused date', async () => {

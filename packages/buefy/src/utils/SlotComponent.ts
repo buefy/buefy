@@ -28,11 +28,12 @@ export default defineComponent({
         }
     },
     render() {
+        const slot = this.component.$slots?.[this.name]
         return createElement(this.tag, {},
-            this.component.$slots
+            slot
                 ? this.scoped
-                    ? this.component.$slots[this.name](this.props)
-                    : this.component.$slots[this.name]()
+                    ? slot(this.props)
+                    : slot()
                 : undefined)
     }
 })
