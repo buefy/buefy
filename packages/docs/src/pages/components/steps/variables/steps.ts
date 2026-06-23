@@ -59,10 +59,4 @@ export default [
         description: 'The vertical padding for steps',
         default: '<code>1em 0</code>'
     },
-    {
-        sass: '<code>$steps-mobile-max-width</code>',
-        css: '<code>--bulma-steps-mobile-max-width</code>',
-        description: 'The max width for steps on mobile',
-        default: '<code>$tablet</code>'
-    }
 ]

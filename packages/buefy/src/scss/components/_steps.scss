@@ -34,7 +34,6 @@ $steps-colors: dv.$colors !default;
         "steps-active-color": #{$steps-active-color},
         "steps-divider-height": #{$steps-divider-height},
         "steps-vertical-padding": #{$steps-vertical-padding},
-        "steps-mobile-max-width": #{$steps-mobile-max-width},
         "step-size": cv.getVar("size-normal")
     ));
 
@@ -322,7 +321,7 @@ $steps-colors: dv.$colors !default;
                     }
                 }
 
-                @include mixins.until(cv.getVar("steps-mobile-max-width")) {
+                @include mixins.until($steps-mobile-max-width) {
                     &::before, &::after, &:not(:first-child)::before {
                         top: #{cv.getVar("step-size")};
                     }
@@ -483,7 +482,7 @@ $steps-colors: dv.$colors !default;
     }
     &:not(.is-vertical) {
         .steps {
-            @include mixins.until(cv.getVar("steps-mobile-max-width")) {
+            @include mixins.until($steps-mobile-max-width) {
                 &.mobile-minimalist {
                     .step-items {
                         .step-item {
