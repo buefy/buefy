@@ -271,6 +271,20 @@ describe('BField', () => {
         })
     })
 
+    describe('hasAddons with dynamic slot children', () => {
+        it('returns true when multiple children are wrapped in a fragment (e.g. via v-for)', () => {
+            const wrapper = mount(
+                {
+                    components: { BField, BInput },
+                    template: `<b-field><b-input v-for="i in 2" :key="i" /></b-field>`
+                },
+                { global: { components } }
+            )
+            expect(wrapper.findComponent(BField).vm.hasAddons()).toBe(true)
+            expect(wrapper.find('.field').classes()).toContain('has-addons')
+        })
+    })
+
     describe('with grouped and horizontal true', () => {
         let wrapper: VueWrapper<BFieldInstance>
 

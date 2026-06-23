@@ -67,10 +67,10 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import type { PropType } from 'vue'
+import type { PropType, VNode } from 'vue'
 
 import config from '../../utils/config'
-import { isTag } from '../../utils/helpers'
+import { isFragment, isTag } from '../../utils/helpers'
 import BFieldBody from './FieldBody.vue'
 
 /*
@@ -281,7 +281,14 @@ const Field = defineComponent({
         hasAddons() {
             let renderedNode = 0
             if (this.$slots.default) {
-                renderedNode = this.$slots.default().reduce((i, node) => isTag(node) ? i + 1 : i, 0)
+                const countTags = (nodes: VNode[]): number =>
+                    nodes.reduce((i, node) => {
+                        if (isFragment(node) && Array.isArray(node.children)) {
+                            return i + countTags(node.children as VNode[])
+                        }
+                        return isTag(node) ? i + 1 : i
+                    }, 0)
+                renderedNode = countTags(this.$slots.default())
             }
             return (
                 renderedNode > 1 &&
