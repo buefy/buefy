@@ -1,8 +1,9 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { shallowMount } from '@vue/test-utils'
+import { mount, shallowMount } from '@vue/test-utils'
 import type { VueWrapper } from '@vue/test-utils'
 import { defineComponent } from 'vue'
 import BCarousel from '@components/carousel/Carousel.vue'
+import BCarouselItem from '@components/carousel/CarouselItem.vue'
 import InjectedChildMixin, { Sorted } from '../../utils/InjectedChildMixin'
 
 type BCarouselInstance = InstanceType<typeof BCarousel>
@@ -300,5 +301,27 @@ describe('BCarousel', () => {
         wrapper.unmount()
 
         expect(wrapper.vm.pauseTimer).toHaveBeenCalled()
+    })
+
+    it('preserves DOM order when an item is inserted via splice (v-for)', async () => {
+        const WrapperComp = defineComponent({
+            components: { BCarousel, BCarouselItem },
+            data() {
+                return { slides: ['slide0', 'slide2'] }
+            },
+            template: `
+                <BCarousel :autoplay="false">
+                    <BCarouselItem v-for="s in slides" :key="s" :value="s" />
+                </BCarousel>`
+        })
+
+        const root = mount(WrapperComp)
+        const carouselVm = root.findComponent(BCarousel).vm
+
+        expect(carouselVm.sortedItems.map((i) => i.uniqueValue)).toEqual(['slide0', 'slide2'])
+
+        await root.setData({ slides: ['slide0', 'slide1', 'slide2'] })
+
+        expect(carouselVm.sortedItems.map((i) => i.uniqueValue)).toEqual(['slide0', 'slide1', 'slide2'])
     })
 })

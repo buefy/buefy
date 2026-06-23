@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest'
+import { defineComponent } from 'vue'
 import { mount } from '@vue/test-utils'
 import type { VueWrapper } from '@vue/test-utils'
 import BSteps from '@components/steps/Steps.vue'
@@ -121,5 +122,27 @@ describe('BSteps', () => {
         await wrapper.setProps({ position: 'is-right' })
         wrapperClasses = wrapper.vm.wrapperClasses[1] as Record<string, boolean>
         expect(wrapperClasses['is-right']).toBeTruthy()
+    })
+
+    it('preserves DOM order when a step is inserted via splice (v-for)', async () => {
+        const WrapperComp = defineComponent({
+            components: { BSteps, BStepItem },
+            data() {
+                return { steps: ['step0', 'step2'] }
+            },
+            template: `
+                <BSteps>
+                    <BStepItem v-for="s in steps" :key="s" :value="s" />
+                </BSteps>`
+        })
+
+        const root = mount(WrapperComp)
+        const stepsVm = root.findComponent(BSteps).vm
+
+        expect(stepsVm.items.map((i) => i.uniqueValue)).toEqual(['step0', 'step2'])
+
+        await root.setData({ steps: ['step0', 'step1', 'step2'] })
+
+        expect(stepsVm.items.map((i) => i.uniqueValue)).toEqual(['step0', 'step1', 'step2'])
     })
 })
