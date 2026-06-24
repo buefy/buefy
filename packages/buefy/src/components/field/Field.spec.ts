@@ -276,7 +276,7 @@ describe('BField', () => {
             const wrapper = mount(
                 {
                     components: { BField, BInput },
-                    template: `<b-field><b-input v-for="i in 2" :key="i" /></b-field>`
+                    template: '<b-field><b-input v-for="i in 2" :key="i" /></b-field>'
                 },
                 { global: { components } }
             )

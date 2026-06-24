@@ -2,9 +2,19 @@
 
 ## [3.0.9](https://github.com/buefy/buefy/compare/v3.0.8...v3.0.9)
 
+### Features
+
+- Add new `BTree` component for rendering hierarchical data with checkbox selection support.
+
 ### Fixes
 
-- Fix BTabs, BSteps, and BCarousel tab ordering when items are inserted dynamically (e.g. via `v-for` splice after mount). Tabs now sort by DOM position instead of registration order.
+- Fix `BTabs`, `BSteps`, and `BCarousel` tab ordering when items are inserted dynamically (e.g. via `v-for` splice after mount). Tabs now sort by DOM position instead of registration order.
+- [#4299](https://github.com/buefy/buefy/issues/4299) Fix `BField` `hasAddons` not detecting multiple slot children when they are rendered via `v-for` (Vue wraps them in a Fragment VNode).
+- Fix `BSteps` mobile breakpoint to use the SCSS variable instead of a hardcoded pixel value.
+
+### Chores & Dependency Updates
+
+- Resolve security vulnerabilities in dependencies.
 
 ## [3.0.8](https://github.com/buefy/buefy/compare/v3.0.7...v3.0.8)
 
