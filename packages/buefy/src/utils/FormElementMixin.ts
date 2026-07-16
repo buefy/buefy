@@ -112,7 +112,7 @@ const FormElementMixin = defineComponent({
         iconSize() {
             switch (this.size) {
                 case 'is-small': return this.size
-                case 'is-medium': return
+                case 'is-medium': return this.size
                 case 'is-large': return this.newIconPack === 'mdi'
                     ? 'is-medium'
                     : ''
