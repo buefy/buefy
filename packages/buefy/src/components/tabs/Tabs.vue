@@ -16,9 +16,7 @@
                     v-show="childItem.visible"
                     :class="[ childItem.headerClass, { 'is-active': childItem.isActive,
                                                        'is-disabled': childItem.disabled }]"
-                    role="tab"
-                    :aria-controls="`${childItem.uniqueValue}-content`"
-                    :aria-selected="`${childItem.isActive}`"
+                    role="presentation"
                 >
                     <b-slot-component
                         :ref="`tabLink${childItem.index}`"
@@ -28,6 +26,9 @@
                         tag="a"
                         :id="`${childItem.uniqueValue}-label`"
                         :tabindex="childItem.isActive ? 0 : -1"
+                        role="tab"
+                        :aria-controls="`${childItem.uniqueValue}-content`"
+                        :aria-selected="`${childItem.isActive}`"
                         @focus="currentFocus = childItem.index"
                         @click="childClick(childItem)"
                         @keydown="manageTabKeydown($event, childItem)"
@@ -37,6 +38,9 @@
                         v-else
                         :id="`${childItem.uniqueValue}-label`"
                         :tabindex="childItem.isActive ? 0 : -1"
+                        role="tab"
+                        :aria-controls="`${childItem.uniqueValue}-content`"
+                        :aria-selected="`${childItem.isActive}`"
                         @focus="currentFocus = childItem.index"
                         @click="childClick(childItem)"
                         @keydown="manageTabKeydown($event, childItem)"
