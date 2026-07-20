@@ -115,10 +115,10 @@ npm install
 
 ## Buefy core library
 
-The core source files of Buefy are in the [`packages/buefy-next`](../packages/buefy-next/) folder.
+The core source files of Buefy are in the [`packages/buefy`](../packages/buefy/) folder.
 
 ```bash
-cd packages/buefy-next
+cd packages/buefy
 ```
 
 ### Checking types
