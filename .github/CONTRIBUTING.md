@@ -11,7 +11,7 @@
 * Include **screenshots** or animated GIFs in your pull request whenever needed (if visual changes)
 * It's OK to have multiple small commits as you work on the PR - we will let GitHub automatically squash it before merging
 * Make sure all the unit tests pass by running `npm test` both in the library and documentation
-* Make sure your code style is consistent by running `npm run lint:fix` both in the libary and documentation
+* Make sure your code style is consistent by running `npm run lint:fix` both in the library and documentation
 * **DO NOT** commit the ``lib`` and ``dist`` folder, use it only for testing on your end
 * If adding new feature:
     * Provide convincing reason to add this feature. Ideally you should open a suggestion issue first and have it greenlighted before working on it
