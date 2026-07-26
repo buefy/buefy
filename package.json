@@ -20,7 +20,7 @@
     "follow-redirects": "^1.16.0",
     "js-cookie": "^3.0.7",
     "postcss": "^8.5.10",
-    "shell-quote": "^1.8.4"
+    "shell-quote": "^1.10.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^7.18.0",
