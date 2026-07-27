@@ -218,3 +218,16 @@ As some type errors may be detected only in the production build, you should als
 ```bash
 npm run build:type-check
 ```
+
+# Releasing
+
+Publishing to npm happens automatically via the `Publish buefy to NPM` GitHub Actions workflow ([`.github/workflows/npm_deploy.yml`](workflows/npm_deploy.yml)), which runs when a **GitHub Release is published from the `main` branch**. Pushing commits or tags on their own does not trigger a publish.
+
+To cut a release:
+
+1. Bump the `version` field in the root `package.json`, `packages/buefy/package.json`, and `packages/docs/package.json` to the same value.
+2. Add a new entry to [`CHANGELOG.md`](../CHANGELOG.md) summarizing the changes.
+3. Merge these changes into `main`.
+4. On GitHub, [draft a new Release](https://github.com/buefy/buefy/releases/new) targeting `main`, tagged `vX.Y.Z` to match the bumped version, and publish it.
+
+Publishing to npm uses [Trusted Publishing](https://docs.npmjs.com/trusted-publishers) (OIDC) — there is no long-lived `NPM_TOKEN` secret to manage. The `buefy` package's Trusted Publisher configuration on npmjs.com must reference this repository and the `npm_deploy.yml` workflow for publishes to succeed.

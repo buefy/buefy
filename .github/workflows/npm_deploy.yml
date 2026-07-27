@@ -1,24 +1,25 @@
 name: Publish buefy to NPM
 on:
-    push:
-        branches:
-            - main
+    release:
+        types: [published]
     workflow_dispatch:
 jobs:
     build:
+        # Only publish releases tagged from main; workflow_dispatch allows manual runs
+        if: github.event_name == 'workflow_dispatch' || github.event.release.target_commitish == 'main'
         runs-on: ubuntu-latest
+        environment: npm-publish
         permissions:
             contents: read
-            packages: write
+            id-token: write
         steps:
             - uses: actions/checkout@v4
-            # Setup .npmrc file to publish to GitHub Packages
             - uses: actions/setup-node@v4
               with:
                   node-version: "20.x"
                   registry-url: "https://registry.npmjs.org/"
+            # Trusted Publishing (OIDC) requires npm >= 11.5.1
+            - run: npm install -g npm@latest
             - run: npm ci
             - run: npm -w buefy run build
             - run: npm -w buefy publish --access public
-              env:
-                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
