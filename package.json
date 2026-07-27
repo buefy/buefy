@@ -14,7 +14,6 @@
     "packages/*"
   ],
   "overrides": {
-    "brace-expansion": "^5.0.8",
     "cross-spawn": "^7.0.6",
     "esbuild": "^0.28.1",
     "fast-uri": "^3.1.4",
