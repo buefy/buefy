@@ -281,7 +281,7 @@ describe('BField', () => {
                 { global: { components } }
             )
             expect(wrapper.findComponent(BField).vm.hasAddons()).toBe(true)
-            expect(wrapper.find('.field').classes()).toContain('has-addons')
+            expect(wrapper.find('.field-body').find('.field').classes()).toContain('has-addons')
         })
     })
 

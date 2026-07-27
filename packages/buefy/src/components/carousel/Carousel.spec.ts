@@ -10,6 +10,7 @@ type BCarouselInstance = InstanceType<typeof BCarousel>
 
 let wrapper: VueWrapper<BCarouselInstance>
 
+// eslint-disable-next-line vue/one-component-per-file
 const mockCarouselItems = defineComponent({
     name: 'BCarouselItem',
     mixins: [InjectedChildMixin<typeof Sorted, BCarouselInstance>('carousel', Sorted)],
@@ -304,6 +305,7 @@ describe('BCarousel', () => {
     })
 
     it('preserves DOM order when an item is inserted via splice (v-for)', async () => {
+        // eslint-disable-next-line vue/one-component-per-file
         const WrapperComp = defineComponent({
             components: { BCarousel, BCarouselItem },
             data() {
