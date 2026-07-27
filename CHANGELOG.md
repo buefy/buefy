@@ -11,10 +11,12 @@
 - Fix `BTabs`, `BSteps`, and `BCarousel` tab ordering when items are inserted dynamically (e.g. via `v-for` splice after mount). Tabs now sort by DOM position instead of registration order.
 - [#4299](https://github.com/buefy/buefy/issues/4299) Fix `BField` `hasAddons` not detecting multiple slot children when they are rendered via `v-for` (Vue wraps them in a Fragment VNode).
 - Fix `BSteps` mobile breakpoint to use the SCSS variable instead of a hardcoded pixel value.
+- Fix form element `iconSize` not returning a value for `is-medium` fields, causing icons to be incorrectly sized.
 
 ### Chores & Dependency Updates
 
 - Resolve security vulnerabilities in dependencies.
+- Bump `rimraf` to v6 to fix a build crash caused by `brace-expansion`'s missing default export.
 
 ## [3.0.8](https://github.com/buefy/buefy/compare/v3.0.7...v3.0.8)
 
