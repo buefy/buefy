@@ -38,4 +38,12 @@ describe('FormElementMixin', () => {
         expect(wrapper.emitted().blur).toBeTruthy()
         expect(wrapper.vm.checkHtml5Validity).toHaveBeenCalled()
     })
+
+    it('should match icon size to field size for is-small and is-medium', async () => {
+        await wrapper.setProps({ size: 'is-small' })
+        expect(wrapper.vm.iconSize).toBe('is-small')
+
+        await wrapper.setProps({ size: 'is-medium' })
+        expect(wrapper.vm.iconSize).toBe('is-medium')
+    })
 })
