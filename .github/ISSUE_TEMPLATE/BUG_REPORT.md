@@ -41,3 +41,9 @@ labels:
 
 <!--What actually happened-->
 <!--If possible, please use this [CodePen template](https://codepen.io/service-paradis/pen/KKgJZOK) to reproduce the problem.-->
+
+### AI Disclosure
+
+<!-- See "Use of AI" in CONTRIBUTING.md -->
+- [ ] AI was used to help write or research this report
+- [ ] I have personally reproduced the issue described above

@@ -18,3 +18,8 @@ labels: feature request
 ### Why Buefy need this feature
 
 <!--Explain why Buefy needs it-->
+
+### AI Disclosure
+
+<!-- See "Use of AI" in CONTRIBUTING.md -->
+- [ ] AI was used to help write or research this request

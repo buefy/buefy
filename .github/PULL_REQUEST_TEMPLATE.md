@@ -8,3 +8,7 @@ Fixes #
 -
 -
 -
+
+## AI Disclosure
+
+- [ ] This PR contains AI-generated code (see [Use of AI](.github/CONTRIBUTING.md#use-of-ai) in CONTRIBUTING.md)

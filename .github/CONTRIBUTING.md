@@ -1,5 +1,16 @@
 > Thanks for contributing!
 
+# Use of AI
+
+We're fine with contributors using AI tools (Copilot, ChatGPT, Claude, etc.) to help write code, draft issues, or debug problems — used well, they lower the barrier to contributing. In return, we ask for honesty and accountability, in line with what most other open source projects now expect:
+
+- **Disclose it.** If AI materially helped produce a PR's code or an issue's content, say so — check the corresponding box in the issue/PR template. This isn't about shaming AI use, it just helps maintainers calibrate how closely to review.
+- **You are responsible for it.** Submitting a contribution means you've read, understood, and verified it yourself. "The AI wrote it" is not an excuse for bugs, style violations, made-up APIs, or failing tests. Review AI output as critically as you would a stranger's patch.
+- **No fabricated or unverified bug reports.** Don't file issues describing behavior you haven't actually reproduced. Hallucinated stack traces, invented reproduction steps, or "plausible sounding" bugs waste maintainer time and will be closed.
+- **No unreviewed bulk/"slop" PRs.** Large AI-generated changes that weren't meaningfully reviewed by a human, or that exist mainly to pad a contribution history, will be closed without much discussion.
+- **Respect licensing.** Only submit AI-generated code you have the right to contribute under Buefy's license — don't paste in output you know reproduces copyrighted/licensed source without permission.
+- **Everything else still applies.** AI-assisted contributions go through the same bar as any other: tests must pass, lint must be clean, and the guidelines below still hold.
+
 # Raising an Issue
 
 - Make sure the issue hasn't been raised yet
