@@ -4,10 +4,10 @@ exports[`BTabs > render correctly 1`] = `
 "<div class="b-tabs">
   <nav class="tabs">
     <ul aria-orientation="horizontal" role="tablist">
-      <li class="is-active" role="tab" aria-controls="tab1-content" aria-selected="true"><a id="tab1-label" tabindex="0">
+      <li class="is-active" role="presentation"><a id="tab1-label" tabindex="0" role="tab" aria-controls="tab1-content" aria-selected="true">
           <!--v-if--><span></span>
         </a></li>
-      <li class="" role="tab" aria-controls="tab2-content" aria-selected="false" style="display: none;"><a id="tab2-label" tabindex="-1">
+      <li class="" role="presentation" style="display: none;"><a id="tab2-label" tabindex="-1" role="tab" aria-controls="tab2-content" aria-selected="false">
           <!--v-if--><span></span>
         </a></li>
     </ul>
