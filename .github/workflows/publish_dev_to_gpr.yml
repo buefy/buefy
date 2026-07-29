@@ -2,7 +2,7 @@ name: Publish dev package to GitHub Packages registry (GPR) for evaluation
 on:
     push:
         branches:
-            - dev
+            - main
 jobs:
     build:
         runs-on: ubuntu-latest
