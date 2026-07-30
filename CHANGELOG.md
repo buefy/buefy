@@ -1,5 +1,21 @@
 # Buefy Changelog
 
+## [3.0.10](https://github.com/buefy/buefy/compare/v3.0.9...v3.0.10)
+
+### Refactors
+
+- Major refactor of `BTable` to remove the "god component" pattern: table responsibilities were extracted from `Table.vue` into focused mixins (`TableCheckableMixin`, `TableDetailMixin`, `TableDragMixin`, `TableFilterMixin`, `TableSortMixin`) and shared `tableColumnHelpers`, with comprehensive unit tests added for each. Behavior is intended to be unchanged, but given the scope of this refactor please report any regressions.
+
+### Fixes
+
+- [#4130](https://github.com/buefy/buefy/issues/4130) [#4129](https://github.com/buefy/buefy/issues/4129) Fix `BTooltip` `appendToBody` lifecycle handling — listeners and observers are now set up/torn down safely, preventing errors when toggling `appendToBody` and opening the tooltip.
+- [#4264](https://github.com/buefy/buefy/issues/4264) Fix `BTag` close button ignoring `close-type` color modifiers.
+
+### Chores & Dependency Updates
+
+- Add TypeScript types to `BTable` example handlers in the documentation.
+- Flag the `BTable` documentation page as recently refactored, with a warning notice and a link to report regressions.
+
 ## [3.0.9](https://github.com/buefy/buefy/compare/v3.0.8...v3.0.9)
 
 ### Features
