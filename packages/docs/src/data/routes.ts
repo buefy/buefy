@@ -10,6 +10,7 @@ export interface Route {
     breadcrumb?: string[]
     isUpdated?: boolean
     isNew?: boolean
+    isRefactored?: boolean
     hideSidebar?: boolean
 }
 

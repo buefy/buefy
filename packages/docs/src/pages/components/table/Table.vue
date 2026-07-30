@@ -1,5 +1,15 @@
 <template>
     <div>
+        <b-message type="is-warning" title="Recently refactored">
+            This component recently went through a major refactor to remove
+            a "god component" pattern. Please be on the lookout for bugs and
+            <a
+                href="https://github.com/buefy/buefy/issues"
+                target="_blank"
+                rel="noopener"
+            >report any regressions you find</a>.
+        </b-message>
+
         <Example :component="ExSimple" :code="ExSimpleCode">
             <p>
                 To show a data table is very simple, you just need a

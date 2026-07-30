@@ -489,7 +489,8 @@
             "documentation",
             "documentation/table"
         ],
-        "isUpdated": false
+        "isUpdated": false,
+        "isRefactored": true
     },
     "documentation/pagination": {
         "title": "Pagination",

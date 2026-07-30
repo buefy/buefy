@@ -28,6 +28,9 @@
                             <b-tag v-if="item.isUpdated" type="is-info">
                                 Updated
                             </b-tag>
+                            <b-tag v-if="item.isRefactored" type="is-warning">
+                                Refactored
+                            </b-tag>
                         </router-link>
 
                         <!-- submenu -->
@@ -53,6 +56,12 @@
                                             type="is-info"
                                         >
                                             Updated
+                                        </b-tag>
+                                        <b-tag
+                                            v-if="subItem.isRefactored"
+                                            type="is-warning"
+                                        >
+                                            Refactored
                                         </b-tag>
                                     </router-link>
                                 </li>
