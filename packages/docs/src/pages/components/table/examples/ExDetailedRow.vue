@@ -21,7 +21,8 @@
             detail-key="id"
             :detail-transition="transitionName"
             @details-open="
-                (row) => $buefy.toast.open(`Expanded ${row.user.first_name}`)
+                (row: TableRow) =>
+                    $buefy.toast.open(`Expanded ${row.user.first_name}`)
             "
             :show-detail-icon="showDetailIcon"
             aria-next-label="Next page"
@@ -121,6 +122,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { BField, BIcon, BSwitch, BTable, BTableColumn } from "buefy";
+import type { TableRow } from "buefy";
 import data from "@/data/sample.json";
 
 export default defineComponent({

@@ -24,7 +24,9 @@
             :opened-detailed="['Board Games']"
             :default-sort="['name', 'asc']"
             detail-key="name"
-            @details-open="(row) => $buefy.toast.open(`Expanded ${row.name}`)"
+            @details-open="
+                (row: TableRow) => $buefy.toast.open(`Expanded ${row.name}`)
+            "
             :show-detail-icon="showDetailIcon"
         >
             <b-table-column
