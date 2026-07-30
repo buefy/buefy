@@ -1,9 +1,19 @@
 import { h as createElement } from 'vue'
 import type { Slots } from 'vue'
 
+import { getValueByPath } from '../../utils/helpers'
+import {
+    computeColumnStyle,
+    computeIsHeaderUnselectable,
+    computeRootClasses,
+    computeRootClassesForRow,
+    computeRootStyleForRow,
+    computeThClasses,
+    computeThStyle
+} from './tableColumnHelpers'
 import type { VueClassAttribute } from '../../utils/config'
-import { getValueByPath, toCssWidth } from '../../utils/helpers'
 import type {
+    ITableColumn,
     StyleValue,
     StyleValueUnit,
     TableColumnHost,
@@ -44,48 +54,27 @@ export default function mockTableColumn(table: TableColumnHost, column: TableCol
         _isTableColumn: true,
         // public computed
         get thClasses(): VueClassAttribute {
-            const attrs = this.thAttrs(this)
-            const classes = [this.headerClass, {
-                'is-sortable': this.sortable,
-                'is-sticky': this.sticky,
-                'is-unselectable': this.isHeaderUnSelectable
-            }]
-            if (attrs && attrs.class) {
-                classes.push(attrs.class)
-            }
-            return classes
+            return computeThClasses(this as unknown as ITableColumn)
         },
         get thStyle(): StyleValue {
-            const attrs = this.thAttrs(this)
-            const style = [this.style]
-            if (attrs && attrs.style) {
-                style.push(attrs.style)
-            }
-            return style
+            return computeThStyle(this as unknown as ITableColumn)
         },
+        // NOTE: unlike `TableColumn.vue`'s `thWrapStyle`, this does not skip
+        // percentage widths. That's a pre-existing inconsistency between
+        // `columns`-prop tables and `<b-table-column>`-slot tables (see
+        // Table.spec.ts's "holds columns" test, which asserts this exact
+        // percentage-width behavior) — left as-is to avoid a behavior change.
         get thWrapStyle(): StyleValue {
             return this.style
         },
         get style(): StyleValueUnit {
-            return {
-                width: toCssWidth(this.width) ?? undefined // null → undefined to satisfy StyleValue
-            }
+            return computeColumnStyle(this as unknown as ITableColumn)
         },
         getRootClasses(row: TableRow) {
-            const attrs = this.tdAttrs(row, this)
-            const classes = [this.rootClasses]
-            if (attrs && attrs.class) {
-                classes.push(attrs.class)
-            }
-            return classes
+            return computeRootClassesForRow(this as unknown as ITableColumn, row)
         },
         getRootStyle(row: TableRow) {
-            const attrs = this.tdAttrs(row, this)
-            const style = []
-            if (attrs && attrs.style) {
-                style.push(attrs.style)
-            }
-            return style
+            return computeRootStyleForRow(this as unknown as ITableColumn, row)
         },
         $slots: {
             default: (props: TableColumnSlotProps) => {
@@ -97,14 +86,10 @@ export default function mockTableColumn(table: TableColumnHost, column: TableCol
         } as Slots,
         // private properties
         get rootClasses(): VueClassAttribute {
-            return [this.cellClass, {
-                'has-text-right': this.numeric && !this.centered,
-                'has-text-centered': this.centered,
-                'is-sticky': this.sticky
-            }]
+            return computeRootClasses(this as unknown as ITableColumn)
         },
         get isHeaderUnSelectable(): boolean {
-            return !this.headerSelectable && !!this.sortable
+            return computeIsHeaderUnselectable(this as unknown as ITableColumn)
         }
     }
 }

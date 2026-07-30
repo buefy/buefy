@@ -88,6 +88,46 @@ export interface TableColumnHost {
     _unregisterTableColumn(column: ITableColumn): void
 }
 
+// Members of `Table.vue` itself that `TableCheckableMixin` reads.
+// `visibleData` is the pagination-aware slice of data, owned by `Table.vue`.
+export interface TableCheckableMixinHost {
+    visibleData: TableRow[]
+}
+
+// Members of `Table.vue` itself that `TableDragMixin` reads/writes.
+// `_selectedRow` tracks the row tapped before a touch-drag may begin; it's
+// owned by `Table.vue`'s row-selection logic (`selectRow`).
+export interface TableDragMixinHost {
+    _selectedRow: TableRow | null
+}
+
+// Members of `Table.vue` itself that `TableSortMixin` reads/writes.
+// `newColumns` is the resolved column list; `newData`/`data` are the
+// (possibly re-sorted) working data and the original `data` prop. All are
+// owned by `Table.vue`'s column/data plumbing.
+export interface TableSortMixinHost {
+    newColumns: ITableColumn[]
+    newData: TableRow[]
+    data: TableRow[]
+}
+
+// Members of `Table.vue` (column/data plumbing) and `TableSortMixin` that
+// `TableFilterMixin` reads/writes/calls from `handleFiltersChange`, which
+// re-sorts and re-totals the filtered data.
+export interface TableFilterMixinHost {
+    newColumns: ITableColumn[]
+    data: TableRow[]
+    newData: TableRow[]
+    backendPagination: boolean
+    newDataTotal: number | string
+    backendSorting: boolean
+    sortMultiple: boolean
+    sortMultipleDataLocal: TableColumnOrder[]
+    currentSortColumn: ITableColumn
+    doSortMultiColumn(): void
+    doSortSingleColumn(column: ITableColumn): void
+}
+
 // Modifier keys for operations, e.g., sorting, checking, in Table.
 // It is mentioned as "event".
 // TODO: we should not mix the UI matter and the logic of the Table component.

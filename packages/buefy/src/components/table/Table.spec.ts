@@ -6,7 +6,10 @@ import type { DOMWrapper, VueWrapper } from '@vue/test-utils'
 import BInput from '@components/input/Input.vue'
 import BTable from '@components/table/Table.vue'
 import BTablePagination from '@components/table/TablePagination.vue'
-import type { ITableColumn } from '@components/table/types'
+import type { ITableColumn, ModifierKeys } from '@components/table/types'
+
+const noModifiers: ModifierKeys = { shiftKey: false, altKey: false, ctrlKey: false }
+const shiftModifier: ModifierKeys = { shiftKey: true, altKey: false, ctrlKey: false }
 
 describe('BTable', () => {
     let wrapper: VueWrapper<InstanceType<typeof BTable>>
@@ -543,6 +546,198 @@ describe('BTable', () => {
             expect(wrapper.vm.visibleData).toEqual([
                 data[6], data[5], data[4], data[3], data[2], data[1], data[0]
             ])
+        })
+    })
+
+    describe('Checkable', () => {
+        const data = [
+            { id: 1, name: 'Jesse' },
+            { id: 2, name: 'John' },
+            { id: 3, name: 'Tina' }
+        ]
+        const columns = [
+            { label: 'ID', field: 'id' },
+            { label: 'Name', field: 'name' }
+        ]
+
+        beforeEach(() => {
+            wrapper = shallowMount(BTable, {
+                props: { columns, data, checkable: true }
+            })
+        })
+
+        it('checks and unchecks a single row', () => {
+            wrapper.vm.checkRow(data[0], 0, noModifiers)
+            expect(wrapper.vm.newCheckedRows).toEqual([data[0]])
+            expect(wrapper.emitted('check')![0]).toEqual([[data[0]], data[0]])
+            expect(wrapper.emitted('update:checkedRows')![0]).toEqual([[data[0]]])
+
+            wrapper.vm.checkRow(data[0], 0, noModifiers)
+            expect(wrapper.vm.newCheckedRows).toEqual([])
+        })
+
+        it('checks a range of rows with shift-click', () => {
+            wrapper.vm.checkRow(data[0], 0, noModifiers)
+            wrapper.vm.checkRow(data[2], 2, shiftModifier)
+            expect(wrapper.vm.newCheckedRows).toEqual(data)
+        })
+
+        it('checks and unchecks all rows via checkAll', () => {
+            wrapper.vm.checkAll()
+            expect(wrapper.vm.newCheckedRows).toEqual(data)
+            expect(wrapper.vm.isAllChecked).toBe(true)
+            expect(wrapper.emitted('check-all')![0]).toEqual([data])
+
+            wrapper.vm.checkAll()
+            expect(wrapper.vm.newCheckedRows).toEqual([])
+            expect(wrapper.vm.isAllChecked).toBe(false)
+        })
+
+        it('respects isRowCheckable when checking all', async () => {
+            await wrapper.setProps({
+                isRowCheckable: (row: { id: number }) => row.id !== 2
+            })
+            wrapper.vm.checkAll()
+            expect(wrapper.vm.newCheckedRows).toEqual([data[0], data[2]])
+        })
+    })
+
+    describe('Detailed rows', () => {
+        const data = [
+            { id: 1, name: 'Jesse' },
+            { id: 2, name: 'John' }
+        ]
+        const columns = [
+            { label: 'ID', field: 'id' },
+            { label: 'Name', field: 'name' }
+        ]
+
+        beforeEach(() => {
+            wrapper = shallowMount(BTable, {
+                props: { columns, data, detailed: true, detailKey: 'id' }
+            })
+        })
+
+        it('opens and closes a detail row via toggleDetails', () => {
+            expect(wrapper.vm.isVisibleDetailRow(data[0])).toBe(false)
+
+            wrapper.vm.toggleDetails(data[0])
+            expect(wrapper.vm.isVisibleDetailRow(data[0])).toBe(true)
+            expect(wrapper.emitted('details-open')![0]).toEqual([data[0]])
+            expect(wrapper.emitted('update:openedDetailed')![0]).toEqual([[1]])
+
+            wrapper.vm.toggleDetails(data[0])
+            expect(wrapper.vm.isVisibleDetailRow(data[0])).toBe(false)
+            expect(wrapper.emitted('details-close')![0]).toEqual([data[0]])
+        })
+
+        it('throws when openedDetailed is set without a detailKey', async () => {
+            await wrapper.setProps({ openedDetailed: [data[0]], detailKey: '' })
+            expect(() => wrapper.vm.checkPredefinedDetailedRows()).toThrow()
+        })
+
+        it('syncs visible detail rows from the openedDetailed prop', async () => {
+            await wrapper.setProps({ openedDetailed: [2] })
+            expect(wrapper.vm.isVisibleDetailRow(data[1])).toBe(true)
+        })
+    })
+
+    describe('Draggable rows', () => {
+        const data = [
+            { id: 1, name: 'Jesse' },
+            { id: 2, name: 'John' }
+        ]
+        const columns = [
+            { label: 'ID', field: 'id' },
+            { label: 'Name', field: 'name' }
+        ]
+
+        beforeEach(() => {
+            wrapper = shallowMount(BTable, {
+                props: { columns, data, draggable: true }
+            })
+        })
+
+        it('emits drag events for the dragged row', async () => {
+            const row = wrapper.findAll('tbody tr')[0]
+
+            await row.trigger('dragstart')
+            expect(wrapper.vm.isDraggingRow).toBe(true)
+            expect(wrapper.emitted('dragstart')![0][0]).toMatchObject({ row: data[0], index: 0 })
+
+            await row.trigger('dragover')
+            expect(wrapper.emitted('dragover')![0][0]).toMatchObject({ row: data[0], index: 0 })
+
+            await row.trigger('drop')
+            expect(wrapper.emitted('drop')![0][0]).toMatchObject({ row: data[0], index: 0 })
+
+            await row.trigger('dragleave')
+            expect(wrapper.emitted('dragleave')![0][0]).toMatchObject({ row: data[0], index: 0 })
+
+            await row.trigger('dragend')
+            expect(wrapper.vm.isDraggingRow).toBe(false)
+            expect(wrapper.emitted('dragend')![0][0]).toMatchObject({ row: data[0], index: 0 })
+        })
+
+        it('only starts touch-dragging a row that was just tapped', async () => {
+            const row = wrapper.findAll('tbody tr')[0]
+
+            await row.trigger('touchstart')
+            expect(wrapper.vm.mayBeTouchDragging).toBe(false) // row was never tapped
+
+            await row.trigger('click')
+            await row.trigger('touchstart')
+            expect(wrapper.vm.mayBeTouchDragging).toBe(true)
+        })
+    })
+
+    describe('Draggable columns', () => {
+        const data = [
+            { id: 1, name: 'Jesse' }
+        ]
+        const columns = [
+            { label: 'ID', field: 'id' },
+            { label: 'Name', field: 'name' }
+        ]
+
+        beforeEach(() => {
+            wrapper = shallowMount(BTable, {
+                props: { columns, data, draggableColumn: true }
+            })
+        })
+
+        it('emits drag events for the dragged column', async () => {
+            const th = wrapper.findAll('thead th')[0]
+
+            await th.trigger('dragstart')
+            expect(wrapper.vm.isDraggingColumn).toBe(true)
+            expect(wrapper.emitted('columndragstart')![0][0]).toMatchObject({ index: 0 })
+
+            await th.trigger('dragover')
+            expect(wrapper.emitted('columndragover')![0][0]).toMatchObject({ index: 0 })
+
+            await th.trigger('drop')
+            expect(wrapper.emitted('columndrop')![0][0]).toMatchObject({ index: 0 })
+
+            await th.trigger('dragleave')
+            expect(wrapper.emitted('columndragleave')![0][0]).toMatchObject({ index: 0 })
+
+            await th.trigger('dragend')
+            expect(wrapper.vm.isDraggingColumn).toBe(false)
+            expect(wrapper.emitted('columndragend')![0][0]).toMatchObject({ index: 0 })
+        })
+
+        it('disables column dragging while a row drag is in progress', async () => {
+            await wrapper.setProps({ draggable: true })
+            const row = wrapper.findAll('tbody tr')[0]
+            const th = wrapper.findAll('thead th')[0]
+
+            await row.trigger('dragstart')
+            expect(wrapper.vm.isDraggingRow).toBe(true)
+
+            await th.trigger('dragstart')
+            expect(wrapper.vm.isDraggingColumn).toBe(false)
+            expect(wrapper.emitted('columndragstart')).toBeUndefined()
         })
     })
 

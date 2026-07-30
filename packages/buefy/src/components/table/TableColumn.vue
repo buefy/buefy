@@ -3,6 +3,15 @@ import { defineComponent } from 'vue'
 import type { PropType } from 'vue'
 
 import { toCssWidth } from '../../utils/helpers'
+import {
+    computeColumnStyle,
+    computeIsHeaderUnselectable,
+    computeRootClasses,
+    computeRootClassesForRow,
+    computeRootStyleForRow,
+    computeThClasses,
+    computeThStyle
+} from './tableColumnHelpers'
 import type {
     CustomSearchFunction,
     CustomSortFunction,
@@ -54,24 +63,10 @@ export default defineComponent({
     },
     computed: {
         thClasses() {
-            const attrs = this.thAttrs(this)
-            const classes = [this.headerClass, {
-                'is-sortable': this.sortable,
-                'is-sticky': this.sticky,
-                'is-unselectable': this.isHeaderUnSelectable
-            }]
-            if (attrs && attrs.class) {
-                classes.push(attrs.class)
-            }
-            return classes
+            return computeThClasses(this as unknown as ITableColumn)
         },
         thStyle() {
-            const attrs = this.thAttrs(this)
-            const style = [this.style]
-            if (attrs && attrs.style) {
-                style.push(attrs.style)
-            }
-            return style
+            return computeThStyle(this as unknown as ITableColumn)
         },
         thWrapStyle() {
             const width = toCssWidth(this.width)
@@ -84,16 +79,10 @@ export default defineComponent({
             }
         },
         rootClasses() {
-            return [this.cellClass, {
-                'has-text-right': this.numeric && !this.centered,
-                'has-text-centered': this.centered,
-                'is-sticky': this.sticky
-            }]
+            return computeRootClasses(this as unknown as ITableColumn)
         },
         style() {
-            return {
-                width: toCssWidth(this.width) ?? undefined // null → undefined to satisfy StyleValue
-            }
+            return computeColumnStyle(this as unknown as ITableColumn)
         },
         hasDefaultSlot() {
             return !!this.$slots.default
@@ -102,25 +91,15 @@ export default defineComponent({
          * Return if column header is un-selectable
          */
         isHeaderUnSelectable() {
-            return !this.headerSelectable && this.sortable
+            return computeIsHeaderUnselectable(this as unknown as ITableColumn)
         }
     },
     methods: {
         getRootClasses(row: TableRow) {
-            const attrs = this.tdAttrs(row, this)
-            const classes = [this.rootClasses]
-            if (attrs && attrs.class) {
-                classes.push(attrs.class)
-            }
-            return classes
+            return computeRootClassesForRow(this as unknown as ITableColumn, row)
         },
         getRootStyle(row: TableRow) {
-            const attrs = this.tdAttrs(row, this)
-            const style = []
-            if (attrs && attrs.style) {
-                style.push(attrs.style)
-            }
-            return style
+            return computeRootStyleForRow(this as unknown as ITableColumn, row)
         }
     },
     created() {

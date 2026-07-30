@@ -441,13 +441,17 @@
 </template>
 
 <script lang="ts">
-import { camelize, defineComponent, toHandlerKey, toRaw } from 'vue'
+import { camelize, defineComponent, toHandlerKey } from 'vue'
 import type { PropType } from 'vue'
 
 import type { VueClassAttribute } from '../../utils/config'
-import { getValueByPath, indexOf, multiColumnSort, escapeRegExpChars, toCssWidth, removeDiacriticsFromString, isFragment, isNil, translateTouchAsDragEvent, createAbsoluteElement, removeElement } from '../../utils/helpers'
-import debounce from '../../utils/debounce'
+import { toCssWidth, isFragment } from '../../utils/helpers'
 import CompatFallthroughMixin from '../../utils/CompatFallthroughMixin'
+import TableCheckableMixin from './mixins/TableCheckableMixin'
+import TableDetailMixin from './mixins/TableDetailMixin'
+import TableDragMixin from './mixins/TableDragMixin'
+import TableSortMixin from './mixins/TableSortMixin'
+import TableFilterMixin from './mixins/TableFilterMixin'
 import BCheckbox from '../checkbox/Checkbox.vue'
 import BIcon from '../icon/Icon.vue'
 import BInput from '../input/Input.vue'
@@ -457,27 +461,10 @@ import BTableMobileSort from './TableMobileSort.vue'
 import BTablePagination from './TablePagination.vue'
 import mockTableColumn from './mockTableColumn'
 import type {
-    CustomSortFunction,
     ITableColumn,
-    ModifierKeys,
-    TableColumnDragEvent,
-    TableColumnOrder,
     TableColumnProps,
-    TableRow,
-    TableRowDragEvent
+    TableRow
 } from './types'
-
-// Dummy column object that indicates there is no column present.
-const BLANK_COLUMN = {
-    thAttrs: () => ({}),
-    tdAttrs: () => ({}),
-    getRootClasses: () => [],
-    getRootStyle: () => undefined,
-    $slots: {}
-} as const
-
-// Handler for filters' changes.
-type FiltersChangeHandler = (filters: Record<string, string | number>) => void
 
 export default defineComponent({
     name: 'BTable',
@@ -490,7 +477,14 @@ export default defineComponent({
         BTableMobileSort,
         BTablePagination
     },
-    mixins: [CompatFallthroughMixin],
+    mixins: [
+        CompatFallthroughMixin,
+        TableCheckableMixin,
+        TableDetailMixin,
+        TableDragMixin,
+        TableSortMixin,
+        TableFilterMixin
+    ],
     provide() {
         return {
             $table: this
@@ -510,73 +504,15 @@ export default defineComponent({
         narrowed: Boolean,
         hoverable: Boolean,
         loading: Boolean,
-        detailed: Boolean,
-        checkable: Boolean,
-        headerCheckable: {
-            type: Boolean,
-            default: true
-        },
-        checkboxType: {
-            type: String,
-            default: 'is-primary'
-        },
-        checkboxPosition: {
-            type: String,
-            default: 'left',
-            validator: (value) => {
-                return [
-                    'left',
-                    'right'
-                ].indexOf(value as string) >= 0
-            }
-        },
-        stickyCheckbox: {
-            type: Boolean,
-            default: false
-        },
         selected: Object as PropType<TableRow>,
         isRowSelectable: {
             type: Function,
             default: () => true
         },
         focusable: Boolean,
-        customIsChecked: Function as PropType<(a: TableRow, b: TableRow) => boolean>,
-        isRowCheckable: {
-            type: Function as PropType<(row: TableRow) => boolean>,
-            default: () => true
-        },
-        checkedRows: {
-            type: Array<TableRow>,
-            default: () => []
-        },
         mobileCards: {
             type: Boolean,
             default: true
-        },
-        defaultSort: [String, Array<string>],
-        defaultSortDirection: {
-            type: String,
-            default: 'asc'
-        },
-        sortIcon: {
-            type: String,
-            default: 'arrow-up'
-        },
-        sortIconSize: {
-            type: String,
-            default: 'is-small'
-        },
-        sortMultiple: {
-            type: Boolean,
-            default: false
-        },
-        sortMultipleData: {
-            type: Array as PropType<TableColumnOrder[]>,
-            default: () => []
-        },
-        sortMultipleKey: {
-            type: String as PropType<keyof ModifierKeys | null>,
-            default: null
         },
         paginated: Boolean,
         currentPage: {
@@ -586,14 +522,6 @@ export default defineComponent({
         perPage: {
             type: [Number, String],
             default: 20
-        },
-        showDetailIcon: {
-            type: Boolean,
-            default: true
-        },
-        detailIcon: {
-            type: String,
-            default: 'chevron-right'
         },
         paginationPosition: {
             type: String,
@@ -607,31 +535,9 @@ export default defineComponent({
             }
         },
         paginationRounded: Boolean,
-        backendSorting: Boolean,
-        backendFiltering: Boolean,
         rowClass: {
             type: Function as PropType<(row: TableRow, index: number) => VueClassAttribute>,
             default: () => ''
-        },
-        openedDetailed: {
-            type: Array<TableRow>,
-            default: () => []
-        },
-        hasDetailedVisible: {
-            type: Function as PropType<(row: TableRow) => boolean>,
-            default: () => true
-        },
-        detailKey: {
-            type: String,
-            default: ''
-        },
-        detailTransition: {
-            type: String,
-            default: ''
-        },
-        customDetailRow: {
-            type: Boolean,
-            default: false
         },
         backendPagination: Boolean,
         total: {
@@ -639,16 +545,7 @@ export default defineComponent({
             default: 0
         },
         iconPack: String,
-        mobileSortPlaceholder: String,
         customRowKey: String,
-        draggable: {
-            type: Boolean,
-            default: false
-        },
-        draggableColumn: {
-            type: Boolean,
-            default: false
-        },
         scrollable: Boolean,
         ariaNextLabel: String,
         ariaPreviousLabel: String,
@@ -656,16 +553,11 @@ export default defineComponent({
         ariaCurrentLabel: String,
         stickyHeader: Boolean,
         height: [Number, String],
-        filtersEvent: {
-            type: String,
-            default: ''
-        },
         cardLayout: Boolean,
         showHeader: {
             type: Boolean,
             default: true
         },
-        debounceSearch: Number,
         caption: String,
         showCaption: {
             type: Boolean,
@@ -687,68 +579,26 @@ export default defineComponent({
             _rowIndex: number,
             _colIndex: number
         ) => true,
-        check: (_checkedRows: TableRow[], _row?: TableRow) => true,
-        'check-all': (_rows: TableRow[]) => true,
         click: (_row: TableRow) => true,
-        columndragend: (_event: TableColumnDragEvent) => true,
-        columndragleave: (_event: TableColumnDragEvent) => true,
-        columndragover: (_event: TableColumnDragEvent) => true,
-        columndragstart: (_event: TableColumnDragEvent) => true,
-        columndrop: (_event: TableColumnDragEvent) => true,
         contextmenu: (_row: TableRow, _event: MouseEvent) => true,
         dblclick: (_row: TableRow) => true,
-        'details-close': (_row: TableRow) => true,
-        'details-open': (_row: TableRow) => true,
-        dragend: (_event: TableRowDragEvent) => true,
-        dragleave: (_event: TableRowDragEvent) => true,
-        dragover: (_event: TableRowDragEvent) => true,
-        dragstart: (_event: TableRowDragEvent) => true,
-        drop: (_event: TableRowDragEvent) => true,
-        'filters-change': (_value: Record<string, string | number>) => true,
         'page-change': (_page: string | number) => true,
         select: (_new: TableRow, _old: TableRow) => true,
-        sort: (
-            _field: string | undefined,
-            _order: 'asc' | 'desc',
-            _event: ModifierKeys | null
-        ) => true,
-        'sorting-priority-removed': (_field: string | undefined) => true,
-        'update:checkedRows': (_rows: TableRow[]) => true,
         'update:currentPage': (_page: string | number) => true,
-        'update:openedDetailed': (_rows: TableRow[]) => true,
         'update:selected': (_row: TableRow) => true
         /* eslint-enable @typescript-eslint/no-unused-vars */
     },
     data() {
         return {
-            sortMultipleDataLocal: [] as TableColumnOrder[],
-            getValueByPath,
-            visibleDetailRows: this.openedDetailed,
             newData: this.data,
             newDataTotal: this.backendPagination ? this.total : this.data.length,
-            newCheckedRows: [...this.checkedRows],
-            lastCheckedRowIndex: null as number | null,
             newCurrentPage: this.currentPage,
-            currentSortColumn: {} as ITableColumn,
-            isAsc: true,
-            filters: {} as Record<string, string | number>,
             defaultSlots: [] as ITableColumn[],
-            firstTimeSort: true, // Used by first time initSort
-            isDraggingRow: false,
-            isDraggingColumn: false,
-            debouncedHandleFiltersChange: undefined as FiltersChangeHandler | undefined,
-            // for touch-enabled devices
-            _selectedRow: null,
-            mayBeTouchDragging: false,
-            touchDragoverTarget: null as Element | null,
-            _draggedCellEl: undefined as Element | undefined,
-            draggedCellContent: ''
+            // row tapped before a touch-drag may begin; see `TableDragMixin`
+            _selectedRow: null
         }
     },
     computed: {
-        sortMultipleDataComputed() {
-            return this.backendSorting ? this.sortMultipleData : this.sortMultipleDataLocal
-        },
         tableClasses() {
             return {
                 'is-bordered': this.bordered,
@@ -805,46 +655,6 @@ export default defineComponent({
         },
 
         /*
-        * Check if all rows in the page are checked.
-        */
-        isAllChecked() {
-            const validVisibleData = this.visibleData.filter(
-                (row) => this.isRowCheckable(row))
-            if (validVisibleData.length === 0) return false
-            const isAllChecked = validVisibleData.some((currentVisibleRow) => {
-                return indexOf(this.newCheckedRows, currentVisibleRow, this.customIsChecked) < 0
-            })
-            return !isAllChecked
-        },
-
-        /*
-        * Check if all rows in the page are checkable.
-        */
-        isAllUncheckable() {
-            const validVisibleData = this.visibleData.filter(
-                (row) => this.isRowCheckable(row))
-            return validVisibleData.length === 0
-        },
-
-        /*
-        * Check if has any sortable column.
-        */
-        hasSortablenewColumns() {
-            return this.newColumns.some((column) => {
-                return column.sortable
-            })
-        },
-
-        /*
-        * Check if has any searchable column.
-        */
-        hasSearchablenewColumns() {
-            return this.newColumns.some((column) => {
-                return column.searchable
-            })
-        },
-
-        /*
         * Check if has any column using subheading.
         */
         hasCustomSubheadings() {
@@ -891,12 +701,6 @@ export default defineComponent({
                 })
             }
             return this.defaultSlots
-        },
-        canDragRow() {
-            return this.draggable && !this.isDraggingColumn
-        },
-        canDragColumn() {
-            return this.draggableColumn && !this.isDraggingRow
         }
     },
     watch: {
@@ -937,212 +741,9 @@ export default defineComponent({
 
         newCurrentPage(newVal) {
             this.$emit('update:currentPage', newVal)
-        },
-
-        /*
-        * When checkedRows prop change, update internal value without
-        * mutating original data.
-        */
-        checkedRows(rows) {
-            this.newCheckedRows = [...rows]
-        },
-
-        debounceSearch: {
-            handler(value) {
-                this.debouncedHandleFiltersChange = debounce(this.handleFiltersChange, value)
-            },
-            immediate: true
-        },
-
-        filters: {
-            handler(value) {
-                if (this.debounceSearch) {
-                    this.debouncedHandleFiltersChange!(value)
-                } else {
-                    this.handleFiltersChange(value)
-                }
-            },
-            deep: true
-        },
-
-        /*
-        * When the user wants to control the detailed rows via props.
-        * Or wants to open the details of certain row with the router for example.
-        */
-        openedDetailed(expandedRows) {
-            this.visibleDetailRows = expandedRows
         }
     },
     methods: {
-        onFiltersEvent(event: Event) {
-            // @ts-expect-error  `filtersEvent` may be any native event, so we cannot exhaustively list possible values in `emits`. btw, the motivation for `filtersEvent`: https://github.com/buefy/buefy/issues/2297
-            this.$emit(`filters-event-${this.filtersEvent}`, { event, filters: this.filters })
-        },
-        handleFiltersChange(value: Record<string, string | number>) {
-            if (this.backendFiltering) {
-                this.$emit('filters-change', value)
-            } else {
-                this.newData = this.data.filter(
-                    (row) => this.isRowFiltered(row))
-                if (!this.backendPagination) {
-                    this.newDataTotal = this.newData.length
-                }
-                if (!this.backendSorting) {
-                    if (this.sortMultiple &&
-                        this.sortMultipleDataLocal && this.sortMultipleDataLocal.length > 0) {
-                        this.doSortMultiColumn()
-                    } else if (Object.keys(this.currentSortColumn).length > 0) {
-                        this.doSortSingleColumn(this.currentSortColumn)
-                    }
-                }
-            }
-        },
-        findIndexOfSortData(column: ITableColumn) {
-            const sortObj = this.sortMultipleDataComputed.filter((i) =>
-                i.field === column.field)[0]
-            return this.sortMultipleDataComputed.indexOf(sortObj) + 1
-        },
-        removeSortingPriority(column: ITableColumn) {
-            if (this.backendSorting) {
-                this.$emit('sorting-priority-removed', column.field)
-            } else {
-                this.sortMultipleDataLocal = this.sortMultipleDataLocal.filter(
-                    (priority) => priority.field !== column.field)
-
-                if (this.sortMultipleDataLocal.length === 0) {
-                    this.resetMultiSorting()
-                } else {
-                    this.newData = multiColumnSort(this.newData, this.sortMultipleDataLocal)
-                }
-            }
-        },
-        resetMultiSorting() {
-            this.sortMultipleDataLocal = []
-            this.currentSortColumn = BLANK_COLUMN
-            this.newData = this.data
-        },
-        /*
-        * Sort an array by key without mutating original data.
-        * Call the user sort function if it was passed.
-        */
-        sortBy(
-            array: TableRow[],
-            key: string | undefined,
-            fn: CustomSortFunction | undefined,
-            isAsc: boolean
-        ) {
-            let sorted = []
-            // Sorting without mutating original data
-            if (fn && typeof fn === 'function') {
-                sorted = [...array].sort((a, b) => fn(a, b, isAsc))
-            } else {
-                sorted = [...array].sort((a, b) => {
-                    // Get nested values from objects
-                    let newA = getValueByPath(a, key!)
-                    let newB = getValueByPath(b, key!)
-
-                    // sort boolean type
-                    if (typeof newA === 'boolean' && typeof newB === 'boolean') {
-                        return isAsc ? +newA - +newB : +newB - +newA
-                    }
-
-                    // sort null values to the bottom when in asc order
-                    // and to the top when in desc order
-                    if (!isNil(newB) && isNil(newA)) return isAsc ? 1 : -1
-                    if (!isNil(newA) && isNil(newB)) return isAsc ? -1 : 1
-                    if (newA === newB) return 0
-
-                    newA = (typeof newA === 'string')
-                        ? newA.toUpperCase()
-                        : newA
-                    newB = (typeof newB === 'string')
-                        ? newB.toUpperCase()
-                        : newB
-
-                    return isAsc
-                        ? newA > newB ? 1 : -1
-                        : newA > newB ? -1 : 1
-                })
-            }
-
-            return sorted
-        },
-
-        sortMultiColumn(column: ITableColumn | TableColumnOrder) {
-            this.currentSortColumn = BLANK_COLUMN
-            if (!this.backendSorting) {
-                const existingPriority = this.sortMultipleDataLocal.filter((i) =>
-                    i.field === column.field)[0]
-                if (existingPriority) {
-                    existingPriority.order = existingPriority.order === 'desc' ? 'asc' : 'desc'
-                } else {
-                    this.sortMultipleDataLocal.push({
-                        field: column.field,
-                        order: this.isAsc ? 'asc' : 'desc',
-                        customSort: column.customSort
-                    })
-                }
-                this.doSortMultiColumn()
-            }
-        },
-
-        doSortMultiColumn() {
-            this.newData = multiColumnSort(this.newData, this.sortMultipleDataLocal)
-        },
-
-        /*
-        * Sort the column.
-        * Toggle current direction on column if it's sortable
-        * and not just updating the prop.
-        */
-        sort(
-            column: ITableColumn | null | undefined,
-            updatingData: boolean | null = false,
-            event: ModifierKeys | null = null
-        ) {
-            if (!column || !column.sortable) return
-            if (
-                // if backend sorting is enabled, just emit the sort press like usual
-                // if the correct key combination isnt pressed, sort like usual
-                !this.backendSorting &&
-                this.sortMultiple &&
-                ((this.sortMultipleKey && event![this.sortMultipleKey]) || !this.sortMultipleKey)
-            ) {
-                if (updatingData) {
-                    this.doSortMultiColumn()
-                } else {
-                    this.sortMultiColumn(column)
-                }
-            } else {
-                // sort multiple is enabled but the correct key combination isnt pressed so reset
-                if (this.sortMultiple) {
-                    this.sortMultipleDataLocal = []
-                }
-
-                if (!updatingData) {
-                    this.isAsc = toRaw(column) === toRaw(this.currentSortColumn)
-                        ? !this.isAsc
-                        : (this.defaultSortDirection.toLowerCase() !== 'desc')
-                }
-                if (!this.firstTimeSort) {
-                    this.$emit('sort', column.field, this.isAsc ? 'asc' : 'desc', event)
-                }
-                if (!this.backendSorting) {
-                    this.doSortSingleColumn(column)
-                }
-                this.currentSortColumn = column
-            }
-        },
-
-        doSortSingleColumn(column: ITableColumn) {
-            this.newData = this.sortBy(
-                this.newData,
-                column.field,
-                column.customSort,
-                this.isAsc
-            )
-        },
-
         isRowSelected(row: TableRow, selected: TableRow | undefined) {
             if (!selected) {
                 return false
@@ -1151,90 +752,6 @@ export default defineComponent({
                 return row[this.customRowKey] === selected[this.customRowKey]
             }
             return row === selected
-        },
-
-        /*
-        * Check if the row is checked (is added to the array).
-        */
-        isRowChecked(row: TableRow) {
-            return indexOf(this.newCheckedRows, row, this.customIsChecked) >= 0
-        },
-
-        /*
-        * Remove a checked row from the array.
-        */
-        removeCheckedRow(row: TableRow) {
-            const index = indexOf(this.newCheckedRows, row, this.customIsChecked)
-            if (index >= 0) {
-                this.newCheckedRows.splice(index, 1)
-            }
-        },
-
-        /*
-        * Header checkbox click listener.
-        * Add or remove all rows in current page.
-        */
-        checkAll() {
-            const isAllChecked = this.isAllChecked
-            this.visibleData.forEach((currentRow) => {
-                if (this.isRowCheckable(currentRow)) {
-                    this.removeCheckedRow(currentRow)
-                }
-                if (!isAllChecked) {
-                    if (this.isRowCheckable(currentRow)) {
-                        this.newCheckedRows.push(currentRow)
-                    }
-                }
-            })
-
-            this.$emit('check', this.newCheckedRows)
-            this.$emit('check-all', this.newCheckedRows)
-
-            // Emit checked rows to update user variable
-            this.$emit('update:checkedRows', this.newCheckedRows)
-        },
-
-        /*
-        * Row checkbox click listener.
-        */
-        checkRow(row: TableRow, index: number, event: ModifierKeys) {
-            if (!this.isRowCheckable(row)) return
-            const lastIndex = this.lastCheckedRowIndex
-            this.lastCheckedRowIndex = index
-
-            if (event.shiftKey && lastIndex !== null && index !== lastIndex) {
-                this.shiftCheckRow(row, index, lastIndex)
-            } else if (!this.isRowChecked(row)) {
-                this.newCheckedRows.push(row)
-            } else {
-                this.removeCheckedRow(row)
-            }
-
-            this.$emit('check', this.newCheckedRows, row)
-
-            // Emit checked rows to update user variable
-            this.$emit('update:checkedRows', this.newCheckedRows)
-        },
-
-        /*
-         * Check row when shift is pressed.
-         */
-        shiftCheckRow(row: TableRow, index: number, lastCheckedRowIndex: number) {
-            // Get the subset of the list between the two indicies
-            const subset = this.visibleData.slice(
-                Math.min(index, lastCheckedRowIndex),
-                Math.max(index, lastCheckedRowIndex) + 1
-            )
-
-            // Determine the operation based on the state of the clicked checkbox
-            const shouldCheck = !this.isRowChecked(row)
-
-            subset.forEach((item) => {
-                this.removeCheckedRow(item)
-                if (shouldCheck && this.isRowCheckable(item)) {
-                    this.newCheckedRows.push(item)
-                }
-            })
         },
 
         /*
@@ -1253,117 +770,6 @@ export default defineComponent({
 
             // Emit new row to update user variable
             this.$emit('update:selected', row)
-        },
-
-        /*
-        * Toggle to show/hide details slot
-        */
-        toggleDetails(obj: TableRow) {
-            const found = this.isVisibleDetailRow(obj)
-
-            if (found) {
-                this.closeDetailRow(obj)
-                this.$emit('details-close', obj)
-            } else {
-                this.openDetailRow(obj)
-                this.$emit('details-open', obj)
-            }
-
-            // Syncs the detailed rows with the parent component
-            this.$emit('update:openedDetailed', this.visibleDetailRows)
-        },
-
-        openDetailRow(obj: TableRow) {
-            const index = this.handleDetailKey(obj)
-            this.visibleDetailRows.push(index)
-        },
-
-        closeDetailRow(obj: TableRow) {
-            const index = this.handleDetailKey(obj)
-            const i = this.visibleDetailRows.indexOf(index)
-            if (i >= 0) {
-                this.visibleDetailRows.splice(i, 1)
-            }
-        },
-
-        isVisibleDetailRow(obj: TableRow) {
-            const index = this.handleDetailKey(obj)
-            return this.visibleDetailRows.indexOf(index) >= 0
-        },
-
-        isActiveDetailRow(row: TableRow) {
-            return this.detailed && !this.customDetailRow && this.isVisibleDetailRow(row)
-        },
-
-        isActiveCustomDetailRow(row: TableRow) {
-            return this.detailed && this.customDetailRow && this.isVisibleDetailRow(row)
-        },
-
-        isRowFiltered(row: TableRow) {
-            for (const key in this.filters) {
-                if (!this.filters[key]) continue
-                const input = this.filters[key]
-                const column = this.newColumns.filter((c) => c.field === key)[0]
-                if (column && column.customSearch && typeof column.customSearch === 'function') {
-                    if (!column.customSearch(row, input)) return false
-                } else {
-                    const value = this.getValueByPath(row, key)
-                    if (value == null) return false
-                    if (Number.isInteger(value)) {
-                        if (value !== Number(input)) return false
-                    } else {
-                        const re = new RegExp(escapeRegExpChars(input + '')!, 'i')
-                        if (Array.isArray(value)) {
-                            const valid = value.some((val) =>
-                                re.test(removeDiacriticsFromString(val)) || re.test(val)
-                            )
-                            if (!valid) return false
-                        } else {
-                            if (!re.test(removeDiacriticsFromString(value)) && !re.test(value)) {
-                                return false
-                            }
-                        }
-                    }
-                }
-            }
-            return true
-        },
-
-        /*
-        * When the detailKey is defined we use the object[detailKey] as index.
-        * If not, use the object reference by default.
-        */
-        handleDetailKey(index: TableRow) {
-            const key = this.detailKey
-            return !key.length || !index
-                ? index
-                : index[key]
-        },
-
-        checkPredefinedDetailedRows() {
-            const defaultExpandedRowsDefined = this.openedDetailed.length > 0
-            if (defaultExpandedRowsDefined && !this.detailKey.length) {
-                throw new Error('If you set a predefined opened-detailed, you must provide a unique key using the prop "detail-key"')
-            }
-        },
-
-        /*
-        * Call initSort only first time (For example async data).
-        */
-        checkSort() {
-            if (this.newColumns.length && this.firstTimeSort) {
-                this.initSort()
-                this.firstTimeSort = false
-            } else if (this.newColumns.length) {
-                if (toRaw(this.currentSortColumn) !== BLANK_COLUMN) {
-                    for (let i = 0; i < this.newColumns.length; i++) {
-                        if (this.newColumns[i].field === this.currentSortColumn.field) {
-                            this.currentSortColumn = this.newColumns[i]
-                            break
-                        }
-                    }
-                }
-            }
         },
 
         /*
@@ -1437,75 +843,6 @@ export default defineComponent({
             this.$el.querySelector('table').focus()
         },
 
-        /*
-        * Initial sorted column based on the default-sort prop.
-        */
-        initSort() {
-            if (this.sortMultiple && this.sortMultipleData) {
-                this.sortMultipleData.forEach((column) => {
-                    this.sortMultiColumn(column)
-                })
-            } else {
-                if (!this.defaultSort) return
-
-                let sortField = ''
-                let sortDirection = this.defaultSortDirection
-
-                if (Array.isArray(this.defaultSort)) {
-                    sortField = this.defaultSort[0]
-                    if (this.defaultSort[1]) {
-                        sortDirection = this.defaultSort[1]
-                    }
-                } else {
-                    sortField = this.defaultSort
-                }
-
-                const sortColumn = this.newColumns.filter(
-                    (column) => (column.field === sortField))[0]
-                if (sortColumn) {
-                    this.isAsc = sortDirection.toLowerCase() !== 'desc'
-                    this.sort(sortColumn, true)
-                }
-            }
-        },
-        /*
-        * Emits drag start event (row)
-        */
-        handleDragStart(event: DragEvent, row: TableRow, index: number) {
-            if (!this.canDragRow) return
-            this.isDraggingRow = true
-            this.$emit('dragstart', { event, row, index })
-        },
-        /*
-        * Emits drag leave event (row)
-        */
-        handleDragEnd(event: DragEvent, row: TableRow, index: number) {
-            if (!this.canDragRow) return
-            this.isDraggingRow = false
-            this.$emit('dragend', { event, row, index })
-        },
-        /*
-        * Emits drop event (row)
-        */
-        handleDrop(event: DragEvent, row: TableRow, index: number) {
-            if (!this.canDragRow) return
-            this.$emit('drop', { event, row, index })
-        },
-        /*
-        * Emits drag over event (row)
-        */
-        handleDragOver(event: DragEvent, row: TableRow, index: number) {
-            if (!this.canDragRow) return
-            this.$emit('dragover', { event, row, index })
-        },
-        /*
-        * Emits drag leave event (row)
-        */
-        handleDragLeave(event: DragEvent, row: TableRow, index: number) {
-            if (!this.canDragRow) return
-            this.$emit('dragleave', { event, row, index })
-        },
-
         // this method is for "mouseenter", and "mouseleave" events.
         // the original idea of this method was introduced by the PR
         // https://github.com/buefy/buefy/pull/2150
@@ -1527,219 +864,6 @@ export default defineComponent({
             return listener != null ? this.$emit(eventName, row, event) : null
         },
 
-        /*
-        * Emits drag start event (column)
-        */
-        handleColumnDragStart(event: DragEvent, column: ITableColumn, index: number) {
-            if (!this.canDragColumn) return
-            this.isDraggingColumn = true
-            this.$emit('columndragstart', { event, column, index })
-        },
-
-        /*
-        * Emits drag leave event (column)
-        */
-        handleColumnDragEnd(event: DragEvent, column: ITableColumn, index: number) {
-            if (!this.canDragColumn) return
-            this.isDraggingColumn = false
-            this.$emit('columndragend', { event, column, index })
-        },
-
-        /*
-        * Emits drop event (column)
-        */
-        handleColumnDrop(event: DragEvent, column: ITableColumn, index: number) {
-            if (!this.canDragColumn) return
-            this.$emit('columndrop', { event, column, index })
-        },
-
-        /*
-        * Emits drag over event (column)
-        */
-        handleColumnDragOver(event: DragEvent, column: ITableColumn, index: number) {
-            if (!this.canDragColumn) return
-            this.$emit('columndragover', { event, column, index })
-        },
-
-        /*
-        * Emits drag leave event (column)
-        */
-        handleColumnDragLeave(event: DragEvent, column: ITableColumn, index: number) {
-            if (!this.canDragColumn) return
-            this.$emit('columndragleave', { event, column, index })
-        },
-
-        /*
-        * Starts monitoring drag-by-touch events (row on touch-enabled devices)
-        */
-        handleTouchStart(event: TouchEvent, row: TableRow) {
-            if (!this.canDragRow) return
-            if (this.isDraggingColumn) return
-            // drag won't start unless the row has been clicked (tapped)
-            // I think trapping touch-scrolling is annoying
-            if (this._selectedRow !== row) return
-            event.preventDefault()
-            this.mayBeTouchDragging = true
-        },
-        /*
-        * Emits dragover and dragleave events (row on touch-enabled devices)
-        *
-        * Emits also dragstart if this is the first touchmove after touchstart.
-        */
-        handleTouchMove(event: TouchEvent) {
-            if (!this.canDragRow) return
-            if (!this.mayBeTouchDragging) return
-            if (!this.isDraggingRow) {
-                const eventTarget = event.target! as HTMLElement
-                const tr = eventTarget.closest('tr')
-                this.draggedCellContent = tr
-                    ? `<table class="table"><tr>${tr.innerHTML}</tr></table>`
-                    : eventTarget.innerHTML;
-                (this.$refs.draggedCell as HTMLElement).style.width = tr
-                    ? `${tr.offsetWidth}px`
-                    : `${eventTarget.offsetWidth}px`
-                eventTarget.dispatchEvent(translateTouchAsDragEvent(event, {
-                    type: 'dragstart'
-                }))
-            }
-            const touch = event.touches[0]
-            const target = document.elementFromPoint(touch.clientX, touch.clientY)
-            if (target != null) {
-                if (target !== this.touchDragoverTarget) {
-                    if (this.touchDragoverTarget != null) {
-                        this.touchDragoverTarget.dispatchEvent(
-                            translateTouchAsDragEvent(event, {
-                                type: 'dragleave',
-                                target: this.touchDragoverTarget
-                            })
-                        )
-                    }
-                    this.touchDragoverTarget = target
-                    target.dispatchEvent(
-                        translateTouchAsDragEvent(event, {
-                            type: 'dragover',
-                            target
-                        })
-                    )
-                }
-            } else if (this.touchDragoverTarget != null) {
-                this.touchDragoverTarget.dispatchEvent(
-                    translateTouchAsDragEvent(event, {
-                        type: 'dragleave',
-                        target: this.touchDragoverTarget
-                    })
-                )
-                this.touchDragoverTarget = null
-            }
-            this.updateDraggedCell(touch)
-        },
-        /*
-        * Emits drop and dragend events (row on touch-enabled devices)
-        */
-        handleTouchEnd(event: TouchEvent) {
-            if (!this.canDragRow) return
-            if (this.isDraggingRow) {
-                const touch = event.changedTouches[0]
-                const target = document.elementFromPoint(touch.clientX, touch.clientY)
-                if (target != null) {
-                    target.dispatchEvent(translateTouchAsDragEvent(event, {
-                        type: 'drop',
-                        target
-                    }))
-                }
-                event.target!.dispatchEvent(translateTouchAsDragEvent(event, {
-                    type: 'dragend'
-                }))
-                this._selectedRow = null
-            }
-            this.mayBeTouchDragging = false
-        },
-
-        /*
-        * Starts monitoring drag-by-touch events (column on touch-enabled devices)
-        */
-        handleColumnTouchStart(event: TouchEvent) {
-            if (!this.canDragColumn) return
-            if (this.isDraggingRow) return
-            event.preventDefault() // otherwise triggers touch-scrolling
-            this.mayBeTouchDragging = true
-        },
-        /*
-        * Emits dragover and dragleave events (column on touch-enabled devices)
-        *
-        * Also emits dragstart if this is the first touchmove after touchstart.
-        */
-        handleColumnTouchMove(event: TouchEvent) {
-            if (!this.canDragColumn) return
-            if (!this.mayBeTouchDragging) return
-            if (!this.isDraggingColumn) {
-                const eventTarget = event.target! as HTMLElement
-                this.draggedCellContent = eventTarget.innerHTML;
-                (this.$refs.draggedCell as HTMLElement).style.width = `${eventTarget.offsetWidth}px`
-                eventTarget.dispatchEvent(translateTouchAsDragEvent(event, {
-                    type: 'dragstart'
-                }))
-            }
-            const touch = event.touches[0]
-            const target = document.elementFromPoint(touch.clientX, touch.clientY)
-            if (target != null) {
-                if (target !== this.touchDragoverTarget) {
-                    if (this.touchDragoverTarget != null) {
-                        this.touchDragoverTarget.dispatchEvent(
-                            translateTouchAsDragEvent(event, {
-                                type: 'dragleave',
-                                target: this.touchDragoverTarget
-                            })
-                        )
-                    }
-                    this.touchDragoverTarget = target
-                    target.dispatchEvent(
-                        translateTouchAsDragEvent(event, {
-                            type: 'dragover',
-                            target
-                        })
-                    )
-                }
-            } else if (this.touchDragoverTarget != null) {
-                this.touchDragoverTarget.dispatchEvent(
-                    translateTouchAsDragEvent(event, {
-                        type: 'dragleave',
-                        target: this.touchDragoverTarget
-                    })
-                )
-                this.touchDragoverTarget = null
-            }
-            this.updateDraggedCell(touch)
-        },
-        /*
-        * Emits drop and dragend events (column on touch-enabled devices)
-        */
-        handleColumnTouchEnd(event: TouchEvent) {
-            if (!this.canDragColumn) return
-            if (this.isDraggingColumn) {
-                const touch = event.changedTouches[0]
-                const target = document.elementFromPoint(touch.clientX, touch.clientY)
-                if (target != null) {
-                    target.dispatchEvent(translateTouchAsDragEvent(event, {
-                        type: 'drop',
-                        target
-                    }))
-                }
-                event.target!.dispatchEvent(translateTouchAsDragEvent(event, {
-                    type: 'dragend'
-                }))
-            }
-            this.mayBeTouchDragging = false
-        },
-
-        updateDraggedCell({ clientX, clientY }: { clientX: number, clientY: number }) {
-            const cellRect = (this.$refs.draggedCell as HTMLElement).getBoundingClientRect()
-            const top = clientY + window.scrollY - cellRect.height / 2
-            const left = clientX + window.scrollX - cellRect.width / 2;
-            (this.$refs.draggedCell as HTMLElement).style.top = `calc(${top}px)`;
-            (this.$refs.draggedCell as HTMLElement).style.left = `calc(${left}px)`
-        },
-
         _registerTableColumn(column: ITableColumn) {
             if (column._isTableColumn) {
                 this.defaultSlots.push(column)
@@ -1755,22 +879,6 @@ export default defineComponent({
     mounted() {
         this.checkPredefinedDetailedRows()
         this.checkSort()
-        // appends `draggedCell` to the body whenever `draggable` or
-        // `draggableColumn` becomes true
-        // starts watching here to make sure the DOM is ready
-        const prepareDraggedCell = (isDraggable: boolean) => {
-            if (isDraggable && this.$data._draggedCellEl == null) {
-                this.$data._draggedCellEl =
-                    createAbsoluteElement(this.$refs.draggedCell as HTMLElement)
-            }
-        }
-        this.$watch('draggable', prepareDraggedCell, { immediate: true })
-        this.$watch('draggableColumn', prepareDraggedCell, { immediate: true })
-    },
-    beforeUnmount() {
-        if (this.$data._draggedCellEl) {
-            removeElement(this.$data._draggedCellEl)
-        }
     }
 })
 </script>
