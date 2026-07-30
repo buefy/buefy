@@ -1,5 +1,7 @@
 @use "bulma/sass/utilities/initial-variables" as iv;
 @use "bulma/sass/utilities/mixins" as mixins;
+@use "bulma/sass/utilities/css-variables" as cv;
+@use "bulma/sass/utilities/derived-variables" as dv;
 
 
 .#{iv.$class-prefix}tag {
@@ -14,6 +16,21 @@
         .icon:first-child:not(:last-child) {
             margin-right: 0px;
             margin-left: 0px;
+        }
+    }
+
+    // Bulma's `.delete` element has no color modifiers of its own, so
+    // `close-type="is-*"` is otherwise ignored on the close button.
+    .#{iv.$class-prefix}delete {
+        @each $name, $pair in dv.$colors {
+            &.#{iv.$class-prefix}is-#{$name} {
+                background-color: hsl(cv.getVar($name, "", "-h"), cv.getVar($name, "", "-s"), cv.getVar($name, "", "-l"));
+
+                &::before,
+                &::after {
+                    background-color: hsl(cv.getVar($name, "", "-h"), cv.getVar($name, "", "-s"), cv.getVar($name, "", "-invert-l"));
+                }
+            }
         }
     }
 }
