@@ -29,4 +29,10 @@ describe('BTag', () => {
 
         expect(wrapper.emitted().close).toHaveLength(1)
     })
+
+    it('applies closeType as a class on the close button', async () => {
+        await wrapper.setProps({ closable: true, closeType: 'is-danger' })
+
+        expect(wrapper.find('.delete').classes()).toContain('is-danger')
+    })
 })
