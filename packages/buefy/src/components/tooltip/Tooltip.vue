@@ -134,6 +134,17 @@ export default defineComponent({
             if (this.appendToBody) {
                 this.updateAppendToBody()
             }
+        },
+        /*
+         * When appendToBody property changes, create or clean up
+         * the body element and its associated listeners
+         */
+        appendToBody(newValue, oldValue) {
+            if (newValue && !oldValue) {
+                this.setupAppendToBody()
+            } else if (!newValue && oldValue) {
+                this.teardownAppendToBody()
+            }
         }
     },
     methods: {
@@ -242,6 +253,61 @@ export default defineComponent({
                 }
             }
         },
+        /*
+         * Create the body element and set up the listeners needed
+         * to keep it positioned relative to the trigger
+         */
+        setupAppendToBody() {
+            if (typeof window === 'undefined' || this.$data._bodyEl) return
+
+            this.controller = new window.AbortController()
+            this.$data._bodyEl = createAbsoluteElement(this.$refs.content as Element)
+            this.updateAppendToBody()
+            // updates the tooltip position if the tooltip is inside
+            // `.animation-content`
+            const animation = this.$el.closest('.animation-content')
+            if (animation != null) {
+                const listener = () => {
+                    this.updateAppendToBody()
+                    animation.removeEventListener('transitionend', listener)
+                }
+                animation.addEventListener('transitionend', listener, {
+                    signal: this.controller.signal
+                })
+            }
+            // observes changes in the window size
+            this.resizeListener = () => this.updateAppendToBody()
+            window.addEventListener('resize', this.resizeListener)
+            // observes changes in the size of the immediate parent
+            if (window.ResizeObserver) {
+                this.resizeObserver = new ResizeObserver(this.resizeListener)
+                const parentNode = this.$el.parentNode
+                if (parentNode != null && parentNode.nodeType === Node.ELEMENT_NODE) {
+                    this.resizeObserver.observe(parentNode)
+                }
+            }
+        },
+        /*
+         * Remove the body element and tear down its associated listeners
+         */
+        teardownAppendToBody() {
+            if (this.resizeListener != null) {
+                window.removeEventListener('resize', this.resizeListener)
+                this.resizeListener = undefined
+            }
+            if (this.resizeObserver != null) {
+                this.resizeObserver.disconnect()
+                this.resizeObserver = undefined
+            }
+            if (this.controller != null) {
+                this.controller.abort()
+                this.controller = undefined
+            }
+            if (this.$data._bodyEl) {
+                removeElement(this.$data._bodyEl)
+                this.$data._bodyEl = undefined
+            }
+        },
         onClick() {
             if (this.triggers.indexOf('click') < 0) return
             // if not active, toggle after clickOutside event
@@ -333,30 +399,8 @@ export default defineComponent({
         }
     },
     mounted() {
-        if (this.appendToBody && typeof window !== 'undefined') {
-            this.controller = new window.AbortController()
-            this.$data._bodyEl = createAbsoluteElement(this.$refs.content as Element)
-            this.updateAppendToBody()
-            // updates the tooltip position if the tooltip is inside
-            // `.animation-content`
-            const animation = this.$el.closest('.animation-content')
-            if (animation != null) {
-                const listener = () => {
-                    this.updateAppendToBody()
-                    animation.removeEventListener('transitionend', listener)
-                }
-                animation.addEventListener('transitionend', listener, {
-                    signal: this.controller.signal
-                })
-            }
-            // observes changes in the window size
-            this.resizeListener = () => this.updateAppendToBody()
-            window.addEventListener('resize', this.resizeListener)
-            // observes changes in the size of the immediate parent
-            this.resizeObserver = new ResizeObserver(this.resizeListener)
-            if (this.$el.parentNode != null && this.$el.parentNode.nodeType === Node.ELEMENT_NODE) {
-                this.resizeObserver.observe(this.$el.parentNode)
-            }
+        if (this.appendToBody) {
+            this.setupAppendToBody()
         }
         // dynamicPosition has to be computed if it is always shown
         if (this.always) {
@@ -374,18 +418,7 @@ export default defineComponent({
             document.removeEventListener('click', this.clickedOutside)
             document.removeEventListener('keyup', this.keyPress)
         }
-        if (this.resizeListener != null) {
-            window.removeEventListener('resize', this.resizeListener)
-        }
-        if (this.resizeObserver != null) {
-            this.resizeObserver.disconnect()
-        }
-        if (this.appendToBody) {
-            removeElement(this.$data._bodyEl!)
-        }
-        if (this.controller != null) {
-            this.controller.abort()
-        }
+        this.teardownAppendToBody()
         clearTimeout(this.timer)
         clearTimeout(this.timeOutID)
     }
