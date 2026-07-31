@@ -180,6 +180,10 @@ $table-sticky-header-height: 300px !default;
             &.is-sticky {
                 position: -webkit-sticky;
                 position: sticky;
+                // Fallback for a sticky column with no pixel-resolvable
+                // `width` (or the first column in the stack) — `Table.vue`
+                // sets an inline `left` for columns whose width can be
+                // summed, which overrides this. Not dead code.
                 left: 0;
                 z-index: 3 !important;
                 background: cv.getVar('table-head-background-color');
@@ -240,6 +244,10 @@ $table-sticky-header-height: 300px !default;
             &.is-sticky {
                 position: -webkit-sticky;
                 position: sticky;
+                // Fallback for a sticky column with no pixel-resolvable
+                // `width` (or the first column in the stack) — `Table.vue`
+                // sets an inline `left` for columns whose width can be
+                // summed, which overrides this. Not dead code.
                 left: 0;
                 z-index: 1;
                 background: cv.getVar('table-background-color');

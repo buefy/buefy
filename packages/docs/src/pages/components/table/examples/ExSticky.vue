@@ -130,6 +130,7 @@ export default defineComponent({
                 {
                     field: "date",
                     label: "Date",
+                    width: "180",
                     searchable: this.dateSearchable,
                     centered: true,
                     sticky: true,
@@ -201,7 +202,7 @@ export default defineComponent({
                     label: "ID",
                     width: "40",
                     numeric: true,
-                    sticky: false,
+                    sticky: true,
                 },
                 {
                     field: "user.first_name",

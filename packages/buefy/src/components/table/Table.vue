@@ -90,7 +90,7 @@
                             :class="[column.thClasses, {
                                 'is-current-sort': !sortMultiple && currentSortColumn === column,
                             }]"
-                            :style="column.thStyle"
+                            :style="[column.thStyle, stickyLeftStyles[index]]"
                             @click.stop="sort(column, null, $event)"
                             :draggable="canDragColumn"
                             @dragstart="handleColumnDragStart($event, column, index)"
@@ -226,7 +226,7 @@
                             v-for="(column, index) in visibleColumns"
                             :key="column.newKey + ':' + index + 'searchable'"
                             v-bind="column.thAttrs(column)"
-                            :style="column.thStyle"
+                            :style="[column.thStyle, stickyLeftStyles[index]]"
                             :class="{'is-sticky': column.sticky}"
                         >
                             <div class="th-wrap" :style="column.thWrapStyle">
@@ -322,7 +322,9 @@
                                         name="default"
                                         tag="td"
                                         :class="column.getRootClasses(row)"
-                                        :style="column.getRootStyle(row)"
+                                        :style="[
+                                            column.getRootStyle(row), stickyLeftStyles[colindex]
+                                        ]"
                                         :data-label="column.label"
                                         :props="{
                                             row, column, index, colindex,
@@ -460,6 +462,7 @@ import BSlotComponent from '../../utils/SlotComponent'
 import BTableMobileSort from './TableMobileSort.vue'
 import BTablePagination from './TablePagination.vue'
 import mockTableColumn from './mockTableColumn'
+import { computeStickyOffsets } from './tableStickyOffsets'
 import type {
     ITableColumn,
     TableColumnProps,
@@ -691,6 +694,23 @@ export default defineComponent({
             if (!this.newColumns) return false
             return this.newColumns.some((column) => {
                 return column.sticky
+            })
+        },
+
+        /*
+        * Cumulative `left` px offset for each visible column, so stacked
+        * sticky columns don't all pin to `left: 0` and overlap.
+        * See https://github.com/buefy/buefy/discussions/4028.
+        */
+        stickyOffsetsPx() {
+            return computeStickyOffsets(this.visibleColumns, {
+                hasStickyCheckboxLeft:
+                    this.checkable && this.stickyCheckbox && this.checkboxPosition === 'left'
+            })
+        },
+        stickyLeftStyles() {
+            return this.visibleColumns.map((column, index) => {
+                return column.sticky ? { left: `${this.stickyOffsetsPx[index]}px` } : undefined
             })
         },
 
