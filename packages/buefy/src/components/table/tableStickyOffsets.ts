@@ -8,8 +8,11 @@
 
 import type { ITableColumn } from './types'
 
-// Keep in sync with `.checkbox-cell { width: 40px }` in
-// `src/scss/components/_table.scss`.
+// Keep in sync with the `$table-checkbox-cell-width` SCSS variable's
+// default (`src/scss/components/_table.scss`) — this constant can't read
+// the CSS value at runtime, so a project that overrides the SCSS variable
+// will need sticky data columns to compensate manually (e.g. via a custom
+// `width` on the first sticky column).
 export const STICKY_CHECKBOX_WIDTH_PX = 40
 
 /*

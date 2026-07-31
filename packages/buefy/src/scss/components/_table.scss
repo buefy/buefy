@@ -4,10 +4,12 @@
 @use "../utils/_functions" as fn;
 
 $table-sticky-header-height: 300px !default;
+$table-checkbox-cell-width: 40px !default;
 
 .#{iv.$class-prefix}b-table {
     @include cv.register-vars((
-        "table-sticky-header-height": #{$table-sticky-header-height}
+        "table-sticky-header-height": #{$table-sticky-header-height},
+        "table-checkbox-cell-width": #{$table-checkbox-cell-width}
     ))
 }
 
@@ -211,7 +213,7 @@ $table-sticky-header-height: 300px !default;
             }
         }
         .checkbox-cell {
-            width: 40px;
+            width: cv.getVar('table-checkbox-cell-width');
             .checkbox {
                 vertical-align: middle;
                 .check {
