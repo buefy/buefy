@@ -96,7 +96,10 @@ describe('BTable', () => {
                         { label: 'Date', field: 'date', width: 60, sticky: true }
                     ],
                     data: [{ id: 1, name: 'Jesse', date: '2016/10/15' }]
-                }
+                },
+                // body cells render through `<b-slot-component tag="td">`;
+                // un-stub it so the real `<td>` (and its style) renders.
+                global: { stubs: { BSlotComponent: false } }
             })
 
             const headerSticky = stickyWrapper.findAll('thead th.is-sticky')
