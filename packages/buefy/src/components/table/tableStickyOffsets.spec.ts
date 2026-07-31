@@ -57,7 +57,7 @@ describe('computeStickyOffsets', () => {
         expect(computeStickyOffsets(columns)).toEqual([0, 40])
     })
 
-    it('does not let a non-sticky column between two sticky columns affect the offset (#4028)', () => {
+    it('does not let a non-sticky column between sticky columns affect the offset (#4028)', () => {
         const columns = [
             makeColumn({ sticky: true, width: 40 }), // id
             makeColumn({ width: 300 }), // user.first_name (not sticky)
