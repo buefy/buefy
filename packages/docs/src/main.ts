@@ -80,15 +80,11 @@ function highlightCodeBlocks(el: HTMLElement, binding: { value?: string }) {
         // instead of the element content.
         if (binding.value) {
             target.innerHTML = binding.value
-        } else {
-            // Strip markup left by a previous highlight pass so reactive
-            // updates to the element's text are highlighted from scratch
-            // instead of being skipped.
-            const plainText = target.textContent
-            target.textContent = plainText
         }
         // hljs v11 refuses to re-highlight an element once it's marked
-        // `data-highlighted`, so clear it before every pass.
+        // `data-highlighted`, so clear it before every pass. Vue has
+        // already patched `target`'s plain text via its own reactive
+        // text-interpolation update by the time this hook runs.
         delete target.dataset.highlighted
         hljs.highlightElement(target)
     }
