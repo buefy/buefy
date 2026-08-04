@@ -84,7 +84,8 @@ function highlightCodeBlocks(el: HTMLElement, binding: { value?: string }) {
             // Strip markup left by a previous highlight pass so reactive
             // updates to the element's text are highlighted from scratch
             // instead of being skipped.
-            target.textContent = target.textContent
+            const plainText = target.textContent
+            target.textContent = plainText
         }
         // hljs v11 refuses to re-highlight an element once it's marked
         // `data-highlighted`, so clear it before every pass.
