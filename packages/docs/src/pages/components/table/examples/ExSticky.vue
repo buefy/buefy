@@ -8,14 +8,23 @@
                 <b-switch v-model="dateSearchable">Date searchable</b-switch>
             </div>
         </b-field>
+
+        Give each sticky column an explicit pixel <code>width</code> so
+        they stack, left to right, instead of overlapping. Here
+        <code>ID</code> and <code>Date</code> are both sticky.
+        <br />
+        <br />
         <b-table
             :data="data"
             :columns="columns"
             :sticky-header="stickyHeaders"
         ></b-table>
+
         <br />
-        Use <code>checkable</code> and <code>sticky-checkbox</code> to make a
-        sticky checkbox column.
+
+        Use <code>checkable</code> and <code>sticky-checkbox</code> to make
+        a sticky checkbox column too — sticky data columns automatically
+        account for its width.
         <br />
         <br />
         <b-table
@@ -32,6 +41,13 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { BField, BSwitch, BTable } from "buefy";
+
+// Extra columns just to force horizontal scrolling, so the sticky
+// columns' effect is visible.
+const fillerColumns = ["A", "B", "C", "D", "E", "F"].map((letter) => ({
+    field: "id",
+    label: `Column ${letter}`,
+}));
 
 export default defineComponent({
     components: {
@@ -72,36 +88,6 @@ export default defineComponent({
                     date: "2016/12/06 14:38:38",
                     gender: "Female",
                 },
-                {
-                    id: 6,
-                    user: { first_name: "Sara", last_name: "Armstrong" },
-                    date: "2016/09/23 18:50:04",
-                    gender: "Female",
-                },
-                {
-                    id: 7,
-                    user: { first_name: "Anthony", last_name: "Webb" },
-                    date: "2016/08/30 23:49:38",
-                    gender: "Male",
-                },
-                {
-                    id: 8,
-                    user: { first_name: "Andrew", last_name: "Greene" },
-                    date: "2016/11/20 14:57:47",
-                    gender: "Male",
-                },
-                {
-                    id: 9,
-                    user: { first_name: "Russell", last_name: "White" },
-                    date: "2016/07/13 09:29:49",
-                    gender: "Male",
-                },
-                {
-                    id: 10,
-                    user: { first_name: "Lori", last_name: "Hunter" },
-                    date: "2016/12/09 01:44:05",
-                    gender: "Female",
-                },
             ],
             stickyHeaders: true,
             dateSearchable: false,
@@ -116,8 +102,6 @@ export default defineComponent({
                     width: "40",
                     numeric: true,
                     sticky: true,
-                    headerClass: "is-sticky-column-one",
-                    cellClass: "is-sticky-column-one",
                 },
                 {
                     field: "user.first_name",
@@ -130,68 +114,16 @@ export default defineComponent({
                 {
                     field: "date",
                     label: "Date",
+                    width: "180",
                     searchable: this.dateSearchable,
                     centered: true,
                     sticky: true,
-                    headerClass: "is-sticky-column-two",
-                    cellClass: "is-sticky-column-two",
                 },
                 {
                     field: "gender",
                     label: "Gender",
                 },
-                {
-                    field: "id",
-                    label: "Column A",
-                },
-                {
-                    field: "id",
-                    label: "Column B",
-                },
-                {
-                    field: "id",
-                    label: "Column C",
-                },
-                {
-                    field: "id",
-                    label: "Column D",
-                },
-                {
-                    field: "id",
-                    label: "Column E",
-                },
-                {
-                    field: "id",
-                    label: "Column F",
-                },
-                {
-                    field: "id",
-                    label: "Column G",
-                },
-                {
-                    field: "id",
-                    label: "Column H",
-                },
-                {
-                    field: "id",
-                    label: "Column I",
-                },
-                {
-                    field: "id",
-                    label: "Column L",
-                },
-                {
-                    field: "id",
-                    label: "Column M",
-                },
-                {
-                    field: "id",
-                    label: "Column N",
-                },
-                {
-                    field: "id",
-                    label: "Column O",
-                },
+                ...fillerColumns,
             ];
         },
         checkableColumns() {
@@ -201,7 +133,7 @@ export default defineComponent({
                     label: "ID",
                     width: "40",
                     numeric: true,
-                    sticky: false,
+                    sticky: true,
                 },
                 {
                     field: "user.first_name",
@@ -216,77 +148,14 @@ export default defineComponent({
                     label: "Date",
                     searchable: this.dateSearchable,
                     centered: true,
-                    sticky: false,
                 },
                 {
                     field: "gender",
                     label: "Gender",
                 },
-                {
-                    field: "id",
-                    label: "Column A",
-                },
-                {
-                    field: "id",
-                    label: "Column B",
-                },
-                {
-                    field: "id",
-                    label: "Column C",
-                },
-                {
-                    field: "id",
-                    label: "Column D",
-                },
-                {
-                    field: "id",
-                    label: "Column E",
-                },
-                {
-                    field: "id",
-                    label: "Column F",
-                },
-                {
-                    field: "id",
-                    label: "Column G",
-                },
-                {
-                    field: "id",
-                    label: "Column H",
-                },
-                {
-                    field: "id",
-                    label: "Column I",
-                },
-                {
-                    field: "id",
-                    label: "Column L",
-                },
-                {
-                    field: "id",
-                    label: "Column M",
-                },
-                {
-                    field: "id",
-                    label: "Column N",
-                },
-                {
-                    field: "id",
-                    label: "Column O",
-                },
+                ...fillerColumns,
             ];
         },
     },
 });
 </script>
-
-<style>
-.is-sticky-column-one {
-    background: #23d160 !important;
-    color: white !important;
-}
-.is-sticky-column-two {
-    background: #167df0 !important;
-    color: white !important;
-}
-</style>

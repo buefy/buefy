@@ -800,7 +800,12 @@ export default [
             },
             {
                 name: '<code>sticky</code>',
-                description: 'Show a sticky column',
+                description: 'Show a sticky (fixed) column. To stack multiple sticky columns ' +
+                    'without them overlapping, give each one an explicit pixel-resolvable ' +
+                    '<code>width</code> (e.g. <code>40</code> or <code>"40px"</code>) — columns ' +
+                    'stack left-to-right by accumulating the widths of the sticky columns before ' +
+                    'them (plus the sticky checkbox\'s width, if enabled). A sticky column with no ' +
+                    'resolvable width falls back to the left edge.',
                 type: 'Boolean',
                 values: '—',
                 default: '<code>false</code>'

@@ -86,6 +86,65 @@ describe('BTable', () => {
         expect(cols[3].attributes('style')).toBe('width: 100px;')
     })
 
+    describe('Sticky columns', () => {
+        it('gives stacked sticky columns distinct left offsets, in header and body', () => {
+            const stickyWrapper = shallowMount(BTable, {
+                props: {
+                    columns: [
+                        { label: 'ID', field: 'id', width: 40, sticky: true },
+                        { label: 'Name', field: 'name' },
+                        { label: 'Date', field: 'date', width: 60, sticky: true }
+                    ],
+                    data: [{ id: 1, name: 'Jesse', date: '2016/10/15' }]
+                },
+                // body cells render through `<b-slot-component tag="td">`;
+                // un-stub it so the real `<td>` (and its style) renders.
+                global: { stubs: { BSlotComponent: false } }
+            })
+
+            const headerSticky = stickyWrapper.findAll('thead th.is-sticky')
+            expect(headerSticky).toHaveLength(2)
+            expect(headerSticky[0].attributes('style')).toContain('left: 0px;')
+            expect(headerSticky[1].attributes('style')).toContain('left: 40px;')
+
+            const bodySticky = stickyWrapper.findAll('tbody td.is-sticky')
+            expect(bodySticky).toHaveLength(2)
+            expect(bodySticky[0].attributes('style')).toContain('left: 0px;')
+            expect(bodySticky[1].attributes('style')).toContain('left: 40px;')
+        })
+
+        it('folds the sticky checkbox width into a sticky data column offset', () => {
+            const stickyWrapper = shallowMount(BTable, {
+                props: {
+                    checkable: true,
+                    stickyCheckbox: true,
+                    checkboxPosition: 'left',
+                    columns: [
+                        { label: 'ID', field: 'id', width: 40, sticky: true }
+                    ],
+                    data: [{ id: 1 }]
+                }
+            })
+
+            const headerSticky = stickyWrapper.find('thead th.is-sticky:not(.checkbox-cell)')
+            expect(headerSticky.attributes('style')).toContain('left: 40px;')
+        })
+
+        it('falls back to left: 0px for a sticky column with no resolvable width', () => {
+            const stickyWrapper = shallowMount(BTable, {
+                props: {
+                    columns: [
+                        { label: 'Name', field: 'name', sticky: true }
+                    ],
+                    data: [{ name: 'Jesse' }]
+                }
+            })
+
+            const headerSticky = stickyWrapper.find('thead th.is-sticky')
+            expect(headerSticky.attributes('style')).toContain('left: 0px;')
+        })
+    })
+
     describe('Selectable', () => {
         const data = [
             { id: 1, name: 'Jesse' },
