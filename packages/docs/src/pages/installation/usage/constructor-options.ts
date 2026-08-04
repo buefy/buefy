@@ -4,24 +4,37 @@
 // them, if they are in the component (.vue) file.
 
 export const usageBundle = `
-Vue.use(Buefy, {
+import { createApp } from 'vue'
+import Buefy from 'buefy'
+
+import App from './App.vue'
+
+const app = createApp(App)
+app.use(Buefy, {
     defaultIconPack: 'fas',
     // ...
-})`
+})
+app.mount('#app')`
 
 export const usageComponents = `
+import { createApp } from 'vue'
 import { ConfigProgrammatic, Table, Input } from 'buefy'
 
-Vue.use(Table)
-Vue.use(Input)
+import App from './App.vue'
+
+const app = createApp(App)
+app.use(Table)
+app.use(Input)
 ConfigProgrammatic.setOptions({
     defaultIconPack: 'fas',
     // ...
-})`
+})
+app.mount('#app')`
 
 export const usageCdn = `
-// When using CDN, Buefy automatically attaches itself on Vue
-Vue.prototype.$buefy.config.setOptions({
+// When using CDN, Buefy attaches ConfigProgrammatic to the global Buefy object
+const { ConfigProgrammatic } = Buefy;
+ConfigProgrammatic.setOptions({
     defaultIconPack: 'fas',
     // ...
 })`

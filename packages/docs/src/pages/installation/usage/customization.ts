@@ -30,15 +30,15 @@ export const sass = `
   $radius-small: 2px,
   $radius: 4px,
   $radius-large: 6px,
-  $radius-rounded: 9999px,
-  
-  // Buefy specific variables
-  $speed-slow: 150ms,
-  $speed-slower: 250ms
+  $radius-rounded: 9999px
 );
 
 // Import Buefy styles
-@use "buefy/src/scss/buefy";
+// Buefy specific variables (not part of bulma/sass) are configured here
+@use "buefy/src/scss/buefy" with (
+  $speed-slow: 150ms,
+  $speed-slower: 250ms
+);
 `
 
 export const sassLegacy = `

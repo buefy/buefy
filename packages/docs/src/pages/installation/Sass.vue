@@ -118,7 +118,7 @@
                 <li><strong>Colors:</strong> <code>$primary</code>, <code>$link</code>, <code>$info</code>, <code>$success</code>, <code>$warning</code>, <code>$danger</code></li>
                 <li><strong>Typography:</strong> <code>$family-sans-serif</code>, <code>$size-1</code> to <code>$size-7</code></li>
                 <li><strong>Spacing:</strong> <code>$radius</code>, <code>$radius-small</code>, <code>$radius-large</code>, <code>$radius-rounded</code></li>
-                <li><strong>Buefy specific:</strong> <code>$speed-slow</code>, <code>$speed-slower</code></li>
+                <li><strong>Buefy specific</strong> (set on the <code>buefy/src/scss/buefy</code> <code>@use</code>, not <code>bulma/sass</code>): <code>$speed-slow</code>, <code>$speed-slower</code></li>
             </ul>
 
             <h4 class="title is-4">Learn More</h4>

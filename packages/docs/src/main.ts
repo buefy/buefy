@@ -73,29 +73,29 @@ vueApp.component('VariablesView', VariablesView)
 // eslint-disable-next-line vue/multi-word-component-names
 vueApp.component('Example', Example)
 
-vueApp.directive('highlight', {
-    beforeMount(el, binding) {
-        // On first bind, highlight all targets
-        const targets = el.querySelectorAll('code')
-        for (const target of targets) {
-            // if a value is directly assigned to the directive, use this
-            // instead of the element content.
-            if (binding.value) {
-                target.innerHTML = binding.value
-            }
-            hljs.highlightElement(target)
+function highlightCodeBlocks(el: HTMLElement, binding: { value?: string }) {
+    const targets = el.querySelectorAll('code')
+    for (const target of targets) {
+        // if a value is directly assigned to the directive, use this
+        // instead of the element content.
+        if (binding.value) {
+            target.innerHTML = binding.value
+        } else {
+            // Strip markup left by a previous highlight pass so reactive
+            // updates to the element's text are highlighted from scratch
+            // instead of being skipped.
+            target.textContent = target.textContent
         }
-    },
-    updated(el, binding) {
-        // After an update, re-fill the content and then highlight
-        const targets = el.querySelectorAll('code')
-        for (const target of targets) {
-            if (binding.value) {
-                target.innerHTML = binding.value
-                hljs.highlightElement(target)
-            }
-        }
+        // hljs v11 refuses to re-highlight an element once it's marked
+        // `data-highlighted`, so clear it before every pass.
+        delete target.dataset.highlighted
+        hljs.highlightElement(target)
     }
+}
+
+vueApp.directive('highlight', {
+    beforeMount: highlightCodeBlocks,
+    updated: highlightCodeBlocks
 })
 
 document.addEventListener('DOMContentLoaded', function () {

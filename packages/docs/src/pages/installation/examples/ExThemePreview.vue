@@ -107,10 +107,15 @@
 
         <!-- Generated CSS -->
         <div class="mt-4">
-            <p class="mb-2">
-                <strong>Generated CSS</strong> — paste this into your stylesheet:
-            </p>
-            <CodeView :code="generatedCss" lang="css" expanded />
+            <div class="is-flex is-align-items-center is-justify-content-space-between mb-2">
+                <p>
+                    <strong>Generated CSS</strong> — paste this into your stylesheet:
+                </p>
+                <b-button size="is-small" type="is-text" @click="copyCss">
+                    {{ copied ? 'Copied!' : 'Copy' }}
+                </b-button>
+            </div>
+            <pre class="generated-css"><code>{{ generatedCss }}</code></pre>
         </div>
     </div>
 </template>
@@ -118,7 +123,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { BButton, BInput, BTag, BProgress } from 'buefy'
-import CodeView from '@/components/CodeView.vue'
 
 function hexToHsl(hex: string): { h: number; s: number; l: number } {
     const r = parseInt(hex.slice(1, 3), 16) / 255
@@ -157,7 +161,7 @@ const DEFAULTS = {
 }
 
 export default defineComponent({
-    components: { BButton, BInput, BTag, BProgress, CodeView },
+    components: { BButton, BInput, BTag, BProgress },
     data() {
         return {
             primaryHex: DEFAULTS.primaryHex,
@@ -165,6 +169,7 @@ export default defineComponent({
             dangerHex:  DEFAULTS.dangerHex,
             warningHex: DEFAULTS.warningHex,
             radius:     DEFAULTS.radius,
+            copied:     false,
         }
     },
     computed: {
@@ -229,6 +234,11 @@ export default defineComponent({
             this.warningHex = DEFAULTS.warningHex
             this.radius     = DEFAULTS.radius
         },
+        async copyCss() {
+            await navigator.clipboard.writeText(this.generatedCss)
+            this.copied = true
+            setTimeout(() => { this.copied = false }, 1500)
+        },
     },
 })
 </script>
@@ -277,5 +287,17 @@ export default defineComponent({
 .radius-slider {
     width: 100%;
     cursor: pointer;
+}
+
+.generated-css {
+    margin: 0;
+    padding: 1rem;
+    border-radius: 4px;
+    background: #2b2b2b;
+    color: #f5f5f5;
+    font-family: monospace;
+    font-size: 0.85rem;
+    overflow-x: auto;
+    white-space: pre;
 }
 </style>
