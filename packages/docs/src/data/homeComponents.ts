@@ -33,7 +33,8 @@ const categories: ComponentCategory[] = [
             { name: 'Table', route: '/documentation/table' },
             { name: 'Tag', route: '/documentation/tag' },
             { name: 'Toast', route: '/documentation/toast' },
-            { name: 'Tooltip', route: '/documentation/tooltip' }
+            { name: 'Tooltip', route: '/documentation/tooltip' },
+            { name: 'Tree', route: '/documentation/tree' }
         ]
     },
     {
