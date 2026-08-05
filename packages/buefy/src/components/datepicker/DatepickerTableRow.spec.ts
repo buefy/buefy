@@ -108,6 +108,35 @@ describe('BDatepickerTableRow', () => {
         })
     })
 
+    describe('classObject with a time component on the range boundaries', function () {
+        beforeEach(() => {
+            const withTime = (date: Date, hours: number) => {
+                const result = new Date(date)
+                result.setHours(hours)
+                return result
+            }
+            wrapper.setProps({
+                selectedDate: [
+                    withTime(props.week[1], 2),
+                    withTime(props.week[5], 2)
+                ],
+                nearbySelectableMonthDays: true
+            })
+        })
+
+        it('should not have is-within-selected class for the last date selected within the range', function () {
+            // wrappers should return 5 elements. Destructure to get the last one
+            const [, , , , lastSelectedCell] = wrapper.findAll('.is-selected')
+            expect(lastSelectedCell.classes()).toContain('is-last-selected')
+            expect(lastSelectedCell.classes()).not.toContain('is-within-selected')
+        })
+
+        it('should have is-within-selected class for the dates strictly within the range', function () {
+            const withinSelectedRangeCells = wrapper.findAll('.is-selected.is-within-selected')
+            expect(withinSelectedRangeCells.length).toBe(3)
+        })
+    })
+
     describe('classObject with multiple dates', function () {
         beforeEach(() => {
             wrapper.setProps({

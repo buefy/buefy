@@ -303,9 +303,15 @@ export default defineComponent({
                 dates: Date | Date[] | undefined,
                 multiple?: boolean
             ) {
-                if (!Array.isArray(dates) || multiple) { return false }
+                if (!Array.isArray(dates) || multiple || !dates[0] || !dates[1]) { return false }
 
-                return dateOne > dates[0] && dateOne < dates[1]
+                // compare by day only, ignoring time, so a range boundary
+                // with a non-zero time doesn't also count as "within"
+                const stripTime = (date: Date) =>
+                    new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime()
+
+                const day = stripTime(dateOne)
+                return day > stripTime(dates[0]) && day < stripTime(dates[1])
             }
 
             return {
