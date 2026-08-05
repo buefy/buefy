@@ -181,7 +181,7 @@ export default defineComponent({
     },
     data() {
         return {
-            newValue: this.modelValue,
+            newValue: this.modelValue as number | string | null,
             newStep: this.step || 1,
             newMinStep: this.minStep,
             timesPressed: 1,
@@ -197,18 +197,26 @@ export default defineComponent({
                 return this.newValue
             },
             set(value: number | string | null | undefined) {
+                // Preserve the raw string while the user is typing a negative
+                // number that currently evaluates to zero (e.g. "-0", "-0.5"
+                // mid entry), so the minus sign isn't stripped and typing a
+                // negative decimal remains possible. See #4106 and #3170.
+                const isNegativeZero = typeof value === 'string' && value.startsWith('-') && Number(value) === 0
+
                 // Parses the number, so that "0" => 0, and "invalid" => null
-                let newValue = (Number(value) === 0) ? 0 : (Number(value) || null)
-                if (value === '' || value === undefined || value === null) {
+                let newValue: number | string | null = isNegativeZero
+                    ? value
+                    : (Number(value) === 0 ? 0 : (Number(value) || null))
+                if (!isNegativeZero && (value === '' || value === undefined || value === null)) {
                     newValue = null
                 }
                 this.newValue = newValue
-                if (newValue === null) {
-                    this.$emit('update:modelValue', newValue)
-                // I decided to comment out `newValue !== '-0'` until we fix
-                // the regression of https://github.com/buefy/buefy/pull/3170
-                } else if (!isNaN(newValue)/* && newValue !== '-0' */) {
-                    this.$emit('update:modelValue', Number(newValue))
+                if (!isNegativeZero) {
+                    if (newValue === null) {
+                        this.$emit('update:modelValue', newValue)
+                    } else if (!isNaN(newValue as number)) {
+                        this.$emit('update:modelValue', Number(newValue))
+                    }
                 }
                 this.$nextTick(() => {
                     if (this.$refs.input) {

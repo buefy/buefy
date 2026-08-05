@@ -385,6 +385,25 @@ describe('BNumberinput', () => {
             expect(wrapper.vm.computedValue).toBeNull()
         })
 
+        it('preserves the minus sign when typing a negative decimal starting with "-0"', async () => {
+            wrapper.vm.computedValue = '-0'
+            expect(wrapper.vm.computedValue).toBe('-0')
+            expect(wrapper.emitted('update:modelValue')).toBeFalsy()
+
+            wrapper.vm.computedValue = '-0.5'
+            expect(wrapper.vm.computedValue).toBe(-0.5)
+            expect(wrapper.emitted('update:modelValue')).toBeTruthy()
+            const emitted = wrapper.emitted('update:modelValue') as unknown[][]
+            expect(emitted[emitted.length - 1]).toEqual([-0.5])
+        })
+
+        it('still coerces a plain "0" to the number 0', async () => {
+            wrapper.vm.computedValue = '0'
+            expect(wrapper.vm.computedValue).toBe(0)
+            const emitted = wrapper.emitted('update:modelValue') as unknown[][]
+            expect(emitted[emitted.length - 1]).toEqual([0])
+        })
+
         it('increments/decrements on click', async () => {
             await wrapper.setProps({ modelValue: 5, step: 1 })
 
