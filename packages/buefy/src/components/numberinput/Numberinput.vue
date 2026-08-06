@@ -104,7 +104,7 @@ import BField from '../field/Field.vue'
 import BIcon from '../icon/Icon.vue'
 import BInput from '../input/Input.vue'
 import CompatFallthroughMixin from '../../utils/CompatFallthroughMixin'
-import FormElementMixin from '../../utils/FormElementMixin'
+import { useFormElementMixin } from '../../utils/FormElementMixin'
 
 type BFieldInstance = InstanceType<typeof BField>
 type BInputInstance = InstanceType<typeof BInput>
@@ -121,7 +121,7 @@ export default defineComponent({
         BIcon,
         BInput
     },
-    mixins: [CompatFallthroughMixin, FormElementMixin],
+    mixins: [CompatFallthroughMixin, useFormElementMixin<HTMLInputElement>()],
     inject: {
         field: {
             from: 'BField',

@@ -122,7 +122,7 @@ import {
     toCssWidth
 } from '../../utils/helpers'
 import CompatFallthroughMixin from '../../utils/CompatFallthroughMixin'
-import FormElementMixin from '../../utils/FormElementMixin'
+import { useFormElementMixin } from '../../utils/FormElementMixin'
 import BInput from '../input/Input.vue'
 
 type BInputComponent = InstanceType<typeof BInput>
@@ -141,7 +141,7 @@ interface DataItem {
 export default defineComponent({
     name: 'BAutocomplete',
     components: { BInput },
-    mixins: [CompatFallthroughMixin, FormElementMixin],
+    mixins: [CompatFallthroughMixin, useFormElementMixin<HTMLInputElement | HTMLTextAreaElement>()],
     props: {
         modelValue: [Number, String, null] as PropType<number | string | null>,
         data: {

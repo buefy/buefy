@@ -106,12 +106,12 @@ import type { PropType } from 'vue'
 import BIcon from '../icon/Icon.vue'
 import config from '../../utils/config'
 import CompatFallthroughMixin from '../../utils/CompatFallthroughMixin'
-import FormElementMixin from '../../utils/FormElementMixin'
+import { useFormElementMixin } from '../../utils/FormElementMixin'
 
 export default defineComponent({
     name: 'BInput',
     components: { BIcon },
-    mixins: [CompatFallthroughMixin, FormElementMixin],
+    mixins: [CompatFallthroughMixin, useFormElementMixin<HTMLInputElement | HTMLTextAreaElement>()],
     props: {
         modelValue: {
             type: [Number, String] as PropType<string | number | undefined | null>

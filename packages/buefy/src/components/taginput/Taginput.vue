@@ -116,7 +116,7 @@ import BTag from '../tag/Tag.vue'
 import BAutocomplete from '../autocomplete/Autocomplete.vue'
 import config from '../../utils/config'
 import CompatFallthroughMixin from '../../utils/CompatFallthroughMixin'
-import FormElementMixin from '../../utils/FormElementMixin'
+import { useFormElementMixin } from '../../utils/FormElementMixin'
 
 type BAutocompleteInstance = InstanceType<typeof BAutocomplete>
 
@@ -135,7 +135,7 @@ export default defineComponent({
         BAutocomplete,
         BTag
     },
-    mixins: [CompatFallthroughMixin, FormElementMixin],
+    mixins: [CompatFallthroughMixin, useFormElementMixin<HTMLInputElement | HTMLTextAreaElement>()],
     props: {
         modelValue: {
             type: Array as PropType<T[]>,

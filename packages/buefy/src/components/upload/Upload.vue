@@ -42,12 +42,12 @@ import { defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import type { ExtractComponentProps } from '../../utils/helpers'
 import CompatFallthroughMixin from '../../utils/CompatFallthroughMixin'
-import FormElementMixin from '../../utils/FormElementMixin'
+import { useFormElementMixin } from '../../utils/FormElementMixin'
 import { File } from '../../utils/ssr'
 
 const Upload = defineComponent({
     name: 'BUpload',
-    mixins: [CompatFallthroughMixin, FormElementMixin],
+    mixins: [CompatFallthroughMixin, useFormElementMixin<HTMLInputElement>()],
     props: {
         modelValue: {
             type: [Object, Function, File, Array] as PropType<File | Array<File> | null>

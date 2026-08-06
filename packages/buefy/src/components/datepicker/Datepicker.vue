@@ -232,7 +232,7 @@ import { defineComponent } from 'vue'
 import type { PropType } from 'vue'
 
 import CompatFallthroughMixin from '../../utils/CompatFallthroughMixin'
-import FormElementMixin from '../../utils/FormElementMixin'
+import { useFormElementMixin } from '../../utils/FormElementMixin'
 import { isMobile, getMonthNames, getWeekdayNames, matchWithGroups } from '../../utils/helpers'
 import config from '../../utils/config'
 
@@ -322,7 +322,7 @@ export default defineComponent({
         BDropdown,
         BDropdownItem
     },
-    mixins: [CompatFallthroughMixin, FormElementMixin],
+    mixins: [CompatFallthroughMixin, useFormElementMixin<HTMLInputElement>()],
     provide() {
         return {
             $datepicker: this

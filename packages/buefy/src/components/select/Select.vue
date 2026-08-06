@@ -47,7 +47,7 @@ import { defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import BIcon from '../icon/Icon.vue'
 import CompatFallthroughMixin from '../../utils/CompatFallthroughMixin'
-import FormElementMixin from '../../utils/FormElementMixin'
+import { useFormElementMixin } from '../../utils/FormElementMixin'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ModelValue = any
@@ -57,7 +57,7 @@ export default defineComponent({
     components: {
         BIcon
     },
-    mixins: [CompatFallthroughMixin, FormElementMixin],
+    mixins: [CompatFallthroughMixin, useFormElementMixin<HTMLSelectElement>()],
     props: {
         modelValue: {
             type: [
