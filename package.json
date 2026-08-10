@@ -20,7 +20,7 @@
     "follow-redirects": "^1.16.0",
     "immutable": "^5.1.8",
     "js-cookie": "^3.0.7",
-    "js-yaml": "^4.3.0",
+    "js-yaml": "^4.3.1",
     "postcss": "^8.5.18",
     "shell-quote": "^1.8.5"
   },
