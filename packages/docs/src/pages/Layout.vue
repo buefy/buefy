@@ -30,5 +30,33 @@
             And many more, refer to its
             <a href="https://bulma.io/documentation/" target="_blank">documentation</a>.
         </p>
+
+        <p class="subtitle">Putting it all together</p>
+        <p>
+            A single page combining every layout element above — Container, Hero, Section,
+            Footer, Level, Media, the Grid/Column system, Box, Content, Card, Image, Panel and
+            Title. Open it on StackBlitz to explore the full source and edit it live.
+        </p>
+        <Example :component="ExFullLayout" :code="ExFullLayoutCode" title="Full layout example" />
     </div>
 </template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+
+import Example from "@/components/Example.vue";
+import { shallowFields } from "@/utils";
+
+import ExFullLayout from "./layout/examples/ExFullLayout.vue";
+import ExFullLayoutCode from "./layout/examples/ExFullLayout.vue?raw";
+
+export default defineComponent({
+    components: { Example },
+    data() {
+        return {
+            ...shallowFields({ ExFullLayout }),
+            ExFullLayoutCode,
+        };
+    },
+});
+</script>
