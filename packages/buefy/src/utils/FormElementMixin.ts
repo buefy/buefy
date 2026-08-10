@@ -153,7 +153,10 @@ function buildFormElementMixin<T extends ConstraintValidationElement>() {
             getElement(): T {
                 let el = this.$refs[this.$data._elementRef]
                 while (el != null && typeof el === 'object' && '$refs' in el) {
-                    const form = el as unknown as { $refs: Record<string, unknown>, $data: { _elementRef: string } }
+                    const form = el as unknown as {
+                        $refs: Record<string, unknown>
+                        $data: { _elementRef: string }
+                    }
                     el = form.$refs[form.$data._elementRef]
                 }
                 // TODO: what if el is not an HTMLElement? possibly null?
@@ -210,7 +213,8 @@ function buildFormElementMixin<T extends ConstraintValidationElement>() {
     })
 }
 
-type FormElementMixinDef<T extends ConstraintValidationElement> = ReturnType<typeof buildFormElementMixin<T>>
+type FormElementMixinDef<T extends ConstraintValidationElement> =
+    ReturnType<typeof buildFormElementMixin<T>>
 
 const FormElementMixin = buildFormElementMixin<ConstraintValidationElement>()
 
@@ -218,7 +222,9 @@ const FormElementMixin = buildFormElementMixin<ConstraintValidationElement>()
 // down to the specific element(s) they can actually render, instead of the
 // full ConstraintValidationElement union. Returns the same singleton mixin,
 // just reinterpreted under a more specific type.
-export function useFormElementMixin<T extends ConstraintValidationElement = ConstraintValidationElement>(): FormElementMixinDef<T> {
+export function useFormElementMixin<
+    T extends ConstraintValidationElement = ConstraintValidationElement
+>(): FormElementMixinDef<T> {
     return FormElementMixin as unknown as FormElementMixinDef<T>
 }
 

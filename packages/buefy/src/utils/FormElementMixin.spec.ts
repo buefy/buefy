@@ -7,6 +7,7 @@ import FormElementMixin, { useFormElementMixin } from '@utils/FormElementMixin'
 describe('FormElementMixin', () => {
     HTMLElement.prototype.insertAdjacentElement = vi.fn()
 
+    // eslint-disable-next-line vue/one-component-per-file
     const component = defineComponent({
         mixins: [FormElementMixin],
         template: '<div class="b-component"></div>'
@@ -49,6 +50,7 @@ describe('FormElementMixin', () => {
 
     // https://github.com/buefy/buefy/issues/4187
     it('narrows getElement() to the given type parameter instead of the full element union', () => {
+        // eslint-disable-next-line vue/one-component-per-file
         const narrowedComponent = defineComponent({
             mixins: [useFormElementMixin<HTMLInputElement>()],
             template: '<div class="b-component"></div>'
