@@ -2,7 +2,7 @@ import { defineComponent } from 'vue'
 import { shallowMount } from '@vue/test-utils'
 import type { VueWrapper } from '@vue/test-utils'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import FormElementMixin from '@utils/FormElementMixin'
+import FormElementMixin, { useFormElementMixin } from '@utils/FormElementMixin'
 
 describe('FormElementMixin', () => {
     HTMLElement.prototype.insertAdjacentElement = vi.fn()
@@ -45,5 +45,23 @@ describe('FormElementMixin', () => {
 
         await wrapper.setProps({ size: 'is-medium' })
         expect(wrapper.vm.iconSize).toBe('is-medium')
+    })
+
+    // https://github.com/buefy/buefy/issues/4187
+    it('narrows getElement() to the given type parameter instead of the full element union', () => {
+        const narrowedComponent = defineComponent({
+            mixins: [useFormElementMixin<HTMLInputElement>()],
+            template: '<div class="b-component"></div>'
+        })
+        const narrowedWrapper = shallowMount(narrowedComponent, {
+            attachTo: document.body
+        })
+
+        // Type-only assertion: if `useFormElementMixin` stopped narrowing the
+        // return type of `getElement()`, this would fail to type-check because
+        // the full ConstraintValidationElement union isn't assignable to
+        // `HTMLInputElement | undefined`.
+        const element: HTMLInputElement | undefined = narrowedWrapper.vm.getElement()
+        expect(element).toBeUndefined()
     })
 })

@@ -20,10 +20,12 @@ export type ConstraintValidationElement =
     | HTMLSelectElement
     | HTMLTextAreaElement
 
-// Allows host components to narrow the return type of `getElement()`/`focus()`
-// down to the specific element(s) they can actually render, instead of the
-// full ConstraintValidationElement union.
-export function useFormElementMixin<T extends ConstraintValidationElement = ConstraintValidationElement>() {
+// Builds the mixin definition; only ever instantiated once (see `FormElementMixin`
+// below) so that all host components share the same underlying methods object.
+// `useFormElementMixin()` re-exposes that singleton under a narrower type instead
+// of calling this again, so mixin/component identity (e.g. spying on
+// `FormElementMixin.methods.xyz` in tests) keeps working across host components.
+function buildFormElementMixin<T extends ConstraintValidationElement>() {
     return defineComponent({
         props: {
             size: String,
@@ -208,6 +210,16 @@ export function useFormElementMixin<T extends ConstraintValidationElement = Cons
     })
 }
 
-const FormElementMixin = useFormElementMixin()
+type FormElementMixinDef<T extends ConstraintValidationElement> = ReturnType<typeof buildFormElementMixin<T>>
+
+const FormElementMixin = buildFormElementMixin<ConstraintValidationElement>()
+
+// Allows host components to narrow the return type of `getElement()`/`focus()`
+// down to the specific element(s) they can actually render, instead of the
+// full ConstraintValidationElement union. Returns the same singleton mixin,
+// just reinterpreted under a more specific type.
+export function useFormElementMixin<T extends ConstraintValidationElement = ConstraintValidationElement>(): FormElementMixinDef<T> {
+    return FormElementMixin as unknown as FormElementMixinDef<T>
+}
 
 export default FormElementMixin
