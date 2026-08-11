@@ -129,4 +129,37 @@ describe('Datetimepicker', () => {
         datepicker.vm.onChange('Whatever!')
         expect(datepicker.vm.computedValue).toEqual(expectedDatetime)
     })
+
+    it('forwards native attributes to the underlying input, like Datepicker does', () => {
+        wrapper = mount(Datetimepicker, {
+            props: {
+                locale: 'en-US'
+            },
+            attrs: {
+                id: 'foo',
+                name: 'foo'
+            }
+        })
+
+        expect(wrapper.find('input').attributes('name')).toBe('foo')
+        // id defaults to the root div.datepicker, matching Datepicker's own
+        // compatFallthrough default behavior
+        expect(wrapper.find('div.datepicker').attributes('id')).toBe('foo')
+    })
+
+    it('lets the datepicker prop override a native attribute with the same name', () => {
+        wrapper = mount(Datetimepicker, {
+            props: {
+                locale: 'en-US',
+                datepicker: {
+                    name: 'bar'
+                }
+            },
+            attrs: {
+                name: 'foo'
+            }
+        })
+
+        expect(wrapper.find('input').attributes('name')).toBe('bar')
+    })
 })
