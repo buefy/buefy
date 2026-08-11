@@ -1,5 +1,33 @@
 # Buefy Changelog
 
+## [3.0.11](https://github.com/buefy/buefy/compare/v3.0.10...v3.0.11)
+
+### Enhancements
+
+- [#4361](https://github.com/buefy/buefy/pull/4361) Prevent overlapping stacked sticky `BTable` columns by computing cumulative `left` offsets, and add a `$table-checkbox-cell-width` SCSS variable (exposed as `--bulma-table-checkbox-cell-width`) instead of a hardcoded 40px checkbox column width.
+
+### Fixes
+
+- [#4264](https://github.com/buefy/buefy/issues/4264) Fix `BDatepicker` range boundary detection to compare dates without time components, so boundaries with time no longer incorrectly count as "within" the range.
+- [#4106](https://github.com/buefy/buefy/issues/4106) [#3170](https://github.com/buefy/buefy/issues/3170) Fix `BNumberinput` stripping the minus sign while typing a negative decimal (e.g. `-0.5`) by preserving the raw `-0` input state.
+
+### Refactors
+
+- Convert `FormElementMixin` into a generic factory (`useFormElementMixin<T>()`) built on a shared singleton, so host components (`Autocomplete`, `Datepicker`, `Input`, `Numberinput`, `Select`, `Taginput`, `Upload`) can narrow `getElement()`/`focus()` element types without breaking mixin/component identity relied on by tests. No runtime behavior change intended.
+
+### Chores & Dependency Updates (docs)
+
+- Add a full-page layout example combining `BContainer`, `BHero`, `BSection`, `BFooter`, `BLevel`, `BMedia`, `BGrid`/`BColumn`, `BBox`, `BContent`, `BCard`, `BImage`, `BPanel`, and `BTitle` to the Layout docs page.
+- Add `BTree` to the homepage components list.
+- Migrate installation usage examples to Vue 3 `createApp`/`app.use` and update the CDN snippet to use `ConfigProgrammatic` on the global `Buefy` object.
+- Clarify in the Sass docs that Buefy-specific variables (`$speed-slow`, `$speed-slower`) are set via the `buefy/src/scss/buefy` `@use`, not `bulma/sass`.
+- Add a Copy button and clipboard support to the theme preview's generated CSS output.
+- Refactor the docs' code-highlighting directive into a reusable function and fix stale highlighting after reactive text updates.
+
+### Chores & Dependency Updates
+
+- Bump the `npm_deploy` workflow to Node 22.x and sync lockfile version entries.
+
 ## [3.0.10](https://github.com/buefy/buefy/compare/v3.0.9...v3.0.10)
 
 ### Refactors
