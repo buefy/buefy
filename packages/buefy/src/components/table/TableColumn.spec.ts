@@ -82,4 +82,39 @@ describe('BTableColumn', () => {
         expect(wrapper.find('#td-2').text()).not.toContain('Closed')
         expect(wrapper.find('#td-2').text()).toContain('Opened')
     })
+
+    // Regression test for https://github.com/buefy/buefy/issues/2850
+    it('keeps the sort icon visible when a sortable column uses a custom header slot', async () => {
+        const SortableCustomHeader = {
+            template: `
+                <BTable :data="tableData">
+                    <BTableColumn field="id" label="ID" sortable>
+                        <template #header="{ column }">
+                            <strong>{{ column.label }}</strong>
+                        </template>
+                        <template #default="props">{{ props.row.id }}</template>
+                    </BTableColumn>
+                </BTable>`,
+            components: { BTable, BTableColumn },
+            data: () => ({
+                tableData: [{ id: 2 }, { id: 1 }]
+            })
+        }
+
+        const wrapper = mount(SortableCustomHeader)
+        await wrapper.vm.$nextTick()
+        const th = wrapper.find('thead th')
+
+        // custom header content still renders
+        expect(th.find('strong').text()).toBe('ID')
+        // ...and the sort icon renders alongside it, not just the default label
+        expect(th.find('.sort-icon').exists()).toBe(true)
+        expect(th.find('.sort-icon').classes()).toContain('is-invisible')
+
+        await th.trigger('click')
+
+        expect(th.find('strong').text()).toBe('ID')
+        expect(th.find('.sort-icon').exists()).toBe(true)
+        expect(th.find('.sort-icon').classes()).not.toContain('is-invisible')
+    })
 })

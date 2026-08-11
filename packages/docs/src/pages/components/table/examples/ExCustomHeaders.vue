@@ -1,6 +1,6 @@
 <template>
     <b-table :data="data">
-        <b-table-column field="id" label="ID" width="40" numeric>
+        <b-table-column field="id" label="ID" width="40" numeric sortable>
             <template v-slot:header="{ column }">
                 <b-tooltip :label="column.label" append-to-body dashed>
                     {{ column.label }}

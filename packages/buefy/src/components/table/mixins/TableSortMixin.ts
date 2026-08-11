@@ -83,10 +83,17 @@ export default defineComponent({
         }
     },
     methods: {
+        /*
+        * Return the multi-sort priority entry for a column, if it is part
+        * of the current multi-sort selection.
+        */
+        getMultiSortEntry(column: ITableColumn) {
+            return this.sortMultipleDataComputed.find((i) => i.field === column.field)
+        },
+
         findIndexOfSortData(column: ITableColumn) {
-            const sortObj = this.sortMultipleDataComputed.filter((i) =>
-                i.field === column.field)[0]
-            return this.sortMultipleDataComputed.indexOf(sortObj) + 1
+            const sortObj = this.getMultiSortEntry(column)
+            return sortObj ? this.sortMultipleDataComputed.indexOf(sortObj) + 1 : 0
         },
 
         removeSortingPriority(column: ITableColumn) {
