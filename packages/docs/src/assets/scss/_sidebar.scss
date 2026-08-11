@@ -100,7 +100,7 @@
                 transition: background-color 0.15s ease, color 0.15s ease;
                 &:hover {
                     background: cv.getVar('primary-soft');
-                    color: cv.getVar('link');
+                    color: cv.getVar('primary');
                 }
                 &.is-active {
                     background: cv.getVar('primary-soft');
