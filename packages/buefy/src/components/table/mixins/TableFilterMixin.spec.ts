@@ -83,6 +83,25 @@ describe('TableFilterMixin', () => {
         expect(wrapper.vm.isRowFiltered(data[0])).toBe(false) // Jesse
     })
 
+    it('isRowFiltered substring-matches integer columns when not marked numeric', async () => {
+        const idColumn = makeColumn({ field: 'id', searchable: true })
+        await wrapper.setProps({ newColumns: [idColumn] })
+        wrapper.vm.filters.id = '1'
+
+        expect(wrapper.vm.isRowFiltered(data[0])).toBe(true) // id: 1
+        expect(wrapper.vm.isRowFiltered(data[1])).toBe(false) // id: 2
+    })
+
+    it('isRowFiltered requires an exact match on integer columns marked numeric', async () => {
+        const idColumn = makeColumn({ field: 'id', searchable: true, numeric: true })
+        await wrapper.setProps({ newColumns: [idColumn] })
+        wrapper.vm.filters.id = '1'
+        expect(wrapper.vm.isRowFiltered(data[0])).toBe(true) // id: 1
+
+        wrapper.vm.filters.id = '2'
+        expect(wrapper.vm.isRowFiltered(data[0])).toBe(false) // id: 1 !== 2
+    })
+
     it('isRowFiltered defers to a column customSearch when provided', async () => {
         const customSearch = vi.fn((row) => row.id === 3)
         await wrapper.setProps({ newColumns: [makeColumn({ field: 'name', customSearch })] })

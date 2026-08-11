@@ -94,17 +94,19 @@ export default defineComponent({
                 } else {
                     const value = getValueByPath(row, key)
                     if (value == null) return false
-                    if (Number.isInteger(value)) {
+                    if (Number.isInteger(value) && column && column.numeric) {
                         if (value !== Number(input)) return false
                     } else {
                         const re = new RegExp(escapeRegExpChars(input + '')!, 'i')
                         if (Array.isArray(value)) {
-                            const valid = value.some((val) =>
-                                re.test(removeDiacriticsFromString(val)) || re.test(val)
-                            )
+                            const valid = value.some((val) => {
+                                const str = val + ''
+                                return re.test(removeDiacriticsFromString(str)) || re.test(str)
+                            })
                             if (!valid) return false
                         } else {
-                            if (!re.test(removeDiacriticsFromString(value)) && !re.test(value)) {
+                            const str = value + ''
+                            if (!re.test(removeDiacriticsFromString(str)) && !re.test(str)) {
                                 return false
                             }
                         }
