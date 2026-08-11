@@ -5,11 +5,15 @@
 ### Enhancements
 
 - [#4361](https://github.com/buefy/buefy/pull/4361) Prevent overlapping stacked sticky `BTable` columns by computing cumulative `left` offsets, and add a `$table-checkbox-cell-width` SCSS variable (exposed as `--bulma-table-checkbox-cell-width`) instead of a hardcoded 40px checkbox column width.
+- [#4295](https://github.com/buefy/buefy/issues/4295) Add ARIA `listbox`/`option` support to `BDropdown`/`BDropdownItem` via `aria-role="listbox"` and `aria-role="option"`, so a dropdown can act as an accessible select replacement, with `aria-selected` exposed on active items.
 
 ### Fixes
 
 - [#4264](https://github.com/buefy/buefy/issues/4264) Fix `BDatepicker` range boundary detection to compare dates without time components, so boundaries with time no longer incorrectly count as "within" the range.
 - [#4106](https://github.com/buefy/buefy/issues/4106) [#3170](https://github.com/buefy/buefy/issues/3170) Fix `BNumberinput` stripping the minus sign while typing a negative decimal (e.g. `-0.5`) by preserving the raw `-0` input state.
+- [#2850](https://github.com/buefy/buefy/issues/2850) Fix `BTable` sortable columns hiding the sort icon when using a custom header slot.
+- [#4039](https://github.com/buefy/buefy/issues/4039) Fix `BDatetimepicker` not forwarding native attributes (e.g. `id`, `name`) to the underlying input.
+- [#4345](https://github.com/buefy/buefy/issues/4345) Fix `BTable` treating integer cell values as exact-match only regardless of the column's `numeric` flag, which blocked substring/regex filtering on non-numeric integer columns.
 
 ### Refactors
 
