@@ -20,6 +20,10 @@
 
         <Example :component="ExCustomize" :code="ExCustomizeCode" title="Customizing with v-model"/>
 
+        <Example :component="ExListbox" :code="ExListboxCode" title="As a select replacement">
+            <p>Use <code>aria-role="listbox"</code> on the dropdown and <code>aria-role="option"</code> on its items to expose the dropdown as a listbox, the appropriate semantics when replacing a native <code>select</code>. Selected items are exposed via <code>aria-selected</code>.</p>
+        </Example>
+
         <Example :component="ExCustomizeMultiple" :code="ExCustomizeMultipleCode" title="Multiple">
             <div class="tags has-addons">
                 <span class="tag is-success">Since</span>
@@ -65,6 +69,9 @@
     import ExCustomize from './examples/ExCustomize.vue'
     import ExCustomizeCode from './examples/ExCustomize.vue?raw'
 
+    import ExListbox from './examples/ExListbox.vue'
+    import ExListboxCode from './examples/ExListbox.vue?raw'
+
     import ExCustomizeMultiple from './examples/ExCustomizeMultiple.vue'
     import ExCustomizeMultipleCode from './examples/ExCustomizeMultiple.vue?raw'
 
@@ -86,6 +93,7 @@
                     ExContentPosition,
                     ExHasLinkDisabled,
                     ExCustomize,
+                    ExListbox,
                     ExCustomizeMultiple,
                     ExCustomizeScrollable
                 }),
@@ -93,6 +101,7 @@
                 ExContentPositionCode,
                 ExHasLinkDisabledCode,
                 ExCustomizeCode,
+                ExListboxCode,
                 ExCustomizeMultipleCode,
                 ExCustomizeScrollableCode
             }

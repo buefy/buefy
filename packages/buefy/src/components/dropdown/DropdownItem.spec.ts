@@ -75,4 +75,19 @@ describe('BDropdownItem', () => {
         expect(parent.selectItem).toHaveBeenCalled()
         expect(wrapper.emitted().click).toBeTruthy()
     })
+
+    it('supports the option aria-role and exposes aria-selected accordingly', async () => {
+        await wrapper.setProps({ ariaRole: 'option', value: dropdownSelected })
+        expect(wrapper.vm.ariaRoleItem).toBe('option')
+        expect(wrapper.attributes('aria-selected')).toBe('true')
+
+        await wrapper.setProps({ value: 'other-val' })
+        expect(wrapper.attributes('aria-selected')).toBe('false')
+    })
+
+    it('does not set aria-selected for non-option roles', async () => {
+        await wrapper.setProps({ ariaRole: 'listitem', value: dropdownSelected })
+        expect(wrapper.vm.ariaRoleItem).toBe('listitem')
+        expect(wrapper.attributes('aria-selected')).toBeUndefined()
+    })
 })

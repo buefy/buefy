@@ -6,6 +6,7 @@
         :class="anchorClasses"
         @click="selectItem"
         :role="ariaRoleItem"
+        :aria-selected="ariaSelected"
         :tabindex="isFocusable ? 0 : undefined"
     >
         <slot />
@@ -15,6 +16,7 @@
         :class="itemClasses"
         @click="selectItem"
         :role="ariaRoleItem"
+        :aria-selected="ariaSelected"
         :tabindex="isFocusable ? 0 : undefined"
     >
         <slot />
@@ -78,7 +80,10 @@ export default defineComponent({
             }
         },
         ariaRoleItem() {
-            return this.ariaRole === 'menuitem' || this.ariaRole === 'listitem' ? this.ariaRole : undefined
+            return ['menuitem', 'listitem', 'option'].indexOf(this.ariaRole) > -1 ? this.ariaRole : undefined
+        },
+        ariaSelected() {
+            return this.ariaRoleItem === 'option' ? this.isActive : undefined
         },
         isClickable() {
             return !(this.parent as DropdownInstance).disabled &&

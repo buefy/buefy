@@ -60,9 +60,9 @@ export default [
             },
             {
                 name: '<code>aria-role</code>',
-                description: 'Role attribute to be passed to list container for better accessibility. Use <code>menu</code> only in situations where your dropdown is related to navigation menus.',
+                description: 'Role attribute to be passed to list container for better accessibility. Use <code>menu</code> only in situations where your dropdown is related to navigation menus. Use <code>listbox</code> when the dropdown replaces a native select.',
                 type: 'String',
-                values: '<code>list</code>, <code>menu</code>, <code>dialog</code>',
+                values: '<code>list</code>, <code>menu</code>, <code>dialog</code>, <code>listbox</code>',
                 default: '—'
             },
             {
@@ -219,9 +219,9 @@ export default [
             },
             {
                 name: '<code>aria-role</code>',
-                description: 'Role attribute to be passed to list item for better accessibility. Use <code>menuitem</code> only in situations where your dropdown is related to navigation menus.',
+                description: 'Role attribute to be passed to list item for better accessibility. Use <code>menuitem</code> only in situations where your dropdown is related to navigation menus. Use <code>option</code> when the parent dropdown has <code>aria-role="listbox"</code>; the item will also expose <code>aria-selected</code>.',
                 type: 'String',
-                values: '<code>listitem</code>, <code>menuitem</code>',
+                values: '<code>listitem</code>, <code>menuitem</code>, <code>option</code>',
                 default: '—'
             }
         ],

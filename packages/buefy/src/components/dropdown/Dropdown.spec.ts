@@ -33,6 +33,14 @@ describe('BDropdown', () => {
         expect(position.validator && position.validator('is-top-left')).toBeTruthy()
         expect(position.validator && position.validator('is-top-right')).toBeTruthy()
         expect(position.validator && position.validator('is-bottom-left')).toBeTruthy()
+
+        const ariaRole = wrapper.vm.$options.props.ariaRole
+
+        expect(ariaRole.validator && ariaRole.validator('menu')).toBeTruthy()
+        expect(ariaRole.validator && ariaRole.validator('list')).toBeTruthy()
+        expect(ariaRole.validator && ariaRole.validator('dialog')).toBeTruthy()
+        expect(ariaRole.validator && ariaRole.validator('listbox')).toBeTruthy()
+        expect(ariaRole.validator && ariaRole.validator('invalid')).toBeFalsy()
     })
 
     it('react accordingly when changing v-model', async () => {

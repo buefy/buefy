@@ -124,7 +124,8 @@ export default defineComponent({
                 return [
                     'menu',
                     'list',
-                    'dialog'
+                    'dialog',
+                    'listbox'
                 ].indexOf(value as string) > -1
             },
             default: null
