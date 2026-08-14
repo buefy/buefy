@@ -152,11 +152,9 @@ const Upload = defineComponent({
             (this.$refs.input as HTMLInputElement).value = ''
         },
         updateDragDropFocus(focus: boolean) {
-            console.log('updateDragDropFocus', focus)
             if (!this.disabled && !this.loading) {
                 this.dragDropFocus = focus
             }
-            console.log('updateDragDropFocus', focus)
         },
         checkType(file: File) {
             if (!this.accept) return true
