@@ -17,9 +17,11 @@
                 'is-hovered': dragDropFocus,
                 'is-expanded': expanded,
             }]"
+            @dragenter.prevent="updateDragDropFocus(true)"
             @dragover.prevent="updateDragDropFocus(true)"
             @dragleave.prevent="updateDragDropFocus(false)"
-            @dragenter.prevent="updateDragDropFocus(true)"
+            @mouseover.prevent="updateDragDropFocus(true)"
+            @mouseout.prevent="updateDragDropFocus(false)"
             @drop.prevent="onFileChange"
         >
             <slot />
@@ -150,9 +152,11 @@ const Upload = defineComponent({
             (this.$refs.input as HTMLInputElement).value = ''
         },
         updateDragDropFocus(focus: boolean) {
+            console.log('updateDragDropFocus', focus)
             if (!this.disabled && !this.loading) {
                 this.dragDropFocus = focus
             }
+            console.log('updateDragDropFocus', focus)
         },
         checkType(file: File) {
             if (!this.accept) return true
