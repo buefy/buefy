@@ -185,7 +185,8 @@
                         <th
                             v-for="(column, index) in visibleColumns"
                             :key="column.newKey + ':' + index + 'subheading'"
-                            :style="column.style"
+                            :style="[column.style, stickyLeftStyles[index]]"
+                            :class="{'is-sticky': column.sticky}"
                         >
                             <div
                                 class="th-wrap"
