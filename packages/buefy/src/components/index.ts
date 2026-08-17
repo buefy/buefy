@@ -1,6 +1,8 @@
 /* eslint-disable import/first */
 import Autocomplete from './autocomplete'
 export * from './autocomplete'
+import Badge from './badge'
+export * from './badge'
 import Breadcrumb from './breadcrumb'
 export * from './breadcrumb'
 import Button from './button'
@@ -90,6 +92,7 @@ export * from './upload'
 // exports plugins of individual components for separate install
 export {
     Autocomplete,
+    Badge,
     Breadcrumb,
     Button,
     Carousel,
@@ -137,6 +140,7 @@ export {
 // exports an array of all the component plugins for batch install
 const allComponents = [
     Autocomplete,
+    Badge,
     Breadcrumb,
     Button,
     Carousel,

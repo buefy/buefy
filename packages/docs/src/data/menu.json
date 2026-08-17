@@ -51,6 +51,7 @@
             "categoryIcon": "eye",
             "categoryColor": "success",
             "pages": [
+                "documentation/badge",
                 "documentation/carousel",
                 "documentation/collapse",
                 "documentation/icon",

@@ -1,0 +1,53 @@
+@use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/utilities/css-variables" as cv;
+
+$badge-dot-size: 0.75em !default;
+$badge-z-index: 2 !default;
+
+.#{iv.$class-prefix}b-badge {
+    position: relative;
+    display: inline-flex;
+
+    @include cv.register-vars(
+        (
+            "badge-dot-size": #{$badge-dot-size},
+            "badge-z-index": #{$badge-z-index}
+        )
+    );
+
+    .b-badge-badge {
+        position: absolute;
+        z-index: cv.getVar("badge-z-index");
+        pointer-events: none;
+        white-space: nowrap;
+
+        &.is-top-right {
+            top: 0;
+            right: 0;
+            transform: translate(50%, -50%);
+        }
+        &.is-top-left {
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+        }
+        &.is-bottom-right {
+            bottom: 0;
+            right: 0;
+            transform: translate(50%, 50%);
+        }
+        &.is-bottom-left {
+            bottom: 0;
+            left: 0;
+            transform: translate(-50%, 50%);
+        }
+
+        &.is-dot {
+            width: cv.getVar("badge-dot-size");
+            height: cv.getVar("badge-dot-size");
+            min-width: 0;
+            padding: 0;
+            border-radius: 50%;
+        }
+    }
+}
