@@ -47,6 +47,9 @@ import { File } from '../../utils/ssr'
 
 const Upload = defineComponent({
     name: 'BUpload',
+    // In vue/compat mode, INSTANCE_LISTENERS defaults to true and strips
+    // event listeners out of $attrs, breaking the v-bind="fallthroughAttrs" forwarding below.
+    compatConfig: { INSTANCE_LISTENERS: false },
     mixins: [CompatFallthroughMixin, useFormElementMixin<HTMLInputElement>()],
     props: {
         modelValue: {

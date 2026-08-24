@@ -131,6 +131,9 @@ type U = any
 
 export default defineComponent({
     name: 'BTaginput',
+    // In vue/compat mode, INSTANCE_LISTENERS defaults to true and strips
+    // event listeners out of $attrs, breaking the v-bind="fallthroughAttrs" forwarding below.
+    compatConfig: { INSTANCE_LISTENERS: false },
     components: {
         BAutocomplete,
         BTag

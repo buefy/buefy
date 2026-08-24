@@ -117,6 +117,9 @@ export type ControlOperation = typeof CONTROL_OPERATIONS[number]
 
 export default defineComponent({
     name: 'BNumberinput',
+    // In vue/compat mode, INSTANCE_LISTENERS defaults to true and strips
+    // event listeners out of $attrs, breaking the v-bind="fallthroughAttrs" forwarding below.
+    compatConfig: { INSTANCE_LISTENERS: false },
     components: {
         BIcon,
         BInput

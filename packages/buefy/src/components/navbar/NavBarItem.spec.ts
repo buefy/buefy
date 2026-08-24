@@ -36,6 +36,14 @@ describe('BNavbarItem', () => {
         expect(wrapper.html()).toMatchSnapshot()
     })
 
+    // https://github.com/buefy/buefy/issues/4297
+    // Under vue/compat, INSTANCE_LISTENERS defaults to true and strips event
+    // listeners out of $attrs, silently breaking the v-bind="$attrs" forwarding
+    // used to attach @click to the rendered tag.
+    it('disables INSTANCE_LISTENERS compat so $attrs listeners still forward', () => {
+        expect(BNavbarItem.compatConfig).toEqual({ INSTANCE_LISTENERS: false })
+    })
+
     it('correctly renders the provided tag', async () => {
         await wrapper.setProps({ tag })
         expect(wrapper.find(tag).exists()).toBeTruthy()

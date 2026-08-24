@@ -50,6 +50,9 @@ type MenuInstance = InstanceType<typeof BMenu>
 
 export default defineComponent({
     name: 'BMenuItem',
+    // In vue/compat mode, INSTANCE_LISTENERS defaults to true and strips
+    // event listeners out of $attrs, breaking the v-bind="fallthroughAttrs" forwarding below.
+    compatConfig: { INSTANCE_LISTENERS: false },
     components: {
         BIcon
     },

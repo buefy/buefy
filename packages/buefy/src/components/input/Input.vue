@@ -111,6 +111,9 @@ import { useFormElementMixin } from '../../utils/FormElementMixin'
 export default defineComponent({
     name: 'BInput',
     components: { BIcon },
+    // In vue/compat mode, INSTANCE_LISTENERS defaults to true and strips
+    // event listeners out of $attrs, breaking the v-bind="fallthroughAttrs" forwarding below.
+    compatConfig: { INSTANCE_LISTENERS: false },
     mixins: [CompatFallthroughMixin, useFormElementMixin<HTMLInputElement | HTMLTextAreaElement>()],
     props: {
         modelValue: {

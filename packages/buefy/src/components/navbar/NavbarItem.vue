@@ -35,6 +35,9 @@ type NavbarItemParent = ComponentPublicInstance<
 
 export default defineComponent({
     name: 'BNavbarItem',
+    // In vue/compat mode, INSTANCE_LISTENERS defaults to true and strips
+    // event listeners out of $attrs, breaking the v-bind="$attrs" forwarding below.
+    compatConfig: { INSTANCE_LISTENERS: false },
     inheritAttrs: false,
     props: {
         tag: {

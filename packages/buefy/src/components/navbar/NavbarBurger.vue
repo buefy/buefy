@@ -20,6 +20,9 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
     name: 'NavbarBurger',
+    // In vue/compat mode, INSTANCE_LISTENERS defaults to true and strips
+    // event listeners out of $attrs, breaking the v-bind="$attrs" forwarding above.
+    compatConfig: { INSTANCE_LISTENERS: false },
     props: {
         isOpened: {
             type: Boolean,
