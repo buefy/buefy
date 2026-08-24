@@ -17,9 +17,11 @@
                 'is-hovered': dragDropFocus,
                 'is-expanded': expanded,
             }]"
+            @dragenter.prevent="updateDragDropFocus(true)"
             @dragover.prevent="updateDragDropFocus(true)"
             @dragleave.prevent="updateDragDropFocus(false)"
-            @dragenter.prevent="updateDragDropFocus(true)"
+            @mouseover.prevent="updateDragDropFocus(true)"
+            @mouseout.prevent="updateDragDropFocus(false)"
             @drop.prevent="onFileChange"
         >
             <slot />

@@ -46,6 +46,10 @@
                 border-width: 0.25em;
             }
         }
+        &.is-hovered {
+            border-color: cv.getVar("primary");
+            background-color: cv.getVar("primary-light");
+        }
         &.is-expanded {
             width: 100%;
         }
