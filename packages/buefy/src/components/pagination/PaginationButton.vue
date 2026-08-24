@@ -23,6 +23,9 @@ import type { PaginationPage } from './types'
 
 export default defineComponent({
     name: 'BPaginationButton',
+    // In vue/compat mode, INSTANCE_LISTENERS defaults to true and strips
+    // event listeners out of $attrs, breaking the v-bind="$attrs" forwarding above.
+    compatConfig: { INSTANCE_LISTENERS: false },
     props: {
         page: {
             type: Object as PropType<PaginationPage>,

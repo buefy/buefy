@@ -67,6 +67,7 @@ export function createDocsRouter(vueApp: App) {
                     route('documentation/tabs', () => import('@/pages/components/tabs/Tabs.vue')),
                     route('documentation/collapse', () => import('@/pages/components/collapse/Collapse.vue')),
                     route('documentation/tag', () => import('@/pages/components/tag/Tag.vue')),
+                    route('documentation/badge', () => import('@/pages/components/badge/Badge.vue')),
                     route('documentation/dialog', () => import('@/pages/components/dialog/Dialog.vue')),
                     route('documentation/toast', () => import('@/pages/components/toast/Toast.vue')),
                     route('documentation/snackbar', () => import('@/pages/components/snackbar/Snackbar.vue')),

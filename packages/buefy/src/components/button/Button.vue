@@ -55,6 +55,9 @@ export type ButtonNativeType = typeof NATIVE_TYPES[number]
 export default defineComponent({
     name: 'BButton',
     components: { BIcon },
+    // In vue/compat mode, INSTANCE_LISTENERS defaults to true and strips
+    // event listeners out of $attrs, breaking the v-bind="$attrs" forwarding below.
+    compatConfig: { INSTANCE_LISTENERS: false },
     inheritAttrs: false,
     props: {
         type: [String, Object],

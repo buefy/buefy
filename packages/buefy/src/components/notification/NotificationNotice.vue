@@ -45,6 +45,9 @@ type NotificationInstance = InstanceType<typeof BNotification>
 const NotificationNotice = defineComponent({
     name: 'BNotificationNotice',
     components: { BNotification },
+    // In vue/compat mode, INSTANCE_LISTENERS defaults to true and strips
+    // event listeners out of $attrs, breaking the v-bind="$attrs" forwarding above.
+    compatConfig: { INSTANCE_LISTENERS: false },
     mixins: [NoticeMixin],
     data() {
         return {

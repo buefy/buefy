@@ -141,6 +141,9 @@ interface DataItem {
 export default defineComponent({
     name: 'BAutocomplete',
     components: { BInput },
+    // In vue/compat mode, INSTANCE_LISTENERS defaults to true and strips
+    // event listeners out of $attrs, breaking the v-bind="fallthroughAttrs" forwarding below.
+    compatConfig: { INSTANCE_LISTENERS: false },
     mixins: [CompatFallthroughMixin, useFormElementMixin<HTMLInputElement | HTMLTextAreaElement>()],
     props: {
         modelValue: [Number, String, null] as PropType<number | string | null>,
