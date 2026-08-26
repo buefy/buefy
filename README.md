@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://buefy.org">
-        <img src="https://raw.githubusercontent.com/buefy/buefy/master/static/img/buefy-banner.png" />
+        <img src="https://raw.githubusercontent.com/buefy/buefy/main/packages/docs/public/static/img/buefy-banner.png" />
     </a>
     <a href="https://github.com/buefy/buefy/releases"><img src="https://img.shields.io/github/v/release/buefy/buefy?logo=buefy&color=7957d5&labelColor=lightgrey" /></a>
     <a href="https://www.npmjs.com/package/buefy"><img src="https://img.shields.io/npm/v/buefy.svg?logo=npm" /></a>
