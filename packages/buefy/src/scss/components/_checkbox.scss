@@ -117,6 +117,11 @@ $checkbox-colors: shared.$form-colors !default;
     }
     &.button {
       display: flex;
+
+      .icon:first-child:nth-last-child(2) {
+        margin-inline-start: calc(-0.5 * #{cv.getVar('button-padding-horizontal')});
+        margin-inline-end: calc(-0.5 * #{cv.getVar('button-padding-horizontal')});
+      }
     }
     &[disabled] {
       opacity: 0.5;

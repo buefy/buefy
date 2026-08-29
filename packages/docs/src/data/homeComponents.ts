@@ -20,6 +20,7 @@ const categories: ComponentCategory[] = [
     {
         label: 'Data Display',
         items: [
+            { name: 'Badge', route: '/documentation/badge' },
             { name: 'Carousel', route: '/documentation/carousel' },
             { name: 'Collapse', route: '/documentation/collapse' },
             { name: 'Icon', route: '/documentation/icon' },

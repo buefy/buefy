@@ -110,6 +110,11 @@ $radio-shadow: cv.getVar('shadow') !default;
             &.is-selected {
                 z-index: 1;
             }
+
+            .icon:first-child:nth-last-child(2) {
+                margin-inline-start: calc(-0.5 * #{cv.getVar('button-padding-horizontal')});
+                margin-inline-end: calc(-0.5 * #{cv.getVar('button-padding-horizontal')});
+            }
         }
         &[disabled] {
             opacity: 0.5;

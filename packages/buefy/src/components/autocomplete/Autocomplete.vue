@@ -717,8 +717,9 @@ export default defineComponent({
                 this.isListInViewportVertically =
                     rect.top >= 0 &&
                     rect.bottom <=
-                        (window?.innerHeight ||
-                            document?.documentElement?.clientHeight)
+                        (typeof window !== 'undefined'
+                            ? window.innerHeight
+                            : document?.documentElement?.clientHeight)
                 if (this.appendToBody) {
                     this.updateAppendToBody()
                 }
