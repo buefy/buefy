@@ -8,7 +8,7 @@ $datepicker-background-color: cv.getVar("scheme-main") !default;
 $datepicker-radius: cv.getVar("radius") !default;
 $datepicker-shadow: cv.getVar("shadow") !default;
 $datepicker-header-color: cv.getVar("grey") !default;
-$datepicker-today-border: solid 1px cv.getRgbaVar('primary', 0.5) !default;
+$datepicker-today-border: solid 1px cv.getRgbaVar('primary', 0.5, '', '-rgb') !default;
 $datepicker-item-color: cv.getVar("text") !default;
 $datepicker-item-disabled-color: cv.getVar("text-weak") !default;
 $datepicker-item-hover-color: cv.getVar("primary-light-invert") !default;
