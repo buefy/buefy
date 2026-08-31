@@ -1,5 +1,29 @@
 # Buefy Changelog
 
+## [3.1.0](https://github.com/buefy/buefy/compare/v3.0.11...v3.1.0)
+
+### Features
+
+- [#4370](https://github.com/buefy/buefy/pull/4370) [#4368](https://github.com/buefy/buefy/issues/4368) Add new `BBadge` component for rendering overlay badges (`value`, `type`, `size`, `rounded`, `position`, `dot`, `max`, `visible`, `tag` props, with max-value truncation), including docs, examples, and unit tests.
+
+### Fixes
+
+- [#4297](https://github.com/buefy/buefy/issues/4297) Fix Vue compat mode stripping event listeners from `$attrs` by setting `compatConfig: { INSTANCE_LISTENERS: false }` across affected components (`Autocomplete`, `Breadcrumb`, `Button`, `Clockpicker`, `Datepicker`, `Datetimepicker`, `Input`, `Menu`, `Navbar`, `Notification`, `Numberinput`, `Pagination`, `Select`, `Slider`, `Table`, `Taginput`, `Timepicker`, `Upload`), restoring `v-bind` listener fallthrough.
+- [#4371](https://github.com/buefy/buefy/issues/4371) Fix `BAutocomplete` viewport detection incorrectly accessing `window`/`document` during SSR-safe evaluation, and add negative horizontal spacing for `BCheckbox`/`BRadio` icons in icon-first button layouts.
+- [#4367](https://github.com/buefy/buefy/pull/4367) Fix `BUpload` missing hover and drag-over background styles.
+- Fix `BTable` sticky column styles not being applied to subheader cells, causing misalignment when subheadings are rendered.
+- Fix `BDatepicker` today-marker border using the wrong primary color variable format, causing it to not resolve correctly across themes.
+
+### Chores & Dependency Updates (docs)
+
+- Update the docs sidebar hover color to use the primary color variable for consistency with the active state.
+- Clarify README developer release instructions to reference the `main` branch and note that developer releases publish automatically on every commit to `main`.
+- Fix the README banner image URL, which still pointed at the old `master` branch asset location.
+
+### Chores & Dependency Updates
+
+- Split repo guidance from the root `CLAUDE.md` into `packages/buefy/CLAUDE.md` and `packages/docs/CLAUDE.md` for package-scoped conventions.
+
 ## [3.0.11](https://github.com/buefy/buefy/compare/v3.0.10...v3.0.11)
 
 ### Enhancements
