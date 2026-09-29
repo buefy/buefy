@@ -487,8 +487,10 @@ export default defineComponent({
             // prevents scrolling on desktop browsers at mobile viewport widths.
             document.documentElement.classList.remove('is-clipped-touch')
         }
-        if (this.appendToBody) {
-            removeElement(this.$data._bodyEl!)
+        // _bodyEl is only created in mounted(), which has not run yet when the
+        // dropdown is unmounted in the same flush that rendered it
+        if (this.appendToBody && this.$data._bodyEl) {
+            removeElement(this.$data._bodyEl)
         }
         clearTimeout(this.timeOutID)
         clearTimeout(this.timeOutID2)

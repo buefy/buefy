@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { shallowMount } from '@vue/test-utils'
+import { defineComponent, h } from 'vue'
+import { mount, shallowMount } from '@vue/test-utils'
 import type { VueWrapper } from '@vue/test-utils'
 import BDropdown from '@components/dropdown/Dropdown.vue'
 
@@ -248,5 +249,31 @@ describe('BDropdown', () => {
         wrapper.unmount()
 
         expect(document.documentElement.classList.contains('is-clipped-touch')).toBe(false)
+    })
+
+    it('unmounts with append-to-body before it was ever mounted', async () => {
+        // Rendered and unmounted within one scheduler flush, the dropdown runs
+        // beforeUnmount without mounted, so it never created _bodyEl.  Hiding
+        // it again while it is being mounted makes that happen.
+        const Parent = defineComponent({
+            data: () => ({ open: false }),
+            render() {
+                if (!this.open) return h('div')
+                return h('div', [
+                    h(
+                        BDropdown,
+                        { appendToBody: true, onVnodeBeforeMount: () => { this.open = false } },
+                        { trigger: () => h('button', 'trigger') }
+                    )
+                ])
+            }
+        })
+        const errorHandler = vi.fn()
+        const parent = mount(Parent, { global: { config: { errorHandler } } })
+
+        await parent.setData({ open: true })
+
+        expect(parent.vm.open).toBe(false)
+        expect(errorHandler).not.toHaveBeenCalled()
     })
 })
