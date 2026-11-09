@@ -1,7 +1,7 @@
 import { mount, shallowMount } from '@vue/test-utils'
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { nextTick } from 'vue'
+import { defineComponent, h, nextTick, ref } from 'vue'
 import BAutocomplete from '@components/autocomplete/Autocomplete.vue'
 
 const findStringsStartingWith = (array: string[], value: string) =>
@@ -70,6 +70,36 @@ describe('BAutocomplete', () => {
         expect(wrapper.vm.contentStyle.maxHeight).toBe(`${maxHeight}px`)
         await wrapper.setProps({ maxHeight: `${maxHeight}rem` })
         expect(wrapper.vm.contentStyle.maxHeight).toBe(`${maxHeight}rem`)
+    })
+
+    it('does not select a suggestion after the input becomes disabled while open', async () => {
+        const disabled = ref(false)
+        const parent = mount(defineComponent({
+            setup: () => () => h(BAutocomplete, {
+                data: ['Apple', 'Orange'],
+                disabled: disabled.value,
+                modelValue: 'Apple',
+                openOnFocus: true
+            })
+        }), { attachTo: document.body, global: { stubs } })
+        const autocomplete = parent.getComponent(BAutocomplete)
+        const input = autocomplete.get('input')
+        await input.trigger('focus')
+        expect(autocomplete.get(dropdownMenu).isVisible()).toBe(true)
+        const orange = autocomplete.findAll('.dropdown-item').find((item) => item.text() === 'Orange')!
+
+        disabled.value = true
+        await nextTick()
+        expect(input.element.disabled).toBe(true)
+        await orange.trigger('click')
+        expect(autocomplete.emitted('select')).toBeUndefined()
+        expect(input.element.value).toBe('Apple')
+
+        disabled.value = false
+        await nextTick()
+        await orange.trigger('click')
+        expect(autocomplete.emitted('select')?.[0][0]).toBe('Orange')
+        parent.unmount()
     })
 
     it('can select a value using v-model', async () => {
