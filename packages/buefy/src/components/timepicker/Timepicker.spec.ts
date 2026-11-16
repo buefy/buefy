@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
 import type { VueWrapper } from '@vue/test-utils'
 import BTimepicker from '@components/timepicker/Timepicker.vue'
@@ -104,5 +104,19 @@ describe('BTimepicker', () => {
             expect(input.attributes('style')).toBe(attrs.style)
             expect(input.attributes('id')).toBe(attrs.id)
         })
+    })
+
+    it('removes the document keyup listener when unmounted', () => {
+        const add = vi.spyOn(document, 'addEventListener')
+        const remove = vi.spyOn(document, 'removeEventListener')
+        const wrapper = shallowMount(BTimepicker)
+        const keyup = add.mock.calls.find(([type]) => type === 'keyup')
+        expect(keyup).toBeDefined()
+
+        wrapper.unmount()
+
+        expect(remove).toHaveBeenCalledWith('keyup', keyup![1])
+        add.mockRestore()
+        remove.mockRestore()
     })
 })
