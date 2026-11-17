@@ -173,6 +173,7 @@ export default defineComponent({
             maybeTap: false,
             isTouchEnabled: false,
             _bodyEl: undefined as Element | undefined, // Used to append to body
+            _isUnmounting: false, // Set in beforeUnmount, which can run before mounted
             timeOutID: undefined as ReturnType<typeof setTimeout> | undefined,
             timeOutID2: undefined as ReturnType<typeof setTimeout> | undefined
         }
@@ -408,12 +409,15 @@ export default defineComponent({
         },
 
         updateAppendToBody() {
+            // _bodyEl does not exist before mounted() or after beforeUnmount()
+            const bodyEl = this.$data._bodyEl
+            if (!bodyEl) return
             const dropdown = this.$refs.dropdown as HTMLElement
             const dropdownMenu = this.$refs.dropdownMenu as Element
             const trigger = this.$refs.trigger as Element
             if (dropdownMenu && trigger) {
                 // update wrapper dropdown
-                const dropdownWrapper = this.$data._bodyEl!.children[0]
+                const dropdownWrapper = bodyEl.children[0]
                 dropdownWrapper.classList.forEach((item) => dropdownWrapper.classList.remove(item))
                 dropdownWrapper.classList.add('dropdown')
                 dropdownWrapper.classList.add('dropdown-menu-animation')
@@ -438,7 +442,7 @@ export default defineComponent({
                 })
                 if (this.appendToBodyCopyParent) {
                     const parentNode = (this.$refs.dropdown as Element).parentNode!
-                    const parent = this.$data._bodyEl!
+                    const parent = bodyEl
                     parent.classList.forEach((item) => parent.classList.remove(item));
                     (parentNode as Element).classList.forEach((item) => {
                         parent.classList.add(item)
@@ -466,7 +470,9 @@ export default defineComponent({
         }
     },
     mounted() {
-        if (this.appendToBody) {
+        // Unmounted in the same flush that rendered it, Vue runs mounted() after
+        // beforeUnmount(); creating _bodyEl then would leak it into the body
+        if (this.appendToBody && !this.$data._isUnmounting) {
             this.$data._bodyEl = createAbsoluteElement(this.$refs.dropdownMenu as Element)
             this.updateAppendToBody()
         }
@@ -478,6 +484,7 @@ export default defineComponent({
         }
     },
     beforeUnmount() {
+        this.$data._isUnmounting = true
         if (typeof window !== 'undefined') {
             document.removeEventListener('click', this.clickedOutside)
             document.removeEventListener('keyup', this.keyPress)
@@ -488,9 +495,11 @@ export default defineComponent({
             document.documentElement.classList.remove('is-clipped-touch')
         }
         // _bodyEl is only created in mounted(), which has not run yet when the
-        // dropdown is unmounted in the same flush that rendered it
+        // dropdown is unmounted in the same flush that rendered it, and will not
+        // create it afterwards
         if (this.appendToBody && this.$data._bodyEl) {
             removeElement(this.$data._bodyEl)
+            this.$data._bodyEl = undefined
         }
         clearTimeout(this.timeOutID)
         clearTimeout(this.timeOutID2)

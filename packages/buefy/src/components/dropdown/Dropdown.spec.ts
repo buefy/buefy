@@ -270,10 +270,30 @@ describe('BDropdown', () => {
         })
         const errorHandler = vi.fn()
         const parent = mount(Parent, { global: { config: { errorHandler } } })
+        const bodyChildren = document.body.childElementCount
 
         await parent.setData({ open: true })
 
         expect(parent.vm.open).toBe(false)
         expect(errorHandler).not.toHaveBeenCalled()
+        expect(document.body.childElementCount).toBe(bodyChildren)
+        parent.unmount()
+    })
+
+    it('removes and forgets its body element on unmount with append-to-body', () => {
+        const bodyChildren = document.body.childElementCount
+        const dropdown = mount(BDropdown, {
+            props: { appendToBody: true },
+            slots: { trigger: '<button>trigger</button>' }
+        })
+        const bodyEl = dropdown.vm.$data._bodyEl
+        expect(bodyEl).toBeDefined()
+        expect(document.body.contains(bodyEl!)).toBe(true)
+
+        dropdown.unmount()
+
+        expect(document.body.contains(bodyEl!)).toBe(false)
+        expect(dropdown.vm.$data._bodyEl).toBeUndefined()
+        expect(document.body.childElementCount).toBe(bodyChildren)
     })
 })
