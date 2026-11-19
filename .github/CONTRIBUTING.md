@@ -18,9 +18,12 @@ We're fine with contributors using AI tools (Copilot, ChatGPT, Claude, etc.) to 
 
 # Submitting a Pull Request
 
-- The `master` branch is a snapshot of the latest release. **Submit your PR in the `dev` branch**
+- **Submit your PR against the `main` branch**
+- Merging a PR does **not** publish to npm. Maintainers cut releases separately (see [Releasing](#releasing-maintainers))
+- **DO NOT** bump package versions or edit `CHANGELOG.md`, maintainers do that when releasing
 - Include **screenshots** or animated GIFs in your pull request whenever needed (if visual changes)
 - It's OK to have multiple small commits as you work on the PR - we will let GitHub automatically squash it before merging
+- Make sure the library builds (`npm run build` in `packages/buefy`), as the unit tests depend on the compiled artifacts
 - Make sure all the unit tests pass by running `npm test` both in the library and documentation
 - Make sure your code style is consistent by running `npm run lint:fix` both in the library and documentation
 - **DO NOT** commit the `lib` and `dist` folder, use it only for testing on your end
@@ -219,9 +222,15 @@ As some type errors may be detected only in the production build, you should als
 npm run build:type-check
 ```
 
-# Releasing
+# Releasing (maintainers)
 
-Publishing to npm happens automatically via the `Publish buefy to NPM` GitHub Actions workflow ([`.github/workflows/npm_deploy.yml`](workflows/npm_deploy.yml)), which runs when a **GitHub Release is published from the `main` branch**. Pushing commits or tags on their own does not trigger a publish.
+Contributors don't need to do anything here. The overall flow is:
+
+1. A PR is merged into `main`.
+2. Every push to `main` automatically publishes a development build to GitHub Packages as `@buefy/buefy` (version `<version>-<commit sha>`) for evaluation ([`publish_dev_to_gpr.yml`](workflows/publish_dev_to_gpr.yml)). This is not a release.
+3. When ready, a maintainer cuts a release (steps below), which publishes the package to npm.
+
+Publishing to npm happens automatically via the `Publish buefy to NPM` GitHub Actions workflow ([`.github/workflows/npm_deploy.yml`](workflows/npm_deploy.yml)), which runs when a **GitHub Release is published from the `main` branch**. Pushing commits or tags on their own does not trigger a publish. Maintainers can also run the workflow manually via `workflow_dispatch`.
 
 To cut a release:
 
