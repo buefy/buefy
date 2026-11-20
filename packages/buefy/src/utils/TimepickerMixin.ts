@@ -759,7 +759,7 @@ export default defineComponent({
             document.addEventListener('keyup', this.keyPress)
         }
     },
-    beforeUnmounted() {
+    beforeUnmount() {
         if (typeof window !== 'undefined') {
             document.removeEventListener('keyup', this.keyPress)
         }
