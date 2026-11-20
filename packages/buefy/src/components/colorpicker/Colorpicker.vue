@@ -31,6 +31,7 @@
 
             <b-dropdown-item
                 :disabled="disabled"
+                :inert="disabled || undefined"
                 :focusable="focusable"
                 custom
                 :class="{'dropdown-horizontal-colorpicker': horizontalColorPicker}"
@@ -67,6 +68,7 @@
                                 <b-input
                                     type="number"
                                     v-model.number="computedValue.red"
+                                    :disabled="disabled || undefined"
                                     @update:model-value="updateRGB"
                                     size="is-small"
                                     aria-label="Red"
@@ -76,6 +78,7 @@
                                 <b-input
                                     type="number"
                                     v-model.number="computedValue.green"
+                                    :disabled="disabled || undefined"
                                     @update:model-value="updateRGB"
                                     size="is-small"
                                     aria-label="Green"
@@ -85,6 +88,7 @@
                                 <b-input
                                     type="number"
                                     v-model.number="computedValue.blue"
+                                    :disabled="disabled || undefined"
                                     @update:model-value="updateRGB"
                                     size="is-small"
                                     aria-label="Blue"
@@ -307,6 +311,10 @@ export default defineComponent({
         }
     },
     watch: {
+        disabled(value) {
+            const dropdown = this.$refs.dropdown as BDropdownInstance | undefined
+            if (value && dropdown) dropdown.isActive = false
+        },
         modelValue(value) {
             this.computedValue = new Color(value)
         }
@@ -320,15 +328,18 @@ export default defineComponent({
             }
         },
         updateColor(value: Color) {
+            if (this.disabled) return
             value.alpha = this.computedValue.alpha
             this.computedValue = value
             this.$emit('update:modelValue', value)
         },
         updateAlpha(alpha: number) {
+            if (this.disabled) return
             this.computedValue.alpha = alpha
             this.$emit('update:modelValue', this.computedValue)
         },
         updateRGB() {
+            if (this.disabled) return
             this.$emit('update:modelValue', this.computedValue)
         },
         /*
