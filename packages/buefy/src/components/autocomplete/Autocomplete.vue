@@ -510,6 +510,7 @@ export default defineComponent({
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         setSelected(option: any, closeDropdown = true, event?: Event) {
             if (option === undefined) return
+            if (option !== null && this.getElement()?.matches(':disabled')) return
             this.selected = option
             this.$emit('select', this.selected, event)
             if (this.selected !== null) {
